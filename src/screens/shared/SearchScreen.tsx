@@ -74,7 +74,7 @@ export function SearchScreen({ onChat }: SearchScreenProps) {
       .order('rating', { ascending: false });
 
     if (!error && data) {
-      setAdjusters((data as AdjusterRow[]).map(mapToAdjuster));
+      setAdjusters((data as unknown as AdjusterRow[]).map(mapToAdjuster));
     }
   }, []);
 

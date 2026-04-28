@@ -78,12 +78,13 @@ CREATE POLICY "messages_select"
   ON public.messages FOR SELECT
   USING (public.is_chat_participant(chat_room_id));
 
--- INSERT: sender_id = 본인 만 확인 (chat_rooms 서브쿼리 없음!)
---   chat_room_id FK가 chat_rooms 존재 보장
---   악의적 삽입은 chat_rooms SELECT 정책이 차단
+-- INSERT: sender_id = 본인이고, 해당 채팅방 참여자인 경우만 허용
 CREATE POLICY "messages_insert"
   ON public.messages FOR INSERT
-  WITH CHECK (sender_id = auth.uid());
+  WITH CHECK (
+    sender_id = auth.uid()
+    AND public.is_chat_participant(chat_room_id)
+  );
 
 -- UPDATE: 읽음 처리 — 참여자만 가능
 CREATE POLICY "messages_update"

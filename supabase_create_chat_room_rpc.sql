@@ -29,6 +29,15 @@ BEGIN
     RAISE EXCEPTION 'adjuster_not_found: %', p_adjuster_id;
   END IF;
 
+  -- 사건 채팅인 경우, 사건 소유 고객만 방을 만들 수 있음
+  IF p_case_id IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM public.cases
+    WHERE id = p_case_id
+      AND customer_id = v_uid
+  ) THEN
+    RAISE EXCEPTION 'case_not_accessible: %', p_case_id;
+  END IF;
+
   -- INSERT, 이미 존재하면 기존 row 반환
   INSERT INTO public.chat_rooms (case_id, customer_id, adjuster_id)
   VALUES (p_case_id, v_uid, p_adjuster_id)
