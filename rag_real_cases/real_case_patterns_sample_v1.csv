@@ -1,0 +1,31 @@
+id,case_pattern_code,insurance_type,claim_type,diagnosis_code,dispute_category,denial_reason_category,outcome_type,difficulty,contains_personal_data,contains_sensitive_data
+RCP001,DISCLOSURE_M4726_SINGLE_VISIT,실손의료보험,통원/실손,M47.26,계약전 알릴의무,최근 3개월 내 진료기록 미고지,재검토 필요,hard,false,false
+RCP002,DISCLOSURE_THYROID_NODULE_SCREENING,암보험,암 진단비,E04,계약전 알릴의무,건강검진상 결절 및 추적검사 권유 미고지,일부지급,hard,false,false
+RCP003,DISCLOSURE_HYPERTENSION_MEDICATION,종합보험,입원비/진단비,I10,계약전 알릴의무,고혈압 투약 사실 미고지,부지급 유지,medium,false,false
+RCP004,DISCLOSURE_BREAST_NODULE_SCREENING,암보험,유방암 진단비,D24,계약전 알릴의무,유방결절 검사 및 재검 권유 미고지,추가조사,hard,false,false
+RCP005,DISCLOSURE_GASTRITIS_SINGLE_TREATMENT,실손의료보험,통원/약제비,K29,계약전 알릴의무,위염 1회 치료 미고지,계약해지 취소,medium,false,false
+RCP006,DISCLOSURE_LUMBAR_MRI_NOT_DISCLOSED,종합보험,후유장해/입원비,M51,계약전 알릴의무,가입 전 MRI 검사 미고지,재검토 필요,hard,false,false
+RCP007,DISCLOSURE_AGENT_ORAL_NOTICE_ONLY,종합보험,계약해지 다툼,,계약전 알릴의무,청약서 미기재,진행중,hard,false,false
+RCP008,DISCLOSURE_HEALTH_CHECK_REEXAM_NOTICE,건강보험,계약해지/보험금,R94,계약전 알릴의무,건강검진 재검 권유 미고지,추가조사,medium,false,false
+RCP009,INDEMNITY_MANUAL_THERAPY_PURPOSE,실손의료보험,비급여 도수치료,M54,실손보험 부지급,치료목적 및 의학적 필요성 부인,일부지급,medium,false,false
+RCP010,INDEMNITY_CATARACT_MULTIFOCAL_LENS,실손의료보험,백내장 수술비/렌즈비,H25,실손보험 부지급,다초점 인공수정체 비용 보상 제외,일부지급,hard,false,false
+RCP011,INDEMNITY_CANCER_NURSING_HOSPITAL,실손의료보험,요양병원 암 입원비,C50,실손보험 부지급,암 직접치료 목적 입원 부인,재검토 필요,hard,false,false
+RCP012,INDEMNITY_NUTRITION_INJECTION_DENIAL,실손의료보험,비급여 주사치료,R53,실손보험 부지급,영양수액 및 주사치료의 치료목적 부인,부지급 유지,medium,false,false
+RCP013,INDEMNITY_ESWT_DENIAL,실손의료보험,체외충격파 치료비,M77,실손보험 부지급,치료 횟수 과다 및 의학적 필요성 부족,일부지급,medium,false,false
+RCP014,INDEMNITY_DIAGNOSTIC_ADMISSION_DENIAL,실손의료보험,입원비,R10,실손보험 부지급,검사 목적 입원 및 입원 필요성 부족,추가조사,medium,false,false
+RCP015,INDEMNITY_PROPORTIONAL_REIMBURSEMENT,실손의료보험,중복가입 비례보상,,실손보험 부지급,중복보상 제한 및 비례보상 산정 차이,추가지급,easy,false,false
+RCP016,DISABILITY_KNEE_INSTABILITY,상해보험,후유장해보험금,S83,후유장해,동요관절 장해 인정 부인,일부지급,hard,false,false
+RCP017,DISABILITY_ROTATOR_CUFF,상해보험,후유장해보험금,M75,후유장해,퇴행성 회전근개파열 및 운동범위 제한 부인,재검토 필요,hard,false,false
+RCP018,DISABILITY_LUMBAR_DISC,상해보험,후유장해보험금,M51,후유장해,추간판탈출증 장해 및 상해성 부인,부지급 유지,hard,false,false
+RCP019,DISABILITY_COMPRESSION_FRACTURE,상해보험,후유장해보험금,S32,후유장해,압박률 및 골다공증 기여도 다툼,일부지급,hard,false,false
+RCP020,DISABILITY_FACIAL_SCAR,상해보험,추상장해보험금,S01,후유장해,안면 반흔 추상장해 기준 미달,재검토 필요,medium,false,false
+RCP021,DIAGNOSIS_THYROID_CANCER_MINOR,암보험,갑상선암 진단비,C73,암/뇌/심장 진단비,소액암 또는 유사암 분류,일부지급,medium,false,false
+RCP022,DIAGNOSIS_BORDERLINE_TUMOR,암보험,경계성종양 진단비,D37-D48,암/뇌/심장 진단비,악성암 해당성 부인,일부지급,medium,false,false
+RCP023,DIAGNOSIS_AMI_CRITERIA,진단비보험,급성심근경색 진단비,I21,암/뇌/심장 진단비,약관상 급성심근경색 진단 기준 미충족,재검토 필요,hard,false,false
+RCP024,DIAGNOSIS_CEREBRAL_INFARCTION,진단비보험,뇌경색 진단비,I63,암/뇌/심장 진단비,무증상 또는 오래된 병변 주장,추가조사,hard,false,false
+RCP025,DIAGNOSIS_CEREBRAL_HEMORRHAGE,진단비보험,뇌출혈 진단비,I61,암/뇌/심장 진단비,외상성 출혈 또는 보장분류 다툼,재검토 필요,hard,false,false
+RCP026,CAUSATION_TRAFFIC_PREEXISTING_BACK,자동차보험/상해보험,치료비/후유장해,M51,기왕증/인과관계/상해성,교통사고 후 기왕증 악화 주장,일부지급,hard,false,false
+RCP027,CAUSATION_ROTATOR_CUFF_DEGENERATIVE,상해보험,수술비/후유장해,M75,기왕증/인과관계/상해성,퇴행성 파열 및 사고 인과관계 부인,재검토 필요,hard,false,false
+RCP028,CAUSATION_DISC_TRAUMA_DENIAL,상해보험,수술비/입원비,M51,기왕증/인과관계/상해성,추간판탈출증 상해성 부인,부지급 유지,hard,false,false
+RCP029,CAUSATION_DEATH_AFTER_ACCIDENT,상해보험,상해사망보험금,,기왕증/인과관계/상해성,질병 사망 및 사고 인과관계 부인,진행중,hard,false,false
+RCP030,CAUSATION_STEROID_AVN,질병/상해보험,수술비/후유장해,M87,기왕증/인과관계/상해성,스테로이드 치료와 무혈성 괴사 인과관계 다툼,알 수 없음,hard,false,false

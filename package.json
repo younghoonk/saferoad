@@ -19,7 +19,9 @@
     "rag:fss:check": "node scripts/checkFssLatestCases.js",
     "rag:precedent:fetch": "node scripts/fetchPrecedentCases.js",
     "rag:precedent:import": "node scripts/importPrecedentCases.js",
-    "rag:precedent:check": "node scripts/checkPrecedentCases.js"
+    "rag:precedent:check": "node scripts/checkPrecedentCases.js",
+    "rag:realcases:import": "node scripts/importRealCasePatterns.js",
+    "rag:realcases:check": "node scripts/checkRealCasePatterns.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",

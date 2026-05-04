@@ -1,0 +1,18 @@
+[
+  {"id":"AR001","rule_name":"name_removal","target":"이름","method":"실명 삭제 후 고객, 피보험자, 신청인 등 역할명으로 대체","risk_level":"high"},
+  {"id":"AR002","rule_name":"resident_registration_number_removal","target":"주민등록번호","method":"전체 삭제. 생년월일이 필요한 경우 연령대만 보존","risk_level":"critical"},
+  {"id":"AR003","rule_name":"phone_number_removal","target":"전화번호","method":"전화번호 전체 삭제 및 연락처 문맥 제거","risk_level":"high"},
+  {"id":"AR004","rule_name":"address_generalization","target":"주소","method":"상세주소 삭제. 필요 시 시/도 또는 광역 지역 단위로 축소","risk_level":"high"},
+  {"id":"AR005","rule_name":"email_removal","target":"이메일","method":"이메일 주소와 계정 식별자를 전체 삭제","risk_level":"high"},
+  {"id":"AR006","rule_name":"hospital_registration_number_removal","target":"병원등록번호","method":"환자번호, 차트번호, 등록번호 전체 삭제","risk_level":"high"},
+  {"id":"AR007","rule_name":"policy_number_removal","target":"보험증권번호","method":"증권번호, 계약번호, 청구번호 전체 삭제","risk_level":"high"},
+  {"id":"AR008","rule_name":"accident_number_removal","target":"사고번호","method":"보험사 사고접수번호와 민원 접수번호 전체 삭제","risk_level":"high"},
+  {"id":"AR009","rule_name":"vehicle_number_removal","target":"차량번호","method":"차량번호 전체 삭제. 차량 종류가 필요한 경우 차종 범주만 보존","risk_level":"high"},
+  {"id":"AR010","rule_name":"bank_account_removal","target":"계좌번호","method":"은행명과 계좌번호 전체 삭제. 지급 여부만 요약","risk_level":"critical"},
+  {"id":"AR011","rule_name":"birthdate_to_age_band","target":"정확한 생년월일","method":"정확한 날짜는 삭제하고 10세 단위 연령대로 변환","risk_level":"high"},
+  {"id":"AR012","rule_name":"specific_location_generalization","target":"구체적 사고장소","method":"상세 장소명, 건물명, 도로명 삭제 후 장소 유형 또는 지역 단위로 축소","risk_level":"medium"},
+  {"id":"AR013","rule_name":"medical_record_summary_only","target":"의료기록 원문","method":"원문 저장 금지. 보험 쟁점과 필요한 검사/진단 정보만 요약","risk_level":"critical"},
+  {"id":"AR014","rule_name":"image_original_block","target":"원본 이미지","method":"진단서, 면책공문, 신분증, 검사결과지 원본 이미지는 저장하지 않음","risk_level":"critical"},
+  {"id":"AR015","rule_name":"date_shift_or_bucket","target":"정확한 사고일/진료일","method":"필요 시 월 단위 또는 가입 전/후 상대 시점으로 변환","risk_level":"medium"},
+  {"id":"AR016","rule_name":"rare_disease_review","target":"희귀질환 또는 고유 의료상황","method":"재식별 위험 검토 후 진단군으로 축소하거나 저장 제외","risk_level":"high"}
+]
