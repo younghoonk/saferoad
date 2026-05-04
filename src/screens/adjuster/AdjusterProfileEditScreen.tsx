@@ -7,11 +7,14 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
   Alert,
   Image,
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Header } from '../../components/Header';
@@ -45,6 +48,7 @@ const REGIONS = [
 
 export function AdjusterProfileEditScreen({ onBack, onSaved }: AdjusterProfileEditScreenProps) {
   const { profile, session, refreshProfile } = useAuth();
+  const insets = useSafeAreaInsets();
   const [form, setForm] = useState<FormState>({
     name: profile?.name ?? '',
     licenseNumber: '',
@@ -182,7 +186,16 @@ export function AdjusterProfileEditScreen({ onBack, onSaved }: AdjusterProfileEd
   return (
     <SafeAreaView style={styles.safe}>
       <Header title="프로필 편집" subtitle="손해사정사 프로필" showBack onBack={onBack} />
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 16) }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
 
         {/* 프로필 사진 */}
         <View style={styles.photoSection}>
@@ -401,17 +414,19 @@ export function AdjusterProfileEditScreen({ onBack, onSaved }: AdjusterProfileEd
           </View>
         </View>
 
-        <View style={styles.submitWrap}>
+        <View style={[styles.submitWrap, { paddingBottom: Math.max(insets.bottom + 16, 32) }]}>
           <Button title="프로필 저장하기" onPress={handleSave} loading={saving} size="lg" style={styles.submitBtn} />
         </View>
         <View style={{ height: 40 }} />
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: Colors.background },
+  flex: { flex: 1 },
   container: { flex: 1 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
 
@@ -449,17 +464,17 @@ const styles = StyleSheet.create({
 
   inputWrap: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
-    backgroundColor: Colors.inputBg, borderRadius: 12,
+    backgroundColor: Colors.inputBg, borderRadius: 14,
     paddingHorizontal: 14, paddingVertical: 2,
-    borderWidth: 1, borderColor: Colors.border,
+    borderWidth: 1.2, borderColor: Colors.border,
   },
   inputWrapDisabled: { opacity: 0.6 },
   input: { flex: 1, fontSize: 14, color: Colors.textPrimary, paddingVertical: 12 },
   inputRaw: {
-    backgroundColor: Colors.inputBg, borderRadius: 12,
+    backgroundColor: Colors.inputBg, borderRadius: 14,
     paddingHorizontal: 14, paddingVertical: 12,
     fontSize: 14, color: Colors.textPrimary,
-    borderWidth: 1, borderColor: Colors.border,
+    borderWidth: 1.2, borderColor: Colors.border,
   },
   textArea: { height: 100, textAlignVertical: 'top' },
   unitText: { fontSize: 13, color: Colors.textSecondary, fontWeight: '600' },
@@ -480,7 +495,7 @@ const styles = StyleSheet.create({
   regionContent: { gap: 8, paddingVertical: 2 },
   regionChip: {
     paddingHorizontal: 14, paddingVertical: 8,
-    borderRadius: 20, borderWidth: 1.5, borderColor: Colors.border,
+    borderRadius: 14, borderWidth: 1.2, borderColor: Colors.border,
     backgroundColor: Colors.white,
   },
   regionChipSelected: { borderColor: Colors.primary, backgroundColor: Colors.primary },

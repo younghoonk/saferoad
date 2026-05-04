@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '../constants';
 import { UserType } from '../types';
 import { useAuth } from '../contexts/AuthContext';
@@ -45,6 +46,8 @@ type Screen =
   | 'received-profiles'
   | 'adjuster-profile-edit'
   | 'ai-analysis';
+
+type AIMode = 'denial-analysis' | 'assessment-draft' | 'closing-report';
 
 interface NavItem {
   id: Tab;
@@ -86,6 +89,7 @@ const splash = StyleSheet.create({
 
 export function AppNavigator() {
   const { session, profile, loading, signOut } = useAuth();
+  const insets = useSafeAreaInsets();
 
   const [screen, setScreen] = useState<Screen>('onboarding');
   const [activeTab, setActiveTab] = useState<Tab>('home');
@@ -95,6 +99,7 @@ export function AppNavigator() {
   const [chatPartnerAvatar, setChatPartnerAvatar] = useState<string | null>(null);
   const [quoteCaseId, setQuoteCaseId] = useState<string | undefined>(undefined);
   const [profileCaseId, setProfileCaseId] = useState<string | undefined>(undefined);
+  const [aiInitialMode, setAiInitialMode] = useState<AIMode>('denial-analysis');
 
   if (loading) return <SplashScreen />;
 
@@ -180,7 +185,7 @@ export function AppNavigator() {
   }
 
   if (screen === 'ai-analysis') {
-    return <AIAnalysisScreen onBack={goBack} />;
+    return <AIAnalysisScreen onBack={goBack} initialMode={aiInitialMode} />;
   }
 
   if (screen === 'chat-detail') {
@@ -218,7 +223,10 @@ export function AppNavigator() {
           <AdjusterHomeScreen
             onViewCase={() => {}}
             onChat={goToChat}
-            onAIAnalysis={() => setActiveTab('ai')}
+            onAIAnalysis={(mode = 'denial-analysis') => {
+              setAiInitialMode(mode);
+              setActiveTab('ai');
+            }}
           />
         ) : (
           <HomeScreen
@@ -249,7 +257,9 @@ export function AppNavigator() {
         );
 
       case 'ai':
-        return isAdjuster ? <AIAnalysisScreen onBack={() => setActiveTab('home')} /> : null;
+        return isAdjuster ? (
+          <AIAnalysisScreen onBack={() => setActiveTab('home')} initialMode={aiInitialMode} />
+        ) : null;
 
       case 'profile':
         return (
@@ -272,7 +282,15 @@ export function AppNavigator() {
     <View style={styles.container}>
       <View style={styles.content}>{renderTabContent()}</View>
 
-      <View style={styles.navBar}>
+      <View
+        style={[
+          styles.navBar,
+          {
+            paddingBottom: Math.max(insets.bottom, 8),
+            height: 58 + Math.max(insets.bottom, 8),
+          },
+        ]}
+      >
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
           const isAI = item.id === 'ai';
@@ -296,7 +314,7 @@ export function AppNavigator() {
                 <Ionicons
                   name={(isActive ? item.icon : `${item.icon}-outline`) as any}
                   size={20}
-                  color={isActive ? (isAI ? '#6C3CE1' : Colors.primary) : Colors.textMuted}
+                  color={isActive ? (isAI ? Colors.accent : Colors.primary) : Colors.textMuted}
                 />
               </View>
               <Text
@@ -324,7 +342,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.navBg,
     borderTopWidth: 1,
     borderTopColor: Colors.border,
-    paddingTop: 6,
+    paddingTop: 7,
     paddingBottom: Platform.OS === 'ios' ? 22 : 8,
     paddingHorizontal: 4,
     shadowColor: '#000',
@@ -339,11 +357,11 @@ const styles = StyleSheet.create({
     height: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 9,
+    borderRadius: 12,
   },
   navIconWrapActive: { backgroundColor: Colors.primary + '15' },
-  navIconWrapAI: { backgroundColor: '#6C3CE115' },
+  navIconWrapAI: { backgroundColor: Colors.accent + '16' },
   navLabel: { fontSize: 9, color: Colors.textMuted, fontWeight: '500' },
   navLabelActive: { color: Colors.primary, fontWeight: '700' },
-  navLabelAI: { color: '#6C3CE1', fontWeight: '700' },
+  navLabelAI: { color: Colors.accent, fontWeight: '700' },
 });

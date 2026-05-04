@@ -12,6 +12,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Card } from '../../components/Card';
 import { Colors } from '../../constants';
@@ -64,6 +65,7 @@ interface GroupedSends {
 
 export function ReceivedProfilesScreen({ onBack, onChat, caseId }: ReceivedProfilesScreenProps) {
   const { session, profile } = useAuth();
+  const insets = useSafeAreaInsets();
   const [groups, setGroups] = useState<GroupedSends[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -188,7 +190,7 @@ export function ReceivedProfilesScreen({ onBack, onChat, caseId }: ReceivedProfi
   return (
     <SafeAreaView style={styles.safe}>
       {/* 헤더 */}
-      <View style={styles.headerBar}>
+      <View style={[styles.headerBar, { paddingTop: insets.top + 14 }]}>
         <TouchableOpacity style={styles.backBtn} onPress={onBack}>
           <Ionicons name="chevron-back" size={24} color={Colors.textPrimary} />
         </TouchableOpacity>
@@ -222,6 +224,7 @@ export function ReceivedProfilesScreen({ onBack, onChat, caseId }: ReceivedProfi
         </View>
       ) : (
         <ScrollView
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={Colors.primary} />
@@ -435,7 +438,7 @@ const styles = StyleSheet.create({
   },
   caseSendsCount: { fontSize: 12, color: Colors.white, fontWeight: '700' },
 
-  profileCard: { marginHorizontal: 16, marginBottom: 12, position: 'relative', overflow: 'visible' },
+  profileCard: { marginHorizontal: 16, marginBottom: 12, position: 'relative', overflow: 'visible', borderRadius: 16 },
   profileCardAccepted: { borderColor: Colors.success, borderWidth: 2 },
   profileCardRejected: { opacity: 0.5 },
 
@@ -509,17 +512,17 @@ const styles = StyleSheet.create({
   btnRow: { flexDirection: 'row', gap: 10 },
   chatBtn: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    borderWidth: 1.5, borderColor: Colors.primary, borderRadius: 10, paddingVertical: 10,
+    borderWidth: 1.2, borderColor: Colors.border, borderRadius: 14, paddingVertical: 12,
   },
-  chatBtnText: { fontSize: 13, color: Colors.primary, fontWeight: '600' },
+  chatBtnText: { fontSize: 13, color: Colors.primary, fontWeight: '700' },
   hireBtn: {
     flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    backgroundColor: Colors.primary, borderRadius: 10, paddingVertical: 10,
+    backgroundColor: Colors.primary, borderRadius: 14, paddingVertical: 12,
   },
   hireBtnText: { fontSize: 13, color: Colors.white, fontWeight: '700' },
   hireBtnAccepted: {
     flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    backgroundColor: Colors.success + '15', borderRadius: 10, paddingVertical: 10,
+    backgroundColor: Colors.success + '15', borderRadius: 14, paddingVertical: 12,
     borderWidth: 1, borderColor: Colors.success + '40',
   },
   hireBtnAcceptedText: { fontSize: 13, color: Colors.success, fontWeight: '700' },

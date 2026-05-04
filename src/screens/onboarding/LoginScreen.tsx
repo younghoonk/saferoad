@@ -12,6 +12,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from '../../components/Button';
 import { Colors } from '../../constants';
@@ -26,6 +27,7 @@ interface LoginScreenProps {
 
 export function LoginScreen({ onBack, onSuccess, onSignUp }: LoginScreenProps) {
   const { signIn } = useAuth();
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +89,7 @@ export function LoginScreen({ onBack, onSuccess, onSignUp }: LoginScreenProps) {
         {/* 헤더 */}
         <LinearGradient
           colors={[Colors.primaryDark, Colors.primary]}
-          style={styles.header}
+          style={[styles.header, { paddingTop: insets.top + 16 }]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
@@ -104,7 +106,12 @@ export function LoginScreen({ onBack, onSuccess, onSignUp }: LoginScreenProps) {
           <Text style={styles.headerSubtitle}>계정에 로그인하여 계속하세요</Text>
         </LinearGradient>
 
-        <ScrollView style={styles.form} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+        <ScrollView
+          style={styles.form}
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
           {/* 이메일 */}
           <View style={styles.fieldGroup}>
             <Text style={styles.label}>이메일</Text>
@@ -228,15 +235,15 @@ const styles = StyleSheet.create({
   logoText: { fontSize: 20, fontWeight: '900', color: Colors.white, letterSpacing: 2 },
   headerTitle: { fontSize: 26, fontWeight: '900', color: Colors.white },
   headerSubtitle: { fontSize: 14, color: 'rgba(255,255,255,0.75)' },
-  form: { flex: 1, padding: 20 },
+  form: { flex: 1, padding: 18 },
   fieldGroup: { marginBottom: 16 },
   labelRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
   label: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary, marginBottom: 8 },
   forgotText: { fontSize: 13, color: Colors.accent, fontWeight: '600' },
   inputWrap: {
     flexDirection: 'row', alignItems: 'center',
-    backgroundColor: Colors.white, borderRadius: 12,
-    borderWidth: 1.5, borderColor: Colors.border,
+    backgroundColor: Colors.white, borderRadius: 14,
+    borderWidth: 1.2, borderColor: Colors.border,
     paddingHorizontal: 14, paddingVertical: 2,
   },
   inputError: { borderColor: Colors.danger },

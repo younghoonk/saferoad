@@ -17,6 +17,7 @@ import {
 const REGION_FILTERS       = ['전체', '서울', '경기', '인천', '부산', '대구', '광주', '대전', '경남', '경북', '충남', '충북', '전남', '전북', '강원', '제주', '전국'];
 const ACCIDENT_TYPE_FILTERS = ['전체', '교통사고', '화재사고', '상해사고', '재산피해', '의료사고', '산업재해', '소비자직접선임권', '기타'];
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Card } from '../../components/Card';
 import { StatusBadge } from '../../components/StatusBadge';
@@ -55,7 +56,7 @@ interface AdjusterStats {
 interface AdjusterHomeScreenProps {
   onViewCase: (caseId: string) => void;
   onChat: (adjusterId: string, adjusterName?: string) => void;
-  onAIAnalysis: () => void;
+  onAIAnalysis: (mode?: 'denial-analysis' | 'assessment-draft' | 'closing-report') => void;
 }
 
 // ── 프로필 전송 모달 ───────────────────────────────────────────
@@ -74,6 +75,7 @@ function SendProfileModal({
   onClose,
   onSuccess,
 }: SendProfileModalProps) {
+  const insets = useSafeAreaInsets();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -120,7 +122,11 @@ function SendProfileModal({
             <Text style={styles.modalCaseTitle} numberOfLines={1}>{caseTitle}</Text>
           </View>
 
-          <ScrollView showsVerticalScrollIndicator={false} style={styles.modalBody}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.modalBody}
+            contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+          >
             <View style={styles.infoBox}>
               <Ionicons name="information-circle-outline" size={16} color={Colors.accent} />
               <Text style={styles.infoText}>
@@ -150,7 +156,7 @@ function SendProfileModal({
               size="lg"
               style={styles.submitBtn}
             />
-            <View style={{ height: 24 }} />
+            <View style={{ height: 8 }} />
           </ScrollView>
         </View>
       </KeyboardAvoidingView>
@@ -161,6 +167,7 @@ function SendProfileModal({
 // ── 메인 화면 ─────────────────────────────────────────────────
 export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: AdjusterHomeScreenProps) {
   const { profile, session } = useAuth();
+  const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<'requests' | 'active'>('requests');
 
   // 사정사 profile id (adjuster_profiles 테이블의 id = profile.id)
@@ -287,12 +294,16 @@ export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: Adjuste
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        showsVerticalScrollIndicator={false}
+      >
 
         {/* ── 상단 배너 ── */}
         <LinearGradient
-          colors={[Colors.primaryDark, '#1B3A7A', Colors.primary]}
-          style={styles.heroBanner}
+          colors={[Colors.primaryDark, Colors.primary, Colors.primaryLight]}
+          style={[styles.heroBanner, { paddingTop: insets.top + 12 }]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
@@ -343,9 +354,9 @@ export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: Adjuste
         <View style={styles.section}>
           <View style={styles.quickActions}>
             {[
-              { icon: 'search',        label: '사건 검색',  color: '#4A90D9', bg: '#EBF4FF' },
+              { icon: 'search',        label: '사건 검색',  color: Colors.accent, bg: Colors.accent + '12' },
               { icon: 'chatbubbles',   label: '채팅',       color: '#27AE60', bg: '#E9F7EF' },
-              { icon: 'document-text', label: '계약서',     color: '#9B59B6', bg: '#F3EEF9' },
+              { icon: 'document-text', label: '계약서',     color: Colors.primaryLight, bg: Colors.primary + '10' },
               { icon: 'stats-chart',   label: '수익 현황',  color: '#E67E22', bg: '#FDF2E4' },
             ].map((item) => (
               <TouchableOpacity key={item.label} style={styles.quickActionItem} activeOpacity={0.8}>
@@ -360,9 +371,9 @@ export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: Adjuste
 
         {/* ── AI 면책분석 배너 (사정사 전용) ── */}
         <View style={styles.section}>
-          <TouchableOpacity onPress={onAIAnalysis} activeOpacity={0.9}>
+          <TouchableOpacity onPress={() => onAIAnalysis('denial-analysis')} activeOpacity={0.9}>
             <LinearGradient
-              colors={['#4A1FA8', '#6C3CE1', '#4A90D9']}
+              colors={[Colors.primaryDark, Colors.primary, Colors.accent]}
               style={styles.aiBanner}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
@@ -380,6 +391,31 @@ export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: Adjuste
               <View style={styles.aiBannerRight}>
                 <View style={styles.aiBannerIconCircle}>
                   <Ionicons name="sparkles" size={28} color={Colors.white} />
+                </View>
+                <Ionicons name="chevron-forward" size={16} color="rgba(255,255,255,0.5)" />
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onAIAnalysis('closing-report')} activeOpacity={0.9} style={styles.aiBannerSpacing}>
+            <LinearGradient
+              colors={[Colors.accent, Colors.primary, Colors.primaryDark]}
+              style={styles.aiBanner}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              <View style={styles.aiBannerLeft}>
+                <View style={styles.aiBannerBadge}>
+                  <Ionicons name="clipboard-outline" size={11} color="#C4B5FD" />
+                  <Text style={styles.aiBannerBadgeText}>보험사 제출용</Text>
+                </View>
+                <Text style={styles.aiBannerTitle}>종결보고서 작성</Text>
+                <Text style={styles.aiBannerDesc}>
+                  진단서 · 조사자료 · 손해자료 분석{'\n'}보험사 제출용 보고서 초안 작성
+                </Text>
+              </View>
+              <View style={styles.aiBannerRight}>
+                <View style={styles.aiBannerIconCircle}>
+                  <Ionicons name="clipboard-outline" size={28} color={Colors.white} />
                 </View>
                 <Ionicons name="chevron-forward" size={16} color="rgba(255,255,255,0.5)" />
               </View>
@@ -567,7 +603,7 @@ export function AdjusterHomeScreen({ onViewCase, onChat, onAIAnalysis }: Adjuste
           )}
         </View>
 
-        <View style={{ height: 32 }} />
+        <View style={{ height: 16 }} />
       </ScrollView>
 
       {/* 프로필 전송 모달 */}
@@ -641,10 +677,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.border, backgroundColor: Colors.white,
   },
   typeFilterChipActive: { borderColor: Colors.primary, backgroundColor: Colors.primary },
-  typeFilterChipSpecial: { borderColor: '#7B61FF50', backgroundColor: '#7B61FF08' },
+  typeFilterChipSpecial: { borderColor: Colors.accent + '50', backgroundColor: Colors.accent + '08' },
   typeFilterText: { fontSize: 13, color: Colors.textSecondary, fontWeight: '500' },
   typeFilterTextActive: { color: Colors.white, fontWeight: '700' },
-  typeFilterTextSpecial: { color: '#7B61FF', fontWeight: '600' },
+  typeFilterTextSpecial: { color: Colors.accent, fontWeight: '600' },
 
   section: { paddingHorizontal: 16, marginTop: 20 },
   quickActions: { flexDirection: 'row', justifyContent: 'space-between' },
@@ -654,9 +690,10 @@ const styles = StyleSheet.create({
 
   // AI 배너
   aiBanner: {
-    borderRadius: 18, padding: 20,
+    borderRadius: 16, padding: 20,
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
   },
+  aiBannerSpacing: { marginTop: 12 },
   aiBannerLeft: { flex: 1 },
   aiBannerBadge: {
     flexDirection: 'row', alignItems: 'center', gap: 4,

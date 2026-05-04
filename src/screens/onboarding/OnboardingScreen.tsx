@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '../../constants';
 import { UserType } from '../../types';
 
@@ -20,6 +21,7 @@ interface OnboardingScreenProps {
 }
 
 export function OnboardingScreen({ onSelect, onLogin }: OnboardingScreenProps) {
+  const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<UserType | null>(null);
 
   const handleSelect = (type: UserType) => {
@@ -37,7 +39,15 @@ export function OnboardingScreen({ onSelect, onLogin }: OnboardingScreenProps) {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
     >
-      <SafeAreaView style={styles.safe}>
+      <SafeAreaView
+        style={[
+          styles.safe,
+          {
+            paddingTop: insets.top,
+            paddingBottom: Math.max(insets.bottom, 16),
+          },
+        ]}
+      >
         {/* 로고 */}
         <View style={styles.header}>
           <Text style={styles.logo}>SAFE ROAD</Text>
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
   card: {
     width: width - 32,
     backgroundColor: Colors.white,
-    borderRadius: 28,
+    borderRadius: 18,
     padding: 24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },
@@ -218,7 +228,7 @@ const styles = StyleSheet.create({
   optionIcon: {
     width: 56,
     height: 56,
-    borderRadius: 28,
+    borderRadius: 14,
     backgroundColor: Colors.inputBg,
     alignItems: 'center',
     justifyContent: 'center',

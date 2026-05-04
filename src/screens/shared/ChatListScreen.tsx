@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '../../constants';
 import { useAuth } from '../../contexts/AuthContext';
@@ -36,6 +37,7 @@ interface ChatRoomRow {
 
 export function ChatListScreen({ onSelectRoom }: ChatListScreenProps) {
   const { session, profile } = useAuth();
+  const insets = useSafeAreaInsets();
   const [rooms, setRooms]       = useState<ChatRoomRow[]>([]);
   const [loading, setLoading]   = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -209,7 +211,7 @@ export function ChatListScreen({ onSelectRoom }: ChatListScreenProps) {
     <SafeAreaView style={styles.safe}>
       <LinearGradient
         colors={[Colors.primaryDark, Colors.primary]}
-        style={styles.header}
+        style={[styles.header, { paddingTop: insets.top + 16 }]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
@@ -246,6 +248,7 @@ export function ChatListScreen({ onSelectRoom }: ChatListScreenProps) {
           data={rooms}
           keyExtractor={(item) => item.id}
           renderItem={renderRoom}
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}

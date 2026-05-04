@@ -14,6 +14,7 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { Header } from '../../components/Header';
@@ -40,6 +41,7 @@ interface MsgRow {
 
 export function ChatScreen({ onBack, chatRoomId, partnerName, partnerAvatar }: ChatScreenProps) {
   const { session } = useAuth();
+  const insets = useSafeAreaInsets();
   const uid = session?.user.id ?? '';
 
   const [messages,       setMessages]       = useState<MsgRow[]>([]);
@@ -316,7 +318,10 @@ export function ChatScreen({ onBack, chatRoomId, partnerName, partnerAvatar }: C
             data={messages}
             keyExtractor={(item) => item.id}
             renderItem={renderMessage}
-            contentContainerStyle={styles.msgList}
+            contentContainerStyle={[
+              styles.msgList,
+              { paddingBottom: Math.max(insets.bottom, 12) + 12 },
+            ]}
             onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
             ListEmptyComponent={
               <View style={styles.emptyChat}>
@@ -328,11 +333,11 @@ export function ChatScreen({ onBack, chatRoomId, partnerName, partnerAvatar }: C
 
         {/* 첨부 메뉴 */}
         {showAttachMenu && (
-          <View style={styles.attachMenu}>
+          <View style={[styles.attachMenu, { paddingBottom: Math.max(insets.bottom, 12) }]}>
             {[
               { label: '문서 첨부', icon: 'document-outline',  color: Colors.accent,   bg: Colors.accent + '20',   onPress: attachDocument },
               { label: '사진 첨부', icon: 'image-outline',     color: Colors.success,  bg: Colors.success + '20',  onPress: attachImage },
-              { label: '카메라',   icon: 'camera-outline',    color: '#9B59B6',        bg: '#9B59B620',             onPress: () => { setShowAttachMenu(false); Alert.alert('준비 중', '카메라 기능은 준비 중입니다.'); } },
+              { label: '카메라',   icon: 'camera-outline',    color: Colors.primaryLight, bg: Colors.primary + '12', onPress: () => { setShowAttachMenu(false); Alert.alert('준비 중', '카메라 기능은 준비 중입니다.'); } },
             ].map((opt) => (
               <TouchableOpacity key={opt.label} style={styles.attachOpt} onPress={opt.onPress}>
                 <View style={[styles.attachIconWrap, { backgroundColor: opt.bg }]}>
@@ -345,7 +350,7 @@ export function ChatScreen({ onBack, chatRoomId, partnerName, partnerAvatar }: C
         )}
 
         {/* 입력창 */}
-        <View style={styles.inputBar}>
+        <View style={[styles.inputBar, { paddingBottom: Math.max(insets.bottom, 10) }]}>
           <TouchableOpacity
             style={styles.attachBtn}
             onPress={() => setShowAttachMenu((v) => !v)}
@@ -463,7 +468,7 @@ const styles = StyleSheet.create({
   attachBtn: { padding: 4 },
   textInput: {
     flex: 1, backgroundColor: Colors.inputBg,
-    borderRadius: 20, paddingHorizontal: 14,
+    borderRadius: 16, paddingHorizontal: 14,
     paddingTop: 10, paddingBottom: 10,
     fontSize: 14, color: Colors.textPrimary,
     maxHeight: 100, borderWidth: 1, borderColor: Colors.border,

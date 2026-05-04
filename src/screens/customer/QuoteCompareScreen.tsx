@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 import { Colors } from '../../constants';
@@ -44,6 +45,7 @@ interface QuoteRow {
 }
 
 export function QuoteCompareScreen({ onBack, onChat, caseId }: QuoteCompareScreenProps) {
+  const insets = useSafeAreaInsets();
   const [quotes, setQuotes] = useState<QuoteRow[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -145,7 +147,11 @@ export function QuoteCompareScreen({ onBack, onChat, caseId }: QuoteCompareScree
         showBack
         onBack={onBack}
       />
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* 안내 배너 */}
         <View style={styles.banner}>
           <Ionicons name="information-circle" size={18} color={Colors.accent} />
@@ -297,7 +303,7 @@ export function QuoteCompareScreen({ onBack, onChat, caseId }: QuoteCompareScree
           </>
         )}
 
-        <View style={{ height: 32 }} />
+        <View style={{ height: 16 }} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -332,14 +338,14 @@ const styles = StyleSheet.create({
   sortChip: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 20,
+    borderRadius: 14,
     backgroundColor: Colors.white,
     borderWidth: 1,
     borderColor: Colors.border,
   },
   sortText: { fontSize: 12, color: Colors.textSecondary, fontWeight: '500' },
   list: { padding: 16, gap: 12 },
-  quoteCard: { position: 'relative', overflow: 'visible' },
+  quoteCard: { position: 'relative', overflow: 'visible', borderRadius: 16 },
   quoteCardSelected: { borderColor: Colors.primary, borderWidth: 2 },
   recommendBadge: {
     position: 'absolute',
@@ -391,12 +397,12 @@ const styles = StyleSheet.create({
   btnRow: { flexDirection: 'row', gap: 10 },
   chatBtn: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    borderWidth: 1.5, borderColor: Colors.primary, borderRadius: 10, paddingVertical: 10,
+    borderWidth: 1.2, borderColor: Colors.border, borderRadius: 14, paddingVertical: 12,
   },
-  chatBtnText: { fontSize: 13, color: Colors.primary, fontWeight: '600' },
+  chatBtnText: { fontSize: 13, color: Colors.primary, fontWeight: '700' },
   acceptBtn: {
-    flex: 2, backgroundColor: Colors.primary, borderRadius: 10,
-    paddingVertical: 10, alignItems: 'center',
+    flex: 2, backgroundColor: Colors.primary, borderRadius: 14,
+    paddingVertical: 12, alignItems: 'center',
   },
   acceptBtnSelected: { backgroundColor: Colors.success },
   acceptBtnText: { fontSize: 14, color: Colors.white, fontWeight: '700' },

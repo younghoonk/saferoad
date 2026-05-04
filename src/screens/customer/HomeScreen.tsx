@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Card } from '../../components/Card';
 import { Colors } from '../../constants';
@@ -27,14 +28,15 @@ interface HomeScreenProps {
 }
 
 const QUICK_MENU: { icon: string; label: string; color: string; tab: string }[] = [
-  { icon: 'document-text',  label: '내 사건',    color: '#4A90D9', tab: 'cases'    },
+  { icon: 'document-text',  label: '내 사건',    color: Colors.accent, tab: 'cases'    },
   { icon: 'people',         label: '받은 프로필', color: '#27AE60', tab: 'profiles' },
   { icon: 'chatbubbles',    label: '1:1 채팅',   color: '#E67E22', tab: 'chat'     },
-  { icon: 'search',         label: '사정사 검색', color: '#9B59B6', tab: 'search'   },
+  { icon: 'search',         label: '사정사 검색', color: Colors.primaryLight, tab: 'search'   },
 ];
 
 export function HomeScreen({ onRegisterCase, onDirectHire, onViewQuotes, onChat, onViewReceivedProfiles }: HomeScreenProps) {
   const { profile, session } = useAuth();
+  const insets = useSafeAreaInsets();
   const firstName = profile?.name?.split('')[0] ?? '고객';
   const [receivedCount, setReceivedCount] = useState(0);
 
@@ -69,12 +71,16 @@ export function HomeScreen({ onRegisterCase, onDirectHire, onViewQuotes, onChat,
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        showsVerticalScrollIndicator={false}
+      >
 
         {/* ── 상단 배너 ── */}
         <LinearGradient
           colors={[Colors.primaryDark, Colors.primary, Colors.primaryLight]}
-          style={styles.heroBanner}
+          style={[styles.heroBanner, { paddingTop: insets.top + 12 }]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
@@ -125,7 +131,7 @@ export function HomeScreen({ onRegisterCase, onDirectHire, onViewQuotes, onChat,
         <View style={styles.section}>
           <TouchableOpacity onPress={onRegisterCase} activeOpacity={0.9}>
             <LinearGradient
-              colors={['#1B3A7A', Colors.primary]}
+              colors={[Colors.primaryDark, Colors.primary]}
               style={styles.ctaCard}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
@@ -149,7 +155,7 @@ export function HomeScreen({ onRegisterCase, onDirectHire, onViewQuotes, onChat,
           {/* 소비자직접선임권 배너 */}
           <TouchableOpacity onPress={onDirectHire} activeOpacity={0.9} style={{ marginTop: 10 }}>
             <LinearGradient
-              colors={['#4A1FA8', '#7B61FF']}
+              colors={[Colors.primaryDark, Colors.accent]}
               style={styles.ctaCard}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
@@ -378,7 +384,7 @@ const styles = StyleSheet.create({
   seeAll: { fontSize: 13, color: Colors.accent, fontWeight: '600' },
 
   // CTA 카드
-  ctaCard: { borderRadius: 18, padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  ctaCard: { borderRadius: 16, padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   ctaTextWrap: { flex: 1 },
   ctaNewBadge: {
     backgroundColor: Colors.accentLight, alignSelf: 'flex-start',
@@ -470,7 +476,7 @@ const styles = StyleSheet.create({
   profileNoticeDesc: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
 
   // AI 배너
-  aiBanner: { borderRadius: 18, padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  aiBanner: { borderRadius: 16, padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   aiBannerBadge: {
     backgroundColor: 'rgba(255,255,255,0.2)', alignSelf: 'flex-start',
     borderRadius: 8, paddingHorizontal: 8, paddingVertical: 2,

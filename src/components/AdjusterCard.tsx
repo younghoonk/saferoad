@@ -64,7 +64,7 @@ export function AdjusterCard({ adjuster, onPress, compact = false }: AdjusterCar
 }
 
 const styles = StyleSheet.create({
-  card: { marginBottom: 12 },
+  card: { marginBottom: 12, borderRadius: 16 },
   row: { flexDirection: 'row', alignItems: 'flex-start' },
   avatar: {
     width: 48,
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
   license: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 6 },
   tag: {
-    backgroundColor: Colors.inputBg,
+    backgroundColor: Colors.primary + '0D',
     borderRadius: 8,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  tagText: { fontSize: 11, color: Colors.primary, fontWeight: '500' },
+  tagText: { fontSize: 11, color: Colors.primary, fontWeight: '700' },
   bio: { fontSize: 13, color: Colors.textSecondary, marginTop: 12, lineHeight: 18 },
   stats: {
     flexDirection: 'row',

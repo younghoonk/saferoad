@@ -11,6 +11,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AdjusterCard } from '../../components/AdjusterCard';
 import { Colors } from '../../constants';
 import { supabase } from '../../lib/supabase';
@@ -58,6 +59,7 @@ function mapToAdjuster(row: AdjusterRow): Adjuster {
 }
 
 export function SearchScreen({ onChat }: SearchScreenProps) {
+  const insets = useSafeAreaInsets();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('전체');
   const [adjusters, setAdjusters] = useState<Adjuster[]>([]);
@@ -98,7 +100,7 @@ export function SearchScreen({ onChat }: SearchScreenProps) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.searchHeader}>
+      <View style={[styles.searchHeader, { paddingTop: insets.top + 16 }]}>
         <Text style={styles.title}>사정사 검색</Text>
         <View style={styles.searchBox}>
           <Ionicons name="search-outline" size={18} color={Colors.textMuted} />
@@ -144,6 +146,7 @@ export function SearchScreen({ onChat }: SearchScreenProps) {
       ) : (
         <ScrollView
           style={styles.list}
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={Colors.primary} />
@@ -167,7 +170,7 @@ export function SearchScreen({ onChat }: SearchScreenProps) {
               onPress={() => onChat(adjuster.id, adjuster.name)}
             />
           ))}
-          <View style={{ height: 32 }} />
+          <View style={{ height: 16 }} />
         </ScrollView>
       )}
     </SafeAreaView>

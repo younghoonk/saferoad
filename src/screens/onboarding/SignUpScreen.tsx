@@ -12,6 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from '../../components/Button';
 import { Colors } from '../../constants';
@@ -45,6 +46,7 @@ interface FormErrors {
 
 export function SignUpScreen({ userType, onBack, onSuccess, onLogin }: SignUpScreenProps) {
   const { signUp } = useAuth();
+  const insets = useSafeAreaInsets();
   const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
@@ -150,7 +152,7 @@ export function SignUpScreen({ userType, onBack, onSuccess, onLogin }: SignUpScr
         {/* 헤더 */}
         <LinearGradient
           colors={[Colors.primaryDark, Colors.primary]}
-          style={styles.header}
+          style={[styles.header, { paddingTop: insets.top + 16 }]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
@@ -169,7 +171,12 @@ export function SignUpScreen({ userType, onBack, onSuccess, onLogin }: SignUpScr
           </View>
         </LinearGradient>
 
-        <ScrollView style={styles.form} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+        <ScrollView
+          style={styles.form}
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
           {/* 이름 */}
           <View style={styles.fieldGroup}>
             <Text style={styles.label}>이름 <Text style={styles.required}>*</Text></Text>
@@ -341,14 +348,14 @@ const styles = StyleSheet.create({
   typeBadgeText: { fontSize: 12, color: Colors.white, fontWeight: '600' },
   headerTitle: { fontSize: 26, fontWeight: '900', color: Colors.white },
   headerSubtitle: { fontSize: 14, color: 'rgba(255,255,255,0.75)' },
-  form: { flex: 1, padding: 20 },
+  form: { flex: 1, padding: 18 },
   fieldGroup: { marginBottom: 16 },
   label: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary, marginBottom: 8 },
   required: { color: Colors.danger },
   inputWrap: {
     flexDirection: 'row', alignItems: 'center',
-    backgroundColor: Colors.white, borderRadius: 12,
-    borderWidth: 1.5, borderColor: Colors.border,
+    backgroundColor: Colors.white, borderRadius: 14,
+    borderWidth: 1.2, borderColor: Colors.border,
     paddingHorizontal: 14, paddingVertical: 2,
   },
   inputError: { borderColor: Colors.danger },

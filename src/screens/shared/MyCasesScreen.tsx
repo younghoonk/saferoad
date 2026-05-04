@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card } from '../../components/Card';
 import { StatusBadge } from '../../components/StatusBadge';
 import { Colors } from '../../constants';
@@ -46,6 +47,7 @@ interface MyCasesScreenProps {
 
 export function MyCasesScreen({ onViewQuotes, onViewReceivedProfiles }: MyCasesScreenProps) {
   const { session } = useAuth();
+  const insets = useSafeAreaInsets();
   const [cases,       setCases]       = useState<CaseRow[]>([]);
   const [loading,     setLoading]     = useState(true);
   const [refreshing,  setRefreshing]  = useState(false);
@@ -113,7 +115,7 @@ export function MyCasesScreen({ onViewQuotes, onViewReceivedProfiles }: MyCasesS
   return (
     <SafeAreaView style={styles.safe}>
       {/* 헤더 */}
-      <View style={styles.headerRow}>
+      <View style={[styles.headerRow, { paddingTop: insets.top + 16 }]}>
         <Text style={styles.title}>내 사건</Text>
         <View style={styles.headerRight}>
           {!loading && (
@@ -174,6 +176,7 @@ export function MyCasesScreen({ onViewQuotes, onViewReceivedProfiles }: MyCasesS
         /* 목록 */
         <ScrollView
           style={styles.list}
+          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
@@ -246,7 +249,7 @@ export function MyCasesScreen({ onViewQuotes, onViewReceivedProfiles }: MyCasesS
               )}
             </Card>
           ))}
-          <View style={{ height: 32 }} />
+          <View style={{ height: 16 }} />
         </ScrollView>
       )}
     </SafeAreaView>

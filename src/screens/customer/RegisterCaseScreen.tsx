@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
   Alert,
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
@@ -31,6 +34,7 @@ const REGIONS = [
 
 export function RegisterCaseScreen({ onBack, onSubmit }: RegisterCaseScreenProps) {
   const { session } = useAuth();
+  const insets = useSafeAreaInsets();
 
   const [accidentType,     setAccidentType]     = useState('');
   const [insuranceCompany, setInsuranceCompany] = useState('');
@@ -114,7 +118,16 @@ export function RegisterCaseScreen({ onBack, onSubmit }: RegisterCaseScreenProps
   return (
     <SafeAreaView style={styles.safe}>
       <Header title="사건 등록" showBack onBack={onBack} />
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 16) }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
 
         {/* 사고 유형 */}
         <View style={styles.section}>
@@ -242,7 +255,7 @@ export function RegisterCaseScreen({ onBack, onSubmit }: RegisterCaseScreenProps
           </View>
         ) : null}
 
-        <View style={styles.submitWrap}>
+        <View style={[styles.submitWrap, { paddingBottom: Math.max(insets.bottom + 16, 32) }]}>
           <Button
             title={loading ? '' : '견적 요청하기'}
             onPress={handleSubmit}
@@ -253,12 +266,14 @@ export function RegisterCaseScreen({ onBack, onSubmit }: RegisterCaseScreenProps
           />
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe:      { flex: 1, backgroundColor: Colors.background },
+  flex:      { flex: 1 },
   container: { flex: 1 },
   section: {
     padding: 16,
@@ -273,7 +288,7 @@ const styles = StyleSheet.create({
   regionRow: { flexDirection: 'row', gap: 8, paddingVertical: 2 },
   chip: {
     paddingHorizontal: 14, paddingVertical: 8,
-    borderRadius: 20, borderWidth: 1.5,
+    borderRadius: 14, borderWidth: 1.2,
     borderColor: Colors.border, backgroundColor: Colors.white,
   },
   chipSelected:     { borderColor: Colors.primary, backgroundColor: Colors.primary + '10' },
@@ -281,9 +296,9 @@ const styles = StyleSheet.create({
   chipTextSelected: { color: Colors.primary, fontWeight: '700' },
   input: {
     backgroundColor: Colors.inputBg,
-    borderRadius: 12, padding: 14,
+    borderRadius: 14, padding: 14,
     fontSize: 14, color: Colors.textPrimary,
-    borderWidth: 1, borderColor: Colors.border,
+    borderWidth: 1.2, borderColor: Colors.border,
   },
   textArea:  { height: 130, paddingTop: 14 },
   charCount: { fontSize: 11, color: Colors.textMuted, textAlign: 'right', marginTop: 6 },

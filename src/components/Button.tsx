@@ -57,7 +57,8 @@ export function Button({
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: 12,
+    minHeight: 50,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -70,21 +71,21 @@ const styles = StyleSheet.create({
   outline: {
     backgroundColor: 'transparent',
     borderWidth: 1.5,
-    borderColor: Colors.primary,
+    borderColor: Colors.border,
   },
   ghost: {
     backgroundColor: 'transparent',
   },
-  size_sm: { paddingVertical: 8, paddingHorizontal: 16 },
-  size_md: { paddingVertical: 14, paddingHorizontal: 24 },
-  size_lg: { paddingVertical: 18, paddingHorizontal: 32 },
+  size_sm: { minHeight: 40, paddingVertical: 8, paddingHorizontal: 16 },
+  size_md: { minHeight: 48, paddingVertical: 12, paddingHorizontal: 22 },
+  size_lg: { minHeight: 52, paddingVertical: 14, paddingHorizontal: 28 },
   disabled: { opacity: 0.5 },
-  text: { fontWeight: '600' },
+  text: { fontWeight: '700' },
   text_primary: { color: Colors.white },
   text_secondary: { color: Colors.white },
   text_outline: { color: Colors.primary },
   text_ghost: { color: Colors.primary },
   textSize_sm: { fontSize: 13 },
   textSize_md: { fontSize: 15 },
-  textSize_lg: { fontSize: 17 },
+  textSize_lg: { fontSize: 16 },
 });

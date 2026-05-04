@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Card } from '../../components/Card';
 import { Colors } from '../../constants';
@@ -38,6 +39,7 @@ interface CaseStats {
 
 export function ProfileScreen({ onLogout, onEditAdjusterProfile }: ProfileScreenProps) {
   const { profile, session } = useAuth();
+  const insets = useSafeAreaInsets();
   const isAdjuster = profile?.user_type === 'adjuster';
   const [stats, setStats] = useState<CaseStats>({ inProgress: 0, resolved: 0, chatRooms: 0 });
 
@@ -71,11 +73,15 @@ export function ProfileScreen({ onLogout, onEditAdjusterProfile }: ProfileScreen
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* 프로필 헤더 */}
         <LinearGradient
           colors={[Colors.primary, Colors.primaryLight]}
-          style={styles.profileHeader}
+          style={[styles.profileHeader, { paddingTop: insets.top + 32 }]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
@@ -189,7 +195,7 @@ export function ProfileScreen({ onLogout, onEditAdjusterProfile }: ProfileScreen
         {/* 버전 */}
         <Text style={styles.version}>SAFE ROAD v1.0.0</Text>
 
-        <View style={{ height: 32 }} />
+        <View style={{ height: 16 }} />
       </ScrollView>
     </SafeAreaView>
   );

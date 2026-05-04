@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
   Alert,
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from '../../components/Button';
@@ -31,6 +34,7 @@ const REGIONS = [
 
 export function DirectHireScreen({ onBack, onSubmit }: DirectHireScreenProps) {
   const { session } = useAuth();
+  const insets = useSafeAreaInsets();
 
   const [insuranceCompany, setInsuranceCompany] = useState('');
   const [region,           setRegion]           = useState('전국');
@@ -114,8 +118,8 @@ export function DirectHireScreen({ onBack, onSubmit }: DirectHireScreenProps) {
     <SafeAreaView style={styles.safe}>
       {/* 헤더 */}
       <LinearGradient
-        colors={['#4A1FA8', '#7B61FF']}
-        style={styles.header}
+        colors={[Colors.primaryDark, Colors.accent]}
+        style={[styles.header, { paddingTop: insets.top + 12 }]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
@@ -132,13 +136,22 @@ export function DirectHireScreen({ onBack, onSubmit }: DirectHireScreenProps) {
         </View>
       </LinearGradient>
 
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 16) }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
 
         {/* 안내 박스 */}
         <View style={styles.infoCard}>
           <View style={styles.infoRow}>
             <View style={styles.infoIconWrap}>
-              <Ionicons name="information-circle" size={20} color="#7B61FF" />
+              <Ionicons name="information-circle" size={20} color={Colors.accent} />
             </View>
             <View style={styles.infoTextWrap}>
               <Text style={styles.infoTitle}>소비자직접선임권이란?</Text>
@@ -240,12 +253,12 @@ export function DirectHireScreen({ onBack, onSubmit }: DirectHireScreenProps) {
 
         {loading && uploadProgress ? (
           <View style={styles.progressBox}>
-            <Ionicons name="cloud-upload-outline" size={16} color="#7B61FF" />
+            <Ionicons name="cloud-upload-outline" size={16} color={Colors.accent} />
             <Text style={styles.progressText}>{uploadProgress}</Text>
           </View>
         ) : null}
 
-        <View style={styles.submitWrap}>
+        <View style={[styles.submitWrap, { paddingBottom: Math.max(insets.bottom + 16, 32) }]}>
           <Button
             title={loading ? '' : '소비자직접선임권 등록하기'}
             onPress={handleSubmit}
@@ -256,12 +269,14 @@ export function DirectHireScreen({ onBack, onSubmit }: DirectHireScreenProps) {
           />
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe:      { flex: 1, backgroundColor: Colors.background },
+  flex:      { flex: 1 },
   container: { flex: 1 },
 
   header: { paddingTop: 12, paddingBottom: 28, paddingHorizontal: 20 },
@@ -284,16 +299,16 @@ const styles = StyleSheet.create({
 
   infoCard: {
     margin: 16,
-    backgroundColor: '#7B61FF0D',
+    backgroundColor: Colors.accent + '0D',
     borderRadius: 14,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#7B61FF25',
+    borderColor: Colors.accent + '25',
   },
   infoRow: { flexDirection: 'row', gap: 10 },
   infoIconWrap: { paddingTop: 2 },
   infoTextWrap: { flex: 1 },
-  infoTitle: { fontSize: 13, fontWeight: '700', color: '#7B61FF', marginBottom: 6 },
+  infoTitle: { fontSize: 13, fontWeight: '700', color: Colors.accent, marginBottom: 6 },
   infoDesc:  { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
 
   section: {
@@ -310,18 +325,18 @@ const styles = StyleSheet.create({
   regionRow: { flexDirection: 'row', gap: 8, paddingVertical: 2 },
   chip: {
     paddingHorizontal: 14, paddingVertical: 8,
-    borderRadius: 20, borderWidth: 1.5,
+    borderRadius: 14, borderWidth: 1.2,
     borderColor: Colors.border, backgroundColor: Colors.white,
   },
-  chipSelected:     { borderColor: '#7B61FF', backgroundColor: '#7B61FF10' },
+  chipSelected:     { borderColor: Colors.accent, backgroundColor: Colors.accent + '10' },
   chipText:         { fontSize: 13, color: Colors.textSecondary, fontWeight: '500' },
-  chipTextSelected: { color: '#7B61FF', fontWeight: '700' },
+  chipTextSelected: { color: Colors.accent, fontWeight: '700' },
 
   input: {
     backgroundColor: Colors.inputBg,
-    borderRadius: 12, padding: 14,
+    borderRadius: 14, padding: 14,
     fontSize: 14, color: Colors.textPrimary,
-    borderWidth: 1, borderColor: Colors.border,
+    borderWidth: 1.2, borderColor: Colors.border,
   },
   textArea:  { height: 160, paddingTop: 14 },
   charCount: { fontSize: 11, color: Colors.textMuted, textAlign: 'right', marginTop: 6 },
@@ -348,12 +363,12 @@ const styles = StyleSheet.create({
 
   progressBox: {
     flexDirection: 'row', alignItems: 'center', gap: 8,
-    backgroundColor: '#7B61FF12',
+    backgroundColor: Colors.accent + '12',
     borderRadius: 10, padding: 12,
     marginHorizontal: 16, marginBottom: 4,
   },
-  progressText: { fontSize: 13, color: '#7B61FF', fontWeight: '600' },
+  progressText: { fontSize: 13, color: Colors.accent, fontWeight: '600' },
 
   submitWrap: { padding: 16, paddingBottom: 32 },
-  submitBtn:  { borderRadius: 14, backgroundColor: '#7B61FF' },
+  submitBtn:  { borderRadius: 14, backgroundColor: Colors.primary },
 });
