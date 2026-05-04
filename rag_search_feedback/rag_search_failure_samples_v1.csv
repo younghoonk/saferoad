@@ -1,0 +1,31 @@
+id,feature_name,search_status,feedback_type,rating,task_type,priority,input_text
+RSF001,assessment_draft,low_similarity,missing_reference,2,add_keywords,high,M47.26으로 1회 통원했는데 실손보험이 고지의무 위반으로 해지됨
+RSF002,assessment_draft,low_similarity,missing_reference,2,add_fss_case,high,갑상선 결절 검진 미고지 후 갑상선암 진단비가 거절됨
+RSF003,manual_rag_test,wrong_issue,wrong_reference,2,fix_metadata,medium,고혈압 측정치만 있었는데 고혈압 투약 미고지로 검색됨
+RSF004,assessment_draft,no_results,missing_reference,1,add_precedent,high,보험설계사에게 병력을 말했는데 청약서에는 누락됨
+RSF005,assessment_draft,low_similarity,too_generic,2,add_keywords,medium,유방결절 검진 미고지로 암보험 해지 통보를 받음
+RSF006,manual_rag_test,missing_legal_basis,missing_reference,2,add_fss_case,medium,위염 1회 진료 미고지로 계약해지 가능한지 검색
+RSF007,assessment_draft,missing_terms,missing_reference,2,add_terms_chunk,high,가입 전 MRI 검사만 했고 치료는 없었는데 미고지라고 함
+RSF008,closing_report,no_results,not_helpful,1,add_keywords,high,건강검진 재검 권유를 모르고 가입한 사건 종결보고서 근거 검색
+RSF009,assessment_draft,missing_terms,missing_reference,2,add_terms_chunk,high,도수치료 실손 부지급에 치료목적 반박자료가 필요함
+RSF010,assessment_draft,low_similarity,missing_reference,2,add_fss_case,high,백내장 다초점렌즈 비용이 실손에서 빠졌음
+RSF011,closing_report,no_results,missing_reference,1,add_fss_case,high,요양병원 암 입원비가 직접치료가 아니라고 부지급됨
+RSF012,assessment_draft,missing_medical_basis,too_generic,2,add_medical_issue_code,medium,비급여 주사치료 실손 부지급 반박 근거
+RSF013,manual_rag_test,missing_terms,missing_reference,2,add_terms_chunk,medium,체외충격파 치료 횟수 과다라고 하는데 기준이 필요함
+RSF014,assessment_draft,missing_terms,missing_reference,2,add_terms_chunk,high,무릎 동요관절 후유장해 지급률 검색
+RSF015,assessment_draft,missing_precedent,missing_reference,2,add_precedent,high,회전근개파열 후유장해와 퇴행성 주장을 구분해야 함
+RSF016,closing_report,missing_precedent,missing_reference,2,add_precedent,high,추간판탈출증 후유장해에서 기왕증 감액 근거 필요
+RSF017,manual_rag_test,no_results,not_helpful,1,add_medical_issue_code,medium,압박골절 후유장해 압박률 기준 검색
+RSF018,assessment_draft,missing_terms,missing_reference,2,add_terms_chunk,medium,안면 반흔 추상장해 기준이 필요함
+RSF019,assessment_draft,missing_terms,missing_reference,2,add_terms_chunk,high,급성심근경색 진단비에서 트로포닌과 심전도 기준 검색
+RSF020,assessment_draft,missing_fss_case,missing_reference,2,add_fss_case,high,무증상 뇌경색 진단비 부지급 근거를 찾고 싶음
+RSF021,closing_report,wrong_issue,wrong_reference,2,fix_metadata,medium,경계성종양과 제자리암 구분이 잘 안 됨
+RSF022,assessment_draft,insufficient_context,too_generic,3,fix_metadata,medium,갑상선암이 일반암인지 유사암인지 검색 결과가 혼재됨
+RSF023,manual_rag_test,missing_terms,missing_reference,2,add_terms_chunk,high,뇌출혈 진단비에서 외상성인지 질병성인지 구분 검색
+RSF024,assessment_draft,insufficient_context,missing_reference,3,fix_metadata,high,약관 검색은 됐는데 적용시점이 현재 약관인지 과거 약관인지 알 수 없음
+RSF025,manual_rag_test,insufficient_context,too_generic,3,fix_metadata,medium,판례는 검색됐지만 사건번호 외에 쟁점 태그가 부족함
+RSF026,manual_rag_test,insufficient_context,too_generic,3,fix_metadata,medium,약관 chunk 제목이 너무 일반적이라 검색 결과가 구분되지 않음
+RSF027,assessment_draft,low_similarity,missing_reference,2,add_keywords,high,보험사 공문에는 고의중과실이라고 표현하지 않고 중요한 병력 누락이라고 적혀 있음
+RSF028,assessment_draft,no_results,not_helpful,1,add_keywords,high,고객은 허리 뻐근함이라고 쓰는데 M47.26이나 M51로 검색되지 않음
+RSF029,closing_report,low_similarity,missing_reference,2,add_keywords,medium,보험사 면책공문이 의료자문 결과만 근거로 부지급했는데 유사 패턴이 부족함
+RSF030,assessment_draft,hallucination_risk,hallucination_risk,1,improve_query_prompt,high,검색 결과가 부족해서 AI가 없는 판례를 말할 위험이 있음

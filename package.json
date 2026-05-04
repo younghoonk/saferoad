@@ -21,7 +21,9 @@
     "rag:precedent:import": "node scripts/importPrecedentCases.js",
     "rag:precedent:check": "node scripts/checkPrecedentCases.js",
     "rag:realcases:import": "node scripts/importRealCasePatterns.js",
-    "rag:realcases:check": "node scripts/checkRealCasePatterns.js"
+    "rag:realcases:check": "node scripts/checkRealCasePatterns.js",
+    "rag:feedback:import": "node scripts/importRagSearchFeedbackSamples.js",
+    "rag:feedback:check": "node scripts/checkRagSearchFeedback.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
