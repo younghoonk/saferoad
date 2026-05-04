@@ -1,0 +1,1143 @@
+[
+  {
+    "target_id": "PST001",
+    "query": "보험 고지의무 중대한 과실 중요한 사항",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:21.641Z"
+  },
+  {
+    "target_id": "PST002",
+    "query": "보험계약 고지의무 중요한 사항",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:22.121Z"
+  },
+  {
+    "target_id": "PST003",
+    "query": "고지의무 위반 보험사고 인과관계",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:22.601Z"
+  },
+  {
+    "target_id": "PST004",
+    "query": "건강검진 고지의무 보험계약",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:23.069Z"
+  },
+  {
+    "target_id": "PST005",
+    "query": "갑상선 결절 고지의무 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:23.551Z"
+  },
+  {
+    "target_id": "PST006",
+    "query": "고혈압 투약 고지의무 보험계약",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:24.031Z"
+  },
+  {
+    "target_id": "PST007",
+    "query": "보험 고지의무 해지권 행사기간",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:24.620Z"
+  },
+  {
+    "target_id": "PST008",
+    "query": "보험 고지의무 설계사에게 고지",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:25.381Z"
+  },
+  {
+    "target_id": "PST009",
+    "query": "청약서 질문표 고지의무 중요한 사항",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:25.863Z"
+  },
+  {
+    "target_id": "PST010",
+    "query": "보험계약 고지의무 고의 중대한 과실",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:26.329Z"
+  },
+  {
+    "target_id": "PST011",
+    "query": "질병 치료력 고지의무 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:26.828Z"
+  },
+  {
+    "target_id": "PST012",
+    "query": "보험 고지의무 인수심사 중요사항",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:27.300Z"
+  },
+  {
+    "target_id": "PST013",
+    "query": "보험계약 해지 고지의무 제척기간",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:27.763Z"
+  },
+  {
+    "target_id": "PST014",
+    "query": "고지의무 위반 보험금 지급 인과관계",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:28.250Z"
+  },
+  {
+    "target_id": "PST015",
+    "query": "보험 고지의무 경미한 질병 통원",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:28.716Z"
+  },
+  {
+    "target_id": "PST016",
+    "query": "이륜차 운전 통지의무 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:29.184Z"
+  },
+  {
+    "target_id": "PST017",
+    "query": "보험 직업변경 통지의무 위험변경",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:29.649Z"
+  },
+  {
+    "target_id": "PST018",
+    "query": "상해보험 직업 변경 보험금 감액",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:30.116Z"
+  },
+  {
+    "target_id": "PST019",
+    "query": "보험계약 위험변경 통지의무 해지",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:30.578Z"
+  },
+  {
+    "target_id": "PST020",
+    "query": "오토바이 운전 통지의무 상해보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:31.059Z"
+  },
+  {
+    "target_id": "PST021",
+    "query": "배달업 직업변경 보험 통지의무",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:31.523Z"
+  },
+  {
+    "target_id": "PST022",
+    "query": "상해보험 위험 증가 통지의무",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:32.004Z"
+  },
+  {
+    "target_id": "PST023",
+    "query": "보험 통지의무 위반 보험금 지급",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:32.578Z"
+  },
+  {
+    "target_id": "PST024",
+    "query": "실손보험 도수치료 치료목적",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:33.058Z"
+  },
+  {
+    "target_id": "PST025",
+    "query": "백내장 다초점렌즈 실손보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:33.559Z"
+  },
+  {
+    "target_id": "PST026",
+    "query": "실손보험 요양병원 암 입원 직접치료",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:34.026Z"
+  },
+  {
+    "target_id": "PST027",
+    "query": "실손보험 비급여 주사 치료목적",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:34.478Z"
+  },
+  {
+    "target_id": "PST028",
+    "query": "실손보험 체외충격파 치료 필요성",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:34.990Z"
+  },
+  {
+    "target_id": "PST029",
+    "query": "실손보험 입원 필요성 통원 가능",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:35.487Z"
+  },
+  {
+    "target_id": "PST030",
+    "query": "실손보험 미용 목적 보상 제외",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:35.969Z"
+  },
+  {
+    "target_id": "PST031",
+    "query": "실손보험 비급여 MRI 의학적 필요성",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:36.467Z"
+  },
+  {
+    "target_id": "PST032",
+    "query": "실손보험 상급병실료 보상 한도",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:37.020Z"
+  },
+  {
+    "target_id": "PST033",
+    "query": "실손보험 진료비 세부내역 비급여",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:37.500Z"
+  },
+  {
+    "target_id": "PST034",
+    "query": "후유장해 보험금 장해지급률",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:37.996Z"
+  },
+  {
+    "target_id": "PST035",
+    "query": "추간판탈출증 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:38.477Z"
+  },
+  {
+    "target_id": "PST036",
+    "query": "무릎 동요관절 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:38.945Z"
+  },
+  {
+    "target_id": "PST037",
+    "query": "회전근개파열 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:39.430Z"
+  },
+  {
+    "target_id": "PST038",
+    "query": "척추 압박골절 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:39.913Z"
+  },
+  {
+    "target_id": "PST039",
+    "query": "안면 반흔 추상장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:40.394Z"
+  },
+  {
+    "target_id": "PST040",
+    "query": "신경계 장해 보험금 후유장해",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:40.890Z"
+  },
+  {
+    "target_id": "PST041",
+    "query": "청력장해 후유장해 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:41.372Z"
+  },
+  {
+    "target_id": "PST042",
+    "query": "관절 운동범위 제한 후유장해",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:41.860Z"
+  },
+  {
+    "target_id": "PST043",
+    "query": "기왕장해 감액 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:42.343Z"
+  },
+  {
+    "target_id": "PST044",
+    "query": "장해진단서 보험금 지급률 다툼",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:42.810Z"
+  },
+  {
+    "target_id": "PST045",
+    "query": "복합부위통증증후군 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:43.308Z"
+  },
+  {
+    "target_id": "PST046",
+    "query": "약관 설명의무 보험금 지급제한",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:43.805Z"
+  },
+  {
+    "target_id": "PST047",
+    "query": "보험약관 고객에게 유리하게 해석",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:44.292Z"
+  },
+  {
+    "target_id": "PST048",
+    "query": "보험 약관 작성자 불이익 원칙",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:44.748Z"
+  },
+  {
+    "target_id": "PST049",
+    "query": "보험자 약관 명시 설명의무",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:45.229Z"
+  },
+  {
+    "target_id": "PST050",
+    "query": "중요한 약관 내용 설명의무 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:45.686Z"
+  },
+  {
+    "target_id": "PST051",
+    "query": "보험 약관 면책조항 설명의무",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:46.166Z"
+  },
+  {
+    "target_id": "PST052",
+    "query": "보험금 지급제한 약관 설명의무",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:46.665Z"
+  },
+  {
+    "target_id": "PST053",
+    "query": "보험약관 해석 객관적 획일적 해석",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:47.180Z"
+  },
+  {
+    "target_id": "PST054",
+    "query": "보험 약관 불명확 고객 유리",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:47.723Z"
+  },
+  {
+    "target_id": "PST055",
+    "query": "보험 모집인 설명의무 약관",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:48.210Z"
+  },
+  {
+    "target_id": "PST056",
+    "query": "보험약관 교부 설명의무 위반",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:48.674Z"
+  },
+  {
+    "target_id": "PST057",
+    "query": "보험계약 약관해석 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:49.159Z"
+  },
+  {
+    "target_id": "PST058",
+    "query": "보험 자살 면책 사망보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:49.619Z"
+  },
+  {
+    "target_id": "PST059",
+    "query": "보험 고의 사고 면책 입증책임",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:50.159Z"
+  },
+  {
+    "target_id": "PST060",
+    "query": "상해보험 고의 면책 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:50.688Z"
+  },
+  {
+    "target_id": "PST061",
+    "query": "보험 범죄행위 면책 약관",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:51.160Z"
+  },
+  {
+    "target_id": "PST062",
+    "query": "음주운전 보험 면책 약관",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:51.626Z"
+  },
+  {
+    "target_id": "PST063",
+    "query": "보험 자살 면책기간 일반사망",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:52.097Z"
+  },
+  {
+    "target_id": "PST064",
+    "query": "보험 면책사유 입증책임",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:52.581Z"
+  },
+  {
+    "target_id": "PST065",
+    "query": "상해보험 우연한 사고 고의 면책",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:53.057Z"
+  },
+  {
+    "target_id": "PST066",
+    "query": "기왕증 기여도 보험금 감액",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:53.521Z"
+  },
+  {
+    "target_id": "PST067",
+    "query": "추간판탈출증 상해성 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:54.016Z"
+  },
+  {
+    "target_id": "PST068",
+    "query": "회전근개파열 퇴행성 상해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:54.498Z"
+  },
+  {
+    "target_id": "PST069",
+    "query": "교통사고 기왕증 악화 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:54.984Z"
+  },
+  {
+    "target_id": "PST070",
+    "query": "골다공증 압박골절 상해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:55.473Z"
+  },
+  {
+    "target_id": "PST071",
+    "query": "사고와 사망 인과관계 상해보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:55.989Z"
+  },
+  {
+    "target_id": "PST072",
+    "query": "퇴행성 변화 사고 기여도 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:56.473Z"
+  },
+  {
+    "target_id": "PST073",
+    "query": "외상성 뇌출혈 질병성 뇌출혈 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:56.989Z"
+  },
+  {
+    "target_id": "PST074",
+    "query": "상해보험 외래 사고 질병 인과관계",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:57.487Z"
+  },
+  {
+    "target_id": "PST075",
+    "query": "무릎 연골파열 퇴행성 상해성 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:57.941Z"
+  },
+  {
+    "target_id": "PST076",
+    "query": "보험 의료자문 보험금 삭감",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:58.414Z"
+  },
+  {
+    "target_id": "PST077",
+    "query": "보험사 의료자문 동의 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:58.897Z"
+  },
+  {
+    "target_id": "PST078",
+    "query": "보험금 지급 심사 의료자문",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:59.366Z"
+  },
+  {
+    "target_id": "PST079",
+    "query": "손해사정 의료자문 보험금 감액",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:15:59.848Z"
+  },
+  {
+    "target_id": "PST080",
+    "query": "보험 조사동의 의료자문 분쟁",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:16:00.339Z"
+  },
+  {
+    "target_id": "PST001",
+    "query": "보험 고지의무 중대한 과실 중요한 사항",
+    "status": "no_results",
+    "message": "results=0 imported=0",
+    "fetched_at": "2026-05-04T16:23:14.005Z"
+  },
+  {
+    "target_id": "PST001",
+    "query": "보험 고지의무 중대한 과실 중요한 사항",
+    "status": "fetched",
+    "message": "results=5 imported=5",
+    "fetched_at": "2026-05-04T16:24:49.635Z"
+  },
+  {
+    "target_id": "PST001",
+    "query": "보험 고지의무 중대한 과실 중요한 사항",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:35:21.280Z"
+  },
+  {
+    "target_id": "PST001",
+    "query": "보험 고지의무 중대한 과실 중요한 사항",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:09.582Z"
+  },
+  {
+    "target_id": "PST002",
+    "query": "보험계약 고지의무 중요한 사항",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:11.975Z"
+  },
+  {
+    "target_id": "PST003",
+    "query": "고지의무 위반 보험사고 인과관계",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:14.362Z"
+  },
+  {
+    "target_id": "PST004",
+    "query": "건강검진 고지의무 보험계약",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=3 list_only=1 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:17.456Z"
+  },
+  {
+    "target_id": "PST005",
+    "query": "갑상선 결절 고지의무 보험",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:20.781Z"
+  },
+  {
+    "target_id": "PST006",
+    "query": "고혈압 투약 고지의무 보험계약",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:23.639Z"
+  },
+  {
+    "target_id": "PST007",
+    "query": "보험 고지의무 해지권 행사기간",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=3 list_only=2 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:27.215Z"
+  },
+  {
+    "target_id": "PST008",
+    "query": "보험 고지의무 설계사에게 고지",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:30.086Z"
+  },
+  {
+    "target_id": "PST009",
+    "query": "청약서 질문표 고지의무 중요한 사항",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:32.414Z"
+  },
+  {
+    "target_id": "PST010",
+    "query": "보험계약 고지의무 고의 중대한 과실",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:33.857Z"
+  },
+  {
+    "target_id": "PST011",
+    "query": "질병 치료력 고지의무 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:34.622Z"
+  },
+  {
+    "target_id": "PST012",
+    "query": "보험 고지의무 인수심사 중요사항",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=3 list_only=1 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:38.389Z"
+  },
+  {
+    "target_id": "PST013",
+    "query": "보험계약 해지 고지의무 제척기간",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=1 list_only=3 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:41.221Z"
+  },
+  {
+    "target_id": "PST014",
+    "query": "고지의무 위반 보험금 지급 인과관계",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:43.041Z"
+  },
+  {
+    "target_id": "PST015",
+    "query": "보험 고지의무 경미한 질병 통원",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=4 list_only=1 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:46.389Z"
+  },
+  {
+    "target_id": "PST016",
+    "query": "이륜차 운전 통지의무 보험",
+    "status": "fetched",
+    "message": "results=4 imported=4 fulltext=4 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:49.280Z"
+  },
+  {
+    "target_id": "PST017",
+    "query": "보험 직업변경 통지의무 위험변경",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:51.215Z"
+  },
+  {
+    "target_id": "PST018",
+    "query": "상해보험 직업 변경 보험금 감액",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:53.527Z"
+  },
+  {
+    "target_id": "PST019",
+    "query": "보험계약 위험변경 통지의무 해지",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:55.327Z"
+  },
+  {
+    "target_id": "PST020",
+    "query": "오토바이 운전 통지의무 상해보험",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:57.710Z"
+  },
+  {
+    "target_id": "PST021",
+    "query": "배달업 직업변경 보험 통지의무",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:58.496Z"
+  },
+  {
+    "target_id": "PST022",
+    "query": "상해보험 위험 증가 통지의무",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:37:59.319Z"
+  },
+  {
+    "target_id": "PST023",
+    "query": "보험 통지의무 위반 보험금 지급",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:00.609Z"
+  },
+  {
+    "target_id": "PST024",
+    "query": "실손보험 도수치료 치료목적",
+    "status": "fetched",
+    "message": "results=2 imported=2 fulltext=2 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:02.423Z"
+  },
+  {
+    "target_id": "PST025",
+    "query": "백내장 다초점렌즈 실손보험",
+    "status": "fetched",
+    "message": "results=1 imported=1 fulltext=1 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:03.702Z"
+  },
+  {
+    "target_id": "PST026",
+    "query": "실손보험 요양병원 암 입원 직접치료",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:04.464Z"
+  },
+  {
+    "target_id": "PST027",
+    "query": "실손보험 비급여 주사 치료목적",
+    "status": "fetched",
+    "message": "results=3 imported=3 fulltext=3 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:06.848Z"
+  },
+  {
+    "target_id": "PST028",
+    "query": "실손보험 체외충격파 치료 필요성",
+    "status": "fetched",
+    "message": "results=1 imported=0 fulltext=0 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:07.662Z"
+  },
+  {
+    "target_id": "PST029",
+    "query": "실손보험 입원 필요성 통원 가능",
+    "status": "fetched",
+    "message": "results=2 imported=0 fulltext=0 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:08.421Z"
+  },
+  {
+    "target_id": "PST030",
+    "query": "실손보험 미용 목적 보상 제외",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:09.188Z"
+  },
+  {
+    "target_id": "PST031",
+    "query": "실손보험 비급여 MRI 의학적 필요성",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:09.950Z"
+  },
+  {
+    "target_id": "PST032",
+    "query": "실손보험 상급병실료 보상 한도",
+    "status": "fetched",
+    "message": "results=3 imported=1 fulltext=1 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:11.349Z"
+  },
+  {
+    "target_id": "PST033",
+    "query": "실손보험 진료비 세부내역 비급여",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:12.116Z"
+  },
+  {
+    "target_id": "PST034",
+    "query": "후유장해 보험금 장해지급률",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:15.562Z"
+  },
+  {
+    "target_id": "PST035",
+    "query": "추간판탈출증 후유장해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:18.462Z"
+  },
+  {
+    "target_id": "PST036",
+    "query": "무릎 동요관절 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:19.216Z"
+  },
+  {
+    "target_id": "PST037",
+    "query": "회전근개파열 후유장해 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:19.982Z"
+  },
+  {
+    "target_id": "PST038",
+    "query": "척추 압박골절 후유장해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:22.295Z"
+  },
+  {
+    "target_id": "PST039",
+    "query": "안면 반흔 추상장해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:25.667Z"
+  },
+  {
+    "target_id": "PST040",
+    "query": "신경계 장해 보험금 후유장해",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:28.026Z"
+  },
+  {
+    "target_id": "PST041",
+    "query": "청력장해 후유장해 보험금",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:28.790Z"
+  },
+  {
+    "target_id": "PST042",
+    "query": "관절 운동범위 제한 후유장해",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:31.115Z"
+  },
+  {
+    "target_id": "PST043",
+    "query": "기왕장해 감액 후유장해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:33.464Z"
+  },
+  {
+    "target_id": "PST044",
+    "query": "장해진단서 보험금 지급률 다툼",
+    "status": "fetched",
+    "message": "results=1 imported=0 fulltext=0 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:34.234Z"
+  },
+  {
+    "target_id": "PST045",
+    "query": "복합부위통증증후군 후유장해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:37.083Z"
+  },
+  {
+    "target_id": "PST046",
+    "query": "약관 설명의무 보험금 지급제한",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:40.496Z"
+  },
+  {
+    "target_id": "PST047",
+    "query": "보험약관 고객에게 유리하게 해석",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:42.284Z"
+  },
+  {
+    "target_id": "PST048",
+    "query": "보험 약관 작성자 불이익 원칙",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:44.071Z"
+  },
+  {
+    "target_id": "PST049",
+    "query": "보험자 약관 명시 설명의무",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:44.824Z"
+  },
+  {
+    "target_id": "PST050",
+    "query": "중요한 약관 내용 설명의무 보험",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:45.704Z"
+  },
+  {
+    "target_id": "PST051",
+    "query": "보험 약관 면책조항 설명의무",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:46.982Z"
+  },
+  {
+    "target_id": "PST052",
+    "query": "보험금 지급제한 약관 설명의무",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:47.764Z"
+  },
+  {
+    "target_id": "PST053",
+    "query": "보험약관 해석 객관적 획일적 해석",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:49.067Z"
+  },
+  {
+    "target_id": "PST054",
+    "query": "보험 약관 불명확 고객 유리",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=4 list_only=1 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:52.469Z"
+  },
+  {
+    "target_id": "PST055",
+    "query": "보험 모집인 설명의무 약관",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:53.847Z"
+  },
+  {
+    "target_id": "PST056",
+    "query": "보험약관 교부 설명의무 위반",
+    "status": "fetched",
+    "message": "results=5 imported=0 fulltext=0 list_only=0 duplicates=5 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:54.613Z"
+  },
+  {
+    "target_id": "PST057",
+    "query": "보험계약 약관해석 보험금",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:55.904Z"
+  },
+  {
+    "target_id": "PST058",
+    "query": "보험 자살 면책 사망보험금",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:38:59.241Z"
+  },
+  {
+    "target_id": "PST059",
+    "query": "보험 고의 사고 면책 입증책임",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:02.713Z"
+  },
+  {
+    "target_id": "PST060",
+    "query": "상해보험 고의 면책 보험금",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:05.070Z"
+  },
+  {
+    "target_id": "PST061",
+    "query": "보험 범죄행위 면책 약관",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:07.373Z"
+  },
+  {
+    "target_id": "PST062",
+    "query": "음주운전 보험 면책 약관",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:10.206Z"
+  },
+  {
+    "target_id": "PST063",
+    "query": "보험 자살 면책기간 일반사망",
+    "status": "fetched",
+    "message": "results=5 imported=3 fulltext=3 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:12.706Z"
+  },
+  {
+    "target_id": "PST064",
+    "query": "보험 면책사유 입증책임",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=1 list_only=1 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:14.538Z"
+  },
+  {
+    "target_id": "PST065",
+    "query": "상해보험 우연한 사고 고의 면책",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:17.871Z"
+  },
+  {
+    "target_id": "PST066",
+    "query": "기왕증 기여도 보험금 감액",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:20.673Z"
+  },
+  {
+    "target_id": "PST067",
+    "query": "추간판탈출증 상해성 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:21.453Z"
+  },
+  {
+    "target_id": "PST068",
+    "query": "회전근개파열 퇴행성 상해 보험",
+    "status": "fetched",
+    "message": "results=2 imported=2 fulltext=2 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:23.293Z"
+  },
+  {
+    "target_id": "PST069",
+    "query": "교통사고 기왕증 악화 보험금",
+    "status": "fetched",
+    "message": "results=5 imported=4 fulltext=4 list_only=0 duplicates=1 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:26.150Z"
+  },
+  {
+    "target_id": "PST070",
+    "query": "골다공증 압박골절 상해 보험",
+    "status": "fetched",
+    "message": "results=5 imported=5 fulltext=5 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:29.653Z"
+  },
+  {
+    "target_id": "PST071",
+    "query": "사고와 사망 인과관계 상해보험",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:31.446Z"
+  },
+  {
+    "target_id": "PST072",
+    "query": "퇴행성 변화 사고 기여도 보험",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:33.242Z"
+  },
+  {
+    "target_id": "PST073",
+    "query": "외상성 뇌출혈 질병성 뇌출혈 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:33.999Z"
+  },
+  {
+    "target_id": "PST074",
+    "query": "상해보험 외래 사고 질병 인과관계",
+    "status": "fetched",
+    "message": "results=5 imported=1 fulltext=1 list_only=0 duplicates=4 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:35.344Z"
+  },
+  {
+    "target_id": "PST075",
+    "query": "무릎 연골파열 퇴행성 상해성 보험",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:36.097Z"
+  },
+  {
+    "target_id": "PST076",
+    "query": "보험 의료자문 보험금 삭감",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:36.836Z"
+  },
+  {
+    "target_id": "PST077",
+    "query": "보험사 의료자문 동의 보험금",
+    "status": "fetched",
+    "message": "results=2 imported=0 fulltext=0 list_only=0 duplicates=2 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:37.634Z"
+  },
+  {
+    "target_id": "PST078",
+    "query": "보험금 지급 심사 의료자문",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:39.523Z"
+  },
+  {
+    "target_id": "PST079",
+    "query": "손해사정 의료자문 보험금 감액",
+    "status": "no_results",
+    "message": "results=0 imported=0 fulltext=0 list_only=0 duplicates=0 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:40.305Z"
+  },
+  {
+    "target_id": "PST080",
+    "query": "보험 조사동의 의료자문 분쟁",
+    "status": "fetched",
+    "message": "results=5 imported=2 fulltext=2 list_only=0 duplicates=3 total_limit_skipped=0",
+    "fetched_at": "2026-05-04T16:39:42.621Z"
+  }
+]

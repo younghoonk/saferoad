@@ -16,7 +16,10 @@
     "rag:medical:check": "node scripts/checkMedicalIssueCodes.js",
     "rag:fss:fetch": "node scripts/fetchFssLatestCases.js",
     "rag:fss:import": "node scripts/importFssLatestCases.js",
-    "rag:fss:check": "node scripts/checkFssLatestCases.js"
+    "rag:fss:check": "node scripts/checkFssLatestCases.js",
+    "rag:precedent:fetch": "node scripts/fetchPrecedentCases.js",
+    "rag:precedent:import": "node scripts/importPrecedentCases.js",
+    "rag:precedent:check": "node scripts/checkPrecedentCases.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
