@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "rag:import": "node scripts/importRagData.js",
-    "rag:check": "node scripts/checkRagData.js"
+    "rag:check": "node scripts/checkRagData.js",
+    "rag:eval:check": "node scripts/checkRagEvalDataset.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
