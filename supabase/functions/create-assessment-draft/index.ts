@@ -9,18 +9,33 @@ declare const Deno: {
 type Tone = 'concise' | 'professional' | 'detailed';
 
 interface RetrievedReference {
+  source_area?: string;
+  source_area_label?: string;
   source_type?: string;
+  chunk_id?: string;
+  source_id?: string;
+  record_id?: string;
+  source_record_id?: string;
+  source_document_id?: string;
   title?: string;
   case_number?: string;
   court_or_agency?: string;
   decision_date?: string;
+  law_name?: string;
+  article_title?: string;
+  diagnosis_code?: string;
+  diagnosis_name?: string;
   accident_type?: string;
   issue?: string;
   summary?: string;
+  chunk_text?: string;
   key_points?: string[];
   conclusion?: string;
   keywords?: string[];
   source_url?: string;
+  embedding_status?: string;
+  review_status?: string;
+  trust_level?: string;
 }
 
 interface SourceAnalysis {
@@ -71,6 +86,23 @@ const MAX_FIELD_LENGTH = 1800;
 const MAX_SHORT_FIELD_LENGTH = 200;
 const MAX_REFERENCES = 8;
 const MAX_REFERENCE_TEXT_LENGTH = 1200;
+
+const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
+const CHUNK_REFERENCE_PATTERN = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
+const INTERNAL_FIELD_LINE_PATTERN = /^\s*(?:chunk_id|source_id|record_id|source_record_id|source_document_id|embedding_status|review_status|trust_level|source_type)\s*[:=].*$/gim;
+const INTERNAL_SOURCE_TYPE_PATTERN = /\binternal_[A-Za-z0-9_:-]*\b/g;
+
+const sourceAreaLabels: Record<string, string> = {
+  fss_dispute_cases: '금융감독원 분쟁조정례',
+  legal_statutes: '법령',
+  medical_knowledge: '의료 참고자료',
+  precedents: '판례',
+  terms_standards: '약관/지급기준',
+  issue_playbooks: '내부 쟁점 플레이북',
+  medical_issue_codes: '질병코드별 의료쟁점',
+  real_case_patterns: '익명 사건 패턴',
+  real_case_documents: '익명 문서 요약',
+};
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -143,6 +175,17 @@ function cleanText(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
 }
 
+function cleanPublicText(value: unknown) {
+  return cleanText(value)
+    .replace(INTERNAL_FIELD_LINE_PATTERN, '')
+    .replace(CHUNK_REFERENCE_PATTERN, '')
+    .replace(INTERNAL_ID_PATTERN, '')
+    .replace(INTERNAL_SOURCE_TYPE_PATTERN, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+}
+
 function clip(value: string, maxLength: number) {
   return value.length > maxLength ? value.slice(0, maxLength) : value;
 }
@@ -150,10 +193,20 @@ function clip(value: string, maxLength: number) {
 function cleanStringArray(value: unknown, maxItems = 12) {
   if (!Array.isArray(value)) return [];
   return value
-    .map((item) => cleanText(item))
+    .map((item) => cleanPublicText(item))
     .filter(Boolean)
     .slice(0, maxItems)
     .map((item) => clip(item, MAX_SHORT_FIELD_LENGTH));
+}
+
+function publicSourceLabel(ref: RetrievedReference) {
+  const sourceAreaLabel = cleanPublicText(ref.source_area_label);
+  if (sourceAreaLabel) return clip(sourceAreaLabel, MAX_SHORT_FIELD_LENGTH);
+  const sourceArea = cleanText(ref.source_area);
+  if (sourceArea && sourceAreaLabels[sourceArea]) return sourceAreaLabels[sourceArea];
+  const sourceType = cleanText(ref.source_type);
+  if (sourceType.startsWith('internal_')) return '';
+  return clip(cleanPublicText(sourceType), MAX_SHORT_FIELD_LENGTH);
 }
 
 function validateReferences(rawReferences: unknown): RetrievedReference[] {
@@ -172,18 +225,22 @@ function validateReferences(rawReferences: unknown): RetrievedReference[] {
 
     const ref = item as RetrievedReference;
     return {
-      source_type: clip(cleanText(ref.source_type), MAX_SHORT_FIELD_LENGTH),
-      title: clip(cleanText(ref.title) || `참고자료 ${index + 1}`, MAX_SHORT_FIELD_LENGTH),
-      case_number: clip(cleanText(ref.case_number), MAX_SHORT_FIELD_LENGTH),
-      court_or_agency: clip(cleanText(ref.court_or_agency), MAX_SHORT_FIELD_LENGTH),
-      decision_date: clip(cleanText(ref.decision_date), MAX_SHORT_FIELD_LENGTH),
-      accident_type: clip(cleanText(ref.accident_type), MAX_SHORT_FIELD_LENGTH),
-      issue: clip(cleanText(ref.issue), MAX_REFERENCE_TEXT_LENGTH),
-      summary: clip(cleanText(ref.summary), MAX_REFERENCE_TEXT_LENGTH),
+      source_area_label: publicSourceLabel(ref),
+      title: clip(cleanPublicText(ref.title) || `참고자료 ${index + 1}`, MAX_SHORT_FIELD_LENGTH),
+      case_number: clip(cleanPublicText(ref.case_number), MAX_SHORT_FIELD_LENGTH),
+      court_or_agency: clip(cleanPublicText(ref.court_or_agency), MAX_SHORT_FIELD_LENGTH),
+      decision_date: clip(cleanPublicText(ref.decision_date), MAX_SHORT_FIELD_LENGTH),
+      law_name: clip(cleanPublicText(ref.law_name), MAX_SHORT_FIELD_LENGTH),
+      article_title: clip(cleanPublicText(ref.article_title), MAX_SHORT_FIELD_LENGTH),
+      diagnosis_code: clip(cleanPublicText(ref.diagnosis_code), MAX_SHORT_FIELD_LENGTH),
+      diagnosis_name: clip(cleanPublicText(ref.diagnosis_name), MAX_SHORT_FIELD_LENGTH),
+      accident_type: clip(cleanPublicText(ref.accident_type), MAX_SHORT_FIELD_LENGTH),
+      issue: clip(cleanPublicText(ref.issue), MAX_REFERENCE_TEXT_LENGTH),
+      summary: clip(cleanPublicText(ref.summary || ref.chunk_text), MAX_REFERENCE_TEXT_LENGTH),
       key_points: cleanStringArray(ref.key_points),
-      conclusion: clip(cleanText(ref.conclusion), MAX_REFERENCE_TEXT_LENGTH),
+      conclusion: clip(cleanPublicText(ref.conclusion), MAX_REFERENCE_TEXT_LENGTH),
       keywords: cleanStringArray(ref.keywords),
-      source_url: clip(cleanText(ref.source_url), 500),
+      source_url: clip(cleanPublicText(ref.source_url), 500),
     };
   });
 }
@@ -268,10 +325,14 @@ function formatReferences(references: RetrievedReference[]) {
 
   return references.map((ref, index) => [
     `[${index + 1}] ${ref.title ?? '제목 없음'}`,
-    ref.source_type ? `자료 유형: ${ref.source_type}` : '',
+    ref.source_area_label ? `자료 구분: ${ref.source_area_label}` : '',
+    ref.law_name ? `법령명: ${ref.law_name}` : '',
+    ref.article_title ? `조문명: ${ref.article_title}` : '',
     ref.case_number ? `사건/결정 번호: ${ref.case_number}` : '',
     ref.court_or_agency ? `법원/기관: ${ref.court_or_agency}` : '',
     ref.decision_date ? `선고/결정일: ${ref.decision_date}` : '',
+    ref.diagnosis_code ? `질병코드: ${ref.diagnosis_code}` : '',
+    ref.diagnosis_name ? `진단명: ${ref.diagnosis_name}` : '',
     ref.accident_type ? `사고 유형: ${ref.accident_type}` : '',
     ref.issue ? `쟁점: ${ref.issue}` : '',
     ref.summary ? `요약: ${ref.summary}` : '',
@@ -425,6 +486,22 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
   }
 }
 
+function sanitizeResult(result: AssessmentDraftResult): AssessmentDraftResult {
+  return {
+    title: cleanPublicText(result.title),
+    overview: cleanPublicText(result.overview),
+    facts: cleanPublicText(result.facts),
+    issues: cleanPublicText(result.issues),
+    legalAndReferenceBasis: cleanPublicText(result.legalAndReferenceBasis),
+    damageAssessment: cleanPublicText(result.damageAssessment),
+    insurerPositionReview: cleanPublicText(result.insurerPositionReview),
+    adjusterOpinionDraft: cleanPublicText(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: cleanPublicText(result.requiredAdditionalChecks),
+    simpleClientSummary: cleanPublicText(result.simpleClientSummary),
+    disclaimer: cleanPublicText(result.disclaimer),
+  };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
@@ -442,14 +519,14 @@ Deno.serve(async (req: Request) => {
     const input = validateInput(body);
 
     const draftText = await callOpenAI(apiKey, buildDraftPrompt(input), 0.2);
-    const draft = parseJsonResponse(draftText);
+    const draft = sanitizeResult(parseJsonResponse(draftText));
 
     const reviewedText = await callOpenAI(
       apiKey,
       buildReviewPrompt(draft, input.retrievedReferences),
       0,
     );
-    const reviewed = parseJsonResponse(reviewedText);
+    const reviewed = sanitizeResult(parseJsonResponse(reviewedText));
 
     return jsonResponse(reviewed);
   } catch (error: unknown) {

@@ -60,6 +60,10 @@ const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 24 * 1024 * 1024;
 const MAX_IMAGES_PER_GROUP = 5;
 const SUPPORTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
+const CHUNK_REFERENCE_PATTERN = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
+const INTERNAL_FIELD_LINE_PATTERN = /^\s*(?:chunk_id|source_id|record_id|source_record_id|source_document_id|embedding_status|review_status|trust_level|source_type)\s*[:=].*$/gim;
+const INTERNAL_SOURCE_TYPE_PATTERN = /\binternal_[A-Za-z0-9_:-]*\b/g;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -111,6 +115,17 @@ async function requireAdjuster(req: Request) {
 
 function cleanText(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function cleanPublicText(value: unknown) {
+  return cleanText(value)
+    .replace(INTERNAL_FIELD_LINE_PATTERN, '')
+    .replace(CHUNK_REFERENCE_PATTERN, '')
+    .replace(INTERNAL_ID_PATTERN, '')
+    .replace(INTERNAL_SOURCE_TYPE_PATTERN, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
 }
 
 function estimateBase64Bytes(base64: string) {
@@ -341,7 +356,32 @@ function validateResult(result: ClosingReportResult) {
     if (result[key] == null) throw new HttpError(502, `AI 응답에 ${key} 필드가 없습니다.`);
   }
   if (!Array.isArray(result.requiredAdditionalChecks)) result.requiredAdditionalChecks = [];
-  return result;
+  return {
+    title: cleanPublicText(result.title),
+    basicInfo: {
+      receivedDate: cleanPublicText(result.basicInfo.receivedDate),
+      assignedDate: cleanPublicText(result.basicInfo.assignedDate),
+      reportDate: cleanPublicText(result.basicInfo.reportDate),
+      insurerName: cleanPublicText(result.basicInfo.insurerName),
+      insuredName: cleanPublicText(result.basicInfo.insuredName),
+      claimNumber: cleanPublicText(result.basicInfo.claimNumber),
+      investigator: cleanPublicText(result.basicInfo.investigator),
+      claimManager: cleanPublicText(result.basicInfo.claimManager),
+    },
+    contractInfo: cleanPublicText(result.contractInfo),
+    lossInfo: cleanPublicText(result.lossInfo),
+    claimAndInvestigationResult: cleanPublicText(result.claimAndInvestigationResult),
+    keyIssues: cleanPublicText(result.keyIssues),
+    investigationChecklist: cleanPublicText(result.investigationChecklist),
+    medicalFindings: cleanPublicText(result.medicalFindings),
+    disclosureDutyReview: cleanPublicText(result.disclosureDutyReview),
+    otherInsuranceInfo: cleanPublicText(result.otherInsuranceInfo),
+    interviewAndSpecialNotes: cleanPublicText(result.interviewAndSpecialNotes),
+    investigationProcessTimeline: cleanPublicText(result.investigationProcessTimeline),
+    finalOpinion: cleanPublicText(result.finalOpinion),
+    requiredAdditionalChecks: result.requiredAdditionalChecks.map(cleanPublicText).filter(Boolean),
+    disclaimer: cleanPublicText(result.disclaimer),
+  };
 }
 
 Deno.serve(async (req: Request) => {
