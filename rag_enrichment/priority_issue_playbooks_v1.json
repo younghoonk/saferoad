@@ -1,0 +1,4876 @@
+[
+  {
+    "id": "PIP001",
+    "category": "계약전 알릴의무",
+    "sub_category": "실손보험 계약해지",
+    "issue_type": "중요사항성 / 고의중과실",
+    "title": "M47.26 1회 통원 미고지로 실손보험 계약해지",
+    "scenario_summary": "M47.26 1회 통원 미고지로 실손보험 계약해지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "M47.26",
+      "요추증",
+      "1회 통원",
+      "고지의무",
+      "중요한 사항",
+      "고의",
+      "중대한 과실",
+      "계약해지",
+      "계약전 알릴의무",
+      "실손보험 계약해지",
+      "중요사항성 / 고의중과실"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP002",
+    "category": "계약전 알릴의무",
+    "sub_category": "건강검진 미고지",
+    "issue_type": "검진 이상소견 / 중요사항성",
+    "title": "갑상선 결절 건강검진 미고지",
+    "scenario_summary": "갑상선 결절 건강검진 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "갑상선 결절",
+      "건강검진",
+      "추적관찰",
+      "갑상선암",
+      "고지의무",
+      "암진단비",
+      "계약전 알릴의무",
+      "건강검진 미고지",
+      "검진 이상소견 / 중요사항성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP003",
+    "category": "계약전 알릴의무",
+    "sub_category": "투약 미고지",
+    "issue_type": "장기투약 / 인과관계",
+    "title": "고혈압 투약 미고지",
+    "scenario_summary": "고혈압 투약 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "고혈압",
+      "투약",
+      "뇌경색",
+      "고지의무",
+      "인과관계",
+      "진단비",
+      "계약전 알릴의무",
+      "투약 미고지",
+      "장기투약 / 인과관계"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP004",
+    "category": "계약전 알릴의무",
+    "sub_category": "검진 수치 미고지",
+    "issue_type": "단순 측정치 / 치료 이력 구분",
+    "title": "고혈압 단순 측정치 미고지",
+    "scenario_summary": "고혈압 단순 측정치 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "혈압 상승",
+      "단순 측정치",
+      "고혈압",
+      "건강검진",
+      "투약 없음",
+      "재검 권유",
+      "계약전 알릴의무",
+      "검진 수치 미고지",
+      "단순 측정치 / 치료 이력 구분"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP005",
+    "category": "계약전 알릴의무",
+    "sub_category": "건강검진 미고지",
+    "issue_type": "여성질환 / 암 관련성",
+    "title": "유방결절 건강검진 미고지",
+    "scenario_summary": "유방결절 건강검진 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "유방결절",
+      "유방암",
+      "초음파",
+      "재검 권유",
+      "암진단비",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "건강검진 미고지",
+      "여성질환 / 암 관련성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP006",
+    "category": "계약전 알릴의무",
+    "sub_category": "경미질환 미고지",
+    "issue_type": "1회성 치료 / 중요사항성",
+    "title": "위염 1회성 치료 미고지",
+    "scenario_summary": "위염 1회성 치료 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "위염",
+      "1회 진료",
+      "단기처방",
+      "위암",
+      "고지의무",
+      "인과관계",
+      "계약전 알릴의무",
+      "경미질환 미고지",
+      "1회성 치료 / 중요사항성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP007",
+    "category": "계약전 알릴의무",
+    "sub_category": "물리치료 미고지",
+    "issue_type": "통원치료 / 장기치료 구분",
+    "title": "허리통증 물리치료 미고지",
+    "scenario_summary": "허리통증 물리치료 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "허리통증",
+      "물리치료",
+      "디스크",
+      "통원치료",
+      "기왕증",
+      "계약해지",
+      "계약전 알릴의무",
+      "물리치료 미고지",
+      "통원치료 / 장기치료 구분"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP008",
+    "category": "계약전 알릴의무",
+    "sub_category": "검사 미고지",
+    "issue_type": "영상검사 / 진단 전 단계",
+    "title": "보험가입 전 MRI 검사 미고지",
+    "scenario_summary": "보험가입 전 MRI 검사 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "MRI",
+      "영상검사",
+      "진단 전",
+      "정밀검사",
+      "동일부위",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "검사 미고지",
+      "영상검사 / 진단 전 단계"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP009",
+    "category": "계약전 알릴의무",
+    "sub_category": "검진 재검 미고지",
+    "issue_type": "재검 권유 / 미확진",
+    "title": "건강검진 재검 권유 미고지",
+    "scenario_summary": "건강검진 재검 권유 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "건강검진",
+      "재검 권유",
+      "이상소견",
+      "미확진",
+      "청약서",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "검진 재검 미고지",
+      "재검 권유 / 미확진"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP010",
+    "category": "계약전 알릴의무",
+    "sub_category": "모집 과정",
+    "issue_type": "설계사 고지 / 고지수령권",
+    "title": "보험설계사에게만 병력을 말한 경우",
+    "scenario_summary": "보험설계사에게만 병력을 말한 경우 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "설계사",
+      "구두 고지",
+      "고지수령권",
+      "청약서",
+      "자필서명",
+      "계약해지",
+      "계약전 알릴의무",
+      "모집 과정",
+      "설계사 고지 / 고지수령권"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP011",
+    "category": "계약전 알릴의무",
+    "sub_category": "정신과 치료 미고지",
+    "issue_type": "치료 이력 / 사망보험",
+    "title": "우울증 상담 및 수면제 처방 미고지",
+    "scenario_summary": "우울증 상담 및 수면제 처방 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "우울증",
+      "정신과",
+      "수면제",
+      "사망보험금",
+      "인과관계",
+      "상담",
+      "계약전 알릴의무",
+      "정신과 치료 미고지",
+      "치료 이력 / 사망보험"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP012",
+    "category": "계약전 알릴의무",
+    "sub_category": "간질환 검진 미고지",
+    "issue_type": "간수치 / 재검 권유",
+    "title": "간수치 상승 재검 권유 미고지",
+    "scenario_summary": "간수치 상승 재검 권유 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "간수치",
+      "AST",
+      "ALT",
+      "재검 권유",
+      "간질환",
+      "건강검진",
+      "계약전 알릴의무",
+      "간질환 검진 미고지",
+      "간수치 / 재검 권유"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP013",
+    "category": "계약전 알릴의무",
+    "sub_category": "감염질환 미고지",
+    "issue_type": "보균자 / 암 관련성",
+    "title": "B형간염 보균 사실 미고지",
+    "scenario_summary": "B형간염 보균 사실 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "B형간염",
+      "보균자",
+      "간암",
+      "정기검사",
+      "인과관계",
+      "암진단비",
+      "계약전 알릴의무",
+      "감염질환 미고지",
+      "보균자 / 암 관련성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP014",
+    "category": "계약전 알릴의무",
+    "sub_category": "당뇨 관련 미고지",
+    "issue_type": "검진 수치 / 투약 전 단계",
+    "title": "당뇨 전단계 검진소견 미고지",
+    "scenario_summary": "당뇨 전단계 검진소견 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "당뇨 전단계",
+      "공복혈당장애",
+      "검진소견",
+      "합병증",
+      "투약 없음",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "당뇨 관련 미고지",
+      "검진 수치 / 투약 전 단계"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP015",
+    "category": "계약전 알릴의무",
+    "sub_category": "전립선 질환 미고지",
+    "issue_type": "양성질환 / 암 관련성",
+    "title": "전립선비대증 투약 미고지",
+    "scenario_summary": "전립선비대증 투약 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "전립선비대증",
+      "전립선암",
+      "투약",
+      "암진단비",
+      "인과관계",
+      "비뇨기과",
+      "계약전 알릴의무",
+      "전립선 질환 미고지",
+      "양성질환 / 암 관련성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP016",
+    "category": "계약전 알릴의무",
+    "sub_category": "산부인과 추적관찰",
+    "issue_type": "낭종 / 암 관련성",
+    "title": "난소낭종 추적관찰 미고지",
+    "scenario_summary": "난소낭종 추적관찰 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "난소낭종",
+      "추적관찰",
+      "난소암",
+      "산부인과",
+      "초음파",
+      "암진단비",
+      "계약전 알릴의무",
+      "산부인과 추적관찰",
+      "낭종 / 암 관련성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP017",
+    "category": "계약전 알릴의무",
+    "sub_category": "심장검사 미고지",
+    "issue_type": "심전도 이상 / 추가검사",
+    "title": "심전도 이상 추가검사 권유 미고지",
+    "scenario_summary": "심전도 이상 추가검사 권유 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "심전도 이상",
+      "추가검사",
+      "심장질환",
+      "급성심근경색",
+      "검진",
+      "진단비",
+      "계약전 알릴의무",
+      "심장검사 미고지",
+      "심전도 이상 / 추가검사"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP018",
+    "category": "계약전 알릴의무",
+    "sub_category": "호흡기 치료 미고지",
+    "issue_type": "장기처방 / 관련질환",
+    "title": "알레르기 비염 장기처방 미고지",
+    "scenario_summary": "알레르기 비염 장기처방 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "알레르기 비염",
+      "장기처방",
+      "천식",
+      "호흡기질환",
+      "입원비",
+      "인과관계",
+      "계약전 알릴의무",
+      "호흡기 치료 미고지",
+      "장기처방 / 관련질환"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP019",
+    "category": "계약전 알릴의무",
+    "sub_category": "단기 진료 미고지",
+    "issue_type": "경미질환 / 중요사항성",
+    "title": "감기 2회 진료 미고지",
+    "scenario_summary": "감기 2회 진료 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "감기",
+      "인후염",
+      "3개월 내 진료",
+      "폐렴",
+      "경미질환",
+      "입원비",
+      "계약전 알릴의무",
+      "단기 진료 미고지",
+      "경미질환 / 중요사항성"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP020",
+    "category": "계약전 알릴의무",
+    "sub_category": "외상 전 진료 미고지",
+    "issue_type": "동일 부위 / 상해수술",
+    "title": "무릎 통증 물리치료 미고지 후 십자인대 파열",
+    "scenario_summary": "무릎 통증 물리치료 미고지 후 십자인대 파열 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "무릎통증",
+      "물리치료",
+      "십자인대파열",
+      "상해수술비",
+      "동일부위",
+      "인과관계",
+      "계약전 알릴의무",
+      "외상 전 진료 미고지",
+      "동일 부위 / 상해수술"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP021",
+    "category": "계약전 알릴의무",
+    "sub_category": "수면질환 미고지",
+    "issue_type": "양압기 / 사망보험",
+    "title": "수면무호흡 양압기 사용 미고지",
+    "scenario_summary": "수면무호흡 양압기 사용 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "수면무호흡",
+      "양압기",
+      "심장질환",
+      "사망보험금",
+      "인과관계",
+      "진단",
+      "계약전 알릴의무",
+      "수면질환 미고지",
+      "양압기 / 사망보험"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP022",
+    "category": "계약전 알릴의무",
+    "sub_category": "과거 암 치료 미고지",
+    "issue_type": "완치 / 질문기간",
+    "title": "과거 암 수술 완치 후 미고지",
+    "scenario_summary": "과거 암 수술 완치 후 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "과거 암",
+      "수술",
+      "완치",
+      "질문기간",
+      "암보험",
+      "계약해지",
+      "계약전 알릴의무",
+      "과거 암 치료 미고지",
+      "완치 / 질문기간"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP023",
+    "category": "계약전 알릴의무",
+    "sub_category": "내시경 검사 미고지",
+    "issue_type": "조직검사 / 양성결과",
+    "title": "대장용종 절제 미고지",
+    "scenario_summary": "대장용종 절제 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "대장용종",
+      "내시경",
+      "조직검사",
+      "대장암",
+      "양성",
+      "추적검사",
+      "계약전 알릴의무",
+      "내시경 검사 미고지",
+      "조직검사 / 양성결과"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP024",
+    "category": "계약전 알릴의무",
+    "sub_category": "갑상선 투약 미고지",
+    "issue_type": "기능항진 / 기능저하",
+    "title": "갑상선 기능질환 투약 미고지",
+    "scenario_summary": "갑상선 기능질환 투약 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "갑상선기능항진",
+      "갑상선기능저하",
+      "투약",
+      "갑상선암",
+      "인과관계",
+      "진단비",
+      "계약전 알릴의무",
+      "갑상선 투약 미고지",
+      "기능항진 / 기능저하"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP025",
+    "category": "계약전 알릴의무",
+    "sub_category": "피부질환 미고지",
+    "issue_type": "반복치료 / 면책 주장",
+    "title": "아토피 반복치료 미고지",
+    "scenario_summary": "아토피 반복치료 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "아토피",
+      "피부염",
+      "반복치료",
+      "실손보험",
+      "통원",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "피부질환 미고지",
+      "반복치료 / 면책 주장"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP026",
+    "category": "계약전 알릴의무",
+    "sub_category": "담낭질환 미고지",
+    "issue_type": "검진소견 / 수술비",
+    "title": "담석 검진소견 미고지 후 담낭절제술",
+    "scenario_summary": "담석 검진소견 미고지 후 담낭절제술 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "담석",
+      "담낭절제술",
+      "건강검진",
+      "수술비",
+      "복부초음파",
+      "인과관계",
+      "계약전 알릴의무",
+      "담낭질환 미고지",
+      "검진소견 / 수술비"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP027",
+    "category": "계약전 알릴의무",
+    "sub_category": "부정맥 미고지",
+    "issue_type": "심장내과 / 검사기록",
+    "title": "부정맥 의심 진료 미고지",
+    "scenario_summary": "부정맥 의심 진료 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "부정맥",
+      "두근거림",
+      "홀터검사",
+      "심장내과",
+      "추가검사",
+      "진단비",
+      "계약전 알릴의무",
+      "부정맥 미고지",
+      "심장내과 / 검사기록"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP028",
+    "category": "계약전 알릴의무",
+    "sub_category": "신장질환 미고지",
+    "issue_type": "단백뇨 / 재검",
+    "title": "단백뇨 재검 권유 미고지",
+    "scenario_summary": "단백뇨 재검 권유 미고지 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "단백뇨",
+      "신장질환",
+      "재검 권유",
+      "건강검진",
+      "검사결과",
+      "중요한 사항",
+      "계약전 알릴의무",
+      "신장질환 미고지",
+      "단백뇨 / 재검"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP029",
+    "category": "계약전 알릴의무",
+    "sub_category": "보험자 해지권",
+    "issue_type": "해지기간 / 안 날",
+    "title": "보험사가 미고지를 안 뒤 늦게 해지 통보",
+    "scenario_summary": "보험사가 미고지를 안 뒤 늦게 해지 통보 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "해지권",
+      "안 날",
+      "제척기간",
+      "계약해지",
+      "통지일",
+      "보험자",
+      "계약전 알릴의무",
+      "보험자 해지권",
+      "해지기간 / 안 날"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP030",
+    "category": "계약전 알릴의무",
+    "sub_category": "인수심사",
+    "issue_type": "보험사 인수지침 / 중요사항",
+    "title": "인수지침상 거절 사유와 중요한 사항성",
+    "scenario_summary": "인수지침상 거절 사유와 중요한 사항성 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "청약서 알릴의무 질문사항",
+      "진료기록지",
+      "처방전",
+      "검사결과지",
+      "진료비 세부내역서",
+      "보험사 해지 통지서",
+      "의사 소견서"
+    ],
+    "useful_search_keywords": [
+      "인수지침",
+      "부담보",
+      "인수거절",
+      "중요한 사항",
+      "보험료",
+      "심사",
+      "계약전 알릴의무",
+      "인수심사",
+      "보험사 인수지침 / 중요사항"
+    ],
+    "expected_source_areas": [
+      "legal_statutes",
+      "fss_dispute_cases",
+      "medical_knowledge",
+      "terms_standards",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP031",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "도수치료 치료목적 부인",
+    "scenario_summary": "도수치료 치료목적 부인 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "도수치료",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP032",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "백내장 다초점렌즈 비용 부지급",
+    "scenario_summary": "백내장 다초점렌즈 비용 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "백내장",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP033",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "요양병원 암 입원비 부지급",
+    "scenario_summary": "요양병원 암 입원비 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "요양병원",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP034",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "비급여 주사치료 부지급",
+    "scenario_summary": "비급여 주사치료 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "비급여",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP035",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "체외충격파 치료 부지급",
+    "scenario_summary": "체외충격파 치료 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "체외충격파",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP036",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "검사 목적 입원 부지급",
+    "scenario_summary": "검사 목적 입원 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "검사",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP037",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "치료 필요성 부족 주장",
+    "scenario_summary": "치료 필요성 부족 주장 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "치료",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP038",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "미용 또는 예방 목적 주장",
+    "scenario_summary": "미용 또는 예방 목적 주장 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "미용",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP039",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "중복보상 및 비례보상 쟁점",
+    "scenario_summary": "중복보상 및 비례보상 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "중복보상",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP040",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "진료비 세부내역상 비급여 항목 쟁점",
+    "scenario_summary": "진료비 세부내역상 비급여 항목 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "진료비",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP041",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "상급병실료 차액 제한 지급",
+    "scenario_summary": "상급병실료 차액 제한 지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "상급병실료",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP042",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "비응급 환자 응급실 비용 부지급",
+    "scenario_summary": "비응급 환자 응급실 비용 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "비응급",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP043",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "비급여 MRI 검사 부지급",
+    "scenario_summary": "비급여 MRI 검사 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "비급여",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP044",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "입원치료를 통원 한도로 제한",
+    "scenario_summary": "입원치료를 통원 한도로 제한 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "입원치료를",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP045",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "비급여 로봇수술 비용 제한",
+    "scenario_summary": "비급여 로봇수술 비용 제한 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "비급여",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP046",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "성장호르몬 치료비 부지급",
+    "scenario_summary": "성장호르몬 치료비 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "성장호르몬",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP047",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "흉터 레이저 치료비 부지급",
+    "scenario_summary": "흉터 레이저 치료비 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "흉터",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP048",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "하지정맥류 레이저 수술 부지급",
+    "scenario_summary": "하지정맥류 레이저 수술 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "하지정맥류",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP049",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "한방 추나요법 실손 보상 제한",
+    "scenario_summary": "한방 추나요법 실손 보상 제한 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "한방",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP050",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "턱관절 치료비 치과면책 쟁점",
+    "scenario_summary": "턱관절 치료비 치과면책 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "턱관절",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP051",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "보조기와 치료재료 비용 부지급",
+    "scenario_summary": "보조기와 치료재료 비용 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "보조기와",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP052",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "장기 재활치료 실손 부지급",
+    "scenario_summary": "장기 재활치료 실손 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "장기",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP053",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "통원비 공제와 한도 산정 쟁점",
+    "scenario_summary": "통원비 공제와 한도 산정 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "통원비",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP054",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "건강검진성 검사비 부지급",
+    "scenario_summary": "건강검진성 검사비 부지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "건강검진성",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP055",
+    "category": "실손보험 부지급",
+    "sub_category": "실손보험 심사",
+    "issue_type": "치료목적 / 약관상 보상범위",
+    "title": "치료 필요성 입증자료 부족",
+    "scenario_summary": "치료 필요성 입증자료 부족 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진료비 세부내역서",
+      "진료기록지",
+      "검사결과지",
+      "의사 처방전",
+      "치료 경과기록",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "치료",
+      "실손보험",
+      "부지급",
+      "치료목적",
+      "의학적 필요성",
+      "비급여",
+      "약관",
+      "실손보험 부지급",
+      "실손보험 심사",
+      "치료목적 / 약관상 보상범위"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "fss_dispute_cases",
+      "medical_knowledge"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP056",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "무릎 동요관절 후유장해",
+    "scenario_summary": "무릎 동요관절 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "무릎",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP057",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "회전근개파열 후유장해",
+    "scenario_summary": "회전근개파열 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "회전근개파열",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP058",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "추간판탈출증 후유장해",
+    "scenario_summary": "추간판탈출증 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "추간판탈출증",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP059",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "척추 압박골절 후유장해",
+    "scenario_summary": "척추 압박골절 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "척추",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP060",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "반월상연골파열 후유장해",
+    "scenario_summary": "반월상연골파열 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "반월상연골파열",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP061",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "안면 반흔 추상장해",
+    "scenario_summary": "안면 반흔 추상장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "안면",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP062",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "신경계 장해 인정 여부",
+    "scenario_summary": "신경계 장해 인정 여부 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "신경계",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP063",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "청력장해 지급률",
+    "scenario_summary": "청력장해 지급률 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "청력장해",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP064",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "관절 운동범위 제한 장해",
+    "scenario_summary": "관절 운동범위 제한 장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "관절",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP065",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "기왕장해 감액 쟁점",
+    "scenario_summary": "기왕장해 감액 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "기왕장해",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP066",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "발목 골절 후 운동제한",
+    "scenario_summary": "발목 골절 후 운동제한 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "발목",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP067",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "손가락 관절강직 후유장해",
+    "scenario_summary": "손가락 관절강직 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "손가락",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP068",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "고관절 인공관절 후유장해",
+    "scenario_summary": "고관절 인공관절 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "고관절",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP069",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "복합부위통증증후군 장해",
+    "scenario_summary": "복합부위통증증후군 장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "복합부위통증증후군",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP070",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "눈 외상 후 시력장해",
+    "scenario_summary": "눈 외상 후 시력장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "눈",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP071",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "하지 단축 장해",
+    "scenario_summary": "하지 단축 장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "하지",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP072",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "팔꿈치 골절 후 운동제한",
+    "scenario_summary": "팔꿈치 골절 후 운동제한 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "팔꿈치",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP073",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "치아 파절 후 장해와 치료비 구분",
+    "scenario_summary": "치아 파절 후 장해와 치료비 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "치아",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP074",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "척추 고정술 후 장해",
+    "scenario_summary": "척추 고정술 후 장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "척추",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP075",
+    "category": "후유장해 / 장해지급률",
+    "sub_category": "장해평가",
+    "issue_type": "장해분류표 / 객관적 측정",
+    "title": "말초신경 손상 후유장해",
+    "scenario_summary": "말초신경 손상 후유장해 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "장해진단서",
+      "수술기록지",
+      "영상검사 자료",
+      "관절운동범위 측정지",
+      "재활치료 기록",
+      "사고경위서",
+      "기왕증 의무기록"
+    ],
+    "useful_search_keywords": [
+      "말초신경",
+      "후유장해",
+      "장해지급률",
+      "장해분류표",
+      "기왕증",
+      "객관적 검사",
+      "지급률",
+      "후유장해 / 장해지급률",
+      "장해평가",
+      "장해분류표 / 객관적 측정"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "precedents"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP076",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "갑상선암 진단비",
+    "scenario_summary": "갑상선암 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "갑상선암",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP077",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "갑상선 결절 이후 갑상선암",
+    "scenario_summary": "갑상선 결절 이후 갑상선암 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "갑상선",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP078",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "경계성종양 보험금",
+    "scenario_summary": "경계성종양 보험금 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "경계성종양",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP079",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "제자리암 진단비",
+    "scenario_summary": "제자리암 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "제자리암",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP080",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "원발암과 전이암 구분",
+    "scenario_summary": "원발암과 전이암 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "원발암과",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP081",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "미세침흡인검사 암진단 인정 여부",
+    "scenario_summary": "미세침흡인검사 암진단 인정 여부 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "미세침흡인검사",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP082",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "조직검사 전 암진단비",
+    "scenario_summary": "조직검사 전 암진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "조직검사",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP083",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "급성심근경색 진단비",
+    "scenario_summary": "급성심근경색 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "급성심근경색",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP084",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "협심증과 급성심근경색 구분",
+    "scenario_summary": "협심증과 급성심근경색 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "협심증과",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP085",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "트로포닌 심전도 관상동맥조영술 쟁점",
+    "scenario_summary": "트로포닌 심전도 관상동맥조영술 쟁점 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "트로포닌",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP086",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "뇌경색 진단비",
+    "scenario_summary": "뇌경색 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "뇌경색",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP087",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "무증상 뇌경색",
+    "scenario_summary": "무증상 뇌경색 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "무증상",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP088",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "뇌출혈 진단비",
+    "scenario_summary": "뇌출혈 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "뇌출혈",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP089",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "심낭삼출과 심장질환 청구",
+    "scenario_summary": "심낭삼출과 심장질환 청구 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "심낭삼출과",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP090",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "대장점막내암 진단비",
+    "scenario_summary": "대장점막내암 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "대장점막내암",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP091",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "일과성 허혈발작과 뇌경색 구분",
+    "scenario_summary": "일과성 허혈발작과 뇌경색 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "일과성",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP092",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "트로포닌 경미 상승 진단비",
+    "scenario_summary": "트로포닌 경미 상승 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "트로포닌",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP093",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "대장용종 고도이형성 진단비",
+    "scenario_summary": "대장용종 고도이형성 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "대장용종",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP094",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "림프종 의심 항암치료와 진단확정",
+    "scenario_summary": "림프종 의심 항암치료와 진단확정 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "림프종",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP095",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "소뇌경색 어지럼 진단비",
+    "scenario_summary": "소뇌경색 어지럼 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "소뇌경색",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP096",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "책임개시일 전 암 의심소견",
+    "scenario_summary": "책임개시일 전 암 의심소견 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "책임개시일",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP097",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "스텐트 시술과 진단비 구분",
+    "scenario_summary": "스텐트 시술과 진단비 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "스텐트",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP098",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "유사암 이후 전이 추가지급",
+    "scenario_summary": "유사암 이후 전이 추가지급 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "유사암",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP099",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "열공성 뇌경색 진단비",
+    "scenario_summary": "열공성 뇌경색 진단비 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "열공성",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  },
+  {
+    "id": "PIP100",
+    "category": "암 / 뇌 / 심장 진단비",
+    "sub_category": "진단비 심사",
+    "issue_type": "진단확정 / 약관 분류",
+    "title": "심부전과 급성심근경색 구분",
+    "scenario_summary": "심부전과 급성심근경색 구분 사안에서 보험사가 약관상 요건, 의학적 필요성, 진단확정, 고지의무 또는 장해평가를 다투는 실무형 검색 보조 시나리오.",
+    "key_arguments": [
+      "보험사는 약관 문언, 청약서 질문사항, 검사결과, 진료기록 또는 장해평가 기준을 근거로 제한 지급 또는 부지급을 주장할 수 있음.",
+      "내부 심사 기준과 공식 약관상 요건을 구분해 실제 근거 자료를 확인해야 함."
+    ],
+    "counter_arguments": [
+      "피보험자 측은 경위, 증상, 검사결과, 치료 경과, 의사 소견을 통해 쟁점별 반박이 가능함.",
+      "질병명 또는 비용 항목명만으로 결론 내리지 말고 약관 문언과 의무기록의 구체 내용을 함께 확인해야 함.",
+      "이 플레이북은 검색 보조 자료이며 최종 문서의 공식 인용 근거로 사용하면 안 됨."
+    ],
+    "required_documents": [
+      "보험약관",
+      "진단서",
+      "병리보고서",
+      "영상검사 결과",
+      "혈액검사 결과",
+      "입퇴원확인서",
+      "보험사 부지급 안내문"
+    ],
+    "useful_search_keywords": [
+      "심부전과",
+      "진단비",
+      "확정진단",
+      "약관분류",
+      "검사결과",
+      "보험금",
+      "부지급",
+      "암 / 뇌 / 심장 진단비",
+      "진단비 심사",
+      "진단확정 / 약관 분류"
+    ],
+    "expected_source_areas": [
+      "terms_standards",
+      "medical_knowledge",
+      "fss_dispute_cases",
+      "legal_statutes"
+    ],
+    "caution_notes": "공식 판례, 분쟁조정례, 약관조항이 아니라 검색 보조용 내부 플레이북이다. 최종 판단에는 실제 법령, 약관, 분쟁조정례, 진료기록 확인이 필요하다.",
+    "source_area": "issue_playbooks",
+    "source_type": "internal_issue_playbook",
+    "trust_level": "internal_playbook",
+    "review_status": "needs_human_review"
+  }
+]

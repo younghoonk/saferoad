@@ -1,0 +1,6842 @@
+[
+  {
+    "id": "RKA001",
+    "domain": "diagnosis_code",
+    "canonical_term": "M47.26",
+    "aliases": [
+      "M47.26",
+      "M47.26 관련 표현",
+      "M47.26 쟁점",
+      "M47.26 보험금",
+      "M47.26 부지급",
+      "M47.26 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "M47.26"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "M47.26",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA002",
+    "domain": "diagnosis_code",
+    "canonical_term": "M51",
+    "aliases": [
+      "M51",
+      "M51 관련 표현",
+      "M51 쟁점",
+      "M51 보험금",
+      "M51 부지급",
+      "M51 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "M51"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "M51",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA003",
+    "domain": "diagnosis_code",
+    "canonical_term": "M54",
+    "aliases": [
+      "M54",
+      "M54 관련 표현",
+      "M54 쟁점",
+      "M54 보험금",
+      "M54 부지급",
+      "M54 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "M54"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "M54",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA004",
+    "domain": "diagnosis_code",
+    "canonical_term": "I10",
+    "aliases": [
+      "I10",
+      "I10 관련 표현",
+      "I10 쟁점",
+      "I10 보험금",
+      "I10 부지급",
+      "I10 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "I10"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "I10",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA005",
+    "domain": "diagnosis_code",
+    "canonical_term": "E11",
+    "aliases": [
+      "E11",
+      "E11 관련 표현",
+      "E11 쟁점",
+      "E11 보험금",
+      "E11 부지급",
+      "E11 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "E11"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "E11",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA006",
+    "domain": "diagnosis_code",
+    "canonical_term": "C73",
+    "aliases": [
+      "C73",
+      "C73 관련 표현",
+      "C73 쟁점",
+      "C73 보험금",
+      "C73 부지급",
+      "C73 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "C73"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "C73",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA007",
+    "domain": "diagnosis_code",
+    "canonical_term": "D37",
+    "aliases": [
+      "D37",
+      "D37 관련 표현",
+      "D37 쟁점",
+      "D37 보험금",
+      "D37 부지급",
+      "D37 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "D37"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "D37",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA008",
+    "domain": "diagnosis_code",
+    "canonical_term": "D05",
+    "aliases": [
+      "D05",
+      "D05 관련 표현",
+      "D05 쟁점",
+      "D05 보험금",
+      "D05 부지급",
+      "D05 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "D05"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "D05",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA009",
+    "domain": "diagnosis_code",
+    "canonical_term": "I21",
+    "aliases": [
+      "I21",
+      "I21 관련 표현",
+      "I21 쟁점",
+      "I21 보험금",
+      "I21 부지급",
+      "I21 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "I21"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "I21",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA010",
+    "domain": "diagnosis_code",
+    "canonical_term": "I63",
+    "aliases": [
+      "I63",
+      "I63 관련 표현",
+      "I63 쟁점",
+      "I63 보험금",
+      "I63 부지급",
+      "I63 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "I63"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "I63",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA011",
+    "domain": "diagnosis_code",
+    "canonical_term": "I61",
+    "aliases": [
+      "I61",
+      "I61 관련 표현",
+      "I61 쟁점",
+      "I61 보험금",
+      "I61 부지급",
+      "I61 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "I61"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "I61",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA012",
+    "domain": "diagnosis_code",
+    "canonical_term": "S83",
+    "aliases": [
+      "S83",
+      "S83 관련 표현",
+      "S83 쟁점",
+      "S83 보험금",
+      "S83 부지급",
+      "S83 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "S83"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "S83",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA013",
+    "domain": "diagnosis_code",
+    "canonical_term": "M75",
+    "aliases": [
+      "M75",
+      "M75 관련 표현",
+      "M75 쟁점",
+      "M75 보험금",
+      "M75 부지급",
+      "M75 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "M75"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "M75",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA014",
+    "domain": "diagnosis_code",
+    "canonical_term": "S32",
+    "aliases": [
+      "S32",
+      "S32 관련 표현",
+      "S32 쟁점",
+      "S32 보험금",
+      "S32 부지급",
+      "S32 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "S32"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "S32",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA015",
+    "domain": "diagnosis_code",
+    "canonical_term": "H90",
+    "aliases": [
+      "H90",
+      "H90 관련 표현",
+      "H90 쟁점",
+      "H90 보험금",
+      "H90 부지급",
+      "H90 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "H90"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "H90",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA016",
+    "domain": "diagnosis_code",
+    "canonical_term": "G90.5",
+    "aliases": [
+      "G90.5",
+      "G90.5 관련 표현",
+      "G90.5 쟁점",
+      "G90.5 보험금",
+      "G90.5 부지급",
+      "G90.5 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "G90.5"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "G90.5",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA017",
+    "domain": "diagnosis_code",
+    "canonical_term": "K29",
+    "aliases": [
+      "K29",
+      "K29 관련 표현",
+      "K29 쟁점",
+      "K29 보험금",
+      "K29 부지급",
+      "K29 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "K29"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "K29",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA018",
+    "domain": "diagnosis_code",
+    "canonical_term": "B18.1",
+    "aliases": [
+      "B18.1",
+      "B18.1 관련 표현",
+      "B18.1 쟁점",
+      "B18.1 보험금",
+      "B18.1 부지급",
+      "B18.1 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "B18.1"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "B18.1",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA019",
+    "domain": "diagnosis_code",
+    "canonical_term": "N40",
+    "aliases": [
+      "N40",
+      "N40 관련 표현",
+      "N40 쟁점",
+      "N40 보험금",
+      "N40 부지급",
+      "N40 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "N40"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "N40",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA020",
+    "domain": "diagnosis_code",
+    "canonical_term": "N83",
+    "aliases": [
+      "N83",
+      "N83 관련 표현",
+      "N83 쟁점",
+      "N83 보험금",
+      "N83 부지급",
+      "N83 분쟁"
+    ],
+    "related_diagnosis_codes": [
+      "N83"
+    ],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "N83",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA021",
+    "domain": "disease_name",
+    "canonical_term": "요추증",
+    "aliases": [
+      "요추증",
+      "요추증 관련 표현",
+      "요추증 쟁점",
+      "요추증 보험금",
+      "요추증 부지급",
+      "요추증 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "요추증",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA022",
+    "domain": "disease_name",
+    "canonical_term": "추간판탈출증",
+    "aliases": [
+      "추간판탈출증",
+      "추간판탈출증 관련 표현",
+      "추간판탈출증 쟁점",
+      "추간판탈출증 보험금",
+      "추간판탈출증 부지급",
+      "추간판탈출증 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "추간판탈출증",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA023",
+    "domain": "disease_name",
+    "canonical_term": "요통",
+    "aliases": [
+      "요통",
+      "요통 관련 표현",
+      "요통 쟁점",
+      "요통 보험금",
+      "요통 부지급",
+      "요통 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "요통",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA024",
+    "domain": "disease_name",
+    "canonical_term": "고혈압",
+    "aliases": [
+      "고혈압",
+      "고혈압 관련 표현",
+      "고혈압 쟁점",
+      "고혈압 보험금",
+      "고혈압 부지급",
+      "고혈압 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "고혈압",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA025",
+    "domain": "disease_name",
+    "canonical_term": "당뇨",
+    "aliases": [
+      "당뇨",
+      "당뇨 관련 표현",
+      "당뇨 쟁점",
+      "당뇨 보험금",
+      "당뇨 부지급",
+      "당뇨 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "당뇨",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA026",
+    "domain": "disease_name",
+    "canonical_term": "갑상선암",
+    "aliases": [
+      "갑상선암",
+      "갑상선암 관련 표현",
+      "갑상선암 쟁점",
+      "갑상선암 보험금",
+      "갑상선암 부지급",
+      "갑상선암 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "갑상선암",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA027",
+    "domain": "disease_name",
+    "canonical_term": "경계성종양",
+    "aliases": [
+      "경계성종양",
+      "경계성종양 관련 표현",
+      "경계성종양 쟁점",
+      "경계성종양 보험금",
+      "경계성종양 부지급",
+      "경계성종양 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "경계성종양",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA028",
+    "domain": "disease_name",
+    "canonical_term": "제자리암",
+    "aliases": [
+      "제자리암",
+      "제자리암 관련 표현",
+      "제자리암 쟁점",
+      "제자리암 보험금",
+      "제자리암 부지급",
+      "제자리암 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "제자리암",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA029",
+    "domain": "disease_name",
+    "canonical_term": "급성심근경색",
+    "aliases": [
+      "급성심근경색",
+      "급성심근경색 관련 표현",
+      "급성심근경색 쟁점",
+      "급성심근경색 보험금",
+      "급성심근경색 부지급",
+      "급성심근경색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "급성심근경색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA030",
+    "domain": "disease_name",
+    "canonical_term": "뇌경색",
+    "aliases": [
+      "뇌경색",
+      "뇌경색 관련 표현",
+      "뇌경색 쟁점",
+      "뇌경색 보험금",
+      "뇌경색 부지급",
+      "뇌경색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "뇌경색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA031",
+    "domain": "disease_name",
+    "canonical_term": "뇌출혈",
+    "aliases": [
+      "뇌출혈",
+      "뇌출혈 관련 표현",
+      "뇌출혈 쟁점",
+      "뇌출혈 보험금",
+      "뇌출혈 부지급",
+      "뇌출혈 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "뇌출혈",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA032",
+    "domain": "disease_name",
+    "canonical_term": "반월상연골파열",
+    "aliases": [
+      "반월상연골파열",
+      "반월상연골파열 관련 표현",
+      "반월상연골파열 쟁점",
+      "반월상연골파열 보험금",
+      "반월상연골파열 부지급",
+      "반월상연골파열 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "반월상연골파열",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA033",
+    "domain": "disease_name",
+    "canonical_term": "회전근개파열",
+    "aliases": [
+      "회전근개파열",
+      "회전근개파열 관련 표현",
+      "회전근개파열 쟁점",
+      "회전근개파열 보험금",
+      "회전근개파열 부지급",
+      "회전근개파열 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "회전근개파열",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA034",
+    "domain": "disease_name",
+    "canonical_term": "압박골절",
+    "aliases": [
+      "압박골절",
+      "압박골절 관련 표현",
+      "압박골절 쟁점",
+      "압박골절 보험금",
+      "압박골절 부지급",
+      "압박골절 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "압박골절",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA035",
+    "domain": "disease_name",
+    "canonical_term": "난청",
+    "aliases": [
+      "난청",
+      "난청 관련 표현",
+      "난청 쟁점",
+      "난청 보험금",
+      "난청 부지급",
+      "난청 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "난청",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA036",
+    "domain": "disease_name",
+    "canonical_term": "복합부위통증증후군",
+    "aliases": [
+      "복합부위통증증후군",
+      "복합부위통증증후군 관련 표현",
+      "복합부위통증증후군 쟁점",
+      "복합부위통증증후군 보험금",
+      "복합부위통증증후군 부지급",
+      "복합부위통증증후군 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "복합부위통증증후군",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA037",
+    "domain": "disease_name",
+    "canonical_term": "위염",
+    "aliases": [
+      "위염",
+      "위염 관련 표현",
+      "위염 쟁점",
+      "위염 보험금",
+      "위염 부지급",
+      "위염 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "위염",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA038",
+    "domain": "disease_name",
+    "canonical_term": "B형간염",
+    "aliases": [
+      "B형간염",
+      "B형간염 관련 표현",
+      "B형간염 쟁점",
+      "B형간염 보험금",
+      "B형간염 부지급",
+      "B형간염 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "B형간염",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA039",
+    "domain": "disease_name",
+    "canonical_term": "전립선비대증",
+    "aliases": [
+      "전립선비대증",
+      "전립선비대증 관련 표현",
+      "전립선비대증 쟁점",
+      "전립선비대증 보험금",
+      "전립선비대증 부지급",
+      "전립선비대증 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "전립선비대증",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA040",
+    "domain": "disease_name",
+    "canonical_term": "난소낭종",
+    "aliases": [
+      "난소낭종",
+      "난소낭종 관련 표현",
+      "난소낭종 쟁점",
+      "난소낭종 보험금",
+      "난소낭종 부지급",
+      "난소낭종 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "난소낭종",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA041",
+    "domain": "customer_expression",
+    "canonical_term": "허리 뻐근함",
+    "aliases": [
+      "허리 뻐근함",
+      "허리 뻐근함 관련 표현",
+      "허리 뻐근함 쟁점",
+      "허리 뻐근함 보험금",
+      "허리 뻐근함 부지급",
+      "허리 뻐근함 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "허리 뻐근함",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA042",
+    "domain": "customer_expression",
+    "canonical_term": "허리디스크 의심",
+    "aliases": [
+      "허리디스크 의심",
+      "허리디스크 의심 관련 표현",
+      "허리디스크 의심 쟁점",
+      "허리디스크 의심 보험금",
+      "허리디스크 의심 부지급",
+      "허리디스크 의심 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "허리디스크 의심",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA043",
+    "domain": "customer_expression",
+    "canonical_term": "혈압이 높다",
+    "aliases": [
+      "혈압이 높다",
+      "혈압이 높다 관련 표현",
+      "혈압이 높다 쟁점",
+      "혈압이 높다 보험금",
+      "혈압이 높다 부지급",
+      "혈압이 높다 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "혈압이 높다",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA044",
+    "domain": "customer_expression",
+    "canonical_term": "당 수치 높음",
+    "aliases": [
+      "당 수치 높음",
+      "당 수치 높음 관련 표현",
+      "당 수치 높음 쟁점",
+      "당 수치 높음 보험금",
+      "당 수치 높음 부지급",
+      "당 수치 높음 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "당 수치 높음",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA045",
+    "domain": "customer_expression",
+    "canonical_term": "목에 혹",
+    "aliases": [
+      "목에 혹",
+      "목에 혹 관련 표현",
+      "목에 혹 쟁점",
+      "목에 혹 보험금",
+      "목에 혹 부지급",
+      "목에 혹 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "목에 혹",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA046",
+    "domain": "customer_expression",
+    "canonical_term": "암 전 단계",
+    "aliases": [
+      "암 전 단계",
+      "암 전 단계 관련 표현",
+      "암 전 단계 쟁점",
+      "암 전 단계 보험금",
+      "암 전 단계 부지급",
+      "암 전 단계 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "암 전 단계",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA047",
+    "domain": "customer_expression",
+    "canonical_term": "상피내암",
+    "aliases": [
+      "상피내암",
+      "상피내암 관련 표현",
+      "상피내암 쟁점",
+      "상피내암 보험금",
+      "상피내암 부지급",
+      "상피내암 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "상피내암",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA048",
+    "domain": "customer_expression",
+    "canonical_term": "심장마비",
+    "aliases": [
+      "심장마비",
+      "심장마비 관련 표현",
+      "심장마비 쟁점",
+      "심장마비 보험금",
+      "심장마비 부지급",
+      "심장마비 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "심장마비",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA049",
+    "domain": "customer_expression",
+    "canonical_term": "뇌졸중",
+    "aliases": [
+      "뇌졸중",
+      "뇌졸중 관련 표현",
+      "뇌졸중 쟁점",
+      "뇌졸중 보험금",
+      "뇌졸중 부지급",
+      "뇌졸중 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "뇌졸중",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA050",
+    "domain": "customer_expression",
+    "canonical_term": "머리 출혈",
+    "aliases": [
+      "머리 출혈",
+      "머리 출혈 관련 표현",
+      "머리 출혈 쟁점",
+      "머리 출혈 보험금",
+      "머리 출혈 부지급",
+      "머리 출혈 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "머리 출혈",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA051",
+    "domain": "customer_expression",
+    "canonical_term": "무릎이 흔들림",
+    "aliases": [
+      "무릎이 흔들림",
+      "무릎이 흔들림 관련 표현",
+      "무릎이 흔들림 쟁점",
+      "무릎이 흔들림 보험금",
+      "무릎이 흔들림 부지급",
+      "무릎이 흔들림 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "무릎이 흔들림",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA052",
+    "domain": "customer_expression",
+    "canonical_term": "어깨 힘줄 파열",
+    "aliases": [
+      "어깨 힘줄 파열",
+      "어깨 힘줄 파열 관련 표현",
+      "어깨 힘줄 파열 쟁점",
+      "어깨 힘줄 파열 보험금",
+      "어깨 힘줄 파열 부지급",
+      "어깨 힘줄 파열 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "어깨 힘줄 파열",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA053",
+    "domain": "customer_expression",
+    "canonical_term": "척추가 주저앉음",
+    "aliases": [
+      "척추가 주저앉음",
+      "척추가 주저앉음 관련 표현",
+      "척추가 주저앉음 쟁점",
+      "척추가 주저앉음 보험금",
+      "척추가 주저앉음 부지급",
+      "척추가 주저앉음 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "척추가 주저앉음",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA054",
+    "domain": "customer_expression",
+    "canonical_term": "귀가 잘 안 들림",
+    "aliases": [
+      "귀가 잘 안 들림",
+      "귀가 잘 안 들림 관련 표현",
+      "귀가 잘 안 들림 쟁점",
+      "귀가 잘 안 들림 보험금",
+      "귀가 잘 안 들림 부지급",
+      "귀가 잘 안 들림 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "귀가 잘 안 들림",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA055",
+    "domain": "customer_expression",
+    "canonical_term": "손이 타는 듯 아픔",
+    "aliases": [
+      "손이 타는 듯 아픔",
+      "손이 타는 듯 아픔 관련 표현",
+      "손이 타는 듯 아픔 쟁점",
+      "손이 타는 듯 아픔 보험금",
+      "손이 타는 듯 아픔 부지급",
+      "손이 타는 듯 아픔 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "손이 타는 듯 아픔",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA056",
+    "domain": "customer_expression",
+    "canonical_term": "속쓰림",
+    "aliases": [
+      "속쓰림",
+      "속쓰림 관련 표현",
+      "속쓰림 쟁점",
+      "속쓰림 보험금",
+      "속쓰림 부지급",
+      "속쓰림 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "속쓰림",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA057",
+    "domain": "customer_expression",
+    "canonical_term": "간염 보균",
+    "aliases": [
+      "간염 보균",
+      "간염 보균 관련 표현",
+      "간염 보균 쟁점",
+      "간염 보균 보험금",
+      "간염 보균 부지급",
+      "간염 보균 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "간염 보균",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA058",
+    "domain": "customer_expression",
+    "canonical_term": "소변이 자주 마려움",
+    "aliases": [
+      "소변이 자주 마려움",
+      "소변이 자주 마려움 관련 표현",
+      "소변이 자주 마려움 쟁점",
+      "소변이 자주 마려움 보험금",
+      "소변이 자주 마려움 부지급",
+      "소변이 자주 마려움 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "소변이 자주 마려움",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA059",
+    "domain": "customer_expression",
+    "canonical_term": "난소 물혹",
+    "aliases": [
+      "난소 물혹",
+      "난소 물혹 관련 표현",
+      "난소 물혹 쟁점",
+      "난소 물혹 보험금",
+      "난소 물혹 부지급",
+      "난소 물혹 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "난소 물혹",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA060",
+    "domain": "customer_expression",
+    "canonical_term": "검진 재검",
+    "aliases": [
+      "검진 재검",
+      "검진 재검 관련 표현",
+      "검진 재검 쟁점",
+      "검진 재검 보험금",
+      "검진 재검 부지급",
+      "검진 재검 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검진 재검",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA061",
+    "domain": "insurer_expression",
+    "canonical_term": "중요한 사항 미고지",
+    "aliases": [
+      "중요한 사항 미고지",
+      "중요한 사항 미고지 관련 표현",
+      "중요한 사항 미고지 쟁점",
+      "중요한 사항 미고지 보험금",
+      "중요한 사항 미고지 부지급",
+      "중요한 사항 미고지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "중요한 사항 미고지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA062",
+    "domain": "insurer_expression",
+    "canonical_term": "고의 또는 중대한 과실",
+    "aliases": [
+      "고의 또는 중대한 과실",
+      "고의 또는 중대한 과실 관련 표현",
+      "고의 또는 중대한 과실 쟁점",
+      "고의 또는 중대한 과실 보험금",
+      "고의 또는 중대한 과실 부지급",
+      "고의 또는 중대한 과실 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "고의 또는 중대한 과실",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA063",
+    "domain": "insurer_expression",
+    "canonical_term": "인과관계 있음",
+    "aliases": [
+      "인과관계 있음",
+      "인과관계 있음 관련 표현",
+      "인과관계 있음 쟁점",
+      "인과관계 있음 보험금",
+      "인과관계 있음 부지급",
+      "인과관계 있음 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "인과관계 있음",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA064",
+    "domain": "insurer_expression",
+    "canonical_term": "치료 목적 부족",
+    "aliases": [
+      "치료 목적 부족",
+      "치료 목적 부족 관련 표현",
+      "치료 목적 부족 쟁점",
+      "치료 목적 부족 보험금",
+      "치료 목적 부족 부지급",
+      "치료 목적 부족 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "치료 목적 부족",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA065",
+    "domain": "insurer_expression",
+    "canonical_term": "의학적 필요성 부족",
+    "aliases": [
+      "의학적 필요성 부족",
+      "의학적 필요성 부족 관련 표현",
+      "의학적 필요성 부족 쟁점",
+      "의학적 필요성 부족 보험금",
+      "의학적 필요성 부족 부지급",
+      "의학적 필요성 부족 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "의학적 필요성 부족",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA066",
+    "domain": "insurer_expression",
+    "canonical_term": "과잉진료",
+    "aliases": [
+      "과잉진료",
+      "과잉진료 관련 표현",
+      "과잉진료 쟁점",
+      "과잉진료 보험금",
+      "과잉진료 부지급",
+      "과잉진료 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "과잉진료",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA067",
+    "domain": "insurer_expression",
+    "canonical_term": "미용 목적",
+    "aliases": [
+      "미용 목적",
+      "미용 목적 관련 표현",
+      "미용 목적 쟁점",
+      "미용 목적 보험금",
+      "미용 목적 부지급",
+      "미용 목적 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "미용 목적",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA068",
+    "domain": "insurer_expression",
+    "canonical_term": "예방 목적",
+    "aliases": [
+      "예방 목적",
+      "예방 목적 관련 표현",
+      "예방 목적 쟁점",
+      "예방 목적 보험금",
+      "예방 목적 부지급",
+      "예방 목적 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "예방 목적",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA069",
+    "domain": "insurer_expression",
+    "canonical_term": "직접치료 아님",
+    "aliases": [
+      "직접치료 아님",
+      "직접치료 아님 관련 표현",
+      "직접치료 아님 쟁점",
+      "직접치료 아님 보험금",
+      "직접치료 아님 부지급",
+      "직접치료 아님 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "직접치료 아님",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA070",
+    "domain": "insurer_expression",
+    "canonical_term": "장해 고정 미흡",
+    "aliases": [
+      "장해 고정 미흡",
+      "장해 고정 미흡 관련 표현",
+      "장해 고정 미흡 쟁점",
+      "장해 고정 미흡 보험금",
+      "장해 고정 미흡 부지급",
+      "장해 고정 미흡 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "장해 고정 미흡",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA071",
+    "domain": "insurer_expression",
+    "canonical_term": "기왕장해 감액",
+    "aliases": [
+      "기왕장해 감액",
+      "기왕장해 감액 관련 표현",
+      "기왕장해 감액 쟁점",
+      "기왕장해 감액 보험금",
+      "기왕장해 감액 부지급",
+      "기왕장해 감액 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "기왕장해 감액",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA072",
+    "domain": "insurer_expression",
+    "canonical_term": "퇴행성 변화",
+    "aliases": [
+      "퇴행성 변화",
+      "퇴행성 변화 관련 표현",
+      "퇴행성 변화 쟁점",
+      "퇴행성 변화 보험금",
+      "퇴행성 변화 부지급",
+      "퇴행성 변화 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "퇴행성 변화",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA073",
+    "domain": "insurer_expression",
+    "canonical_term": "진단확정 미충족",
+    "aliases": [
+      "진단확정 미충족",
+      "진단확정 미충족 관련 표현",
+      "진단확정 미충족 쟁점",
+      "진단확정 미충족 보험금",
+      "진단확정 미충족 부지급",
+      "진단확정 미충족 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진단확정 미충족",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA074",
+    "domain": "insurer_expression",
+    "canonical_term": "책임개시일 전",
+    "aliases": [
+      "책임개시일 전",
+      "책임개시일 전 관련 표현",
+      "책임개시일 전 쟁점",
+      "책임개시일 전 보험금",
+      "책임개시일 전 부지급",
+      "책임개시일 전 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "책임개시일 전",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA075",
+    "domain": "insurer_expression",
+    "canonical_term": "약관상 제외",
+    "aliases": [
+      "약관상 제외",
+      "약관상 제외 관련 표현",
+      "약관상 제외 쟁점",
+      "약관상 제외 보험금",
+      "약관상 제외 부지급",
+      "약관상 제외 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "약관상 제외",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA076",
+    "domain": "insurer_expression",
+    "canonical_term": "통원 가능",
+    "aliases": [
+      "통원 가능",
+      "통원 가능 관련 표현",
+      "통원 가능 쟁점",
+      "통원 가능 보험금",
+      "통원 가능 부지급",
+      "통원 가능 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "통원 가능",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA077",
+    "domain": "insurer_expression",
+    "canonical_term": "비례보상",
+    "aliases": [
+      "비례보상",
+      "비례보상 관련 표현",
+      "비례보상 쟁점",
+      "비례보상 보험금",
+      "비례보상 부지급",
+      "비례보상 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "비례보상",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA078",
+    "domain": "insurer_expression",
+    "canonical_term": "상급병실료 제한",
+    "aliases": [
+      "상급병실료 제한",
+      "상급병실료 제한 관련 표현",
+      "상급병실료 제한 쟁점",
+      "상급병실료 제한 보험금",
+      "상급병실료 제한 부지급",
+      "상급병실료 제한 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "상급병실료 제한",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA079",
+    "domain": "insurer_expression",
+    "canonical_term": "비응급",
+    "aliases": [
+      "비응급",
+      "비응급 관련 표현",
+      "비응급 쟁점",
+      "비응급 보험금",
+      "비응급 부지급",
+      "비응급 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "비응급",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA080",
+    "domain": "insurer_expression",
+    "canonical_term": "보험기간 전 사고",
+    "aliases": [
+      "보험기간 전 사고",
+      "보험기간 전 사고 관련 표현",
+      "보험기간 전 사고 쟁점",
+      "보험기간 전 사고 보험금",
+      "보험기간 전 사고 부지급",
+      "보험기간 전 사고 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험기간 전 사고",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA081",
+    "domain": "policy_expression",
+    "canonical_term": "계약전 알릴의무",
+    "aliases": [
+      "계약전 알릴의무",
+      "계약전 알릴의무 관련 표현",
+      "계약전 알릴의무 쟁점",
+      "계약전 알릴의무 보험금",
+      "계약전 알릴의무 부지급",
+      "계약전 알릴의무 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "계약전 알릴의무",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA082",
+    "domain": "policy_expression",
+    "canonical_term": "보험계약 해지",
+    "aliases": [
+      "보험계약 해지",
+      "보험계약 해지 관련 표현",
+      "보험계약 해지 쟁점",
+      "보험계약 해지 보험금",
+      "보험계약 해지 부지급",
+      "보험계약 해지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험계약 해지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA083",
+    "domain": "policy_expression",
+    "canonical_term": "중요한 사항",
+    "aliases": [
+      "중요한 사항",
+      "중요한 사항 관련 표현",
+      "중요한 사항 쟁점",
+      "중요한 사항 보험금",
+      "중요한 사항 부지급",
+      "중요한 사항 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "중요한 사항",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA084",
+    "domain": "policy_expression",
+    "canonical_term": "통지의무",
+    "aliases": [
+      "통지의무",
+      "통지의무 관련 표현",
+      "통지의무 쟁점",
+      "통지의무 보험금",
+      "통지의무 부지급",
+      "통지의무 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "통지의무",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA085",
+    "domain": "policy_expression",
+    "canonical_term": "보상하지 않는 사항",
+    "aliases": [
+      "보상하지 않는 사항",
+      "보상하지 않는 사항 관련 표현",
+      "보상하지 않는 사항 쟁점",
+      "보상하지 않는 사항 보험금",
+      "보상하지 않는 사항 부지급",
+      "보상하지 않는 사항 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보상하지 않는 사항",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA086",
+    "domain": "policy_expression",
+    "canonical_term": "입원의 정의",
+    "aliases": [
+      "입원의 정의",
+      "입원의 정의 관련 표현",
+      "입원의 정의 쟁점",
+      "입원의 정의 보험금",
+      "입원의 정의 부지급",
+      "입원의 정의 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "입원의 정의",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA087",
+    "domain": "policy_expression",
+    "canonical_term": "통원의 정의",
+    "aliases": [
+      "통원의 정의",
+      "통원의 정의 관련 표현",
+      "통원의 정의 쟁점",
+      "통원의 정의 보험금",
+      "통원의 정의 부지급",
+      "통원의 정의 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "통원의 정의",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA088",
+    "domain": "policy_expression",
+    "canonical_term": "암의 진단확정",
+    "aliases": [
+      "암의 진단확정",
+      "암의 진단확정 관련 표현",
+      "암의 진단확정 쟁점",
+      "암의 진단확정 보험금",
+      "암의 진단확정 부지급",
+      "암의 진단확정 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "암의 진단확정",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA089",
+    "domain": "policy_expression",
+    "canonical_term": "뇌혈관질환 진단",
+    "aliases": [
+      "뇌혈관질환 진단",
+      "뇌혈관질환 진단 관련 표현",
+      "뇌혈관질환 진단 쟁점",
+      "뇌혈관질환 진단 보험금",
+      "뇌혈관질환 진단 부지급",
+      "뇌혈관질환 진단 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "뇌혈관질환 진단",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA090",
+    "domain": "policy_expression",
+    "canonical_term": "급성심근경색 진단",
+    "aliases": [
+      "급성심근경색 진단",
+      "급성심근경색 진단 관련 표현",
+      "급성심근경색 진단 쟁점",
+      "급성심근경색 진단 보험금",
+      "급성심근경색 진단 부지급",
+      "급성심근경색 진단 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "급성심근경색 진단",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA091",
+    "domain": "policy_expression",
+    "canonical_term": "장해분류표",
+    "aliases": [
+      "장해분류표",
+      "장해분류표 관련 표현",
+      "장해분류표 쟁점",
+      "장해분류표 보험금",
+      "장해분류표 부지급",
+      "장해분류표 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "장해분류표",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA092",
+    "domain": "policy_expression",
+    "canonical_term": "운동장해",
+    "aliases": [
+      "운동장해",
+      "운동장해 관련 표현",
+      "운동장해 쟁점",
+      "운동장해 보험금",
+      "운동장해 부지급",
+      "운동장해 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "운동장해",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA093",
+    "domain": "policy_expression",
+    "canonical_term": "추상장해",
+    "aliases": [
+      "추상장해",
+      "추상장해 관련 표현",
+      "추상장해 쟁점",
+      "추상장해 보험금",
+      "추상장해 부지급",
+      "추상장해 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "추상장해",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA094",
+    "domain": "policy_expression",
+    "canonical_term": "신경계 장해",
+    "aliases": [
+      "신경계 장해",
+      "신경계 장해 관련 표현",
+      "신경계 장해 쟁점",
+      "신경계 장해 보험금",
+      "신경계 장해 부지급",
+      "신경계 장해 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "신경계 장해",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA095",
+    "domain": "policy_expression",
+    "canonical_term": "비급여 의료비",
+    "aliases": [
+      "비급여 의료비",
+      "비급여 의료비 관련 표현",
+      "비급여 의료비 쟁점",
+      "비급여 의료비 보험금",
+      "비급여 의료비 부지급",
+      "비급여 의료비 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "비급여 의료비",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA096",
+    "domain": "policy_expression",
+    "canonical_term": "본인부담금",
+    "aliases": [
+      "본인부담금",
+      "본인부담금 관련 표현",
+      "본인부담금 쟁점",
+      "본인부담금 보험금",
+      "본인부담금 부지급",
+      "본인부담금 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "본인부담금",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA097",
+    "domain": "policy_expression",
+    "canonical_term": "공제금액",
+    "aliases": [
+      "공제금액",
+      "공제금액 관련 표현",
+      "공제금액 쟁점",
+      "공제금액 보험금",
+      "공제금액 부지급",
+      "공제금액 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "공제금액",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA098",
+    "domain": "policy_expression",
+    "canonical_term": "보상한도",
+    "aliases": [
+      "보상한도",
+      "보상한도 관련 표현",
+      "보상한도 쟁점",
+      "보상한도 보험금",
+      "보상한도 부지급",
+      "보상한도 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보상한도",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA099",
+    "domain": "policy_expression",
+    "canonical_term": "책임개시일",
+    "aliases": [
+      "책임개시일",
+      "책임개시일 관련 표현",
+      "책임개시일 쟁점",
+      "책임개시일 보험금",
+      "책임개시일 부지급",
+      "책임개시일 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "책임개시일",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA100",
+    "domain": "policy_expression",
+    "canonical_term": "면책기간",
+    "aliases": [
+      "면책기간",
+      "면책기간 관련 표현",
+      "면책기간 쟁점",
+      "면책기간 보험금",
+      "면책기간 부지급",
+      "면책기간 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "면책기간",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA101",
+    "domain": "medical_document_expression",
+    "canonical_term": "진료기록지",
+    "aliases": [
+      "진료기록지",
+      "진료기록지 관련 표현",
+      "진료기록지 쟁점",
+      "진료기록지 보험금",
+      "진료기록지 부지급",
+      "진료기록지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진료기록지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA102",
+    "domain": "medical_document_expression",
+    "canonical_term": "초진기록",
+    "aliases": [
+      "초진기록",
+      "초진기록 관련 표현",
+      "초진기록 쟁점",
+      "초진기록 보험금",
+      "초진기록 부지급",
+      "초진기록 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "초진기록",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA103",
+    "domain": "medical_document_expression",
+    "canonical_term": "경과기록",
+    "aliases": [
+      "경과기록",
+      "경과기록 관련 표현",
+      "경과기록 쟁점",
+      "경과기록 보험금",
+      "경과기록 부지급",
+      "경과기록 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "경과기록",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA104",
+    "domain": "medical_document_expression",
+    "canonical_term": "처방전",
+    "aliases": [
+      "처방전",
+      "처방전 관련 표현",
+      "처방전 쟁점",
+      "처방전 보험금",
+      "처방전 부지급",
+      "처방전 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "처방전",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA105",
+    "domain": "medical_document_expression",
+    "canonical_term": "검사결과지",
+    "aliases": [
+      "검사결과지",
+      "검사결과지 관련 표현",
+      "검사결과지 쟁점",
+      "검사결과지 보험금",
+      "검사결과지 부지급",
+      "검사결과지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검사결과지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA106",
+    "domain": "medical_document_expression",
+    "canonical_term": "MRI 판독지",
+    "aliases": [
+      "MRI 판독지",
+      "MRI 판독지 관련 표현",
+      "MRI 판독지 쟁점",
+      "MRI 판독지 보험금",
+      "MRI 판독지 부지급",
+      "MRI 판독지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "MRI 판독지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA107",
+    "domain": "medical_document_expression",
+    "canonical_term": "CT 판독지",
+    "aliases": [
+      "CT 판독지",
+      "CT 판독지 관련 표현",
+      "CT 판독지 쟁점",
+      "CT 판독지 보험금",
+      "CT 판독지 부지급",
+      "CT 판독지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "CT 판독지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA108",
+    "domain": "medical_document_expression",
+    "canonical_term": "초음파 결과",
+    "aliases": [
+      "초음파 결과",
+      "초음파 결과 관련 표현",
+      "초음파 결과 쟁점",
+      "초음파 결과 보험금",
+      "초음파 결과 부지급",
+      "초음파 결과 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "초음파 결과",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA109",
+    "domain": "medical_document_expression",
+    "canonical_term": "병리보고서",
+    "aliases": [
+      "병리보고서",
+      "병리보고서 관련 표현",
+      "병리보고서 쟁점",
+      "병리보고서 보험금",
+      "병리보고서 부지급",
+      "병리보고서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "병리보고서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA110",
+    "domain": "medical_document_expression",
+    "canonical_term": "조직검사",
+    "aliases": [
+      "조직검사",
+      "조직검사 관련 표현",
+      "조직검사 쟁점",
+      "조직검사 보험금",
+      "조직검사 부지급",
+      "조직검사 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "조직검사",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA111",
+    "domain": "medical_document_expression",
+    "canonical_term": "세포검사",
+    "aliases": [
+      "세포검사",
+      "세포검사 관련 표현",
+      "세포검사 쟁점",
+      "세포검사 보험금",
+      "세포검사 부지급",
+      "세포검사 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "세포검사",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA112",
+    "domain": "medical_document_expression",
+    "canonical_term": "심전도",
+    "aliases": [
+      "심전도",
+      "심전도 관련 표현",
+      "심전도 쟁점",
+      "심전도 보험금",
+      "심전도 부지급",
+      "심전도 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "심전도",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA113",
+    "domain": "medical_document_expression",
+    "canonical_term": "트로포닌",
+    "aliases": [
+      "트로포닌",
+      "트로포닌 관련 표현",
+      "트로포닌 쟁점",
+      "트로포닌 보험금",
+      "트로포닌 부지급",
+      "트로포닌 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "트로포닌",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA114",
+    "domain": "medical_document_expression",
+    "canonical_term": "관상동맥조영술",
+    "aliases": [
+      "관상동맥조영술",
+      "관상동맥조영술 관련 표현",
+      "관상동맥조영술 쟁점",
+      "관상동맥조영술 보험금",
+      "관상동맥조영술 부지급",
+      "관상동맥조영술 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "관상동맥조영술",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA115",
+    "domain": "medical_document_expression",
+    "canonical_term": "진단서",
+    "aliases": [
+      "진단서",
+      "진단서 관련 표현",
+      "진단서 쟁점",
+      "진단서 보험금",
+      "진단서 부지급",
+      "진단서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진단서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA116",
+    "domain": "medical_document_expression",
+    "canonical_term": "입퇴원확인서",
+    "aliases": [
+      "입퇴원확인서",
+      "입퇴원확인서 관련 표현",
+      "입퇴원확인서 쟁점",
+      "입퇴원확인서 보험금",
+      "입퇴원확인서 부지급",
+      "입퇴원확인서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "입퇴원확인서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA117",
+    "domain": "medical_document_expression",
+    "canonical_term": "수술기록지",
+    "aliases": [
+      "수술기록지",
+      "수술기록지 관련 표현",
+      "수술기록지 쟁점",
+      "수술기록지 보험금",
+      "수술기록지 부지급",
+      "수술기록지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "수술기록지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA118",
+    "domain": "medical_document_expression",
+    "canonical_term": "장해진단서",
+    "aliases": [
+      "장해진단서",
+      "장해진단서 관련 표현",
+      "장해진단서 쟁점",
+      "장해진단서 보험금",
+      "장해진단서 부지급",
+      "장해진단서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "장해진단서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA119",
+    "domain": "medical_document_expression",
+    "canonical_term": "진료비 세부내역서",
+    "aliases": [
+      "진료비 세부내역서",
+      "진료비 세부내역서 관련 표현",
+      "진료비 세부내역서 쟁점",
+      "진료비 세부내역서 보험금",
+      "진료비 세부내역서 부지급",
+      "진료비 세부내역서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진료비 세부내역서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA120",
+    "domain": "medical_document_expression",
+    "canonical_term": "의사소견서",
+    "aliases": [
+      "의사소견서",
+      "의사소견서 관련 표현",
+      "의사소견서 쟁점",
+      "의사소견서 보험금",
+      "의사소견서 부지급",
+      "의사소견서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "의사소견서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA121",
+    "domain": "issue_type",
+    "canonical_term": "중요사항성",
+    "aliases": [
+      "중요사항성",
+      "중요사항성 관련 표현",
+      "중요사항성 쟁점",
+      "중요사항성 보험금",
+      "중요사항성 부지급",
+      "중요사항성 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "중요사항성",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA122",
+    "domain": "issue_type",
+    "canonical_term": "고의중과실",
+    "aliases": [
+      "고의중과실",
+      "고의중과실 관련 표현",
+      "고의중과실 쟁점",
+      "고의중과실 보험금",
+      "고의중과실 부지급",
+      "고의중과실 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "고의중과실",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA123",
+    "domain": "issue_type",
+    "canonical_term": "해지권 행사기간",
+    "aliases": [
+      "해지권 행사기간",
+      "해지권 행사기간 관련 표현",
+      "해지권 행사기간 쟁점",
+      "해지권 행사기간 보험금",
+      "해지권 행사기간 부지급",
+      "해지권 행사기간 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "해지권 행사기간",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA124",
+    "domain": "issue_type",
+    "canonical_term": "고지수령권",
+    "aliases": [
+      "고지수령권",
+      "고지수령권 관련 표현",
+      "고지수령권 쟁점",
+      "고지수령권 보험금",
+      "고지수령권 부지급",
+      "고지수령권 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "고지수령권",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA125",
+    "domain": "issue_type",
+    "canonical_term": "보험사고 인과관계",
+    "aliases": [
+      "보험사고 인과관계",
+      "보험사고 인과관계 관련 표현",
+      "보험사고 인과관계 쟁점",
+      "보험사고 인과관계 보험금",
+      "보험사고 인과관계 부지급",
+      "보험사고 인과관계 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험사고 인과관계",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA126",
+    "domain": "issue_type",
+    "canonical_term": "치료목적",
+    "aliases": [
+      "치료목적",
+      "치료목적 관련 표현",
+      "치료목적 쟁점",
+      "치료목적 보험금",
+      "치료목적 부지급",
+      "치료목적 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "치료목적",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA127",
+    "domain": "issue_type",
+    "canonical_term": "입원 필요성",
+    "aliases": [
+      "입원 필요성",
+      "입원 필요성 관련 표현",
+      "입원 필요성 쟁점",
+      "입원 필요성 보험금",
+      "입원 필요성 부지급",
+      "입원 필요성 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "입원 필요성",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA128",
+    "domain": "issue_type",
+    "canonical_term": "직접치료",
+    "aliases": [
+      "직접치료",
+      "직접치료 관련 표현",
+      "직접치료 쟁점",
+      "직접치료 보험금",
+      "직접치료 부지급",
+      "직접치료 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "직접치료",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA129",
+    "domain": "issue_type",
+    "canonical_term": "비급여 적정성",
+    "aliases": [
+      "비급여 적정성",
+      "비급여 적정성 관련 표현",
+      "비급여 적정성 쟁점",
+      "비급여 적정성 보험금",
+      "비급여 적정성 부지급",
+      "비급여 적정성 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "비급여 적정성",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA130",
+    "domain": "issue_type",
+    "canonical_term": "중복보상",
+    "aliases": [
+      "중복보상",
+      "중복보상 관련 표현",
+      "중복보상 쟁점",
+      "중복보상 보험금",
+      "중복보상 부지급",
+      "중복보상 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "중복보상",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA131",
+    "domain": "issue_type",
+    "canonical_term": "장해지급률",
+    "aliases": [
+      "장해지급률",
+      "장해지급률 관련 표현",
+      "장해지급률 쟁점",
+      "장해지급률 보험금",
+      "장해지급률 부지급",
+      "장해지급률 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "장해지급률",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA132",
+    "domain": "issue_type",
+    "canonical_term": "기왕증 기여도",
+    "aliases": [
+      "기왕증 기여도",
+      "기왕증 기여도 관련 표현",
+      "기왕증 기여도 쟁점",
+      "기왕증 기여도 보험금",
+      "기왕증 기여도 부지급",
+      "기왕증 기여도 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "기왕증 기여도",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA133",
+    "domain": "issue_type",
+    "canonical_term": "상해성 여부",
+    "aliases": [
+      "상해성 여부",
+      "상해성 여부 관련 표현",
+      "상해성 여부 쟁점",
+      "상해성 여부 보험금",
+      "상해성 여부 부지급",
+      "상해성 여부 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "상해성 여부",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA134",
+    "domain": "issue_type",
+    "canonical_term": "진단확정",
+    "aliases": [
+      "진단확정",
+      "진단확정 관련 표현",
+      "진단확정 쟁점",
+      "진단확정 보험금",
+      "진단확정 부지급",
+      "진단확정 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진단확정",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA135",
+    "domain": "issue_type",
+    "canonical_term": "질병분류",
+    "aliases": [
+      "질병분류",
+      "질병분류 관련 표현",
+      "질병분류 쟁점",
+      "질병분류 보험금",
+      "질병분류 부지급",
+      "질병분류 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "질병분류",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA136",
+    "domain": "issue_type",
+    "canonical_term": "책임개시",
+    "aliases": [
+      "책임개시",
+      "책임개시 관련 표현",
+      "책임개시 쟁점",
+      "책임개시 보험금",
+      "책임개시 부지급",
+      "책임개시 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "책임개시",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA137",
+    "domain": "issue_type",
+    "canonical_term": "면책약관",
+    "aliases": [
+      "면책약관",
+      "면책약관 관련 표현",
+      "면책약관 쟁점",
+      "면책약관 보험금",
+      "면책약관 부지급",
+      "면책약관 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "면책약관",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA138",
+    "domain": "issue_type",
+    "canonical_term": "설명의무",
+    "aliases": [
+      "설명의무",
+      "설명의무 관련 표현",
+      "설명의무 쟁점",
+      "설명의무 보험금",
+      "설명의무 부지급",
+      "설명의무 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "설명의무",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA139",
+    "domain": "issue_type",
+    "canonical_term": "과실비율",
+    "aliases": [
+      "과실비율",
+      "과실비율 관련 표현",
+      "과실비율 쟁점",
+      "과실비율 보험금",
+      "과실비율 부지급",
+      "과실비율 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "과실비율",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA140",
+    "domain": "issue_type",
+    "canonical_term": "손해액 산정",
+    "aliases": [
+      "손해액 산정",
+      "손해액 산정 관련 표현",
+      "손해액 산정 쟁점",
+      "손해액 산정 보험금",
+      "손해액 산정 부지급",
+      "손해액 산정 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "손해액 산정",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA141",
+    "domain": "source_area_hint",
+    "canonical_term": "legal_statutes",
+    "aliases": [
+      "legal_statutes",
+      "legal_statutes 관련 표현",
+      "legal_statutes 쟁점",
+      "legal_statutes 보험금",
+      "legal_statutes 부지급",
+      "legal_statutes 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "legal_statutes",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA142",
+    "domain": "source_area_hint",
+    "canonical_term": "fss_dispute_cases",
+    "aliases": [
+      "fss_dispute_cases",
+      "fss_dispute_cases 관련 표현",
+      "fss_dispute_cases 쟁점",
+      "fss_dispute_cases 보험금",
+      "fss_dispute_cases 부지급",
+      "fss_dispute_cases 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "fss_dispute_cases",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA143",
+    "domain": "source_area_hint",
+    "canonical_term": "medical_knowledge",
+    "aliases": [
+      "medical_knowledge",
+      "medical_knowledge 관련 표현",
+      "medical_knowledge 쟁점",
+      "medical_knowledge 보험금",
+      "medical_knowledge 부지급",
+      "medical_knowledge 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "medical_knowledge",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA144",
+    "domain": "source_area_hint",
+    "canonical_term": "terms_standards",
+    "aliases": [
+      "terms_standards",
+      "terms_standards 관련 표현",
+      "terms_standards 쟁점",
+      "terms_standards 보험금",
+      "terms_standards 부지급",
+      "terms_standards 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "terms_standards",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA145",
+    "domain": "source_area_hint",
+    "canonical_term": "precedents",
+    "aliases": [
+      "precedents",
+      "precedents 관련 표현",
+      "precedents 쟁점",
+      "precedents 보험금",
+      "precedents 부지급",
+      "precedents 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "precedents",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA146",
+    "domain": "source_area_hint",
+    "canonical_term": "issue_playbooks",
+    "aliases": [
+      "issue_playbooks",
+      "issue_playbooks 관련 표현",
+      "issue_playbooks 쟁점",
+      "issue_playbooks 보험금",
+      "issue_playbooks 부지급",
+      "issue_playbooks 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "issue_playbooks",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA147",
+    "domain": "source_area_hint",
+    "canonical_term": "상법 근거",
+    "aliases": [
+      "상법 근거",
+      "상법 근거 관련 표현",
+      "상법 근거 쟁점",
+      "상법 근거 보험금",
+      "상법 근거 부지급",
+      "상법 근거 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "상법 근거",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA148",
+    "domain": "source_area_hint",
+    "canonical_term": "분쟁조정례 검색",
+    "aliases": [
+      "분쟁조정례 검색",
+      "분쟁조정례 검색 관련 표현",
+      "분쟁조정례 검색 쟁점",
+      "분쟁조정례 검색 보험금",
+      "분쟁조정례 검색 부지급",
+      "분쟁조정례 검색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "분쟁조정례 검색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA149",
+    "domain": "source_area_hint",
+    "canonical_term": "의료지식 검색",
+    "aliases": [
+      "의료지식 검색",
+      "의료지식 검색 관련 표현",
+      "의료지식 검색 쟁점",
+      "의료지식 검색 보험금",
+      "의료지식 검색 부지급",
+      "의료지식 검색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "의료지식 검색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA150",
+    "domain": "source_area_hint",
+    "canonical_term": "약관 원문 검색",
+    "aliases": [
+      "약관 원문 검색",
+      "약관 원문 검색 관련 표현",
+      "약관 원문 검색 쟁점",
+      "약관 원문 검색 보험금",
+      "약관 원문 검색 부지급",
+      "약관 원문 검색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "약관 원문 검색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA151",
+    "domain": "source_area_hint",
+    "canonical_term": "판례 유형 검색",
+    "aliases": [
+      "판례 유형 검색",
+      "판례 유형 검색 관련 표현",
+      "판례 유형 검색 쟁점",
+      "판례 유형 검색 보험금",
+      "판례 유형 검색 부지급",
+      "판례 유형 검색 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "판례 유형 검색",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA152",
+    "domain": "source_area_hint",
+    "canonical_term": "내부 플레이북",
+    "aliases": [
+      "내부 플레이북",
+      "내부 플레이북 관련 표현",
+      "내부 플레이북 쟁점",
+      "내부 플레이북 보험금",
+      "내부 플레이북 부지급",
+      "내부 플레이북 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "내부 플레이북",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA153",
+    "domain": "source_area_hint",
+    "canonical_term": "검색 키워드 확장",
+    "aliases": [
+      "검색 키워드 확장",
+      "검색 키워드 확장 관련 표현",
+      "검색 키워드 확장 쟁점",
+      "검색 키워드 확장 보험금",
+      "검색 키워드 확장 부지급",
+      "검색 키워드 확장 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검색 키워드 확장",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA154",
+    "domain": "source_area_hint",
+    "canonical_term": "쟁점 분류",
+    "aliases": [
+      "쟁점 분류",
+      "쟁점 분류 관련 표현",
+      "쟁점 분류 쟁점",
+      "쟁점 분류 보험금",
+      "쟁점 분류 부지급",
+      "쟁점 분류 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "쟁점 분류",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA155",
+    "domain": "source_area_hint",
+    "canonical_term": "추가자료 체크리스트",
+    "aliases": [
+      "추가자료 체크리스트",
+      "추가자료 체크리스트 관련 표현",
+      "추가자료 체크리스트 쟁점",
+      "추가자료 체크리스트 보험금",
+      "추가자료 체크리스트 부지급",
+      "추가자료 체크리스트 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "추가자료 체크리스트",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA156",
+    "domain": "source_area_hint",
+    "canonical_term": "공식근거 확인",
+    "aliases": [
+      "공식근거 확인",
+      "공식근거 확인 관련 표현",
+      "공식근거 확인 쟁점",
+      "공식근거 확인 보험금",
+      "공식근거 확인 부지급",
+      "공식근거 확인 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "공식근거 확인",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA157",
+    "domain": "source_area_hint",
+    "canonical_term": "인용 금지",
+    "aliases": [
+      "인용 금지",
+      "인용 금지 관련 표현",
+      "인용 금지 쟁점",
+      "인용 금지 보험금",
+      "인용 금지 부지급",
+      "인용 금지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "인용 금지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA158",
+    "domain": "source_area_hint",
+    "canonical_term": "사람 검토 필요",
+    "aliases": [
+      "사람 검토 필요",
+      "사람 검토 필요 관련 표현",
+      "사람 검토 필요 쟁점",
+      "사람 검토 필요 보험금",
+      "사람 검토 필요 부지급",
+      "사람 검토 필요 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "사람 검토 필요",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA159",
+    "domain": "source_area_hint",
+    "canonical_term": "검색 보조",
+    "aliases": [
+      "검색 보조",
+      "검색 보조 관련 표현",
+      "검색 보조 쟁점",
+      "검색 보조 보험금",
+      "검색 보조 부지급",
+      "검색 보조 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검색 보조",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA160",
+    "domain": "source_area_hint",
+    "canonical_term": "유사사례",
+    "aliases": [
+      "유사사례",
+      "유사사례 관련 표현",
+      "유사사례 쟁점",
+      "유사사례 보험금",
+      "유사사례 부지급",
+      "유사사례 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "유사사례",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA161",
+    "domain": "document_checklist",
+    "canonical_term": "청약서",
+    "aliases": [
+      "청약서",
+      "청약서 관련 표현",
+      "청약서 쟁점",
+      "청약서 보험금",
+      "청약서 부지급",
+      "청약서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "청약서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA162",
+    "domain": "document_checklist",
+    "canonical_term": "알릴의무 질문표",
+    "aliases": [
+      "알릴의무 질문표",
+      "알릴의무 질문표 관련 표현",
+      "알릴의무 질문표 쟁점",
+      "알릴의무 질문표 보험금",
+      "알릴의무 질문표 부지급",
+      "알릴의무 질문표 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "알릴의무 질문표",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA163",
+    "domain": "document_checklist",
+    "canonical_term": "보험증권",
+    "aliases": [
+      "보험증권",
+      "보험증권 관련 표현",
+      "보험증권 쟁점",
+      "보험증권 보험금",
+      "보험증권 부지급",
+      "보험증권 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험증권",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA164",
+    "domain": "document_checklist",
+    "canonical_term": "보험약관",
+    "aliases": [
+      "보험약관",
+      "보험약관 관련 표현",
+      "보험약관 쟁점",
+      "보험약관 보험금",
+      "보험약관 부지급",
+      "보험약관 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험약관",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA165",
+    "domain": "document_checklist",
+    "canonical_term": "해지 통지서",
+    "aliases": [
+      "해지 통지서",
+      "해지 통지서 관련 표현",
+      "해지 통지서 쟁점",
+      "해지 통지서 보험금",
+      "해지 통지서 부지급",
+      "해지 통지서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "해지 통지서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA166",
+    "domain": "document_checklist",
+    "canonical_term": "부지급 안내문",
+    "aliases": [
+      "부지급 안내문",
+      "부지급 안내문 관련 표현",
+      "부지급 안내문 쟁점",
+      "부지급 안내문 보험금",
+      "부지급 안내문 부지급",
+      "부지급 안내문 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "부지급 안내문",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA167",
+    "domain": "document_checklist",
+    "canonical_term": "보험금 청구서",
+    "aliases": [
+      "보험금 청구서",
+      "보험금 청구서 관련 표현",
+      "보험금 청구서 쟁점",
+      "보험금 청구서 보험금",
+      "보험금 청구서 부지급",
+      "보험금 청구서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "보험금 청구서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA168",
+    "domain": "document_checklist",
+    "canonical_term": "동의서",
+    "aliases": [
+      "동의서",
+      "동의서 관련 표현",
+      "동의서 쟁점",
+      "동의서 보험금",
+      "동의서 부지급",
+      "동의서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "동의서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA169",
+    "domain": "document_checklist",
+    "canonical_term": "진료비 영수증",
+    "aliases": [
+      "진료비 영수증",
+      "진료비 영수증 관련 표현",
+      "진료비 영수증 쟁점",
+      "진료비 영수증 보험금",
+      "진료비 영수증 부지급",
+      "진료비 영수증 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진료비 영수증",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA170",
+    "domain": "document_checklist",
+    "canonical_term": "진료비 세부내역서",
+    "aliases": [
+      "진료비 세부내역서",
+      "진료비 세부내역서 관련 표현",
+      "진료비 세부내역서 쟁점",
+      "진료비 세부내역서 보험금",
+      "진료비 세부내역서 부지급",
+      "진료비 세부내역서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진료비 세부내역서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA171",
+    "domain": "document_checklist",
+    "canonical_term": "진료확인서",
+    "aliases": [
+      "진료확인서",
+      "진료확인서 관련 표현",
+      "진료확인서 쟁점",
+      "진료확인서 보험금",
+      "진료확인서 부지급",
+      "진료확인서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "진료확인서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA172",
+    "domain": "document_checklist",
+    "canonical_term": "입원확인서",
+    "aliases": [
+      "입원확인서",
+      "입원확인서 관련 표현",
+      "입원확인서 쟁점",
+      "입원확인서 보험금",
+      "입원확인서 부지급",
+      "입원확인서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "입원확인서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA173",
+    "domain": "document_checklist",
+    "canonical_term": "검사 CD",
+    "aliases": [
+      "검사 CD",
+      "검사 CD 관련 표현",
+      "검사 CD 쟁점",
+      "검사 CD 보험금",
+      "검사 CD 부지급",
+      "검사 CD 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검사 CD",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA174",
+    "domain": "document_checklist",
+    "canonical_term": "영상 판독지",
+    "aliases": [
+      "영상 판독지",
+      "영상 판독지 관련 표현",
+      "영상 판독지 쟁점",
+      "영상 판독지 보험금",
+      "영상 판독지 부지급",
+      "영상 판독지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "영상 판독지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA175",
+    "domain": "document_checklist",
+    "canonical_term": "병리 슬라이드",
+    "aliases": [
+      "병리 슬라이드",
+      "병리 슬라이드 관련 표현",
+      "병리 슬라이드 쟁점",
+      "병리 슬라이드 보험금",
+      "병리 슬라이드 부지급",
+      "병리 슬라이드 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "병리 슬라이드",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA176",
+    "domain": "document_checklist",
+    "canonical_term": "투약내역",
+    "aliases": [
+      "투약내역",
+      "투약내역 관련 표현",
+      "투약내역 쟁점",
+      "투약내역 보험금",
+      "투약내역 부지급",
+      "투약내역 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "투약내역",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA177",
+    "domain": "document_checklist",
+    "canonical_term": "건강검진 결과지",
+    "aliases": [
+      "건강검진 결과지",
+      "건강검진 결과지 관련 표현",
+      "건강검진 결과지 쟁점",
+      "건강검진 결과지 보험금",
+      "건강검진 결과지 부지급",
+      "건강검진 결과지 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "건강검진 결과지",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA178",
+    "domain": "document_checklist",
+    "canonical_term": "소견서",
+    "aliases": [
+      "소견서",
+      "소견서 관련 표현",
+      "소견서 쟁점",
+      "소견서 보험금",
+      "소견서 부지급",
+      "소견서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "소견서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA179",
+    "domain": "document_checklist",
+    "canonical_term": "사고경위서",
+    "aliases": [
+      "사고경위서",
+      "사고경위서 관련 표현",
+      "사고경위서 쟁점",
+      "사고경위서 보험금",
+      "사고경위서 부지급",
+      "사고경위서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "사고경위서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA180",
+    "domain": "document_checklist",
+    "canonical_term": "손해사정서",
+    "aliases": [
+      "손해사정서",
+      "손해사정서 관련 표현",
+      "손해사정서 쟁점",
+      "손해사정서 보험금",
+      "손해사정서 부지급",
+      "손해사정서 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "손해사정서",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA181",
+    "domain": "search_boost",
+    "canonical_term": "1회 통원",
+    "aliases": [
+      "1회 통원",
+      "1회 통원 관련 표현",
+      "1회 통원 쟁점",
+      "1회 통원 보험금",
+      "1회 통원 부지급",
+      "1회 통원 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "1회 통원",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA182",
+    "domain": "search_boost",
+    "canonical_term": "정밀검사 없음",
+    "aliases": [
+      "정밀검사 없음",
+      "정밀검사 없음 관련 표현",
+      "정밀검사 없음 쟁점",
+      "정밀검사 없음 보험금",
+      "정밀검사 없음 부지급",
+      "정밀검사 없음 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "정밀검사 없음",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA183",
+    "domain": "search_boost",
+    "canonical_term": "장기투약 없음",
+    "aliases": [
+      "장기투약 없음",
+      "장기투약 없음 관련 표현",
+      "장기투약 없음 쟁점",
+      "장기투약 없음 보험금",
+      "장기투약 없음 부지급",
+      "장기투약 없음 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "장기투약 없음",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA184",
+    "domain": "search_boost",
+    "canonical_term": "재검 권유",
+    "aliases": [
+      "재검 권유",
+      "재검 권유 관련 표현",
+      "재검 권유 쟁점",
+      "재검 권유 보험금",
+      "재검 권유 부지급",
+      "재검 권유 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "재검 권유",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA185",
+    "domain": "search_boost",
+    "canonical_term": "추적관찰",
+    "aliases": [
+      "추적관찰",
+      "추적관찰 관련 표현",
+      "추적관찰 쟁점",
+      "추적관찰 보험금",
+      "추적관찰 부지급",
+      "추적관찰 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "추적관찰",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA186",
+    "domain": "search_boost",
+    "canonical_term": "동일부위",
+    "aliases": [
+      "동일부위",
+      "동일부위 관련 표현",
+      "동일부위 쟁점",
+      "동일부위 보험금",
+      "동일부위 부지급",
+      "동일부위 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "동일부위",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA187",
+    "domain": "search_boost",
+    "canonical_term": "기왕증",
+    "aliases": [
+      "기왕증",
+      "기왕증 관련 표현",
+      "기왕증 쟁점",
+      "기왕증 보험금",
+      "기왕증 부지급",
+      "기왕증 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "기왕증",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA188",
+    "domain": "search_boost",
+    "canonical_term": "퇴행성",
+    "aliases": [
+      "퇴행성",
+      "퇴행성 관련 표현",
+      "퇴행성 쟁점",
+      "퇴행성 보험금",
+      "퇴행성 부지급",
+      "퇴행성 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "퇴행성",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA189",
+    "domain": "search_boost",
+    "canonical_term": "급성 외상",
+    "aliases": [
+      "급성 외상",
+      "급성 외상 관련 표현",
+      "급성 외상 쟁점",
+      "급성 외상 보험금",
+      "급성 외상 부지급",
+      "급성 외상 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "급성 외상",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA190",
+    "domain": "search_boost",
+    "canonical_term": "영상 소견",
+    "aliases": [
+      "영상 소견",
+      "영상 소견 관련 표현",
+      "영상 소견 쟁점",
+      "영상 소견 보험금",
+      "영상 소견 부지급",
+      "영상 소견 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "영상 소견",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA191",
+    "domain": "search_boost",
+    "canonical_term": "객관적 검사",
+    "aliases": [
+      "객관적 검사",
+      "객관적 검사 관련 표현",
+      "객관적 검사 쟁점",
+      "객관적 검사 보험금",
+      "객관적 검사 부지급",
+      "객관적 검사 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "객관적 검사",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA192",
+    "domain": "search_boost",
+    "canonical_term": "치료 경과",
+    "aliases": [
+      "치료 경과",
+      "치료 경과 관련 표현",
+      "치료 경과 쟁점",
+      "치료 경과 보험금",
+      "치료 경과 부지급",
+      "치료 경과 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "치료 경과",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA193",
+    "domain": "search_boost",
+    "canonical_term": "호전 기록",
+    "aliases": [
+      "호전 기록",
+      "호전 기록 관련 표현",
+      "호전 기록 쟁점",
+      "호전 기록 보험금",
+      "호전 기록 부지급",
+      "호전 기록 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "호전 기록",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA194",
+    "domain": "search_boost",
+    "canonical_term": "반복 치료",
+    "aliases": [
+      "반복 치료",
+      "반복 치료 관련 표현",
+      "반복 치료 쟁점",
+      "반복 치료 보험금",
+      "반복 치료 부지급",
+      "반복 치료 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "반복 치료",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA195",
+    "domain": "search_boost",
+    "canonical_term": "비급여 코드",
+    "aliases": [
+      "비급여 코드",
+      "비급여 코드 관련 표현",
+      "비급여 코드 쟁점",
+      "비급여 코드 보험금",
+      "비급여 코드 부지급",
+      "비급여 코드 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "비급여 코드",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA196",
+    "domain": "search_boost",
+    "canonical_term": "직접치료",
+    "aliases": [
+      "직접치료",
+      "직접치료 관련 표현",
+      "직접치료 쟁점",
+      "직접치료 보험금",
+      "직접치료 부지급",
+      "직접치료 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "직접치료",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA197",
+    "domain": "search_boost",
+    "canonical_term": "확정진단",
+    "aliases": [
+      "확정진단",
+      "확정진단 관련 표현",
+      "확정진단 쟁점",
+      "확정진단 보험금",
+      "확정진단 부지급",
+      "확정진단 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "확정진단",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA198",
+    "domain": "search_boost",
+    "canonical_term": "병리 기준",
+    "aliases": [
+      "병리 기준",
+      "병리 기준 관련 표현",
+      "병리 기준 쟁점",
+      "병리 기준 보험금",
+      "병리 기준 부지급",
+      "병리 기준 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "병리 기준",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA199",
+    "domain": "search_boost",
+    "canonical_term": "검사 수치",
+    "aliases": [
+      "검사 수치",
+      "검사 수치 관련 표현",
+      "검사 수치 쟁점",
+      "검사 수치 보험금",
+      "검사 수치 부지급",
+      "검사 수치 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "검사 수치",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  },
+  {
+    "id": "RKA200",
+    "domain": "search_boost",
+    "canonical_term": "책임개시일",
+    "aliases": [
+      "책임개시일",
+      "책임개시일 관련 표현",
+      "책임개시일 쟁점",
+      "책임개시일 보험금",
+      "책임개시일 부지급",
+      "책임개시일 분쟁"
+    ],
+    "related_diagnosis_codes": [],
+    "related_issue_types": [
+      "계약전 알릴의무",
+      "실손보험 부지급",
+      "후유장해",
+      "암뇌심장 진단비"
+    ],
+    "related_source_areas": [
+      "medical_knowledge",
+      "legal_statutes",
+      "fss_dispute_cases",
+      "terms_standards"
+    ],
+    "search_boost_keywords": [
+      "검색 보조",
+      "쟁점 분류",
+      "추가자료 확인",
+      "책임개시일",
+      "사람 검토 필요"
+    ],
+    "notes": "공식 용어 사전이 아니라 RAG 검색 recall 보강용 내부 alias다."
+  }
+]

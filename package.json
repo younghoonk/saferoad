@@ -9,7 +9,9 @@
     "web": "expo start --web",
     "rag:import": "node scripts/importRagData.js",
     "rag:check": "node scripts/checkRagData.js",
-    "rag:eval:check": "node scripts/checkRagEvalDataset.js"
+    "rag:eval:check": "node scripts/checkRagEvalDataset.js",
+    "rag:enrich:import": "node scripts/importRagEnrichment.js",
+    "rag:enrich:check": "node scripts/checkRagEnrichment.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
