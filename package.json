@@ -11,7 +11,9 @@
     "rag:check": "node scripts/checkRagData.js",
     "rag:eval:check": "node scripts/checkRagEvalDataset.js",
     "rag:enrich:import": "node scripts/importRagEnrichment.js",
-    "rag:enrich:check": "node scripts/checkRagEnrichment.js"
+    "rag:enrich:check": "node scripts/checkRagEnrichment.js",
+    "rag:medical:import": "node scripts/importMedicalIssueCodes.js",
+    "rag:medical:check": "node scripts/checkMedicalIssueCodes.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
