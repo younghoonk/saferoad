@@ -1,0 +1,527 @@
+[
+  {
+    "target_id": "FSS_LATEST_001",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:35.324Z"
+  },
+  {
+    "target_id": "FSS_LATEST_002",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:35.877Z"
+  },
+  {
+    "target_id": "FSS_LATEST_003",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:36.438Z"
+  },
+  {
+    "target_id": "FSS_LATEST_004",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:36.997Z"
+  },
+  {
+    "target_id": "FSS_LATEST_005",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:37.588Z"
+  },
+  {
+    "target_id": "FSS_LATEST_006",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:38.347Z"
+  },
+  {
+    "target_id": "FSS_LATEST_007",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:38.900Z"
+  },
+  {
+    "target_id": "FSS_LATEST_008",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:39.798Z"
+  },
+  {
+    "target_id": "FSS_LATEST_009",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:41.747Z"
+  },
+  {
+    "target_id": "FSS_LATEST_010",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:42.528Z"
+  },
+  {
+    "target_id": "FSS_LATEST_011",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:43.298Z"
+  },
+  {
+    "target_id": "FSS_LATEST_012",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:44.118Z"
+  },
+  {
+    "target_id": "FSS_LATEST_013",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:44.876Z"
+  },
+  {
+    "target_id": "FSS_LATEST_014",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:45.617Z"
+  },
+  {
+    "target_id": "FSS_LATEST_015",
+    "source_url": "https://www.insclaim.co.kr/34?np=1",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:46.167Z"
+  },
+  {
+    "target_id": "FSS_LATEST_016",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:46.686Z"
+  },
+  {
+    "target_id": "FSS_LATEST_017",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:47.216Z"
+  },
+  {
+    "target_id": "FSS_LATEST_018",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:47.736Z"
+  },
+  {
+    "target_id": "FSS_LATEST_019",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:48.316Z"
+  },
+  {
+    "target_id": "FSS_LATEST_020",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:48.846Z"
+  },
+  {
+    "target_id": "FSS_LATEST_021",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:49.386Z"
+  },
+  {
+    "target_id": "FSS_LATEST_022",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:49.966Z"
+  },
+  {
+    "target_id": "FSS_LATEST_023",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:50.497Z"
+  },
+  {
+    "target_id": "FSS_LATEST_024",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:51.137Z"
+  },
+  {
+    "target_id": "FSS_LATEST_025",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:51.686Z"
+  },
+  {
+    "target_id": "FSS_LATEST_026",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:42:52.207Z"
+  },
+  {
+    "target_id": "FSS_LATEST_027",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:52.726Z"
+  },
+  {
+    "target_id": "FSS_LATEST_028",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:53.236Z"
+  },
+  {
+    "target_id": "FSS_LATEST_029",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:54.156Z"
+  },
+  {
+    "target_id": "FSS_LATEST_030",
+    "source_url": "https://www.insclaim.co.kr/34?np=2",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:54.697Z"
+  },
+  {
+    "target_id": "FSS_LATEST_031",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:55.226Z"
+  },
+  {
+    "target_id": "FSS_LATEST_032",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:55.747Z"
+  },
+  {
+    "target_id": "FSS_LATEST_033",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:56.276Z"
+  },
+  {
+    "target_id": "FSS_LATEST_034",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:56.836Z"
+  },
+  {
+    "target_id": "FSS_LATEST_035",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:57.386Z"
+  },
+  {
+    "target_id": "FSS_LATEST_036",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:57.916Z"
+  },
+  {
+    "target_id": "FSS_LATEST_037",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:58.466Z"
+  },
+  {
+    "target_id": "FSS_LATEST_038",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:59.016Z"
+  },
+  {
+    "target_id": "FSS_LATEST_039",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:42:59.526Z"
+  },
+  {
+    "target_id": "FSS_LATEST_040",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:00.106Z"
+  },
+  {
+    "target_id": "FSS_LATEST_041",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:00.646Z"
+  },
+  {
+    "target_id": "FSS_LATEST_042",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:01.186Z"
+  },
+  {
+    "target_id": "FSS_LATEST_043",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:01.727Z"
+  },
+  {
+    "target_id": "FSS_LATEST_044",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:02.246Z"
+  },
+  {
+    "target_id": "FSS_LATEST_045",
+    "source_url": "https://www.insclaim.co.kr/34?np=3",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:02.777Z"
+  },
+  {
+    "target_id": "FSS_LATEST_046",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:03.306Z"
+  },
+  {
+    "target_id": "FSS_LATEST_047",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:03.836Z"
+  },
+  {
+    "target_id": "FSS_LATEST_048",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:04.446Z"
+  },
+  {
+    "target_id": "FSS_LATEST_049",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:04.996Z"
+  },
+  {
+    "target_id": "FSS_LATEST_050",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:05.566Z"
+  },
+  {
+    "target_id": "FSS_LATEST_051",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:06.116Z"
+  },
+  {
+    "target_id": "FSS_LATEST_052",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:06.676Z"
+  },
+  {
+    "target_id": "FSS_LATEST_053",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:07.227Z"
+  },
+  {
+    "target_id": "FSS_LATEST_054",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:07.767Z"
+  },
+  {
+    "target_id": "FSS_LATEST_055",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:08.318Z"
+  },
+  {
+    "target_id": "FSS_LATEST_056",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:08.856Z"
+  },
+  {
+    "target_id": "FSS_LATEST_057",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:09.417Z"
+  },
+  {
+    "target_id": "FSS_LATEST_058",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:10.116Z"
+  },
+  {
+    "target_id": "FSS_LATEST_059",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:10.666Z"
+  },
+  {
+    "target_id": "FSS_LATEST_060",
+    "source_url": "https://www.insclaim.co.kr/34?np=4",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:11.206Z"
+  },
+  {
+    "target_id": "FSS_LATEST_061",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:11.747Z"
+  },
+  {
+    "target_id": "FSS_LATEST_062",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:12.277Z"
+  },
+  {
+    "target_id": "FSS_LATEST_063",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:12.808Z"
+  },
+  {
+    "target_id": "FSS_LATEST_064",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:13.346Z"
+  },
+  {
+    "target_id": "FSS_LATEST_065",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:13.877Z"
+  },
+  {
+    "target_id": "FSS_LATEST_066",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:14.407Z"
+  },
+  {
+    "target_id": "FSS_LATEST_067",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:14.936Z"
+  },
+  {
+    "target_id": "FSS_LATEST_068",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:15.466Z"
+  },
+  {
+    "target_id": "FSS_LATEST_069",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:16.337Z"
+  },
+  {
+    "target_id": "FSS_LATEST_070",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:16.868Z"
+  },
+  {
+    "target_id": "FSS_LATEST_071",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:17.416Z"
+  },
+  {
+    "target_id": "FSS_LATEST_072",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:17.967Z"
+  },
+  {
+    "target_id": "FSS_LATEST_073",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:18.498Z"
+  },
+  {
+    "target_id": "FSS_LATEST_074",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_not_detected",
+    "message": "Fetched page did not expose verifiable FSS full text for this target",
+    "fetched_at": "2026-05-04T15:43:19.027Z"
+  },
+  {
+    "target_id": "FSS_LATEST_075",
+    "source_url": "https://www.insclaim.co.kr/34?np=5",
+    "status": "full_text_extracted",
+    "message": "Full text extracted from source_url",
+    "fetched_at": "2026-05-04T15:43:19.637Z"
+  }
+]

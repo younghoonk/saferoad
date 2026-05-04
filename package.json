@@ -13,7 +13,10 @@
     "rag:enrich:import": "node scripts/importRagEnrichment.js",
     "rag:enrich:check": "node scripts/checkRagEnrichment.js",
     "rag:medical:import": "node scripts/importMedicalIssueCodes.js",
-    "rag:medical:check": "node scripts/checkMedicalIssueCodes.js"
+    "rag:medical:check": "node scripts/checkMedicalIssueCodes.js",
+    "rag:fss:fetch": "node scripts/fetchFssLatestCases.js",
+    "rag:fss:import": "node scripts/importFssLatestCases.js",
+    "rag:fss:check": "node scripts/checkFssLatestCases.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
