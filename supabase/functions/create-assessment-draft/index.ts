@@ -911,10 +911,16 @@ function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: R
     if (/2009다103349|2009다103356/.test(ground)) {
       return `${ground}은 갑상선 결절 관련 고지의무 판단에서 피보험자의 질병 인식 가능성 및 중요한 사항성 판단을 신중히 보아야 한다는 점에서 본 건의 핵심 참고 판례가 된다.`;
     }
+    if (/2023다274056/.test(ground)) {
+      return `${ground}은 갑상선암 관련 약관상 분류기준 및 설명의무 검토 시 참고할 수 있는 보조 판례이다. 다만 본 건의 주된 고지의무 판단 근거는 아니므로 약관 설명의무와 암 분류기준 쟁점에 한정하여 검토한다.`;
+    }
     if (/판결|판례/.test(ground)) {
       return `${ground}은(는) retrievedReferences에 확인된 범위에서만 검토 근거로 삼고, 사건번호ㆍ법원ㆍ선고일자 등 메타데이터가 부족한 경우 관련 판례 추가 확인이 필요하다.`;
     }
     if (/금융감독원|분쟁조정례/.test(ground)) {
+      if (profile === 'thyroid_disclosure_cancer') {
+        return `${ground}은 갑상선 결절, 건강검진, 추적관찰 또는 정밀검사 권유가 고지의무 판단에 어떤 의미를 갖는지 검토할 때 참고할 수 있다. 다만 구체적 결론은 원문 사실관계와 본 건의 검사ㆍ설명ㆍ추적관찰 경과가 유사한지 확인해야 한다.`;
+      }
       return `${ground}은(는) 고지의무 또는 계약해지 쟁점의 분쟁 처리 방향을 검토할 때 참고할 수 있으나, 본 건의 진료 횟수와 치료 정도가 실제로 유사한지는 원문 확인이 필요하다.`;
     }
     if (/약관|실손|표준/.test(ground)) {
@@ -1019,7 +1025,7 @@ function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: Return
     '다만 초음파상 악성 의심 소견, 미세침흡인검사 권유, 조직검사 권유, 갑상선 양성신생물 진단, 반복 추적검사 지시가 확인된다면 보험회사 주장이 강화될 수 있다. 이 부분은 고객에게 불리한 사정이 될 수 있으므로 건강검진 결과지, 갑상선 초음파 판독지, 검사 권유 기록, 외래기록을 추가로 확보해야 한다.',
     '보험회사가 해당 갑상선 결절 소견을 알았다면 인수거절, 부담보, 할증 또는 조건부 인수로 처리했을 것이라고 주장하는 경우에도, 그 주장은 객관적 인수기준으로 뒷받침되어야 한다. 보험회사가 실제 인수심사 기준과 유사 사례의 인수처리 기준을 제시하지 못한다면 계약해지 판단의 전제는 재검토될 필요가 있다.',
     '암진단비 부지급까지 문제되는 경우에는 상법 제655조의 취지상 고지의무 위반 여부와 별도로, 미고지된 갑상선 결절 소견과 이후 갑상선암 진단 사이의 인과관계도 검토되어야 한다. 결절의 위치, 크기 변화, 검사 경과, 병리결과, 진단확정 시점 및 가입 당시 암보험 약관상 암진단비ㆍ갑상선암ㆍ진단확정 조항을 함께 확인해야 한다.',
-    '종합하면, 현 단계에서 암진단비 지급을 확정할 수는 없으나 고객 측 주장은 상당한 검토 가치가 있다. 갑상선 결절 소견의 성격, 고객의 인식 가능성, 보험회사의 객관적 인수기준, 갑상선암 진단과의 인과관계가 충분히 검토되지 않았다면 보험회사의 계약해지 및 암진단비 부지급 처분은 재검토가 필요하다는 의견이다.',
+    '종합하면, 단순 갑상선 결절 소견만으로 계약전 알릴의무 위반 및 암진단비 부지급을 단정하기는 어렵다. 특히 건강검진상 단순 추적관찰 수준이고 치료, 투약, 수술, 입원, 미세침흡인검사 또는 조직검사 등 정밀검사 권유가 없었다면 고객에게 고의 또는 중대한 과실이 있었다고 보기 어렵다는 주장이 가능하다. 보험회사는 인수거절, 부담보, 할증 기준과 갑상선암 진단 사이의 인과관계를 구체적으로 제시할 필요가 있으므로, 보험회사의 계약해지 및 암진단비 부지급 처분은 재검토가 필요하다는 의견으로 정리한다.',
   ];
   const opinionText = opinion.join('\n\n');
 
@@ -1092,6 +1098,26 @@ function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: Retu
     requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
     simpleClientSummary: clean(result.simpleClientSummary),
     disclaimer: clean(result.disclaimer),
+  };
+}
+
+function addThyroidFssFollowUpCheck(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
+  if (caseProfile(input) !== 'thyroid_disclosure_cancer') return result;
+  const hasConfirmedFss = (ragResult.officialReferences || []).some((ref) => {
+    const text = [ref.title, ref.summary, ref.case_number, ref.court_or_agency].filter(Boolean).join(' ');
+    return ref.source_area === 'fss_dispute_cases'
+      && /갑상선|결절|갑상선암|C73|E04|D34/i.test(text)
+      && !/추가\s*확인\s*필요|원문\s*확인\s*필요/i.test(text);
+  });
+  if (hasConfirmedFss || /갑상선 결절 고지의무 관련 금융감독원 분쟁조정례 추가 확인 필요/.test(result.requiredAdditionalChecks)) {
+    return result;
+  }
+  return {
+    ...result,
+    requiredAdditionalChecks: [
+      result.requiredAdditionalChecks,
+      '갑상선 결절 고지의무 관련 금융감독원 분쟁조정례 추가 확인 필요. 조정번호, 결정일자, 결론은 원문 확인 전에는 특정하지 않는다.',
+    ].filter(Boolean).join('\n\n'),
   };
 }
 
@@ -1196,6 +1222,8 @@ function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]
     if (/상법/.test(text) && /제\s*655\s*조|655조/i.test(text)) return 'legal_statutes:상법:제655조';
   }
   if (ref.source_area === 'precedents' && /2009다103349|2009다103356/.test(text)) return 'precedents:2009다103349,103356';
+  if (ref.source_area === 'precedents' && /2023다274056/.test(text)) return 'precedents:2023다274056';
+  if (ref.source_area === 'fss_dispute_cases' && /갑상선|결절|갑상선암/.test(text) && /고지의무|알릴의무|미고지|추적관찰|미세침흡인|정밀검사/.test(text)) return 'fss:thyroid-disclosure';
   return `${ref.source_area}:${cleanPublicText(ref.title)}:${cleanPublicText(ref.source_url)}`;
 }
 
@@ -1230,6 +1258,21 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       if (/M47\.26|요추증|허리통증|정형외과|1회\s*통원|실손보험\s*약관|도수치료|백내장|중심정맥관|무릎|후유장해|체외충격파|회전근개|자동차|교통사고/i.test(text)) return false;
       if (ref.source_area === 'terms_standards' && /실손|실손보험|실손의료/i.test(text)) return false;
       if (ref.source_area === 'terms_standards' && !/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
+      if (ref.source_area === 'fss_dispute_cases') {
+        const confirmedFss = /official_fss_full_text|조정|분쟁조정|결정|원문/i.test(text)
+          && !/추가\s*확인\s*필요|원문\s*확인\s*필요/i.test(text);
+        if (!confirmedFss) return false;
+      }
+      if (ref.source_area === 'precedents') {
+        const corePrecedent = /2009다103349|2009다103356|2023다274056/.test(text);
+        const directlyRelated = /갑상선|결절|갑상선암|고지의무|중요한\s*사항|중대한\s*과실|암진단비|설명의무/i.test(text);
+        const weakSummary = cleanPublicText(ref.summary).length < 40 && !/갑상선|고지의무|암진단비|설명의무/i.test(text);
+        if (!corePrecedent && (!directlyRelated || weakSummary)) return false;
+        if (/2023다274056/.test(text)) {
+          ref.title = '대법원 2025.5.15. 선고 2023다274056 판결 - 갑상선암 약관 설명의무 보조 판례';
+          ref.summary = '갑상선암 관련 약관상 분류기준 및 설명의무 검토 시 참고할 수 있는 보조 판례이다. 본 건의 주된 고지의무 판단 근거가 아니라 약관 설명의무와 암 분류기준 쟁점에 한정하여 검토한다.';
+        }
+      }
     }
     const key = officialReferenceKey(ref);
     if (seenOfficial.has(key)) return false;
@@ -1335,18 +1378,21 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
       0,
     );
-    const reviewed = removeProfileSpecificLeakage(
-      neutralizeUnverifiedMedicalSourcePhrases(
-        normalizeDisclosureOpinion(
-          ensureSubstantialOpinion(
-            adjustDisclosureDamageScope(
-              enforceCustomerSideStance(
-                ensureOfficialGroundsInBody(
-                  removeReferenceAbsenceContradiction(
-                    preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = addThyroidFssFollowUpCheck(
+      removeProfileSpecificLeakage(
+        neutralizeUnverifiedMedicalSourcePhrases(
+          normalizeDisclosureOpinion(
+            ensureSubstantialOpinion(
+              adjustDisclosureDamageScope(
+                enforceCustomerSideStance(
+                  ensureOfficialGroundsInBody(
+                    removeReferenceAbsenceContradiction(
+                      preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                      ragResult,
+                    ),
                     ragResult,
+                    input,
                   ),
-                  ragResult,
                   input,
                 ),
                 input,
@@ -1360,6 +1406,7 @@ Deno.serve(async (req: Request) => {
         input,
       ),
       input,
+      ragResult,
     );
 
     return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
