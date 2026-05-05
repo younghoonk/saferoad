@@ -329,6 +329,10 @@ function disclosureQuery(query: string) {
   return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|미고지|중요한\s*사항|중대한\s*과실|계약\s*해지|알릴의무|고지의무/i.test(query);
 }
 
+function cancerInsuranceQuery(query: string) {
+  return /암보험|암진단비|갑상선암|갑상선\s*결절|C73|E04|D34/i.test(query);
+}
+
 function disclosureRelevantText(row: EnrichedRow) {
   return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|알릴\s*의무|미고지|계약\s*해지|해지|청약서|질문\s*사항|중요한\s*사항|중대한\s*과실|보험사고.{0,12}인과관계|인과관계|상법\s*제?\s*651|제\s*651\s*조|제\s*651\s*조의\s*2|제\s*655\s*조/i.test(rowText(row));
 }
@@ -403,6 +407,11 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (row.source_area === 'terms_standards' && cancerInsuranceQuery(query)) {
+    const text = rowText(row);
+    if (/실손|실손보험|실손의료|도수치료|백내장|체외충격파/i.test(text)) return false;
+    if (!/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
+  }
   if (disclosureQuery(query)) {
     if (row.source_area === 'legal_statutes') return preferredDisclosureStatute(row);
     if (postContractNoticeStatute(row)) return false;

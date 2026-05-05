@@ -457,6 +457,30 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
+  const profile = caseProfile(input);
+  const profileRules = profile === 'm47_disclosure' ? `
+[M47.26 customer-side argument when applicable]
+- For M47.26 one-time outpatient non-disclosure, the customer-side position is that the medical record exists, but the record alone does not prove the legal requirements for termination.
+- Explain that Commercial Act Article 651 requires materiality and intentional or grossly negligent non-disclosure.
+- If the facts are one simple back-pain outpatient visit with no admission, surgery, advanced imaging, repeated treatment, or long-term medication, state that materiality and gross negligence can be disputed.
+- Distinguish hospital coding of M47.26 from the insured's awareness of the code's medical meaning or underwriting importance.
+- State that the insurer should present objective underwriting standards showing decline, exclusion, loading, or conditional acceptance if the visit had been disclosed.
+- For claim denial after termination, state that causal relationship between the non-disclosed fact and the insured event must be separately reviewed under Commercial Act Article 655 and related precedent principles.
+- The conclusion should be: the customer's position has meaningful review value, and the insurer's termination/denial decision requires reconsideration. Do not state payment is certain.
+` : profile === 'thyroid_disclosure_cancer' ? `
+[Thyroid nodule / thyroid cancer disclosure-duty argument]
+- Do not mention M47.26, back pain, orthopedic visit, one outpatient visit, or spine-related facts unless they are explicitly in the input.
+- For thyroid nodule non-disclosure followed by thyroid cancer diagnosis, distinguish the existence of a thyroid nodule finding from satisfaction of contract termination requirements.
+- Analyze materiality and intentional or grossly negligent non-disclosure under Commercial Act Article 651.
+- If the facts show only health-checkup nodule or follow-up recommendation without treatment, medication, surgery, admission, cancer-suspicion explanation, FNA recommendation, or biopsy recommendation, explain that the customer's awareness of an important disease may be disputable.
+- Reflect the Supreme Court 2011.4.14. 2009다103349, 103356 precedent only as a confirmed retrieved/reference ground, and use it for thyroid nodule materiality and disease-awareness reasoning.
+- State unfavorable points separately if ultrasound showed malignancy suspicion, FNA/biopsy was recommended, benign neoplasm was diagnosed, or repeated follow-up was ordered.
+- For cancer diagnosis benefit denial, separately review causal relationship between the non-disclosed thyroid nodule and later thyroid cancer diagnosis under Commercial Act Article 655.
+- Use cancer insurance policy terms only when directly related to cancer diagnosis benefit, thyroid cancer, diagnosis confirmation, similar cancer, low-amount cancer, or carcinoma in situ. Do not use indemnity medical insurance terms as official grounds for cancer insurance.
+` : `
+[General disclosure-duty argument]
+- For pre-contract disclosure duty disputes, analyze materiality, intentional or grossly negligent non-disclosure, written questions, objective underwriting standards, and causal relationship without importing disease-specific facts that are not in the input.
+`;
   return `당신은 보험 손해사정 실무 문서 작성 보조자입니다.
 아래 사건 정보, 면책공문 분석 요약, 고객 의학/손해자료 요약, 참고자료 범위 안에서만 손해사정사가 검토할 "사정서 초안"을 작성하세요.
 
@@ -552,23 +576,7 @@ ${formatOfficialGroundsForBody(ragResult)}
 - The adjusterOpinionDraft field must contain at least 5 substantial paragraphs. Prefer 5 to 8 paragraphs for ordinary cases.
 - The requiredAdditionalChecks field must include both unfavorable points and concrete documents to request.
 
-[M47.26 customer-side argument when applicable]
-- For M47.26 one-time outpatient non-disclosure, the customer-side position is that the medical record exists, but the record alone does not prove the legal requirements for termination.
-- Explain that Commercial Act Article 651 requires materiality and intentional or grossly negligent non-disclosure.
-- If the facts are one simple back-pain outpatient visit with no admission, surgery, advanced imaging, repeated treatment, or long-term medication, state that materiality and gross negligence can be disputed.
-- Distinguish hospital coding of M47.26 from the insured's awareness of the code's medical meaning or underwriting importance.
-- State that the insurer should present objective underwriting standards showing decline, exclusion, loading, or conditional acceptance if the visit had been disclosed.
-- For claim denial after termination, state that causal relationship between the non-disclosed fact and the insured event must be separately reviewed under Commercial Act Article 655 and related precedent principles.
-- The conclusion should be: the customer's position has meaningful review value, and the insurer's termination/denial decision requires reconsideration. Do not state payment is certain.
-
-[Mandatory disclosure-duty logic when applicable]
-- In an M47.26 single outpatient non-disclosure case, acknowledge that the medical visit record exists, but explain that its existence alone does not automatically satisfy contract termination requirements.
-- For pre-contract disclosure duty termination, analyze materiality and intentional or grossly negligent non-disclosure under Commercial Act Article 651 and Article 651-2 where relevant.
-- If the facts show only one outpatient visit for simple back stiffness and no admission, surgery, advanced imaging, long-term medication, or repeated treatment, state that materiality and intentional/gross negligence can be disputed.
-- Distinguish the hospital system's M47.26 diagnosis-code entry from the insured's awareness that it was a serious disease or an important matter for insurance underwriting.
-- State that the insurer should identify objective underwriting criteria showing it would have declined, excluded, loaded, or conditionally accepted the contract had it known the visit history.
-- For refusal of insurance benefits after termination, separately review causal relationship between the non-disclosed fact and the insured event under Commercial Act Article 655.
-- Do not conclude "termination cancellation is possible" as a final result. Use a restrained conclusion such as "계약해지 처분은 재검토가 필요하다."
+${profileRules}
 
 응답은 아래 JSON 형식으로만 반환하세요. JSON 외 텍스트는 포함하지 마세요.
 {
@@ -586,7 +594,13 @@ ${formatOfficialGroundsForBody(ragResult)}
 }`;
 }
 
-function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult) {
+function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
+  const profile = caseProfile(input);
+  const profileReviewRules = profile === 'm47_disclosure'
+    ? '- For an M47.26 single outpatient non-disclosure case, keep the logic that one outpatient record and a diagnosis-code entry alone do not automatically establish materiality or intentional/grossly negligent non-disclosure.'
+    : profile === 'thyroid_disclosure_cancer'
+      ? '- For a thyroid nodule / thyroid cancer disclosure case, remove M47.26, back pain, orthopedic, one-outpatient, and spine-specific reasoning. Keep the reasoning focused on thyroid nodule, health checkup, ultrasound, FNA/biopsy recommendation, cancer diagnosis benefit, objective underwriting standards, and thyroid cancer causal relationship.'
+      : '- Do not import disease-specific reasoning that is not supported by the input facts.';
   return `아래 사정서 초안 JSON을 검증하고 보정하세요.
 
 [검증 기준]
@@ -612,7 +626,7 @@ ${formatOfficialGroundsForBody(ragResult)}
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
 - Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
 - Policy/terms references must be removed if they are not directly related to the issue.
-- Preserve diagnosis codes exactly as provided. If a generated title or body changed M47.26 to another code, restore M47.26.
+- Preserve diagnosis codes exactly as provided. If a generated title or body changed an input diagnosis code, restore the input diagnosis code.
 - Remove accident date, accident location, accident mechanism, treatment date, or insurer facts that were not in the input, uploaded summaries, or RAG references.
 - If RAG search references exist, remove any statement saying reference materials were not provided.
 - In pre-contract disclosure duty cases, keep Commercial Act Articles 651, 651-2, and 655 as the priority statutory grounds. Remove Articles 652 and 653 unless the case is about post-contract notice duty or risk change.
@@ -627,7 +641,7 @@ ${formatOfficialGroundsForBody(ragResult)}
 - The legalAndReferenceBasis, damageAssessment, and adjusterOpinionDraft fields must contain actual official ground names from "Official grounds that must remain in the body" when official RAG grounds exist.
 - Do not invent precedent numbers, adjustment numbers, policy article numbers, court names, or decision dates. If metadata is missing, write "관련 판례 추가 확인 필요" or "가입 당시 원약관 확인 필요."
 - The requiredAdditionalChecks field must separately include unfavorable points and concrete documents to request.
-- For an M47.26 single outpatient non-disclosure case, keep the logic that one outpatient record and a diagnosis-code entry alone do not automatically establish materiality or intentional/grossly negligent non-disclosure.
+${profileReviewRules}
 - Keep the final stance customer-side: the insurer's denial/exemption/termination decision requires reconsideration.
 - Do not convert the draft into a neutral memo. It must be a customer-side reconsideration request draft with balanced unfavorable-point disclosure.
 - Remove prohibited expressions if present: "보험금 지급 확정", "반드시 받을 수 있음", "보험사의 처분은 무조건 위법", "승소 가능성".
@@ -727,7 +741,7 @@ function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: Retur
     customerStatement: input.customerStatement,
     adjusterMemo: input.adjusterMemo,
     sourceAnalysis: input.sourceAnalysis,
-  })).filter((code) => code.includes('.'));
+  }));
   if (!inputCodes.length) return result;
 
   const preserve = (value: string) => {
@@ -739,6 +753,11 @@ function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: Retur
       if (letter && numeric && decimal) {
         text = text.replace(new RegExp(`\\b${letter}\\d{2}\\.${decimal}\\b`, 'gi'), code);
         text = text.replace(new RegExp(`\\b${letter}${numeric}\\.\\d{1,3}\\b`, 'gi'), code);
+      } else {
+        const simple = code.match(/^([A-Z])(\d{2})$/i)?.slice(1);
+        if (simple) {
+          text = text.replace(new RegExp(`\\b${simple[0]}\\d{2}\\b`, 'gi'), code);
+        }
       }
     }
     return text;
@@ -807,24 +826,63 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'general_disclosure' | 'general';
+
+function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
+  const diagnosisText = [
+    input.diagnosisText,
+    input.diagnosisCode,
+    input.diagnosisName,
+    input.sourceAnalysis?.diagnosisSummary,
+  ].filter(Boolean).join(' ');
+  const allText = [
+    diagnosisText,
+    input.caseTitle,
+    input.insuranceType,
+    input.coverageType,
+    input.damageDetails,
+    input.insurerPosition,
+    input.customerStatement,
+    input.adjusterMemo,
+    input.sourceAnalysis?.summary,
+    input.sourceAnalysis?.denialReason,
+    ...(input.sourceAnalysis?.keyIssues || []),
+  ].filter(Boolean).join(' ');
+  const disclosure = isDisclosureDutyCase(input);
+  if (disclosure && /M47\.26|요추증|신경뿌리병증|허리통증|요통/i.test(diagnosisText)) return 'm47_disclosure';
+  if (/C73|갑상선암|갑상선\s*결절|thyroid|E04|D34/i.test(allText)) return 'thyroid_disclosure_cancer';
+  if (disclosure) return 'general_disclosure';
+  return 'general';
+}
+
 function ensureSubstantialOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>) {
   if (paragraphCount(result.adjusterOpinionDraft) >= 5 || !isDisclosureDutyCase(input)) return result;
-  const supplemental = [
+  const profile = caseProfile(input);
+  const supplemental = profile === 'm47_disclosure' ? [
     '진료기록 또는 병원 전산상 질병코드가 존재한다는 사정은 우선 사실관계로 인정할 수 있다. 다만 그 사실만으로 곧바로 계약전 알릴의무 위반에 따른 계약해지 요건이 충족된다고 볼 수는 없으며, 해당 진료가 청약서 질문사항상 중요한 사항에 해당하는지와 피보험자에게 고의 또는 중대한 과실이 있었는지를 별도로 검토해야 한다.',
     '현재 입력된 사실관계가 단순 허리 불편감 또는 1회 통원에 그치고, 입원, 수술, 정밀검사, 장기투약, 반복치료가 확인되지 않는 구조라면 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다. 특히 M47.26이라는 질병코드가 병원 전산에 기재되었다는 점과 피보험자가 이를 보험계약상 중요한 질환 또는 인수심사에 중대한 사항으로 인식했다는 점은 구분하여 보아야 한다.',
     '보험회사가 계약해지를 유지하려면 해당 진료이력을 알았을 경우 인수거절, 부담보, 할증 또는 조건부 인수 등으로 처리했을 객관적 인수기준을 제시할 필요가 있다. 단순히 진료기록이 존재한다는 사정만으로 중요한 사항성과 고의ㆍ중과실을 모두 추정하는 방식은 재검토가 필요하다.',
     '보험금 부지급까지 문제되는 경우에는 고지의무 위반 여부와 별도로, 미고지 사실과 보험사고 또는 청구 손해 사이의 인과관계도 검토되어야 한다. 따라서 계약해지와 보험금 부지급은 같은 사실관계에서 출발하더라도 각각의 법적 요건과 입증관계를 분리하여 판단해야 한다.',
     '위 사정들을 종합하면, 현 단계의 손해사정 의견은 계약해지 취소를 단정하기보다 계약해지 처분의 요건 충족 여부에 대한 재검토가 필요하다는 방향으로 정리하는 것이 타당하다. 추가로 청약서 질문사항, 초진기록, 처방전, 검사내역, 의사소견서, 보험회사의 인수기준을 확인하여 중요사항성, 고의ㆍ중대한 과실, 인과관계를 순차적으로 검토할 필요가 있다.',
-  ].join('\n\n');
+  ] : profile === 'thyroid_disclosure_cancer' ? [
+    '보험가입 전 갑상선 결절 소견이 있었다는 사실 자체와 계약전 알릴의무 위반으로 인한 계약해지 요건 충족 여부는 구분되어야 한다. 보험회사가 계약해지 또는 암진단비 부지급을 주장하려면 해당 결절 소견이 청약 당시 중요한 사항에 해당하고, 고객에게 고의 또는 중대한 과실이 있었다는 점을 구체적으로 검토해야 한다.',
+    '건강검진상 단순 결절 또는 추적관찰 권유에 그쳤고, 암 의심 설명, 미세침흡인검사 또는 조직검사 권유, 치료ㆍ투약ㆍ수술ㆍ입원 등이 없었다면 고객이 이를 보험계약상 중요한 병력으로 인식하기 어려웠을 가능성이 있다.',
+    '반대로 초음파상 악성 의심 소견, 미세침흡인검사 권유, 조직검사 권유, 양성신생물 진단, 반복 추적검사 지시가 확인된다면 보험회사 주장이 강화될 수 있으므로 해당 자료를 별도로 확인해야 한다.',
+    '보험회사는 해당 갑상선 결절 소견을 알았다면 인수거절, 부담보, 할증 등 조건으로 인수했을 객관적 인수기준을 제시할 필요가 있다. 암진단비 부지급은 고지의무 위반 여부와 별도로 갑상선암 진단과의 인과관계도 함께 검토해야 한다.',
+  ] : [
+    '계약전 알릴의무 위반 사건에서는 진료 또는 검사 이력의 존재와 계약해지 요건 충족 여부를 구분해야 한다. 청약서 질문사항 해당성, 중요한 사항성, 고의 또는 중대한 과실, 보험사고와의 인과관계를 순차적으로 검토해야 한다.',
+  ];
+  const supplementalText = supplemental.join('\n\n');
   return {
     ...result,
-    adjusterOpinionDraft: [result.adjusterOpinionDraft, supplemental].filter(Boolean).join('\n\n'),
+    adjusterOpinionDraft: [result.adjusterOpinionDraft, supplementalText].filter(Boolean).join('\n\n'),
   };
 }
 
-function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: RagSearchResult): AssessmentDraftResult {
+function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: RagSearchResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const official = ragResult.officialReferences || [];
   if (!official.length) return result;
+  const profile = caseProfile(input);
   const grounds = official.map(referenceDisplayName).filter(Boolean);
   if (!grounds.length) return result;
   const existingText = [
@@ -837,13 +895,21 @@ function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: R
 
   const legalLines = groundsForSection.map((ground) => {
     if (/상법.*제\s*651\s*조의\s*2|제\s*651\s*조의\s*2|651조의2|651-2/.test(ground)) {
+      if (profile === 'thyroid_disclosure_cancer') {
+        return `${ground}는 보험자가 서면으로 질문한 사항을 중요한 사항으로 추정하지만, 건강검진상 갑상선 결절 소견이 청약서 질문사항에 어떻게 해당하는지는 원문 확인이 필요하다는 점에서 의미가 있다.`;
+      }
       return `${ground}는 보험자가 서면으로 질문한 사항을 중요한 사항으로 추정한다는 점에서 의미가 있다. 다만 본 건에서는 1회성 통원 사실이 청약서 질문사항에 명확히 포함되는지와 피보험자의 인식 가능성을 별도로 확인해야 한다.`;
     }
     if (/상법.*제\s*651\s*조|제\s*651\s*조|651조/.test(ground)) {
       return `${ground}는 계약전 알릴의무 위반으로 계약해지가 가능하려면 중요한 사항에 대한 고의 또는 중대한 과실이 필요하다는 점에서 본 건의 핵심 기준이 된다.`;
     }
     if (/상법.*제\s*655\s*조|제\s*655\s*조|655조/.test(ground)) {
-      return `${ground}는 계약해지 후 보험금 부지급이 문제될 때 고지의무 위반 사실과 보험사고 발생 사이의 인과관계를 별도로 검토해야 한다는 점에서 의미가 있다.`;
+      return profile === 'thyroid_disclosure_cancer'
+        ? `${ground}는 고지의무 위반 사실과 갑상선암 진단 사이의 인과관계를 별도로 검토해야 한다는 점에서 의미가 있다.`
+        : `${ground}는 계약해지 후 보험금 부지급이 문제될 때 고지의무 위반 사실과 보험사고 발생 사이의 인과관계를 별도로 검토해야 한다는 점에서 의미가 있다.`;
+    }
+    if (/2009다103349|2009다103356/.test(ground)) {
+      return `${ground}은 갑상선 결절 관련 고지의무 판단에서 피보험자의 질병 인식 가능성 및 중요한 사항성 판단을 신중히 보아야 한다는 점에서 본 건의 핵심 참고 판례가 된다.`;
     }
     if (/판결|판례/.test(ground)) {
       return `${ground}은(는) retrievedReferences에 확인된 범위에서만 검토 근거로 삼고, 사건번호ㆍ법원ㆍ선고일자 등 메타데이터가 부족한 경우 관련 판례 추가 확인이 필요하다.`;
@@ -857,7 +923,9 @@ function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: R
     return `${ground}은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.`;
   }).join('\n');
 
-  const application = '위 근거들을 현 사건에 적용하면, 보험회사의 계약해지 주장은 진료기록의 존재만으로 충분하지 않고 청약서 질문사항 해당성, 중요한 사항성, 피보험자의 인식 가능성, 고의 또는 중대한 과실, 그리고 보험금 부지급과 관련한 인과관계가 함께 확인되어야 한다.';
+  const application = profile === 'thyroid_disclosure_cancer'
+    ? '위 근거들을 현 사건에 적용하면, 보험회사의 계약해지 및 암진단비 부지급 주장은 갑상선 결절 소견의 존재만으로 충분하지 않고 청약서 질문사항 해당성, 중요한 사항성, 고객의 질병 인식 가능성, 고의 또는 중대한 과실, 그리고 갑상선암 진단과의 인과관계가 함께 확인되어야 한다.'
+    : '위 근거들을 현 사건에 적용하면, 보험회사의 계약해지 주장은 진료기록의 존재만으로 충분하지 않고 청약서 질문사항 해당성, 중요한 사항성, 피보험자의 인식 가능성, 고의 또는 중대한 과실, 그리고 보험금 부지급과 관련한 인과관계가 함께 확인되어야 한다.';
   const opinion = '따라서 손해사정 의견은 보험금 지급 또는 계약해지 취소를 단정하기보다, 위 공식근거와 현재 확인된 사실관계에 비추어 계약해지 처분의 요건 충족 여부를 재검토해야 한다는 방향으로 정리한다.';
 
   return {
@@ -921,7 +989,12 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
 
 function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   if (!isDisclosureDutyCase(input)) return result;
-  const scope = '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.';
+  const profile = caseProfile(input);
+  const scope = profile === 'm47_disclosure'
+    ? '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.'
+    : profile === 'thyroid_disclosure_cancer'
+      ? '본 건은 손해액 산정보다는 보험가입 전 갑상선 결절 소견이 계약전 알릴의무상 중요한 사항에 해당하는지, 고객에게 고의 또는 중대한 과실이 있었는지, 그리고 이후 갑상선암 진단과의 관련성이 인정되는지가 핵심이다. 따라서 건강검진 결과지, 갑상선 초음파 판독지, 미세침흡인검사 권유 여부, 조직검사 여부, 가입 당시 암보험 약관 및 청약서 질문사항을 중심으로 검토해야 한다.'
+      : '본 건은 손해액 산정보다는 보험가입 전 확인된 진료ㆍ검사ㆍ병력 사항이 계약전 알릴의무상 중요한 사항에 해당하는지, 고객에게 고의 또는 중대한 과실이 있었는지, 보험사고와의 인과관계가 인정되는지가 핵심이다. 따라서 청약서 질문사항, 진료기록, 검사내역, 보험회사의 객관적 인수기준 및 가입 당시 약관을 중심으로 검토해야 한다.';
   return {
     ...result,
     damageAssessment: scope,
@@ -929,8 +1002,9 @@ function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: Retur
 }
 
 function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
-  if (!isDisclosureDutyCase(input)) return result;
-  const opinion = [
+  const profile = caseProfile(input);
+  if (profile !== 'm47_disclosure' && profile !== 'thyroid_disclosure_cancer') return result;
+  const opinion = profile === 'm47_disclosure' ? [
     '먼저, 보험가입 전 진료기록 또는 병원 전산상 M47.26 질병코드가 존재한다는 점은 사실관계로 인정할 수 있다. 다만 진료기록이 존재한다는 사정과 계약전 알릴의무 위반을 이유로 한 계약해지 요건이 충족되는지는 구분되어야 한다. 보험회사가 계약해지를 주장하려면 단순한 기록 존재를 넘어 그 진료이력이 청약 당시 고지해야 할 중요한 사항에 해당한다는 점을 구체적으로 설명할 필요가 있다.',
     '상법 제651조의 취지에 비추어 보면, 계약전 알릴의무 위반에 따른 계약해지는 중요한 사항성과 고의 또는 중대한 과실이 함께 문제된다. 따라서 본 건에서는 청약서 질문사항이 해당 1회 통원 사실을 명확히 묻고 있었는지, 피보험자가 그 사실을 보험계약상 중요한 사항으로 인식할 수 있었는지, 고지하지 않은 데 고의 또는 중대한 과실이 있었다고 볼 수 있는지를 순차적으로 검토해야 한다.',
     '현재 입력된 사실관계가 단순 허리 뻐근함 또는 허리 통증으로 인한 1회성 통원에 그치고, 입원, 수술, 정밀검사, 반복치료, 장기투약이 확인되지 않는 사안이라면 이는 고객 측에 유리한 사정이다. 이러한 경우 피보험자가 해당 진료를 중대한 질환 또는 보험계약 인수에 영향을 미칠 중요한 병력으로 인식했다고 단정하기 어렵고, 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다.',
@@ -938,11 +1012,20 @@ function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: Return
     '보험회사가 해당 진료이력을 알았다면 계약을 거절하거나 부담보, 할증, 조건부 인수 등으로 처리했을 것이라고 주장하는 경우에도, 그 주장은 객관적 인수기준으로 뒷받침되어야 한다. 따라서 보험회사가 실제 인수심사 기준, 동일 또는 유사한 상병코드에 대한 인수처리 사례, 부담보 또는 할증 적용 기준을 제시하지 못한다면 계약해지 판단의 전제는 재검토될 필요가 있다.',
     '보험금 부지급까지 함께 문제되는 경우에는 상법 제655조의 취지상 고지의무 위반 여부와 별도로, 미고지 사실과 보험사고 또는 청구 손해 사이의 인과관계도 검토되어야 한다. 계약해지 가능성과 보험금 부지급 가능성은 같은 사실관계에서 출발하더라도 법적 검토 지점이 다르므로, 보험회사는 부지급 판단에 대해서도 별도의 인과관계 및 약관상 근거를 제시할 필요가 있다.',
     '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 고객 측 주장은 상당한 검토 가치가 있다. 특히 1회성 통원, 중대한 검사ㆍ치료 부재, 질병코드 기재와 고객 인식의 구분, 보험회사의 객관적 인수기준 제시 필요성, 고지의무 위반과 보험사고 사이의 인과관계 검토 필요성에 비추어 볼 때, 보험회사의 계약해지 및 부지급 처분은 재검토가 필요하다는 의견이다.',
-  ].join('\n\n');
+  ] : [
+    '먼저, 보험가입 전 갑상선 결절 소견이 있었다는 사실 자체와 계약전 알릴의무 위반으로 인한 계약해지 요건이 충족되는지는 구분되어야 한다. 보험회사가 갑상선 결절 미고지를 이유로 계약해지 또는 암진단비 부지급을 주장하려면 해당 소견이 청약 당시 중요한 사항에 해당하고, 고객에게 고의 또는 중대한 과실이 있었다는 점을 구체적으로 검토해야 한다.',
+    '상법 제651조의 취지에 비추어 보면 계약전 알릴의무 위반에 따른 계약해지는 중요한 사항성과 고의 또는 중대한 과실이 함께 문제된다. 건강검진상 단순 결절 또는 추적관찰 권유에 그쳤고 치료, 투약, 수술, 입원, 암 의심 설명, 미세침흡인검사 또는 조직검사 권유가 없었다면 고객이 이를 보험계약상 중요한 병력으로 인식하기 어려웠을 가능성이 있다.',
+    '대법원 2011.4.14. 선고 2009다103349, 103356 판결의 취지상, 갑상선 결절을 알고 있었다는 사정만으로 그것이 고지의무 대상의 중요한 사항임을 알고도 불고지했다고 단정하기는 어렵다. 따라서 본 건에서도 갑상선 결절의 발견 경위, 설명 내용, 추가검사 권유 여부, 고객의 질병 인식 가능성을 구체적으로 나누어 보아야 한다.',
+    '다만 초음파상 악성 의심 소견, 미세침흡인검사 권유, 조직검사 권유, 갑상선 양성신생물 진단, 반복 추적검사 지시가 확인된다면 보험회사 주장이 강화될 수 있다. 이 부분은 고객에게 불리한 사정이 될 수 있으므로 건강검진 결과지, 갑상선 초음파 판독지, 검사 권유 기록, 외래기록을 추가로 확보해야 한다.',
+    '보험회사가 해당 갑상선 결절 소견을 알았다면 인수거절, 부담보, 할증 또는 조건부 인수로 처리했을 것이라고 주장하는 경우에도, 그 주장은 객관적 인수기준으로 뒷받침되어야 한다. 보험회사가 실제 인수심사 기준과 유사 사례의 인수처리 기준을 제시하지 못한다면 계약해지 판단의 전제는 재검토될 필요가 있다.',
+    '암진단비 부지급까지 문제되는 경우에는 상법 제655조의 취지상 고지의무 위반 여부와 별도로, 미고지된 갑상선 결절 소견과 이후 갑상선암 진단 사이의 인과관계도 검토되어야 한다. 결절의 위치, 크기 변화, 검사 경과, 병리결과, 진단확정 시점 및 가입 당시 암보험 약관상 암진단비ㆍ갑상선암ㆍ진단확정 조항을 함께 확인해야 한다.',
+    '종합하면, 현 단계에서 암진단비 지급을 확정할 수는 없으나 고객 측 주장은 상당한 검토 가치가 있다. 갑상선 결절 소견의 성격, 고객의 인식 가능성, 보험회사의 객관적 인수기준, 갑상선암 진단과의 인과관계가 충분히 검토되지 않았다면 보험회사의 계약해지 및 암진단비 부지급 처분은 재검토가 필요하다는 의견이다.',
+  ];
+  const opinionText = opinion.join('\n\n');
 
   return {
     ...result,
-    adjusterOpinionDraft: opinion,
+    adjusterOpinionDraft: opinionText,
   };
 }
 
@@ -987,6 +1070,31 @@ function neutralizeUnverifiedMedicalSourcePhrases(result: AssessmentDraftResult,
   };
 }
 
+function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'thyroid_disclosure_cancer') return result;
+  const m47Leak = /M47\.26|단순\s*허리|허리\s*통증|허리통증|정형외과|1회\s*통원|요추증|신경뿌리병증|입원\/수술\/정밀검사|입원,\s*수술,\s*정밀검사/i;
+  const clean = (value: string) => value
+    .split(/(?<=[.。])\s+|\n+/)
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => sentence && !m47Leak.test(sentence))
+    .join('\n\n')
+    .trim();
+  return {
+    ...result,
+    title: clean(result.title) || result.title.replace(/M47\.26/gi, '').trim(),
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: clean(result.issues),
+    legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+    damageAssessment: clean(result.damageAssessment),
+    insurerPositionReview: clean(result.insurerPositionReview),
+    adjusterOpinionDraft: clean(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+    simpleClientSummary: clean(result.simpleClientSummary),
+    disclaimer: clean(result.disclaimer),
+  };
+}
+
 function inputDiagnosisCodes(input: ReturnType<typeof validateInput>) {
   return extractDiagnosisCodesFromText(JSON.stringify({
     caseTitle: input.caseTitle,
@@ -998,7 +1106,7 @@ function inputDiagnosisCodes(input: ReturnType<typeof validateInput>) {
     customerStatement: input.customerStatement,
     adjusterMemo: input.adjusterMemo,
     sourceAnalysis: input.sourceAnalysis,
-  })).filter((code) => code.includes('.'));
+  }));
 }
 
 function preserveDiagnosisCodesInText(value: string | undefined, codes: string[]) {
@@ -1010,6 +1118,9 @@ function preserveDiagnosisCodesInText(value: string | undefined, codes: string[]
     if (letter && numeric && decimal) {
       text = text.replace(new RegExp(`\\b${letter}\\d{2}\\.${decimal}\\b`, 'gi'), code);
       text = text.replace(new RegExp(`\\b${letter}${numeric}\\.\\d{1,3}\\b`, 'gi'), code);
+    } else {
+      const simple = code.match(/^([A-Z])(\d{2})$/i)?.slice(1);
+      if (simple) text = text.replace(new RegExp(`\\b${simple[0]}\\d{2}\\b`, 'gi'), code);
     }
   }
   return text;
@@ -1056,6 +1167,22 @@ function disclosureStatuteReferences(): RagSearchResult['officialReferences'] {
   ];
 }
 
+function thyroidPrecedentReference(): RagSearchResult['officialReferences'][number] {
+  return {
+    reference_type: 'official',
+    source_area: 'precedents',
+    source_area_label: '판례',
+    title: '대법원 2011.4.14. 선고 2009다103349, 103356 보험금 판결',
+    summary: '갑상선 결절 관련 고지의무 판단에서 결절을 알고 있었다는 사정만으로 중요한 사항임을 알고도 불고지했다고 단정하기 어렵다는 취지로 검토할 수 있는 판례이다.',
+    source_url: 'https://www.law.go.kr',
+    sourceDisplayName: '국가법령정보센터',
+    similarity: 1,
+    case_number: '2009다103349, 103356',
+    court_or_agency: '대법원',
+    decision_date: '2011.4.14.',
+  };
+}
+
 function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]) {
   const text = [
     ref.law_name,
@@ -1068,12 +1195,15 @@ function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]
     if (/상법/.test(text) && /제\s*651\s*조|651조/i.test(text)) return 'legal_statutes:상법:제651조';
     if (/상법/.test(text) && /제\s*655\s*조|655조/i.test(text)) return 'legal_statutes:상법:제655조';
   }
+  if (ref.source_area === 'precedents' && /2009다103349|2009다103356/.test(text)) return 'precedents:2009다103349,103356';
   return `${ref.source_area}:${cleanPublicText(ref.title)}:${cleanPublicText(ref.source_url)}`;
 }
 
 function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): RagSearchResult {
   const codes = inputDiagnosisCodes(input);
-  const disclosureM4726 = isDisclosureDutyCase(input) && codes.includes('M47.26');
+  const profile = caseProfile(input);
+  const disclosureM4726 = profile === 'm47_disclosure';
+  const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
     ...ref,
     title: preserveDiagnosisCodesInText(ref.title, codes),
@@ -1083,10 +1213,24 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   });
 
   const officialBase = isDisclosureDutyCase(input)
-    ? [...disclosureStatuteReferences(), ...ragResult.officialReferences]
+    ? [...disclosureStatuteReferences(), ...(thyroidProfile ? [thyroidPrecedentReference()] : []), ...ragResult.officialReferences]
     : ragResult.officialReferences;
   const seenOfficial = new Set<string>();
   const officialReferences = officialBase.map(normalizeRef).filter((ref) => {
+    const text = [
+      ref.title,
+      ref.summary,
+      ref.law_name,
+      ref.article_title,
+      ref.case_number,
+      ref.diagnosis_code,
+      ref.diagnosis_name,
+    ].filter(Boolean).join(' ');
+    if (thyroidProfile) {
+      if (/M47\.26|요추증|허리통증|정형외과|1회\s*통원|실손보험\s*약관|도수치료|백내장|중심정맥관|무릎|후유장해|체외충격파|회전근개|자동차|교통사고/i.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && /실손|실손보험|실손의료/i.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && !/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
+    }
     const key = officialReferenceKey(ref);
     if (seenOfficial.has(key)) return false;
     seenOfficial.add(key);
@@ -1097,6 +1241,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   if (disclosureM4726) {
     const excluded = /회전근개|어깨|견관절|중심정맥관|암수술|체외충격파|M48\.3|척추협착|무릎|M17|백내장|심장|뇌|입원비|장기\s*재활/i;
     const allowed = /M47\.26|\bM47(?:\.|$)|\bM54(?:\.|$)|요통|허리통증|요추증|신경뿌리병증|고지의무|1회\s*통원|계약해지|DISCLOSURE_M4726_SINGLE_VISIT/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (thyroidProfile) {
+    const excluded = /M47\.26|요추증|허리통증|정형외과|1회\s*통원|실손보험|도수치료|백내장|중심정맥관|무릎|후유장해|체외충격파|회전근개|자동차|교통사고|M48\.3|척추협착|어깨|견관절/i;
+    const allowed = /C73|갑상선암|갑상선\s*결절|E04|갑상선종|D34|갑상선\s*양성신생물|초음파|미세침흡인검사|조직검사|건강검진|암진단비|고지의무|알릴의무/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
@@ -1176,20 +1332,24 @@ Deno.serve(async (req: Request) => {
 
     const reviewedText = await callOpenAI(
       apiKey,
-      buildReviewPrompt(draft, input.retrievedReferences, ragResult),
+      buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
       0,
     );
-    const reviewed = neutralizeUnverifiedMedicalSourcePhrases(
-      normalizeDisclosureOpinion(
-        ensureSubstantialOpinion(
-          adjustDisclosureDamageScope(
-            enforceCustomerSideStance(
-              ensureOfficialGroundsInBody(
-                removeReferenceAbsenceContradiction(
-                  preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = removeProfileSpecificLeakage(
+      neutralizeUnverifiedMedicalSourcePhrases(
+        normalizeDisclosureOpinion(
+          ensureSubstantialOpinion(
+            adjustDisclosureDamageScope(
+              enforceCustomerSideStance(
+                ensureOfficialGroundsInBody(
+                  removeReferenceAbsenceContradiction(
+                    preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                    ragResult,
+                  ),
                   ragResult,
+                  input,
                 ),
-                ragResult,
+                input,
               ),
               input,
             ),
