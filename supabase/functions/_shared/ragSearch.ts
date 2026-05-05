@@ -347,16 +347,80 @@ function postContractNoticeStatute(row: EnrichedRow) {
   return /제\s*652\s*조|제\s*653\s*조|652조|653조|위험\s*변경|계약\s*후\s*알릴\s*의무|통지\s*의무/i.test(rowText(row));
 }
 
+const insurerNames = [
+  '삼성화재',
+  '메리츠화재',
+  '현대해상',
+  'DB손해보험',
+  'KB손해보험',
+  '한화손해보험',
+  '롯데손해보험',
+  '흥국화재',
+  'MG손해보험',
+  '농협손해보험',
+  '메리츠',
+  '삼성',
+  '현대',
+  'DB',
+  'KB',
+];
+
+function normalizedInsurer(value?: string) {
+  const text = publicText(value).replace(/\s+/g, '');
+  if (!text) return '';
+  if (/메리츠/.test(text)) return '메리츠';
+  if (/삼성/.test(text)) return '삼성';
+  if (/현대/.test(text)) return '현대';
+  if (/DB|디비/.test(text)) return 'DB';
+  if (/KB|케이비/.test(text)) return 'KB';
+  if (/한화/.test(text)) return '한화';
+  if (/롯데/.test(text)) return '롯데';
+  if (/흥국/.test(text)) return '흥국';
+  if (/농협|NH/.test(text)) return '농협';
+  return text;
+}
+
+function rowInsurer(row: EnrichedRow) {
+  const text = rowText(row);
+  return normalizedInsurer(insurerNames.find((name) => text.includes(name)));
+}
+
+function isStandardTerms(row: EnrichedRow) {
+  return /표준약관|보험업감독업무시행세칙|금융감독원|손해보험협회|생명보험협회/i.test(rowText(row));
+}
+
+function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
+  if (row.source_area !== 'terms_standards') return false;
+  const expected = normalizedInsurer(context?.insurerName);
+  if (!expected) return false;
+  const found = rowInsurer(row);
+  return Boolean(found && found !== expected && !isStandardTerms(row));
+}
+
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
   if (disclosureQuery(query)) {
-    if (postContractNoticeStatute(row)) return false;
     if (row.source_area === 'legal_statutes') return preferredDisclosureStatute(row);
+    if (postContractNoticeStatute(row)) return false;
     if (['fss_dispute_cases', 'precedents', 'terms_standards'].includes(row.source_area)) {
       return disclosureRelevantText(row) && !irrelevantDisclosureText(row);
     }
   }
   if (row.source_area === 'terms_standards') return isDirectlyRelevantTerms(row, query);
+  return true;
+}
+
+function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCodes: string[]) {
+  if (!isInternalReviewMaterial(row)) return false;
+  const text = rowText(row);
+  if (disclosureQuery(query) && diagnosisCodes.includes('M47.26')) {
+    if (/M17\.5|무릎|슬관절|어깨|회전근개|심장|뇌|암진단|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
+      return false;
+    }
+    return exactCodeMatches(row, ['M47.26']).length > 0
+      || /\bM47(?:\.|$)|척추증|요추증|요통|M54|허리|고지의무|알릴의무|미고지|1회\s*통원|계약해지/i.test(text);
+  }
+  if (diagnosisCodes.length) return exactCodeMatches(row, diagnosisCodes).length > 0 || !hasSimilarButNotExactCode(row, diagnosisCodes);
   return true;
 }
 
@@ -529,6 +593,29 @@ function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): 
   };
 }
 
+async function fetchDisclosureStatuteRows(supabaseUrl: string, serviceRoleKey: string) {
+  const targets = [
+    { key: '651', patterns: ['제651조', '651조'] },
+    { key: '651-2', patterns: ['제651조의2', '651조의2'] },
+    { key: '655', patterns: ['제655조', '655조'] },
+  ];
+  const rows: EnrichedRow[] = [];
+  const select = 'id,source_area,source_type,title,summary,chunk_text,keywords,source_url,metadata,review_status,trust_level';
+  for (const target of targets) {
+    const filters = target.patterns.flatMap((pattern) => [
+      `title.ilike.*${pattern}*`,
+      `summary.ilike.*${pattern}*`,
+      `chunk_text.ilike.*${pattern}*`,
+    ]).join(',');
+    const url = `${supabaseUrl}/rest/v1/rag_master_chunks?select=${select}&source_area=eq.legal_statutes&or=(${encodeURIComponent(filters)})&limit=1`;
+    const response = await fetch(url, { headers: restHeaders(serviceRoleKey) });
+    if (!response.ok) continue;
+    const data = await response.json() as EnrichedRow[];
+    if (data[0]) rows.push({ ...data[0], similarity: 1 });
+  }
+  return rows;
+}
+
 function dedupeReferences(rows: EnrichedRow[]) {
   const seen = new Set<string>();
   return rows.filter((row) => {
@@ -584,18 +671,26 @@ export async function searchRagReferences(params: {
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
+      if (isOtherInsurerTerms(row, params.context)) continue;
       if (directlyRelevantOfficial(row, query) && officialRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         officialRows.push(row);
-      } else if (isInternalReviewMaterial(row) && internalRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
+      } else if (directlyRelevantInternal(row, query, diagnosisCodes) && internalRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         internalRows.push(row);
       }
+    }
+  }
+
+  if (disclosureQuery(query)) {
+    const statuteRows = await fetchDisclosureStatuteRows(params.supabaseUrl, params.serviceRoleKey);
+    for (const row of statuteRows) {
+      if (!officialRows.some((item) => item.id === row.id)) officialRows.unshift(row);
     }
   }
 
   return {
     query,
     officialReferences: dedupeReferences(officialRows).map((row) => toReference(row, 'official')),
-    internalReviewMaterials: dedupeReferences(internalRows).map((row) => toReference(row, 'internal')),
+    internalReviewMaterials: dedupeReferences(internalRows).slice(0, disclosureQuery(query) ? 5 : 12).map((row) => toReference(row, 'internal')),
   };
 }
 
