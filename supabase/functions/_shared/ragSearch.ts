@@ -333,6 +333,19 @@ function cancerInsuranceQuery(query: string) {
   return /암보험|암진단비|갑상선암|갑상선\s*결절|C73|E04|D34/i.test(query);
 }
 
+function manualTherapyQuery(query: string) {
+  return /도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|실손보험|실손의료/i.test(query)
+    && !/고지의무|미고지|계약해지|갑상선|암진단비/i.test(query);
+}
+
+function manualTherapyText(row: EnrichedRow) {
+  return /도수치료|manual\s*therapy|실손보험|실손의료|비급여|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|의료비\s*지급|보상\s*제외|M54|요통|허리통증/i.test(rowText(row));
+}
+
+function irrelevantManualTherapyText(row: EnrichedRow) {
+  return /계약전\s*알릴의무|고지의무|미고지|계약해지|청약서|인수거절|부담보|할증|M47\.26|M54\.26\s*1회\s*통원|자동차|손해배상|후유장해|암진단비|백내장|갑상선암|입원비|이륜차|요양불승인|산재/i.test(rowText(row));
+}
+
 function disclosureRelevantText(row: EnrichedRow) {
   return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|알릴\s*의무|미고지|계약\s*해지|해지|청약서|질문\s*사항|중요한\s*사항|중대한\s*과실|보험사고.{0,12}인과관계|인과관계|상법\s*제?\s*651|제\s*651\s*조|제\s*651\s*조의\s*2|제\s*655\s*조/i.test(rowText(row));
 }
@@ -417,6 +430,13 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (manualTherapyQuery(query)) {
+    if (irrelevantManualTherapyText(row)) return false;
+    if (row.source_area === 'legal_statutes') return false;
+    if (row.source_area === 'fss_dispute_cases') return manualTherapyText(row);
+    if (row.source_area === 'precedents') return manualTherapyText(row);
+    if (row.source_area === 'terms_standards') return manualTherapyText(row);
+  }
   if (cancerInsuranceQuery(query)) {
     if (row.source_area === 'fss_dispute_cases') return thyroidFssText(row) && !irrelevantDisclosureText(row);
     if (row.source_area === 'precedents') {
@@ -447,6 +467,9 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
 function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCodes: string[]) {
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
+  if (manualTherapyQuery(query)) {
+    return manualTherapyText(row) && !irrelevantManualTherapyText(row);
+  }
   if (disclosureQuery(query) && diagnosisCodes.includes('M47.26')) {
     if (/M17(?:\.\d+)?|M75(?:\.\d+)?|M48\.3|무릎|슬관절|어깨|어깨병변|회전근개|견관절|중심정맥관|암수술|척추협착|심장|뇌|암진단|암진단비|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
       return false;
@@ -474,6 +497,10 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearc
     if (postContractNoticeStatute(row)) score -= 0.45;
     if (disclosureRelevantText(row)) score += 0.12;
     if (irrelevantDisclosureText(row) && !disclosureRelevantText(row)) score -= 0.35;
+  }
+  if (manualTherapyQuery(query)) {
+    if (manualTherapyText(row)) score += 0.18;
+    if (irrelevantManualTherapyText(row)) score -= 0.5;
   }
   if (cancerInsuranceQuery(query)) {
     if (row.source_area === 'fss_dispute_cases' && thyroidFssText(row)) score += 0.28;
