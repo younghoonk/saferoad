@@ -892,17 +892,9 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
 function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   if (!isDisclosureDutyCase(input)) return result;
   const scope = '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.';
-  const cleaned = result.damageAssessment
-    .replace(/손해[가은는\s]*크지\s*않[^.。]*[.。]?/g, '')
-    .replace(/손해[가은는\s]*경미[^.。]*[.。]?/g, '')
-    .replace(/손해\s*정도[가은는\s]*크지\s*않[^.。]*[.。]?/g, '')
-    .replace(/손해\s*정도[가은는\s]*경미[^.。]*[.。]?/g, '')
-    .replace(/손해\s*정도[가은]?\s*경미[^.。]*[.。]?/g, '')
-    .replace(/피해\s*정도[가은]?\s*경미[^.。]*[.。]?/g, '')
-    .trim();
   return {
     ...result,
-    damageAssessment: [scope, cleaned].filter(Boolean).join('\n\n'),
+    damageAssessment: scope,
   };
 }
 

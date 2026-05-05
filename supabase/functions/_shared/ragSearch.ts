@@ -334,7 +334,11 @@ function disclosureRelevantText(row: EnrichedRow) {
 }
 
 function irrelevantDisclosureText(row: EnrichedRow) {
-  return /백내장|다초점|이륜차|오토바이|자동차\s*손해배상|자동차\s*보험|대인배상|대물배상|자기신체사고|차량\s*전손|예금자\s*보호|비례\s*보상|중지\s*\/?\s*재개|보험계약\s*중지|색인|목차/i.test(rowText(row));
+  return /요양불승인|산재|CRPS|회전근개|견관절|교통사고|자동차|손해배상|백내장|다초점|이륜차|오토바이|종합소득세|부과처분|자동차\s*손해배상|자동차\s*보험|대인배상|대물배상|자기신체사고|차량\s*전손|예금자\s*보호|비례\s*보상|중지\s*\/?\s*재개|보험계약\s*중지|색인|목차/i.test(rowText(row));
+}
+
+function disclosurePrecedentText(row: EnrichedRow) {
+  return /고지의무|계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|중요한\s*사항|중대한\s*과실|부실고지|보험계약\s*해지|보험사고\s*인과관계|상법\s*제?\s*651|상법\s*제?\s*655/i.test(rowText(row));
 }
 
 function preferredDisclosureStatute(row: EnrichedRow) {
@@ -402,6 +406,9 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (disclosureQuery(query)) {
     if (row.source_area === 'legal_statutes') return preferredDisclosureStatute(row);
     if (postContractNoticeStatute(row)) return false;
+    if (row.source_area === 'precedents') {
+      return disclosurePrecedentText(row) && !irrelevantDisclosureText(row);
+    }
     if (['fss_dispute_cases', 'precedents', 'terms_standards'].includes(row.source_area)) {
       return disclosureRelevantText(row) && !irrelevantDisclosureText(row);
     }
@@ -414,12 +421,12 @@ function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCode
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
   if (disclosureQuery(query) && diagnosisCodes.includes('M47.26')) {
-    if (/M17(?:\.\d+)?|M75(?:\.\d+)?|M48\.3|무릎|슬관절|어깨|어깨병변|회전근개|척추협착|심장|뇌|암진단|암진단비|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
+    if (/M17(?:\.\d+)?|M75(?:\.\d+)?|M48\.3|무릎|슬관절|어깨|어깨병변|회전근개|견관절|중심정맥관|암수술|척추협착|심장|뇌|암진단|암진단비|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
       return false;
     }
     const directCode = exactCodeMatches(row, ['M47.26']).length > 0;
-    const spineRelated = /\bM47(?:\.|$)|척추증|요추증|요통|M54|허리/i.test(text);
-    const m4726DisclosurePattern = /M47\.26|요추증|요통|허리/i.test(text)
+    const spineRelated = /\bM47(?:\.|$)|\bM54(?:\.|$)|척추증|요추증|요통|허리통증|신경뿌리병증/i.test(text);
+    const m4726DisclosurePattern = /M47\.26|DISCLOSURE_M4726_SINGLE_VISIT|요추증|요통|허리통증|신경뿌리병증/i.test(text)
       && /고지의무|알릴의무|미고지|1회\s*통원|계약해지/i.test(text);
     return directCode || spineRelated || m4726DisclosurePattern;
   }
@@ -658,18 +665,10 @@ function fallbackDisclosureStatuteRows() {
 }
 
 function ensureDisclosureStatuteRows(rows: EnrichedRow[]) {
-  const combined = [...rows];
-  for (const fallback of fallbackDisclosureStatuteRows()) {
-    const fallbackText = rowText(fallback);
-    const exists = combined.some((row) => {
-      const text = rowText(row);
-      if (/651조의2|651\s*조의\s*2|651-2/.test(fallbackText)) return /651조의2|651\s*조의\s*2|651-2/.test(text);
-      if (/655/.test(fallbackText)) return /655/.test(text);
-      return /651/.test(text) && !/651조의2|651\s*조의\s*2|651-2/.test(text);
-    });
-    if (!exists) combined.unshift(fallback);
-  }
-  return combined;
+  const fallbacks = fallbackDisclosureStatuteRows();
+  const fallbackIds = new Set(fallbacks.map((row) => row.id));
+  const withoutDuplicateFallbacks = rows.filter((row) => !fallbackIds.has(String(row.id || '')));
+  return [...fallbacks, ...withoutDuplicateFallbacks];
 }
 
 function dedupeReferences(rows: EnrichedRow[]) {
