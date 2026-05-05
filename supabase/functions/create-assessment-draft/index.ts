@@ -379,8 +379,15 @@ function ragContextFromInput(input: ReturnType<typeof validateInput>): RagSearch
   };
 }
 
-function formatReferences(references: RetrievedReference[]) {
+function hasRagReferences(ragResult?: RagSearchResult) {
+  return Boolean((ragResult?.officialReferences?.length || 0) + (ragResult?.internalReviewMaterials?.length || 0));
+}
+
+function formatReferences(references: RetrievedReference[], ragResult?: RagSearchResult) {
   if (references.length === 0) {
+    if (hasRagReferences(ragResult)) {
+      return '사용자가 별도로 제공한 수동 참고자료는 없음. 아래 RAG search references에 검색된 참고근거가 별도로 제공됨.';
+    }
     return '제공된 판례, 결정례, 분쟁조정례, 약관, 참고자료 없음.';
   }
 
@@ -402,6 +409,41 @@ function formatReferences(references: RetrievedReference[]) {
     ref.keywords?.length ? `키워드: ${ref.keywords.join(', ')}` : '',
     ref.source_url ? `출처 URL: ${ref.source_url}` : '',
   ].filter(Boolean).join('\n')).join('\n\n');
+}
+
+function referenceDisplayName(ref: RagSearchResult['officialReferences'][number]) {
+  const area = ref.source_area;
+  const title = cleanPublicText(ref.title);
+  const lawName = cleanPublicText(ref.law_name);
+  const articleTitle = cleanPublicText(ref.article_title);
+  const caseNumber = cleanPublicText(ref.case_number);
+  const court = cleanPublicText(ref.court_or_agency);
+  const decisionDate = cleanPublicText(ref.decision_date);
+
+  if (area === 'legal_statutes') {
+    return [lawName, articleTitle].filter(Boolean).join(' ') || title;
+  }
+  if (area === 'precedents') {
+    if (caseNumber && court && decisionDate) return `${court} ${decisionDate} 선고 ${caseNumber} 판결`;
+    return title ? `${title}(사건번호/법원/선고일자 추가 확인 필요)` : '관련 판례 추가 확인 필요';
+  }
+  if (area === 'fss_dispute_cases') {
+    return caseNumber ? `금융감독원 분쟁조정례 ${caseNumber}` : `금융감독원 분쟁조정례 ${title || '사례'}`;
+  }
+  if (area === 'terms_standards') {
+    return title ? `${title}` : '가입 당시 원약관 또는 표준약관';
+  }
+  return title;
+}
+
+function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
+  const official = ragResult.officialReferences || [];
+  if (!official.length) return '직접 관련 공식 근거 부족. 관련 법령, 판례, 분쟁조정례, 원약관 추가 확인 필요.';
+  return official.map((ref, index) => {
+    const name = referenceDisplayName(ref);
+    const summary = cleanPublicText(ref.summary);
+    return `[근거 ${index + 1}] ${name}${summary ? `: ${summary}` : ''}`;
+  }).join('\n');
 }
 
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
@@ -450,10 +492,13 @@ ${toneInstruction(input.tone)}
 사정서 반영 핵심 근거: ${source?.draftSupportingFacts?.join(' / ') || '없음'}
 
 [제공된 참고자료]
-${formatReferences(input.retrievedReferences)}
+${formatReferences(input.retrievedReferences, ragResult)}
 
 [RAG search references]
 ${formatRagForPrompt(ragResult)}
+
+[Official grounds that must be woven into the body]
+${formatOfficialGroundsForBody(ragResult)}
 
 [RAG usage rules]
 - Cite only official or semi-official RAG references as legal/reference basis.
@@ -470,6 +515,47 @@ ${formatRagForPrompt(ragResult)}
 - For disability and disease-code issues, state that the policy appendix in effect at enrollment must be checked.
 - Cite precedents only when case number, court, and decision date are available.
 - Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
+
+[Customer-side reconsideration direction]
+- The purpose of this draft is to support the customer's request for reconsideration of the insurer's denial, exemption, or contract termination decision.
+- Write from the customer's side, while preserving objectivity and not hiding unfavorable points.
+- The main thesis should be: "보험회사의 부지급/면책/계약해지 처분은 재검토가 필요하다."
+- Use expressions such as "다툴 여지가 있다", "객관적 근거 제시가 필요하다", "추가자료 확인을 전제로 고객 측 주장이 상당한 검토 가치가 있다."
+- Do not use prohibited expressions: "보험금 지급 확정", "반드시 받을 수 있음", "보험사의 처분은 무조건 위법", "승소 가능성".
+- Structure the reasoning as: 1) 사건 개요, 2) 인정되는 사실, 3) 보험사 주장, 4) 고객 측 주장, 5) 주요 쟁점, 6) 고객 측에 유리한 사정, 7) 관련 근거 검토, 8) 현 사건에의 적용, 9) 보험사 주장에 대한 반박 의견, 10) 손해사정 의견 초안, 11) 불리한 점 및 보완 필요 사항, 12) 추가 확보 필요 자료, 13) 고객 안내용 쉬운 요약.
+- First organize the insurer's position, then emphasize customer-favorable facts, then analyze weaknesses in the insurer's position, then connect official grounds to the customer's reconsideration logic.
+- Unfavorable facts must be placed in "불리한 점 및 보완 필요 사항" and matched with concrete documents to supplement them.
+
+[Draft reasoning structure rules]
+- This is not a search-result summary. Write a practical loss-adjusting opinion draft that applies the searched grounds to the current case facts.
+- Use this reasoning order in the body: 1) 인정되는 사실, 2) 보험사 주장, 3) 고객 주장, 4) 쟁점 정리, 5) 관련 법령/약관/분쟁조정례/판례 검토, 6) 현 사건에의 적용, 7) 손해사정 의견, 8) 불리한 점 및 추가 확인 필요 사항, 9) 고객 안내용 요약.
+- Do not leave the opinion at "additional review is needed" only. Even when final judgment is difficult, write the provisional loss-adjusting opinion available from the provided facts.
+- Explain why each directly related official RAG ground is favorable or unfavorable to this case. Do not merely list references.
+- In legalAndReferenceBasis, damageAssessment, and adjusterOpinionDraft, write the actual ground names from "Official grounds that must be woven into the body" in sentences.
+- If a precedent lacks case number, court, or decision date in retrievedReferences, do not invent them. Write "관련 판례 추가 확인 필요" instead.
+- If a policy term lacks the original company/product policy or enrollment-date version, write that the original policy terms at enrollment must be checked and use standard terms only as reference material.
+- Use internal review materials only for issue framing and document checklist. Never cite them as official legal, precedent, FSS, or policy grounds.
+- If official grounds are insufficient, say "직접 관련 공식 근거 부족" and still analyze the current facts under the available legal framework.
+- The adjusterOpinionDraft field must contain at least 5 substantial paragraphs. Prefer 5 to 8 paragraphs for ordinary cases.
+- The requiredAdditionalChecks field must include both unfavorable points and concrete documents to request.
+
+[M47.26 customer-side argument when applicable]
+- For M47.26 one-time outpatient non-disclosure, the customer-side position is that the medical record exists, but the record alone does not prove the legal requirements for termination.
+- Explain that Commercial Act Article 651 requires materiality and intentional or grossly negligent non-disclosure.
+- If the facts are one simple back-pain outpatient visit with no admission, surgery, advanced imaging, repeated treatment, or long-term medication, state that materiality and gross negligence can be disputed.
+- Distinguish hospital coding of M47.26 from the insured's awareness of the code's medical meaning or underwriting importance.
+- State that the insurer should present objective underwriting standards showing decline, exclusion, loading, or conditional acceptance if the visit had been disclosed.
+- For claim denial after termination, state that causal relationship between the non-disclosed fact and the insured event must be separately reviewed under Commercial Act Article 655 and related precedent principles.
+- The conclusion should be: the customer's position has meaningful review value, and the insurer's termination/denial decision requires reconsideration. Do not state payment is certain.
+
+[Mandatory disclosure-duty logic when applicable]
+- In an M47.26 single outpatient non-disclosure case, acknowledge that the medical visit record exists, but explain that its existence alone does not automatically satisfy contract termination requirements.
+- For pre-contract disclosure duty termination, analyze materiality and intentional or grossly negligent non-disclosure under Commercial Act Article 651 and Article 651-2 where relevant.
+- If the facts show only one outpatient visit for simple back stiffness and no admission, surgery, advanced imaging, long-term medication, or repeated treatment, state that materiality and intentional/gross negligence can be disputed.
+- Distinguish the hospital system's M47.26 diagnosis-code entry from the insured's awareness that it was a serious disease or an important matter for insurance underwriting.
+- State that the insurer should identify objective underwriting criteria showing it would have declined, excluded, loaded, or conditionally accepted the contract had it known the visit history.
+- For refusal of insurance benefits after termination, separately review causal relationship between the non-disclosed fact and the insured event under Commercial Act Article 655.
+- Do not conclude "termination cancellation is possible" as a final result. Use a restrained conclusion such as "계약해지 처분은 재검토가 필요하다."
 
 응답은 아래 JSON 형식으로만 반환하세요. JSON 외 텍스트는 포함하지 마세요.
 {
@@ -501,10 +587,13 @@ function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedRe
 - 응답은 같은 JSON 구조로만 반환하세요.
 
 [제공된 참고자료]
-${formatReferences(references)}
+${formatReferences(references, ragResult)}
 
 [RAG search references]
 ${formatRagForPrompt(ragResult)}
+
+[Official grounds that must remain in the body]
+${formatOfficialGroundsForBody(ragResult)}
 
 [RAG review rules]
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
@@ -518,6 +607,18 @@ ${formatRagForPrompt(ragResult)}
 - If no directly related original policy terms are available, say that original policy terms at enrollment require confirmation.
 - Remove or qualify any statement that applies a later policy version, disease classification table, or disability table to an older contract without confirming the original policy.
 - Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
+- Ensure the final draft reads like a loss-adjusting opinion, not a reference search summary.
+- The adjusterOpinionDraft field must contain at least 5 substantial paragraphs and must explain the insurer's position, counterpoints, application of official grounds, unfavorable points, and a restrained provisional opinion.
+- Do not end the opinion with only "additional review needed." If facts are insufficient, still state what can be argued from current facts and what must be confirmed.
+- The legalAndReferenceBasis and damageAssessment fields must explain how directly related official RAG grounds apply to this case.
+- The legalAndReferenceBasis, damageAssessment, and adjusterOpinionDraft fields must contain actual official ground names from "Official grounds that must remain in the body" when official RAG grounds exist.
+- Do not invent precedent numbers, adjustment numbers, policy article numbers, court names, or decision dates. If metadata is missing, write "관련 판례 추가 확인 필요" or "가입 당시 원약관 확인 필요."
+- The requiredAdditionalChecks field must separately include unfavorable points and concrete documents to request.
+- For an M47.26 single outpatient non-disclosure case, keep the logic that one outpatient record and a diagnosis-code entry alone do not automatically establish materiality or intentional/grossly negligent non-disclosure.
+- Keep the final stance customer-side: the insurer's denial/exemption/termination decision requires reconsideration.
+- Do not convert the draft into a neutral memo. It must be a customer-side reconsideration request draft with balanced unfavorable-point disclosure.
+- Remove prohibited expressions if present: "보험금 지급 확정", "반드시 받을 수 있음", "보험사의 처분은 무조건 위법", "승소 가능성".
+- Make the insurer rebuttal explicit. The insurerPositionReview and adjusterOpinionDraft fields must identify weaknesses in the insurer's reasoning and the documents the insurer should objectively present.
 
 [초안 JSON]
 ${JSON.stringify(draft)}`;
@@ -533,7 +634,7 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number) {
     body: JSON.stringify({
       model: OPENAI_MODEL,
       messages: [{ role: 'user', content: prompt }],
-      max_tokens: 4096,
+      max_tokens: 6000,
       temperature,
     }),
   });
@@ -638,6 +739,156 @@ function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: Retur
   };
 }
 
+function removeReferenceAbsenceContradiction(result: AssessmentDraftResult, ragResult: RagSearchResult): AssessmentDraftResult {
+  if (!hasRagReferences(ragResult)) return result;
+  const fix = (value: string) => value
+    .replace(/제공된\s*참고자료가\s*없으므로/g, '직접 관련 공식근거는 제한적이므로')
+    .replace(/제공된\s*참고\s*자료가\s*없으므로/g, '직접 관련 공식근거는 제한적이므로')
+    .replace(/참고자료가\s*없으므로/g, '직접 관련 공식근거는 제한적이므로')
+    .replace(/검색된\s*RAG\s*참고근거\s*없음/g, '검색된 RAG 참고근거는 아래 별도 표시')
+    .replace(/제공된\s*판례,\s*결정례,\s*분쟁조정례,\s*약관,\s*참고자료\s*없음\.?/g, '수동 참고자료는 없으며, RAG 검색 참고근거는 아래 별도 표시');
+
+  return {
+    ...result,
+    title: fix(result.title),
+    overview: fix(result.overview),
+    facts: fix(result.facts),
+    issues: fix(result.issues),
+    legalAndReferenceBasis: fix(result.legalAndReferenceBasis),
+    damageAssessment: fix(result.damageAssessment),
+    insurerPositionReview: fix(result.insurerPositionReview),
+    adjusterOpinionDraft: fix(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: fix(result.requiredAdditionalChecks),
+    simpleClientSummary: fix(result.simpleClientSummary),
+    disclaimer: fix(result.disclaimer),
+  };
+}
+
+function paragraphCount(value: string) {
+  return value.split(/\n{2,}|(?<=다\.)\s+(?=[가-힣A-Z])/).map((item) => item.trim()).filter(Boolean).length;
+}
+
+function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
+  const text = [
+    input.caseTitle,
+    input.damageDetails,
+    input.insurerPosition,
+    input.customerStatement,
+    input.adjusterMemo,
+    input.sourceAnalysis?.diagnosisSummary,
+    input.sourceAnalysis?.summary,
+    input.sourceAnalysis?.denialReason,
+    ...(input.sourceAnalysis?.keyIssues || []),
+  ].filter(Boolean).join(' ');
+  return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
+}
+
+function ensureSubstantialOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>) {
+  if (paragraphCount(result.adjusterOpinionDraft) >= 5 || !isDisclosureDutyCase(input)) return result;
+  const supplemental = [
+    '진료기록 또는 병원 전산상 질병코드가 존재한다는 사정은 우선 사실관계로 인정할 수 있다. 다만 그 사실만으로 곧바로 계약전 알릴의무 위반에 따른 계약해지 요건이 충족된다고 볼 수는 없으며, 해당 진료가 청약서 질문사항상 중요한 사항에 해당하는지와 피보험자에게 고의 또는 중대한 과실이 있었는지를 별도로 검토해야 한다.',
+    '현재 입력된 사실관계가 단순 허리 불편감 또는 1회 통원에 그치고, 입원, 수술, 정밀검사, 장기투약, 반복치료가 확인되지 않는 구조라면 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다. 특히 M47.26이라는 질병코드가 병원 전산에 기재되었다는 점과 피보험자가 이를 보험계약상 중요한 질환 또는 인수심사에 중대한 사항으로 인식했다는 점은 구분하여 보아야 한다.',
+    '보험회사가 계약해지를 유지하려면 해당 진료이력을 알았을 경우 인수거절, 부담보, 할증 또는 조건부 인수 등으로 처리했을 객관적 인수기준을 제시할 필요가 있다. 단순히 진료기록이 존재한다는 사정만으로 중요한 사항성과 고의ㆍ중과실을 모두 추정하는 방식은 재검토가 필요하다.',
+    '보험금 부지급까지 문제되는 경우에는 고지의무 위반 여부와 별도로, 미고지 사실과 보험사고 또는 청구 손해 사이의 인과관계도 검토되어야 한다. 따라서 계약해지와 보험금 부지급은 같은 사실관계에서 출발하더라도 각각의 법적 요건과 입증관계를 분리하여 판단해야 한다.',
+    '위 사정들을 종합하면, 현 단계의 손해사정 의견은 계약해지 취소를 단정하기보다 계약해지 처분의 요건 충족 여부에 대한 재검토가 필요하다는 방향으로 정리하는 것이 타당하다. 추가로 청약서 질문사항, 초진기록, 처방전, 검사내역, 의사소견서, 보험회사의 인수기준을 확인하여 중요사항성, 고의ㆍ중대한 과실, 인과관계를 순차적으로 검토할 필요가 있다.',
+  ].join('\n\n');
+  return {
+    ...result,
+    adjusterOpinionDraft: [result.adjusterOpinionDraft, supplemental].filter(Boolean).join('\n\n'),
+  };
+}
+
+function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: RagSearchResult): AssessmentDraftResult {
+  const official = ragResult.officialReferences || [];
+  if (!official.length) return result;
+  const grounds = official.map(referenceDisplayName).filter(Boolean);
+  if (!grounds.length) return result;
+  const existingText = [
+    result.legalAndReferenceBasis,
+    result.damageAssessment,
+    result.adjusterOpinionDraft,
+  ].join('\n');
+  const missing = grounds.filter((ground) => !existingText.includes(ground));
+  if (!missing.length) return result;
+
+  const legalLines = missing.map((ground) => {
+    if (/상법|제\s*\d+\s*조|651|655/.test(ground)) {
+      return `${ground}에 비추어 보면, 본 건에서는 단순 진료기록 존재와 계약해지 요건 충족을 구분하고 중요한 사항성, 고의 또는 중대한 과실, 보험사고와의 인과관계를 순차적으로 검토해야 한다.`;
+    }
+    if (/판결|판례/.test(ground)) {
+      return `${ground}은(는) retrievedReferences에 확인된 범위에서만 검토 근거로 삼고, 사건번호ㆍ법원ㆍ선고일자 등 메타데이터가 부족한 경우 관련 판례 추가 확인이 필요하다.`;
+    }
+    if (/금융감독원|분쟁조정례/.test(ground)) {
+      return `${ground}은(는) 고지의무 또는 계약해지 쟁점의 분쟁 처리 방향을 검토할 때 참고할 수 있으나, 본 건의 진료 횟수와 치료 정도가 실제로 유사한지는 원문 확인이 필요하다.`;
+    }
+    if (/약관|실손|표준/.test(ground)) {
+      return `${ground}은(는) 약관 검토자료이나, 가입 당시 해당 보험회사ㆍ상품의 원약관 확인 전에는 표준약관 또는 유사자료로만 참고해야 한다.`;
+    }
+    return `${ground}은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.`;
+  }).join('\n');
+
+  const application = '위 근거들을 현 사건에 적용하면, 보험회사의 계약해지 주장은 진료기록의 존재만으로 충분하지 않고 청약서 질문사항 해당성, 중요한 사항성, 피보험자의 인식 가능성, 고의 또는 중대한 과실, 그리고 보험금 부지급과 관련한 인과관계가 함께 확인되어야 한다.';
+  const opinion = '따라서 손해사정 의견은 보험금 지급 또는 계약해지 취소를 단정하기보다, 위 공식근거와 현재 확인된 사실관계에 비추어 계약해지 처분의 요건 충족 여부를 재검토해야 한다는 방향으로 정리한다.';
+
+  return {
+    ...result,
+    legalAndReferenceBasis: [result.legalAndReferenceBasis, '[본문 반영 근거]', legalLines].filter(Boolean).join('\n\n'),
+    damageAssessment: [result.damageAssessment, application].filter(Boolean).join('\n\n'),
+    adjusterOpinionDraft: [result.adjusterOpinionDraft, opinion].filter(Boolean).join('\n\n'),
+  };
+}
+
+function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  const prohibited = [
+    /보험금\s*지급\s*확정/g,
+    /반드시\s*받을\s*수\s*있음/g,
+    /보험사의\s*처분은\s*무조건\s*위법/g,
+    /승소\s*가능성/g,
+  ];
+  const clean = (value: string) => prohibited.reduce((text, pattern) => text.replace(pattern, '재검토 필요'), value);
+  const isRelevant = isDisclosureDutyCase(input) || /부지급|면책|해지|재검토|고객/i.test([
+    input.insurerPosition,
+    input.customerStatement,
+    input.adjusterMemo,
+    input.sourceAnalysis?.denialReason,
+  ].filter(Boolean).join(' '));
+  if (!isRelevant) {
+    return {
+      ...result,
+      title: clean(result.title),
+      overview: clean(result.overview),
+      facts: clean(result.facts),
+      issues: clean(result.issues),
+      legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+      damageAssessment: clean(result.damageAssessment),
+      insurerPositionReview: clean(result.insurerPositionReview),
+      adjusterOpinionDraft: clean(result.adjusterOpinionDraft),
+      requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+      simpleClientSummary: clean(result.simpleClientSummary),
+      disclaimer: clean(result.disclaimer),
+    };
+  }
+
+  const customerStance = '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 고객 측 주장은 상당한 검토 가치가 있다. 보험회사는 부지급, 면책 또는 계약해지 판단의 전제가 되는 객관적 근거와 인수기준을 제시할 필요가 있으며, 현재 확인된 사실관계에 비추어 해당 처분은 재검토가 필요하다는 방향으로 의견을 정리한다.';
+  const rebuttal = '보험사 주장에 대해서는 진료기록 또는 코드 기재 사실만으로 곧바로 면책ㆍ해지 요건이 충족되는지, 고객이 해당 사실의 보험계약상 중요성을 인식했다고 볼 수 있는지, 보험회사가 동일 정보를 알았다면 실제로 인수거절ㆍ부담보ㆍ할증 등 조건부 인수를 했을 객관적 기준이 있는지를 중심으로 반박할 필요가 있다.';
+  const unfavorable = '불리한 점으로는 실제 청약서 질문사항, 고지 당시 문답 내용, 진료기록의 구체적 기재, 처방 또는 검사 여부에 따라 보험사 주장이 강화될 수 있다는 점이 있다. 따라서 청약서, 상품별 원약관, 초진기록, 처방전, 검사내역, 의사소견서, 보험사 인수기준을 보완자료로 확보해야 한다.';
+
+  return {
+    ...result,
+    title: clean(result.title),
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: clean(result.issues),
+    legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+    damageAssessment: clean(result.damageAssessment),
+    insurerPositionReview: [clean(result.insurerPositionReview), rebuttal].filter(Boolean).join('\n\n'),
+    adjusterOpinionDraft: [clean(result.adjusterOpinionDraft), customerStance].filter(Boolean).join('\n\n'),
+    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), unfavorable].filter(Boolean).join('\n\n'),
+    simpleClientSummary: clean(result.simpleClientSummary),
+    disclaimer: clean(result.disclaimer),
+  };
+}
+
 function emptyRagResult(): RagSearchResult {
   return { query: '', officialReferences: [], internalReviewMaterials: [] };
 }
@@ -699,7 +950,19 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult),
       0,
     );
-    const reviewed = preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input);
+    const reviewed = ensureSubstantialOpinion(
+      enforceCustomerSideStance(
+        ensureOfficialGroundsInBody(
+          removeReferenceAbsenceContradiction(
+            preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+            ragResult,
+          ),
+          ragResult,
+        ),
+        input,
+      ),
+      input,
+    );
 
     return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
   } catch (error: unknown) {
