@@ -893,12 +893,34 @@ function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: Retur
   if (!isDisclosureDutyCase(input)) return result;
   const scope = '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.';
   const cleaned = result.damageAssessment
+    .replace(/손해[가은는\s]*크지\s*않[^.。]*[.。]?/g, '')
+    .replace(/손해[가은는\s]*경미[^.。]*[.。]?/g, '')
+    .replace(/손해\s*정도[가은는\s]*크지\s*않[^.。]*[.。]?/g, '')
+    .replace(/손해\s*정도[가은는\s]*경미[^.。]*[.。]?/g, '')
     .replace(/손해\s*정도[가은]?\s*경미[^.。]*[.。]?/g, '')
     .replace(/피해\s*정도[가은]?\s*경미[^.。]*[.。]?/g, '')
     .trim();
   return {
     ...result,
     damageAssessment: [scope, cleaned].filter(Boolean).join('\n\n'),
+  };
+}
+
+function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (!isDisclosureDutyCase(input)) return result;
+  const opinion = [
+    '먼저, 보험가입 전 진료기록 또는 병원 전산상 M47.26 질병코드가 존재한다는 점은 사실관계로 인정할 수 있다. 다만 진료기록이 존재한다는 사정과 계약전 알릴의무 위반을 이유로 한 계약해지 요건이 충족되는지는 구분되어야 한다. 보험회사가 계약해지를 주장하려면 단순한 기록 존재를 넘어 그 진료이력이 청약 당시 고지해야 할 중요한 사항에 해당한다는 점을 구체적으로 설명할 필요가 있다.',
+    '상법 제651조의 취지에 비추어 보면, 계약전 알릴의무 위반에 따른 계약해지는 중요한 사항성과 고의 또는 중대한 과실이 함께 문제된다. 따라서 본 건에서는 청약서 질문사항이 해당 1회 통원 사실을 명확히 묻고 있었는지, 피보험자가 그 사실을 보험계약상 중요한 사항으로 인식할 수 있었는지, 고지하지 않은 데 고의 또는 중대한 과실이 있었다고 볼 수 있는지를 순차적으로 검토해야 한다.',
+    '현재 입력된 사실관계가 단순 허리 뻐근함 또는 허리 통증으로 인한 1회성 통원에 그치고, 입원, 수술, 정밀검사, 반복치료, 장기투약이 확인되지 않는 사안이라면 이는 고객 측에 유리한 사정이다. 이러한 경우 피보험자가 해당 진료를 중대한 질환 또는 보험계약 인수에 영향을 미칠 중요한 병력으로 인식했다고 단정하기 어렵고, 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다.',
+    '또한 병원 전산상 M47.26 코드가 부여되었다는 사실과 피보험자가 그 코드의 의학적 의미 및 보험계약상 중요성을 알았다는 사실은 별개의 문제이다. 의료기관이 행정상 또는 진료비 청구상 질병코드를 기재한 사정만으로 피보험자가 해당 상병을 중대한 질환으로 이해하고 있었다고 볼 수는 없으므로, 보험회사는 피보험자의 인식 가능성에 관한 구체적 근거를 제시해야 한다.',
+    '보험회사가 해당 진료이력을 알았다면 계약을 거절하거나 부담보, 할증, 조건부 인수 등으로 처리했을 것이라고 주장하는 경우에도, 그 주장은 객관적 인수기준으로 뒷받침되어야 한다. 따라서 보험회사가 실제 인수심사 기준, 동일 또는 유사한 상병코드에 대한 인수처리 사례, 부담보 또는 할증 적용 기준을 제시하지 못한다면 계약해지 판단의 전제는 재검토될 필요가 있다.',
+    '보험금 부지급까지 함께 문제되는 경우에는 상법 제655조의 취지상 고지의무 위반 여부와 별도로, 미고지 사실과 보험사고 또는 청구 손해 사이의 인과관계도 검토되어야 한다. 계약해지 가능성과 보험금 부지급 가능성은 같은 사실관계에서 출발하더라도 법적 검토 지점이 다르므로, 보험회사는 부지급 판단에 대해서도 별도의 인과관계 및 약관상 근거를 제시할 필요가 있다.',
+    '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 고객 측 주장은 상당한 검토 가치가 있다. 특히 1회성 통원, 중대한 검사ㆍ치료 부재, 질병코드 기재와 고객 인식의 구분, 보험회사의 객관적 인수기준 제시 필요성, 고지의무 위반과 보험사고 사이의 인과관계 검토 필요성에 비추어 볼 때, 보험회사의 계약해지 및 부지급 처분은 재검토가 필요하다는 의견이다.',
+  ].join('\n\n');
+
+  return {
+    ...result,
+    adjusterOpinionDraft: opinion,
   };
 }
 
@@ -963,15 +985,18 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult),
       0,
     );
-    const reviewed = ensureSubstantialOpinion(
-      adjustDisclosureDamageScope(
-        enforceCustomerSideStance(
-          ensureOfficialGroundsInBody(
-            removeReferenceAbsenceContradiction(
-              preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = normalizeDisclosureOpinion(
+      ensureSubstantialOpinion(
+        adjustDisclosureDamageScope(
+          enforceCustomerSideStance(
+            ensureOfficialGroundsInBody(
+              removeReferenceAbsenceContradiction(
+                preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                ragResult,
+              ),
               ragResult,
             ),
-            ragResult,
+            input,
           ),
           input,
         ),

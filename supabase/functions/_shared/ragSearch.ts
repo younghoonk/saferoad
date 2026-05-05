@@ -616,6 +616,59 @@ async function fetchDisclosureStatuteRows(supabaseUrl: string, serviceRoleKey: s
   return rows;
 }
 
+function fallbackDisclosureStatuteRows() {
+  const statutes = [
+    {
+      key: '651',
+      title: '상법 제651조 고지의무위반으로 인한 계약해지',
+      summary: '상법 제651조는 보험계약 당시 중요한 사항에 관하여 고의 또는 중대한 과실로 고지하지 않거나 부실고지를 한 경우 보험자가 일정 기간 내 계약을 해지할 수 있다는 취지의 조항이다.',
+      articleTitle: '제651조 고지의무위반으로 인한 계약해지',
+    },
+    {
+      key: '651-2',
+      title: '상법 제651조의2 서면에 의한 질문의 효력',
+      summary: '상법 제651조의2는 보험자가 서면으로 질문한 사항은 중요한 사항으로 추정한다는 취지의 조항이다.',
+      articleTitle: '제651조의2 서면에 의한 질문의 효력',
+    },
+    {
+      key: '655',
+      title: '상법 제655조 계약해지와 보험금청구권',
+      summary: '상법 제655조는 고지의무 위반 등으로 계약을 해지한 경우 보험금청구권 및 고지의무 위반 사실과 보험사고 발생 사이의 인과관계를 검토할 때 문제되는 조항이다.',
+      articleTitle: '제655조 계약해지와 보험금청구권',
+    },
+  ];
+  return statutes.map((statute) => ({
+    id: `fallback-commercial-act-${statute.key}`,
+    source_area: 'legal_statutes',
+    source_type: 'legal_statute_fallback',
+    title: statute.title,
+    summary: statute.summary,
+    chunk_text: statute.summary,
+    source_url: 'https://www.law.go.kr/법령/상법',
+    similarity: 1,
+    metadata: {
+      law_name: '상법',
+      article_title: statute.articleTitle,
+      source_status: 'official_law_fallback',
+    },
+  })) as EnrichedRow[];
+}
+
+function ensureDisclosureStatuteRows(rows: EnrichedRow[]) {
+  const combined = [...rows];
+  for (const fallback of fallbackDisclosureStatuteRows()) {
+    const fallbackText = rowText(fallback);
+    const exists = combined.some((row) => {
+      const text = rowText(row);
+      if (/651조의2|651\s*조의\s*2|651-2/.test(fallbackText)) return /651조의2|651\s*조의\s*2|651-2/.test(text);
+      if (/655/.test(fallbackText)) return /655/.test(text);
+      return /651/.test(text) && !/651조의2|651\s*조의\s*2|651-2/.test(text);
+    });
+    if (!exists) combined.unshift(fallback);
+  }
+  return combined;
+}
+
 function dedupeReferences(rows: EnrichedRow[]) {
   const seen = new Set<string>();
   return rows.filter((row) => {
@@ -685,6 +738,8 @@ export async function searchRagReferences(params: {
     for (const row of statuteRows) {
       if (!officialRows.some((item) => item.id === row.id)) officialRows.unshift(row);
     }
+    const ensuredRows = ensureDisclosureStatuteRows(officialRows);
+    officialRows.splice(0, officialRows.length, ...ensuredRows);
   }
 
   return {
