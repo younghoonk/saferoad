@@ -414,11 +414,14 @@ function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCode
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
   if (disclosureQuery(query) && diagnosisCodes.includes('M47.26')) {
-    if (/M17\.5|무릎|슬관절|어깨|회전근개|심장|뇌|암진단|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
+    if (/M17(?:\.\d+)?|M75(?:\.\d+)?|M48\.3|무릎|슬관절|어깨|어깨병변|회전근개|척추협착|심장|뇌|암진단|암진단비|백내장|체외충격파|장기\s*재활|R10|입원비|복통|급성심근경색|뇌경색|뇌출혈/i.test(text)) {
       return false;
     }
-    return exactCodeMatches(row, ['M47.26']).length > 0
-      || /\bM47(?:\.|$)|척추증|요추증|요통|M54|허리|고지의무|알릴의무|미고지|1회\s*통원|계약해지/i.test(text);
+    const directCode = exactCodeMatches(row, ['M47.26']).length > 0;
+    const spineRelated = /\bM47(?:\.|$)|척추증|요추증|요통|M54|허리/i.test(text);
+    const m4726DisclosurePattern = /M47\.26|요추증|요통|허리/i.test(text)
+      && /고지의무|알릴의무|미고지|1회\s*통원|계약해지/i.test(text);
+    return directCode || spineRelated || m4726DisclosurePattern;
   }
   if (diagnosisCodes.length) return exactCodeMatches(row, diagnosisCodes).length > 0 || !hasSimilarButNotExactCode(row, diagnosisCodes);
   return true;
@@ -745,7 +748,7 @@ export async function searchRagReferences(params: {
   return {
     query,
     officialReferences: dedupeReferences(officialRows).map((row) => toReference(row, 'official')),
-    internalReviewMaterials: dedupeReferences(internalRows).slice(0, disclosureQuery(query) ? 5 : 12).map((row) => toReference(row, 'internal')),
+    internalReviewMaterials: dedupeReferences(internalRows).slice(0, disclosureQuery(query) ? 4 : 12).map((row) => toReference(row, 'internal')),
   };
 }
 

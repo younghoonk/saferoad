@@ -924,6 +924,47 @@ function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: Return
   };
 }
 
+function hasCustomerMedicalEvidence(input: ReturnType<typeof validateInput>) {
+  const source = input.sourceAnalysis;
+  if (!source) return false;
+  const values = [
+    source.customerMedicalSummary,
+    source.diagnosisSummary,
+    source.testResultSummary,
+    source.treatmentSummary,
+    source.damageEvidenceSummary,
+    ...(source.draftSupportingFacts || []),
+  ];
+  return values.some((value) => cleanPublicText(value).length > 0);
+}
+
+function neutralizeUnverifiedMedicalSourcePhrases(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (hasCustomerMedicalEvidence(input)) return result;
+  const fix = (value: string) => value
+    .replace(/고객의\s*의학자료에\s*따르면/g, '현재 입력된 사실관계에 따르면')
+    .replace(/고객\s*의학자료에\s*따르면/g, '현재 입력된 사실관계에 따르면')
+    .replace(/제출된\s*의학자료에\s*따르면/g, '제출자료 확인 전 단계에서는')
+    .replace(/의학자료에\s*따르면/g, '고객 진술상')
+    .replace(/고객의\s*의료자료에\s*따르면/g, '현재 입력된 사실관계에 따르면')
+    .replace(/제출된\s*의료자료에\s*따르면/g, '제출자료 확인 전 단계에서는')
+    .replace(/의료자료에\s*따르면/g, '고객 진술상');
+
+  return {
+    ...result,
+    title: fix(result.title),
+    overview: fix(result.overview),
+    facts: fix(result.facts),
+    issues: fix(result.issues),
+    legalAndReferenceBasis: fix(result.legalAndReferenceBasis),
+    damageAssessment: fix(result.damageAssessment),
+    insurerPositionReview: fix(result.insurerPositionReview),
+    adjusterOpinionDraft: fix(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: fix(result.requiredAdditionalChecks),
+    simpleClientSummary: fix(result.simpleClientSummary),
+    disclaimer: fix(result.disclaimer),
+  };
+}
+
 function emptyRagResult(): RagSearchResult {
   return { query: '', officialReferences: [], internalReviewMaterials: [] };
 }
@@ -985,16 +1026,19 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult),
       0,
     );
-    const reviewed = normalizeDisclosureOpinion(
-      ensureSubstantialOpinion(
-        adjustDisclosureDamageScope(
-          enforceCustomerSideStance(
-            ensureOfficialGroundsInBody(
-              removeReferenceAbsenceContradiction(
-                preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = neutralizeUnverifiedMedicalSourcePhrases(
+      normalizeDisclosureOpinion(
+        ensureSubstantialOpinion(
+          adjustDisclosureDamageScope(
+            enforceCustomerSideStance(
+              ensureOfficialGroundsInBody(
+                removeReferenceAbsenceContradiction(
+                  preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                  ragResult,
+                ),
                 ragResult,
               ),
-              ragResult,
+              input,
             ),
             input,
           ),
