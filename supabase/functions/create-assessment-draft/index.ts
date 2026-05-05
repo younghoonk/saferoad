@@ -458,7 +458,16 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'indemnity_manual_therapy_denial' ? `
+  const profileRules = profile === 'indemnity_cataract_multifocal_lens_denial' ? `
+[Indemnity cataract multifocal lens denial argument]
+- This is a cataract / multifocal intraocular lens indemnity denial case. Do not mention manual therapy, M54, low back pain, repeated manual therapy, disclosure duty, contract termination, disability, thyroid cancer, or automobile insurance unless explicitly entered.
+- Distinguish cataract surgery itself from multifocal intraocular lens costs.
+- Analyze whether the surgery was for cataract treatment or whether part of the lens cost was for vision correction and excluded under the policy.
+- If the insurer denied the whole claim only because a multifocal lens was used, explain that the insurer should distinguish treatment-purpose medical costs from vision-correction or excluded costs item by item.
+- If inpatient medical expenses are claimed, review the original policy definition of hospitalization, actual stay time, treatment under physician management, and whether the substance of care was inpatient treatment.
+- The customer should secure cataract diagnosis, slit-lamp exam, visual acuity test, surgery record, IOL type and cost breakdown, detailed medical bill, and original indemnity policy terms.
+- The conclusion should be: the insurer's partial or full denial requires reconsideration based on itemized exclusion grounds and treatment purpose. Do not state payment is certain.
+` : profile === 'indemnity_manual_therapy_denial' ? `
 [Indemnity manual therapy denial argument]
 - This is not a disclosure-duty or contract-termination case. Do not use pre-contract disclosure duty, policy termination, underwriting, application-form question, decline, exclusion, loading, or non-disclosure reasoning unless explicitly entered.
 - For manual therapy denial under indemnity medical insurance, focus on treatment purpose, medical necessity, doctor's prescription, treatment plan, treatment course, appropriateness of repeated therapy, detailed medical bill items, and policy exclusions.
@@ -604,7 +613,9 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'indemnity_manual_therapy_denial'
+  const profileReviewRules = profile === 'indemnity_cataract_multifocal_lens_denial'
+    ? '- For a cataract multifocal intraocular lens indemnity denial case, remove manual therapy, M54, low back pain, repeated manual therapy, disclosure-duty, contract termination, disability, thyroid cancer, and automobile-insurance reasoning. Keep the reasoning focused on cataract surgery, multifocal IOL cost, treatment purpose versus vision correction, inpatient/outpatient distinction, policy exclusions, and original indemnity policy terms.'
+    : profile === 'indemnity_manual_therapy_denial'
     ? '- For a manual therapy indemnity denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion, loading, M47.26 non-disclosure, automobile damage, disability, cancer, cataract, and hospitalization-pattern reasoning. Keep the reasoning focused on treatment purpose, medical necessity, doctor prescription, treatment plan, repeated therapy appropriateness, policy exclusions, and original indemnity policy terms.'
     : profile === 'm47_disclosure'
     ? '- For an M47.26 single outpatient non-disclosure case, keep the logic that one outpatient record and a diagnosis-code entry alone do not automatically establish materiality or intentional/grossly negligent non-disclosure.'
@@ -836,7 +847,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -859,6 +870,9 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
     ...(input.sourceAnalysis?.keyIssues || []),
   ].filter(Boolean).join(' ');
   const disclosure = isDisclosureDutyCase(input);
+  if (/백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(allText)) {
+    return 'indemnity_cataract_multifocal_lens_denial';
+  }
   if (/도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|과잉진료|의학적\s*필요성|반복치료|진료비\s*세부내역|치료계획/i.test(allText)
     || (/실손|실손보험|실손의료/i.test(allText) && /M54|요통|허리통증|도수|비급여|치료/i.test(allText))) {
     return 'indemnity_manual_therapy_denial';
@@ -870,8 +884,8 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
 }
 
 function ensureSubstantialOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>) {
-  if (paragraphCount(result.adjusterOpinionDraft) >= 5 || !isDisclosureDutyCase(input)) return result;
   const profile = caseProfile(input);
+  if (paragraphCount(result.adjusterOpinionDraft) >= 5 || (!isDisclosureDutyCase(input) && profile !== 'indemnity_cataract_multifocal_lens_denial')) return result;
   const supplemental = profile === 'm47_disclosure' ? [
     '진료기록 또는 병원 전산상 질병코드가 존재한다는 사정은 우선 사실관계로 인정할 수 있다. 다만 그 사실만으로 곧바로 계약전 알릴의무 위반에 따른 계약해지 요건이 충족된다고 볼 수는 없으며, 해당 진료가 청약서 질문사항상 중요한 사항에 해당하는지와 피보험자에게 고의 또는 중대한 과실이 있었는지를 별도로 검토해야 한다.',
     '현재 입력된 사실관계가 단순 허리 불편감 또는 1회 통원에 그치고, 입원, 수술, 정밀검사, 장기투약, 반복치료가 확인되지 않는 구조라면 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다. 특히 M47.26이라는 질병코드가 병원 전산에 기재되었다는 점과 피보험자가 이를 보험계약상 중요한 질환 또는 인수심사에 중대한 사항으로 인식했다는 점은 구분하여 보아야 한다.',
@@ -887,6 +901,9 @@ function ensureSubstantialOpinion(result: AssessmentDraftResult, input: ReturnTy
     '도수치료 실손보험 부지급 사건에서는 도수치료라는 항목명만으로 보험금 지급 또는 부지급이 곧바로 확정되는 것은 아니다. 보험금 지급 여부는 치료 목적성, 의학적 필요성, 의사 처방 및 치료계획, 치료 경과, 반복치료의 적정성, 가입 당시 실손보험 약관상 보상 제외 조항을 중심으로 검토해야 한다.',
     '보험회사가 의학적 필요성 부족 또는 과잉진료를 주장하는 경우에도 단순히 비급여 도수치료라는 사정만으로는 부족하다. 보험회사는 구체적인 진료기록, 치료횟수, 치료기간, 증상 경과, 의학적 필요성 부족 사유, 약관상 보상 제외 근거를 제시할 필요가 있다.',
     '고객 측은 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서, 영수증, 비급여 진료내역을 통해 치료 목적성과 필요성을 보완해야 한다.',
+  ] : profile === 'indemnity_cataract_multifocal_lens_denial' ? [
+    '백내장 다초점 인공수정체 실손보험 부지급 사건에서는 백내장 수술 자체와 다초점 인공수정체 비용을 구분하여 검토해야 한다. 보험회사가 다초점렌즈 사용을 이유로 전체 부지급하였다면 치료 목적 비용과 시력교정 또는 보상 제외 비용을 항목별로 구분하여 설명할 필요가 있다.',
+    '고객 측은 백내장 진단서, 세극등검사, 시력검사, 수술기록지, 인공수정체 종류 및 비용 구분, 진료비 세부내역서, 가입 당시 실손보험 원약관을 확보하여 치료 목적성과 보상 제외 항목의 범위를 검토해야 한다.',
   ] : [
     '계약전 알릴의무 위반 사건에서는 진료 또는 검사 이력의 존재와 계약해지 요건 충족 여부를 구분해야 한다. 청약서 질문사항 해당성, 중요한 사항성, 고의 또는 중대한 과실, 보험사고와의 인과관계를 순차적으로 검토해야 한다.',
   ];
@@ -974,6 +991,24 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
     input.adjusterMemo,
     input.sourceAnalysis?.denialReason,
   ].filter(Boolean).join(' '));
+  if (caseProfile(input) === 'indemnity_cataract_multifocal_lens_denial') {
+    const customerStance = '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 백내장 다초점 인공수정체 관련 부지급 처분은 항목별 보상 제외 근거와 치료 목적성을 기준으로 재검토될 필요가 있다. 보험회사는 백내장 치료 목적의 비용과 시력교정 또는 보상 제외 비용을 구체적으로 구분하여 설명해야 한다.';
+    const rebuttal = '보험사 주장에 대해서는 다초점 인공수정체가 사용되었다는 사정만으로 전체 의료비 부지급이 가능한지, 백내장 치료 목적 수술비와 시력교정 목적 렌즈 비용이 항목별로 구분되었는지, 입원의료비 청구라면 가입 당시 약관상 입원의 정의와 실제 치료 실질이 충족되는지를 중심으로 반박할 필요가 있다.';
+    return {
+      ...result,
+      title: clean(result.title),
+      overview: clean(result.overview),
+      facts: clean(result.facts),
+      issues: clean(result.issues),
+      legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+      damageAssessment: clean(result.damageAssessment),
+      insurerPositionReview: [clean(result.insurerPositionReview), rebuttal].filter(Boolean).join('\n\n'),
+      adjusterOpinionDraft: [clean(result.adjusterOpinionDraft), customerStance].filter(Boolean).join('\n\n'),
+      requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+      simpleClientSummary: clean(result.simpleClientSummary),
+      disclaimer: clean(result.disclaimer),
+    };
+  }
   if (caseProfile(input) === 'indemnity_manual_therapy_denial') {
     const customerStance = '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 도수치료 부지급 처분은 치료 목적성, 의학적 필요성, 의사 처방 및 치료 경과 자료를 기준으로 재검토될 필요가 있다. 보험회사는 단순히 도수치료 항목명만으로 부지급을 유지하기보다 구체적인 의학적 필요성 부족 근거와 가입 당시 실손보험 약관상 보상 제외 근거를 제시해야 한다.';
     const rebuttal = '보험사 주장에 대해서는 도수치료가 비급여 항목이라는 사정만으로 곧바로 부지급 요건이 충족되는지, 진료기록상 치료 목적성과 의학적 필요성이 배척될 수 있는지, 반복치료의 횟수와 기간이 구체적으로 왜 부적정한지, 가입 당시 원약관상 어떤 보상 제외 조항이 적용되는지를 중심으로 반박할 필요가 있다.';
@@ -1031,8 +1066,10 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
 
 function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const profile = caseProfile(input);
-  if (!isDisclosureDutyCase(input) && profile !== 'indemnity_manual_therapy_denial') return result;
-  const scope = profile === 'indemnity_manual_therapy_denial'
+  if (!isDisclosureDutyCase(input) && profile !== 'indemnity_manual_therapy_denial' && profile !== 'indemnity_cataract_multifocal_lens_denial') return result;
+  const scope = profile === 'indemnity_cataract_multifocal_lens_denial'
+    ? '본 건은 손해액 산정보다는 백내장 수술 자체와 다초점 인공수정체 비용을 구분하여, 백내장 치료 목적의 의료비와 시력교정 또는 약관상 보상 제외 비용이 어떻게 나뉘는지가 핵심이다. 입원의료비로 청구된 경우에는 가입 당시 실손보험 약관상 입원의 정의, 실제 체류시간, 의사 관리하 치료 여부, 치료의 실질이 입원치료인지도 함께 검토해야 한다.'
+    : profile === 'indemnity_manual_therapy_denial'
     ? '본 건은 손해액 산정보다는 도수치료가 가입 당시 실손보험 약관상 보상 대상 치료에 해당하는지, 치료 목적성과 의학적 필요성이 인정되는지, 반복치료의 적정성과 비급여 치료 항목의 보상 제외 여부가 어떻게 판단되는지가 핵심이다. 따라서 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서, 비급여 진료내역, 가입 당시 실손보험 원약관 및 보험회사 부지급 사유서를 중심으로 검토해야 한다.'
     : profile === 'm47_disclosure'
     ? '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.'
@@ -1047,8 +1084,15 @@ function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: Retur
 
 function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const profile = caseProfile(input);
-  if (profile !== 'm47_disclosure' && profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial') return result;
-  const opinion = profile === 'indemnity_manual_therapy_denial' ? [
+  if (profile !== 'm47_disclosure' && profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial' && profile !== 'indemnity_cataract_multifocal_lens_denial') return result;
+  const opinion = profile === 'indemnity_cataract_multifocal_lens_denial' ? [
+    '먼저, 백내장 수술 자체와 다초점 인공수정체 비용은 구분하여 검토되어야 한다. 현재 입력된 사실관계에 따르면 핵심은 백내장 치료 목적의 수술비와 시력교정 목적 또는 약관상 보상 제외로 볼 수 있는 렌즈 관련 비용이 항목별로 어떻게 구분되는지이다.',
+    '보험회사가 다초점 인공수정체 사용을 이유로 전체 부지급을 주장하는 경우에도, 다초점렌즈가 사용되었다는 사실만으로 모든 의료비가 곧바로 보상 제외된다고 단정하기는 어렵다. 보험회사는 전체 의료비 중 어떤 항목이 백내장 치료 목적 비용이고 어떤 항목이 시력교정 또는 보상 제외 비용인지 구체적으로 구분하여 설명할 필요가 있다.',
+    '입원의료비로 청구된 사안이라면 가입 당시 실손보험 약관상 입원의 정의, 실제 체류시간, 의사 관리하 치료 여부, 수술 및 회복 과정의 실질이 입원치료에 해당하는지도 검토해야 한다. 단순히 수술 당일 체류시간만으로 결론을 내리기보다 진료기록과 수술기록을 함께 보아야 한다.',
+    '고객 측에서는 백내장 진단서, 세극등검사, 시력검사, 수술기록지, 인공수정체 종류 및 비용 구분, 진료비 세부내역서, 영수증, 가입 당시 실손보험 원약관을 확보해야 한다. 특히 다초점 인공수정체 비용 중 보상 제외로 주장되는 부분과 백내장 치료 목적의 수술ㆍ검사ㆍ처치 비용이 구분되어 있는지 확인하는 것이 중요하다.',
+    '불리한 점도 함께 검토해야 한다. 다초점 인공수정체가 주로 시력교정 목적이라고 기재되어 있거나, 약관상 명확한 보상 제외 조항이 있고, 진료비 세부내역상 렌즈 비용이 별도로 특정되어 있다면 보험회사 주장이 강화될 수 있다. 따라서 고객 측 주장은 항목별 비용 구분과 치료 목적성을 입증하는 자료 확보를 전제로 정리해야 한다.',
+    '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 보험회사의 일부 또는 전부 부지급 처분은 항목별 보상 제외 근거와 치료 목적성을 기준으로 재검토될 필요가 있다. 보험회사가 백내장 치료 목적 비용과 시력교정 또는 보상 제외 비용을 충분히 구분하지 않고 전체 부지급하였다면, 고객 측은 위 보완자료를 제출하여 실손보험금 재심사를 요청할 수 있다는 의견이다.',
+  ] : profile === 'indemnity_manual_therapy_denial' ? [
     '먼저, 도수치료가 실손보험 청구 항목에 포함되어 있다는 사실만으로 보험금 지급 또는 부지급이 곧바로 확정되는 것은 아니다. 현재 입력된 사실관계에 따르면 핵심은 해당 도수치료가 치료 목적의 의료행위였는지, 의학적 필요성이 인정되는지, 반복치료의 횟수와 기간이 진료 경과에 비추어 적정한지 여부이다.',
     '보험회사가 도수치료의 의학적 필요성 부족 또는 과잉진료를 이유로 부지급을 주장하려면 단순히 비급여 도수치료라는 항목명만으로는 부족하다. 보험회사는 진료기록, 치료횟수, 치료기간, 증상 경과, 의학적 필요성이 부족하다고 보는 구체적 사유, 가입 당시 실손보험 약관상 보상 제외 근거를 명확히 제시할 필요가 있다.',
     '고객 측에서는 도수치료가 통증 완화나 기능 회복 등 치료 목적에서 시행되었다는 점을 자료로 보완해야 한다. 이를 위해 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서와 영수증, 비급여 진료내역을 확보하는 것이 중요하다.',
@@ -1123,8 +1167,10 @@ function neutralizeUnverifiedMedicalSourcePhrases(result: AssessmentDraftResult,
 
 function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const profile = caseProfile(input);
-  if (profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial') return result;
-  const leak = profile === 'thyroid_disclosure_cancer'
+  if (profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial' && profile !== 'indemnity_cataract_multifocal_lens_denial') return result;
+  const leak = profile === 'indemnity_cataract_multifocal_lens_denial'
+    ? /도수치료|manual\s*therapy|M54|요통|허리통증|치료목적성\s*부족|반복치료|체외충격파|고지의무|계약해지|후유장해|갑상선암|M47\.26/i
+    : profile === 'thyroid_disclosure_cancer'
     ? /M47\.26|단순\s*허리|허리\s*통증|허리통증|정형외과|1회\s*통원|요추증|신경뿌리병증|입원\/수술\/정밀검사|입원,\s*수술,\s*정밀검사/i
     : /계약전\s*알릴의무|계약\s*전\s*알릴\s*의무|고지의무|미고지|계약해지|청약서\s*질문사항|청약서|인수기준|인수거절|부담보|할증|M47\.26|M54\.26|1회\s*통원\s*미고지|자동차보험\s*손해액|후유장해|암진단비|백내장|입원비\s*부지급|입원치료|입원\s*인정\s*여부/i;
   const clean = (value: string) => value
@@ -1181,11 +1227,13 @@ function finalizeManualTherapyResult(result: AssessmentDraftResult, input: Retur
       && !/입원치료|입원\s*인정\s*여부|백내장|고지의무|계약해지/i.test(text);
   });
   const fallbackBasis = '도수치료와 직접 관련된 공식 판례 또는 분쟁조정례는 현재 충분히 확인되지 않았습니다. 따라서 본 건은 가입 당시 실손보험 원약관, 비급여 도수치료 관련 조항, 진료기록상 치료 목적성과 의학적 필요성을 중심으로 검토해야 합니다.';
+  const manualTherapyFacts = '현재 입력된 사실관계에 따르면, 고객은 허리 통증으로 병원 진료를 받았고 의사의 처방 또는 치료계획에 따라 도수치료를 여러 차례 시행한 후 실손보험금을 청구하였다. 보험회사는 치료 목적의 명확성 및 반복치료의 의학적 필요성 부족을 이유로 보험금 지급을 거절하였다.';
+  const manualTherapyClientSummary = '도수치료 실손보험금 재심사에서는 치료 목적성과 의학적 필요성을 보여주는 자료가 중요합니다. 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 진료비 세부내역서를 준비하면 보험회사에 재심사를 요청할 때 도움이 됩니다.';
   return {
     ...result,
     title: cleanField(result.title) || '도수치료 실손보험 부지급 재검토 사정서 초안',
     overview: cleanField(result.overview),
-    facts: cleanField(result.facts),
+    facts: manualTherapyFacts,
     issues: cleanField(result.issues),
     legalAndReferenceBasis: [cleanField(result.legalAndReferenceBasis), hasDirectOfficial ? '' : fallbackBasis].filter(Boolean).join('\n\n'),
     damageAssessment: cleanField(result.damageAssessment),
@@ -1203,7 +1251,48 @@ function finalizeManualTherapyResult(result: AssessmentDraftResult, input: Retur
       '보험회사 부지급 사유서',
       '가입 당시 실손보험 원약관',
     ].join('\n'),
-    simpleClientSummary: cleanField(result.simpleClientSummary),
+    simpleClientSummary: manualTherapyClientSummary,
+    disclaimer: cleanField(result.disclaimer),
+  };
+}
+
+function finalizeCataractResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
+  if (caseProfile(input) !== 'indemnity_cataract_multifocal_lens_denial') return result;
+  const blocked = /도수치료|manual\s*therapy|M54|요통|허리통증|치료목적성\s*부족|반복치료|체외충격파|고지의무|계약해지|후유장해|갑상선암|M47\.26/i;
+  const cleanField = (value: string) => cleanPublicText(value)
+    .split(/(?<=[.。])\s+|\n+/)
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => sentence && !blocked.test(sentence))
+    .join('\n\n')
+    .trim();
+  const hasDirectOfficial = (ragResult.officialReferences || []).some((ref) => {
+    const text = [ref.title, ref.summary, ref.article_title].filter(Boolean).join(' ');
+    return /백내장|H25|H26|인공수정체|다초점렌즈|다초점\s*인공수정체|입원|통원|실손의료비|시력교정|보상\s*제외|약관해석|입원의\s*정의/i.test(text)
+      && !/도수치료|고지의무|계약해지|M47\.26|M54|후유장해|갑상선|자동차보험/i.test(text);
+  });
+  const fallbackBasis = '백내장 다초점 인공수정체와 직접 관련된 공식 판례 또는 분쟁조정례가 충분히 확인되지 않은 경우, 본 건은 가입 당시 실손보험 원약관, 다초점 인공수정체 비용의 보상 제외 여부, 백내장 치료 목적성, 입원/통원 구분 및 진료비 세부내역을 중심으로 검토해야 합니다.';
+  return {
+    ...result,
+    title: '백내장 다초점 인공수정체 실손보험 부지급 관련 손해사정 의견 초안',
+    overview: cleanField(result.overview),
+    facts: cleanField(result.facts),
+    issues: cleanField(result.issues),
+    legalAndReferenceBasis: [cleanField(result.legalAndReferenceBasis), hasDirectOfficial ? '' : fallbackBasis].filter(Boolean).join('\n\n'),
+    damageAssessment: cleanField(result.damageAssessment),
+    insurerPositionReview: cleanField(result.insurerPositionReview),
+    adjusterOpinionDraft: cleanField(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: [
+      '백내장 진단서',
+      '세극등검사 결과',
+      '시력검사 결과',
+      '수술기록지',
+      '인공수정체 종류 및 비용 구분 자료',
+      '진료비 세부내역서',
+      '영수증',
+      '가입 당시 실손보험 원약관',
+      '보험회사 부지급 사유서',
+    ].join('\n'),
+    simpleClientSummary: '백내장 다초점 인공수정체 실손보험금 재심사에서는 백내장 치료 목적 비용과 시력교정 또는 보상 제외 비용을 항목별로 구분하는 자료가 중요합니다. 진단서, 검사결과, 수술기록지, 인공수정체 비용 구분 자료, 진료비 세부내역서와 가입 당시 실손보험 약관을 준비하면 보험회사에 재검토를 요청할 때 필요한 자료를 정리할 수 있습니다.',
     disclaimer: cleanField(result.disclaimer),
   };
 }
@@ -1340,6 +1429,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
+  const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
   const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
     ...ref,
     title: preserveDiagnosisCodesInText(ref.title, codes),
@@ -1389,6 +1479,13 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       if (ref.source_area === 'precedents' && !direct.test(text)) return false;
       if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
     }
+    if (cataractProfile) {
+      const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|고지의무|계약해지|M47\.26|후유장해|갑상선|자동차보험|자동차/i;
+      const direct = /백내장|H25|H26|인공수정체|다초점렌즈|다초점\s*인공수정체|입원|통원|실손의료비|시력교정|보상\s*제외|약관해석|입원의\s*정의|수정체|안과/i;
+      if (excluded.test(text)) return false;
+      if (ref.source_area === 'precedents' && !direct.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
+    }
     const key = officialReferenceKey(ref);
     if (seenOfficial.has(key)) return false;
     seenOfficial.add(key);
@@ -1423,6 +1520,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (manualTherapyProfile) {
     const excluded = /계약전\s*알릴의무|고지의무|계약해지|청약서|인수거절|부담보|할증|M47\.26|M54\.26\s*1회\s*통원\s*미고지|계약해지\s*안내문|자동차보험\s*손해액|후유장해|암진단비|백내장|갑상선암|입원비\s*부지급|중심정맥관/i;
     const allowed = /도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|\bM54(?:\.|$)|요통|허리통증|진료비\s*세부내역|치료계획|INDEMNITY_MANUAL_THERAPY_PURPOSE|보험금\s*부지급\s*안내문/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (cataractProfile) {
+    const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|갑상선암|후유장해|고지의무|계약해지|M47\.26/i;
+    const allowed = /백내장|H25|H26|다초점렌즈|다초점\s*인공수정체|인공수정체|안과|시력교정|백내장\s*수술|진료비\s*세부내역|입원|통원|수정체/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
@@ -1505,20 +1614,23 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
       0,
     );
-    const reviewed = finalizeManualTherapyResult(
-      addThyroidFssFollowUpCheck(
-        removeProfileSpecificLeakage(
-          neutralizeUnverifiedMedicalSourcePhrases(
-            normalizeDisclosureOpinion(
-              ensureSubstantialOpinion(
-                adjustDisclosureDamageScope(
-                  enforceCustomerSideStance(
-                    ensureOfficialGroundsInBody(
-                      removeReferenceAbsenceContradiction(
-                        preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = finalizeCataractResult(
+      finalizeManualTherapyResult(
+        addThyroidFssFollowUpCheck(
+          removeProfileSpecificLeakage(
+            neutralizeUnverifiedMedicalSourcePhrases(
+              normalizeDisclosureOpinion(
+                ensureSubstantialOpinion(
+                  adjustDisclosureDamageScope(
+                    enforceCustomerSideStance(
+                      ensureOfficialGroundsInBody(
+                        removeReferenceAbsenceContradiction(
+                          preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                          ragResult,
+                        ),
                         ragResult,
+                        input,
                       ),
-                      ragResult,
                       input,
                     ),
                     input,
@@ -1532,6 +1644,7 @@ Deno.serve(async (req: Request) => {
             input,
           ),
           input,
+          ragResult,
         ),
         input,
         ragResult,

@@ -333,9 +333,22 @@ function cancerInsuranceQuery(query: string) {
   return /암보험|암진단비|갑상선암|갑상선\s*결절|C73|E04|D34/i.test(query);
 }
 
+function cataractQuery(query: string) {
+  return /백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(query);
+}
+
 function manualTherapyQuery(query: string) {
+  if (cataractQuery(query)) return false;
   return /도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|실손보험|실손의료/i.test(query)
     && !/고지의무|미고지|계약해지|갑상선|암진단비/i.test(query);
+}
+
+function cataractText(row: EnrichedRow) {
+  return /백내장|H25|H26|인공수정체|다초점렌즈|다초점\s*인공수정체|입원|통원|실손의료비|실손보험|시력교정|보상\s*제외|약관해석|입원의\s*정의|안과|수정체|진료비\s*세부내역/i.test(rowText(row));
+}
+
+function irrelevantCataractText(row: EnrichedRow) {
+  return /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|고지의무|계약해지|M47\.26|후유장해|갑상선|자동차보험|자동차/i.test(rowText(row));
 }
 
 function manualTherapyText(row: EnrichedRow) {
@@ -430,6 +443,13 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (cataractQuery(query)) {
+    if (irrelevantCataractText(row)) return false;
+    if (row.source_area === 'legal_statutes') return false;
+    if (row.source_area === 'fss_dispute_cases') return cataractText(row);
+    if (row.source_area === 'precedents') return cataractText(row);
+    if (row.source_area === 'terms_standards') return cataractText(row);
+  }
   if (manualTherapyQuery(query)) {
     if (irrelevantManualTherapyText(row)) return false;
     if (row.source_area === 'legal_statutes') return false;
@@ -467,6 +487,9 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
 function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCodes: string[]) {
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
+  if (cataractQuery(query)) {
+    return cataractText(row) && !irrelevantCataractText(row);
+  }
   if (manualTherapyQuery(query)) {
     return manualTherapyText(row) && !irrelevantManualTherapyText(row);
   }
@@ -497,6 +520,10 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearc
     if (postContractNoticeStatute(row)) score -= 0.45;
     if (disclosureRelevantText(row)) score += 0.12;
     if (irrelevantDisclosureText(row) && !disclosureRelevantText(row)) score -= 0.35;
+  }
+  if (cataractQuery(query)) {
+    if (cataractText(row)) score += 0.18;
+    if (irrelevantCataractText(row)) score -= 0.5;
   }
   if (manualTherapyQuery(query)) {
     if (manualTherapyText(row)) score += 0.18;
