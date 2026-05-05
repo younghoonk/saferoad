@@ -345,6 +345,16 @@ function disclosurePrecedentText(row: EnrichedRow) {
   return /고지의무|계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|중요한\s*사항|중대한\s*과실|부실고지|보험계약\s*해지|보험사고\s*인과관계|상법\s*제?\s*651|상법\s*제?\s*655/i.test(rowText(row));
 }
 
+function thyroidOfficialText(row: EnrichedRow) {
+  return /갑상선\s*결절|갑상선암|갑상선|C73|E04|D34|건강검진|추적관찰|미세침흡인검사|초음파|양성신생물|정밀검사|암진단비/i.test(rowText(row));
+}
+
+function thyroidFssText(row: EnrichedRow) {
+  const text = rowText(row);
+  return /갑상선|결절|갑상선암|C73|E04|D34|건강검진|추적관찰|미세침흡인검사|초음파|양성신생물|정밀검사/i.test(text)
+    && /고지의무|알릴의무|미고지|계약전|중요한\s*사항|중대한\s*과실|인과관계/i.test(text);
+}
+
 function preferredDisclosureStatute(row: EnrichedRow) {
   if (row.source_area !== 'legal_statutes') return false;
   return /상법|보험/i.test(rowText(row)) && /제\s*651\s*조(?:의\s*2)?|제\s*655\s*조|651조(?:의2)?|655조/i.test(rowText(row));
@@ -407,6 +417,14 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (cancerInsuranceQuery(query)) {
+    if (row.source_area === 'fss_dispute_cases') return thyroidFssText(row) && !irrelevantDisclosureText(row);
+    if (row.source_area === 'precedents') {
+      const text = rowText(row);
+      return (/2009다103349|2009다103356|2023다274056/.test(text) || thyroidOfficialText(row) || disclosurePrecedentText(row))
+        && !irrelevantDisclosureText(row);
+    }
+  }
   if (row.source_area === 'terms_standards' && cancerInsuranceQuery(query)) {
     const text = rowText(row);
     if (/실손|실손보험|실손의료|도수치료|백내장|체외충격파/i.test(text)) return false;
@@ -456,6 +474,12 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearc
     if (postContractNoticeStatute(row)) score -= 0.45;
     if (disclosureRelevantText(row)) score += 0.12;
     if (irrelevantDisclosureText(row) && !disclosureRelevantText(row)) score -= 0.35;
+  }
+  if (cancerInsuranceQuery(query)) {
+    if (row.source_area === 'fss_dispute_cases' && thyroidFssText(row)) score += 0.28;
+    if (row.source_area === 'precedents' && /2009다103349|2009다103356/.test(rowText(row))) score += 0.25;
+    if (row.source_area === 'precedents' && /2023다274056/.test(rowText(row))) score += 0.08;
+    if (thyroidOfficialText(row)) score += 0.12;
   }
   if (row.source_area === 'terms_standards') {
     if (rowMatchesText(row, context?.insurerName)) score += 0.1;
