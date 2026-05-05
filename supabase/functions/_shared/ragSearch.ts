@@ -325,7 +325,42 @@ function isInternalReviewMaterial(row: EnrichedRow) {
     || String(row.source_type || '').startsWith('internal_');
 }
 
-function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearchContext) {
+function disclosureQuery(query: string) {
+  return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|미고지|중요한\s*사항|중대한\s*과실|계약\s*해지|알릴의무|고지의무/i.test(query);
+}
+
+function disclosureRelevantText(row: EnrichedRow) {
+  return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|알릴\s*의무|미고지|계약\s*해지|해지|청약서|질문\s*사항|중요한\s*사항|중대한\s*과실|보험사고.{0,12}인과관계|인과관계|상법\s*제?\s*651|제\s*651\s*조|제\s*651\s*조의\s*2|제\s*655\s*조/i.test(rowText(row));
+}
+
+function irrelevantDisclosureText(row: EnrichedRow) {
+  return /백내장|다초점|이륜차|오토바이|자동차\s*손해배상|자동차\s*보험|대인배상|대물배상|자기신체사고|차량\s*전손|예금자\s*보호|비례\s*보상|중지\s*\/?\s*재개|보험계약\s*중지|색인|목차/i.test(rowText(row));
+}
+
+function preferredDisclosureStatute(row: EnrichedRow) {
+  if (row.source_area !== 'legal_statutes') return false;
+  return /상법|보험/i.test(rowText(row)) && /제\s*651\s*조(?:의\s*2)?|제\s*655\s*조|651조(?:의2)?|655조/i.test(rowText(row));
+}
+
+function postContractNoticeStatute(row: EnrichedRow) {
+  if (row.source_area !== 'legal_statutes') return false;
+  return /제\s*652\s*조|제\s*653\s*조|652조|653조|위험\s*변경|계약\s*후\s*알릴\s*의무|통지\s*의무/i.test(rowText(row));
+}
+
+function directlyRelevantOfficial(row: EnrichedRow, query: string) {
+  if (!isOfficialReference(row)) return false;
+  if (disclosureQuery(query)) {
+    if (postContractNoticeStatute(row)) return false;
+    if (row.source_area === 'legal_statutes') return preferredDisclosureStatute(row);
+    if (['fss_dispute_cases', 'precedents', 'terms_standards'].includes(row.source_area)) {
+      return disclosureRelevantText(row) && !irrelevantDisclosureText(row);
+    }
+  }
+  if (row.source_area === 'terms_standards') return isDirectlyRelevantTerms(row, query);
+  return true;
+}
+
+function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearchContext, query = '') {
   let score = Number(row.similarity || 0);
   if (isOfficialReference(row)) score += 0.08;
   if (row.source_area === 'issue_playbooks') score -= 0.05;
@@ -333,6 +368,12 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearc
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
   if (hasSimilarButNotExactCode(row, diagnosisCodes)) score -= 0.08;
   if (isTitleSeedFss(row)) score -= 0.2;
+  if (disclosureQuery(query)) {
+    if (preferredDisclosureStatute(row)) score += 0.35;
+    if (postContractNoticeStatute(row)) score -= 0.45;
+    if (disclosureRelevantText(row)) score += 0.12;
+    if (irrelevantDisclosureText(row) && !disclosureRelevantText(row)) score -= 0.35;
+  }
   if (row.source_area === 'terms_standards') {
     if (rowMatchesText(row, context?.insurerName)) score += 0.1;
     if (rowMatchesText(row, context?.productName) || rowMatchesText(row, context?.policyName)) score += 0.1;
@@ -539,12 +580,11 @@ export async function searchRagReferences(params: {
   for (const plan of searchPlan) {
     const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 4, 10));
     const rows = await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows);
-    const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context) - scoreRow(a, diagnosisCodes, params.context));
+    const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
-      if (row.source_area === 'terms_standards' && !isDirectlyRelevantTerms(row, query)) continue;
-      if (isOfficialReference(row) && officialRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
+      if (directlyRelevantOfficial(row, query) && officialRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         officialRows.push(row);
       } else if (isInternalReviewMaterial(row) && internalRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         internalRows.push(row);

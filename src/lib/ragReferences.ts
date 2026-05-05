@@ -166,6 +166,17 @@ function sanitizeReference(reference: Partial<RagRetrievedReference>): RagRetrie
   };
 }
 
+function isDisclosureDutyReference(reference: RagRetrievedReference) {
+  const text = [reference.title, reference.summary, reference.law_name, reference.article_title].join(' ');
+  return /계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|고지\s*의무|알릴\s*의무|미고지|계약\s*해지|청약서|질문\s*사항|중요한\s*사항|중대한\s*과실|보험사고.{0,12}인과관계|상법\s*제?\s*651|제\s*651\s*조|제\s*651\s*조의\s*2|제\s*655\s*조/i.test(text);
+}
+
+function isUnrelatedDisclosureReference(reference: RagRetrievedReference) {
+  const text = [reference.title, reference.summary, reference.law_name, reference.article_title].join(' ');
+  return /백내장|다초점|이륜차|오토바이|자동차\s*손해배상|자동차\s*보험|대인배상|대물배상|자기신체사고|차량\s*전손|예금자\s*보호|비례\s*보상|중지\s*\/?\s*재개|보험계약\s*중지|색인|목차/i.test(text)
+    && !isDisclosureDutyReference(reference);
+}
+
 export function sanitizeRagSearchResult(value: unknown): RagSearchResult | undefined {
   if (!value || typeof value !== 'object') return undefined;
   const raw = value as Partial<RagSearchResult>;
@@ -174,6 +185,7 @@ export function sanitizeRagSearchResult(value: unknown): RagSearchResult | undef
       .filter((item) => !isBlockedOfficialSource(item.source_url))
       .map(sanitizeReference)
       .filter((item): item is RagRetrievedReference => Boolean(item))
+      .filter((item) => !isUnrelatedDisclosureReference(item))
     : [];
   const internalReviewMaterials = Array.isArray(raw.internalReviewMaterials)
     ? raw.internalReviewMaterials.map((item) => sanitizeReference({ ...item, reference_type: 'internal' })).filter((item): item is RagRetrievedReference => Boolean(item))

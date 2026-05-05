@@ -355,6 +355,11 @@ ${formatRagForPrompt(ragResult)}
 - Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
 - Do not cite FSS title seeds without confirmed full text.
 - Do not cite policy/terms references unless the title and summary are directly related to the issue.
+- Preserve diagnosis codes exactly as provided in user input, uploaded summaries, or extracted facts. If the input says M47.26, keep M47.26 exactly and never rewrite it as another code such as M47.27.
+- Do not invent accident date, accident location, accident mechanism, treatment date, insurer name, or contract date that was not provided.
+- For disclosure-duty disputes, cite only directly related law, FSS cases, precedents, or policy terms. Exclude cataract admission, motorcycle notice duty, automobile damages, deposit protection, proportional indemnity, suspension/restart, index, or table-of-contents materials unless the input issue directly concerns them.
+- For pre-contract disclosure duty cases, prioritize Commercial Act Article 651, Article 651-2, and Article 655. Do not use Articles 652 or 653 as core grounds unless the issue is post-contract notice duty or risk change.
+- If directly related policy terms are not available, state that the original policy terms at enrollment must be checked instead of forcing unrelated terms.
 - Policy terms, disease classification tables, and disability classification/payment tables must be applied based on the insurance contract date and original policy terms.
 - Do not automatically apply the newest policy terms to older contracts.
 - If the original company/product policy is missing, use standard policy terms or similar materials only as reference materials.
@@ -411,6 +416,11 @@ ${formatRagForPrompt(ragResult)}
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
 - Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
 - Policy/terms references must be removed if they are not directly related to the issue.
+- Preserve diagnosis codes exactly as provided. If a generated title or body changed M47.26 to another code, restore M47.26.
+- Remove accident date, accident location, accident mechanism, treatment date, or insurer facts that were not in the input, uploaded summaries, extracted facts, or RAG references.
+- In pre-contract disclosure duty cases, keep Commercial Act Articles 651, 651-2, and 655 as the priority statutory grounds. Remove Articles 652 and 653 unless the case is about post-contract notice duty or risk change.
+- Remove unrelated precedent or policy references such as cataract admission, motorcycle notice duty, automobile damages, deposit protection, proportional indemnity, suspension/restart, index, or table-of-contents materials unless the input issue directly concerns them.
+- If no directly related original policy terms are available, say that original policy terms at enrollment require confirmation.
 - Remove or qualify any statement that applies a later policy version, disease classification table, or disability table to an older contract without confirming the original policy.
 - Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
 
@@ -467,6 +477,49 @@ function validateResult(result: ClosingReportResult) {
   };
 }
 
+function extractDiagnosisCodesFromText(value: unknown) {
+  return Array.from(new Set(String(value || '').match(/\b[A-Z]\d{2}(?:\.\d{1,3})?\b/gi) || []))
+    .map((code) => code.toUpperCase());
+}
+
+function preserveInputDiagnosisCodes(result: ClosingReportResult, input: ReturnType<typeof validateInput>, facts: Record<string, unknown>): ClosingReportResult {
+  const inputCodes = extractDiagnosisCodesFromText(JSON.stringify({
+    caseInfo: input.caseInfo,
+    uploadedDocumentAnalysis: input.uploadedDocumentAnalysis,
+    adjusterMemo: input.adjusterMemo,
+    finalOpinion: input.finalOpinion,
+    facts,
+  })).filter((code) => code.includes('.'));
+  if (!inputCodes.length) return result;
+
+  const preserve = (value: string) => {
+    let text = value;
+    for (const code of inputCodes) {
+      const group = code.split('.')[0];
+      text = text.replace(new RegExp(`\\b${group}\\.\\d{1,3}\\b`, 'gi'), code);
+    }
+    return text;
+  };
+
+  return {
+    ...result,
+    title: preserve(result.title),
+    contractInfo: preserve(result.contractInfo),
+    lossInfo: preserve(result.lossInfo),
+    claimAndInvestigationResult: preserve(result.claimAndInvestigationResult),
+    keyIssues: preserve(result.keyIssues),
+    investigationChecklist: preserve(result.investigationChecklist),
+    medicalFindings: preserve(result.medicalFindings),
+    disclosureDutyReview: preserve(result.disclosureDutyReview),
+    otherInsuranceInfo: preserve(result.otherInsuranceInfo),
+    interviewAndSpecialNotes: preserve(result.interviewAndSpecialNotes),
+    investigationProcessTimeline: preserve(result.investigationProcessTimeline),
+    finalOpinion: preserve(result.finalOpinion),
+    requiredAdditionalChecks: result.requiredAdditionalChecks.map(preserve),
+    disclaimer: preserve(result.disclaimer),
+  };
+}
+
 function emptyRagResult(): RagSearchResult {
   return { query: '', officialReferences: [], internalReviewMaterials: [] };
 }
@@ -515,7 +568,7 @@ Deno.serve(async (req: Request) => {
     const draftText = await callOpenAI(apiKey, [{ role: 'user', content: buildReportPrompt(input, facts, ragResult) }], 0.2);
     const draft = validateResult(extractJson<ClosingReportResult>(draftText));
     const reviewedText = await callOpenAI(apiKey, [{ role: 'user', content: buildReviewPrompt(draft, ragResult) }], 0);
-    const reviewed = validateResult(extractJson<ClosingReportResult>(reviewedText));
+    const reviewed = preserveInputDiagnosisCodes(validateResult(extractJson<ClosingReportResult>(reviewedText)), input, facts);
 
     return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
   } catch (error: unknown) {
