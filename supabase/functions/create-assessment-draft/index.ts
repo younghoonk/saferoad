@@ -974,6 +974,24 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
     input.adjusterMemo,
     input.sourceAnalysis?.denialReason,
   ].filter(Boolean).join(' '));
+  if (caseProfile(input) === 'indemnity_manual_therapy_denial') {
+    const customerStance = '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 도수치료 부지급 처분은 치료 목적성, 의학적 필요성, 의사 처방 및 치료 경과 자료를 기준으로 재검토될 필요가 있다. 보험회사는 단순히 도수치료 항목명만으로 부지급을 유지하기보다 구체적인 의학적 필요성 부족 근거와 가입 당시 실손보험 약관상 보상 제외 근거를 제시해야 한다.';
+    const rebuttal = '보험사 주장에 대해서는 도수치료가 비급여 항목이라는 사정만으로 곧바로 부지급 요건이 충족되는지, 진료기록상 치료 목적성과 의학적 필요성이 배척될 수 있는지, 반복치료의 횟수와 기간이 구체적으로 왜 부적정한지, 가입 당시 원약관상 어떤 보상 제외 조항이 적용되는지를 중심으로 반박할 필요가 있다.';
+    return {
+      ...result,
+      title: clean(result.title),
+      overview: clean(result.overview),
+      facts: clean(result.facts),
+      issues: clean(result.issues),
+      legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+      damageAssessment: clean(result.damageAssessment),
+      insurerPositionReview: [clean(result.insurerPositionReview), rebuttal].filter(Boolean).join('\n\n'),
+      adjusterOpinionDraft: [clean(result.adjusterOpinionDraft), customerStance].filter(Boolean).join('\n\n'),
+      requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+      simpleClientSummary: clean(result.simpleClientSummary),
+      disclaimer: clean(result.disclaimer),
+    };
+  }
   if (!isRelevant) {
     return {
       ...result,
@@ -1108,7 +1126,7 @@ function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: Retu
   if (profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial') return result;
   const leak = profile === 'thyroid_disclosure_cancer'
     ? /M47\.26|단순\s*허리|허리\s*통증|허리통증|정형외과|1회\s*통원|요추증|신경뿌리병증|입원\/수술\/정밀검사|입원,\s*수술,\s*정밀검사/i
-    : /계약전\s*알릴의무|계약\s*전\s*알릴\s*의무|고지의무|미고지|계약해지|청약서\s*질문사항|인수거절|부담보|할증|M47\.26|M54\.26|1회\s*통원\s*미고지|자동차보험\s*손해액|후유장해|암진단비|백내장|입원비\s*부지급/i;
+    : /계약전\s*알릴의무|계약\s*전\s*알릴\s*의무|고지의무|미고지|계약해지|청약서\s*질문사항|청약서|인수기준|인수거절|부담보|할증|M47\.26|M54\.26|1회\s*통원\s*미고지|자동차보험\s*손해액|후유장해|암진단비|백내장|입원비\s*부지급|입원치료|입원\s*인정\s*여부/i;
   const clean = (value: string) => value
     .split(/(?<=[.。])\s+|\n+/)
     .map((sentence) => sentence.trim())
@@ -1128,6 +1146,65 @@ function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: Retu
     requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
     simpleClientSummary: clean(result.simpleClientSummary),
     disclaimer: clean(result.disclaimer),
+  };
+}
+
+function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
+  if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
+  const inputText = JSON.stringify({
+    accidentDate: input.accidentDate,
+    damageDetails: input.damageDetails,
+    customerStatement: input.customerStatement,
+    adjusterMemo: input.adjusterMemo,
+    sourceAnalysis: input.sourceAnalysis,
+  });
+  const normalizeDate = (date: string) => date.replace(/\D/g, '');
+  const inputDates = new Set((inputText.match(/\d{4}[년.-]\s*\d{1,2}[월.-]\s*\d{1,2}일?/g) || []).map(normalizeDate));
+  const generatedFullDate = /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/g;
+  const blocked = /청약서|고지의무|계약전\s*알릴의무|계약\s*전\s*알릴\s*의무|계약해지|인수기준|인수거절|부담보|할증|입원치료|입원\s*인정\s*여부|백내장/i;
+  const cleanField = (value: string) => cleanPublicText(value)
+    .split(/(?<=[.。])\s+|\n+/)
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => {
+      if (!sentence) return false;
+      if (blocked.test(sentence)) return false;
+      const dates = sentence.match(generatedFullDate) || [];
+      return dates.every((date) => inputDates.has(normalizeDate(date)));
+    })
+    .join('\n\n')
+    .replace(/보험금\s*지급\s*가능성을\s*높일\s*수\s*있습니다\.?/g, '재심사에 필요한 근거를 보완할 수 있습니다.')
+    .replace(/보험금\s*지급\s*가능성을\s*높일\s*수\s*있/g, '재심사에 필요한 근거를 보완할 수 있')
+    .trim();
+  const hasDirectOfficial = (ragResult.officialReferences || []).some((ref) => {
+    const text = [ref.title, ref.summary, ref.article_title].filter(Boolean).join(' ');
+    return /도수치료|실손보험|실손의료|비급여|치료\s*목적|치료목적|의학적\s*필요성|보상\s*제외/i.test(text)
+      && !/입원치료|입원\s*인정\s*여부|백내장|고지의무|계약해지/i.test(text);
+  });
+  const fallbackBasis = '도수치료와 직접 관련된 공식 판례 또는 분쟁조정례는 현재 충분히 확인되지 않았습니다. 따라서 본 건은 가입 당시 실손보험 원약관, 비급여 도수치료 관련 조항, 진료기록상 치료 목적성과 의학적 필요성을 중심으로 검토해야 합니다.';
+  return {
+    ...result,
+    title: cleanField(result.title) || '도수치료 실손보험 부지급 재검토 사정서 초안',
+    overview: cleanField(result.overview),
+    facts: cleanField(result.facts),
+    issues: cleanField(result.issues),
+    legalAndReferenceBasis: [cleanField(result.legalAndReferenceBasis), hasDirectOfficial ? '' : fallbackBasis].filter(Boolean).join('\n\n'),
+    damageAssessment: cleanField(result.damageAssessment),
+    insurerPositionReview: cleanField(result.insurerPositionReview),
+    adjusterOpinionDraft: cleanField(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: [
+      '진료기록지',
+      '도수치료 처방 또는 치료계획',
+      '의사 소견서',
+      '치료 전후 증상 변화 기록',
+      '통증평가 기록',
+      '진료비 세부내역서',
+      '영수증',
+      '비급여 진료내역',
+      '보험회사 부지급 사유서',
+      '가입 당시 실손보험 원약관',
+    ].join('\n'),
+    simpleClientSummary: cleanField(result.simpleClientSummary),
+    disclaimer: cleanField(result.disclaimer),
   };
 }
 
@@ -1428,19 +1505,22 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
       0,
     );
-    const reviewed = addThyroidFssFollowUpCheck(
-      removeProfileSpecificLeakage(
-        neutralizeUnverifiedMedicalSourcePhrases(
-          normalizeDisclosureOpinion(
-            ensureSubstantialOpinion(
-              adjustDisclosureDamageScope(
-                enforceCustomerSideStance(
-                  ensureOfficialGroundsInBody(
-                    removeReferenceAbsenceContradiction(
-                      preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+    const reviewed = finalizeManualTherapyResult(
+      addThyroidFssFollowUpCheck(
+        removeProfileSpecificLeakage(
+          neutralizeUnverifiedMedicalSourcePhrases(
+            normalizeDisclosureOpinion(
+              ensureSubstantialOpinion(
+                adjustDisclosureDamageScope(
+                  enforceCustomerSideStance(
+                    ensureOfficialGroundsInBody(
+                      removeReferenceAbsenceContradiction(
+                        preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                        ragResult,
+                      ),
                       ragResult,
+                      input,
                     ),
-                    ragResult,
                     input,
                   ),
                   input,
@@ -1454,6 +1534,7 @@ Deno.serve(async (req: Request) => {
           input,
         ),
         input,
+        ragResult,
       ),
       input,
       ragResult,
