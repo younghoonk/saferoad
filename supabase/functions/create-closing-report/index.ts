@@ -1,6 +1,13 @@
 // Supabase Edge Function: create-closing-report
 // OpenAI API key is read only from Edge Function environment variables.
 
+import {
+  buildRagQueryFromObject,
+  formatRagForPrompt,
+  searchRagReferences,
+  type RagSearchResult,
+} from '../_shared/ragSearch.ts';
+
 declare const Deno: {
   env: { get(key: string): string | undefined };
   serve(handler: (req: Request) => Response | Promise<Response>): void;
@@ -52,6 +59,7 @@ interface ClosingReportResult {
   finalOpinion: string;
   requiredAdditionalChecks: string[];
   disclaimer: string;
+  retrievedReferences?: RagSearchResult;
 }
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
@@ -265,7 +273,7 @@ JSON으로만 응답하세요:
   return extractJson<Record<string, unknown>>(text);
 }
 
-function buildReportPrompt(input: ReturnType<typeof validateInput>, facts: Record<string, unknown>) {
+function buildReportPrompt(input: ReturnType<typeof validateInput>, facts: Record<string, unknown>, ragResult: RagSearchResult) {
   return `STEP 2. 아래 구조화된 사실관계와 사용자가 입력한 사건 정보를 바탕으로 보험사 제출용 ${input.reportType === 'final' ? '종결보고서' : '중간보고서'} 초안을 작성하세요.
 
 [작성 품질 기준]
@@ -289,6 +297,17 @@ function buildReportPrompt(input: ReturnType<typeof validateInput>, facts: Recor
 
 [STEP 1 구조화 사실관계]
 ${JSON.stringify(facts)}
+
+[RAG search references]
+${formatRagForPrompt(ragResult)}
+
+[RAG usage rules]
+- Cite only official or semi-official RAG references as legal/reference basis.
+- Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
+- Do not cite FSS title seeds without confirmed full text.
+- Do not cite policy/terms references unless the title and summary are directly related to the issue.
+- Cite precedents only when case number, court, and decision date are available.
+- Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
 
 아래 JSON 형식으로만 응답하세요:
 {
@@ -319,7 +338,7 @@ ${JSON.stringify(facts)}
 }`;
 }
 
-function buildReviewPrompt(report: ClosingReportResult) {
+function buildReviewPrompt(report: ClosingReportResult, ragResult: RagSearchResult) {
   return `STEP 3. 아래 종결보고서 초안을 검증하고 같은 JSON 구조로 보정하세요.
 
 [검증 기준]
@@ -331,6 +350,15 @@ function buildReviewPrompt(report: ClosingReportResult) {
 - JSON 외 텍스트를 출력하지 마세요.
 
 [초안]
+[RAG search references]
+${formatRagForPrompt(ragResult)}
+
+[RAG review rules]
+- Remove official-looking citations if they are not present in official or semi-official RAG references.
+- Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
+- Policy/terms references must be removed if they are not directly related to the issue.
+- Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
+
 ${JSON.stringify(report)}`;
 }
 
@@ -384,6 +412,32 @@ function validateResult(result: ClosingReportResult) {
   };
 }
 
+function emptyRagResult(): RagSearchResult {
+  return { query: '', officialReferences: [], internalReviewMaterials: [] };
+}
+
+async function getRagResult(apiKey: string, input: ReturnType<typeof validateInput>, facts: Record<string, unknown>) {
+  try {
+    return await searchRagReferences({
+      supabaseUrl: requiredEnv('SUPABASE_URL'),
+      serviceRoleKey: requiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
+      openAiKey: apiKey,
+      query: buildRagQueryFromObject({
+        insurerName: input.insurerName,
+        reportType: input.reportType,
+        finalOpinion: input.finalOpinion,
+        caseInfo: input.caseInfo,
+        uploadedDocumentAnalysis: input.uploadedDocumentAnalysis,
+        adjusterMemo: input.adjusterMemo,
+        extractedFacts: facts,
+      }),
+    });
+  } catch (error) {
+    console.warn('RAG search failed for closing report', error instanceof Error ? error.message : 'unknown error');
+    return emptyRagResult();
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   if (req.method !== 'POST') return jsonResponse({ error: 'POST 요청만 지원합니다.' }, 405);
@@ -394,12 +448,13 @@ Deno.serve(async (req: Request) => {
     const input = validateInput(await req.json() as ClosingReportInput);
 
     const facts = await analyzeUploadedFacts(apiKey, input);
-    const draftText = await callOpenAI(apiKey, [{ role: 'user', content: buildReportPrompt(input, facts) }], 0.2);
+    const ragResult = await getRagResult(apiKey, input, facts);
+    const draftText = await callOpenAI(apiKey, [{ role: 'user', content: buildReportPrompt(input, facts, ragResult) }], 0.2);
     const draft = validateResult(extractJson<ClosingReportResult>(draftText));
-    const reviewedText = await callOpenAI(apiKey, [{ role: 'user', content: buildReviewPrompt(draft) }], 0);
+    const reviewedText = await callOpenAI(apiKey, [{ role: 'user', content: buildReviewPrompt(draft, ragResult) }], 0);
     const reviewed = validateResult(extractJson<ClosingReportResult>(reviewedText));
 
-    return jsonResponse(reviewed);
+    return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';

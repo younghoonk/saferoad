@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 import { ImagePayload } from './openaiApi';
+import { formatRagReferencesForText, sanitizeRagSearchResult, type RagSearchResult } from './ragReferences';
 
 export type ClosingReportType = 'interim' | 'final';
 export type ClosingFinalOpinion = 'pay' | 'deny' | 'partial' | 'investigate';
@@ -71,6 +72,7 @@ export interface ClosingReportResult {
   finalOpinion: string;
   requiredAdditionalChecks: string[];
   disclaimer: string;
+  retrievedReferences?: RagSearchResult;
 }
 
 const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
@@ -115,6 +117,7 @@ function sanitizeClosingReportResult(result: ClosingReportResult): ClosingReport
     finalOpinion: cleanPublicText(result.finalOpinion),
     requiredAdditionalChecks: (result.requiredAdditionalChecks ?? []).map(cleanPublicText).filter(Boolean),
     disclaimer: cleanPublicText(result.disclaimer),
+    retrievedReferences: sanitizeRagSearchResult(result.retrievedReferences),
   };
 }
 
@@ -171,6 +174,8 @@ export function formatClosingReportResult(result: ClosingReportResult) {
     '',
     '## 안내',
     result.disclaimer,
+    '',
+    formatRagReferencesForText(result.retrievedReferences),
   ].join('\n');
 }
 

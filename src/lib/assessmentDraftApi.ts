@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { formatRagReferencesForText, sanitizeRagSearchResult, type RagSearchResult } from './ragReferences';
 
 export type AssessmentDraftTone = 'concise' | 'professional' | 'detailed';
 
@@ -69,6 +70,7 @@ export interface AssessmentDraftResult {
   requiredAdditionalChecks: string;
   simpleClientSummary: string;
   disclaimer: string;
+  retrievedReferences?: RagSearchResult;
 }
 
 const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
@@ -146,6 +148,7 @@ function sanitizeAssessmentDraftResult(result: AssessmentDraftResult): Assessmen
     requiredAdditionalChecks: cleanPublicText(result.requiredAdditionalChecks),
     simpleClientSummary: cleanPublicText(result.simpleClientSummary),
     disclaimer: cleanPublicText(result.disclaimer),
+    retrievedReferences: sanitizeRagSearchResult(result.retrievedReferences),
   };
 }
 
@@ -183,6 +186,8 @@ export function formatAssessmentDraftResult(result: AssessmentDraftResult) {
     '',
     '## 안내',
     safeResult.disclaimer,
+    '',
+    formatRagReferencesForText(safeResult.retrievedReferences),
   ].join('\n');
 }
 

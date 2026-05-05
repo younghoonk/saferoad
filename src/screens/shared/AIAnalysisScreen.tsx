@@ -35,6 +35,7 @@ import {
   ClosingReportResult,
   ClosingReportType,
 } from '../../lib/closingReportApi';
+import { cleanRagPublicText, type RagRetrievedReference, type RagSearchResult } from '../../lib/ragReferences';
 
 interface AIAnalysisScreenProps {
   onBack: () => void;
@@ -509,6 +510,7 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
           <CopyButton copied={copied} onPress={() => handleCopy(formatAssessmentDraftResult(draftResult))} />
         </View>
         <Card><Text style={styles.docText} selectable>{formatAssessmentDraftResult(draftResult)}</Text></Card>
+        <RagReferencesCard references={draftResult.retrievedReferences} />
         {renderNotice()}
         <Button title="입력값 수정 후 재생성" onPress={handleGenerateDraft} disabled={generatingDraft} loading={generatingDraft} variant="outline" size="lg" />
       </View>
@@ -572,6 +574,7 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
         <ResultCard title="최종 조사 의견" body={closingResult.finalOpinion} />
         <ListCard title="추가 확인 필요 사항" items={closingResult.requiredAdditionalChecks} color={Colors.danger} />
         <ResultCard title="안내" body={closingResult.disclaimer} />
+        <RagReferencesCard references={closingResult.retrievedReferences} />
         <Button title="다시 생성" onPress={handleGenerateClosingReport} disabled={generatingClosing} loading={generatingClosing} variant="outline" size="lg" />
       </View>
     );
@@ -754,6 +757,59 @@ function ListCard({ title, items, color }: { title: string; items?: string[]; co
   );
 }
 
+function RagReferencesCard({ references }: { references?: RagSearchResult }) {
+  const official = references?.officialReferences ?? [];
+  const internal = references?.internalReviewMaterials ?? [];
+  if (!official.length && !internal.length) return null;
+
+  return (
+    <Card>
+      <Text style={styles.sectionTitle}>RAG 참고 근거</Text>
+      {official.length > 0 && (
+        <View style={styles.ragGroup}>
+          <Text style={styles.ragGroupTitle}>공식/준공식 근거</Text>
+          {official.map((reference, index) => (
+            <RagReferenceItem key={`official-${index}-${reference.title}`} reference={reference} />
+          ))}
+        </View>
+      )}
+      {internal.length > 0 && (
+        <View style={styles.ragGroup}>
+          <Text style={styles.ragGroupTitle}>내부 검토자료</Text>
+          <Text style={styles.ragNotice}>쟁점 검토용 자료이며 공식 근거로 인용하지 않습니다.</Text>
+          {internal.map((reference, index) => (
+            <RagReferenceItem key={`internal-${index}-${reference.title}`} reference={reference} />
+          ))}
+        </View>
+      )}
+    </Card>
+  );
+}
+
+function RagReferenceItem({ reference }: { reference: RagRetrievedReference }) {
+  const details = [
+    reference.case_number ? `사건번호 ${reference.case_number}` : '',
+    reference.court_or_agency,
+    reference.decision_date,
+    reference.law_name,
+    reference.article_title,
+    reference.diagnosis_code,
+    reference.diagnosis_name,
+  ].map(cleanRagPublicText).filter(Boolean);
+  const summary = cleanRagPublicText(reference.summary);
+  const sourceUrl = cleanRagPublicText(reference.source_url);
+
+  return (
+    <View style={styles.ragItem}>
+      <Text style={styles.ragSource}>{cleanRagPublicText(reference.source_area_label)}</Text>
+      <Text style={styles.ragTitle}>{cleanRagPublicText(reference.title)}</Text>
+      {details.length > 0 && <Text style={styles.ragMeta}>{details.join(' · ')}</Text>}
+      {summary ? <Text style={styles.ragSummary}>{summary}</Text> : null}
+      {sourceUrl ? <Text style={styles.ragUrl}>{sourceUrl}</Text> : null}
+    </View>
+  );
+}
+
 function CopyButton({ copied, onPress }: { copied: boolean; onPress: () => void }) {
   return (
     <TouchableOpacity style={styles.copyBtn} onPress={onPress}>
@@ -873,6 +929,22 @@ const styles = StyleSheet.create({
   bulletRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, marginBottom: 6 },
   bullet: { width: 6, height: 6, borderRadius: 3, marginTop: 6 },
   bulletText: { flex: 1, fontSize: 13, color: Colors.textSecondary, lineHeight: 18 },
+  ragGroup: { gap: 8, marginTop: 8 },
+  ragGroupTitle: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
+  ragNotice: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  ragItem: {
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: Colors.background,
+    gap: 4,
+  },
+  ragSource: { fontSize: 11, fontWeight: '800', color: Colors.primary },
+  ragTitle: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary, lineHeight: 18 },
+  ragMeta: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  ragSummary: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  ragUrl: { fontSize: 11, color: Colors.primary, lineHeight: 16 },
   fieldLabel: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary, marginBottom: 8 },
   required: { color: Colors.danger },
   input: {

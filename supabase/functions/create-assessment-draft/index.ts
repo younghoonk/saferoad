@@ -1,6 +1,13 @@
 // Supabase Edge Function: create-assessment-draft
 // OpenAI API key is read only from Edge Function environment variables.
 
+import {
+  buildRagQueryFromObject,
+  formatRagForPrompt,
+  searchRagReferences,
+  type RagSearchResult,
+} from '../_shared/ragSearch.ts';
+
 declare const Deno: {
   env: { get(key: string): string | undefined };
   serve(handler: (req: Request) => Response | Promise<Response>): void;
@@ -78,6 +85,7 @@ interface AssessmentDraftResult {
   requiredAdditionalChecks: string;
   simpleClientSummary: string;
   disclaimer: string;
+  retrievedReferences?: RagSearchResult;
 }
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
@@ -343,7 +351,7 @@ function formatReferences(references: RetrievedReference[]) {
   ].filter(Boolean).join('\n')).join('\n\n');
 }
 
-function buildDraftPrompt(input: ReturnType<typeof validateInput>) {
+function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   return `당신은 보험 손해사정 실무 문서 작성 보조자입니다.
 아래 사건 정보, 면책공문 분석 요약, 고객 의학/손해자료 요약, 참고자료 범위 안에서만 손해사정사가 검토할 "사정서 초안"을 작성하세요.
@@ -392,6 +400,17 @@ ${toneInstruction(input.tone)}
 [제공된 참고자료]
 ${formatReferences(input.retrievedReferences)}
 
+[RAG search references]
+${formatRagForPrompt(ragResult)}
+
+[RAG usage rules]
+- Cite only official or semi-official RAG references as legal/reference basis.
+- Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
+- Do not cite FSS title seeds without confirmed full text.
+- Do not cite policy/terms references unless the title and summary are directly related to the issue.
+- Cite precedents only when case number, court, and decision date are available.
+- Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
+
 응답은 아래 JSON 형식으로만 반환하세요. JSON 외 텍스트는 포함하지 마세요.
 {
   "title": "제목",
@@ -408,7 +427,7 @@ ${formatReferences(input.retrievedReferences)}
 }`;
 }
 
-function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[]) {
+function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult) {
   return `아래 사정서 초안 JSON을 검증하고 보정하세요.
 
 [검증 기준]
@@ -423,6 +442,15 @@ function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedRe
 
 [제공된 참고자료]
 ${formatReferences(references)}
+
+[RAG search references]
+${formatRagForPrompt(ragResult)}
+
+[RAG review rules]
+- Remove official-looking citations if they are not present in official or semi-official RAG references.
+- Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
+- Policy/terms references must be removed if they are not directly related to the issue.
+- Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
 
 [초안 JSON]
 ${JSON.stringify(draft)}`;
@@ -459,7 +487,7 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
 
   try {
     const parsed = JSON.parse(match[0]) as Partial<AssessmentDraftResult>;
-    const requiredKeys: (keyof AssessmentDraftResult)[] = [
+    const requiredKeys = [
       'title',
       'overview',
       'facts',
@@ -471,7 +499,7 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
       'requiredAdditionalChecks',
       'simpleClientSummary',
       'disclaimer',
-    ];
+    ] as const;
 
     for (const key of requiredKeys) {
       if (!parsed[key]?.trim()) {
@@ -502,6 +530,33 @@ function sanitizeResult(result: AssessmentDraftResult): AssessmentDraftResult {
   };
 }
 
+function emptyRagResult(): RagSearchResult {
+  return { query: '', officialReferences: [], internalReviewMaterials: [] };
+}
+
+async function getRagResult(apiKey: string, input: ReturnType<typeof validateInput>) {
+  try {
+    return await searchRagReferences({
+      supabaseUrl: requiredEnv('SUPABASE_URL'),
+      serviceRoleKey: requiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
+      openAiKey: apiKey,
+      query: buildRagQueryFromObject({
+        caseTitle: input.caseTitle,
+        accidentType: input.accidentType,
+        accidentDate: input.accidentDate,
+        damageDetails: input.damageDetails,
+        insurerPosition: input.insurerPosition,
+        customerStatement: input.customerStatement,
+        adjusterMemo: input.adjusterMemo,
+        sourceAnalysis: input.sourceAnalysis,
+      }),
+    });
+  } catch (error) {
+    console.warn('RAG search failed for assessment draft', error instanceof Error ? error.message : 'unknown error');
+    return emptyRagResult();
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
@@ -517,18 +572,19 @@ Deno.serve(async (req: Request) => {
     const apiKey = requiredEnv('OPENAI_API_KEY');
     const body = await req.json() as AssessmentDraftInput;
     const input = validateInput(body);
+    const ragResult = await getRagResult(apiKey, input);
 
-    const draftText = await callOpenAI(apiKey, buildDraftPrompt(input), 0.2);
+    const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
     const draft = sanitizeResult(parseJsonResponse(draftText));
 
     const reviewedText = await callOpenAI(
       apiKey,
-      buildReviewPrompt(draft, input.retrievedReferences),
+      buildReviewPrompt(draft, input.retrievedReferences, ragResult),
       0,
     );
     const reviewed = sanitizeResult(parseJsonResponse(reviewedText));
 
-    return jsonResponse(reviewed);
+    return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
