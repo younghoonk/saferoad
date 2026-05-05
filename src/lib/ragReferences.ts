@@ -23,6 +23,8 @@ export interface RagSearchResult {
   internalReviewMaterials: RagRetrievedReference[];
 }
 
+export type IndemnityInsuranceGeneration = '1세대' | '2세대' | '3세대' | '4세대' | 'unknown';
+
 const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
 const CHUNK_REFERENCE_PATTERN = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
 const INTERNAL_FIELD_LINE_PATTERN = /^\s*(?:chunk_id|source_id|record_id|source_record_id|source_document_id|embedding_status|review_status|trust_level|source_type)\s*[:=].*$/gim;
@@ -121,6 +123,22 @@ export function cleanRagPublicText(value?: string | number | null) {
     .trim();
 }
 
+function parseDate(value?: string) {
+  const normalized = cleanRagPublicText(value).replace(/[.\/]/g, '-').match(/\d{4}-\d{1,2}-\d{1,2}/)?.[0];
+  if (!normalized) return null;
+  const date = new Date(`${normalized}T00:00:00Z`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+export function inferIndemnityInsuranceGeneration(contractDate: string): IndemnityInsuranceGeneration {
+  const date = parseDate(contractDate);
+  if (!date) return 'unknown';
+  if (date < new Date('2009-10-01T00:00:00Z')) return '1세대';
+  if (date < new Date('2017-04-01T00:00:00Z')) return '2세대';
+  if (date < new Date('2021-07-01T00:00:00Z')) return '3세대';
+  return '4세대';
+}
+
 function sanitizeReference(reference: Partial<RagRetrievedReference>): RagRetrievedReference | null {
   const sourceArea = cleanRagPublicText(reference.source_area);
   const title = cleanRagPublicText(reference.title);
@@ -189,7 +207,11 @@ export function formatRagReferencesForText(references?: RagSearchResult) {
     return '검색된 RAG 참고근거 없음';
   }
 
-  const lines = ['## RAG 참고 근거'];
+  const lines = [
+    '## RAG 참고 근거',
+    '',
+    '약관, 질병분류표, 장해분류표는 보험가입일과 상품 약관에 따라 달라질 수 있습니다. 최종 제출 전 보험증권 및 가입 당시 약관 원문 확인이 필요합니다.',
+  ];
   if (safe.officialReferences.length) {
     lines.push('', '### 공식/준공식 근거');
     safe.officialReferences.forEach((reference) => lines.push(...formatReferenceLines(reference)));

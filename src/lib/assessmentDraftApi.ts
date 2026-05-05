@@ -34,6 +34,17 @@ export interface RetrievedReference {
 
 export interface AssessmentDraftInput {
   caseTitle?: string;
+  insurerName?: string;
+  productName?: string;
+  policyName?: string;
+  policyNumber?: string;
+  insuranceType?: string;
+  coverageType?: string;
+  contractDate?: string;
+  policyGeneration?: string;
+  policyVersion?: string;
+  isLifeInsurance?: boolean;
+  isNonLifeInsurance?: boolean;
   accidentType: string;
   accidentDate: string;
   accidentLocation: string;

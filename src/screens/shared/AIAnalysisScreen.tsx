@@ -770,6 +770,7 @@ function RagReferencesCard({ references }: { references?: RagSearchResult }) {
   return (
     <Card>
       <Text style={styles.sectionTitle}>RAG 참고 근거</Text>
+      <Text style={styles.ragNotice}>약관, 질병분류표, 장해분류표는 보험가입일과 상품 약관에 따라 달라질 수 있습니다. 최종 제출 전 보험증권 및 가입 당시 약관 원문 확인이 필요합니다.</Text>
       {official.length > 0 && (
         <View style={styles.ragGroup}>
           <Text style={styles.ragGroupTitle}>공식/준공식 근거</Text>

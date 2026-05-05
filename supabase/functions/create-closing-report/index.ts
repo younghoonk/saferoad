@@ -2,9 +2,11 @@
 // OpenAI API key is read only from Edge Function environment variables.
 
 import {
-  buildRagQueryFromObject,
+  buildRagSearchQuery,
   formatRagForPrompt,
+  inferIndemnityInsuranceGeneration,
   searchRagReferences,
+  type RagSearchContext,
   type RagSearchResult,
 } from '../_shared/ragSearch.ts';
 
@@ -25,6 +27,16 @@ interface ImagePayload {
 interface ClosingReportInput {
   reportType?: ReportType;
   insurerName?: string;
+  productName?: string;
+  policyName?: string;
+  policyNumber?: string;
+  insuranceType?: string;
+  coverageType?: string;
+  contractDate?: string;
+  policyGeneration?: string;
+  policyVersion?: string;
+  isLifeInsurance?: boolean;
+  isNonLifeInsurance?: boolean;
   caseInfo?: Record<string, unknown>;
   uploadedDocumentAnalysis?: Record<string, unknown>;
   adjusterMemo?: string;
@@ -179,6 +191,16 @@ function validateInput(body: ClosingReportInput) {
   return {
     reportType,
     insurerName: cleanText(body.insurerName),
+    productName: cleanText(body.productName),
+    policyName: cleanText(body.policyName),
+    policyNumber: cleanText(body.policyNumber),
+    insuranceType: cleanText(body.insuranceType),
+    coverageType: cleanText(body.coverageType),
+    contractDate: cleanText(body.contractDate),
+    policyGeneration: cleanText(body.policyGeneration),
+    policyVersion: cleanText(body.policyVersion),
+    isLifeInsurance: Boolean(body.isLifeInsurance),
+    isNonLifeInsurance: Boolean(body.isNonLifeInsurance),
     caseInfo: body.caseInfo && typeof body.caseInfo === 'object' ? body.caseInfo : {},
     uploadedDocumentAnalysis: body.uploadedDocumentAnalysis && typeof body.uploadedDocumentAnalysis === 'object'
       ? body.uploadedDocumentAnalysis
@@ -204,6 +226,33 @@ function imageContent(label: string, images: ReturnType<typeof normalizeImages>)
     });
   });
   return items;
+}
+
+function fieldFromCaseInfo(caseInfo: Record<string, unknown>, keys: string[]) {
+  for (const key of keys) {
+    const value = caseInfo[key];
+    if (typeof value === 'string' && value.trim()) return value.trim();
+  }
+  return '';
+}
+
+function ragContextFromInput(input: ReturnType<typeof validateInput>): RagSearchContext {
+  const caseInfo = input.caseInfo;
+  const contractDate = input.contractDate || fieldFromCaseInfo(caseInfo, ['contractDate', 'policyStartDate', 'enrollmentDate', 'coveragePeriod']);
+  const generation = input.policyGeneration || inferIndemnityInsuranceGeneration(contractDate);
+  return {
+    insurerName: input.insurerName,
+    productName: input.productName || fieldFromCaseInfo(caseInfo, ['productName']),
+    policyName: input.policyName || fieldFromCaseInfo(caseInfo, ['policyName']),
+    policyNumber: input.policyNumber || fieldFromCaseInfo(caseInfo, ['policyNumber']),
+    insuranceType: input.insuranceType || fieldFromCaseInfo(caseInfo, ['insuranceType']),
+    coverageType: input.coverageType || fieldFromCaseInfo(caseInfo, ['claimedCoverage', 'coverageType']),
+    contractDate,
+    policyGeneration: generation,
+    policyVersion: input.policyVersion,
+    isLifeInsurance: input.isLifeInsurance,
+    isNonLifeInsurance: input.isNonLifeInsurance,
+  };
 }
 
 async function callOpenAI(apiKey: string, messages: unknown[], temperature: number, maxTokens = 4096) {
@@ -306,6 +355,11 @@ ${formatRagForPrompt(ragResult)}
 - Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
 - Do not cite FSS title seeds without confirmed full text.
 - Do not cite policy/terms references unless the title and summary are directly related to the issue.
+- Policy terms, disease classification tables, and disability classification/payment tables must be applied based on the insurance contract date and original policy terms.
+- Do not automatically apply the newest policy terms to older contracts.
+- If the original company/product policy is missing, use standard policy terms or similar materials only as reference materials.
+- Indemnity insurance generation is a search aid only; final judgment requires the insurance policy and policy terms in effect at enrollment.
+- For disability and disease-code issues, state that the policy appendix in effect at enrollment must be checked.
 - Cite precedents only when case number, court, and decision date are available.
 - Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
 
@@ -357,6 +411,7 @@ ${formatRagForPrompt(ragResult)}
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
 - Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
 - Policy/terms references must be removed if they are not directly related to the issue.
+- Remove or qualify any statement that applies a later policy version, disease classification table, or disability table to an older contract without confirming the original policy.
 - Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
 
 ${JSON.stringify(report)}`;
@@ -418,19 +473,27 @@ function emptyRagResult(): RagSearchResult {
 
 async function getRagResult(apiKey: string, input: ReturnType<typeof validateInput>, facts: Record<string, unknown>) {
   try {
+    const context = ragContextFromInput(input);
     return await searchRagReferences({
       supabaseUrl: requiredEnv('SUPABASE_URL'),
       serviceRoleKey: requiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
       openAiKey: apiKey,
-      query: buildRagQueryFromObject({
+      context,
+      query: buildRagSearchQuery({
         insurerName: input.insurerName,
+        productName: context.productName,
+        policyName: context.policyName,
+        insuranceType: context.insuranceType,
+        coverageType: context.coverageType,
+        contractDate: context.contractDate,
+        policyGeneration: context.policyGeneration,
         reportType: input.reportType,
         finalOpinion: input.finalOpinion,
         caseInfo: input.caseInfo,
         uploadedDocumentAnalysis: input.uploadedDocumentAnalysis,
         adjusterMemo: input.adjusterMemo,
         extractedFacts: facts,
-      }),
+      }, context),
     });
   } catch (error) {
     console.warn('RAG search failed for closing report', error instanceof Error ? error.message : 'unknown error');

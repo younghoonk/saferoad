@@ -8,6 +8,16 @@ export type ClosingFinalOpinion = 'pay' | 'deny' | 'partial' | 'investigate';
 export interface ClosingReportInput {
   reportType: ClosingReportType;
   insurerName: string;
+  productName?: string;
+  policyName?: string;
+  policyNumber?: string;
+  insuranceType?: string;
+  coverageType?: string;
+  contractDate?: string;
+  policyGeneration?: string;
+  policyVersion?: string;
+  isLifeInsurance?: boolean;
+  isNonLifeInsurance?: boolean;
   caseInfo: {
     receivedDate?: string;
     assignedDate?: string;
@@ -15,6 +25,14 @@ export interface ClosingReportInput {
     insuredName?: string;
     claimNumber?: string;
     policyNumber?: string;
+    policyName?: string;
+    insuranceType?: string;
+    coverageType?: string;
+    contractDate?: string;
+    policyStartDate?: string;
+    enrollmentDate?: string;
+    policyGeneration?: string;
+    policyVersion?: string;
     productName?: string;
     coveragePeriod?: string;
     contractorName?: string;

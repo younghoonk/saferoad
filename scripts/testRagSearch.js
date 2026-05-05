@@ -154,6 +154,38 @@ function extractDiagnosisCodes(query) {
   return Array.from(new Set(String(query).match(/\b[A-Z]\d{2}(?:\.\d{1,3})?\b/g) || []));
 }
 
+function parseDate(value) {
+  const normalized = publicText(value).replace(/[.\/]/g, '-').match(/\d{4}-\d{1,2}-\d{1,2}|\d{4}년/)?.[0];
+  if (!normalized) return null;
+  const dateText = normalized.endsWith('년') ? `${normalized.slice(0, 4)}-01-01` : normalized;
+  const date = new Date(`${dateText}T00:00:00Z`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function inferIndemnityInsuranceGeneration(contractDate) {
+  const date = parseDate(contractDate);
+  if (!date) return 'unknown';
+  if (date < new Date('2009-10-01T00:00:00Z')) return '1세대';
+  if (date < new Date('2017-04-01T00:00:00Z')) return '2세대';
+  if (date < new Date('2021-07-01T00:00:00Z')) return '3세대';
+  return '4세대';
+}
+
+function contextFromQuery(query) {
+  const contractDate = publicText(query).match(/\d{4}[년.-](?:\d{1,2}[월.-]?)?(?:\d{1,2}일?)?/)?.[0] || '';
+  const insurerName = ['메리츠화재', '삼성화재', '현대해상', 'DB손해보험', 'KB손해보험', '한화생명']
+    .find((name) => query.includes(name)) || '';
+  const insuranceType = query.includes('실손') ? '실손보험' : '';
+  return {
+    contractDate,
+    insurerName,
+    insuranceType,
+    policyGeneration: inferIndemnityInsuranceGeneration(contractDate),
+    isLifeInsurance: /생명보험|한화생명/.test(query),
+    isNonLifeInsurance: /손해보험|화재|실손/.test(query),
+  };
+}
+
 function rowText(row) {
   return [
     row.title,
@@ -196,7 +228,7 @@ function displayRole(row) {
   return '기타 참고자료';
 }
 
-function scoreRow(row, diagnosisCodes) {
+function scoreRow(row, diagnosisCodes, context = {}) {
   let score = Number(row.similarity || 0);
   if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row)) score += 0.08;
   if (officialSourceAreas.has(row.source_area) && (isBlockedOfficialSource(row) || !isAllowedOfficialSource(row))) score -= 0.2;
@@ -205,11 +237,18 @@ function scoreRow(row, diagnosisCodes) {
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
   if (hasSimilarButNotExactCode(row, diagnosisCodes)) score -= 0.08;
   if (isTitleSeedFss(row)) score -= 0.2;
+  if (row.source_area === 'terms_standards') {
+    const text = rowText(row);
+    if (context.insurerName && text.includes(context.insurerName)) score += 0.1;
+    if (context.policyGeneration !== 'unknown' && text.includes(context.policyGeneration)) score += 0.08;
+    if (context.isLifeInsurance && text.includes('생명보험')) score += 0.05;
+    if (context.isNonLifeInsurance && text.includes('손해보험')) score += 0.05;
+  }
   return score;
 }
 
-function sortRows(rows, diagnosisCodes) {
-  return [...rows].sort((a, b) => scoreRow(b, diagnosisCodes) - scoreRow(a, diagnosisCodes));
+function sortRows(rows, diagnosisCodes, context) {
+  return [...rows].sort((a, b) => scoreRow(b, diagnosisCodes, context) - scoreRow(a, diagnosisCodes, context));
 }
 
 async function createEmbedding(query) {
@@ -268,12 +307,12 @@ async function enrichRows(rows) {
   return rows.map((row) => ({ ...row, ...(byId.get(row.id) || {}) }));
 }
 
-function printRow(row, index, diagnosisCodes) {
+function printRow(row, index, diagnosisCodes, context) {
   const exact = exactCodeMatches(row, diagnosisCodes);
   const similarOnly = hasSimilarButNotExactCode(row, diagnosisCodes);
   const titleSeed = isTitleSeedFss(row);
 
-  console.log(`\n[${index + 1}] similarity=${Number(row.similarity || 0).toFixed(4)} adjusted=${scoreRow(row, diagnosisCodes).toFixed(4)}`);
+  console.log(`\n[${index + 1}] similarity=${Number(row.similarity || 0).toFixed(4)} adjusted=${scoreRow(row, diagnosisCodes, context).toFixed(4)}`);
   console.log(`role=${displayRole(row)}`);
   console.log(`source_area=${sourceAreaLabels[row.source_area] || row.source_area || '(empty)'}`);
   if (exact.length) console.log(`diagnosis_code_match=exact:${exact.join(',')}`);
@@ -284,30 +323,32 @@ function printRow(row, index, diagnosisCodes) {
   console.log(`source=${getSourceDisplayName(row)}`);
 }
 
-function printSection(title, rows, diagnosisCodes) {
+function printSection(title, rows, diagnosisCodes, context) {
   console.log(`\n=== ${title} (${rows.length}) ===`);
   if (!rows.length) {
     console.log('No results.');
     return;
   }
-  rows.forEach((row, index) => printRow(row, index, diagnosisCodes));
+  rows.forEach((row, index) => printRow(row, index, diagnosisCodes, context));
 }
 
 async function main() {
   const query = process.argv.slice(2).join(' ').trim() || DEFAULT_QUERY;
   const diagnosisCodes = extractDiagnosisCodes(query);
+  const context = contextFromQuery(query);
   console.log(`Query: ${query}`);
   console.log(`Diagnosis codes in query: ${diagnosisCodes.join(', ') || '(none)'}`);
+  console.log(`Policy context: insurer=${context.insurerName || '(unknown)'} contractDate=${context.contractDate || '(unknown)'} indemnityGeneration=${context.policyGeneration}`);
   console.log(`Min similarity: ${MIN_SIMILARITY}`);
 
   const embedding = await createEmbedding(query);
 
-  const integratedRows = sortRows(await rpcSearch(embedding, 30, null), diagnosisCodes).slice(0, 10);
-  printSection('통합 top10 (adjusted ranking preview)', integratedRows, diagnosisCodes);
+  const integratedRows = sortRows(await rpcSearch(embedding, 30, null), diagnosisCodes, context).slice(0, 10);
+  printSection('통합 top10 (adjusted ranking preview)', integratedRows, diagnosisCodes, context);
 
   const groupedResults = [];
   for (const plan of groupedSearchPlan) {
-    const rows = sortRows(await rpcSearch(embedding, Math.max(plan.count * 4, 10), plan.source_area), diagnosisCodes);
+    const rows = sortRows(await rpcSearch(embedding, Math.max(plan.count * 4, 10), plan.source_area), diagnosisCodes, context);
     const filtered = rows
       .filter((row) => !(plan.section === 'official' && isTitleSeedFss(row)))
       .filter((row) => !(plan.section === 'official' && isBlockedOfficialSource(row)))
@@ -324,11 +365,11 @@ async function main() {
     .filter((group) => group.section === 'internal')
     .flatMap((group) => group.rows.map((row) => ({ ...row, group_label: group.label })));
 
-  printSection('공식/준공식 근거 grouped search', officialRows, diagnosisCodes);
-  printSection('의료/내부 검토자료 grouped search', internalRows, diagnosisCodes);
+  printSection('공식/준공식 근거 grouped search', officialRows, diagnosisCodes, context);
+  printSection('의료/내부 검토자료 grouped search', internalRows, diagnosisCodes, context);
 
   const titleSeedRows = groupedResults.flatMap((group) => group.titleSeeds);
-  printSection('금감원 title seed 보조 결과 (공식근거 후보 제외)', titleSeedRows, diagnosisCodes);
+  printSection('금감원 title seed 보조 결과 (공식근거 후보 제외)', titleSeedRows, diagnosisCodes, context);
 }
 
 main().catch((error) => {

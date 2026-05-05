@@ -2,9 +2,11 @@
 // OpenAI API key is read only from Edge Function environment variables.
 
 import {
-  buildRagQueryFromObject,
+  buildRagSearchQuery,
   formatRagForPrompt,
+  inferIndemnityInsuranceGeneration,
   searchRagReferences,
+  type RagSearchContext,
   type RagSearchResult,
 } from '../_shared/ragSearch.ts';
 
@@ -61,6 +63,17 @@ interface SourceAnalysis {
 
 interface AssessmentDraftInput {
   caseTitle?: string;
+  insurerName?: string;
+  productName?: string;
+  policyName?: string;
+  policyNumber?: string;
+  insuranceType?: string;
+  coverageType?: string;
+  contractDate?: string;
+  policyGeneration?: string;
+  policyVersion?: string;
+  isLifeInsurance?: boolean;
+  isNonLifeInsurance?: boolean;
   accidentType?: string;
   accidentDate?: string;
   accidentLocation?: string;
@@ -274,6 +287,17 @@ function validateSourceAnalysis(raw: unknown): SourceAnalysis | undefined {
 function validateInput(input: AssessmentDraftInput) {
   const cleaned = {
     caseTitle: cleanText(input.caseTitle),
+    insurerName: cleanText(input.insurerName),
+    productName: cleanText(input.productName),
+    policyName: cleanText(input.policyName),
+    policyNumber: cleanText(input.policyNumber),
+    insuranceType: cleanText(input.insuranceType),
+    coverageType: cleanText(input.coverageType),
+    contractDate: cleanText(input.contractDate),
+    policyGeneration: cleanText(input.policyGeneration),
+    policyVersion: cleanText(input.policyVersion),
+    isLifeInsurance: Boolean(input.isLifeInsurance),
+    isNonLifeInsurance: Boolean(input.isNonLifeInsurance),
     accidentType: cleanText(input.accidentType),
     accidentDate: cleanText(input.accidentDate),
     accidentLocation: cleanText(input.accidentLocation),
@@ -303,7 +327,21 @@ function validateInput(input: AssessmentDraftInput) {
     if (!cleaned[key]) throw new HttpError(400, `${label}을 입력해 주세요.`);
   }
 
-  const shortFields: (keyof typeof cleaned)[] = ['caseTitle', 'accidentType', 'accidentDate', 'accidentLocation'];
+  const shortFields: (keyof typeof cleaned)[] = [
+    'caseTitle',
+    'insurerName',
+    'productName',
+    'policyName',
+    'policyNumber',
+    'insuranceType',
+    'coverageType',
+    'contractDate',
+    'policyGeneration',
+    'policyVersion',
+    'accidentType',
+    'accidentDate',
+    'accidentLocation',
+  ];
   for (const key of shortFields) {
     if (String(cleaned[key]).length > MAX_SHORT_FIELD_LENGTH) {
       throw new HttpError(400, `${key} 입력값이 너무 깁니다.`);
@@ -324,6 +362,23 @@ function toneInstruction(tone: Tone) {
   if (tone === 'concise') return '간결하고 핵심 위주로 작성하되, 쟁점과 추가 확인 사항은 빠뜨리지 마세요.';
   if (tone === 'detailed') return '상세하고 체계적으로 작성하되, 사실관계와 추정 의견을 명확히 구분하세요.';
   return '전문적인 손해사정 문체로 작성하되, 실무자가 검토하기 쉽게 구조화하세요.';
+}
+
+function ragContextFromInput(input: ReturnType<typeof validateInput>): RagSearchContext {
+  const generation = input.policyGeneration || inferIndemnityInsuranceGeneration(input.contractDate);
+  return {
+    insurerName: input.insurerName,
+    productName: input.productName,
+    policyName: input.policyName,
+    policyNumber: input.policyNumber,
+    insuranceType: input.insuranceType,
+    coverageType: input.coverageType,
+    contractDate: input.contractDate,
+    policyGeneration: generation,
+    policyVersion: input.policyVersion,
+    isLifeInsurance: input.isLifeInsurance,
+    isNonLifeInsurance: input.isNonLifeInsurance,
+  };
 }
 
 function formatReferences(references: RetrievedReference[]) {
@@ -408,6 +463,11 @@ ${formatRagForPrompt(ragResult)}
 - Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
 - Do not cite FSS title seeds without confirmed full text.
 - Do not cite policy/terms references unless the title and summary are directly related to the issue.
+- Policy terms, disease classification tables, and disability classification/payment tables must be applied based on the insurance contract date and original policy terms.
+- Do not automatically apply the newest policy terms to older contracts.
+- If the original company/product policy is missing, use standard policy terms or similar materials only as reference materials.
+- Indemnity insurance generation is a search aid only; final judgment requires the insurance policy and policy terms in effect at enrollment.
+- For disability and disease-code issues, state that the policy appendix in effect at enrollment must be checked.
 - Cite precedents only when case number, court, and decision date are available.
 - Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
 
@@ -450,6 +510,7 @@ ${formatRagForPrompt(ragResult)}
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
 - Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
 - Policy/terms references must be removed if they are not directly related to the issue.
+- Remove or qualify any statement that applies a later policy version, disease classification table, or disability table to an older contract without confirming the original policy.
 - Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
 
 [초안 JSON]
@@ -536,12 +597,21 @@ function emptyRagResult(): RagSearchResult {
 
 async function getRagResult(apiKey: string, input: ReturnType<typeof validateInput>) {
   try {
+    const context = ragContextFromInput(input);
     return await searchRagReferences({
       supabaseUrl: requiredEnv('SUPABASE_URL'),
       serviceRoleKey: requiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
       openAiKey: apiKey,
-      query: buildRagQueryFromObject({
+      context,
+      query: buildRagSearchQuery({
         caseTitle: input.caseTitle,
+        insurerName: input.insurerName,
+        productName: input.productName,
+        policyName: input.policyName,
+        insuranceType: input.insuranceType,
+        coverageType: input.coverageType,
+        contractDate: input.contractDate,
+        policyGeneration: context.policyGeneration,
         accidentType: input.accidentType,
         accidentDate: input.accidentDate,
         damageDetails: input.damageDetails,
@@ -549,7 +619,7 @@ async function getRagResult(apiKey: string, input: ReturnType<typeof validateInp
         customerStatement: input.customerStatement,
         adjusterMemo: input.adjusterMemo,
         sourceAnalysis: input.sourceAnalysis,
-      }),
+      }, context),
     });
   } catch (error) {
     console.warn('RAG search failed for assessment draft', error instanceof Error ? error.message : 'unknown error');

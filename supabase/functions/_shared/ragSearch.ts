@@ -27,6 +27,22 @@ export interface RagSearchResult {
   internalReviewMaterials: RetrievedReference[];
 }
 
+export type IndemnityInsuranceGeneration = '1세대' | '2세대' | '3세대' | '4세대' | 'unknown';
+
+export interface RagSearchContext {
+  insurerName?: string;
+  productName?: string;
+  policyName?: string;
+  policyNumber?: string;
+  insuranceType?: string;
+  coverageType?: string;
+  contractDate?: string;
+  policyGeneration?: string;
+  policyVersion?: string;
+  isLifeInsurance?: boolean;
+  isNonLifeInsurance?: boolean;
+}
+
 interface RpcRow {
   id: string;
   source_area: string;
@@ -216,6 +232,68 @@ function metadataValue(row: EnrichedRow, key: string) {
   return typeof value === 'string' ? value : '';
 }
 
+function firstMetadataValue(row: EnrichedRow, keys: string[]) {
+  for (const key of keys) {
+    const value = metadataValue(row, key);
+    if (value) return value;
+  }
+  return '';
+}
+
+function parseDate(value: unknown) {
+  const text = publicText(value);
+  if (!text) return null;
+  const normalized = text.replace(/[.\/]/g, '-').match(/\d{4}-\d{1,2}-\d{1,2}/)?.[0];
+  if (!normalized) return null;
+  const date = new Date(`${normalized}T00:00:00Z`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+export function inferIndemnityInsuranceGeneration(contractDate: string): IndemnityInsuranceGeneration {
+  const date = parseDate(contractDate);
+  if (!date) return 'unknown';
+  if (date < new Date('2009-10-01T00:00:00Z')) return '1세대';
+  if (date < new Date('2017-04-01T00:00:00Z')) return '2세대';
+  if (date < new Date('2021-07-01T00:00:00Z')) return '3세대';
+  return '4세대';
+}
+
+function effectiveDateScore(row: EnrichedRow, contractDate?: string) {
+  const contract = parseDate(contractDate);
+  if (!contract) return 0;
+  const from = parseDate(firstMetadataValue(row, ['effective_from', 'effectiveFrom', 'applicable_from', 'start_date']));
+  const to = parseDate(firstMetadataValue(row, ['effective_to', 'effectiveTo', 'applicable_to', 'end_date']));
+  if (from && contract < from) return -0.12;
+  if (to && contract > to) return -0.12;
+  if (from || to) return 0.12;
+  return 0;
+}
+
+function contextText(context?: RagSearchContext) {
+  return [
+    context?.insurerName,
+    context?.productName,
+    context?.policyName,
+    context?.insuranceType,
+    context?.coverageType,
+    context?.policyGeneration,
+    context?.policyVersion,
+    context?.contractDate,
+    context?.isLifeInsurance ? '생명보험' : '',
+    context?.isNonLifeInsurance ? '손해보험' : '',
+  ].map(publicText).filter(Boolean).join(' ');
+}
+
+function rowMatchesText(row: EnrichedRow, value?: string) {
+  const needle = publicText(value);
+  if (!needle) return false;
+  return rowText(row).includes(needle) || JSON.stringify(row.metadata || {}).includes(needle);
+}
+
+function policyGeneration(context?: RagSearchContext) {
+  return publicText(context?.policyGeneration) || inferIndemnityInsuranceGeneration(publicText(context?.contractDate));
+}
+
 function sourceStatus(row: EnrichedRow) {
   return metadataValue(row, 'source_status') || metadataValue(row, 'sourceStatus');
 }
@@ -247,7 +325,7 @@ function isInternalReviewMaterial(row: EnrichedRow) {
     || String(row.source_type || '').startsWith('internal_');
 }
 
-function scoreRow(row: EnrichedRow, diagnosisCodes: string[]) {
+function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearchContext) {
   let score = Number(row.similarity || 0);
   if (isOfficialReference(row)) score += 0.08;
   if (row.source_area === 'issue_playbooks') score -= 0.05;
@@ -255,6 +333,19 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[]) {
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
   if (hasSimilarButNotExactCode(row, diagnosisCodes)) score -= 0.08;
   if (isTitleSeedFss(row)) score -= 0.2;
+  if (row.source_area === 'terms_standards') {
+    if (rowMatchesText(row, context?.insurerName)) score += 0.1;
+    if (rowMatchesText(row, context?.productName) || rowMatchesText(row, context?.policyName)) score += 0.1;
+    score += effectiveDateScore(row, context?.contractDate);
+    const generation = policyGeneration(context);
+    if (generation !== 'unknown' && rowMatchesText(row, generation)) score += 0.08;
+    if (context?.isLifeInsurance && rowMatchesText(row, '생명보험')) score += 0.05;
+    if (context?.isNonLifeInsurance && rowMatchesText(row, '손해보험')) score += 0.05;
+    if ((/후유장해|장해|지급률/.test(contextText(context)) || /후유장해|장해|지급률/.test(rowText(row)))
+      && /장해분류표|장해지급률|지급률/.test(rowText(row))) score += 0.08;
+    if ((/질병코드|KCD|질병분류|진단비/.test(contextText(context)) || /질병코드|KCD|질병분류|진단비/.test(rowText(row)))
+      && /질병분류표|KCD|한국표준질병/.test(rowText(row))) score += 0.08;
+  }
   return score;
 }
 
@@ -411,11 +502,31 @@ export function buildRagQueryFromObject(value: unknown) {
   return publicText(JSON.stringify(value)).slice(0, 2500);
 }
 
+export function buildRagSearchQuery(value: unknown, context?: RagSearchContext) {
+  const generation = policyGeneration(context);
+  const parts = [
+    buildRagQueryFromObject(value),
+    context?.insurerName ? `보험회사 ${context.insurerName}` : '',
+    context?.insuranceType ? `보험종류 ${context.insuranceType}` : '',
+    context?.productName ? `상품명 ${context.productName}` : '',
+    context?.policyName ? `약관명 ${context.policyName}` : '',
+    context?.coverageType ? `담보명 ${context.coverageType}` : '',
+    context?.contractDate ? `보험가입일 ${context.contractDate}` : '',
+    generation !== 'unknown' ? `추정 실손보험 ${generation}` : '',
+    context?.policyVersion ? `약관버전 ${context.policyVersion}` : '',
+    context?.isLifeInsurance ? '생명보험' : '',
+    context?.isNonLifeInsurance ? '손해보험' : '',
+    '가입 당시 약관 질병분류표 장해분류표 적용기간',
+  ];
+  return publicText(parts.filter(Boolean).join(' ')).slice(0, 3000);
+}
+
 export async function searchRagReferences(params: {
   supabaseUrl: string;
   serviceRoleKey: string;
   openAiKey: string;
   query: string;
+  context?: RagSearchContext;
 }): Promise<RagSearchResult> {
   const query = publicText(params.query);
   if (!query) return { query: '', officialReferences: [], internalReviewMaterials: [] };
@@ -428,7 +539,7 @@ export async function searchRagReferences(params: {
   for (const plan of searchPlan) {
     const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 4, 10));
     const rows = await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows);
-    const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes) - scoreRow(a, diagnosisCodes));
+    const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context) - scoreRow(a, diagnosisCodes, params.context));
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
@@ -477,6 +588,9 @@ export function formatRagForPrompt(result: RagSearchResult) {
   return [
     '[RAG 검색 질의]',
     result.query,
+    '',
+    '[약관 적용 주의]',
+    '약관, 질병분류표, 장해분류표는 보험가입일과 해당 상품 원약관 기준으로 확인해야 합니다. 실손 세대 추정은 검색 보조용이며 최종 판단 근거가 아닙니다. 회사/상품 원약관이 없으면 표준약관 또는 유사자료는 참고자료로만 사용합니다.',
     '',
     '[공식/준공식 근거 - 인용 가능]',
     official,
