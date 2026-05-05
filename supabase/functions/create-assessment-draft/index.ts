@@ -458,7 +458,15 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'm47_disclosure' ? `
+  const profileRules = profile === 'indemnity_manual_therapy_denial' ? `
+[Indemnity manual therapy denial argument]
+- This is not a disclosure-duty or contract-termination case. Do not use pre-contract disclosure duty, policy termination, underwriting, application-form question, decline, exclusion, loading, or non-disclosure reasoning unless explicitly entered.
+- For manual therapy denial under indemnity medical insurance, focus on treatment purpose, medical necessity, doctor's prescription, treatment plan, treatment course, appropriateness of repeated therapy, detailed medical bill items, and policy exclusions.
+- Manual therapy is not automatically payable or automatically excessive. The insurer should present concrete reasons based on medical records, treatment count, and lack of medical necessity instead of relying only on the item name.
+- The customer-side argument should request reconsideration based on medical necessity and treatment purpose, supported by medical records, physician opinion, treatment plan, symptom-change records, pain assessment records, detailed medical bill, receipt, non-covered treatment details, original indemnity policy terms, and insurer denial letter.
+- If the contract date suggests fourth-generation indemnity insurance, state this is only a search aid and final judgment requires the original policy terms at enrollment.
+- The conclusion should be: the insurer's denial decision requires reconsideration based on treatment purpose and medical necessity materials. Do not state payment is certain.
+` : profile === 'm47_disclosure' ? `
 [M47.26 customer-side argument when applicable]
 - For M47.26 one-time outpatient non-disclosure, the customer-side position is that the medical record exists, but the record alone does not prove the legal requirements for termination.
 - Explain that Commercial Act Article 651 requires materiality and intentional or grossly negligent non-disclosure.
@@ -596,7 +604,9 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'm47_disclosure'
+  const profileReviewRules = profile === 'indemnity_manual_therapy_denial'
+    ? '- For a manual therapy indemnity denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion, loading, M47.26 non-disclosure, automobile damage, disability, cancer, cataract, and hospitalization-pattern reasoning. Keep the reasoning focused on treatment purpose, medical necessity, doctor prescription, treatment plan, repeated therapy appropriateness, policy exclusions, and original indemnity policy terms.'
+    : profile === 'm47_disclosure'
     ? '- For an M47.26 single outpatient non-disclosure case, keep the logic that one outpatient record and a diagnosis-code entry alone do not automatically establish materiality or intentional/grossly negligent non-disclosure.'
     : profile === 'thyroid_disclosure_cancer'
       ? '- For a thyroid nodule / thyroid cancer disclosure case, remove M47.26, back pain, orthopedic, one-outpatient, and spine-specific reasoning. Keep the reasoning focused on thyroid nodule, health checkup, ultrasound, FNA/biopsy recommendation, cancer diagnosis benefit, objective underwriting standards, and thyroid cancer causal relationship.'
@@ -826,7 +836,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -849,6 +859,10 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
     ...(input.sourceAnalysis?.keyIssues || []),
   ].filter(Boolean).join(' ');
   const disclosure = isDisclosureDutyCase(input);
+  if (/도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|과잉진료|의학적\s*필요성|반복치료|진료비\s*세부내역|치료계획/i.test(allText)
+    || (/실손|실손보험|실손의료/i.test(allText) && /M54|요통|허리통증|도수|비급여|치료/i.test(allText))) {
+    return 'indemnity_manual_therapy_denial';
+  }
   if (disclosure && /M47\.26|요추증|신경뿌리병증|허리통증|요통/i.test(diagnosisText)) return 'm47_disclosure';
   if (/C73|갑상선암|갑상선\s*결절|thyroid|E04|D34/i.test(allText)) return 'thyroid_disclosure_cancer';
   if (disclosure) return 'general_disclosure';
@@ -869,6 +883,10 @@ function ensureSubstantialOpinion(result: AssessmentDraftResult, input: ReturnTy
     '건강검진상 단순 결절 또는 추적관찰 권유에 그쳤고, 암 의심 설명, 미세침흡인검사 또는 조직검사 권유, 치료ㆍ투약ㆍ수술ㆍ입원 등이 없었다면 고객이 이를 보험계약상 중요한 병력으로 인식하기 어려웠을 가능성이 있다.',
     '반대로 초음파상 악성 의심 소견, 미세침흡인검사 권유, 조직검사 권유, 양성신생물 진단, 반복 추적검사 지시가 확인된다면 보험회사 주장이 강화될 수 있으므로 해당 자료를 별도로 확인해야 한다.',
     '보험회사는 해당 갑상선 결절 소견을 알았다면 인수거절, 부담보, 할증 등 조건으로 인수했을 객관적 인수기준을 제시할 필요가 있다. 암진단비 부지급은 고지의무 위반 여부와 별도로 갑상선암 진단과의 인과관계도 함께 검토해야 한다.',
+  ] : profile === 'indemnity_manual_therapy_denial' ? [
+    '도수치료 실손보험 부지급 사건에서는 도수치료라는 항목명만으로 보험금 지급 또는 부지급이 곧바로 확정되는 것은 아니다. 보험금 지급 여부는 치료 목적성, 의학적 필요성, 의사 처방 및 치료계획, 치료 경과, 반복치료의 적정성, 가입 당시 실손보험 약관상 보상 제외 조항을 중심으로 검토해야 한다.',
+    '보험회사가 의학적 필요성 부족 또는 과잉진료를 주장하는 경우에도 단순히 비급여 도수치료라는 사정만으로는 부족하다. 보험회사는 구체적인 진료기록, 치료횟수, 치료기간, 증상 경과, 의학적 필요성 부족 사유, 약관상 보상 제외 근거를 제시할 필요가 있다.',
+    '고객 측은 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서, 영수증, 비급여 진료내역을 통해 치료 목적성과 필요성을 보완해야 한다.',
   ] : [
     '계약전 알릴의무 위반 사건에서는 진료 또는 검사 이력의 존재와 계약해지 요건 충족 여부를 구분해야 한다. 청약서 질문사항 해당성, 중요한 사항성, 고의 또는 중대한 과실, 보험사고와의 인과관계를 순차적으로 검토해야 한다.',
   ];
@@ -994,9 +1012,11 @@ function enforceCustomerSideStance(result: AssessmentDraftResult, input: ReturnT
 }
 
 function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
-  if (!isDisclosureDutyCase(input)) return result;
   const profile = caseProfile(input);
-  const scope = profile === 'm47_disclosure'
+  if (!isDisclosureDutyCase(input) && profile !== 'indemnity_manual_therapy_denial') return result;
+  const scope = profile === 'indemnity_manual_therapy_denial'
+    ? '본 건은 손해액 산정보다는 도수치료가 가입 당시 실손보험 약관상 보상 대상 치료에 해당하는지, 치료 목적성과 의학적 필요성이 인정되는지, 반복치료의 적정성과 비급여 치료 항목의 보상 제외 여부가 어떻게 판단되는지가 핵심이다. 따라서 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서, 비급여 진료내역, 가입 당시 실손보험 원약관 및 보험회사 부지급 사유서를 중심으로 검토해야 한다.'
+    : profile === 'm47_disclosure'
     ? '본 건은 손해액 산정보다는 보험가입 전 1회 통원 사실이 계약전 알릴의무 위반 및 계약해지 사유에 해당하는지 여부가 핵심이다. 따라서 손해평가보다는 청약서 질문사항, 진료기록, 보험회사의 객관적 인수기준, 피보험자의 고의 또는 중대한 과실 여부, 고지의무 위반 사실과 보험사고 사이의 인과관계를 중심으로 검토해야 한다.'
     : profile === 'thyroid_disclosure_cancer'
       ? '본 건은 손해액 산정보다는 보험가입 전 갑상선 결절 소견이 계약전 알릴의무상 중요한 사항에 해당하는지, 고객에게 고의 또는 중대한 과실이 있었는지, 그리고 이후 갑상선암 진단과의 관련성이 인정되는지가 핵심이다. 따라서 건강검진 결과지, 갑상선 초음파 판독지, 미세침흡인검사 권유 여부, 조직검사 여부, 가입 당시 암보험 약관 및 청약서 질문사항을 중심으로 검토해야 한다.'
@@ -1009,8 +1029,15 @@ function adjustDisclosureDamageScope(result: AssessmentDraftResult, input: Retur
 
 function normalizeDisclosureOpinion(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const profile = caseProfile(input);
-  if (profile !== 'm47_disclosure' && profile !== 'thyroid_disclosure_cancer') return result;
-  const opinion = profile === 'm47_disclosure' ? [
+  if (profile !== 'm47_disclosure' && profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial') return result;
+  const opinion = profile === 'indemnity_manual_therapy_denial' ? [
+    '먼저, 도수치료가 실손보험 청구 항목에 포함되어 있다는 사실만으로 보험금 지급 또는 부지급이 곧바로 확정되는 것은 아니다. 현재 입력된 사실관계에 따르면 핵심은 해당 도수치료가 치료 목적의 의료행위였는지, 의학적 필요성이 인정되는지, 반복치료의 횟수와 기간이 진료 경과에 비추어 적정한지 여부이다.',
+    '보험회사가 도수치료의 의학적 필요성 부족 또는 과잉진료를 이유로 부지급을 주장하려면 단순히 비급여 도수치료라는 항목명만으로는 부족하다. 보험회사는 진료기록, 치료횟수, 치료기간, 증상 경과, 의학적 필요성이 부족하다고 보는 구체적 사유, 가입 당시 실손보험 약관상 보상 제외 근거를 명확히 제시할 필요가 있다.',
+    '고객 측에서는 도수치료가 통증 완화나 기능 회복 등 치료 목적에서 시행되었다는 점을 자료로 보완해야 한다. 이를 위해 진료기록지, 도수치료 처방 또는 치료계획, 의사 소견서, 치료 전후 증상 변화 기록, 통증평가 기록, 진료비 세부내역서와 영수증, 비급여 진료내역을 확보하는 것이 중요하다.',
+    '2022년 가입 실손보험이라면 4세대 실손보험으로 추정될 수 있으나, 이는 검색과 쟁점 정리를 위한 보조 정보일 뿐이다. 최종 판단은 반드시 가입 당시 해당 보험회사의 실손보험 원약관, 비급여 특약, 도수치료 관련 보상 기준과 자기부담 구조를 확인한 뒤 이루어져야 한다.',
+    '불리한 점도 함께 검토해야 한다. 치료횟수가 과도하게 많거나, 의사 처방 및 치료계획이 불명확하거나, 치료 전후 증상 변화 기록이 부족하거나, 약관상 보상 제외 또는 제한 조항에 해당하는 사정이 있으면 보험회사 주장이 강화될 수 있다. 따라서 고객 측 주장은 치료 목적성과 의학적 필요성을 입증하는 자료 확보를 전제로 정리하는 것이 타당하다.',
+    '종합하면, 현 단계에서 보험금 지급을 확정할 수는 없으나 도수치료 부지급 처분은 치료 목적성, 의학적 필요성, 의사 처방 및 치료 경과 자료를 기준으로 재검토될 필요가 있다. 보험회사가 구체적 의학적 필요성 부족 근거와 약관상 보상 제외 근거를 충분히 제시하지 못했다면, 고객 측은 위 보완자료를 제출하여 실손보험금 재심사를 요청할 수 있다는 의견이다.',
+  ] : profile === 'm47_disclosure' ? [
     '먼저, 보험가입 전 진료기록 또는 병원 전산상 M47.26 질병코드가 존재한다는 점은 사실관계로 인정할 수 있다. 다만 진료기록이 존재한다는 사정과 계약전 알릴의무 위반을 이유로 한 계약해지 요건이 충족되는지는 구분되어야 한다. 보험회사가 계약해지를 주장하려면 단순한 기록 존재를 넘어 그 진료이력이 청약 당시 고지해야 할 중요한 사항에 해당한다는 점을 구체적으로 설명할 필요가 있다.',
     '상법 제651조의 취지에 비추어 보면, 계약전 알릴의무 위반에 따른 계약해지는 중요한 사항성과 고의 또는 중대한 과실이 함께 문제된다. 따라서 본 건에서는 청약서 질문사항이 해당 1회 통원 사실을 명확히 묻고 있었는지, 피보험자가 그 사실을 보험계약상 중요한 사항으로 인식할 수 있었는지, 고지하지 않은 데 고의 또는 중대한 과실이 있었다고 볼 수 있는지를 순차적으로 검토해야 한다.',
     '현재 입력된 사실관계가 단순 허리 뻐근함 또는 허리 통증으로 인한 1회성 통원에 그치고, 입원, 수술, 정밀검사, 반복치료, 장기투약이 확인되지 않는 사안이라면 이는 고객 측에 유리한 사정이다. 이러한 경우 피보험자가 해당 진료를 중대한 질환 또는 보험계약 인수에 영향을 미칠 중요한 병력으로 인식했다고 단정하기 어렵고, 중요사항성 및 고의ㆍ중대한 과실은 다툴 여지가 있다.',
@@ -1077,12 +1104,15 @@ function neutralizeUnverifiedMedicalSourcePhrases(result: AssessmentDraftResult,
 }
 
 function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
-  if (caseProfile(input) !== 'thyroid_disclosure_cancer') return result;
-  const m47Leak = /M47\.26|단순\s*허리|허리\s*통증|허리통증|정형외과|1회\s*통원|요추증|신경뿌리병증|입원\/수술\/정밀검사|입원,\s*수술,\s*정밀검사/i;
+  const profile = caseProfile(input);
+  if (profile !== 'thyroid_disclosure_cancer' && profile !== 'indemnity_manual_therapy_denial') return result;
+  const leak = profile === 'thyroid_disclosure_cancer'
+    ? /M47\.26|단순\s*허리|허리\s*통증|허리통증|정형외과|1회\s*통원|요추증|신경뿌리병증|입원\/수술\/정밀검사|입원,\s*수술,\s*정밀검사/i
+    : /계약전\s*알릴의무|계약\s*전\s*알릴\s*의무|고지의무|미고지|계약해지|청약서\s*질문사항|인수거절|부담보|할증|M47\.26|M54\.26|1회\s*통원\s*미고지|자동차보험\s*손해액|후유장해|암진단비|백내장|입원비\s*부지급/i;
   const clean = (value: string) => value
     .split(/(?<=[.。])\s+|\n+/)
     .map((sentence) => sentence.trim())
-    .filter((sentence) => sentence && !m47Leak.test(sentence))
+    .filter((sentence) => sentence && !leak.test(sentence))
     .join('\n\n')
     .trim();
   return {
@@ -1232,6 +1262,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const profile = caseProfile(input);
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
+  const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
     ...ref,
     title: preserveDiagnosisCodesInText(ref.title, codes),
@@ -1274,6 +1305,13 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
         }
       }
     }
+    if (manualTherapyProfile) {
+      const excluded = /계약전\s*알릴의무|고지의무|계약해지|청약서|인수거절|부담보|할증|M47\.26|1회\s*통원\s*미고지|자동차|손해배상|후유장해|암진단비|백내장|갑상선암|입원비|이륜차|요양불승인|산재/i;
+      const direct = /도수치료|manual\s*therapy|실손보험|실손의료|비급여|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|의료비\s*지급|보상\s*제외/i;
+      if (excluded.test(text)) return false;
+      if (ref.source_area === 'precedents' && !direct.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
+    }
     const key = officialReferenceKey(ref);
     if (seenOfficial.has(key)) return false;
     seenOfficial.add(key);
@@ -1296,6 +1334,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (thyroidProfile) {
     const excluded = /M47\.26|요추증|허리통증|정형외과|1회\s*통원|실손보험|도수치료|백내장|중심정맥관|무릎|후유장해|체외충격파|회전근개|자동차|교통사고|M48\.3|척추협착|어깨|견관절/i;
     const allowed = /C73|갑상선암|갑상선\s*결절|E04|갑상선종|D34|갑상선\s*양성신생물|초음파|미세침흡인검사|조직검사|건강검진|암진단비|고지의무|알릴의무/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (manualTherapyProfile) {
+    const excluded = /계약전\s*알릴의무|고지의무|계약해지|청약서|인수거절|부담보|할증|M47\.26|M54\.26\s*1회\s*통원\s*미고지|계약해지\s*안내문|자동차보험\s*손해액|후유장해|암진단비|백내장|갑상선암|입원비\s*부지급|중심정맥관/i;
+    const allowed = /도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|\bM54(?:\.|$)|요통|허리통증|진료비\s*세부내역|치료계획|INDEMNITY_MANUAL_THERAPY_PURPOSE|보험금\s*부지급\s*안내문/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
