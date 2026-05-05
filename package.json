@@ -23,7 +23,9 @@
     "rag:realcases:import": "node scripts/importRealCasePatterns.js",
     "rag:realcases:check": "node scripts/checkRealCasePatterns.js",
     "rag:feedback:import": "node scripts/importRagSearchFeedbackSamples.js",
-    "rag:feedback:check": "node scripts/checkRagSearchFeedback.js"
+    "rag:feedback:check": "node scripts/checkRagSearchFeedback.js",
+    "rag:embeddings:check": "node scripts/checkRagEmbeddings.js",
+    "rag:search:test": "node scripts/testRagSearch.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
