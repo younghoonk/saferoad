@@ -1,0 +1,2 @@
+[functions.rag-embed-backfill]
+verify_jwt = false
