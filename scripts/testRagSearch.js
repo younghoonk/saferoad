@@ -44,6 +44,41 @@ const officialSourceAreas = new Set([
   'precedents',
 ]);
 
+const sourceDomainDisplayNames = {
+  'law.go.kr': '국가법령정보센터',
+  'open.law.go.kr': '국가법령정보 공동활용',
+  'fss.or.kr': '금융감독원',
+  'fine.fss.or.kr': '금융감독원',
+  'fsc.go.kr': '금융위원회',
+  'health.kdca.go.kr': '질병관리청 국가건강정보포털',
+  'kdca.go.kr': '질병관리청',
+  'data.go.kr': '공공데이터포털',
+  'hira.or.kr': '건강보험심사평가원',
+  'cancer.go.kr': '국가암정보센터',
+  'kostat.go.kr': '통계청',
+  'carinfo.knia.or.kr': '손해보험협회 자동차보험 종합포털',
+  'knia.or.kr': '손해보험협회',
+  'klia.or.kr': '생명보험협회',
+  'samsungfire.com': '삼성화재',
+  'hi.co.kr': '현대해상',
+  'hyundai.co.kr': '현대해상',
+  'dbins.co.kr': 'DB손해보험',
+  'idbins.com': 'DB손해보험',
+  'kbinsure.co.kr': 'KB손해보험',
+  'meritzfire.com': '메리츠화재',
+  'hanwhalife.com': '한화생명',
+};
+
+const allowedOfficialDomains = Object.keys(sourceDomainDisplayNames);
+const blockedOfficialDomains = [
+  'okclaim.com',
+  'insclaim.co.kr',
+  'blog.naver.com',
+  'm.blog.naver.com',
+  'tistory.com',
+  'brunch.co.kr',
+];
+
 const internalReviewSourceAreas = new Set([
   'medical_knowledge',
   'medical_issue_codes',
@@ -60,6 +95,8 @@ const groupedSearchPlan = [
   { label: '의료 검토자료 / 의료지식', source_area: 'medical_knowledge', count: 3, section: 'internal' },
   { label: '의료 검토자료 / 질병코드별 의료쟁점', source_area: 'medical_issue_codes', count: 3, section: 'internal' },
   { label: '내부 검토자료 / 쟁점 플레이북', source_area: 'issue_playbooks', count: 2, section: 'internal' },
+  { label: '내부 검토자료 / 익명 사건 패턴', source_area: 'real_case_patterns', count: 2, section: 'internal' },
+  { label: '내부 검토자료 / 익명 문서 요약', source_area: 'real_case_documents', count: 2, section: 'internal' },
 ];
 
 const internalIdPattern = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
@@ -71,6 +108,41 @@ function publicText(value) {
     .replace(internalIdPattern, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function hostnameFromUrl(sourceUrl) {
+  const value = publicText(sourceUrl);
+  if (!value) return '';
+  try {
+    return new URL(value).hostname.replace(/^www\./, '').toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
+function matchDomain(hostname, domains) {
+  return domains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`));
+}
+
+function isBlockedOfficialSource(row) {
+  const hostname = hostnameFromUrl(row.source_url);
+  return Boolean(hostname && matchDomain(hostname, blockedOfficialDomains));
+}
+
+function isAllowedOfficialSource(row) {
+  const hostname = hostnameFromUrl(row.source_url);
+  if (!hostname) return ['legal_statutes', 'fss_dispute_cases', 'precedents'].includes(row.source_area);
+  return matchDomain(hostname, allowedOfficialDomains);
+}
+
+function getSourceDisplayName(row) {
+  const hostname = hostnameFromUrl(row.source_url);
+  if (hostname) {
+    const matched = Object.entries(sourceDomainDisplayNames)
+      .find(([domain]) => hostname === domain || hostname.endsWith(`.${domain}`));
+    if (matched) return matched[1];
+  }
+  return sourceAreaLabels[row.source_area] || row.source_area || '참고자료';
 }
 
 function clip(value, length = 220) {
@@ -118,14 +190,16 @@ function isTitleSeedFss(row) {
 }
 
 function displayRole(row) {
-  if (officialSourceAreas.has(row.source_area)) return '공식/준공식 근거';
+  if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row)) return '공식/준공식 근거';
+  if (officialSourceAreas.has(row.source_area)) return '공식근거 제외 출처';
   if (internalReviewSourceAreas.has(row.source_area)) return '내부 검토자료';
   return '기타 참고자료';
 }
 
 function scoreRow(row, diagnosisCodes) {
   let score = Number(row.similarity || 0);
-  if (officialSourceAreas.has(row.source_area)) score += 0.08;
+  if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row)) score += 0.08;
+  if (officialSourceAreas.has(row.source_area) && (isBlockedOfficialSource(row) || !isAllowedOfficialSource(row))) score -= 0.2;
   if (row.source_area === 'issue_playbooks') score -= 0.05;
   if (row.source_area === 'medical_issue_codes') score -= 0.03;
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
@@ -207,7 +281,7 @@ function printRow(row, index, diagnosisCodes) {
   if (titleSeed) console.log('fss_status=title_seed_needs_full_text (공식근거 후보에서 낮은 우선순위)');
   console.log(`title=${publicText(row.title) || '(empty)'}`);
   console.log(`summary=${clip(row.summary || row.chunk_text)}`);
-  if (row.source_url) console.log(`source_url=${row.source_url}`);
+  console.log(`source=${getSourceDisplayName(row)}`);
 }
 
 function printSection(title, rows, diagnosisCodes) {
@@ -236,6 +310,8 @@ async function main() {
     const rows = sortRows(await rpcSearch(embedding, Math.max(plan.count * 4, 10), plan.source_area), diagnosisCodes);
     const filtered = rows
       .filter((row) => !(plan.section === 'official' && isTitleSeedFss(row)))
+      .filter((row) => !(plan.section === 'official' && isBlockedOfficialSource(row)))
+      .filter((row) => !(plan.section === 'official' && !isAllowedOfficialSource(row)))
       .slice(0, plan.count);
     const titleSeeds = rows.filter(isTitleSeedFss).slice(0, 2);
     groupedResults.push({ ...plan, rows: filtered, titleSeeds });

@@ -9,6 +9,7 @@ export interface RetrievedReference {
   title: string;
   summary?: string;
   source_url?: string;
+  sourceDisplayName?: string;
   similarity?: number;
   case_number?: string;
   court_or_agency?: string;
@@ -59,6 +60,41 @@ const sourceAreaLabels: Record<string, string> = {
   real_case_documents: '익명 문서 요약',
 };
 
+const sourceDomainDisplayNames: Record<string, string> = {
+  'law.go.kr': '국가법령정보센터',
+  'open.law.go.kr': '국가법령정보 공동활용',
+  'fss.or.kr': '금융감독원',
+  'fine.fss.or.kr': '금융감독원',
+  'fsc.go.kr': '금융위원회',
+  'health.kdca.go.kr': '질병관리청 국가건강정보포털',
+  'kdca.go.kr': '질병관리청',
+  'data.go.kr': '공공데이터포털',
+  'hira.or.kr': '건강보험심사평가원',
+  'cancer.go.kr': '국가암정보센터',
+  'kostat.go.kr': '통계청',
+  'carinfo.knia.or.kr': '손해보험협회 자동차보험 종합포털',
+  'knia.or.kr': '손해보험협회',
+  'klia.or.kr': '생명보험협회',
+  'samsungfire.com': '삼성화재',
+  'hi.co.kr': '현대해상',
+  'hyundai.co.kr': '현대해상',
+  'dbins.co.kr': 'DB손해보험',
+  'idbins.com': 'DB손해보험',
+  'kbinsure.co.kr': 'KB손해보험',
+  'meritzfire.com': '메리츠화재',
+  'hanwhalife.com': '한화생명',
+};
+
+const allowedOfficialDomains = Object.keys(sourceDomainDisplayNames);
+const blockedOfficialDomains = [
+  'okclaim.com',
+  'insclaim.co.kr',
+  'blog.naver.com',
+  'm.blog.naver.com',
+  'tistory.com',
+  'brunch.co.kr',
+];
+
 const searchPlan = [
   { source_area: 'legal_statutes', count: 3 },
   { source_area: 'terms_standards', count: 3 },
@@ -82,6 +118,62 @@ function publicText(value: unknown) {
     .replace(internalSourceTypePattern, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function hostnameFromUrl(sourceUrl: unknown) {
+  const value = publicText(sourceUrl);
+  if (!value) return '';
+  try {
+    return new URL(value).hostname.replace(/^www\./, '').toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
+function matchDomain(hostname: string, domains: string[]) {
+  return domains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`));
+}
+
+function isBlockedOfficialSource(row: EnrichedRow) {
+  const hostname = hostnameFromUrl(row.source_url);
+  return Boolean(hostname && matchDomain(hostname, blockedOfficialDomains));
+}
+
+function isAllowedOfficialSource(row: EnrichedRow) {
+  const hostname = hostnameFromUrl(row.source_url);
+  if (!hostname) {
+    return row.source_area === 'legal_statutes'
+      || row.source_area === 'fss_dispute_cases'
+      || row.source_area === 'precedents';
+  }
+  return matchDomain(hostname, allowedOfficialDomains);
+}
+
+function getSourceDisplayName(sourceUrl: unknown, sourceArea?: string, title?: unknown) {
+  const hostname = hostnameFromUrl(sourceUrl);
+  if (hostname) {
+    const matched = Object.entries(sourceDomainDisplayNames)
+      .find(([domain]) => hostname === domain || hostname.endsWith(`.${domain}`));
+    if (matched) return matched[1];
+  }
+  const areaDisplayNames: Record<string, string> = {
+    fss_dispute_cases: '금융감독원 분쟁조정례',
+    legal_statutes: '법령',
+    medical_knowledge: '의료 참고자료',
+    precedents: '판례',
+    terms_standards: '약관/지급기준',
+    issue_playbooks: '내부 쟁점 플레이북',
+    medical_issue_codes: '질병코드별 의료쟁점',
+    real_case_patterns: '익명 사건 패턴',
+    real_case_documents: '익명 문서 요약',
+  };
+  if (sourceArea && areaDisplayNames[sourceArea]) return areaDisplayNames[sourceArea];
+  if (sourceArea && sourceAreaLabels[sourceArea]) return sourceAreaLabels[sourceArea];
+  const safeTitle = publicText(title);
+  if (/상법|민법|보험업법|법령|조문/.test(safeTitle)) return '국가법령정보센터';
+  if (/금융감독원|분쟁조정/.test(safeTitle)) return '금융감독원';
+  if (/질병관리청|국가건강정보/.test(safeTitle)) return '질병관리청 국가건강정보포털';
+  return sourceArea || '참고자료';
 }
 
 function clip(value: unknown, maxLength = 700) {
@@ -134,10 +226,12 @@ function isTitleSeedFss(row: EnrichedRow) {
   const status = sourceStatus(row);
   return status === 'title_seed_needs_full_text'
     || /title_seed_needs_full_text/i.test(text)
+    || /제목 기반|title seed|원문 .*확인|full text/i.test(text)
     || /제목 기반|title seed|원문 .*확인|full text/i.test(text);
 }
 
 function isOfficialReference(row: EnrichedRow) {
+  if (isBlockedOfficialSource(row) || !isAllowedOfficialSource(row)) return false;
   if (row.source_area === 'legal_statutes' || row.source_area === 'terms_standards') return true;
   if (row.source_area === 'fss_dispute_cases') {
     return sourceStatus(row) === 'official_fss_full_text';
@@ -170,6 +264,31 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
   const queryText = query.replace(/\s+/g, ' ');
   const diagnosisCodes = extractDiagnosisCodes(query);
   if (diagnosisCodes.length && exactCodeMatches(row, diagnosisCodes).length) return true;
+
+  const normalizedIssueGroups = [
+    {
+      query: /고지|알릴|미고지|계약해지|중요한 사항|중대한 과실/,
+      terms: /고지|알릴|미고지|계약해지|해지|질문사항|중요한 사항|중대한 과실/,
+    },
+    {
+      query: /도수|백내장|다초점|요양병원|비급여|주사|체외충격파|치료목적/,
+      terms: /도수|백내장|다초점|요양병원|비급여|주사|체외충격파|치료목적|보상하지/,
+    },
+    {
+      query: /후유장해|장해|지급률|운동범위|동요관절/,
+      terms: /후유장해|장해|지급률|운동범위|동요|장해분류표/,
+    },
+    {
+      query: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리/,
+      terms: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리|진단확정/,
+    },
+    {
+      query: /면책|자살|이륜|통지의무|책임개시|설명의무/,
+      terms: /면책|자살|이륜|통지의무|책임개시|설명의무|보상하지/,
+    },
+  ];
+  const normalizedMatchedGroups = normalizedIssueGroups.filter((group) => group.query.test(queryText));
+  if (normalizedMatchedGroups.length) return normalizedMatchedGroups.some((group) => group.terms.test(text));
 
   const issueGroups = [
     {
@@ -261,10 +380,11 @@ function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): 
   return {
     reference_type: referenceType,
     source_area: row.source_area,
-    source_area_label: sourceAreaLabels[row.source_area] || row.source_area,
+    source_area_label: getSourceDisplayName(undefined, row.source_area, row.title),
     title: clip(row.title, 180),
     summary: clip(row.summary || row.chunk_text, 700),
     source_url: publicText(row.source_url),
+    sourceDisplayName: getSourceDisplayName(row.source_url, row.source_area, row.title),
     similarity: Number(row.similarity || 0),
     case_number: publicText(metadata.case_number),
     court_or_agency: publicText(metadata.court || metadata.court_or_agency || metadata.courtOrAgency),
@@ -338,7 +458,7 @@ export function formatRagForPrompt(result: RagSearchResult) {
       ref.case_number ? `사건번호: ${ref.case_number}` : '',
       ref.court_or_agency ? `법원/기관: ${ref.court_or_agency}` : '',
       ref.decision_date ? `선고/결정일: ${ref.decision_date}` : '',
-      ref.source_url ? `출처: ${ref.source_url}` : '',
+      `출처: ${ref.sourceDisplayName || getSourceDisplayName(ref.source_url, ref.source_area, ref.title)}`,
       ref.summary ? `요약: ${ref.summary}` : '',
     ].filter(Boolean).join('\n')).join('\n\n')
     : '검색된 공식/준공식 근거 없음.';

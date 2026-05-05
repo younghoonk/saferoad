@@ -35,7 +35,12 @@ import {
   ClosingReportResult,
   ClosingReportType,
 } from '../../lib/closingReportApi';
-import { cleanRagPublicText, type RagRetrievedReference, type RagSearchResult } from '../../lib/ragReferences';
+import {
+  cleanRagPublicText,
+  getSourceDisplayName,
+  type RagRetrievedReference,
+  type RagSearchResult,
+} from '../../lib/ragReferences';
 
 interface AIAnalysisScreenProps {
   onBack: () => void;
@@ -797,7 +802,8 @@ function RagReferenceItem({ reference }: { reference: RagRetrievedReference }) {
     reference.diagnosis_name,
   ].map(cleanRagPublicText).filter(Boolean);
   const summary = cleanRagPublicText(reference.summary);
-  const sourceUrl = cleanRagPublicText(reference.source_url);
+  const sourceName = cleanRagPublicText(reference.sourceDisplayName)
+    || getSourceDisplayName(reference.source_url, reference.source_area, reference.title);
 
   return (
     <View style={styles.ragItem}>
@@ -805,7 +811,7 @@ function RagReferenceItem({ reference }: { reference: RagRetrievedReference }) {
       <Text style={styles.ragTitle}>{cleanRagPublicText(reference.title)}</Text>
       {details.length > 0 && <Text style={styles.ragMeta}>{details.join(' · ')}</Text>}
       {summary ? <Text style={styles.ragSummary}>{summary}</Text> : null}
-      {sourceUrl ? <Text style={styles.ragUrl}>{sourceUrl}</Text> : null}
+      <Text style={styles.ragUrl}>출처: {sourceName}</Text>
     </View>
   );
 }
