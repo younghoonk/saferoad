@@ -65,9 +65,11 @@ const AI_NOTICE = 'AI 결과는 참고용 초안입니다. 최종 제출 전 손
 
 const initialDraftInput: AssessmentDraftInput = {
   caseTitle: '',
+  insurerName: '',
+  insuranceType: '',
+  contractDate: '',
   accidentType: '',
   accidentDate: '',
-  accidentLocation: '',
   damageDetails: '',
   insurerPosition: '',
   customerStatement: '',
@@ -79,6 +81,8 @@ const initialDraftInput: AssessmentDraftInput = {
 const initialClosingInput: ClosingReportInput = {
   reportType: 'final',
   insurerName: '',
+  insuranceType: '',
+  contractDate: '',
   caseInfo: {},
   adjusterMemo: '',
   finalOpinion: 'investigate',
@@ -493,9 +497,12 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       <Hero title="AI 사정서 초안 작성" subtitle="분석 결과와 사건 정보를 바탕으로 손해사정사가 검토할 사정서 초안을 생성합니다." icon="create-outline" />
       {renderNotice()}
       <FormInput label="사건명 또는 사건 선택 메모" value={draftInput.caseTitle ?? ''} onChangeText={(value) => setDraftField('caseTitle', value)} placeholder="예: 2026년 3월 후미추돌 사고" />
+      <FormInput label="보험회사" value={draftInput.insurerName ?? ''} onChangeText={(value) => setDraftField('insurerName', value)} placeholder="예: 메리츠화재, 삼성화재, 현대해상, DB손해보험" />
+      <FormInput label="보험종류" value={draftInput.insuranceType ?? ''} onChangeText={(value) => setDraftField('insuranceType', value)} placeholder="예: 실손보험, 상해보험, 질병보험, 암보험, 운전자보험, 자동차보험, 배상책임보험" />
+      <FormInput label="보험가입일" value={draftInput.contractDate ?? ''} onChangeText={(value) => setDraftField('contractDate', value)} placeholder="예: 2024-12-31" />
+      <Text style={styles.helperText}>약관, 질병분류표, 장해분류표는 보험가입일 기준으로 달라질 수 있습니다.</Text>
       <FormInput label="사고 유형" required value={draftInput.accidentType} onChangeText={(value) => setDraftField('accidentType', value)} placeholder="예: 교통사고, 화재사고, 상해사고" />
       <FormInput label="사고 일자" required value={draftInput.accidentDate} onChangeText={(value) => setDraftField('accidentDate', value)} placeholder="예: 2026-04-29" />
-      <FormInput label="사고 장소" required value={draftInput.accidentLocation} onChangeText={(value) => setDraftField('accidentLocation', value)} placeholder="예: 서울시 강남구 테헤란로 인근" />
       <FormInput label="피해 내용" required multiline value={draftInput.damageDetails} onChangeText={(value) => setDraftField('damageDetails', value)} placeholder="차량 파손, 진단/소견, 검사결과, 치료내용, 휴업손해 등 핵심 피해를 요약하세요." />
       <FormInput label="보험사 주장/면책 사유" required multiline value={draftInput.insurerPosition} onChangeText={(value) => setDraftField('insurerPosition', value)} placeholder="보험사가 주장하는 과실, 면책, 감액 사유를 입력하세요." />
       <FormInput label="고객 진술 요약" required multiline value={draftInput.customerStatement} onChangeText={(value) => setDraftField('customerStatement', value)} placeholder="고객이 설명한 사고 경위와 피해 상황을 요약하세요." />
@@ -532,7 +539,10 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       <Text style={styles.limitText}>각 이미지는 8MB 이하, 종결보고서 업로드 전체 용량은 24MB 이하로 제한됩니다.</Text>
 
       <OptionCard title="보고서 유형" options={reportTypeOptions} value={closingInput.reportType} onSelect={(value) => setClosingInput((prev) => ({ ...prev, reportType: value }))} />
-      <FormInput label="보험사명" required value={closingInput.insurerName} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, insurerName: value }))} placeholder="예: DB손해보험" />
+      <FormInput label="보험회사" required value={closingInput.insurerName} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, insurerName: value }))} placeholder="예: 메리츠화재, 삼성화재, 현대해상, DB손해보험" />
+      <FormInput label="보험종류" value={closingInput.insuranceType ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, insuranceType: value, caseInfo: { ...prev.caseInfo, insuranceType: value } }))} placeholder="예: 실손보험, 상해보험, 질병보험, 암보험, 운전자보험, 자동차보험, 배상책임보험" />
+      <FormInput label="보험가입일" value={closingInput.contractDate ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, contractDate: value, caseInfo: { ...prev.caseInfo, contractDate: value } }))} placeholder="예: 2024-12-31" />
+      <Text style={styles.helperText}>약관, 질병분류표, 장해분류표는 보험가입일 기준으로 달라질 수 있습니다.</Text>
       {closingFields.map((field) => (
         <FormInput
           key={field.key}
@@ -911,6 +921,7 @@ const styles = StyleSheet.create({
   },
   uploadTypeBtnText: { fontSize: 13, color: Colors.primary, fontWeight: '700' },
   limitText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  helperText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17, marginTop: -6 },
   primaryBtn: { backgroundColor: Colors.primary, borderRadius: 14 },
   emphasisBtn: { backgroundColor: Colors.accent, borderRadius: 14 },
   analyzingCard: {

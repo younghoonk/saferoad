@@ -47,7 +47,7 @@ export interface AssessmentDraftInput {
   isNonLifeInsurance?: boolean;
   accidentType: string;
   accidentDate: string;
-  accidentLocation: string;
+  accidentLocation?: string;
   damageDetails: string;
   insurerPosition: string;
   customerStatement: string;
@@ -207,7 +207,6 @@ export async function createAssessmentDraft(
 ): Promise<AssessmentDraftResult> {
   if (!input.accidentType.trim()) throw new Error('사고 유형을 입력해 주세요.');
   if (!input.accidentDate.trim()) throw new Error('사고 일자를 입력해 주세요.');
-  if (!input.accidentLocation.trim()) throw new Error('사고 장소를 입력해 주세요.');
   if (!input.damageDetails.trim()) throw new Error('피해 내용을 입력해 주세요.');
   if (!input.insurerPosition.trim()) throw new Error('보험사 주장 또는 면책 사유를 입력해 주세요.');
   if (!input.customerStatement.trim()) throw new Error('고객 진술 요약을 입력해 주세요.');

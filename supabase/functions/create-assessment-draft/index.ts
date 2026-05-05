@@ -317,7 +317,6 @@ function validateInput(input: AssessmentDraftInput) {
   const required: [keyof typeof cleaned, string][] = [
     ['accidentType', '사고 유형'],
     ['accidentDate', '사고 일자'],
-    ['accidentLocation', '사고 장소'],
     ['damageDetails', '피해 내용'],
     ['insurerPosition', '보험사 주장/면책 사유'],
     ['customerStatement', '고객 진술 요약'],
@@ -340,7 +339,6 @@ function validateInput(input: AssessmentDraftInput) {
     'policyVersion',
     'accidentType',
     'accidentDate',
-    'accidentLocation',
   ];
   for (const key of shortFields) {
     if (String(cleaned[key]).length > MAX_SHORT_FIELD_LENGTH) {
@@ -431,7 +429,6 @@ ${toneInstruction(input.tone)}
 사건명/메모: ${input.caseTitle || '미입력'}
 사고 유형: ${input.accidentType}
 사고 일자: ${input.accidentDate}
-사고 장소: ${input.accidentLocation}
 피해 내용: ${input.damageDetails}
 보험사 주장/면책 사유: ${input.insurerPosition}
 고객 진술 요약: ${input.customerStatement}
