@@ -41,6 +41,9 @@ export interface AssessmentDraftInput {
   insuranceType?: string;
   coverageType?: string;
   contractDate?: string;
+  diagnosisText?: string;
+  diagnosisName?: string;
+  diagnosisCode?: string;
   policyGeneration?: string;
   policyVersion?: string;
   isLifeInsurance?: boolean;
@@ -214,6 +217,7 @@ export async function createAssessmentDraft(
   const { data, error } = await supabase.functions.invoke('create-assessment-draft', {
     body: {
       ...input,
+      contractDate: input.contractDate?.trim() || 'unknown',
       retrievedReferences: sanitizeRetrievedReferences(input.retrievedReferences),
     },
   });

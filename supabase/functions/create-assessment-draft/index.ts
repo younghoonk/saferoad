@@ -70,6 +70,9 @@ interface AssessmentDraftInput {
   insuranceType?: string;
   coverageType?: string;
   contractDate?: string;
+  diagnosisText?: string;
+  diagnosisName?: string;
+  diagnosisCode?: string;
   policyGeneration?: string;
   policyVersion?: string;
   isLifeInsurance?: boolean;
@@ -294,6 +297,9 @@ function validateInput(input: AssessmentDraftInput) {
     insuranceType: cleanText(input.insuranceType),
     coverageType: cleanText(input.coverageType),
     contractDate: cleanText(input.contractDate),
+    diagnosisText: cleanText(input.diagnosisText),
+    diagnosisName: cleanText(input.diagnosisName),
+    diagnosisCode: cleanText(input.diagnosisCode),
     policyGeneration: cleanText(input.policyGeneration),
     policyVersion: cleanText(input.policyVersion),
     isLifeInsurance: Boolean(input.isLifeInsurance),
@@ -335,6 +341,9 @@ function validateInput(input: AssessmentDraftInput) {
     'insuranceType',
     'coverageType',
     'contractDate',
+    'diagnosisText',
+    'diagnosisName',
+    'diagnosisCode',
     'policyGeneration',
     'policyVersion',
     'accidentType',
@@ -469,8 +478,12 @@ ${toneInstruction(input.tone)}
 
 [사건 정보]
 사건명/메모: ${input.caseTitle || '미입력'}
+보험회사: ${input.insurerName || '미입력'}
+보험종류: ${input.insuranceType || '미입력'}
+보험가입일: ${input.contractDate || 'unknown'}
 사고 유형: ${input.accidentType}
 사고 일자: ${input.accidentDate}
+질병명/질병코드: ${input.diagnosisText || [input.diagnosisCode, input.diagnosisName].filter(Boolean).join(' ') || source?.diagnosisSummary || '없음'}
 피해 내용: ${input.damageDetails}
 보험사 주장/면책 사유: ${input.insurerPosition}
 고객 진술 요약: ${input.customerStatement}
@@ -706,6 +719,9 @@ function extractDiagnosisCodesFromText(value: unknown) {
 function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   const inputCodes = extractDiagnosisCodesFromText(JSON.stringify({
     caseTitle: input.caseTitle,
+    diagnosisText: input.diagnosisText,
+    diagnosisName: input.diagnosisName,
+    diagnosisCode: input.diagnosisCode,
     damageDetails: input.damageDetails,
     insurerPosition: input.insurerPosition,
     customerStatement: input.customerStatement,
@@ -718,7 +734,12 @@ function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: Retur
     let text = value;
     for (const code of inputCodes) {
       const group = code.split('.')[0];
+      const [letter, numeric, decimal] = code.match(/^([A-Z])(\d{2})\.(\d{1,3})$/i)?.slice(1) || [];
       text = text.replace(new RegExp(`\\b${group}\\.\\d{1,3}\\b`, 'gi'), code);
+      if (letter && numeric && decimal) {
+        text = text.replace(new RegExp(`\\b${letter}\\d{2}\\.${decimal}\\b`, 'gi'), code);
+        text = text.replace(new RegExp(`\\b${letter}${numeric}\\.\\d{1,3}\\b`, 'gi'), code);
+      }
     }
     return text;
   };
@@ -771,6 +792,9 @@ function paragraphCount(value: string) {
 function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   const text = [
     input.caseTitle,
+    input.diagnosisText,
+    input.diagnosisName,
+    input.diagnosisCode,
     input.damageDetails,
     input.insurerPosition,
     input.customerStatement,
@@ -808,12 +832,18 @@ function ensureOfficialGroundsInBody(result: AssessmentDraftResult, ragResult: R
     result.damageAssessment,
     result.adjusterOpinionDraft,
   ].join('\n');
-  const missing = grounds.filter((ground) => !existingText.includes(ground));
-  if (!missing.length) return result;
+  const groundsForSection = grounds.filter((ground) => /상법.*제\s*651|상법.*제\s*655|제\s*651\s*조|제\s*655\s*조|651조|655조/.test(ground) || !existingText.includes(ground));
+  if (!groundsForSection.length) return result;
 
-  const legalLines = missing.map((ground) => {
-    if (/상법|제\s*\d+\s*조|651|655/.test(ground)) {
-      return `${ground}에 비추어 보면, 본 건에서는 단순 진료기록 존재와 계약해지 요건 충족을 구분하고 중요한 사항성, 고의 또는 중대한 과실, 보험사고와의 인과관계를 순차적으로 검토해야 한다.`;
+  const legalLines = groundsForSection.map((ground) => {
+    if (/상법.*제\s*651\s*조의\s*2|제\s*651\s*조의\s*2|651조의2|651-2/.test(ground)) {
+      return `${ground}는 보험자가 서면으로 질문한 사항을 중요한 사항으로 추정한다는 점에서 의미가 있다. 다만 본 건에서는 1회성 통원 사실이 청약서 질문사항에 명확히 포함되는지와 피보험자의 인식 가능성을 별도로 확인해야 한다.`;
+    }
+    if (/상법.*제\s*651\s*조|제\s*651\s*조|651조/.test(ground)) {
+      return `${ground}는 계약전 알릴의무 위반으로 계약해지가 가능하려면 중요한 사항에 대한 고의 또는 중대한 과실이 필요하다는 점에서 본 건의 핵심 기준이 된다.`;
+    }
+    if (/상법.*제\s*655\s*조|제\s*655\s*조|655조/.test(ground)) {
+      return `${ground}는 계약해지 후 보험금 부지급이 문제될 때 고지의무 위반 사실과 보험사고 발생 사이의 인과관계를 별도로 검토해야 한다는 점에서 의미가 있다.`;
     }
     if (/판결|판례/.test(ground)) {
       return `${ground}은(는) retrievedReferences에 확인된 범위에서만 검토 근거로 삼고, 사건번호ㆍ법원ㆍ선고일자 등 메타데이터가 부족한 경우 관련 판례 추가 확인이 필요하다.`;
@@ -957,6 +987,134 @@ function neutralizeUnverifiedMedicalSourcePhrases(result: AssessmentDraftResult,
   };
 }
 
+function inputDiagnosisCodes(input: ReturnType<typeof validateInput>) {
+  return extractDiagnosisCodesFromText(JSON.stringify({
+    caseTitle: input.caseTitle,
+    diagnosisText: input.diagnosisText,
+    diagnosisName: input.diagnosisName,
+    diagnosisCode: input.diagnosisCode,
+    damageDetails: input.damageDetails,
+    insurerPosition: input.insurerPosition,
+    customerStatement: input.customerStatement,
+    adjusterMemo: input.adjusterMemo,
+    sourceAnalysis: input.sourceAnalysis,
+  })).filter((code) => code.includes('.'));
+}
+
+function preserveDiagnosisCodesInText(value: string | undefined, codes: string[]) {
+  let text = cleanPublicText(value);
+  for (const code of codes) {
+    const group = code.split('.')[0];
+    const [letter, numeric, decimal] = code.match(/^([A-Z])(\d{2})\.(\d{1,3})$/i)?.slice(1) || [];
+    text = text.replace(new RegExp(`\\b${group}\\.\\d{1,3}\\b`, 'gi'), code);
+    if (letter && numeric && decimal) {
+      text = text.replace(new RegExp(`\\b${letter}\\d{2}\\.${decimal}\\b`, 'gi'), code);
+      text = text.replace(new RegExp(`\\b${letter}${numeric}\\.\\d{1,3}\\b`, 'gi'), code);
+    }
+  }
+  return text;
+}
+
+function disclosureStatuteReferences(): RagSearchResult['officialReferences'] {
+  return [
+    {
+      reference_type: 'official',
+      source_area: 'legal_statutes',
+      source_area_label: '법령',
+      title: '상법 제651조 고지의무위반으로 인한 계약해지',
+      summary: '상법 제651조는 보험계약 당시 중요한 사항에 관하여 고의 또는 중대한 과실로 고지하지 않거나 부실고지를 한 경우 보험자가 일정 기간 내 계약을 해지할 수 있다는 취지의 조항이다.',
+      source_url: 'https://www.law.go.kr/법령/상법',
+      sourceDisplayName: '국가법령정보센터',
+      similarity: 1,
+      law_name: '상법',
+      article_title: '제651조 고지의무위반으로 인한 계약해지',
+    },
+    {
+      reference_type: 'official',
+      source_area: 'legal_statutes',
+      source_area_label: '법령',
+      title: '상법 제651조의2 서면에 의한 질문의 효력',
+      summary: '상법 제651조의2는 보험자가 서면으로 질문한 사항은 중요한 사항으로 추정한다는 취지의 조항이다.',
+      source_url: 'https://www.law.go.kr/법령/상법',
+      sourceDisplayName: '국가법령정보센터',
+      similarity: 1,
+      law_name: '상법',
+      article_title: '제651조의2 서면에 의한 질문의 효력',
+    },
+    {
+      reference_type: 'official',
+      source_area: 'legal_statutes',
+      source_area_label: '법령',
+      title: '상법 제655조 계약해지와 보험금청구권',
+      summary: '상법 제655조는 고지의무 위반 등으로 계약을 해지한 경우 보험금청구권 및 고지의무 위반 사실과 보험사고 발생 사이의 인과관계를 검토할 때 문제되는 조항이다.',
+      source_url: 'https://www.law.go.kr/법령/상법',
+      sourceDisplayName: '국가법령정보센터',
+      similarity: 1,
+      law_name: '상법',
+      article_title: '제655조 계약해지와 보험금청구권',
+    },
+  ];
+}
+
+function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]) {
+  const text = [
+    ref.law_name,
+    ref.article_title,
+    ref.title,
+    ref.summary,
+  ].filter(Boolean).join(' ');
+  if (ref.source_area === 'legal_statutes') {
+    if (/상법/.test(text) && /제\s*651\s*조의\s*2|651\s*조의\s*2|651조의2|651-2/i.test(text)) return 'legal_statutes:상법:제651조의2';
+    if (/상법/.test(text) && /제\s*651\s*조|651조/i.test(text)) return 'legal_statutes:상법:제651조';
+    if (/상법/.test(text) && /제\s*655\s*조|655조/i.test(text)) return 'legal_statutes:상법:제655조';
+  }
+  return `${ref.source_area}:${cleanPublicText(ref.title)}:${cleanPublicText(ref.source_url)}`;
+}
+
+function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): RagSearchResult {
+  const codes = inputDiagnosisCodes(input);
+  const disclosureM4726 = isDisclosureDutyCase(input) && codes.includes('M47.26');
+  const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
+    ...ref,
+    title: preserveDiagnosisCodesInText(ref.title, codes),
+    summary: preserveDiagnosisCodesInText(ref.summary, codes),
+    diagnosis_code: preserveDiagnosisCodesInText(ref.diagnosis_code, codes),
+    diagnosis_name: preserveDiagnosisCodesInText(ref.diagnosis_name, codes),
+  });
+
+  const officialBase = isDisclosureDutyCase(input)
+    ? [...disclosureStatuteReferences(), ...ragResult.officialReferences]
+    : ragResult.officialReferences;
+  const seenOfficial = new Set<string>();
+  const officialReferences = officialBase.map(normalizeRef).filter((ref) => {
+    const key = officialReferenceKey(ref);
+    if (seenOfficial.has(key)) return false;
+    seenOfficial.add(key);
+    return true;
+  });
+
+  let internalReviewMaterials = ragResult.internalReviewMaterials.map(normalizeRef);
+  if (disclosureM4726) {
+    const excluded = /회전근개|어깨|견관절|중심정맥관|암수술|체외충격파|M48\.3|척추협착|무릎|M17|백내장|심장|뇌|입원비|장기\s*재활/i;
+    const allowed = /M47\.26|\bM47(?:\.|$)|\bM54(?:\.|$)|요통|허리통증|요추증|신경뿌리병증|고지의무|1회\s*통원|계약해지|DISCLOSURE_M4726_SINGLE_VISIT/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  }
+
+  return {
+    ...ragResult,
+    officialReferences,
+    internalReviewMaterials,
+  };
+}
+
 function emptyRagResult(): RagSearchResult {
   return { query: '', officialReferences: [], internalReviewMaterials: [] };
 }
@@ -978,6 +1136,9 @@ async function getRagResult(apiKey: string, input: ReturnType<typeof validateInp
         coverageType: input.coverageType,
         contractDate: input.contractDate,
         policyGeneration: context.policyGeneration,
+        diagnosisText: input.diagnosisText,
+        diagnosisName: input.diagnosisName,
+        diagnosisCode: input.diagnosisCode,
         accidentType: input.accidentType,
         accidentDate: input.accidentDate,
         damageDetails: input.damageDetails,
@@ -1008,7 +1169,7 @@ Deno.serve(async (req: Request) => {
     const apiKey = requiredEnv('OPENAI_API_KEY');
     const body = await req.json() as AssessmentDraftInput;
     const input = validateInput(body);
-    const ragResult = await getRagResult(apiKey, input);
+    const ragResult = sanitizeRagResultForAssessment(input, await getRagResult(apiKey, input));
 
     const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
     const draft = sanitizeResult(parseJsonResponse(draftText));

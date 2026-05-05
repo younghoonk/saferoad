@@ -202,7 +202,14 @@ export async function createClosingReport(input: ClosingReportInput): Promise<Cl
   if (!input.reportType) throw new Error('보고서 유형을 선택해 주세요.');
 
   const { data, error } = await supabase.functions.invoke('create-closing-report', {
-    body: input,
+    body: {
+      ...input,
+      contractDate: input.contractDate?.trim() || 'unknown',
+      caseInfo: {
+        ...input.caseInfo,
+        contractDate: input.caseInfo.contractDate?.trim() || input.contractDate?.trim() || 'unknown',
+      },
+    },
   });
 
   if (error) {

@@ -674,7 +674,17 @@ function ensureDisclosureStatuteRows(rows: EnrichedRow[]) {
 function dedupeReferences(rows: EnrichedRow[]) {
   const seen = new Set<string>();
   return rows.filter((row) => {
-    const key = `${row.source_area}:${publicText(row.title)}:${publicText(row.source_url)}`;
+    const text = rowText(row);
+    let key = `${row.source_area}:${publicText(row.title)}:${publicText(row.source_url)}`;
+    if (row.source_area === 'legal_statutes') {
+      if (/상법/.test(text) && /제\s*651\s*조의\s*2|651\s*조의\s*2|651조의2|651-2/i.test(text)) {
+        key = 'legal_statutes:상법:제651조의2';
+      } else if (/상법/.test(text) && /제\s*651\s*조|651조/i.test(text)) {
+        key = 'legal_statutes:상법:제651조';
+      } else if (/상법/.test(text) && /제\s*655\s*조|655조/i.test(text)) {
+        key = 'legal_statutes:상법:제655조';
+      }
+    }
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

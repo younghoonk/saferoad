@@ -68,6 +68,7 @@ const initialDraftInput: AssessmentDraftInput = {
   insurerName: '',
   insuranceType: '',
   contractDate: '',
+  diagnosisText: '',
   accidentType: '',
   accidentDate: '',
   damageDetails: '',
@@ -107,6 +108,58 @@ const finalOpinionOptions: { value: ClosingFinalOpinion; label: string }[] = [
   { value: 'deny', label: '부지급' },
   { value: 'partial', label: '일부지급' },
   { value: 'investigate', label: '추가조사 필요' },
+];
+
+const insurerOptions = [
+  '삼성화재',
+  '현대해상',
+  'DB손해보험',
+  'KB손해보험',
+  '메리츠화재',
+  '한화손해보험',
+  '롯데손해보험',
+  '흥국화재',
+  'MG손해보험',
+  '농협손해보험',
+  '삼성생명',
+  '한화생명',
+  '교보생명',
+  '신한라이프',
+  '미래에셋생명',
+  '흥국생명',
+  '라이나생명',
+  'AIA생명',
+  '기타',
+];
+
+const insuranceTypeOptions = [
+  '실손보험',
+  '상해보험',
+  '질병보험',
+  '암보험',
+  '운전자보험',
+  '자동차보험',
+  '배상책임보험',
+  '생명보험',
+  '간병보험',
+  '후유장해보험',
+  '기타',
+];
+
+const accidentTypeOptions = [
+  '질병',
+  '상해',
+  '교통사고',
+  '산재',
+  '후유장해',
+  '암/종양',
+  '뇌질환',
+  '심장질환',
+  '근골격계',
+  '실손의료비',
+  '고지의무/계약해지',
+  '면책/부지급',
+  '기타',
 ];
 
 export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AIAnalysisScreenProps) {
@@ -299,6 +352,7 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       ...prev,
       caseTitle: prev.caseTitle || '면책공문 및 고객자료 분석 기반 사정서 초안',
       accidentType: prev.accidentType || structured?.accidentTypeGuess || '',
+      diagnosisText: prev.diagnosisText || structured?.diagnosisSummary || '',
       damageDetails: prev.damageDetails || damageSummary,
       insurerPosition: insurerPosition || prev.insurerPosition,
       customerStatement: prev.customerStatement || structured?.customerClaimSummary || analysisResult.customer_document_summary || '',
@@ -497,11 +551,13 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       <Hero title="AI 사정서 초안 작성" subtitle="분석 결과와 사건 정보를 바탕으로 손해사정사가 검토할 사정서 초안을 생성합니다." icon="create-outline" />
       {renderNotice()}
       <FormInput label="사건명 또는 사건 선택 메모" value={draftInput.caseTitle ?? ''} onChangeText={(value) => setDraftField('caseTitle', value)} placeholder="예: 2026년 3월 후미추돌 사고" />
-      <FormInput label="보험회사" value={draftInput.insurerName ?? ''} onChangeText={(value) => setDraftField('insurerName', value)} placeholder="예: 메리츠화재, 삼성화재, 현대해상, DB손해보험" />
-      <FormInput label="보험종류" value={draftInput.insuranceType ?? ''} onChangeText={(value) => setDraftField('insuranceType', value)} placeholder="예: 실손보험, 상해보험, 질병보험, 암보험, 운전자보험, 자동차보험, 배상책임보험" />
-      <FormInput label="보험가입일" value={draftInput.contractDate ?? ''} onChangeText={(value) => setDraftField('contractDate', value)} placeholder="예: 2024-12-31" />
+      <SelectWithOther label="보험회사" options={insurerOptions} value={draftInput.insurerName ?? ''} onChange={(value) => setDraftField('insurerName', value)} otherPlaceholder="보험회사명을 입력하세요." />
+      <SelectWithOther label="보험종류" options={insuranceTypeOptions} value={draftInput.insuranceType ?? ''} onChange={(value) => setDraftField('insuranceType', value)} otherPlaceholder="보험종류를 입력하세요." />
+      <DateLikeInput label="보험가입일" value={draftInput.contractDate ?? ''} onChangeText={(value) => setDraftField('contractDate', value)} placeholder="예: 2024-12-31" />
       <Text style={styles.helperText}>약관, 질병분류표, 장해분류표는 보험가입일 기준으로 달라질 수 있습니다.</Text>
-      <FormInput label="사고 유형" required value={draftInput.accidentType} onChangeText={(value) => setDraftField('accidentType', value)} placeholder="예: 교통사고, 화재사고, 상해사고" />
+      <SelectWithOther label="사고 유형" required options={accidentTypeOptions} value={draftInput.accidentType} onChange={(value) => setDraftField('accidentType', value)} otherPlaceholder="사고 유형을 입력하세요." />
+      <FormInput label="질병명 / 질병코드" value={draftInput.diagnosisText ?? ''} onChangeText={(value) => setDraftField('diagnosisText', value)} placeholder="예: M47.26 신경뿌리병증을 동반한 요추증" />
+      <Text style={styles.helperText}>진단서 또는 병리결과지의 질병코드를 입력하면 관련 약관의료쟁점 검색 정확도가 높아집니다.</Text>
       <FormInput label="사고 일자" required value={draftInput.accidentDate} onChangeText={(value) => setDraftField('accidentDate', value)} placeholder="예: 2026-04-29" />
       <FormInput label="피해 내용" required multiline value={draftInput.damageDetails} onChangeText={(value) => setDraftField('damageDetails', value)} placeholder="차량 파손, 진단/소견, 검사결과, 치료내용, 휴업손해 등 핵심 피해를 요약하세요." />
       <FormInput label="보험사 주장/면책 사유" required multiline value={draftInput.insurerPosition} onChangeText={(value) => setDraftField('insurerPosition', value)} placeholder="보험사가 주장하는 과실, 면책, 감액 사유를 입력하세요." />
@@ -539,19 +595,32 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       <Text style={styles.limitText}>각 이미지는 8MB 이하, 종결보고서 업로드 전체 용량은 24MB 이하로 제한됩니다.</Text>
 
       <OptionCard title="보고서 유형" options={reportTypeOptions} value={closingInput.reportType} onSelect={(value) => setClosingInput((prev) => ({ ...prev, reportType: value }))} />
-      <FormInput label="보험회사" required value={closingInput.insurerName} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, insurerName: value }))} placeholder="예: 메리츠화재, 삼성화재, 현대해상, DB손해보험" />
-      <FormInput label="보험종류" value={closingInput.insuranceType ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, insuranceType: value, caseInfo: { ...prev.caseInfo, insuranceType: value } }))} placeholder="예: 실손보험, 상해보험, 질병보험, 암보험, 운전자보험, 자동차보험, 배상책임보험" />
-      <FormInput label="보험가입일" value={closingInput.contractDate ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, contractDate: value, caseInfo: { ...prev.caseInfo, contractDate: value } }))} placeholder="예: 2024-12-31" />
+      <SelectWithOther label="보험회사" required options={insurerOptions} value={closingInput.insurerName} onChange={(value) => setClosingInput((prev) => ({ ...prev, insurerName: value }))} otherPlaceholder="보험회사명을 입력하세요." />
+      <SelectWithOther label="보험종류" options={insuranceTypeOptions} value={closingInput.insuranceType ?? ''} onChange={(value) => setClosingInput((prev) => ({ ...prev, insuranceType: value, caseInfo: { ...prev.caseInfo, insuranceType: value } }))} otherPlaceholder="보험종류를 입력하세요." />
+      <DateLikeInput label="보험가입일" value={closingInput.contractDate ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, contractDate: value, caseInfo: { ...prev.caseInfo, contractDate: value } }))} placeholder="예: 2024-12-31" />
       <Text style={styles.helperText}>약관, 질병분류표, 장해분류표는 보험가입일 기준으로 달라질 수 있습니다.</Text>
       {closingFields.map((field) => (
-        <FormInput
-          key={field.key}
-          label={field.label}
-          value={String(closingInput.caseInfo[field.key] ?? '')}
-          onChangeText={(value) => setClosingCaseField(field.key, value)}
-          placeholder={field.placeholder}
-          multiline={field.multiline}
-        />
+        field.key === 'accidentType'
+          ? (
+            <SelectWithOther
+              key={field.key}
+              label={field.label}
+              options={accidentTypeOptions}
+              value={String(closingInput.caseInfo[field.key] ?? '')}
+              onChange={(value) => setClosingCaseField(field.key, value)}
+              otherPlaceholder="사고 유형을 입력하세요."
+            />
+          )
+          : (
+            <FormInput
+              key={field.key}
+              label={field.label}
+              value={String(closingInput.caseInfo[field.key] ?? '')}
+              onChangeText={(value) => setClosingCaseField(field.key, value)}
+              placeholder={field.placeholder}
+              multiline={field.multiline}
+            />
+          )
       ))}
       <FormInput label="조사담당자 메모" multiline value={closingInput.adjusterMemo ?? ''} onChangeText={(value) => setClosingInput((prev) => ({ ...prev, adjusterMemo: value }))} placeholder="조사 중 확인한 특이사항, 유의사항, 미확인 자료를 입력하세요." />
       <OptionCard title="최종 의견" options={finalOpinionOptions} value={closingInput.finalOpinion} onSelect={(value) => setClosingInput((prev) => ({ ...prev, finalOpinion: value }))} />
@@ -726,6 +795,70 @@ function OptionCard<T extends string>({ title, options, value, onSelect }: {
             </TouchableOpacity>
           );
         })}
+      </View>
+    </Card>
+  );
+}
+
+function SelectWithOther({ label, options, value, onChange, otherPlaceholder, required }: {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+  otherPlaceholder: string;
+  required?: boolean;
+}) {
+  const normalizedValue = value.trim();
+  const knownSelected = options.includes(normalizedValue);
+  const otherSelected = normalizedValue === '기타' || Boolean(normalizedValue && !knownSelected);
+  const otherValue = otherSelected && normalizedValue !== '기타' ? value : '';
+
+  return (
+    <Card>
+      <Text style={styles.fieldLabel}>{label} {required ? <Text style={styles.required}>*</Text> : null}</Text>
+      <View style={styles.chipRow}>
+        {options.map((option) => {
+          const selected = option === '기타' ? otherSelected : normalizedValue === option;
+          return (
+            <TouchableOpacity key={option} style={[styles.toneChip, selected && styles.toneChipActive]} onPress={() => onChange(option)}>
+              <Text style={[styles.toneChipText, selected && styles.toneChipTextActive]}>{option}</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+      {otherSelected && (
+        <TextInput
+          style={[styles.input, styles.otherInput]}
+          value={otherValue}
+          onChangeText={onChange}
+          placeholder={otherPlaceholder}
+          placeholderTextColor={Colors.textMuted}
+          maxLength={120}
+        />
+      )}
+    </Card>
+  );
+}
+
+function DateLikeInput({ label, value, onChangeText, placeholder }: {
+  label: string;
+  value: string;
+  onChangeText: (value: string) => void;
+  placeholder: string;
+}) {
+  return (
+    <Card>
+      <Text style={styles.fieldLabel}>{label}</Text>
+      <View style={styles.dateInputWrap}>
+        <Ionicons name="calendar-outline" size={18} color={Colors.primary} />
+        <TextInput
+          style={styles.dateInput}
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          placeholderTextColor={Colors.textMuted}
+          maxLength={10}
+        />
       </View>
     </Card>
   );
@@ -975,6 +1108,25 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     fontSize: 14,
     color: Colors.textPrimary,
+  },
+  otherInput: { marginTop: 10 },
+  dateInputWrap: {
+    minHeight: 48,
+    backgroundColor: Colors.inputBg,
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    borderWidth: 1.2,
+    borderColor: Colors.border,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  dateInput: {
+    flex: 1,
+    minHeight: 48,
+    fontSize: 14,
+    color: Colors.textPrimary,
+    paddingVertical: 12,
   },
   textArea: { minHeight: 110, lineHeight: 20 },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
