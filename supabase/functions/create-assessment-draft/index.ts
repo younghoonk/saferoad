@@ -463,7 +463,17 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'indemnity_general_denial' ? `
+  const profileRules = profile === 'cancer_diagnosis_benefit' ? `
+[Cancer diagnosis benefit / borderline / carcinoma in situ argument]
+- This is a cancer diagnosis benefit, borderline tumor, carcinoma in situ, similar cancer, low-amount cancer, primary/metastatic cancer, or diagnosis-confirmation dispute.
+- Do not mention manual therapy, M54, low back pain, shockwave therapy, indemnity denial, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
+- Do not decide only by the diagnosis certificate code. Review the pathology report, tissue biopsy, cytology, diagnosis confirmation, behavior code, KCD/disease classification table, and original policy terms at enrollment.
+- Cancer, carcinoma in situ, borderline tumor, similar cancer, low-amount cancer, and general cancer must be classified under the policy terms and disease classification table in effect at enrollment.
+- When C-code/D-code or behavior-code classifications conflict, explain that the pathology result and policy definition should be reviewed together.
+- Include the phrases 암진단비, 진단확정, 병리보고서, 가입 당시 약관, and 질병분류표.
+- For borderline/in situ disputes, also discuss 제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드, and 병리결과 where relevant.
+- The conclusion should be: payment is not certain, but cancer diagnosis benefit / carcinoma in situ / borderline tumor benefit requires reconsideration based on pathology and enrollment-date policy terms.
+` : profile === 'indemnity_general_denial' ? `
 [General indemnity medical insurance denial argument]
 - This is an indemnity medical insurance denial case. Do not use disclosure duty, contract termination, underwriting, application-form question, decline, exclusion underwriting, loading, or non-disclosure reasoning unless explicitly entered.
 - Focus on original policy terms at enrollment, policy exclusions, treatment purpose, medical necessity, test/procedure necessity, detailed medical records, receipts, detailed medical bills, and insurer denial grounds.
@@ -640,7 +650,9 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'indemnity_general_denial'
+  const profileReviewRules = profile === 'cancer_diagnosis_benefit'
+    ? '- For a cancer diagnosis benefit / borderline tumor / carcinoma in situ dispute, remove manual therapy, M54, low back pain, shockwave therapy, indemnity-denial, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on cancer diagnosis benefit, diagnosis confirmation, pathology report, biopsy/cytology, disease classification table/KCD, behavior code, C-code/D-code, original policy terms at enrollment, and whether the claim is general cancer, similar cancer, carcinoma in situ, or borderline tumor.'
+    : profile === 'indemnity_general_denial'
     ? '- For a general indemnity medical insurance denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion underwriting, loading, and non-disclosure reasoning. Keep the reasoning focused on original policy terms at enrollment, policy exclusions, medical necessity, treatment/test necessity, detailed medical records, receipts, detailed medical bills, and insurer denial grounds.'
     : profile === 'indemnity_cancer_hospitalization_denial'
     ? '- For a cancer hospitalization / nursing hospital indemnity denial case, remove manual therapy, M54, low back pain, cataract, disclosure-duty, contract termination, disability, and automobile-insurance reasoning. Keep the reasoning focused on direct cancer treatment, hospitalization necessity, original indemnity policy terms, admission definition, treatment records, chemotherapy side-effect management, pain control, nursing records, and detailed medical bill.'
@@ -882,7 +894,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -924,11 +936,14 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
   if (/도수치료|도수\s*치료|manual\s*therapy|도수치료비|비급여\s*도수/i.test(allText)) {
     return 'indemnity_manual_therapy_denial';
   }
+  if (/암진단비|암\s*진단비|일반암|유사암|소액암|제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|C73|C코드|D코드|병리|병리보고서|조직검사|세포검사|진단확정|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal\s*carcinoma|behavior\s*code|행동양식|\/2|원발암|전이암|원발부위|대장점막내암|직장유암종|비침습성\s*방광암|유방상피내암|\bDCIS\b|GIST|흑색종\s*제자리암|갑상선암|미세침흡인검사|질병분류표/i.test(allText)) {
+    return 'cancer_diagnosis_benefit';
+  }
   if (/실손|실손보험|실손의료|실손의료비|비급여|보상\s*제외|부지급|입원의료비|검사비|주사치료|수액|신경차단술|경막외신경성형술|수면다원검사|턱관절|비만치료|검사\s*목적\s*입원|체외충격파|MRI/i.test(allText)) {
     return 'indemnity_general_denial';
   }
   if (disclosure && /M47\.26|요추증|신경뿌리병증|허리통증|요통/i.test(diagnosisText)) return 'm47_disclosure';
-  if (/C73|갑상선암|갑상선\s*결절|thyroid|E04|D34/i.test(allText)) return 'thyroid_disclosure_cancer';
+  if (/C73|갑상선암|갑상선\s*결절|thyroid|E04|D34/i.test(allText)) return 'cancer_diagnosis_benefit';
   if (disclosure) return 'general_disclosure';
   return 'general';
 }
@@ -1367,6 +1382,45 @@ function finalizeGeneralIndemnityResult(result: AssessmentDraftResult, input: Re
   };
 }
 
+function finalizeCancerDiagnosisBenefitResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'cancer_diagnosis_benefit') return result;
+  const inputText = [
+    input.caseTitle,
+    input.diagnosisText,
+    input.damageDetails,
+    input.insurerPosition,
+    input.customerStatement,
+    input.adjusterMemo,
+  ].filter(Boolean).join(' ');
+  const borderlineOrInSitu = /제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal|행동양식|\/2|DCIS|GIST|유암종|비침습성|흑색종/i.test(inputText);
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|M54|요통|허리통증|체외충격파|실손\s*부지급|비급여\s*주사|후유장해|자동차보험|고지의무|계약해지|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const classificationText = borderlineOrInSitu
+    ? '제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.'
+    : '일반암, 유사암, 소액암, 원발암 또는 전이암 해당 여부는 병리보고서와 가입 당시 약관 및 질병분류표 기준으로 구분해야 합니다.';
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '본 건은 암진단비 지급 여부가 문제되는 사안으로, 진단서에 기재된 코드만으로 지급 또는 부지급을 단정하기보다 병리보고서, 조직검사 또는 세포검사 결과에 따른 진단확정 여부를 먼저 확인해야 합니다.',
+    '암, 제자리암, 경계성종양, 유사암 또는 일반암의 구분은 가입 당시 약관과 그 약관에서 정한 질병분류표 기준에 따라 판단해야 합니다. 최신 분류기준을 과거 계약에 자동 적용하거나, 진단서의 C코드 또는 D코드만으로 결론을 내리는 방식은 신중해야 합니다.',
+    classificationText,
+    '따라서 고객 측 의견은 암진단비 지급을 확정하는 것이 아니라, 병리보고서 원문, 진단확정 자료, 가입 당시 약관, 질병분류표를 기준으로 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 방향으로 정리합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '암진단비 진단확정 관련 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), `주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.`].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.',
+    damageAssessment: `본 건은 손해액 산정보다는 암진단비의 진단확정 요건과 병리결과의 분류가 핵심입니다. ${classificationText}`,
+    insurerPositionReview: '보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '병리보고서 원문', '조직검사 결과지', '세포검사 결과지', '진단서', '가입 당시 약관', '질병분류표', '암진단비 약관상 진단확정 조항', '보험회사 부지급 또는 감액 사유서'].filter(Boolean).join('\n'),
+    simpleClientSummary: '암진단비 분쟁은 진단서 코드만으로 판단하기보다 병리보고서, 조직검사 또는 세포검사 결과, 가입 당시 약관과 질병분류표를 함께 확인해야 합니다. 이 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
+  };
+}
+
 function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
   const inputText = JSON.stringify({
@@ -1600,6 +1654,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const profile = caseProfile(input);
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
+  const cancerDiagnosisProfile = profile === 'cancer_diagnosis_benefit';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
   const cancerHospitalizationProfile = profile === 'indemnity_cancer_hospitalization_denial';
@@ -1646,6 +1701,12 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
           ref.summary = '갑상선암 관련 약관상 분류기준 및 설명의무 검토 시 참고할 수 있는 보조 판례이다. 본 건의 주된 고지의무 판단 근거가 아니라 약관 설명의무와 암 분류기준 쟁점에 한정하여 검토한다.';
         }
       }
+    }
+    if (cancerDiagnosisProfile) {
+      const excludedCancer = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|실손\s*부지급|비급여\s*주사|후유장해|자동차보험/i;
+      const directCancer = /암|암진단비|진단확정|병리|조직검사|세포검사|질병분류표|KCD|ICD-O|제자리암|상피내암|경계성종양|유사암|행동양식|D00|D01|D06|D09|D37|D38|D39|D40|D41|D42|D43|D44|D45|D46|D47|D48|C73|갑상선암|대장|방광암|유방상피내암|직장유암종|GIST|흑색종|원발암|전이암|약관|진단비/i;
+      if (excludedCancer.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directCancer.test(text)) return false;
     }
     if (generalDisclosureProfile) {
       const excludedDisclosureOfficial = /암진단비|후유장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
@@ -1714,6 +1775,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (generalDisclosureProfile) {
     const excluded = /암진단비|후유장해|장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
     const allowed = /고지의무|계약전\s*알릴의무|알릴의무|미고지|계약해지|건강검진|재검|추적관찰|1회\s*치료|단순\s*통원|인수기준|중요한\s*사항|고의|중대한\s*과실|K29|위염|소화기|위내시경|고혈압|I10|고지혈증|수면장애|우울증|당뇨|자궁근종/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (cancerDiagnosisProfile) {
+    const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|실손\s*부지급|비급여\s*주사|후유장해|자동차보험|고지의무|계약해지/i;
+    const allowed = /암|암진단비|진단확정|병리|조직검사|세포검사|질병분류표|KCD|ICD-O|제자리암|상피내암|경계성종양|유사암|행동양식|D00|D01|D06|D09|D37|D38|D39|D40|D41|D42|D43|D44|D45|D46|D47|D48|C73|갑상선암|대장|방광암|유방상피내암|직장유암종|GIST|흑색종|원발암|전이암|미세침흡인|약관|진단비/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
@@ -1885,7 +1958,10 @@ Deno.serve(async (req: Request) => {
     const reviewed = finalizeDuplicateProportionalResult(
       finalizeCancerHospitalizationResult(
         finalizeGeneralIndemnityResult(
-          finalizeGeneralDisclosureResult(reviewedBase, input),
+          finalizeCancerDiagnosisBenefitResult(
+            finalizeGeneralDisclosureResult(reviewedBase, input),
+            input,
+          ),
           input,
         ),
         input,

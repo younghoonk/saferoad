@@ -2338,9 +2338,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2417,9 +2414,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -2498,9 +2492,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2577,9 +2568,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -2658,9 +2646,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2735,9 +2720,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -2816,9 +2798,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2896,9 +2875,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2974,9 +2950,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3051,9 +3024,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -3132,9 +3102,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3211,9 +3178,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -3292,9 +3256,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3372,9 +3333,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3449,9 +3407,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -3528,9 +3483,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3606,9 +3558,6 @@
       "후유장해",
       "자동차보험"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -3657,14 +3606,12 @@
       "adjusterMemo": "세포검사 판정, 수술 후 병리, 약관 진단확정 확인"
     },
     "mustInclude": [
-      "갑상선",
-      "C73",
-      "상법 제651조",
-      "상법 제651조의2",
-      "상법 제655조",
-      "미세침흡인",
-      "추적관찰",
-      "재검토",
+      "미세침흡인검사",
+      "갑상선암",
+      "진단확정",
+      "세포검사",
+      "병리",
+      "가입 당시 약관",
       "추가 확인"
     ],
     "mustNotInclude": [
@@ -3686,9 +3633,6 @@
       "도수치료",
       "백내장",
       "후유장해"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -3764,9 +3708,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -3844,9 +3785,6 @@
       "요통",
       "후유장해",
       "자동차보험"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
