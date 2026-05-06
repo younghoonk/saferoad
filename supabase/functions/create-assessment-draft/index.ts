@@ -463,7 +463,26 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'cancer_diagnosis_benefit' ? `
+  const profileRules = profile === 'brain_diagnosis_benefit' ? `
+[Brain disease diagnosis benefit argument]
+- This is a brain disease diagnosis benefit dispute. Do not mention manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
+- Brain disease diagnosis benefit is not decided only by disease name or code. Review the original policy terms at enrollment, definitions of stroke/cerebral infarction/cerebral hemorrhage/cerebrovascular disease, and diagnosis confirmation criteria.
+- MRI, MRA, CTA, CT or other imaging results, specialist diagnosis, and medical records are key.
+- Distinguish acute lesion, old lesion, asymptomatic lesion, TIA/G45, stenosis, carotid stenosis, and cerebrovascular stenosis from confirmed payable brain disease under the policy.
+- Check whether neurological deficit is required by the policy.
+- Include the phrases 뇌질환, 진단확정, 영상검사, MRI, 가입 당시 약관, and 재검토.
+- The conclusion should be: payment is not certain, but the denial requires reconsideration based on imaging and diagnosis-confirmation criteria in the policy at enrollment.
+` : profile === 'heart_diagnosis_benefit' ? `
+[Heart disease diagnosis benefit argument]
+- This is a heart disease diagnosis benefit dispute. Do not mention manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, brain infarction, brain hemorrhage, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
+- Heart disease diagnosis benefit is not decided only by the diagnosis certificate code. Review the original policy terms at enrollment and diagnosis confirmation criteria for acute myocardial infarction, ischemic heart disease, angina, or cardiovascular disease.
+- For acute myocardial infarction, review troponin or other cardiac enzyme elevation, ECG/EKG changes, coronary angiography/CAG, PCI, imaging, and medical records.
+- Distinguish I20 angina from I21 acute myocardial infarction because payable coverage may differ.
+- Coronary stenosis or stent insertion alone does not automatically confirm acute myocardial infarction benefit.
+- For postmortem suspected acute myocardial infarction, review death certificate, emergency records, troponin, ECG/EKG, and autopsy status.
+- Include the phrases 심장질환, 진단확정, 검사결과, 트로포닌, 가입 당시 약관, and 재검토.
+- The conclusion should be: payment is not certain, but the decision requires reconsideration based on test results and diagnosis-confirmation criteria in the policy at enrollment.
+` : profile === 'cancer_diagnosis_benefit' ? `
 [Cancer diagnosis benefit / borderline / carcinoma in situ argument]
 - This is a cancer diagnosis benefit, borderline tumor, carcinoma in situ, similar cancer, low-amount cancer, primary/metastatic cancer, or diagnosis-confirmation dispute.
 - Do not mention manual therapy, M54, low back pain, shockwave therapy, indemnity denial, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
@@ -650,7 +669,11 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'cancer_diagnosis_benefit'
+  const profileReviewRules = profile === 'brain_diagnosis_benefit'
+    ? '- For a brain disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on brain disease, diagnosis confirmation, MRI/MRA/CTA/CT imaging, acute vs old/asymptomatic lesions, neurological deficits, policy definitions at enrollment, and medical records.'
+    : profile === 'heart_diagnosis_benefit'
+    ? '- For a heart disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, brain infarction/hemorrhage, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on heart disease, diagnosis confirmation, test results, troponin/cardiac enzymes, ECG/EKG, coronary angiography/CAG, PCI, policy definitions at enrollment, and medical records.'
+    : profile === 'cancer_diagnosis_benefit'
     ? '- For a cancer diagnosis benefit / borderline tumor / carcinoma in situ dispute, remove manual therapy, M54, low back pain, shockwave therapy, indemnity-denial, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on cancer diagnosis benefit, diagnosis confirmation, pathology report, biopsy/cytology, disease classification table/KCD, behavior code, C-code/D-code, original policy terms at enrollment, and whether the claim is general cancer, similar cancer, carcinoma in situ, or borderline tumor.'
     : profile === 'indemnity_general_denial'
     ? '- For a general indemnity medical insurance denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion underwriting, loading, and non-disclosure reasoning. Keep the reasoning focused on original policy terms at enrollment, policy exclusions, medical necessity, treatment/test necessity, detailed medical records, receipts, detailed medical bills, and insurer denial grounds.'
@@ -894,7 +917,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'brain_diagnosis_benefit' | 'heart_diagnosis_benefit' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -935,6 +958,15 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
   }
   if (/도수치료|도수\s*치료|manual\s*therapy|도수치료비|비급여\s*도수/i.test(allText)) {
     return 'indemnity_manual_therapy_denial';
+  }
+  if (/심장질환|심장진단비|급성심근경색|심근경색|\bNSTEMI\b|\bSTEMI\b|진구성\s*심근경색|협심증|변이형\s*협심증|관상동맥|관상동맥\s*협착|심혈관\s*협착|스텐트|관상동맥조영술|\bCAG\b|\bPCI\b|트로포닌|troponin|심근효소|CK-MB|심전도|\bECG\b|\bEKG\b|I21|I20|I22|I25|I50|사망진단서|부검|흉통/i.test(allText)) {
+    return 'heart_diagnosis_benefit';
+  }
+  if (/뇌질환|뇌진단비|뇌졸중|뇌경색|급성\s*뇌경색|열공성\s*뇌경색|무증상\s*뇌경색|진구성\s*뇌경색|뇌출혈|지주막하출혈|뇌동맥류|일과성\s*뇌허혈|\bTIA\b|I63|I60|I61|I62|I65|I66|I67|I69|G45|MRI|MRA|CTA|CT|영상검사|신경학적\s*결손|급성\s*병변|진구성\s*병변|협착|경동맥\s*협착|뇌혈관\s*협착/i.test(allText)) {
+    return 'brain_diagnosis_benefit';
+  }
+  if (/심장질환|심장진단비|급성심근경색|심근경색|\bNSTEMI\b|\bSTEMI\b|진구성\s*심근경색|협심증|변이형\s*협심증|관상동맥|관상동맥\s*협착|심혈관\s*협착|스텐트|관상동맥조영술|\bCAG\b|\bPCI\b|트로포닌|troponin|심근효소|CK-MB|심전도|\bECG\b|\bEKG\b|I21|I20|I22|I25|I50|사망진단서|부검|흉통/i.test(allText)) {
+    return 'heart_diagnosis_benefit';
   }
   if (/암진단비|암\s*진단비|일반암|유사암|소액암|제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|C73|C코드|D코드|병리|병리보고서|조직검사|세포검사|진단확정|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal\s*carcinoma|behavior\s*code|행동양식|\/2|원발암|전이암|원발부위|대장점막내암|직장유암종|비침습성\s*방광암|유방상피내암|\bDCIS\b|GIST|흑색종\s*제자리암|갑상선암|미세침흡인검사|질병분류표/i.test(allText)) {
     return 'cancer_diagnosis_benefit';
@@ -1421,6 +1453,60 @@ function finalizeCancerDiagnosisBenefitResult(result: AssessmentDraftResult, inp
   };
 }
 
+function finalizeBrainDiagnosisBenefitResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'brain_diagnosis_benefit') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|후유장해|자동차보험|고지의무|계약해지|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '본 건은 뇌질환 진단비 지급 여부가 문제되는 사안으로, 진단명 또는 질병코드만으로 지급 여부를 단정하기보다 가입 당시 약관상 뇌졸중, 뇌경색, 뇌출혈 또는 뇌혈관질환의 정의와 진단확정 기준을 먼저 확인해야 합니다.',
+    '뇌질환 진단확정 판단에서는 MRI, MRA, CTA, CT 등 영상검사 결과, 전문의 진단, 진료기록이 핵심 자료입니다. 특히 급성 병변인지, 진구성 병변인지, 무증상 병변인지, 영상검사상 실제 병변과 임상 증상이 부합하는지 구분해야 합니다.',
+    '일과성 뇌허혈 G45, 경동맥 협착, 뇌혈관 협착, 뇌동맥류 등은 약관상 뇌졸중 또는 뇌경색 진단비 대상에 포함되는지 별도 확인이 필요합니다. 신경학적 결손이 약관상 필수 요건인지도 가입 당시 약관 기준으로 확인해야 합니다.',
+    '따라서 고객 측 의견은 지급 여부를 단정하는 것이 아니라, 영상검사와 가입 당시 약관상 진단확정 기준에 따라 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 방향으로 정리합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '뇌질환 진단비 관련 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 뇌질환 진단비 청구에서 진단확정이 인정되는지, MRI/MRA/CTA/CT 등 영상검사 결과가 가입 당시 약관상 뇌졸중ㆍ뇌경색ㆍ뇌출혈ㆍ뇌혈관질환 정의에 해당하는지입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '가입 당시 약관, 뇌질환 진단확정 조항, MRI/MRA/CTA/CT 등 영상검사 결과, 전문의 진단, 진료기록, 질병분류표를 중심으로 검토해야 합니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 뇌질환 진단확정 요건 충족 여부가 핵심입니다. 영상검사상 급성 병변, 진구성 병변, 무증상 병변, 협착 또는 신경학적 결손 여부를 구분하여 검토해야 합니다.',
+    insurerPositionReview: '보험회사가 진단확정 요건 미충족을 주장하는 경우 MRI, MRA, CTA, CT 등 영상검사 결과와 가입 당시 약관상 정의, 신경학적 결손 또는 급성 병변 요건을 구체적으로 제시할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '가입 당시 약관', 'MRI/MRA/CTA/CT 영상검사 판독지', '전문의 진단서', '진료기록지', '신경학적 결손 기록', '질병분류표', '보험회사 부지급 사유서'].filter(Boolean).join('\n'),
+    simpleClientSummary: '뇌질환 진단비는 진단명만으로 판단하기보다 MRI 등 영상검사와 가입 당시 약관의 진단확정 기준을 함께 확인해야 합니다. 영상검사 판독지와 전문의 진단 자료를 정리하면 재검토 요청에 필요한 근거를 보완할 수 있습니다.',
+  };
+}
+
+function finalizeHeartDiagnosisBenefitResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'heart_diagnosis_benefit') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|뇌경색|뇌출혈|후유장해|자동차보험|고지의무|계약해지|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '본 건은 심장질환 진단비 지급 여부가 문제되는 사안으로, 진단서 코드만으로 지급 여부를 단정하기보다 가입 당시 약관상 급성심근경색, 허혈성심장질환, 협심증 또는 심혈관질환의 정의와 진단확정 기준을 확인해야 합니다.',
+    '급성심근경색 진단확정은 트로포닌 등 심근효소 상승, 심전도 또는 ECG/EKG 변화, 관상동맥조영술(CAG), PCI 시행 여부, 영상 및 진료기록 등 검사결과를 종합해 검토해야 합니다.',
+    'I20 협심증과 I21 급성심근경색은 약관상 지급대상이 다를 수 있으므로 구분해야 합니다. 관상동맥 협착이나 스텐트 삽입만으로 급성심근경색 진단비가 확정되는 것은 아니며, 검사결과와 약관상 진단확정 기준을 함께 확인해야 합니다.',
+    '따라서 고객 측 의견은 지급 여부를 단정하는 것이 아니라, 검사결과와 가입 당시 약관상 진단확정 기준에 따라 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 방향으로 정리합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '심장질환 진단비 관련 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 심장질환 진단비 청구에서 진단확정이 인정되는지, 트로포닌ㆍ심전도ㆍ관상동맥조영술 등 검사결과가 가입 당시 약관상 급성심근경색 또는 허혈성심장질환 정의에 해당하는지입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '가입 당시 약관, 심장질환 진단확정 조항, 트로포닌 등 심근효소 검사결과, 심전도, 관상동맥조영술, CAG/PCI 기록, 진료기록, 질병분류표를 중심으로 검토해야 합니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 심장질환 진단확정 요건 충족 여부가 핵심입니다. 트로포닌 상승, 심전도 변화, 관상동맥조영술 소견, 스텐트 시행 사유, 진구성 또는 급성 병변 여부를 구분해야 합니다.',
+    insurerPositionReview: '보험회사가 진단확정 요건 미충족을 주장하는 경우 트로포닌, 심전도, 관상동맥조영술, CAG/PCI, 사망진단서 또는 부검 여부 등 검사결과와 가입 당시 약관상 정의를 구체적으로 제시할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '가입 당시 약관', '트로포닌 등 심근효소 검사결과', '심전도 또는 ECG/EKG', '관상동맥조영술(CAG) 결과', 'PCI/스텐트 기록', '진료기록지', '질병분류표', '보험회사 부지급 사유서'].filter(Boolean).join('\n'),
+    simpleClientSummary: '심장질환 진단비는 진단서 코드만으로 판단하기보다 트로포닌, 심전도, 관상동맥조영술 등 검사결과와 가입 당시 약관의 진단확정 기준을 함께 확인해야 합니다. 관련 자료를 정리하면 재검토 요청에 필요한 근거를 보완할 수 있습니다.',
+  };
+}
+
 function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
   const inputText = JSON.stringify({
@@ -1655,6 +1741,8 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const cancerDiagnosisProfile = profile === 'cancer_diagnosis_benefit';
+  const brainDiagnosisProfile = profile === 'brain_diagnosis_benefit';
+  const heartDiagnosisProfile = profile === 'heart_diagnosis_benefit';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
   const cancerHospitalizationProfile = profile === 'indemnity_cancer_hospitalization_denial';
@@ -1707,6 +1795,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       const directCancer = /암|암진단비|진단확정|병리|조직검사|세포검사|질병분류표|KCD|ICD-O|제자리암|상피내암|경계성종양|유사암|행동양식|D00|D01|D06|D09|D37|D38|D39|D40|D41|D42|D43|D44|D45|D46|D47|D48|C73|갑상선암|대장|방광암|유방상피내암|직장유암종|GIST|흑색종|원발암|전이암|약관|진단비/i;
       if (excludedCancer.test(text)) return false;
       if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directCancer.test(text)) return false;
+    }
+    if (brainDiagnosisProfile) {
+      const excludedBrain = /도수치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|후유장해|자동차보험|고지의무|계약해지/i;
+      const directBrain = /뇌질환|뇌졸중|뇌경색|뇌출혈|지주막하출혈|뇌동맥류|일과성\s*뇌허혈|I63|I60|I61|I62|I65|I66|I69|G45|MRI|MRA|CTA|CT|영상검사|신경학적\s*결손|협착|경동맥|뇌혈관|진단확정|약관|질병분류표/i;
+      if (excludedBrain.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directBrain.test(text)) return false;
+    }
+    if (heartDiagnosisProfile) {
+      const excludedHeart = /도수치료|manual\s*therapy|M54|요통|백내장|다초점렌즈|갑상선암|암진단비|뇌경색|뇌출혈|후유장해|자동차보험|고지의무|계약해지/i;
+      const directHeart = /심장질환|급성심근경색|심근경색|협심증|관상동맥|심혈관|스텐트|트로포닌|심전도|관상동맥조영술|CAG|PCI|심근효소|CK-MB|I21|I20|I22|I25|I50|사망진단서|부검|진단확정|검사결과|약관|질병분류표/i;
+      if (excludedHeart.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directHeart.test(text)) return false;
     }
     if (generalDisclosureProfile) {
       const excludedDisclosureOfficial = /암진단비|후유장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
@@ -1770,6 +1870,20 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
         ref.diagnosis_code,
         ref.diagnosis_name,
       ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (brainDiagnosisProfile) {
+    const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|후유장해|자동차보험|고지의무|계약해지/i;
+    const allowed = /뇌질환|뇌졸중|뇌경색|뇌출혈|지주막하출혈|뇌동맥류|일과성\s*뇌허혈|I63|I60|I61|I62|I65|I66|I69|G45|MRI|MRA|CTA|CT|영상검사|신경학적\s*결손|협착|경동맥|뇌혈관|진단확정|약관|질병분류표/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (heartDiagnosisProfile) {
+    const excluded = /도수치료|manual\s*therapy|M54|요통|백내장|다초점렌즈|갑상선암|암진단비|뇌경색|뇌출혈|후유장해|자동차보험|고지의무|계약해지/i;
+    const allowed = /심장질환|급성심근경색|심근경색|협심증|관상동맥|심혈관|스텐트|트로포닌|심전도|관상동맥조영술|CAG|PCI|심근효소|CK-MB|I21|I20|I22|I25|I50|사망진단서|부검|진단확정|검사결과|약관|질병분류표/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
       return allowed.test(text) && !excluded.test(text);
     }).slice(0, 4);
   } else if (generalDisclosureProfile) {
@@ -1959,7 +2073,13 @@ Deno.serve(async (req: Request) => {
       finalizeCancerHospitalizationResult(
         finalizeGeneralIndemnityResult(
           finalizeCancerDiagnosisBenefitResult(
-            finalizeGeneralDisclosureResult(reviewedBase, input),
+            finalizeHeartDiagnosisBenefitResult(
+              finalizeBrainDiagnosisBenefitResult(
+                finalizeGeneralDisclosureResult(reviewedBase, input),
+                input,
+              ),
+              input,
+            ),
             input,
           ),
           input,
