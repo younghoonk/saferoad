@@ -463,7 +463,29 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'indemnity_cataract_multifocal_lens_denial' ? `
+  const profileRules = profile === 'indemnity_general_denial' ? `
+[General indemnity medical insurance denial argument]
+- This is an indemnity medical insurance denial case. Do not use disclosure duty, contract termination, underwriting, application-form question, decline, exclusion underwriting, loading, or non-disclosure reasoning unless explicitly entered.
+- Focus on original policy terms at enrollment, policy exclusions, treatment purpose, medical necessity, test/procedure necessity, detailed medical records, receipts, detailed medical bills, and insurer denial grounds.
+- The customer-side position should request reconsideration based on medical records, doctor's prescription or opinion, treatment/test indication, actual treatment details, and original indemnity policy terms.
+- Include the phrases "가입 당시 원약관", "보상 제외", "의학적 필요성", and "재검토" where appropriate.
+- Do not state payment is certain.
+` : profile === 'indemnity_cancer_hospitalization_denial' ? `
+[Indemnity cancer hospitalization denial argument]
+- This is a cancer hospitalization / nursing hospital indemnity denial case. Do not mention manual therapy, M54, low back pain, cataract, disclosure duty, contract termination, disability, or automobile insurance unless explicitly entered.
+- Hospitalization in a nursing hospital is not automatically payable or automatically excluded. The key issues are the original indemnity policy terms at enrollment, policy definition of hospitalization, whether the admission was direct cancer treatment, hospitalization necessity, and actual treatment details.
+- If the insurer argues the admission was not direct cancer treatment, distinguish simple convalescence, nursing, or rest from cancer-treatment continuity, chemotherapy side-effect management, pain control, nutrition management, infection management, palliative treatment, and conservative treatment.
+- The customer should secure admission/discharge confirmation, medical records, attending physician opinion, chemotherapy records, adverse-effect management records, pain-control records, medication records, nursing records, treatments performed during admission, detailed medical bill, insurer denial letter, and original indemnity policy terms.
+- The conclusion should be: the denial requires reconsideration based on direct cancer treatment, hospitalization necessity, and actual treatment materials. Do not state payment is certain.
+` : profile === 'indemnity_duplicate_proportional_reimbursement' ? `
+[Indemnity duplicate proportional reimbursement argument]
+- This is a duplicate indemnity insurance / proportional reimbursement dispute. Do not mention manual therapy, medical necessity, treatment purpose, cataract, cancer diagnosis benefit, disability, disclosure duty, or contract termination unless explicitly entered.
+- Indemnity insurance compensates actual loss, so duplicate enrollment in multiple indemnity policies does not normally allow compensation beyond the actual loss.
+- The key issues are the duplicate enrollment and proportional reimbursement provisions in the original policy terms at enrollment, the actual loss incurred, coverage terms of other policies, payments made by other insurers, deductibles, and each insurer's calculation method.
+- If the insurer paid only part based on proportional reimbursement, review whether total medical expense, patient-paid amount, non-covered amount, other insurance payment, deductible, and contractual sharing formula were calculated correctly.
+- The customer should secure receipts, detailed medical bills, other policy certificates, other insurance payment records, original policy terms for each indemnity insurance contract, deductible calculation details, insurer proportional reimbursement calculation sheet, and payment/denial letter.
+- The conclusion should be: additional payment is not certain, but the proportional reimbursement calculation and actual-loss basis require reconsideration.
+` : profile === 'indemnity_cataract_multifocal_lens_denial' ? `
 [Indemnity cataract multifocal lens denial argument]
 - This is a cataract / multifocal intraocular lens indemnity denial case. Do not mention manual therapy, M54, low back pain, repeated manual therapy, disclosure duty, contract termination, disability, thyroid cancer, or automobile insurance unless explicitly entered.
 - Distinguish cataract surgery itself from multifocal intraocular lens costs.
@@ -618,7 +640,13 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'indemnity_cataract_multifocal_lens_denial'
+  const profileReviewRules = profile === 'indemnity_general_denial'
+    ? '- For a general indemnity medical insurance denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion underwriting, loading, and non-disclosure reasoning. Keep the reasoning focused on original policy terms at enrollment, policy exclusions, medical necessity, treatment/test necessity, detailed medical records, receipts, detailed medical bills, and insurer denial grounds.'
+    : profile === 'indemnity_cancer_hospitalization_denial'
+    ? '- For a cancer hospitalization / nursing hospital indemnity denial case, remove manual therapy, M54, low back pain, cataract, disclosure-duty, contract termination, disability, and automobile-insurance reasoning. Keep the reasoning focused on direct cancer treatment, hospitalization necessity, original indemnity policy terms, admission definition, treatment records, chemotherapy side-effect management, pain control, nursing records, and detailed medical bill.'
+    : profile === 'indemnity_duplicate_proportional_reimbursement'
+    ? '- For a duplicate indemnity insurance / proportional reimbursement dispute, remove manual therapy, medical necessity, treatment purpose, cataract, cancer diagnosis benefit, disability, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on duplicate enrollment, proportional reimbursement, actual loss incurred, original policy terms at enrollment, other insurance contracts, other insurance payments, deductibles, and insurer calculation sheet.'
+    : profile === 'indemnity_cataract_multifocal_lens_denial'
     ? '- For a cataract multifocal intraocular lens indemnity denial case, remove manual therapy, M54, low back pain, repeated manual therapy, disclosure-duty, contract termination, disability, thyroid cancer, and automobile-insurance reasoning. Keep the reasoning focused on cataract surgery, multifocal IOL cost, treatment purpose versus vision correction, inpatient/outpatient distinction, policy exclusions, and original indemnity policy terms.'
     : profile === 'indemnity_manual_therapy_denial'
     ? '- For a manual therapy indemnity denial case, remove disclosure-duty, contract termination, underwriting, application-form question, decline, exclusion, loading, M47.26 non-disclosure, automobile damage, disability, cancer, cataract, and hospitalization-pattern reasoning. Keep the reasoning focused on treatment purpose, medical necessity, doctor prescription, treatment plan, repeated therapy appropriateness, policy exclusions, and original indemnity policy terms.'
@@ -854,7 +882,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -884,12 +912,20 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
     }
     return 'general_disclosure';
   }
+  if (/요양병원|암\s*입원|암입원|암\s*직접치료|직접치료|입원비|입원의료비|항암치료\s*후\s*입원|말기암\s*입원|통증조절|완화치료|보존치료|암요양병원/i.test(allText)) {
+    return 'indemnity_cancer_hospitalization_denial';
+  }
+  if (/중복가입|비례보상|중복\s*보험|복수\s*실손|타\s*보험계약|실제\s*발생한\s*손해|초과보상|보험금\s*분담|실손\s*중복/i.test(allText)) {
+    return 'indemnity_duplicate_proportional_reimbursement';
+  }
   if (/백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(allText)) {
     return 'indemnity_cataract_multifocal_lens_denial';
   }
-  if (/도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|과잉진료|의학적\s*필요성|반복치료|진료비\s*세부내역|치료계획/i.test(allText)
-    || (/실손|실손보험|실손의료/i.test(allText) && /M54|요통|허리통증|도수|비급여|치료/i.test(allText))) {
+  if (/도수치료|도수\s*치료|manual\s*therapy|도수치료비|비급여\s*도수/i.test(allText)) {
     return 'indemnity_manual_therapy_denial';
+  }
+  if (/실손|실손보험|실손의료|실손의료비|비급여|보상\s*제외|부지급|입원의료비|검사비|주사치료|수액|신경차단술|경막외신경성형술|수면다원검사|턱관절|비만치료|검사\s*목적\s*입원|체외충격파|MRI/i.test(allText)) {
+    return 'indemnity_general_denial';
   }
   if (disclosure && /M47\.26|요추증|신경뿌리병증|허리통증|요통/i.test(diagnosisText)) return 'm47_disclosure';
   if (/C73|갑상선암|갑상선\s*결절|thyroid|E04|D34/i.test(allText)) return 'thyroid_disclosure_cancer';
@@ -1251,6 +1287,86 @@ function finalizeGeneralDisclosureResult(result: AssessmentDraftResult, input: R
   };
 }
 
+function finalizeCancerHospitalizationResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'indemnity_cancer_hospitalization_denial') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|M54|요통|허리통증|체외충격파|백내장|다초점렌즈|고지의무|계약해지|후유장해|자동차보험|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const facts = '현재 입력된 사실관계에 따르면, 고객은 암 치료 또는 암 치료 후 관리와 관련하여 요양병원 입원비 또는 입원의료비를 실손보험으로 청구하였고, 보험회사는 암의 직접치료 해당 여부 또는 입원 필요성을 이유로 부지급을 주장하고 있습니다.';
+  const issues = '주요 쟁점은 요양병원 입원이라는 사실 자체가 아니라, 가입 당시 실손보험 원약관상 입원의 정의, 암의 직접치료 해당 여부, 입원 필요성, 입원 중 실제 시행된 치료 내용입니다.';
+  const opinion = [
+    '요양병원 입원이라는 사정만으로 보험금 지급 또는 부지급이 곧바로 확정되는 것은 아닙니다. 본 건은 가입 당시 실손보험 원약관에서 정한 입원의 정의와 암의 직접치료 범위, 실제 입원 중 치료 내용 및 입원 필요성을 중심으로 검토해야 합니다.',
+    '보험회사가 단순 요양, 간병 또는 휴식 목적이라고 주장하는 경우에도, 항암치료 부작용 관리, 통증조절, 영양관리, 감염관리, 완화치료, 보존치료, 치료 연속성 확보 목적이 있었는지는 진료기록과 간호기록을 통해 구체적으로 확인해야 합니다.',
+    '고객 측은 입퇴원확인서, 진료기록지, 주치의 소견서, 항암치료 기록, 항암 부작용 관리 기록, 통증조절 기록, 투약기록, 간호기록, 입원 중 시행된 처치 및 치료 내역, 진료비 세부내역서를 통해 입원 필요성과 치료 목적성을 보완할 필요가 있습니다.',
+    '따라서 현재 단계의 손해사정 의견은 지급 여부를 단정하는 것이 아니라, 암의 직접치료 해당 여부와 입원 필요성 자료를 기준으로 보험회사의 부지급 처분에 재검토가 필요하다는 방향으로 정리하는 것이 적절합니다.',
+  ].join('\n\n');
+  return {
+    ...result,
+    title: '요양병원 암 입원비 실손보험 부지급 관련 손해사정 의견 초안',
+    overview: clean(result.overview) || facts,
+    facts,
+    issues: [clean(result.issues), issues].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '가입 당시 원약관과 가입 당시 실손보험 원약관, 암의 직접치료 관련 약관, 입원의 정의, 보상 제외 조항, 입원 필요성 및 실제 치료 내용에 관한 자료를 중심으로 검토해야 합니다. 직접 관련 공식 판례 또는 분쟁조정례가 부족한 경우에는 이를 보완 필요 근거로 분리하고 원약관 및 진료기록 확인을 우선해야 합니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 요양병원 입원이 암의 직접치료 또는 입원 필요성과 의학적 필요성이 인정되는 치료인지 여부가 핵심입니다. 따라서 입원 중 시행된 처치, 투약, 간호기록, 통증조절, 항암치료 부작용 관리, 진료비 세부내역을 중심으로 검토해야 합니다.',
+    insurerPositionReview: '보험회사가 암의 직접치료가 아니라고 주장하려면 단순 요양ㆍ간병ㆍ휴식 목적과 치료 연속성, 통증조절, 영양관리, 감염관리, 항암치료 부작용 관리 목적을 구체적으로 구분하여 설명할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: '입퇴원확인서\n진료기록지\n주치의 소견서\n항암치료 기록\n항암 부작용 관리 기록\n통증조절 기록\n투약기록\n간호기록\n입원 중 시행된 처치/치료 내역\n진료비 세부내역서\n보험회사 부지급 사유서\n가입 당시 실손보험 원약관',
+    simpleClientSummary: '요양병원 입원비는 요양병원이라는 이유만으로 바로 지급 또는 부지급이 정해지지 않습니다. 입원 중 실제 치료 내용, 암의 직접치료 관련성, 입원 필요성, 보상 제외 조항, 가입 당시 원약관을 정리하면 보험회사에 재검토를 요청할 때 필요한 자료를 보완할 수 있습니다.',
+  };
+}
+
+function finalizeDuplicateProportionalResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'indemnity_duplicate_proportional_reimbursement') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|의학적\s*필요성|치료\s*목적|치료\s*목적성|백내장|암진단비|후유장해|고지의무|계약해지|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    '본 건은 실손보험 중복가입 상태에서 보험회사가 비례보상을 이유로 보험금을 일부만 지급한 사안입니다. 실손보험은 실제 발생한 손해를 보상하는 구조이므로, 여러 실손보험에 가입되어 있더라도 실제 발생한 손해를 초과하여 보상받는 구조는 아니라는 점을 전제로 검토해야 합니다.',
+    '다만 비례보상이라는 결론 자체와 보험회사의 계산이 정확하다는 점은 구분해야 합니다. 가입 당시 원약관상 중복가입 및 비례보상 조항, 실제 발생한 손해액, 본인부담금, 비급여액, 자기부담금, 타 보험 지급액, 각 보험계약의 보장범위가 모두 정확히 반영되었는지 확인해야 합니다.',
+    '보험회사가 일부 지급만 한 경우에는 비례보상 산식과 분담 계산 과정을 구체적으로 제시할 필요가 있습니다. 고객 측에서는 진료비 영수증, 진료비 세부내역서, 타 보험 지급내역, 각 실손보험 보험증권, 가입 당시 원약관, 자기부담금 산정 내역을 대조하여 계산 오류나 누락 항목이 있는지 검토할 수 있습니다.',
+    '따라서 본 건의 결론은 추가 지급을 단정하는 것이 아니라, 중복가입에 따른 비례보상 산정 방식과 실제 발생한 손해 기준이 정확히 적용되었는지에 관하여 보험회사의 지급 결정은 재검토가 필요하다는 의견으로 정리합니다.',
+  ].join('\n\n');
+  return {
+    ...result,
+    title: '중복가입 비례보상 분쟁 관련 손해사정 의견 초안',
+    overview: clean(result.overview) || '실손보험 중복가입 상태에서 보험금이 일부 지급된 비례보상 분쟁입니다.',
+    facts: '현재 입력된 사실관계에 따르면, 고객은 복수의 실손보험에 중복가입한 상태에서 보험금을 청구하였고, 보험회사는 중복가입에 따른 비례보상 원칙을 적용하여 일부만 지급하였습니다.',
+    issues: '주요 쟁점은 중복가입에 따른 비례보상 조항의 적용, 실제 발생한 손해 산정, 타 보험계약의 보장내용과 지급액 반영, 가입 당시 원약관상 분담 계산 방식의 정확성입니다.',
+    legalAndReferenceBasis: '본 건은 가입 당시 원약관의 중복가입 및 비례보상 조항, 실제 발생한 손해를 초과하여 보상하지 않는 실손보험 구조, 타 보험계약 확인 자료를 중심으로 검토해야 합니다.',
+    damageAssessment: '손해 내용은 실제 발생한 손해액, 본인부담금, 비급여액, 자기부담금, 타 보험 지급액, 각 보험계약별 비례보상 산식이 정확히 반영되었는지 여부가 핵심입니다.',
+    insurerPositionReview: '보험회사는 중복가입에 따른 비례보상이라고만 설명할 것이 아니라, 전체 치료비, 실제 발생한 손해, 타 보험 지급액, 자기부담금, 약관상 분담방식 및 계산 근거를 구체적으로 제시할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: '진료비 영수증\n진료비 세부내역서\n타 보험계약 보험증권\n타 보험 지급내역\n각 실손보험 가입 당시 원약관\n자기부담금 산정 내역\n보험회사 비례보상 계산서\n보험회사 지급/부지급 사유서',
+    simpleClientSummary: '중복가입이면 여러 보험에서 실제 발생한 손해를 초과해 받기는 어렵지만, 비례보상 계산이 정확한지는 별도 문제입니다. 가입 당시 원약관, 타 보험 지급내역, 진료비 영수증과 세부내역서를 모아 보험회사 계산 방식의 재검토를 요청할 수 있습니다.',
+  };
+}
+
+function finalizeGeneralIndemnityResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'indemnity_general_denial') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/계약해지|청약서|인수거절|부담보|할증|고지의무|계약전\s*알릴의무|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '본 건은 실손보험 부지급 사안으로, 가입 당시 원약관의 보상 대상 및 보상 제외 조항, 진료기록상 치료 또는 검사의 의학적 필요성, 실제 시행된 처치 내용, 진료비 세부내역을 중심으로 재검토해야 합니다.',
+    '보험회사가 보상 제외 또는 필요성 부족을 이유로 부지급하였다면, 단순히 비급여 항목이라는 사정만으로는 부족하고 약관상 보상 제외 근거와 해당 진료의 의학적 필요성 부족 사유를 구체적으로 제시할 필요가 있습니다.',
+    '고객 측은 진료기록지, 의사 소견서 또는 처방ㆍ검사 의뢰 사유, 치료 또는 검사 결과, 진료비 세부내역서, 영수증, 보험회사 부지급 사유서, 가입 당시 원약관을 확보하여 재검토를 요청하는 방향으로 정리할 수 있습니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title),
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 실손보험 약관상 보상 대상 여부, 보상 제외 조항 적용 여부, 의학적 필요성 또는 검사ㆍ치료 필요성, 가입 당시 원약관 기준의 적용입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '가입 당시 원약관, 실손보험 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역, 보험회사 부지급 사유서를 중심으로 검토해야 합니다. 직접 관련 공식 판례 또는 분쟁조정례가 부족한 경우에는 원약관과 진료기록 확인을 우선해야 합니다.',
+    damageAssessment: '본 건의 평가는 손해액 자체보다 가입 당시 원약관상 보상 대상 여부, 보상 제외 해당 여부, 의학적 필요성, 진료 또는 검사 필요성, 진료비 세부내역의 항목 구분을 중심으로 이루어져야 합니다.',
+    insurerPositionReview: '보험회사는 보상 제외 또는 의학적 필요성 부족을 주장하는 경우 약관 조항, 진료기록, 세부 항목별 부지급 사유를 구체적으로 제시할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '가입 당시 원약관', '진료기록지', '의사 소견서 또는 처방/검사 의뢰 사유', '진료비 세부내역서', '영수증', '보험회사 부지급 사유서'].filter(Boolean).join('\n'),
+    simpleClientSummary: '실손보험 부지급은 가입 당시 원약관, 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역을 함께 확인해야 합니다. 관련 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
+  };
+}
+
 function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
   const inputText = JSON.stringify({
@@ -1486,6 +1602,8 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
+  const cancerHospitalizationProfile = profile === 'indemnity_cancer_hospitalization_denial';
+  const duplicateProportionalProfile = profile === 'indemnity_duplicate_proportional_reimbursement';
   const generalDisclosureProfile = profile === 'general_disclosure';
   const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
     ...ref,
@@ -1543,6 +1661,20 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
     if (cataractProfile) {
       const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|고지의무|계약해지|M47\.26|후유장해|갑상선|자동차보험|자동차/i;
       const direct = /백내장|H25|H26|인공수정체|다초점렌즈|다초점\s*인공수정체|입원|통원|실손의료비|시력교정|보상\s*제외|약관해석|입원의\s*정의|수정체|안과/i;
+      if (excluded.test(text)) return false;
+      if (ref.source_area === 'precedents' && !direct.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
+    }
+    if (cancerHospitalizationProfile) {
+      const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|백내장|다초점렌즈|고지의무|계약해지|후유장해|자동차보험|자동차/i;
+      const direct = /요양병원|암\s*입원|암입원|암\s*직접치료|직접치료|입원비|입원의료비|입원의\s*정의|입원\s*필요성|통증조절|항암치료|완화치료|보존치료|실손보험|원약관/i;
+      if (excluded.test(text)) return false;
+      if (ref.source_area === 'precedents' && !direct.test(text)) return false;
+      if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
+    }
+    if (duplicateProportionalProfile) {
+      const excluded = /도수치료|manual\s*therapy|의학적\s*필요성|치료\s*목적|백내장|암진단비|후유장해|고지의무|계약해지/i;
+      const direct = /중복가입|비례보상|중복\s*보험|복수\s*실손|타\s*보험계약|실제\s*발생한\s*손해|초과보상|보험금\s*분담|실손보험|원약관/i;
       if (excluded.test(text)) return false;
       if (ref.source_area === 'precedents' && !direct.test(text)) return false;
       if (ref.source_area === 'terms_standards' && !direct.test(text)) return false;
@@ -1606,6 +1738,30 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (cataractProfile) {
     const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|갑상선암|후유장해|고지의무|계약해지|M47\.26/i;
     const allowed = /백내장|H25|H26|다초점렌즈|다초점\s*인공수정체|인공수정체|안과|시력교정|백내장\s*수술|진료비\s*세부내역|입원|통원|수정체/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (cancerHospitalizationProfile) {
+    const excluded = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|백내장|다초점렌즈|고지의무|계약해지|후유장해|자동차보험/i;
+    const allowed = /요양병원|암\s*입원|암입원|암\s*직접치료|직접치료|입원\s*필요성|입원의\s*정의|통증조절|항암치료|완화치료|보존치료|간호기록|투약기록|진료비\s*세부내역|실손보험|원약관/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (duplicateProportionalProfile) {
+    const excluded = /도수치료|manual\s*therapy|의학적\s*필요성|치료\s*목적|백내장|암진단비|후유장해|고지의무|계약해지/i;
+    const allowed = /중복가입|비례보상|중복\s*보험|복수\s*실손|타\s*보험계약|실제\s*발생한\s*손해|초과보상|보험금\s*분담|실손보험|원약관|자기부담금|지급내역|계산서/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
@@ -1726,7 +1882,16 @@ Deno.serve(async (req: Request) => {
       input,
       ragResult,
     );
-    const reviewed = finalizeGeneralDisclosureResult(reviewedBase, input);
+    const reviewed = finalizeDuplicateProportionalResult(
+      finalizeCancerHospitalizationResult(
+        finalizeGeneralIndemnityResult(
+          finalizeGeneralDisclosureResult(reviewedBase, input),
+          input,
+        ),
+        input,
+      ),
+      input,
+    );
 
     return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile: caseProfile(input), retrievedReferences: ragResult });
   } catch (error: unknown) {

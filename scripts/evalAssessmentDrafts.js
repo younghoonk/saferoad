@@ -70,7 +70,7 @@ function validateCaseShape(testCase) {
   if (!testCase.id) errors.push('missing id');
   if (!testCase.category) errors.push('missing category');
   if (!testCase.input || typeof testCase.input !== 'object') errors.push('missing input object');
-  for (const key of ['mustInclude', 'mustNotInclude', 'expectedReferenceLabels', 'forbiddenReferenceKeywords', 'requiredSections']) {
+  for (const key of ['mustInclude', 'mustNotInclude', 'expectedReferenceLabels', 'anyOfReferenceLabels', 'forbiddenReferenceKeywords', 'requiredSections']) {
     if (testCase[key] !== undefined && !Array.isArray(testCase[key])) errors.push(`${key} must be an array`);
   }
   return errors;
@@ -285,6 +285,10 @@ function evaluateResult(testCase, result, previous) {
   }
   for (const label of asArray(testCase.expectedReferenceLabels)) {
     if (!includesText(refs, label)) failures.push(`missing reference label: ${label}`);
+  }
+  const anyOfReferenceLabels = asArray(testCase.anyOfReferenceLabels);
+  if (anyOfReferenceLabels.length && !anyOfReferenceLabels.some((label) => includesText(refs, label))) {
+    failures.push(`missing any reference label: ${anyOfReferenceLabels.join(' | ')}`);
   }
   for (const keyword of asArray(testCase.forbiddenReferenceKeywords)) {
     const location = includesText(refs, keyword) ? findLocation({ retrievedReferences: result?.retrievedReferences }, keyword, true) : null;

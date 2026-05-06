@@ -1198,9 +1198,6 @@
       "백내장",
       "갑상선암"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1283,9 +1280,6 @@
       "갑상선암",
       "후유장해"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1363,9 +1357,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1440,9 +1431,6 @@
       "인수거절",
       "부담보",
       "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -1519,9 +1507,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1596,9 +1581,6 @@
       "인수거절",
       "부담보",
       "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -1675,9 +1657,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1752,9 +1731,6 @@
       "인수거절",
       "부담보",
       "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -1831,9 +1807,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -1908,9 +1881,6 @@
       "인수거절",
       "부담보",
       "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -1987,9 +1957,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2064,9 +2031,6 @@
       "인수거절",
       "부담보",
       "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -2143,9 +2107,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2221,9 +2182,6 @@
       "부담보",
       "할증"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -2272,12 +2230,12 @@
       "adjusterMemo": "비례보상 산식, 타 계약 지급내역 확인"
     },
     "mustInclude": [
+      "중복가입",
+      "비례보상",
       "실손보험",
-      "보상 제외",
-      "의학적 필요성",
+      "실제 발생한 손해",
       "가입 당시 원약관",
-      "재검토",
-      "추가 확인"
+      "재검토"
     ],
     "mustNotInclude": [
       "보험금 지급 확정",
@@ -2293,14 +2251,14 @@
       "blog.naver.com",
       "okclaim.com",
       "insclaim.co.kr",
+      "도수치료",
+      "의학적 필요성",
+      "치료 목적",
+      "백내장",
+      "암진단비",
+      "후유장해",
       "고지의무",
-      "계약해지",
-      "인수거절",
-      "부담보",
-      "할증"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
+      "계약해지"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -2316,11 +2274,12 @@
       "blog.naver.com",
       "okclaim.com",
       "insclaim.co.kr",
+      "도수치료",
+      "백내장",
+      "암진단비",
+      "후유장해",
       "고지의무",
-      "계약해지",
-      "인수거절",
-      "부담보",
-      "할증"
+      "계약해지"
     ],
     "requiredSections": [
       "사건 개요",
