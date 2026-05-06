@@ -75,6 +75,7 @@ export interface AssessmentDraftInput {
 
 export interface AssessmentDraftResult {
   requestId?: string;
+  detectedProfile?: string;
   title: string;
   overview: string;
   facts: string;
@@ -154,6 +155,7 @@ function sanitizeRetrievedReferences(references?: RetrievedReference[]) {
 function sanitizeAssessmentDraftResult(result: AssessmentDraftResult): AssessmentDraftResult {
   return {
     requestId: cleanPublicText(result.requestId),
+    detectedProfile: cleanPublicText(result.detectedProfile),
     title: cleanPublicText(result.title),
     overview: cleanPublicText(result.overview),
     facts: cleanPublicText(result.facts),

@@ -92,6 +92,7 @@ interface AssessmentDraftInput {
 
 interface AssessmentDraftResult {
   requestId?: string;
+  detectedProfile?: string;
   title: string;
   overview: string;
   facts: string;
@@ -737,6 +738,7 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
 function sanitizeResult(result: AssessmentDraftResult): AssessmentDraftResult {
   return {
     requestId: cleanPublicText(result.requestId),
+    detectedProfile: cleanPublicText(result.detectedProfile),
     title: cleanPublicText(result.title),
     overview: cleanPublicText(result.overview),
     facts: cleanPublicText(result.facts),
@@ -875,6 +877,7 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
     ...(input.sourceAnalysis?.keyIssues || []),
   ].filter(Boolean).join(' ');
   const disclosure = isDisclosureDutyCase(input);
+  if (disclosure && /M47\.26/i.test(diagnosisText)) return 'm47_disclosure';
   if (/백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(allText)) {
     return 'indemnity_cataract_multifocal_lens_denial';
   }
@@ -1508,6 +1511,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
         ref.diagnosis_code,
         ref.diagnosis_name,
       ].filter(Boolean).join(' ');
+      if (text.includes('후유장해') || text.includes('?꾩쑀?ν빐')) return false;
       return allowed.test(text) && !excluded.test(text);
     }).slice(0, 4);
   } else if (thyroidProfile) {
@@ -1658,7 +1662,7 @@ Deno.serve(async (req: Request) => {
       ragResult,
     );
 
-    return jsonResponse({ ...reviewed, requestId: input.requestId, retrievedReferences: ragResult });
+    return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile: caseProfile(input), retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';

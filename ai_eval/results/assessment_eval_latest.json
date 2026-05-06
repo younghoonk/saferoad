@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-05-06T08:32:00.122Z",
+  "dryRun": false,
+  "filters": {
+    "dryRun": false,
+    "caseId": "",
+    "limit": 3,
+    "category": ""
+  },
+  "totalAvailable": 100,
+  "total": 3,
+  "pass": 3,
+  "fail": 0,
+  "shapeFailures": [],
+  "results": [
+    {
+      "id": "ASSESS_001",
+      "category": "계약전 알릴의무",
+      "title": "M47.26 1회 통원 미고지 실손보험 해지",
+      "status": "PASS",
+      "failures": [],
+      "missingSections": [],
+      "missingKeywords": [],
+      "forbiddenFindings": [],
+      "forbiddenReferenceFindings": [],
+      "rawUrlFinding": null,
+      "internalFindings": [],
+      "preview": "M47.26 1회 통원 미고지 실손보험 해지 사건 손해사정 의견 초안 본 사건은 고객이 실손보험 가입 전 단순 허리 뻐근함으로 정형외과에 1회 통원하였으나 이를 고지하지 않아 보험사가 계약해지를 주장하는 건입니다. 고객은 보험 가입 전 단순 허리 뻐근함으로 인해 정형외과에 1회 통원하였으며, 입원, 수술, 정밀검사, 장기투약, 반복치료는 없었습니다. 보험사는 최근 3개월 내 진료기록 미고지를 이유로 계약해지를 주장하고 있습니다. 고객은 해당 병력을 중요 병력으로 인식하지 못했으며, 질병코드의 의미를 설명받지 못했다고 진술하였습니다. 주요 쟁점은 고객의 고지의무 위반 여부와 그로 인한 계약해지의 적법성입니다. 특히, 고객의 고의 또는 중과실 여부와 해당 병력이 보험 인수에 미치는 중요성에 대한 검토가 필요합니다. 상법 제651조(고지의무위반으로 인한 계약해지), 제651조의2(서면에 의한 질문의 효력), 제655조(계약해지와 보험금청구권)가 본 사건에 적용될 수 있습니다. 관련 판례 ...",
+      "detectedProfile": "m47_disclosure",
+      "resultTitle": "M47.26 1회 통원 미고지 실손보험 해지 사건 손해사정 의견 초안",
+      "requestId": "eval-ASSESS_001-1778056263979-8pg01xe9obq",
+      "referenceCounts": {
+        "official": 3,
+        "internal": 0,
+        "auxiliary": 0,
+        "followUp": 0
+      }
+    },
+    {
+      "id": "ASSESS_002",
+      "category": "계약전 알릴의무",
+      "title": "갑상선 결절 미고지 후 갑상선암 진단비",
+      "status": "PASS",
+      "failures": [],
+      "missingSections": [],
+      "missingKeywords": [],
+      "forbiddenFindings": [],
+      "forbiddenReferenceFindings": [],
+      "rawUrlFinding": null,
+      "internalFindings": [],
+      "preview": "갑상선 결절 미고지 후 갑상선암 진단비 청구 관련 손해사정 의견 초안 본 사건은 고객이 갑상선 결절을 고지하지 않은 상태에서 암보험에 가입한 후, 갑상선암 진단비를 청구한 건으로, 보험사는 고지의무 위반을 이유로 계약해지 및 보험금 부지급을 주장하고 있습니다. 고객은 2021년 3월 15일 삼성화재의 암보험에 가입하였으며, 가입 전 건강검진에서 갑상선 결절 소견을 받았으나 치료나 정밀검사는 받지 않았습니다. 이후 갑상선암(C73) 진단을 받고 보험금을 청구하였으나, 보험사는 고지의무 위반을 이유로 보험금 지급을 거절하였습니다. 주요 쟁점은 갑상선 결절의 고지의무 위반 여부와 갑상선암 진단비 청구의 정당성입니다. 특히, 고객이 결절의 중요성을 인지하고 있었는지, 보험사의 고지의무 위반 주장에 대한 인과관계가 성립하는지가 핵심입니다. 상법 제651조 및 제651조의2에 따라 고지의무 위반 여부를 판단하며, 대법원 2011.4.14. 선고 2009다103349, 103356 판결을 통해 ...",
+      "detectedProfile": "thyroid_disclosure_cancer",
+      "resultTitle": "갑상선 결절 미고지 후 갑상선암 진단비 청구 관련 손해사정 의견 초안",
+      "requestId": "eval-ASSESS_002-1778056284060-zp90g3sbgbj",
+      "referenceCounts": {
+        "official": 5,
+        "internal": 4,
+        "auxiliary": 0,
+        "followUp": 0
+      }
+    },
+    {
+      "id": "ASSESS_003",
+      "category": "계약전 알릴의무",
+      "title": "고혈압 투약 미고지 계약해지",
+      "status": "PASS",
+      "failures": [],
+      "missingSections": [],
+      "missingKeywords": [],
+      "forbiddenFindings": [],
+      "forbiddenReferenceFindings": [],
+      "rawUrlFinding": null,
+      "internalFindings": [],
+      "preview": "고혈압 투약 미고지로 인한 계약해지 사건 사정서 초안 본 사건은 보험가입자가 고혈압 투약 사실을 청약 시 고지하지 않아 보험사가 계약을 해지하고 보험금 지급을 거부한 사례입니다. 고객은 단기간 투약 후 상태가 정상화되었으며 중대한 질환으로 인식하지 못했다고 주장합니다. 보험가입자는 2022년 1월 10일 DB손해보험의 질병보험에 가입하였으며, 가입 전 고혈압으로 약을 복용한 이력이 있었으나 이를 청약 시 알리지 않았습니다. 보험사는 이를 근거로 계약해지 및 보험금 부지급을 주장하고 있습니다. 주요 쟁점은 고혈압 투약 사실의 고지의무 위반 여부, 고지의무 위반의 중대성, 보험사의 계약해지 및 보험금 부지급 결정의 적법성입니다. 상법 제651조 및 제651조의2에 따르면, 고지의무 위반 시 보험자는 계약을 해지할 수 있으며, 서면으로 질문한 사항은 중요한 사항으로 추정됩니다. 관련 판례로는 서울고등법원 20100212 선고 2009나94744 판결과 대법원 20120823 선고 2010...",
+      "detectedProfile": "general_disclosure",
+      "resultTitle": "고혈압 투약 미고지로 인한 계약해지 사건 사정서 초안",
+      "requestId": "eval-ASSESS_003-1778056302213-h5kduxsk68",
+      "referenceCounts": {
+        "official": 6,
+        "internal": 4,
+        "auxiliary": 0,
+        "followUp": 0
+      }
+    }
+  ]
+}

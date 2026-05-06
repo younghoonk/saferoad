@@ -25,7 +25,8 @@
     "rag:feedback:import": "node scripts/importRagSearchFeedbackSamples.js",
     "rag:feedback:check": "node scripts/checkRagSearchFeedback.js",
     "rag:embeddings:check": "node scripts/checkRagEmbeddings.js",
-    "rag:search:test": "node scripts/testRagSearch.js"
+    "rag:search:test": "node scripts/testRagSearch.js",
+    "ai:assessment:eval": "node scripts/evalAssessmentDrafts.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
