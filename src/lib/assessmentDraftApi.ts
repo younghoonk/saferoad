@@ -33,6 +33,7 @@ export interface RetrievedReference {
 }
 
 export interface AssessmentDraftInput {
+  requestId?: string;
   caseTitle?: string;
   insurerName?: string;
   productName?: string;
@@ -73,6 +74,7 @@ export interface AssessmentDraftInput {
 }
 
 export interface AssessmentDraftResult {
+  requestId?: string;
   title: string;
   overview: string;
   facts: string;
@@ -151,6 +153,7 @@ function sanitizeRetrievedReferences(references?: RetrievedReference[]) {
 
 function sanitizeAssessmentDraftResult(result: AssessmentDraftResult): AssessmentDraftResult {
   return {
+    requestId: cleanPublicText(result.requestId),
     title: cleanPublicText(result.title),
     overview: cleanPublicText(result.overview),
     facts: cleanPublicText(result.facts),
@@ -217,6 +220,7 @@ export async function createAssessmentDraft(
   const { data, error } = await supabase.functions.invoke('create-assessment-draft', {
     body: {
       ...input,
+      requestId: input.requestId,
       contractDate: input.contractDate?.trim() || 'unknown',
       retrievedReferences: sanitizeRetrievedReferences(input.retrievedReferences),
     },

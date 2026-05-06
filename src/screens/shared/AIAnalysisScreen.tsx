@@ -177,12 +177,14 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
   const [generatingDoc, setGeneratingDoc] = useState(false);
   const [draftInput, setDraftInput] = useState<AssessmentDraftInput>(initialDraftInput);
   const [draftResult, setDraftResult] = useState<AssessmentDraftResult | null>(null);
+  const [draftError, setDraftError] = useState<string | null>(null);
   const [generatingDraft, setGeneratingDraft] = useState(false);
   const [closingInput, setClosingInput] = useState<ClosingReportInput>(initialClosingInput);
   const [closingResult, setClosingResult] = useState<ClosingReportResult | null>(null);
   const [generatingClosing, setGeneratingClosing] = useState(false);
   const [copied, setCopied] = useState(false);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const activeDraftRequestIdRef = useRef<string | null>(null);
 
   const analysisBytes = [...denialImages, ...customerImages].reduce((sum, image) => sum + image.size, 0);
   const closingBytes = [...hospitalImages, ...insurerImages, ...otherImages].reduce((sum, image) => sum + image.size, 0);
@@ -262,7 +264,18 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
     setImages(group, (prev) => prev.filter((image) => image.id !== id));
   };
 
+  const clearDraftResultState = (cancelActiveRequest = true) => {
+    if (cancelActiveRequest) activeDraftRequestIdRef.current = null;
+    setDraftResult(null);
+    setDraftError(null);
+    setCopied(false);
+  };
+
+  const previewForLog = (value?: string) => (value ?? '').replace(/\s+/g, ' ').trim().slice(0, 50);
+
   const setDraftField = <K extends keyof AssessmentDraftInput>(key: K, value: AssessmentDraftInput[K]) => {
+    clearDraftResultState(true);
+    setGeneratingDraft(false);
     setDraftInput((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -326,6 +339,8 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
 
   const handleUseAnalysisForDraft = () => {
     if (!analysisResult) return;
+    clearDraftResultState(true);
+    setGeneratingDraft(false);
     const structured = analysisResult.structuredData;
     const denialReason = structured?.denialReason || analysisResult.denial_reasons?.join('\n') || '';
     const insurerPosition = structured?.insurerPosition
@@ -375,19 +390,43 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
         draftSupportingFacts: supportingFacts,
       },
     }));
-    setDraftResult(null);
     setMode('assessment-draft');
   };
 
   const handleGenerateDraft = async () => {
+    const requestId = `assessment-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    activeDraftRequestIdRef.current = requestId;
+    const payload: AssessmentDraftInput = {
+      ...draftInput,
+      requestId,
+      contractDate: draftInput.contractDate?.trim() || 'unknown',
+      retrievedReferences: [],
+    };
+    clearDraftResultState(false);
     setGeneratingDraft(true);
+    console.log('[assessment-draft] request', {
+      requestId,
+      insurerName: payload.insurerName,
+      insuranceType: payload.insuranceType,
+      contractDate: payload.contractDate,
+      accidentType: payload.accidentType,
+      diagnosisText: payload.diagnosisText,
+      insurerPositionPreview: previewForLog(payload.insurerPosition),
+      damageDetailsPreview: previewForLog(payload.damageDetails),
+      customerStatementPreview: previewForLog(payload.customerStatement),
+    });
     try {
-      const result = await createAssessmentDraft(draftInput);
-      setDraftResult(result);
+      const result = await createAssessmentDraft(payload);
+      if (activeDraftRequestIdRef.current === requestId && (!result.requestId || result.requestId === requestId)) {
+        setDraftResult(result);
+        setDraftError(null);
+      }
     } catch (err: unknown) {
       Alert.alert('초안 생성 실패', err instanceof Error ? err.message : '사정서 초안 생성 중 오류가 발생했습니다.');
     } finally {
-      setGeneratingDraft(false);
+      if (activeDraftRequestIdRef.current === requestId) {
+        setGeneratingDraft(false);
+      }
     }
   };
 
@@ -565,6 +604,7 @@ export function AIAnalysisScreen({ onBack, initialMode = 'denial-analysis' }: AI
       <FormInput label="손해사정사 메모" multiline value={draftInput.adjusterMemo ?? ''} onChangeText={(value) => setDraftField('adjusterMemo', value)} placeholder="검토 포인트, 추가 자료, 유의사항을 입력하세요." />
       <OptionCard title="원하는 문체" options={toneOptions} value={draftInput.tone} onSelect={(value) => setDraftField('tone', value)} />
       <Button title={generatingDraft ? '초안 생성 중...' : draftResult ? '다시 생성' : '사정서 초안 생성'} onPress={handleGenerateDraft} disabled={generatingDraft} loading={generatingDraft} size="lg" style={styles.primaryBtn} />
+      {draftError && !generatingDraft && <Text style={styles.errorText}>{draftError}</Text>}
       {draftResult && renderDraftResult()}
     </View>
   );
@@ -1144,6 +1184,7 @@ const styles = StyleSheet.create({
   toneChipActive: { backgroundColor: Colors.primary, borderColor: Colors.primary },
   toneChipText: { fontSize: 13, color: Colors.primary, fontWeight: '700' },
   toneChipTextActive: { color: Colors.white },
+  errorText: { fontSize: 13, color: Colors.danger, lineHeight: 18 },
   resultWrap: { gap: 12, marginTop: 4 },
   resultHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   resultTitle: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },

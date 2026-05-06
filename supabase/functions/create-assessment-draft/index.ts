@@ -62,6 +62,7 @@ interface SourceAnalysis {
 }
 
 interface AssessmentDraftInput {
+  requestId?: string;
   caseTitle?: string;
   insurerName?: string;
   productName?: string;
@@ -90,6 +91,7 @@ interface AssessmentDraftInput {
 }
 
 interface AssessmentDraftResult {
+  requestId?: string;
   title: string;
   overview: string;
   facts: string;
@@ -289,6 +291,7 @@ function validateSourceAnalysis(raw: unknown): SourceAnalysis | undefined {
 
 function validateInput(input: AssessmentDraftInput) {
   const cleaned = {
+    requestId: cleanText(input.requestId),
     caseTitle: cleanText(input.caseTitle),
     insurerName: cleanText(input.insurerName),
     productName: cleanText(input.productName),
@@ -334,6 +337,7 @@ function validateInput(input: AssessmentDraftInput) {
 
   const shortFields: (keyof typeof cleaned)[] = [
     'caseTitle',
+    'requestId',
     'insurerName',
     'productName',
     'policyName',
@@ -732,6 +736,7 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
 
 function sanitizeResult(result: AssessmentDraftResult): AssessmentDraftResult {
   return {
+    requestId: cleanPublicText(result.requestId),
     title: cleanPublicText(result.title),
     overview: cleanPublicText(result.overview),
     facts: cleanPublicText(result.facts),
@@ -1653,7 +1658,7 @@ Deno.serve(async (req: Request) => {
       ragResult,
     );
 
-    return jsonResponse({ ...reviewed, retrievedReferences: ragResult });
+    return jsonResponse({ ...reviewed, requestId: input.requestId, retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
