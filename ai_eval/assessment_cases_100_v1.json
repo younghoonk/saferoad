@@ -5361,9 +5361,6 @@
       "뇌경색",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -5438,9 +5435,6 @@
       "갑상선암",
       "뇌경색",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -5517,9 +5511,6 @@
       "뇌경색",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -5595,9 +5586,6 @@
       "뇌경색",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -5672,9 +5660,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -5747,9 +5732,6 @@
       "도수치료",
       "갑상선암",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -5824,9 +5806,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -5899,9 +5878,6 @@
       "도수치료",
       "갑상선암",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -5976,9 +5952,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6051,9 +6024,6 @@
       "도수치료",
       "갑상선암",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6128,9 +6098,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6203,9 +6170,6 @@
       "도수치료",
       "갑상선암",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6280,9 +6244,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6355,9 +6316,6 @@
       "도수치료",
       "갑상선암",
       "고지의무"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6432,9 +6390,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6508,9 +6463,6 @@
       "갑상선암",
       "고지의무"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6582,9 +6534,6 @@
       "도수치료",
       "백내장",
       "갑상선암"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6658,9 +6607,6 @@
       "백내장",
       "갑상선암"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6732,9 +6678,6 @@
       "도수치료",
       "백내장",
       "갑상선암"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6808,9 +6751,6 @@
       "백내장",
       "갑상선암"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -6882,9 +6822,6 @@
       "도수치료",
       "백내장",
       "갑상선암"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -6958,9 +6895,6 @@
       "백내장",
       "갑상선암"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -7033,9 +6967,6 @@
       "백내장",
       "갑상선암"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -7107,9 +7038,6 @@
       "도수치료",
       "백내장",
       "갑상선암"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -7189,9 +7117,6 @@
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -7266,9 +7191,6 @@
       "무조건 불리",
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -7346,9 +7268,6 @@
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -7422,9 +7341,6 @@
       "무조건 불리",
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
@@ -7500,9 +7416,6 @@
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
     ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
-    ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",
       "반드시 받을 수",
@@ -7577,9 +7490,6 @@
       "무조건 불리",
       "소송에서 이깁니다",
       "손해사정사가 소송을 대신"
-    ],
-    "expectedReferenceLabels": [
-      "국가법령정보센터"
     ],
     "forbiddenReferenceKeywords": [
       "보험금 지급 확정",

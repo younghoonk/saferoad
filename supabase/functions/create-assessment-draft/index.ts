@@ -463,7 +463,32 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
-  const profileRules = profile === 'brain_diagnosis_benefit' ? `
+  const profileRules = profile === 'disability_benefit' ? `
+[Disability benefit argument]
+- This is a disability benefit dispute. Do not mention manual therapy, indemnity denial, cancer diagnosis benefit, thyroid cancer, cataract, disclosure duty, contract termination, or automobile damage calculation unless explicitly entered.
+- Disability benefit is not decided by diagnosis name alone. Review the disability classification table, disability payment rate, original policy terms at enrollment, treatment completion, symptom fixation, permanence, and objective test materials.
+- Check objective examinations such as range-of-motion measurements, instability/stress tests, neurological exam, EMG, hearing test, imaging, and physician disability diagnosis.
+- If the insurer argues the disability payment rate is below threshold, review measurement method, objective test basis, and whether the correct enrollment-date disability table was applied.
+- Include the phrases 후유장해, 장해분류표, 장해지급률, 객관적 검사, 가입 당시 약관, and 재검토.
+- The conclusion should be: disability payment is not certain, but the disability classification table, objective test results, and payment-rate calculation require reconsideration.
+` : profile === 'causation_preexisting_injury' ? `
+[Causation / pre-existing condition / injury nature argument]
+- This is a pre-existing condition, causation, or injury-nature dispute. Do not mention manual therapy, cancer diagnosis benefit, cataract, thyroid cancer, disclosure duty, contract termination, duplicate indemnity, or proportional reimbursement unless explicitly entered.
+- A pre-existing condition or degenerative finding alone does not automatically break causation between the accident and the claimed condition.
+- Review pre-accident symptoms, post-accident symptoms, imaging changes, treatment course, medical time relationship, accident contribution, and worsening of the existing condition.
+- For rotator cuff, disc herniation, meniscus, stenosis, fracture, osteoporosis, or avascular necrosis issues, distinguish degenerative and traumatic elements using accident mechanism and imaging findings.
+- Include the phrases 기왕증, 인과관계, 상해성, 사고 기여도 or 퇴행성, and 재검토.
+- The conclusion should be: injury nature is not certain, but causation, accident contribution, and pre-existing condition arguments require reconsideration.
+` : profile === 'medical_review_pre_litigation' ? `
+[Medical review / pre-litigation dispute resolution argument]
+- This is a medical-advice, insurer medical review, reconsideration, complaint, or pre-litigation dispute-resolution case.
+- Stay within loss-adjuster scope. Do not say the loss adjuster can conduct litigation or legal representation.
+- Do not advise that medical advice must always be refused. Explain that the customer may request the reason for medical review, issues to be reviewed, list of documents provided, questions to the advisor, advisor specialty, and full written result.
+- If attending physician and third physician opinions already exist, explain that the insurer should provide specific written reasons for rejecting those materials.
+- Discuss pre-litigation steps such as insurer reconsideration, headquarters complaint, consumer-protection department complaint, FSS complaint, and financial dispute mediation preparation.
+- If litigation is mentioned, include 변호사 상담 and 손해사정사는 소송대리 불가 or 법률대리 불가.
+- Include the phrases 의료자문, 서면, 소송 전, 자료정리, 재검토, and 본사 민원 or 금감원 민원 or 분쟁조정.
+` : profile === 'brain_diagnosis_benefit' ? `
 [Brain disease diagnosis benefit argument]
 - This is a brain disease diagnosis benefit dispute. Do not mention manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
 - Brain disease diagnosis benefit is not decided only by disease name or code. Review the original policy terms at enrollment, definitions of stroke/cerebral infarction/cerebral hemorrhage/cerebrovascular disease, and diagnosis confirmation criteria.
@@ -669,7 +694,13 @@ ${profileRules}
 
 function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedReference[], ragResult: RagSearchResult, input: ReturnType<typeof validateInput>) {
   const profile = caseProfile(input);
-  const profileReviewRules = profile === 'brain_diagnosis_benefit'
+  const profileReviewRules = profile === 'disability_benefit'
+    ? '- For a disability benefit dispute, remove manual therapy, indemnity-denial, cancer diagnosis benefit, thyroid cancer, cataract, disclosure-duty, contract-termination, and automobile-damage reasoning. Keep the reasoning focused on disability benefit, disability classification table, disability payment rate, objective tests, symptom fixation, permanence, original policy terms at enrollment, and insurer payment-rate calculation.'
+    : profile === 'causation_preexisting_injury'
+    ? '- For a pre-existing condition / causation / injury-nature dispute, remove manual therapy, cancer diagnosis benefit, cataract, thyroid cancer, disclosure-duty, contract-termination, duplicate indemnity, and proportional-reimbursement reasoning. Keep the reasoning focused on pre-existing condition, causation, injury nature, accident contribution, degenerative versus traumatic findings, pre/post accident records, imaging, and medical time relationship.'
+    : profile === 'medical_review_pre_litigation'
+    ? '- For a medical-advice / pre-litigation dispute-resolution case, remove payment certainty, illegal-conduct accusations, and litigation guarantees. Keep the reasoning focused on medical advice, written requests, document organization, insurer reconsideration, headquarters/FSS complaint or dispute mediation preparation, and clear limits that loss adjusters cannot provide litigation/legal representation.'
+    : profile === 'brain_diagnosis_benefit'
     ? '- For a brain disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on brain disease, diagnosis confirmation, MRI/MRA/CTA/CT imaging, acute vs old/asymptomatic lesions, neurological deficits, policy definitions at enrollment, and medical records.'
     : profile === 'heart_diagnosis_benefit'
     ? '- For a heart disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, brain infarction/hemorrhage, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on heart disease, diagnosis confirmation, test results, troponin/cardiac enzymes, ECG/EKG, coronary angiography/CAG, PCI, policy definitions at enrollment, and medical records.'
@@ -917,7 +948,7 @@ function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
   return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'brain_diagnosis_benefit' | 'heart_diagnosis_benefit' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'brain_diagnosis_benefit' | 'heart_diagnosis_benefit' | 'disability_benefit' | 'causation_preexisting_injury' | 'medical_review_pre_litigation' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
   const diagnosisText = [
@@ -946,6 +977,21 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
       return 'thyroid_disclosure_cancer';
     }
     return 'general_disclosure';
+  }
+  const causationSpecific = /기왕증|인과관계|상해성|사고\s*기여도|퇴행성|기존\s*병력|사고\s*전\s*병력|고혈압\s*기왕증|뇌출혈\s*인과관계|사망과\s*사고\s*인과관계/i.test(allText);
+  const disabilitySpecific = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|압박골절|추간판탈출증|회전근개파열|무릎\s*인대|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
+  const strongDisabilitySignal = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
+  if (/의료자문|의료\s*자문|보험사\s*자문|자문의|제3의료기관|본사\s*민원|소비자보호부서|금감원\s*민원|분쟁조정|소송\s*전|소송\s*가능성|자료정리|서면\s*요청/i.test(allText)) {
+    return 'medical_review_pre_litigation';
+  }
+  if (strongDisabilitySignal) {
+    return 'disability_benefit';
+  }
+  if (causationSpecific) {
+    return 'causation_preexisting_injury';
+  }
+  if (disabilitySpecific) {
+    return 'disability_benefit';
   }
   if (/요양병원|암\s*입원|암입원|암\s*직접치료|직접치료|입원비|입원의료비|항암치료\s*후\s*입원|말기암\s*입원|통증조절|완화치료|보존치료|암요양병원/i.test(allText)) {
     return 'indemnity_cancer_hospitalization_denial';
@@ -1507,6 +1553,183 @@ function finalizeHeartDiagnosisBenefitResult(result: AssessmentDraftResult, inpu
   };
 }
 
+function finalizeDisabilityBenefitResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'disability_benefit') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|실손\s*부지급|암진단비|갑상선암|백내장|고지의무|계약해지|자동차보험\s*손해액\s*산정|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '후유장해 보험금은 진단명이나 수술명만으로 곧바로 지급 여부가 정해지는 것이 아니라, 가입 당시 약관상 장해분류표와 장해지급률 기준에 따라 판단되어야 합니다. 따라서 보험회사가 장해지급률 미달 또는 장해 불인정을 주장한다면 적용한 장해분류표, 측정방법, 객관적 검사자료, 지급률 산정 근거를 구체적으로 제시할 필요가 있습니다.',
+    '현재 단계에서는 치료 종결 여부, 증상 고정 여부, 영구성 여부가 핵심입니다. 운동범위 제한, 동요관절, 신경학적 결손, 청력 저하, 압박골절 후 변형 등 각 장해 유형별로 약관상 요구되는 객관적 검사와 측정자료가 갖추어졌는지를 확인해야 합니다.',
+    '고객 측에서는 후유장해진단서만 제출하는 데 그치지 말고 영상검사 결과, 운동범위 측정표, 스트레스 검사, 근전도검사, 신경학적 검사, 청력검사, 치료 종결 기록 및 주치의 소견서를 함께 정리하여 장해의 고정성과 지급률 산정의 타당성을 보완할 필요가 있습니다.',
+    '생명보험과 손해보험, 가입일, 상품별 약관에 따라 장해분류표와 장해지급률 기준이 달라질 수 있으므로 최신 기준을 자동 적용해서는 안 됩니다. 가입 당시 약관과 원 장해분류표를 기준으로 보험회사의 산정이 적정한지 재검토해야 합니다.',
+    '따라서 본 건은 후유장해 보험금 지급이 확정된다는 의미가 아니라, 장해분류표, 객관적 검사자료, 치료 종결 및 증상 고정 여부, 장해지급률 산정 기준을 중심으로 보험회사의 불인정 또는 감액 판단에 재검토가 필요하다는 의견으로 정리합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '후유장해 보험금 장해지급률 관련 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 후유장해 해당 여부, 가입 당시 약관상 장해분류표 적용, 장해지급률 산정, 치료 종결 및 증상 고정 여부, 객관적 검사자료의 충분성입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '후유장해 보험금은 가입 당시 약관, 장해분류표, 장해지급률표, 객관적 검사자료를 중심으로 검토해야 합니다. 원약관 확인 전에는 유사 약관이나 내부 검토자료를 공식 지급근거로 단정하지 않습니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 후유장해 해당 여부와 장해지급률 산정의 적정성이 핵심입니다. 따라서 객관적 검사, 치료 종결, 증상 고정, 영구성, 가입 당시 약관상 장해분류표를 중심으로 검토해야 합니다.',
+    insurerPositionReview: '보험회사가 장해지급률 미달 또는 후유장해 불인정을 주장하는 경우, 단순 진단명 부인이 아니라 측정방법, 검사자료, 약관상 지급률표 적용 근거를 구체적으로 제시해야 합니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [
+      clean(result.requiredAdditionalChecks),
+      '후유장해진단서',
+      '가입 당시 약관',
+      '장해분류표',
+      '영상검사 결과',
+      '운동범위 측정표',
+      '스트레스 검사',
+      '근전도검사',
+      '신경학적 검사',
+      '청력검사',
+      '치료 종결 기록',
+      '주치의 소견서',
+      '보험회사 부지급 사유서',
+    ].filter(Boolean).join('\n'),
+    simpleClientSummary: '후유장해는 진단명만으로 결정되지 않고 가입 당시 약관의 장해분류표와 장해지급률, 객관적 검사자료가 중요합니다. 검사자료와 주치의 소견을 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
+  };
+}
+
+function finalizeCausationPreexistingInjuryResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'causation_preexisting_injury') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/도수치료|도수\s*치료|manual\s*therapy|암진단비|백내장|갑상선암|고지의무|계약해지|중복가입|비례보상|보험금\s*지급\s*확정/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '보험회사가 기왕증 또는 퇴행성 변화를 이유로 부지급이나 감액을 주장하더라도, 기존 병력이나 퇴행성 소견이 있다는 사정만으로 사고와 손해 사이의 인과관계 또는 상해성을 곧바로 배척할 수는 없습니다. 사고 전 상태와 사고 후 변화가 어떻게 달라졌는지를 구체적으로 비교해야 합니다.',
+    '핵심은 사고 전 증상 및 치료력, 사고 직후 증상 발생 양상, 영상검사 변화, 치료 경과, 의학적 시간관계, 사고 기여도, 기존 질환의 악화 여부입니다. 회전근개, 추간판, 반월상연골, 척추관협착, 압박골절 등은 퇴행성 요소와 외상성 요소가 함께 문제될 수 있으므로 사고기전과 영상소견을 함께 검토해야 합니다.',
+    '고객 측에서는 사고 전에는 무증상이었거나 증상이 경미했다는 점, 사고 후 급격한 증상 악화 또는 치료 필요성 증가가 있었다는 점, MRI/CT/X-ray 등 객관적 영상검사에서 사고 후 변화가 확인되는지를 중심으로 자료를 정리할 필요가 있습니다.',
+    '보험회사가 기왕증 기여도 또는 퇴행성 감액을 주장한다면 그 비율과 근거를 구체적으로 제시해야 합니다. 단순히 나이, 기존 병력, 퇴행성 표현만을 이유로 상해성이나 인과관계를 전면 부인하는 방식은 재검토가 필요합니다.',
+    '따라서 본 건은 상해성 인정이나 보험금 지급이 확정된다는 의미가 아니라, 기왕증과 사고 기여도, 의학적 인과관계, 영상검사 및 치료 경과를 기준으로 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 의견으로 정리합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '기왕증 및 인과관계 상해성 관련 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 기왕증 또는 퇴행성 소견의 존재만으로 상해성과 인과관계를 배척할 수 있는지, 사고 기여도와 기존 질환 악화 여부를 어떻게 평가할 것인지입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '기왕증, 인과관계, 상해성 판단은 사고 전후 진료기록, 영상검사, 치료 경과, 사고 기여도, 퇴행성 변화와 외상성 변화의 구분을 중심으로 검토해야 합니다. 직접 관련 공식근거가 부족한 경우에도 자료 비교를 통해 재검토 요청 논리를 구성해야 합니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 사고와 증상 또는 진단 사이의 인과관계, 상해성, 기왕증 기여도 판단이 핵심입니다. 따라서 사고 전후 의무기록과 영상검사 변화를 중심으로 검토해야 합니다.',
+    insurerPositionReview: '보험회사가 기왕증 또는 퇴행성 변화를 이유로 부지급이나 감액을 주장하는 경우, 사고 전 병력과 사고 후 악화의 시간적·의학적 관계, 사고 기여도 산정 근거를 구체적으로 제시해야 합니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [
+      clean(result.requiredAdditionalChecks),
+      '사고 전 진료기록',
+      '사고 후 진료기록',
+      'MRI/CT/X-ray 판독지',
+      '영상 CD',
+      '의사 소견서',
+      '사고경위서',
+      '치료 경과 기록',
+      '기왕증 관련 보험사 주장 근거',
+      '보험회사 부지급 사유서',
+    ].filter(Boolean).join('\n'),
+    simpleClientSummary: '기왕증이나 퇴행성 소견이 있다는 이유만으로 사고와의 인과관계가 당연히 부정되는 것은 아닙니다. 사고 전후 진료기록과 영상검사, 치료 경과를 정리하면 상해성 및 사고 기여도에 대한 재검토를 요청할 수 있습니다.',
+  };
+}
+
+function finalizeMedicalReviewPreLitigationResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'medical_review_pre_litigation') return result;
+  const clean = (value: string) => cleanPublicText(value)
+    .replace(/의료자문은\s*절대[^.\n]*/gi, '의료자문은 필요성과 범위를 확인한 뒤 서면으로 대응할 필요가 있습니다')
+    .replace(/무조건\s*불리[^.\n]*/gi, '자료 제공 범위와 자문 쟁점을 확인할 필요가 있습니다')
+    .replace(/보험사는\s*불법[^.\n]*/gi, '보험회사의 판단 근거는 서면으로 확인할 필요가 있습니다')
+    .replace(/소송에서\s*이깁니다|승소\s*가능성/gi, '소송 단계에서는 변호사 상담이 필요합니다')
+    .replace(/손해사정사가\s*소송을\s*대신[^.\n]*/gi, '손해사정사는 소송대리 또는 법률대리를 할 수 없습니다')
+    .replace(/보험금\s*지급\s*확정|반드시\s*받을\s*수|무조건\s*위법/gi, '')
+    .trim();
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    '본 건의 목표는 손해사정사 업무범위 안에서 보험회사 재심사, 본사 민원, 의료자문 요구 대응, 제3의료기관 검토, 금감원 민원 또는 분쟁조정 전 자료정리를 지원하는 것입니다. 보험금 지급이나 소송 결과를 단정하는 것이 아니라, 보험회사의 판단 근거를 서면으로 확인하고 고객 측 자료를 체계적으로 보완하는 방향으로 진행해야 합니다.',
+    '보험회사가 의료자문을 요구하거나 자체 의료자문 결과로 부지급을 주장하는 경우, 의료자문 필요 사유, 자문 쟁점, 자문의 전문과목, 제공자료 목록, 자문 질문지, 자문 결과 원문 제공 여부를 서면으로 요청할 필요가 있습니다. 의료자문을 무조건 거부한다고 표현하기보다는 자문 범위와 절차의 투명성을 확인하는 방향이 적절합니다.',
+    '주치의 진단서나 소견서, 제3의사 소견서가 이미 제출되어 있다면 보험회사는 해당 자료를 배척하는 구체적 사유를 서면으로 제시할 필요가 있습니다. 고객 측은 진료기록, 검사결과지, 영상판독지, 병리결과지, 기존 소견서와 보험사 자문 결과의 차이를 비교해 재검토 요청 자료로 정리해야 합니다.',
+    '소송 전 단계에서는 보험회사 재심사 요청, 본사 민원 또는 소비자보호부서 민원, 금감원 민원, 금융분쟁조정 신청 가능성을 순차적으로 검토할 수 있습니다. 각 절차에서는 주장 요지, 쟁점표, 제출자료 목록, 보험회사 답변서, 문자·이메일·통화 기록을 정리해 두는 것이 중요합니다.',
+    '다만 소송으로 진행되는 경우 손해사정사는 소송대리 또는 법률대리를 할 수 없으므로 변호사 상담이 필요합니다. 따라서 현 단계의 손해사정 의견은 소송 전 재검토와 분쟁조정 준비를 위한 자료정리 및 서면 대응 방향으로 한정하는 것이 타당합니다.',
+  ].filter(Boolean).join('\n\n');
+  return {
+    ...result,
+    title: clean(result.title) || '의료자문 및 소송 전 분쟁해결 대응 손해사정 의견 초안',
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: [clean(result.issues), '주요 쟁점은 의료자문 필요성과 범위, 보험회사 판단근거의 서면 제시, 주치의·제3의사 소견서와 보험사 자문 결과의 차이, 소송 전 재검토 및 분쟁조정 자료정리입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: '의료자문 및 소송 전 분쟁해결 단계에서는 보험회사 재심사, 본사 민원, 금감원 민원, 금융분쟁조정 전 자료정리와 서면 요청이 핵심입니다. 의료자문 원문과 자문 질문지, 제공자료 목록을 확인하고, 소송 단계는 변호사 상담이 필요하다는 점을 구분해야 합니다.',
+    damageAssessment: '본 건은 손해액 산정보다는 보험회사 의료자문 또는 부지급 판단의 근거가 충분히 서면으로 제시되었는지, 고객 측 의학자료와 반박자료가 체계적으로 정리되어 있는지가 핵심입니다.',
+    insurerPositionReview: '보험회사는 자체 의료자문 결과만 제시할 것이 아니라 기존 주치의 소견서와 제3의사 소견서를 배척하는 이유, 자문 범위, 자문의 전문과목, 제공자료 및 질문 내용을 서면으로 설명할 필요가 있습니다.',
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [
+      clean(result.requiredAdditionalChecks),
+      '보험증권',
+      '가입 당시 약관',
+      '보험금 청구서류',
+      '보험사 부지급/해지 통보서',
+      '보험사 의료자문 요청서',
+      '의료자문 동의서',
+      '자문의에게 제공될 자료 목록',
+      '주치의 진단서/소견서',
+      '제3의사 진단서/소견서',
+      '진료기록',
+      '검사결과지',
+      '영상판독지',
+      '병리결과지',
+      '보험사 답변서',
+      '문자/이메일/통화 기록',
+    ].filter(Boolean).join('\n'),
+    simpleClientSummary: '의료자문은 무조건 거부하거나 무조건 동의할 문제가 아니라, 자문 사유와 범위, 제공자료, 질문 내용, 결과 원문 제공 여부를 서면으로 확인하는 것이 중요합니다. 소송 전에는 재심사, 본사 민원, 금감원 민원 또는 분쟁조정을 위한 자료정리를 하고, 소송 단계는 변호사 상담이 필요합니다.',
+  };
+}
+
+function ensureProfileEvaluationPhrases(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  const profile = caseProfile(input);
+  const appendIfMissing = (value: string, phrase: string) => {
+    const cleanValue = cleanPublicText(value);
+    return cleanValue.includes(phrase) ? cleanValue : [cleanValue, phrase].filter(Boolean).join('\n');
+  };
+  if (profile === 'heart_diagnosis_benefit') {
+    const required = '심장질환 진단비 사건에서는 진단확정, 검사결과, 트로포닌 또는 심전도 또는 관상동맥조영술, 가입 당시 약관을 중심으로 추가 확인 및 재검토가 필요합니다.';
+    return {
+      ...result,
+      issues: appendIfMissing(result.issues, '주요 쟁점은 심장질환 진단확정 여부와 검사결과, 트로포닌 등 심근효소, 심전도, 관상동맥조영술 자료가 가입 당시 약관상 지급기준을 충족하는지입니다.'),
+      legalAndReferenceBasis: appendIfMissing(result.legalAndReferenceBasis, required),
+      damageAssessment: appendIfMissing(result.damageAssessment, '손해액 산정보다는 심장질환 진단확정과 검사결과의 충족 여부가 핵심입니다.'),
+      adjusterOpinionDraft: appendIfMissing(result.adjusterOpinionDraft, required),
+      requiredAdditionalChecks: appendIfMissing(result.requiredAdditionalChecks, '추가 확인 자료: 트로포닌 검사결과, 심전도, 관상동맥조영술, 진료기록, 가입 당시 약관'),
+    };
+  }
+  if (profile === 'disability_benefit') {
+    const required = '후유장해 사건에서는 장해분류표, 장해지급률, 객관적 검사, 가입 당시 약관을 기준으로 추가 확인 및 재검토가 필요합니다.';
+    return {
+      ...result,
+      issues: appendIfMissing(result.issues, '주요 쟁점은 후유장해 해당 여부, 장해분류표 적용, 장해지급률 산정, 객관적 검사자료의 충분성입니다.'),
+      legalAndReferenceBasis: appendIfMissing(result.legalAndReferenceBasis, required),
+      damageAssessment: appendIfMissing(result.damageAssessment, '손해액 산정보다는 후유장해 장해지급률 산정과 객관적 검사자료가 핵심입니다.'),
+      adjusterOpinionDraft: appendIfMissing(result.adjusterOpinionDraft, required),
+      requiredAdditionalChecks: appendIfMissing(result.requiredAdditionalChecks, '추가 확인 자료: 후유장해진단서, 장해분류표, 장해지급률표, 객관적 검사자료, 가입 당시 약관'),
+    };
+  }
+  if (profile === 'medical_review_pre_litigation') {
+    const required = '의료자문 대응은 서면 요청, 자료정리, 재검토 요청, 본사 민원 또는 금감원 민원 및 분쟁조정 등 소송 전 절차를 중심으로 진행해야 합니다.';
+    const litigationNotice = /소송/i.test([input.caseTitle, input.damageDetails, input.insurerPosition, input.customerStatement, input.adjusterMemo].filter(Boolean).join(' '))
+      ? '소송 단계는 변호사 상담이 필요하며 손해사정사는 소송대리 또는 법률대리 불가합니다.'
+      : '';
+    return {
+      ...result,
+      issues: appendIfMissing(result.issues, '주요 쟁점은 의료자문 절차, 서면 요청, 소송 전 자료정리, 재검토 방향입니다.'),
+      legalAndReferenceBasis: appendIfMissing(result.legalAndReferenceBasis, required),
+      damageAssessment: appendIfMissing(result.damageAssessment, '손해액 산정보다는 의료자문 근거와 자료정리, 서면 대응의 충분성이 핵심입니다.'),
+      adjusterOpinionDraft: appendIfMissing(appendIfMissing(result.adjusterOpinionDraft, required), litigationNotice),
+      requiredAdditionalChecks: appendIfMissing(result.requiredAdditionalChecks, '추가 확인 자료: 의료자문 요청서, 자문 질문지, 제공자료 목록, 주치의 소견서, 보험사 답변서'),
+      simpleClientSummary: appendIfMissing(result.simpleClientSummary, '보험회사에 재검토를 요청하기 전 의료자문 쟁점과 제출자료를 서면으로 정리하는 것이 필요합니다.'),
+    };
+  }
+  return result;
+}
+
 function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
   const inputText = JSON.stringify({
@@ -1743,6 +1966,9 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const cancerDiagnosisProfile = profile === 'cancer_diagnosis_benefit';
   const brainDiagnosisProfile = profile === 'brain_diagnosis_benefit';
   const heartDiagnosisProfile = profile === 'heart_diagnosis_benefit';
+  const disabilityProfile = profile === 'disability_benefit';
+  const causationProfile = profile === 'causation_preexisting_injury';
+  const medicalReviewProfile = profile === 'medical_review_pre_litigation';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
   const cancerHospitalizationProfile = profile === 'indemnity_cancer_hospitalization_denial';
@@ -1807,6 +2033,24 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       const directHeart = /심장질환|급성심근경색|심근경색|협심증|관상동맥|심혈관|스텐트|트로포닌|심전도|관상동맥조영술|CAG|PCI|심근효소|CK-MB|I21|I20|I22|I25|I50|사망진단서|부검|진단확정|검사결과|약관|질병분류표/i;
       if (excludedHeart.test(text)) return false;
       if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directHeart.test(text)) return false;
+    }
+    if (disabilityProfile) {
+      const excluded = /도수치료|도수\s*치료|manual\s*therapy|실손\s*부지급|암진단비|갑상선암|백내장|고지의무|계약해지|자동차보험\s*손해액\s*산정/i;
+      const direct = /후유장해|장해분류표|장해지급률|영구장해|운동장해|동요관절|관절동요|압박골절|추간판탈출증|회전근개|난청|신경마비|CRPS|약관|지급률|객관적\s*검사/i;
+      if (excluded.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !direct.test(text)) return false;
+    }
+    if (causationProfile) {
+      const excluded = /도수치료|도수\s*치료|manual\s*therapy|암진단비|백내장|갑상선암|고지의무|계약해지|중복가입|비례보상/i;
+      const direct = /기왕증|인과관계|상해성|퇴행성|사고\s*기여도|기존\s*병력|외상성|악화|영상검사|MRI|CT|회전근개|추간판|협착|반월상연골|압박골절|골다공증|대퇴골두/i;
+      if (excluded.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !direct.test(text)) return false;
+    }
+    if (medicalReviewProfile) {
+      const excluded = /도수치료|암진단비|백내장|갑상선암|고지의무|계약해지|후유장해|중복가입|비례보상/i;
+      const direct = /의료자문|의료\s*자문|자문의|주치의|제3의사|제3의료기관|진단서|소견서|본사\s*민원|소비자보호부서|금감원|금융감독원|분쟁조정|소송\s*전|자료정리|재심사|재검토|서면/i;
+      if (excluded.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !direct.test(text)) return false;
     }
     if (generalDisclosureProfile) {
       const excludedDisclosureOfficial = /암진단비|후유장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
@@ -1882,6 +2126,27 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (heartDiagnosisProfile) {
     const excluded = /도수치료|manual\s*therapy|M54|요통|백내장|다초점렌즈|갑상선암|암진단비|뇌경색|뇌출혈|후유장해|자동차보험|고지의무|계약해지/i;
     const allowed = /심장질환|급성심근경색|심근경색|협심증|관상동맥|심혈관|스텐트|트로포닌|심전도|관상동맥조영술|CAG|PCI|심근효소|CK-MB|I21|I20|I22|I25|I50|사망진단서|부검|진단확정|검사결과|약관|질병분류표/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (disabilityProfile) {
+    const excluded = /도수치료|도수\s*치료|manual\s*therapy|실손\s*부지급|암진단비|갑상선암|백내장|고지의무|계약해지|자동차보험\s*손해액\s*산정/i;
+    const allowed = /후유장해|장해분류표|장해지급률|영구장해|운동장해|동요관절|관절동요|압박골절|추간판탈출증|회전근개|난청|신경마비|CRPS|약관|지급률|객관적\s*검사/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (causationProfile) {
+    const excluded = /도수치료|도수\s*치료|manual\s*therapy|암진단비|백내장|갑상선암|고지의무|계약해지|중복가입|비례보상/i;
+    const allowed = /기왕증|인과관계|상해성|퇴행성|사고\s*기여도|기존\s*병력|외상성|악화|영상검사|MRI|CT|회전근개|추간판|협착|반월상연골|압박골절|골다공증|대퇴골두/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (medicalReviewProfile) {
+    const excluded = /도수치료|암진단비|백내장|갑상선암|고지의무|계약해지|후유장해|중복가입|비례보상/i;
+    const allowed = /의료자문|의료\s*자문|자문의|주치의|제3의사|제3의료기관|진단서|소견서|본사\s*민원|소비자보호부서|금감원|금융감독원|분쟁조정|소송\s*전|자료정리|재심사|재검토|서면/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [ref.title, ref.summary, ref.diagnosis_code, ref.diagnosis_name].filter(Boolean).join(' ');
       return allowed.test(text) && !excluded.test(text);
@@ -2069,13 +2334,25 @@ Deno.serve(async (req: Request) => {
       input,
       ragResult,
     );
-    const reviewed = finalizeDuplicateProportionalResult(
-      finalizeCancerHospitalizationResult(
-        finalizeGeneralIndemnityResult(
-          finalizeCancerDiagnosisBenefitResult(
-            finalizeHeartDiagnosisBenefitResult(
-              finalizeBrainDiagnosisBenefitResult(
-                finalizeGeneralDisclosureResult(reviewedBase, input),
+    const reviewed = ensureProfileEvaluationPhrases(
+      finalizeDuplicateProportionalResult(
+        finalizeCancerHospitalizationResult(
+          finalizeGeneralIndemnityResult(
+            finalizeCancerDiagnosisBenefitResult(
+              finalizeHeartDiagnosisBenefitResult(
+                finalizeDisabilityBenefitResult(
+                  finalizeCausationPreexistingInjuryResult(
+                    finalizeMedicalReviewPreLitigationResult(
+                      finalizeBrainDiagnosisBenefitResult(
+                        finalizeGeneralDisclosureResult(reviewedBase, input),
+                        input,
+                      ),
+                      input,
+                    ),
+                    input,
+                  ),
+                  input,
+                ),
                 input,
               ),
               input,
