@@ -878,6 +878,12 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
   ].filter(Boolean).join(' ');
   const disclosure = isDisclosureDutyCase(input);
   if (disclosure && /M47\.26/i.test(diagnosisText)) return 'm47_disclosure';
+  if (disclosure) {
+    if (/C73|thyroid|E04|D34|갑상선암|갑상선\s*결절|갑상선종|양성신생물/i.test(allText)) {
+      return 'thyroid_disclosure_cancer';
+    }
+    return 'general_disclosure';
+  }
   if (/백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(allText)) {
     return 'indemnity_cataract_multifocal_lens_denial';
   }
@@ -1203,6 +1209,48 @@ function removeProfileSpecificLeakage(result: AssessmentDraftResult, input: Retu
   };
 }
 
+function finalizeGeneralDisclosureResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
+  if (caseProfile(input) !== 'general_disclosure') return result;
+
+  const removeManualTherapyLeak = (value: string) => cleanPublicText(value)
+    .replace(/도수\s*치료|도수치료|manual\s*therapy/gi, '일반 치료')
+    .trim();
+  const disclosureIssues = [
+    '주요 쟁점은 보험가입 전 진료 또는 치료 사실이 계약전 알릴의무상 중요한 사항에 해당하는지, 고객에게 고의 또는 중대한 과실이 있었다고 볼 수 있는지, 보험회사의 계약해지 또는 부지급 처분이 재검토 대상인지 여부입니다.',
+    '청약서 질문사항이 해당 진료 사실을 명확히 묻고 있었는지 확인해야 하며, 단순한 1회 치료 또는 일시적 증상인지, 반복치료ㆍ정밀검사ㆍ입원ㆍ수술ㆍ장기투약이 있었는지를 구분해야 합니다.',
+    '보험회사는 해당 사실을 알았다면 인수거절, 부담보, 할증 등 조건부 인수를 했을 객관적 인수기준을 제시할 필요가 있습니다.',
+  ].join('\n\n');
+  const opinion = [
+    removeManualTherapyLeak(result.adjusterOpinionDraft),
+    '본 건은 고객 측에서 보험회사의 계약해지 또는 부지급 처분에 대해 재검토를 요청할 수 있는 사안입니다. 단순 진료 또는 1회 치료 사실이 있었다는 점만으로 곧바로 중요한 사항성과 고의 또는 중대한 과실이 인정된다고 단정하기는 어렵습니다.',
+    '따라서 청약서 질문사항, 진료기록, 처방 및 검사 여부, 치료의 지속성, 보험회사의 객관적 인수기준을 함께 확인하여 계약전 알릴의무 위반 여부를 판단해야 합니다.',
+  ].filter(Boolean).join('\n\n');
+
+  return {
+    ...result,
+    title: removeManualTherapyLeak(result.title),
+    overview: removeManualTherapyLeak(result.overview),
+    facts: removeManualTherapyLeak(result.facts),
+    issues: [removeManualTherapyLeak(result.issues), disclosureIssues].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: removeManualTherapyLeak(result.legalAndReferenceBasis),
+    damageAssessment: removeManualTherapyLeak(result.damageAssessment),
+    insurerPositionReview: [
+      removeManualTherapyLeak(result.insurerPositionReview),
+      '보험회사 주장은 계약전 알릴의무, 중요한 사항, 고의 또는 중대한 과실, 객관적 인수기준 제시 여부를 중심으로 재검토되어야 합니다.',
+    ].filter(Boolean).join('\n\n'),
+    adjusterOpinionDraft: opinion,
+    requiredAdditionalChecks: [
+      removeManualTherapyLeak(result.requiredAdditionalChecks),
+      '청약서 질문사항 확인',
+      '진료기록지 및 처방전 확인',
+      '검사ㆍ입원ㆍ수술ㆍ장기투약 여부 확인',
+      '보험회사 객관적 인수기준 확인',
+    ].filter(Boolean).join('\n'),
+    simpleClientSummary: removeManualTherapyLeak(result.simpleClientSummary),
+    disclaimer: removeManualTherapyLeak(result.disclaimer),
+  };
+}
+
 function finalizeManualTherapyResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_manual_therapy_denial') return result;
   const inputText = JSON.stringify({
@@ -1438,6 +1486,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const manualTherapyProfile = profile === 'indemnity_manual_therapy_denial';
   const cataractProfile = profile === 'indemnity_cataract_multifocal_lens_denial';
+  const generalDisclosureProfile = profile === 'general_disclosure';
   const normalizeRef = <T extends RagSearchResult['officialReferences'][number] | RagSearchResult['internalReviewMaterials'][number]>(ref: T): T => ({
     ...ref,
     title: preserveDiagnosisCodesInText(ref.title, codes),
@@ -1480,6 +1529,10 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
         }
       }
     }
+    if (generalDisclosureProfile) {
+      const excludedDisclosureOfficial = /암진단비|후유장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
+      if (excludedDisclosureOfficial.test(text)) return false;
+    }
     if (manualTherapyProfile) {
       const excluded = /계약전\s*알릴의무|고지의무|계약해지|청약서|인수거절|부담보|할증|M47\.26|1회\s*통원\s*미고지|자동차|손해배상|후유장해|암진단비|백내장|갑상선암|입원비|이륜차|요양불승인|산재/i;
       const direct = /도수치료|manual\s*therapy|실손보험|실손의료|비급여|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|의료비\s*지급|보상\s*제외/i;
@@ -1517,6 +1570,18 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   } else if (thyroidProfile) {
     const excluded = /M47\.26|요추증|허리통증|정형외과|1회\s*통원|실손보험|도수치료|백내장|중심정맥관|무릎|후유장해|체외충격파|회전근개|자동차|교통사고|M48\.3|척추협착|어깨|견관절/i;
     const allowed = /C73|갑상선암|갑상선\s*결절|E04|갑상선종|D34|갑상선\s*양성신생물|초음파|미세침흡인검사|조직검사|건강검진|암진단비|고지의무|알릴의무/i;
+    internalReviewMaterials = internalReviewMaterials.filter((ref) => {
+      const text = [
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' ');
+      return allowed.test(text) && !excluded.test(text);
+    }).slice(0, 4);
+  } else if (generalDisclosureProfile) {
+    const excluded = /암진단비|후유장해|장해|장해지급률|수술비|입원비|도수치료|도수\s*치료|백내장|심근경색|뇌경색|뇌출혈|자동차보험|manual\s*therapy/i;
+    const allowed = /고지의무|계약전\s*알릴의무|알릴의무|미고지|계약해지|건강검진|재검|추적관찰|1회\s*치료|단순\s*통원|인수기준|중요한\s*사항|고의|중대한\s*과실|K29|위염|소화기|위내시경|고혈압|I10|고지혈증|수면장애|우울증|당뇨|자궁근종/i;
     internalReviewMaterials = internalReviewMaterials.filter((ref) => {
       const text = [
         ref.title,
@@ -1623,7 +1688,7 @@ Deno.serve(async (req: Request) => {
       buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
       0,
     );
-    const reviewed = finalizeCataractResult(
+    const reviewedBase = finalizeCataractResult(
       finalizeManualTherapyResult(
         addThyroidFssFollowUpCheck(
           removeProfileSpecificLeakage(
@@ -1661,6 +1726,7 @@ Deno.serve(async (req: Request) => {
       input,
       ragResult,
     );
+    const reviewed = finalizeGeneralDisclosureResult(reviewedBase, input);
 
     return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile: caseProfile(input), retrievedReferences: ragResult });
   } catch (error: unknown) {
