@@ -42,3 +42,5 @@ yarn-error.*
 /android
 rag_assets/
 .env.rag.local
+
+ai_eval/results/
