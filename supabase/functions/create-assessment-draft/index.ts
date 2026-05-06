@@ -1005,6 +1005,12 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
   if (/도수치료|도수\s*치료|manual\s*therapy|도수치료비|비급여\s*도수/i.test(allText)) {
     return 'indemnity_manual_therapy_denial';
   }
+  if (/실손|실손보험|실손의료|실손의료비/i.test(allText) && /MRI|검사비|검사\s*비|부지급|보상\s*제외/i.test(allText)) {
+    return 'indemnity_general_denial';
+  }
+  if (/암진단비|암\s*진단비|일반암|유사암|소액암|제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|C18|C73|C코드|D코드|병리|병리보고서|조직검사|세포검사|진단확정|임상진단|임상\s*진단|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal\s*carcinoma|behavior\s*code|행동양식|\/2|원발암|전이암|원발부위|대장암|대장점막내암|직장유암종|비침습성\s*방광암|유방상피내암|\bDCIS\b|GIST|흑색종\s*제자리암|갑상선암|미세침흡인검사|질병분류표/i.test(allText)) {
+    return 'cancer_diagnosis_benefit';
+  }
   if (/심장질환|심장진단비|급성심근경색|심근경색|\bNSTEMI\b|\bSTEMI\b|진구성\s*심근경색|협심증|변이형\s*협심증|관상동맥|관상동맥\s*협착|심혈관\s*협착|스텐트|관상동맥조영술|\bCAG\b|\bPCI\b|트로포닌|troponin|심근효소|CK-MB|심전도|\bECG\b|\bEKG\b|I21|I20|I22|I25|I50|사망진단서|부검|흉통/i.test(allText)) {
     return 'heart_diagnosis_benefit';
   }
@@ -1014,7 +1020,7 @@ function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCasePro
   if (/심장질환|심장진단비|급성심근경색|심근경색|\bNSTEMI\b|\bSTEMI\b|진구성\s*심근경색|협심증|변이형\s*협심증|관상동맥|관상동맥\s*협착|심혈관\s*협착|스텐트|관상동맥조영술|\bCAG\b|\bPCI\b|트로포닌|troponin|심근효소|CK-MB|심전도|\bECG\b|\bEKG\b|I21|I20|I22|I25|I50|사망진단서|부검|흉통/i.test(allText)) {
     return 'heart_diagnosis_benefit';
   }
-  if (/암진단비|암\s*진단비|일반암|유사암|소액암|제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|C73|C코드|D코드|병리|병리보고서|조직검사|세포검사|진단확정|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal\s*carcinoma|behavior\s*code|행동양식|\/2|원발암|전이암|원발부위|대장점막내암|직장유암종|비침습성\s*방광암|유방상피내암|\bDCIS\b|GIST|흑색종\s*제자리암|갑상선암|미세침흡인검사|질병분류표/i.test(allText)) {
+  if (/암진단비|암\s*진단비|일반암|유사암|소액암|제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|C18|C73|C코드|D코드|병리|병리보고서|조직검사|세포검사|진단확정|임상진단|임상\s*진단|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal\s*carcinoma|behavior\s*code|행동양식|\/2|원발암|전이암|원발부위|대장암|대장점막내암|직장유암종|비침습성\s*방광암|유방상피내암|\bDCIS\b|GIST|흑색종\s*제자리암|갑상선암|미세침흡인검사|질병분류표/i.test(allText)) {
     return 'cancer_diagnosis_benefit';
   }
   if (/실손|실손보험|실손의료|실손의료비|비급여|보상\s*제외|부지급|입원의료비|검사비|주사치료|수액|신경차단술|경막외신경성형술|수면다원검사|턱관절|비만치료|검사\s*목적\s*입원|체외충격파|MRI/i.test(allText)) {
@@ -1436,27 +1442,57 @@ function finalizeDuplicateProportionalResult(result: AssessmentDraftResult, inpu
 
 function finalizeGeneralIndemnityResult(result: AssessmentDraftResult, input: ReturnType<typeof validateInput>): AssessmentDraftResult {
   if (caseProfile(input) !== 'indemnity_general_denial') return result;
+  const inputText = [
+    input.caseTitle,
+    input.diagnosisText,
+    input.damageDetails,
+    input.insurerPosition,
+    input.customerStatement,
+    input.adjusterMemo,
+  ].filter(Boolean).join(' ');
+  const isMriDenial = /MRI/i.test(inputText);
   const clean = (value: string) => cleanPublicText(value)
     .replace(/계약해지|청약서|인수거절|부담보|할증|고지의무|계약전\s*알릴의무|보험금\s*지급\s*확정/gi, '')
     .trim();
-  const opinion = [
-    clean(result.adjusterOpinionDraft),
+  const mriOpinion = [
+    'MRI 검사비 지급 여부는 단순히 MRI 검사를 시행했다는 사실만으로 확정되지 않습니다. 가입 당시 실손보험 원약관상 보상 대상인지, 보상 제외 또는 제한 조항에 해당하는지, 진료기록상 검사 필요성과 의학적 필요성이 확인되는지를 함께 검토해야 합니다.',
+    '보험회사가 MRI 검사비를 부지급하려면 어떤 약관상 보상 제외 조항이 적용되는지, 그리고 해당 MRI의 검사 목적이나 의학적 필요성이 왜 부족하다고 보는지 구체적으로 제시할 필요가 있습니다.',
+    '고객 측은 진료기록지, MRI 처방 또는 검사 의뢰서, MRI 판독지, 의사 소견서, 진료비 세부내역서, 영수증, 보험회사 부지급 사유서, 가입 당시 실손보험 원약관을 확보하여 재검토를 요청하는 방향으로 정리할 수 있습니다.',
+  ];
+  const generalOpinion = [
     '본 건은 실손보험 부지급 사안으로, 가입 당시 원약관의 보상 대상 및 보상 제외 조항, 진료기록상 치료 또는 검사의 의학적 필요성, 실제 시행된 처치 내용, 진료비 세부내역을 중심으로 재검토해야 합니다.',
     '보험회사가 보상 제외 또는 필요성 부족을 이유로 부지급하였다면, 단순히 비급여 항목이라는 사정만으로는 부족하고 약관상 보상 제외 근거와 해당 진료의 의학적 필요성 부족 사유를 구체적으로 제시할 필요가 있습니다.',
     '고객 측은 진료기록지, 의사 소견서 또는 처방ㆍ검사 의뢰 사유, 치료 또는 검사 결과, 진료비 세부내역서, 영수증, 보험회사 부지급 사유서, 가입 당시 원약관을 확보하여 재검토를 요청하는 방향으로 정리할 수 있습니다.',
+  ];
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    ...(isMriDenial ? mriOpinion : generalOpinion),
   ].filter(Boolean).join('\n\n');
+  const requiredChecks = isMriDenial
+    ? [
+      clean(result.requiredAdditionalChecks),
+      '진료기록지',
+      'MRI 처방 또는 검사 의뢰서',
+      'MRI 판독지',
+      '의사 소견서',
+      '진료비 세부내역서',
+      '영수증',
+      '보험회사 부지급 사유서',
+      '가입 당시 실손보험 원약관',
+    ].filter(Boolean).join('\n')
+    : [clean(result.requiredAdditionalChecks), '가입 당시 원약관', '진료기록지', '의사 소견서 또는 처방/검사 의뢰 사유', '진료비 세부내역서', '영수증', '보험회사 부지급 사유서'].filter(Boolean).join('\n');
   return {
     ...result,
-    title: clean(result.title),
+    title: isMriDenial ? 'MRI 검사비 실손보험 부지급 재검토 손해사정 의견 초안' : clean(result.title),
     overview: clean(result.overview),
     facts: clean(result.facts),
-    issues: [clean(result.issues), '주요 쟁점은 실손보험 약관상 보상 대상 여부, 보상 제외 조항 적용 여부, 의학적 필요성 또는 검사ㆍ치료 필요성, 가입 당시 원약관 기준의 적용입니다.'].filter(Boolean).join('\n\n'),
-    legalAndReferenceBasis: '가입 당시 원약관, 실손보험 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역, 보험회사 부지급 사유서를 중심으로 검토해야 합니다. 직접 관련 공식 판례 또는 분쟁조정례가 부족한 경우에는 원약관과 진료기록 확인을 우선해야 합니다.',
-    damageAssessment: '본 건의 평가는 손해액 자체보다 가입 당시 원약관상 보상 대상 여부, 보상 제외 해당 여부, 의학적 필요성, 진료 또는 검사 필요성, 진료비 세부내역의 항목 구분을 중심으로 이루어져야 합니다.',
-    insurerPositionReview: '보험회사는 보상 제외 또는 의학적 필요성 부족을 주장하는 경우 약관 조항, 진료기록, 세부 항목별 부지급 사유를 구체적으로 제시할 필요가 있습니다.',
+    issues: [clean(result.issues), isMriDenial ? '주요 쟁점은 MRI 검사비가 가입 당시 실손보험 원약관상 보상 대상인지, 보상 제외 조항에 해당하는지, 진료기록상 검사 필요성과 의학적 필요성이 확인되는지입니다.' : '주요 쟁점은 실손보험 약관상 보상 대상 여부, 보상 제외 조항 적용 여부, 의학적 필요성 또는 검사ㆍ치료 필요성, 가입 당시 원약관 기준의 적용입니다.'].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: isMriDenial ? 'MRI 검사비는 가입 당시 실손보험 원약관, 보상 제외 또는 제한 조항, 진료기록상 검사 필요성 및 의학적 필요성, 의사 처방 또는 검사 목적, 보험회사 부지급 사유서를 중심으로 검토해야 합니다.' : '가입 당시 원약관, 실손보험 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역, 보험회사 부지급 사유서를 중심으로 검토해야 합니다. 직접 관련 공식 판례 또는 분쟁조정례가 부족한 경우에는 원약관과 진료기록 확인을 우선해야 합니다.',
+    damageAssessment: isMriDenial ? '본 건은 MRI 검사비 지급을 확정하는 사안이 아니라, 검사 필요성, 의학적 필요성, 가입 당시 원약관상 보상 제외 여부를 기준으로 재검토해야 하는 사안입니다.' : '본 건의 평가는 손해액 자체보다 가입 당시 원약관상 보상 대상 여부, 보상 제외 해당 여부, 의학적 필요성, 진료 또는 검사 필요성, 진료비 세부내역의 항목 구분을 중심으로 이루어져야 합니다.',
+    insurerPositionReview: isMriDenial ? '보험회사는 MRI 검사비 부지급을 유지하려면 단순히 검사가 시행되었다는 사정이나 비급여 여부만이 아니라, 적용되는 보상 제외 조항과 의학적 필요성 부족 사유를 구체적으로 제시할 필요가 있습니다.' : '보험회사는 보상 제외 또는 의학적 필요성 부족을 주장하는 경우 약관 조항, 진료기록, 세부 항목별 부지급 사유를 구체적으로 제시할 필요가 있습니다.',
     adjusterOpinionDraft: opinion,
-    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '가입 당시 원약관', '진료기록지', '의사 소견서 또는 처방/검사 의뢰 사유', '진료비 세부내역서', '영수증', '보험회사 부지급 사유서'].filter(Boolean).join('\n'),
-    simpleClientSummary: '실손보험 부지급은 가입 당시 원약관, 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역을 함께 확인해야 합니다. 관련 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
+    requiredAdditionalChecks: requiredChecks,
+    simpleClientSummary: isMriDenial ? 'MRI 검사비 실손보험 부지급은 검사 시행 사실만으로 결론이 나지 않습니다. 검사 필요성, 의학적 필요성, 가입 당시 원약관상 보상 제외 여부를 자료로 정리해 보험회사에 재검토를 요청할 수 있습니다.' : '실손보험 부지급은 가입 당시 원약관, 보상 제외 조항, 진료기록상 의학적 필요성, 진료비 세부내역을 함께 확인해야 합니다. 관련 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
   };
 }
 
@@ -1471,31 +1507,58 @@ function finalizeCancerDiagnosisBenefitResult(result: AssessmentDraftResult, inp
     input.adjusterMemo,
   ].filter(Boolean).join(' ');
   const borderlineOrInSitu = /제자리암|상피내암|경계성종양|D0[0169]|D3[7-9]|D4[0-8]|high\s*grade\s*dysplasia|dysplasia|carcinoma\s*in\s*situ|\bCIS\b|intramucosal|행동양식|\/2|DCIS|GIST|유암종|비침습성|흑색종/i.test(inputText);
+  const preBiopsyClinicalColonCancer = /대장암|C18|대장/i.test(inputText) && /조직검사\s*전|조직검사.*전|임상진단|임상\s*진단|병리.*전/i.test(inputText);
   const clean = (value: string) => cleanPublicText(value)
     .replace(/도수치료|도수\s*치료|manual\s*therapy|M54|요통|허리통증|체외충격파|실손\s*부지급|비급여\s*주사|후유장해|자동차보험|고지의무|계약해지|보험금\s*지급\s*확정/gi, '')
     .trim();
   const classificationText = borderlineOrInSitu
     ? '제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.'
+    : preBiopsyClinicalColonCancer
+    ? '조직검사 전 임상진단만으로 암진단비 지급요건이 충족되는지는 가입 당시 약관의 진단확정 기준, 질병분류표, 영상검사ㆍ내시경 소견, 수술기록 및 추후 병리보고서를 함께 확인해야 합니다.'
     : '일반암, 유사암, 소액암, 원발암 또는 전이암 해당 여부는 병리보고서와 가입 당시 약관 및 질병분류표 기준으로 구분해야 합니다.';
-  const opinion = [
-    clean(result.adjusterOpinionDraft),
+  const generalOpinion = [
     '본 건은 암진단비 지급 여부가 문제되는 사안으로, 진단서에 기재된 코드만으로 지급 또는 부지급을 단정하기보다 병리보고서, 조직검사 또는 세포검사 결과에 따른 진단확정 여부를 먼저 확인해야 합니다.',
     '암, 제자리암, 경계성종양, 유사암 또는 일반암의 구분은 가입 당시 약관과 그 약관에서 정한 질병분류표 기준에 따라 판단해야 합니다. 최신 분류기준을 과거 계약에 자동 적용하거나, 진단서의 C코드 또는 D코드만으로 결론을 내리는 방식은 신중해야 합니다.',
     classificationText,
     '따라서 고객 측 의견은 암진단비 지급을 확정하는 것이 아니라, 병리보고서 원문, 진단확정 자료, 가입 당시 약관, 질병분류표를 기준으로 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 방향으로 정리합니다.',
+  ];
+  const preBiopsyOpinion = [
+    '본 건은 조직검사 전 임상진단만으로 암진단비 지급요건이 충족되는지 여부가 쟁점입니다. 암진단비 지급 여부는 가입 당시 암보험 약관상 암의 진단확정 기준에 따라 검토해야 합니다.',
+    '일반적으로 병리보고서 또는 조직검사 결과가 핵심자료가 되며, 조직검사 전 임상진단만으로 충분한지는 가입 당시 약관, 질병분류표, 영상검사 결과, 내시경 소견, 수술기록 및 추후 병리결과를 함께 확인해야 합니다.',
+    '보험회사가 조직검사 전 임상진단이라는 이유로 부지급하였다면, 임상진단의 근거, 영상검사, 내시경 소견, 수술기록, 추후 병리보고서를 종합하여 암진단비 진단확정 기준 충족 여부를 재검토해야 합니다.',
+    '따라서 결론은 암진단비 지급 확정이 아니라, 암진단비 지급요건 및 진단확정 기준에 따른 재검토가 필요하다는 방향으로 정리합니다.',
+  ];
+  const opinion = [
+    clean(result.adjusterOpinionDraft),
+    ...(preBiopsyClinicalColonCancer ? preBiopsyOpinion : generalOpinion),
   ].filter(Boolean).join('\n\n');
+  const requiredChecks = preBiopsyClinicalColonCancer
+    ? [
+      clean(result.requiredAdditionalChecks),
+      '진단서',
+      '내시경 결과지',
+      '영상검사 결과',
+      '수술기록지',
+      '조직검사 결과지',
+      '병리보고서',
+      '주치의 소견서',
+      '가입 당시 암보험 약관',
+      '가입 당시 질병분류표',
+      '보험회사 부지급 사유서',
+    ].filter(Boolean).join('\n')
+    : [clean(result.requiredAdditionalChecks), '병리보고서 원문', '조직검사 결과지', '세포검사 결과지', '진단서', '가입 당시 약관', '질병분류표', '암진단비 약관상 진단확정 조항', '보험회사 부지급 또는 감액 사유서'].filter(Boolean).join('\n');
   return {
     ...result,
-    title: clean(result.title) || '암진단비 진단확정 관련 손해사정 의견 초안',
+    title: preBiopsyClinicalColonCancer ? '대장암 조직검사 전 임상진단 암진단비 재검토 손해사정 의견 초안' : clean(result.title) || '암진단비 진단확정 관련 손해사정 의견 초안',
     overview: clean(result.overview),
     facts: clean(result.facts),
-    issues: [clean(result.issues), `주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.`].filter(Boolean).join('\n\n'),
-    legalAndReferenceBasis: '가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.',
+    issues: [clean(result.issues), preBiopsyClinicalColonCancer ? '주요 쟁점은 조직검사 전 임상진단만으로 암진단비 청구에서 진단확정이 인정되는지, 병리보고서와 조직검사 결과 전후의 의학자료가 가입 당시 약관과 질병분류표상 암 진단 기준을 충족하는지입니다.' : `주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.`].filter(Boolean).join('\n\n'),
+    legalAndReferenceBasis: preBiopsyClinicalColonCancer ? '가입 당시 약관, 암진단비 진단확정 조항, 질병분류표, 조직검사 결과, 병리보고서, 영상검사 결과, 내시경 결과지와 수술기록지를 중심으로 검토해야 합니다.' : '가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.',
     damageAssessment: `본 건은 손해액 산정보다는 암진단비의 진단확정 요건과 병리결과의 분류가 핵심입니다. ${classificationText}`,
-    insurerPositionReview: '보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.',
+    insurerPositionReview: preBiopsyClinicalColonCancer ? '보험회사가 조직검사 전 임상진단이라는 이유로 암진단비를 부지급하였다면, 임상진단만으로 진단확정이 부족하다는 약관상 근거와 병리보고서ㆍ조직검사 결과를 어떻게 보아야 하는지 구체적으로 제시할 필요가 있습니다.' : '보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.',
     adjusterOpinionDraft: opinion,
-    requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '병리보고서 원문', '조직검사 결과지', '세포검사 결과지', '진단서', '가입 당시 약관', '질병분류표', '암진단비 약관상 진단확정 조항', '보험회사 부지급 또는 감액 사유서'].filter(Boolean).join('\n'),
-    simpleClientSummary: '암진단비 분쟁은 진단서 코드만으로 판단하기보다 병리보고서, 조직검사 또는 세포검사 결과, 가입 당시 약관과 질병분류표를 함께 확인해야 합니다. 이 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
+    requiredAdditionalChecks: requiredChecks,
+    simpleClientSummary: preBiopsyClinicalColonCancer ? '조직검사 전 임상진단만으로 암진단비 진단확정이 인정되는지는 가입 당시 약관과 질병분류표, 병리보고서 및 조직검사 결과를 함께 보아야 합니다. 진단서, 내시경ㆍ영상검사 결과, 수술기록지와 보험회사 부지급 사유서를 정리해 재검토를 요청할 수 있습니다.' : '암진단비 분쟁은 진단서 코드만으로 판단하기보다 병리보고서, 조직검사 또는 세포검사 결과, 가입 당시 약관과 질병분류표를 함께 확인해야 합니다. 이 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.',
   };
 }
 
