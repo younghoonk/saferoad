@@ -23,16 +23,20 @@ const DEFINITIVE_PATTERNS = [
 ];
 
 function parseArgs(argv) {
-  const args = { dryRun: false, caseId: '', limit: 0, category: '' };
+  const args = { dryRun: false, caseId: '', limit: 0, category: '', from: 0, to: 0 };
   for (let i = 0; i < argv.length; i += 1) {
     const item = argv[i];
     if (item === '--dry-run') args.dryRun = true;
     else if (item === '--case') args.caseId = argv[++i] || '';
     else if (item === '--limit') args.limit = Number(argv[++i] || 0);
     else if (item === '--category') args.category = argv[++i] || '';
+    else if (item === '--from') args.from = Number(argv[++i] || 0);
+    else if (item === '--to') args.to = Number(argv[++i] || 0);
     else if (item.startsWith('--case=')) args.caseId = item.slice('--case='.length);
     else if (item.startsWith('--limit=')) args.limit = Number(item.slice('--limit='.length));
     else if (item.startsWith('--category=')) args.category = item.slice('--category='.length);
+    else if (item.startsWith('--from=')) args.from = Number(item.slice('--from='.length));
+    else if (item.startsWith('--to=')) args.to = Number(item.slice('--to='.length));
   }
   return args;
 }
@@ -80,6 +84,16 @@ function selectCases(cases, args) {
   let selected = cases;
   if (args.caseId) selected = selected.filter((item) => item.id === args.caseId);
   if (args.category) selected = selected.filter((item) => item.category === args.category);
+  if (args.from > 0 || args.to > 0) {
+    selected = selected.filter((item) => {
+      const match = String(item.id || '').match(/^ASSESS_(\d+)$/);
+      if (!match) return false;
+      const number = Number(match[1]);
+      if (args.from > 0 && number < args.from) return false;
+      if (args.to > 0 && number > args.to) return false;
+      return true;
+    });
+  }
   if (args.limit > 0) selected = selected.slice(0, args.limit);
   return selected;
 }

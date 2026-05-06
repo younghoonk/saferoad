@@ -18,6 +18,8 @@ npm.cmd run ai:assessment:eval -- --dry-run
 npm.cmd run ai:assessment:eval -- --limit 3
 npm.cmd run ai:assessment:eval -- --case ASSESS_001
 npm.cmd run ai:assessment:eval -- --category "실손보험 부지급"
+npm.cmd run ai:assessment:eval -- --from 51 --to 70
+npm.cmd run ai:assessment:eval -- --from 31 --to 50
 npm.cmd run ai:assessment:eval
 ```
 
@@ -40,4 +42,6 @@ npm.cmd run ai:assessment:eval
 - `ai_eval/results/assessment_eval_latest.json`
 - `ai_eval/results/assessment_eval_latest.md`
 
-100개 전체 평가는 비용과 시간이 들 수 있으므로, 개발 중에는 `--dry-run`, `--case`, `--limit`, `--category` 옵션으로 좁혀 실행하세요.
+100개 전체 평가는 비용과 시간이 들 수 있으므로, 개발 중에는 `--dry-run`, `--case`, `--limit`, `--category`, `--from`, `--to` 옵션으로 좁혀 실행하세요.
+
+구간 실행은 `ASSESS_051` 같은 케이스 ID의 숫자 부분을 기준으로 합니다. 예를 들어 `--from 51 --to 70`은 `ASSESS_051`부터 `ASSESS_070`까지만 실행합니다. `--limit`를 함께 쓰면 필터된 결과의 앞 N개만 실행합니다.
