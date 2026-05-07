@@ -1,0 +1,3310 @@
+[
+  {
+    "id": "PRACTICE_001",
+    "title": "CIN2 자궁경부 이형성증 보험금 받을 수 있을까 HSIL·N87 코드 기준 총정리",
+    "source_doc_name": "CIN2 자궁경부 이형성증 보험금 받을 수 있을까 HSIL N87코드 기준 총정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "source_excerpt_summary": "건강검진 또는 산부인과 정기검진 과정에서 자궁경부 세포검사 이상 소견이 확인된 이후 추가 조직검사를 통해 CIN2(중등도 이형성증) 또는 HSIL(High-grade squamous intraepithelial lesion) 진단을 받는 경우가 많습니다. 최근에는 국가건강검진이나 산부인과 검진이 활성화되면서",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "64aaa7a3d80517b295fca69f784516357f815310c6212c1c3ecf93553550fca5",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_002",
+    "title": "CIN2 자궁경부암 보험금 지급 가능할까? HSIL 상피내암 인정 사례 분석",
+    "source_doc_name": "CIN2 자궁경부암 보험금 지급 가능할까.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "source_excerpt_summary": "건강검진이나 산부인과 정기검진을 통해 자궁경부 세포검사에서이상 소견이 발견되면 가슴이 철렁하기 마련입니다. 특히 추가 조직검사를 거쳐 CIN2(중등도 이형성증) 혹은 HSIL(High-grade Squamous Intraepithelial Lesion) 진단을 받은 분들이 가장 궁금해하시는 점은 바로 암보험금 지급 여부입니다. 최근 국가검진의 활성화로 진단 사례가 급증하고 있지만, 보험사와의 분쟁 또한 비례하여 늘어나고 있습니다. 결론부터 말씀드리면, CIN2는 동일한 진단이라도 어떻게 준비하고 해석하느냐에 따라 보험금 지급 결과가180도 달라지는 구간입니다. 1. CIN2 및 HSIL의 의학적 정의와 보험금 분쟁의 시작 CIN(Cervical Intraepithelial Neoplasia)은 자궁경부 상피내 종양을 뜻하며, 병변의 깊이에 따라 1~3단계로 구분됩니다. CIN1은 경증 이형성증으로 비교적 가벼운 단계이나, CIN2는 암으로 발전하기 전 단계인 중등도 이형성증에 해당합니다. CIN3는 고도 이형성증으로 상피내암(D06)과 매우 밀접한 단계로 봅니다. 여기서 HSIL은 '고등급 편평상피내 병변'을 의미하며, 이는 단순한 염증을 넘어 암세포로 변할",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "3d479f67fab09743c2bb41af987f1b8c6476b151cdd3c0ddfae9c95113fed5b2",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": "PRACTICE_001"
+  },
+  {
+    "id": "PRACTICE_003",
+    "title": "CIN2인데 암보험금 못 받는 이유 지급 기준 완벽 정리",
+    "source_doc_name": "CIN2인데 암보험금 못 받는 이유 지급 기준 완벽 정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암"
+    ],
+    "source_excerpt_summary": "“CIN2인데 암보험금이 안 나온다고요?” 건강검진 이후 조직검사를 받고 “CIN2(자궁경부 이형성증 2단계)” 진단을 받았는데 보험사에서 암보험금 지급이 어렵다는 답변을 받는 경우가 많습니다. 같은 질병인데도 누구는 보험금을 받고 누구는 거절되는 이유는 무엇일까요?",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "b1ada508cb65fa6eb56ff37707f7ff5bd378d574127d35bf53cc039b12c870b0",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": "PRACTICE_001"
+  },
+  {
+    "id": "PRACTICE_004",
+    "title": "CI보험 중대한 뇌경색 진단비 지급 거절, 손해사정사가 말하는 보험금 분쟁 해결책",
+    "source_doc_name": "CI보험 중대한 뇌경색 진단비 지급 거절.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "기타 보험금 분쟁 실무쟁점",
+    "issue_type": "기타 보험금 분쟁 실무쟁점",
+    "diagnosis_keywords": [
+      "I63"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "general_practice_issue",
+      "I63"
+    ],
+    "source_excerpt_summary": "뇌경색증(I63) 진단을 받고 MRI 영상에서 병변이 확인되었음에도 불구하고, 보험사로부터 \"약관상 '중대한' 상태에 해당하지 않는다\"는 통보를 받는 사례가 속출하고 있습니다. CI(Critical Illness) 보험은 일반적인 암이나 뇌졸중 보험과 달리, 질병의 명칭뿐만 아니라 그로 인한 '상태'를 엄격하게 제한하기 때문입니다. 가입자 입장에서는 의사가 내린 진단명이 동일한데 왜 보험금 지급 결과는 다른지 의구심을 가질 수밖에 없습니다. 이 분쟁의 핵심은 단순 영상 소견이 아니라,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "general_practice_issue",
+    "content_hash": "94825da8ae599e3020ba58afa42e40bcdb09f038c7d99e48d1c81498750a75ad",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_004"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_005",
+    "title": "I67 뇌혈관질환 보험금 가능할까. RCVS(가역성 뇌혈관 수축 증후군) 두통 사례 전액 지급",
+    "source_doc_name": "I67 뇌혈관질환 보험금 가능할까. RCVS(가역성 뇌혈관 수축 증후군) 두통 사례 전액 지급.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "issue_type": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "diagnosis_keywords": [
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_i67_mra_mri_findings",
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67"
+    ],
+    "source_excerpt_summary": "I67 뇌혈관질환과 RCVS(가역성 뇌혈관 수축 증후군) 보험금 사례를 말씀드리겠습니다. 실제 상담을 하다 보면 이런 질문을 정말 많이 받습니다. “두통으로 MRI 찍었는데 보험금 받을 수 있나요?” “RCVS(가역성 뇌혈관 수축 증후군)도 뇌혈관질환 보험금이 되나요?” “I67 코드면 보험금이 나오는 건가요?” 결론부터 말씀드리면 조건이 맞으면 충분히 가능합니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_i67_mra_mri_findings",
+    "content_hash": "df938abf45e2c7f0d3aa64c268b2b7adbc616016a205be6d40adfc7dc138f4cd",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_005",
+      "PRACTICE_007",
+      "PRACTICE_012",
+      "PRACTICE_013"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_006",
+    "title": "갑상선 전이암 C73 C77 일반암 보험금 정당한 지급 기준과 대법원 판례 해설",
+    "source_doc_name": "갑상선 전이암 C73 C77 일반암 보험금 정당한 지급 기준과 대법원 판례 해설.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "갑상선암 전이암/원발부위 기준",
+    "issue_type": "갑상선암 전이암/원발부위 기준",
+    "diagnosis_keywords": [
+      "C73",
+      "C77",
+      "갑상선암",
+      "림프절 전이",
+      "원발부위 기준"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_thyroid_metastasis_primary_site",
+      "C73",
+      "C77",
+      "갑상선암",
+      "림프절 전이",
+      "원발부위 기준"
+    ],
+    "source_excerpt_summary": "갑상선암(C73) 진단 이후 목 주변 림프절로 전이되어 C77 코드를 추가로 부여받는 경우, 보험금 지급 기준을 두고 계약자와 보험사 간의 견해 차이가 발생하곤 합니다. 많은 보험 약관에는 '원발 부위(최초 발생부위)를 기준으로 암을 분류한다'는 조항이 포함되어 있어, 전이암인 C77을 소액암인 갑상선암의 연장선으로 보아 보험금이 산정되는 경우가 많기 때문입니다. 하지만 이는 약관의 해석 방식과 가입 당시의 안내 과정에 따라 일반암으로 인정받을 수 있는 법리적 여지가 충분하며,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_thyroid_metastasis_primary_site",
+    "content_hash": "59c3abda5f6584b5817947d551defc8efeea45a25868ec311c7158fb1a792632",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_006"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_007",
+    "title": "건강검진 MRA로 발견한 뇌동맥류 지급 심사 시 꼭 확인해야 할 'I67.1' 코드의 비밀",
+    "source_doc_name": "건강검진 MRA로 발견한 뇌동맥류 지급 심사 시 꼭 확인해야 할 .docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "issue_type": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "diagnosis_keywords": [
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67",
+      "I67.1"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_i67_mra_mri_findings",
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67"
+    ],
+    "source_excerpt_summary": "평소 별다른 증상 없이 건강을 자신하던 분들도 정기 건강검진이나 뇌 MRA, MRI 검사 결과지에서 '비파열 대뇌동맥류'라는 소견을 마주하면 큰 충격에 빠지곤 합니다. 뇌동맥류는 뇌혈관 벽의 일부가 약해지면서 풍선처럼 부풀어 오르는 질환을 말합니다. 질병명 앞에 '비파열'이 붙었다는 것은 다행히 아직 터지지 않았다는 의미이지만, 혈류의 압력이나 외부 요인에 의해 언제 파열되어 뇌출혈로 이어질지 모르는 위험을 안고 있습니다. 이 때문에 의료계에서는 이를 '머릿속 시한폭탄'이라 부르며 세밀한 추적 관찰이나 수술적 치료를 신중하게 고려하게 됩니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_i67_mra_mri_findings",
+    "content_hash": "541d0ee06313894c9cefc17c920faf535a5caffa2d501f21af06906c3f90dc17",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_005",
+      "PRACTICE_007",
+      "PRACTICE_012",
+      "PRACTICE_013"
+    ],
+    "duplicate_of_candidate": "PRACTICE_005"
+  },
+  {
+    "id": "PRACTICE_008",
+    "title": "건강검진 후 발견된 비파열 대뇌동맥류 보험금 받을 수 있을까",
+    "source_doc_name": "건강검진 후 발견된 비파열 대뇌동맥류 보험금 받을 수 있을까.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "비파열 뇌동맥류 진단비/수술비 분쟁",
+    "issue_type": "비파열 뇌동맥류 진단비/수술비 분쟁",
+    "diagnosis_keywords": [
+      "비파열 대뇌동맥류",
+      "뇌동맥류",
+      "MRA",
+      "코일색전술",
+      "I67",
+      "Q28",
+      "I67.1"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_unruptured_aneurysm",
+      "비파열 대뇌동맥류",
+      "뇌동맥류",
+      "MRA",
+      "코일색전술",
+      "I67",
+      "Q28",
+      "I67.1"
+    ],
+    "source_excerpt_summary": "평소처럼 건강검진을 받고 결과를 확인하던 중 뇌 MRA 또는 MRI 검사에서 “비파열 대뇌동맥류 소견이 있습니다” 라는 설명을 듣는 순간, 많은 분들이 큰 충격을 받습니다. “머릿속에 문제가 생긴 건가?” “당장 수술해야 하는 건 아닐까?”",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_unruptured_aneurysm",
+    "content_hash": "11a5244cb6750029420049c37a3348de1aa33a0d68c1a43263acc9f1f78390bb",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_008"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_009",
+    "title": "결장 양성 신생물 D12.6 보험금 받을 수 있을까 대장용종 실제 지급 사례 총정리",
+    "source_doc_name": "결장 양성 신생물 D12.6 보험금 받을 수 있을까 대장용종 실제 지급 사례 총정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "대장용종/D12/high grade dysplasia 진단비",
+    "issue_type": "대장용종/D12/high grade dysplasia 진단비",
+    "diagnosis_keywords": [
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_colorectal_polyp_hgd_d12",
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암"
+    ],
+    "source_excerpt_summary": "건강검진에서 대장내시경을 시행한 후 용종(polyp)이 발견되어 제거를 하는 경우가 많습니다. 이후 조직검사 결과에서 “결장의 양성 신생물 (D12.6)” 이라는 진단을 받게 되면 많은 분들이 같은 질문을 하십니다. “이거 보험금 받을 수 있나요?”",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_colorectal_polyp_hgd_d12",
+    "content_hash": "382ab2d21b1b0c99221302724ecb8555dc1defbf533dfa52f0a9e2a4ed467bea",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_009",
+      "PRACTICE_014",
+      "PRACTICE_015",
+      "PRACTICE_016"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_010",
+    "title": "급성심근경색 진단금 거절 협심증으로 바뀌는 이유와 대응방법",
+    "source_doc_name": "급성심근경색 진단금 거절 협심증으로 바뀌는 이유와 대응방법.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도"
+    ],
+    "source_excerpt_summary": "오늘은 실제 사례를 통해 급성심근경색 진단금 지급 기준과 분쟁 포인트를 자세히 설명드리겠습니다. 심근경색 진단금, 왜 분쟁이 많을까? 우리나라 사망 원인 중 상위권을 차지하는 질환이 바로 심장질환이며, 그중에서도 급성심근경색은 매우 치명적인 질환입니다. 그만큼 심근경색 진단금, 급성심근경색 진단금 청구도 많지만,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "8ef17cbe9c481ae925982654e98ec756d28b90f2029457532288a7a38a52fe51",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_011",
+    "title": "난소경계성종양 암보험금 D39.1 일반암 지급 가능성",
+    "source_doc_name": "난소경계성종양 암보험금 D39.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "난소경계성종양 암보험금 지급률",
+    "issue_type": "난소경계성종양 암보험금 지급률",
+    "diagnosis_keywords": [
+      "D39.1",
+      "난소경계성종양",
+      "Borderline Ovarian Tumor",
+      "기질 침윤",
+      "D39"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_ovarian_borderline",
+      "D39.1",
+      "난소경계성종양",
+      "Borderline Ovarian Tumor",
+      "기질 침윤",
+      "D39"
+    ],
+    "source_excerpt_summary": "최근 건강검진의 보편화로 병원에서 난소경계성종양 진단을 받고 큰 혼란을 겪는 환자들이 급증하고 있습니다. 진단명에 '종양'이라는 단어가 포함되어 있고, 병리 검사 결과지에는 암을 연상시키는 복잡한 의학적 표현들이 등장하지만, 정작 보험사에 암보험금을 청구하면 \"암이 아니다\"라는 이유로 지급이 거절되거나 일부만 지급되는 사례가 반복되고 있기 때문입니다. 난소경계성종양은 일반적인 양성 종양과 악성 난소암의 중간 단계에 해당하는 질환으로, 현미경으로 관찰 시 세포의 이형성은 암과 유사할 정도로 뚜렷하게 나타납니다. 그러나 암을 규정하는 핵심 기준인 '기질 침윤'이 존재하지 않는다는 점 때문에 보험금 지급 과정에서 상당한 분쟁이 발생합니다. ■ 암처럼 보이지만 암은 아닌, 난소경계성종양의 의학적 특징 난소경계성종양(Borderline Ovarian Tumor)은 악성과 양성의 중간적 성격을 지닌 종양으로 분류되며, 상피세포의 증식과 이형성은 관찰되나 원칙적으로 기질 침윤(stromal invasion)을 동반하지 않는다는 점에서 일반적인 난소암과 구별됩니다. 주로 30대에서 50대 여성 사이에서 자주 진단되는 경향이 있으며, 조직학적으로는 장액성(serous)과 점",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_ovarian_borderline",
+    "content_hash": "d102f755e4825319c7ec1e8d41e159b261025f120696ee6d2e10bf2834a863c9",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_011"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_012",
+    "title": "뇌 MRI '파제카스(Fazekas)' 소견 뇌혈관질환 진단비 I67.8 지급 성공 전략",
+    "source_doc_name": "뇌 MRI '파제카스(Fazekas)' 소견 뇌혈관질환 진단비 I67.8 지급 성공 전략 .docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "issue_type": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "diagnosis_keywords": [
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_i67_mra_mri_findings",
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67"
+    ],
+    "source_excerpt_summary": "최근 건강검진의 보편화로 신경과나 신경외과에서 MRI 및 MRA 검사를 받는 분들이 부쩍 늘었습니다. 하지만 검사 결과지에서 '만성 허혈성 뇌백질 변성' 혹은 '파제카스 척도(Fazekas Scale)'라는 소견을 듣고 뇌졸중이나 뇌경색에 대한 불안감으로 보험금을 청구했다가, \"노화에 따른 자연스러운 현상\" 이라는 이유로 면책(지급 거절) 통보를 받는 사례가 빈번합니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_i67_mra_mri_findings",
+    "content_hash": "377e2e35ecba2af6129003e452a4e0921e9e8ae3aeb5a4ef505697bff2071d77",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_005",
+      "PRACTICE_007",
+      "PRACTICE_012",
+      "PRACTICE_013"
+    ],
+    "duplicate_of_candidate": "PRACTICE_005"
+  },
+  {
+    "id": "PRACTICE_013",
+    "title": "뇌동맥류 코일색전술 전후 체크리스트 I67.1 진단비와 수술비 보장 범위 총정리",
+    "source_doc_name": "뇌동맥류 코일색전술 전후 체크리스트 I67.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "issue_type": "뇌 MRI/MRA I67 계열 뇌혈관질환 진단비",
+    "diagnosis_keywords": [
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67.1"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_i67_mra_mri_findings",
+      "I67.8",
+      "Fazekas",
+      "파제카스",
+      "RCVS",
+      "MRA",
+      "MRI",
+      "뇌혈관질환",
+      "I67.1"
+    ],
+    "source_excerpt_summary": "정기적인 건강검진이나 갑작스러운 두통으로 진행한 뇌 MRA 검사에서 비파열 대뇌동맥류라는 진단을 받게 되면 누구나 당혹감을 감추기 어렵습니다. 뇌혈관의 일부가 약해져 꽈리 모양으로 부풀어 오른 이 질환은, 평소에는 아무런 징후가 없다가도 어느 순간 파열되어 치명적인 뇌출혈을 일으킬 수 있는 잠재적 위험을 안고 있습니다. 비록 당장 터진 상태는 아니더라도,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_i67_mra_mri_findings",
+    "content_hash": "92d11eb0a924231cf52711e93c72476c4bf58dc4d7c050a991388a9d2ae8986c",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_005",
+      "PRACTICE_007",
+      "PRACTICE_012",
+      "PRACTICE_013"
+    ],
+    "duplicate_of_candidate": "PRACTICE_005"
+  },
+  {
+    "id": "PRACTICE_014",
+    "title": "대장용종 D12 진단] 고등급 이형성증 유사암 보험금 지급받는 핵심 전략",
+    "source_doc_name": "대장용종 D12 진단.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "대장용종/D12/high grade dysplasia 진단비",
+    "issue_type": "대장용종/D12/high grade dysplasia 진단비",
+    "diagnosis_keywords": [
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암",
+      "D00",
+      "D01",
+      "D09"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_colorectal_polyp_hgd_d12",
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암",
+      "D00",
+      "D01"
+    ],
+    "source_excerpt_summary": "대장 내시경 검사를 통해 용종을 제거했다는소식을 들으면 안도감과 함께 보험금 청구에 대한 고민이 시작됩니다. 특히 진단서상에 '대장의 양성 신생물'을 뜻하는 D12 코드가 부여되었을 때, 이를 단순한 양성 종양으로 치부하고 넘어가야 할지 아니면 유사암 진단비 청구가 가능할지 판단하는 것은 매우 중요한 문제입니다. 일반적으로 대장 용종은 대장 점막에 생기는 작은 돌기 형태의 병변으로, 그 종류에 따라 암으로 발전할 가능성이 있는 선종성 용종 등이 포함됩니다. 만약 조직검사 결과지에서 고등급 이형성증(High grade dysplasia) 문구가 확인된다면, 이는 단순한 용종을 넘어 제자리암에 준하는 보상을 검토해야 하는 시점입니다. 고등급 이형성증은 암으로 진행할 가능성이 매우 높은 전암성 병변으로 분류되기 때문입니다. 2. 보험사와 가입자 간의 시각 차이: D12와 D01 사이의 경계 많은 분들이 대장 용종 제거 후 보험금을 청구하지만, 보험사 측으로부터 지급 거절 안내를 받는 경우가 빈번합니다. 가장 큰 이유는 바로 진단 코드의 차이 때문입니다. 보험사는 D12 진단이 내려진 경우 이를 제자리암(D00-D09) 범주에 해당하지 않는 양성 신생물로 분류하여 ",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_colorectal_polyp_hgd_d12",
+    "content_hash": "814209f2ba8d57d3d24ff157115b6a10105e08db9d3934dd59ac2f3ea9bb9c3b",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_009",
+      "PRACTICE_014",
+      "PRACTICE_015",
+      "PRACTICE_016"
+    ],
+    "duplicate_of_candidate": "PRACTICE_009"
+  },
+  {
+    "id": "PRACTICE_015",
+    "title": "대장용종 보험금 받을 수 있을까 D12 진단 거절 이유와 대장용종제자리암 인정 방법 총정리",
+    "source_doc_name": "대장용종 보험금 받을 수 있을까 D12 진단 거절 이유와 대장용종제자리암 인정 방법 총정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "대장용종/D12/high grade dysplasia 진단비",
+    "issue_type": "대장용종/D12/high grade dysplasia 진단비",
+    "diagnosis_keywords": [
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암",
+      "D00",
+      "D01",
+      "D09"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_colorectal_polyp_hgd_d12",
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암",
+      "D00",
+      "D01"
+    ],
+    "source_excerpt_summary": "대장용종 보험금, 대장용종제자리암 인정 여부에 대한 내용입니다. 건강검진 또는 대장내시경 검사 과정에서 대장용종이 발견되고 용종 절제술까지 시행한 이후 보험금 청구를 진행했지만 “대장용종은 양성입니다” “D12 진단은 암이 아닙니다”",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_colorectal_polyp_hgd_d12",
+    "content_hash": "34989d6aa98336ad514a608a690ef8dc17ba4879d1db0b674c93f3f040afa547",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_009",
+      "PRACTICE_014",
+      "PRACTICE_015",
+      "PRACTICE_016"
+    ],
+    "duplicate_of_candidate": "PRACTICE_009"
+  },
+  {
+    "id": "PRACTICE_016",
+    "title": "대장용종 제자리암 인정될까 보험금 못 받는 이유 정확히 설명드립니다",
+    "source_doc_name": "대장용종 제자리암 인정될까 보험금 못 받는 이유 정확히 설명드립니다.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "대장용종/D12/high grade dysplasia 진단비",
+    "issue_type": "대장용종/D12/high grade dysplasia 진단비",
+    "diagnosis_keywords": [
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_colorectal_polyp_hgd_d12",
+      "D12",
+      "D12.6",
+      "대장용종",
+      "결장 양성 신생물",
+      "high grade dysplasia",
+      "대장점막내암"
+    ],
+    "source_excerpt_summary": "최근 대장용종 제거 후 보험금과 관련하여 상담을 요청하시는 분들이 매우 많습니다. 특히 대장 선종이나 고등급 이형성증으로 진단을 받은 경우 “이게 제자리암인가요?”, “보험금 받을 수 있나요?”라는 질문이 가장 많습니다. 결론부터 말씀드리면 대장용종이라고 해서 모두 보험금이 지급되는 것은 아니며 일부는 충분히 제자리암으로 인정되어 보험금 지급이 가능합니다. 이 차이를 모르고 지나가는 경우 보험금을 받지 못하는 사례가 많습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_colorectal_polyp_hgd_d12",
+    "content_hash": "94d0f441ae718e5c657cedf8516df5adc51ca6922181b4f8725db1c1399e7969",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 4,
+    "duplicate_group_members": [
+      "PRACTICE_009",
+      "PRACTICE_014",
+      "PRACTICE_015",
+      "PRACTICE_016"
+    ],
+    "duplicate_of_candidate": "PRACTICE_009"
+  },
+  {
+    "id": "PRACTICE_017",
+    "title": "말트림프종(MALT 림프종) 보험금 받을 수 있을까 일반암 진단비 지급 기준 완벽정리",
+    "source_doc_name": "말트림프종(MALT 림프종) 보험금 받을 수 있을까 일반암 진단비 지급 기준 완벽정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "MALT 림프종 일반암 진단비",
+    "issue_type": "MALT 림프종 일반암 진단비",
+    "diagnosis_keywords": [
+      "MALT 림프종",
+      "말트림프종",
+      "일반암",
+      "림프종",
+      "C88.4"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_malt_lymphoma",
+      "MALT 림프종",
+      "말트림프종",
+      "일반암",
+      "림프종",
+      "C88.4"
+    ],
+    "source_excerpt_summary": "최근 건강검진과 위내시경 검사가 보편화되면서, 이전에는 잘 알려지지 않았던 희귀 암들이 우연히 발견되는 사례가 급격히 늘어나고 있습니다. 그중에서도 보험 실무 현장에서 가장 자주 분쟁이 발생하는 질환이 바로 말트림프종(MALT 림프종)입니다. 말트림프종은 진단 자체보다도 보험금 지급 여부에서 훨씬 더 큰 문제가 발생하는 질환입니다. 오늘은 말트림프종 진단을 받으신 분들이 꼭 알아야 할 일반암 진단비 지급 기준과 분쟁 대응 포인트를 상세히 정리해드리겠습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_malt_lymphoma",
+    "content_hash": "908a81e4bccb13fab8c7f0121feb22be45308b6314537af3e50d1b249a7d4cb0",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_017"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_018",
+    "title": "방광암 진단비 거절 “CIS라서 암이 아니다” 보험사의 숨은 기준",
+    "source_doc_name": "방광암 진단비 거절 “CIS라서 암이 아니다” 보험사의 숨은 기준.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "방광 CIS/비침습성 방광암 진단비",
+    "issue_type": "방광 CIS/비침습성 방광암 진단비",
+    "diagnosis_keywords": [
+      "방광암",
+      "CIS",
+      "상피내암",
+      "C67",
+      "D09",
+      "PUNLMP",
+      "TUR-BT",
+      "BCG"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_bladder_cis_noninvasive",
+      "방광암",
+      "CIS",
+      "상피내암",
+      "C67",
+      "D09",
+      "PUNLMP",
+      "TUR-BT",
+      "BCG"
+    ],
+    "source_excerpt_summary": "최근 상담 요청 중 압도적으로 많은 질문이 바로 이것입니다. “방광암 진단을 받았는데 보험사가 암이 아니라고 합니다” “CIS라고 하는데 방광암 진단비 못 받는 건가요?” “방광암 보험 청구했는데 경계성 병변이라며 거절됐습니다” 이 질문에는 공통점이 있습니다. 이미 치료는 ‘암 수준’으로 진행됐는데, 보험금은 지급되지 않고 있다는 점입니다. 결론부터 말씀드리겠습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_bladder_cis_noninvasive",
+    "content_hash": "211aa346fba15a91fcf0445a23a0ebddb5c73dba4b2a9e1b3095ba27e58a3f56",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 2,
+    "duplicate_group_members": [
+      "PRACTICE_018",
+      "PRACTICE_019"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_019",
+    "title": "비침윤성 방광암 진단비 거절? CIS·상피내암 D코드도 C67처럼 지급받는 법",
+    "source_doc_name": "비침윤성 방광암 진단비 거절 CIS·상피내암 D코드도 C67처럼 지급받는 법.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "방광 CIS/비침습성 방광암 진단비",
+    "issue_type": "방광 CIS/비침습성 방광암 진단비",
+    "diagnosis_keywords": [
+      "방광암",
+      "CIS",
+      "상피내암",
+      "C67",
+      "D09",
+      "PUNLMP",
+      "TUR-BT",
+      "BCG"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_bladder_cis_noninvasive",
+      "방광암",
+      "CIS",
+      "상피내암",
+      "C67",
+      "D09",
+      "PUNLMP",
+      "TUR-BT",
+      "BCG"
+    ],
+    "source_excerpt_summary": "최근 저희 법인으로 인입되는 상담 중 압도적인 비중을 차지하는 것은 전국 단위의 방광암 진단비 관련 문의입니다. 환자분들은 대학병원에서 정식으로 암 수술을 받고, 고통스러운 방광 내 BCG 항암 주입술까지 시행했는데도 보험사로부터 \"이는 악성 암(C코드가)이 아니라 경계성 종양(D코드)에 해당하여 일반 암 진단비 전액을 지급할 수 없다\" 는 황당한 통보를 받고 망연자실해 하십니다. 환자분들의 억울함을 누구보다 잘 알고 있습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_bladder_cis_noninvasive",
+    "content_hash": "3e96801cd70976ffa78b5857ec42dc0f34f2bbef655c41a7faebd3002a54d4f9",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 2,
+    "duplicate_group_members": [
+      "PRACTICE_018",
+      "PRACTICE_019"
+    ],
+    "duplicate_of_candidate": "PRACTICE_018"
+  },
+  {
+    "id": "PRACTICE_020",
+    "title": "비파열 대뇌동맥류 보험금 거절 이유 확정진단 기준 때문에 못 받는 이유 (MRI·뇌MRA 핵심 정리)",
+    "source_doc_name": "비파열 대뇌동맥류 보험금 거절 이유 확정진단 기준 때문에 못 받는 이유 .docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도"
+    ],
+    "source_excerpt_summary": "최근 상담 문의 중 눈에 띄게 증가한 것이 바로 비파열 대뇌동맥류 보험금 관련 상담입니다. 예전보다 MRI, 뇌MRA 검사가 많아지면서 ✔ 어지럼증원인 ✔ 두통원인, 편두통원인 ✔ 눈떨림, 눈밑떨림 같은 증상으로 신경과병원, 신경과, 신경외과를 방문했다가",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "ad11d195e63b169d8ba333c26cec62e91774f661ecddbb42380c0c16f5d4d6ba",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": "PRACTICE_010"
+  },
+  {
+    "id": "PRACTICE_021",
+    "title": "사구맥관종증 유사암 진단비 ‘양성’이라는 보험사의 말에 속지 마세요",
+    "source_doc_name": "사구맥관종증 유사암 진단비 ‘양성’이라는 보험사의 말에 속지 마세요.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "사구맥관종증 유사암/경계성종양 분쟁",
+    "issue_type": "사구맥관종증 유사암/경계성종양 분쟁",
+    "diagnosis_keywords": [
+      "Glomangiomatosis",
+      "Glomangioma",
+      "사구맥관종증",
+      "D37-D48",
+      "KCD 8차",
+      "/1",
+      "D36",
+      "D37"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_glomangiomatosis_borderline",
+      "Glomangiomatosis",
+      "Glomangioma",
+      "사구맥관종증",
+      "D37-D48",
+      "KCD 8차",
+      "/1",
+      "D36",
+      "D37"
+    ],
+    "source_excerpt_summary": "암 진단비는 보험 상품 중에서도 가장 보상 규모가 크고 복잡한 영역입니다. 특히 '암이냐 아니냐'를 두고 보험사와 가입자 간의 팽팽한 줄다리기가 이어지는 경우가 많은데, 오늘 다룰 '사구맥관종증(Glomangiomatosis)'은 그 대표적인 사례 중 하나입니다. 희귀 질환이라는 이유로, 혹은 단순히 코드상 양성이라는 이유로 정당한 보상을 포기하고 계신 분들을 위해 지급 기준과 해결 방안을 심층적으로 분석해 드리겠습니다. 사구맥관종증, 어떤 질환이며 왜 고통스러울까?",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_glomangiomatosis_borderline",
+    "content_hash": "428abd21b48aaa2336a60ebcfae301d5538bbc792a157b83145a76c12418eb08",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_021"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_022",
+    "title": "신경내분비종양 암진단비 D37.5 경계성종양도 일반암 지급 가능할까?",
+    "source_doc_name": "신경내분비종양 암진단비 D37.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "D12",
+      "D37"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "D12"
+    ],
+    "source_excerpt_summary": "최근 건강검진을 통해 우연히 발견되는 신경내분비종양(NET)은 과거 '유암종'이라는 용어로 익숙했던 질환입니다. 하지만 이 질환이 일반암인지 경계성종양인지에 대한 분류 기준은 의학계와 보험 실무에서 매우 복잡하게 다뤄지고 있습니다. 오늘은 신경내분비종양 암진단비 청구를 고민하시는 분들을 위해, 객관적인 판단 기준과 효율적인 대응 방안을 전문 손해사정사의 시각에서 상세한 정보로 정리해 드리겠습니다. 1. 신경내분비종양(NET)의 정의와 등급별 병리학적 특징 신경내분비종양은 호르몬을 생성하고 분비하는 신경내분비세포에서 발생하는 종양을 말합니다. 주로 췌장, 위, 십이지장, 소장, 대장(직장) 등 소화기계에서 흔히 발견되지만, 폐나 흉선 등 다양한 장기에서도 발생할 수 있습니다. 병리학적으로는 종양세포의 분화도와 증식 속도에 따라 저등급(G1), 중등급(G2), 고등급(G3)으로 분류됩니다. 저등급(G1)은 분화도가 높고 증식이 상대적으로 느리며, 중등급(G2)은 중간 정도의 증식 속도를 보입니다. 반면 고등급(G3)은 분화도가 낮고 매우 침윤적이며 전이 가능성이 높습니다. 여기서 주목할 점은 저등급인 G1이라 할지라도 임상적 위험성에 따라 악성으로 분류될 여지가",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "5a23664fb6a3c166e244702fa6f40fe42a4751b0530b6bcde74789c9e5a36c76",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_023",
+    "title": "심근경색진단비 받을 수 있을까 급성심근경색 진단비 기준 코드 청구 거절 총정리",
+    "source_doc_name": "심근경색진단비 받을 수 있을까 급성심근경색 진단비 기준 코드 청구 거절 총정리.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I22",
+      "I25"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I22",
+      "I25"
+    ],
+    "source_excerpt_summary": "오늘은 실제 상담에서 가장 많이 발생하는 심근경색진단비, 심근경색 진단비 청구, 심근경색 진단비 거절, 급성심근경색 진단비 거절과 관련된 핵심 내용을 실무 기준으로 매우 자세하게 설명드리겠습니다. 최근 보험사에 심근경색 진단비 청구를 진행했지만 “급성심근경색 진단비 기준에 해당하지 않는다” “심근경색 진단비 코드가 다르다” 라는 이유로",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "c012cf80909bb2d535e26e88c76d4d964bd301f26fb856bf9abc6b4b76d6f2f2",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": "PRACTICE_010"
+  },
+  {
+    "id": "PRACTICE_024",
+    "title": "심근경색진단비 받을 수 있을까 급성심근경색 진단비 기준 코드 청구방법 총정리",
+    "source_doc_name": "심근경색진단비 받을 수 있을까 급성심근경색 진단비 기준 코드 청구방법 총정리.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I22",
+      "I25"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I22",
+      "I25"
+    ],
+    "source_excerpt_summary": "오늘은 실제 상담에서 가장 많이 발생하는 심근경색진단비, 심근경색 진단비 청구, 심근경색 진단비 거절과 관련된 핵심 내용을 실무 기준으로 자세히 설명드리겠습니다. 최근 보험사에 심근경색 진단비 청구를 진행했지만 “급성심근경색 진단비 기준에 해당하지 않는다” “심근경색 진단비 코드가 다르다” 라는 이유로",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "fbbc70fd5c7ca75b1ac9d4ffadfa392304a219811c10d23719a0f1aa76541513",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": "PRACTICE_010"
+  },
+  {
+    "id": "PRACTICE_025",
+    "title": "\"이 뇌출혈은 외상성입니다\" 보험사가 먼저 외상성을 주장했고 소비자가 자발성을 주장해야 했던 이유",
+    "source_doc_name": "이 뇌출혈은 외상성입니다 보험사가 먼저 외상성을 주장.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "자발성/외상성 뇌출혈 분류 분쟁",
+    "issue_type": "자발성/외상성 뇌출혈 분류 분쟁",
+    "diagnosis_keywords": [
+      "I60",
+      "I61",
+      "I62",
+      "S06",
+      "자발성 뇌출혈",
+      "외상성 뇌출혈",
+      "경막하출혈",
+      "CT",
+      "MRI"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_hemorrhage_spontaneous_vs_traumatic",
+      "I60",
+      "I61",
+      "I62",
+      "S06",
+      "자발성 뇌출혈",
+      "외상성 뇌출혈",
+      "경막하출혈",
+      "CT"
+    ],
+    "source_excerpt_summary": "대부분의 사람들은 뇌출혈 보험 분쟁이 이런 구도라고 생각합니다. \"보험사는 자발성(비외상성)이라 주장하고, 소비자는 외상성이라 주장한다\"고요. 맞습니다. 그게 일반적입니다. 하지만 반대 상황도 분명히 존재합니다. 보험 가입 구조에 따라, 오히려 자발성(비외상성) 뇌출혈로 인정받는 것이 소비자에게 훨씬 유리한 경우가 있습니다. 이 경우 보험사는 반대로 \"외상성\"을 주장하며 보험금 지급을 줄이거나 거절하려 합니다. 이 글의 사례가 바로 그 케이스입니다. 보험사는 외상성 뇌출혈을 주장했고, 소비자 측은 자발성(비외상성) 경막하출혈임을 입증해야 했습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_hemorrhage_spontaneous_vs_traumatic",
+    "content_hash": "fcecc82a0f3b644ee9780967ab261bb82068ef6d97f4e6766974f685e0567b04",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 2,
+    "duplicate_group_members": [
+      "PRACTICE_025",
+      "PRACTICE_029"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_026",
+    "title": "자궁경부 CIN2 보험금 받을 수 있을까 HSIL 실제 지급 사례로 보는 분쟁 핵심 정리",
+    "source_doc_name": "자궁경부 CIN2 보험금 받을 수 있을까 HSIL 실제 지급 사례로 보는 분쟁 핵심 정리.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "source_excerpt_summary": "건강검진 또는 산부인과 정기검진 과정에서 자궁경부 세포검사 이상 소견이 확인된 이후 조직검사를 통해 “CIN2(중등도 이형성증)” 또는 “HSIL(High-grade squamous intraepithelial lesion)” 진단을 받는 경우가 있습니다. 이때 가장 많이 받는 질문은 단 하나입니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "728ad33dd481afd072653f03174219c15c30e586d58f8171b828f7daf1337d4d",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": "PRACTICE_001"
+  },
+  {
+    "id": "PRACTICE_027",
+    "title": "자궁경부 CIN2 보험금 받을 수 있을까 HSIL 진단 후 실제 지급된 사례 공개",
+    "source_doc_name": "자궁경부 CIN2 보험금 받을 수 있을까 HSIL 진단 후 실제 지급된 사례 공개.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "C53",
+      "N87.1"
+    ],
+    "source_excerpt_summary": "건강검진 또는 산부인과 정기검진 과정에서 자궁경부 세포검사 이상 소견이 확인된 이후 조직검사를 통해 \"CIN2(중등도 이형성증)\" 또는 \"HSIL(High-grade squamous intraepithelial lesion)\" 진단을 받는 경우가 있습니다. 이때 가장 많이 들어오는 질문은 단 하나입니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "11f8b3138154bcd1835721fe457552952b87ff1ab9d0f482bd69a3a3072f0930",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": "PRACTICE_001"
+  },
+  {
+    "id": "PRACTICE_028",
+    "title": "자궁경부 CIN2 보험금 지급 기준: HSIL 조직검사 N87 D06 분쟁 해결 전략",
+    "source_doc_name": "자궁경부 CIN2 보험금 지급 기준.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "issue_type": "자궁경부 CIN2/HSIL 유사암·제자리암 진단비",
+    "diagnosis_keywords": [
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "N87.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_cervix_cin2_hsil",
+      "CIN2",
+      "HSIL",
+      "N87",
+      "D06",
+      "자궁경부 이형성증",
+      "제자리암",
+      "N87.1"
+    ],
+    "source_excerpt_summary": "건강검진이나 산부인과 정기 검진을 통해 자궁경부 세포검사에서 이상 소견을 듣게 되면 누구나 당혹스럽기 마련입니다. 특히 추가적인 조직검사를 통해 자궁경부 CIN2(중등도 이형성증) 또는 HSIL(High-grade squamous intraepithelial lesion) 진단을 받은 경우, 가장 궁금해하시는 점은 바로 암보험금 지급 여부입니다. 자궁경부 CIN2는 보험금 분쟁이 매우 빈번하게 발생하는 구간이며, 동일한 진단이라도 어떻게 의학적으로 해석하고 대응하느냐에 따라 결과가 완전히 달라질 수 있습니다. 오늘은 자궁경부 CIN2 보험금 분쟁의 본질과 해결 방안을 전문적인 시각에서 심도 있게 다뤄보겠습니다. 1. 자궁경부 CIN2와 HSIL의 의학적 개념 정리 CIN은 'Cervical Intraepithelial Neoplasia'의 약자로 자궁경부 상피내 종양을 뜻합니다. 병변의 깊이에 따라 1단계에서 3단계로 구분되는데, CIN1은 경증, CIN3는 고도 이형성증(상피내암)으로 분류됩니다. 우리가 주목해야 할 자궁경부 CIN2는 그 중간 단계인 중등도 이형성증에 해당합니다. 또한 조직검사 결과지에 기재되는 HSIL은 고등급 편평상피내 병변을 의미하며",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_cervix_cin2_hsil",
+    "content_hash": "d2695f7afdc86d145690e049d52dadc36a660bd01bf442caaf724bf19d38a315",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_001",
+      "PRACTICE_002",
+      "PRACTICE_003",
+      "PRACTICE_026",
+      "PRACTICE_027",
+      "PRACTICE_028"
+    ],
+    "duplicate_of_candidate": "PRACTICE_001"
+  },
+  {
+    "id": "PRACTICE_029",
+    "title": "자발성 뇌출혈 보험금 외상성으로 거절된 사례 뒤집은 핵심 포인트",
+    "source_doc_name": "자발성 뇌출혈 보험금 외상성으로 거절된 사례 뒤집은 핵심 포인트.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "자발성/외상성 뇌출혈 분류 분쟁",
+    "issue_type": "자발성/외상성 뇌출혈 분류 분쟁",
+    "diagnosis_keywords": [
+      "I60",
+      "I61",
+      "I62",
+      "S06",
+      "자발성 뇌출혈",
+      "외상성 뇌출혈",
+      "경막하출혈",
+      "CT",
+      "MRI"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_hemorrhage_spontaneous_vs_traumatic",
+      "I60",
+      "I61",
+      "I62",
+      "S06",
+      "자발성 뇌출혈",
+      "외상성 뇌출혈",
+      "경막하출혈",
+      "CT"
+    ],
+    "source_excerpt_summary": "“넘어졌으니 외상성입니다” 보험사의 전형적인 주장 실제 상담을 진행하다 보면 가장 많이 듣는 말이 있습니다. “넘어지면서 머리를 부딪혔기 때문에 외상성 뇌출혈입니다. 보험금 지급 대상이 아닙니다.” 하지만 같은 뇌출혈이라도 외상성인지 자발성인지에 따라 보험금 지급 여부가 완전히 달라집니다. 이 차이를 정확히 이해하지 못하면 받을 수 있는 보험금도 놓치는 경우가 매우 많습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_hemorrhage_spontaneous_vs_traumatic",
+    "content_hash": "688173cf9f30e6e1765ca2fe503067de70d373a10614a329d2d8bc197745b43c",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 2,
+    "duplicate_group_members": [
+      "PRACTICE_025",
+      "PRACTICE_029"
+    ],
+    "duplicate_of_candidate": "PRACTICE_025"
+  },
+  {
+    "id": "PRACTICE_030",
+    "title": "죽상경화성 심장질환(I25.1) 보험금, 왜 거절될까",
+    "source_doc_name": "죽상경화성 심장질환(I25.1) 보험금, 왜 거절될까.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I25.1"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I25.1"
+    ],
+    "source_excerpt_summary": "오늘은 보험 실무에서 매우 자주 분쟁이 발생하는 죽상경화증 심장병, 즉 죽상경화성 심장질환(I25.1)과 관련된 보험금 지급 여부에 대해 자세히 설명드리겠습니다. 많은 분들이 건강검진이나 병원 검사에서 “동맥경화가 있다”, “죽상경화 소견이 보인다”라는 이야기를 듣고 보험금을 청구하지만, 실제로는 보험사로부터 지급 거절을 받는 경우가 상당히 많습니다. 왜 이런 일이 발생하는 걸까요? 죽상경화증 심장병이란 무엇인가? 죽상경화증은 혈관 내벽에 콜레스테롤과 같은",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "b40e11b0be913ef5d19a3e8f8dcfdd941efb7c1c83b049aafdbe725b854921ec",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": "PRACTICE_010"
+  },
+  {
+    "id": "PRACTICE_031",
+    "title": "직장유암종 보험금 D37.5진단도 일반암 100% 가능할까? (C20 코드 분쟁 총정리)",
+    "source_doc_name": "직장유암종 보험금 D37 진단금도 일반암이 가능할까.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "D37"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "D37"
+    ],
+    "source_excerpt_summary": "최근 저희 사무실로 가장 많이 들어오는 상담 문의 중 하나가 바로 직장유암종(직장 신경내분비종양) 보험금 관련 이슈입니다. 건강검진 중 우연히 발견되어 단순한 용종 제거인 줄 알았는데, 조직검사 결과 '유암종'이라는 생소한 단어를 접하게 되면 당혹스러울 수밖에 없습니다. 특히 같은 질환임에도 불구하고 어떤 분은 일반암 보험금 100%를 수령하는 반면, 어떤 분은 소액암 혹은 경계성 종양으로 분류되어 10~20%만 지급받는 차별적 상황이 발생하고 있습니다. 왜 이런 차이가 발생하는지,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "741fcf739abc523d4db4d1081dafb6b23bcd7c7b5962c1070ee6b322aee405a4",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": "PRACTICE_022"
+  },
+  {
+    "id": "PRACTICE_032",
+    "title": "직장유암종 보험금 왜 같은 병인데 지급률이 다를까",
+    "source_doc_name": "직장유암종 보험금 왜 같은 병인데 지급률이 다를까.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3"
+    ],
+    "source_excerpt_summary": "최근 상담을 진행하다 보면 “직장유암종(직장 신경내분비종양) 보험금” 관련 문의가 급격히 증가하고 있습니다. 특히 많은 분들이 이렇게 말씀하십니다. “같은 직장유암종인데 누구는 일반암 100%, 누구는 소액암?” “저는 D코드인데, 다른 사람은 C코드라네요… 왜 다르죠?” 결론부터 말씀드리면 보험 가입 시기 + 진단 시기 + 병리결과 + 코드",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "05661d97900277a8294e6a2e381d865d4280c8458a331d9af5673a3cae5f97f3",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": "PRACTICE_022"
+  },
+  {
+    "id": "PRACTICE_033",
+    "title": "진성적혈구증가증 D45 고액암 진단비 분쟁의 핵심은? (D47.1 만성골수증식질환 인정 사례)",
+    "source_doc_name": "진성적혈구증가증 D45 고액암 진단비 분쟁의 핵심은.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "진성적혈구증가증 D45 고액암/경계성 분쟁",
+    "issue_type": "진성적혈구증가증 D45 고액암/경계성 분쟁",
+    "diagnosis_keywords": [
+      "D45",
+      "진성적혈구증가증",
+      "고액암",
+      "골수증식성질환",
+      "D47",
+      "D47.1"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_polycythemia_vera_d45",
+      "D45",
+      "진성적혈구증가증",
+      "고액암",
+      "골수증식성질환",
+      "D47",
+      "D47.1"
+    ],
+    "source_excerpt_summary": "오늘은 보험 가입자분들이 가장 흔하게 겪는 분쟁 중 하나인 진성적혈구증가증(PV, D45) 고액암 진단비 청구 사례를 다뤄보고자 합니다. 보험사는 약관의 문구를 근거로 지급을 거절하지만, 손해사정사의 입장에서 보면 이는 의학적, 법률적 검토가 충분히 이루어지지 않은 판단인 경우가 많습니다. 오늘 소개해 드릴 사례는 골수검사와 유전자 검사를 통해 확정 진단을 받았음에도 불구하고, 근거자료의 부족으로 고액암 보험금 지급이 거절될 뻔한 내용입니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_polycythemia_vera_d45",
+    "content_hash": "d62ff4a639435189acfdaf54b4ab16bc9b45a0b03c931d388f8f716536839bfd",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_033"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_034",
+    "title": "췌장 인슐린종, 암보험금을 받을 수 있을까요 D코드냐 C코드냐 진단코드 하나가 보험금을 가릅니다",
+    "source_doc_name": "췌장 인슐린종, 암보험금을 받을 수 있을까요 D코드냐 C코드냐  진단코드 하나가 보험금을 가릅니다.docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "C25.4",
+      "D13.7"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "C25.4"
+    ],
+    "source_excerpt_summary": "췌장 인슐린종(Insulinoma)을 처음 진단받은 분들이 가장 먼저 묻는 것이 있습니다. \"이게 암인가요? 암보험금은 나오는 건가요?\" 결론부터 말씀드리겠습니다. 인슐린종은 경우에 따라 암보험금을 받을 수도 있고, 받지 못할 수도 있습니다. 그 기준은 증상의 심각성이나 치료 과정이 아닙니다. 병리검사 결과에 부여된 진단코드가 핵심입니다. 수술까지 받았는데 보험사에서",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "2c96533d96efdc6b485443793a835ab12efce520337092a6a7adbc5e25ea1bb2",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": "PRACTICE_022"
+  },
+  {
+    "id": "PRACTICE_035",
+    "title": "[치매보험금 지급 핵심] CDR 점수 판정 분쟁, 치매진단금 제대로 받는 법",
+    "source_doc_name": "치매보험금 지급 핵심.docx",
+    "category": "치매/간병보험",
+    "subcategory": "치매보험금 지급기준",
+    "issue_type": "치매보험금 지급기준",
+    "diagnosis_keywords": [
+      "치매",
+      "CDR",
+      "인지기능",
+      "장기요양",
+      "치매보험금"
+    ],
+    "insurance_type": "치매/간병보험",
+    "insurer_position": [
+      "약관상 치매 또는 중증치매 진단기준을 충족하지 않는다고 주장",
+      "CDR/인지검사 결과가 부족하다고 주장"
+    ],
+    "customer_position": [
+      "진단서뿐 아니라 신경심리검사, CDR, MMSE, 영상검사, 장기요양기록을 종합해 약관상 지급요건을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "치매보험금은 약관상 치매 정도와 진단기준, CDR 등 객관적 평가자료를 기준으로 검토한다.",
+      "단순 진단명만으로 지급 여부를 단정하지 말고 인지검사·진료기록·장기요양기록을 종합한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "CDR 평가결과",
+      "MMSE/신경심리검사",
+      "뇌영상검사",
+      "진료기록",
+      "장기요양 인정서",
+      "가입 당시 약관"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "치매 진단기준 공식자료",
+      "질병분류표/KCD",
+      "판례/분쟁조정례"
+    ],
+    "profile_hint": "dementia_insurance_benefit",
+    "issue_tags": [
+      "dementia_insurance_benefit",
+      "치매",
+      "CDR",
+      "인지기능",
+      "장기요양",
+      "치매보험금"
+    ],
+    "source_excerpt_summary": "최근 저희 사무실로 들어오는 상담 중 가장 높은 비중을 차지하는 것이 바로 치매진단금 보험금 분쟁입니다. \"분명히 대학병원에서 치매 진단을 받았는데 왜 보험사에서는 지급을 거절하나요? \" 혹은 \"CDR 점수가 부족하다는 이유로 보험금 지급이 안 된다고 합니다\" 와 같은 하소연을 정말 많이 듣습니다. 치매는 환자 본인뿐만 아니라 가족 전체의 삶에 큰 영향을 미치는 질환이기에,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "dementia_insurance_benefit",
+    "content_hash": "83f2eb20397a54342e11c1264f6296453cc779943f1d9f9ea01ea1a2a2dd5b17",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 1,
+    "duplicate_group_members": [
+      "PRACTICE_035"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_036",
+    "title": "카르시노이드 C코드 유사암 거절 일반암 보험금 받는 법 | 유암종·신경내분비종양 분쟁",
+    "source_doc_name": "카르시노이드 C코드 유사암 거절 일반암 보험금 받는 법 .docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "C18"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3",
+      "C18"
+    ],
+    "source_excerpt_summary": "C코드가 기재된 카르시노이드 진단서를 들고 오시는 분들, 유사암으로 거절당한 유암종 환자분들, 신경내분비종양 일반암 보험금을 청구했다가 10분의 1로 깎인 분들 이 모든 분쟁의 중심에는 \"C코드를 어떻게 해석하느냐\" 라는 핵심 쟁점이 있습니다. 카르시노이드 C코드 분쟁, 유암종 C코드 분쟁, 신경내분비종양 C코드 분쟁 이름은 달라도 본질은 같습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "aaf8bd0868d4c3abac43d607461f22d719756409103aa5f76e2e1c8fbd8c393c",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": "PRACTICE_022"
+  },
+  {
+    "id": "PRACTICE_037",
+    "title": "카르시노이드 종양 보험금 받을 수 있을까 (신경내분비종양 암보험 지급 기준 총정리)",
+    "source_doc_name": "카르시노이드 종양 보험금 받을 수 있을까 .docx",
+    "category": "암/경계성/제자리암 진단비",
+    "subcategory": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "issue_type": "직장유암종/NET 일반암·경계성 지급률 분쟁",
+    "diagnosis_keywords": [
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3"
+    ],
+    "insurance_type": "암보험/진단비",
+    "insurer_position": [
+      "진단코드가 양성/D코드라서 일반암 또는 유사암 지급대상이 아니라고 주장",
+      "병리결과가 확정암이 아니거나 경계성/제자리암에 불과하다고 주장",
+      "가입 당시 약관상 지급률 또는 진단확정 기준을 충족하지 않는다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 병리보고서 원문, 조직검사/세포검사, 행동양식 코드, 가입 당시 약관과 질병분류표를 종합해 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "암진단비 지급 여부는 진단서 코드만으로 단정하지 말고 병리보고서 원문과 가입 당시 약관상 암/제자리암/경계성종양 정의를 함께 검토한다.",
+      "D코드/C코드 또는 행동양식 코드가 다투어지는 경우 조직검사 결과, 형태학적 분류, 가입시기·진단시기 기준을 확인한다.",
+      "보험사가 코드만으로 부지급하는 경우 병리학적 실질과 약관상 진단확정 기준에 따른 재검토를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "병리보고서",
+      "조직검사/세포검사 결과",
+      "수술기록지 또는 시술기록지",
+      "영상/내시경 결과",
+      "주치의 소견서",
+      "가입 당시 암보험 약관",
+      "가입 당시 질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "ICD-O/WHO 분류 보조자료",
+      "공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "cancer_diagnosis_benefit",
+    "issue_tags": [
+      "cancer_rectal_carcinoid_net",
+      "직장유암종",
+      "NET",
+      "신경내분비종양",
+      "C20",
+      "D37.5",
+      "D12.8",
+      "/3"
+    ],
+    "source_excerpt_summary": "카르시노이드 종양은 신경내분비종양(NET)의 한 유형으로, 위장관이나 폐 등 다양한 부위에서 발생합니다. 문제는 많은 환자들이 암 진단을 받았음에도 불구하고 보험사에서는 “유사암” 또는 “경계성 종양”으로 판단하여 암보험금 지급을 거절하거나 축소 지급하는 사례가 빈번하다는 점입니다. 실제 손해사정 실무에서도 가장 분쟁이 많은 질환 중 하나입니다. 신경내분비종양(NET)의 특징",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "cancer_rectal_carcinoid_net",
+    "content_hash": "6ba0f3c4ece5b2ca73a4b0c6250e9283f7f27180afe3aaf4bee36c8423046c56",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_022",
+      "PRACTICE_031",
+      "PRACTICE_032",
+      "PRACTICE_034",
+      "PRACTICE_036",
+      "PRACTICE_037"
+    ],
+    "duplicate_of_candidate": "PRACTICE_022"
+  },
+  {
+    "id": "PRACTICE_038",
+    "title": "해면상혈관종 뇌출혈진단비(I61) 지급 거절. Q28.3 코드 진단금 분쟁 해결 사례",
+    "source_doc_name": "해면상혈관종 뇌출혈진단비(I61) 지급 거절. Q28.3 코드 진단금 분쟁 해결 사례.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "해면상혈관종과 뇌출혈 진단비",
+    "issue_type": "해면상혈관종과 뇌출혈 진단비",
+    "diagnosis_keywords": [
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "I61.1",
+      "Q28"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_cavernous_malformation_hemorrhage",
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "I61.1",
+      "Q28"
+    ],
+    "source_excerpt_summary": "많은 분이 보험금을 청구할 때 \"진단서에 코드만 있으면 당연히 나오겠지\"라고 생각하십니다. 하지만 '해면상혈관종'이라는 진단을 받으셨다면 이야기는 완전히 달라집니다. 병원에서는 뇌출혈이라며 수술까지 권유하는데, 정작 보험사에서는 \"이건 선천성 질환이라 지급 대상이 아닙니다\"라며 선을 긋기 때문이죠. 오늘은 실제로 지급 거절 통보를 받았다가, 저와 함께 대응하여 뇌출혈진단비 5,000만 원 전액을 수령한 30대 남성 고객님의 사례를 통해 대응 전략을 상세히 풀어드리겠습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_cavernous_malformation_hemorrhage",
+    "content_hash": "a532cbf135c5684f811717a9107724541ee8d8751bba7aa65755750cd19e710a",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_038",
+      "PRACTICE_039",
+      "PRACTICE_040"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_039",
+    "title": "해면상혈관종으로 뇌출혈이 발생했습니다 Q28.3 진단코드 보험금과 어떤 관계가 있을까요?",
+    "source_doc_name": "해면상혈관종으로 뇌출혈이 발생했습니다 Q28.3 진단코드 보험금과 어떤 관계.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "해면상혈관종과 뇌출혈 진단비",
+    "issue_type": "해면상혈관종과 뇌출혈 진단비",
+    "diagnosis_keywords": [
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "D18.0",
+      "Q28"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_cavernous_malformation_hemorrhage",
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "D18.0",
+      "Q28"
+    ],
+    "source_excerpt_summary": "해면상혈관종으로 인해 뇌출혈이 발생했습니다. MRI에서 확인됐고, 수술까지 받았습니다. 이후 보험금을 청구했는데, 뜻밖의 결과가 나왔습니다. \"진단명 해면상혈관종은 Q28.3 선천성 뇌혈관 기형에 해당하여, 뇌출혈 진단금 및 CI 보험금 지급 기준에 해당하지 않습니다.\" 진단서에 Q28.3이 기재되어 있으면, 보험 약관상 뇌출혈 담보의 지급 요건을 충족하지 못하는 것으로 해석되는 경우가 있습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_cavernous_malformation_hemorrhage",
+    "content_hash": "5e7a9a445c8e551c3c1d78b76203475aae8d77546b48e02f8753bffc820e9f95",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_038",
+      "PRACTICE_039",
+      "PRACTICE_040"
+    ],
+    "duplicate_of_candidate": "PRACTICE_038"
+  },
+  {
+    "id": "PRACTICE_040",
+    "title": "해면상혈관종으로 인한 뇌출혈 진단금 분쟁에서 실제로 어떻게 해결됐을까요",
+    "source_doc_name": "해면상혈관종으로 인한 뇌출혈 진단금 분쟁에서 실제로 어떻게 해결됐을까요.docx",
+    "category": "뇌질환 진단비",
+    "subcategory": "해면상혈관종과 뇌출혈 진단비",
+    "issue_type": "해면상혈관종과 뇌출혈 진단비",
+    "diagnosis_keywords": [
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "I61.1",
+      "Q28"
+    ],
+    "insurance_type": "뇌질환/진단비",
+    "insurer_position": [
+      "진단코드 또는 영상소견만으로 담보상 진단확정 요건을 충족하지 않는다고 주장",
+      "외상성/자발성 분류가 다르다고 주장",
+      "무증상 또는 진구성 병변이라 지급대상이 아니라고 주장"
+    ],
+    "customer_position": [
+      "영상검사, 응급실 초진기록, 선행증상, 기저질환, 복용약력, 전문의 소견을 종합해 진단확정과 원인관계를 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "뇌질환 진단비는 영상소견, 전문의 진단, 신경학적 증상, 급성/진구성 여부, 약관상 진단확정 기준을 함께 검토한다.",
+      "외상성/자발성 뇌출혈은 낙상과 출혈의 선후관계, 기저질환, 복용약력, 영상소견으로 구분한다.",
+      "보험사 자체 자문만으로 판단하지 말고 필요 시 제3의료기관 또는 객관적 재검토 절차를 검토한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 초진기록",
+      "CT/MRI/MRA/CTA 판독지",
+      "영상 CD",
+      "신경학적 검사기록",
+      "복용약력",
+      "기저질환 진료기록",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "뇌질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "brain_diagnosis_benefit",
+    "issue_tags": [
+      "brain_cavernous_malformation_hemorrhage",
+      "해면상혈관종",
+      "Q28.3",
+      "I61",
+      "뇌출혈",
+      "MRI",
+      "I61.1",
+      "Q28"
+    ],
+    "source_excerpt_summary": "해면상혈관종으로 인한 뇌출혈 진단금, 분쟁에서 실제로 어떻게 해결됐을까요? 오늘은 해면상혈관종으로 인한 뇌출혈진단비 분쟁사례에 대해서 소개해드리도록 하겠습니다. [해면상혈관종 뇌출혈 진단금, 왜 분쟁이 생기나요?] 해면상혈관종(cavernous malformation)은 뇌 안에 비정상적인 혈관 덩어리가 형성되는 질환입니다. 문제는 이 병변이 파열되어 뇌출혈이 발생했을 때입니다. MRI에 출혈이 찍혔습니다. 수술을 받았습니다.",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "brain_cavernous_malformation_hemorrhage",
+    "content_hash": "ea199f55035bb504674a986c5189203c993d75527f39db06f7642477a12a2880",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_038",
+      "PRACTICE_039",
+      "PRACTICE_040"
+    ],
+    "duplicate_of_candidate": "PRACTICE_038"
+  },
+  {
+    "id": "PRACTICE_041",
+    "title": "협심증인가 심근경색인가 보험소비자 권익보호를 위한 급성 심근경색 보상 실무",
+    "source_doc_name": "협심증인가 심근경색인가  보험소비자 권익보호를 위한 급성 심근경색 보상 실무.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증과 급성심근경색 구분",
+    "issue_type": "협심증과 급성심근경색 구분",
+    "diagnosis_keywords": [
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I23"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_vs_acute_mi",
+      "I20",
+      "I21",
+      "협심증",
+      "급성심근경색",
+      "트로포닌",
+      "심전도",
+      "I23"
+    ],
+    "source_excerpt_summary": "오늘은 심혈관 질환 중에서도 가장 중대한 급성 심근경색증과 관련하여, 보험금 청구 시 반드시 알아야 할 의학적 기준과 분쟁 예방을 위한 핵심 정보를 정리해 드립니다. 초기 증상의 오인과 심근경색전조증상의 중요성 심혈관 질환은 발생 초기 얼마나 신속하게 대응하느냐가 생사를 결정짓습니다. 하지만 많은 경우 심근경색전조증상을 다른 질병으로 오해하여 적절한 치료 시기를 놓치곤 합니다. 가슴의 압박감을 단순한 장염증상으로 생각하여 내과를 방문하거나,",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_vs_acute_mi",
+    "content_hash": "b1c58a3263a6718d57e66133512e24ff109addba8433452c0e81d27e57a291c5",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 6,
+    "duplicate_group_members": [
+      "PRACTICE_010",
+      "PRACTICE_020",
+      "PRACTICE_023",
+      "PRACTICE_024",
+      "PRACTICE_030",
+      "PRACTICE_041"
+    ],
+    "duplicate_of_candidate": "PRACTICE_010"
+  },
+  {
+    "id": "PRACTICE_042",
+    "title": "협심증진단비 거절 스텐트 시술했는데도 못받는 이유 정확히 알려드립니다",
+    "source_doc_name": "협심증진단비 거절 스텐트 시술했는데도 못받는 이유 정확히 알려드립니다.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증/스텐트 시술 진단비 분쟁",
+    "issue_type": "협심증/스텐트 시술 진단비 분쟁",
+    "diagnosis_keywords": [
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_stent_dispute",
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "source_excerpt_summary": "협심증진단비 관련 문의가 최근 크게 증가하고 있습니다. 특히 협심증 진단을 받고 스텐트 시술까지 받았음에도 불구하고 협심증진단비거절을 당하는 사례가 매우 많습니다. 많은 분들이 “스텐트까지 했는데 왜 협심증진단비 지급거절이 되는가?”라는 질문을 하십니다. 결론부터 말씀드리면 협심증진단비는 단순히 시술 여부가 아니라 진단 기준과 코드에 따라 지급 여부가 완전히 달라집니다. 협심증진단비 거절되는 가장 큰 이유",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_stent_dispute",
+    "content_hash": "c5d62bd3f13c0110b914dc795eed328c572fa220f9fff88e1e18aa1c9b4fe307",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_042",
+      "PRACTICE_043",
+      "PRACTICE_044"
+    ],
+    "duplicate_of_candidate": null
+  },
+  {
+    "id": "PRACTICE_043",
+    "title": "협심증진단비 거절 스텐트보다 중요한 건 ‘안정형 불안정형 구분’입니다",
+    "source_doc_name": "협심증진단비 거절 스텐트보다 중요한 건 ‘안정형 불안정형 구분’입니다.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증/스텐트 시술 진단비 분쟁",
+    "issue_type": "협심증/스텐트 시술 진단비 분쟁",
+    "diagnosis_keywords": [
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_stent_dispute",
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "source_excerpt_summary": "협심증진단비 관련 상담을 진행하다 보면 가장 많이 듣는 질문이 있습니다. “스텐트까지 했는데 왜 협심증진단비 지급거절이 되는가?” 결론부터 말씀드리면 협심증은 단순 시술 여부가 아니라 안정형 / 불안정형 / 변이형 구분에 따라 보험금 지급 여부가 달라집니다. 협심증 유형별 기준 협심증은 크게 3가지로 구분됩니다",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_stent_dispute",
+    "content_hash": "cec416b7d98578168673c6135f9b3ce00a3a5a37c8d6a8efb63d5c2b9e767e2a",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_042",
+      "PRACTICE_043",
+      "PRACTICE_044"
+    ],
+    "duplicate_of_candidate": "PRACTICE_042"
+  },
+  {
+    "id": "PRACTICE_044",
+    "title": "협심증진단비 안 나오는 진짜 이유 보험사가 숨기는 기준",
+    "source_doc_name": "협심증진단비 안 나오는 진짜 이유 보험사가 숨기는 기준.docx",
+    "category": "심장질환 진단비",
+    "subcategory": "협심증/스텐트 시술 진단비 분쟁",
+    "issue_type": "협심증/스텐트 시술 진단비 분쟁",
+    "diagnosis_keywords": [
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "insurance_type": "심장질환/진단비",
+    "insurer_position": [
+      "I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장",
+      "트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장",
+      "협심증 또는 만성 허혈성 심질환에 불과하다고 주장"
+    ],
+    "customer_position": [
+      "진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장"
+    ],
+    "rebuttal_logic": [
+      "급성심근경색 여부는 코드만으로 단정하지 말고 심근효소, 심전도, 관상동맥조영술 및 임상경과를 함께 검토한다.",
+      "I20 협심증·I25 만성 허혈성 심질환과 I21/I22 심근경색의 약관상 지급대상 차이를 확인한다.",
+      "보험사가 부지급할 경우 어떤 진단확정 기준이 부족한지 구체적 근거를 요구한다."
+    ],
+    "required_documents": [
+      "진단서",
+      "응급실 기록",
+      "혈액검사 결과(Troponin, CK-MB)",
+      "심전도 검사결과",
+      "관상동맥조영술 결과",
+      "입퇴원확인서",
+      "주치의 소견서",
+      "가입 당시 약관",
+      "질병분류표"
+    ],
+    "official_reference_needed": [
+      "가입 당시 약관",
+      "질병분류표/KCD",
+      "심장질환 공식 의학자료",
+      "판례/금감원·소비자원 분쟁사례"
+    ],
+    "profile_hint": "heart_diagnosis_benefit",
+    "issue_tags": [
+      "heart_angina_stent_dispute",
+      "I20",
+      "협심증",
+      "스텐트",
+      "관상동맥",
+      "불안정형 협심증",
+      "안정형 협심증"
+    ],
+    "source_excerpt_summary": "협심증진단비를 청구했지만 지급되지 않는 사례가 매우 많습니다. 특히 불안정 협심증으로 인정되지 않는 경우 협심증진단비거절로 이어지는 경우가 많습니다. 많은 분들이 협심증 진단과 스텐트 시술을 받았기 때문에 협심증진단비 지급이 당연하다고 생각합니다. 하지만 실제 보험 기준은 전혀 다르게 적용됩니다. 협심증진단비 지급 기준 핵심 구조",
+    "forbidden_official_citation": true,
+    "citation_allowed": false,
+    "use_in_ai": "internal_practice_playbook",
+    "duplicate_group_key": "heart_angina_stent_dispute",
+    "content_hash": "29f2936b0a1f57481786cd1fb7a1e99424859dc90ee656be20467da58d5d0c31",
+    "trust_level": "internal_practice",
+    "review_status": "needs_human_review",
+    "duplicate_candidate_count": 3,
+    "duplicate_group_members": [
+      "PRACTICE_042",
+      "PRACTICE_043",
+      "PRACTICE_044"
+    ],
+    "duplicate_of_candidate": "PRACTICE_042"
+  }
+]
