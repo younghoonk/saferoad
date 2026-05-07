@@ -32,6 +32,7 @@ const sourceAreaLabels = {
   precedents: '판례',
   terms_standards: '약관/지급기준',
   issue_playbooks: '내부 쟁점 플레이북',
+  practice_playbooks: '내부 실무 플레이북',
   medical_issue_codes: '질병코드별 의료쟁점',
   real_case_patterns: '익명 사건 패턴',
   real_case_documents: '익명 문서 요약',
@@ -83,6 +84,7 @@ const internalReviewSourceAreas = new Set([
   'medical_knowledge',
   'medical_issue_codes',
   'issue_playbooks',
+  'practice_playbooks',
   'real_case_patterns',
   'real_case_documents',
 ]);
@@ -95,12 +97,13 @@ const groupedSearchPlan = [
   { label: '의료 검토자료 / 의료지식', source_area: 'medical_knowledge', count: 3, section: 'internal' },
   { label: '의료 검토자료 / 질병코드별 의료쟁점', source_area: 'medical_issue_codes', count: 3, section: 'internal' },
   { label: '내부 검토자료 / 쟁점 플레이북', source_area: 'issue_playbooks', count: 2, section: 'internal' },
+  { label: '내부 검토자료 / 실무 플레이북', source_area: 'practice_playbooks', count: 2, section: 'internal' },
   { label: '내부 검토자료 / 익명 사건 패턴', source_area: 'real_case_patterns', count: 2, section: 'internal' },
   { label: '내부 검토자료 / 익명 문서 요약', source_area: 'real_case_documents', count: 2, section: 'internal' },
 ];
 
 const internalIdPattern = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
-const chunkReferencePattern = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
+const chunkReferencePattern = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|practice_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
 
 function publicText(value) {
   return String(value || '')
@@ -177,6 +180,7 @@ function contextFromQuery(query) {
     .find((name) => query.includes(name)) || '';
   const insuranceType = query.includes('실손') ? '실손보험' : '';
   return {
+    query,
     contractDate,
     insurerName,
     insuranceType,
@@ -209,6 +213,43 @@ function hasSimilarButNotExactCode(row, diagnosisCodes) {
   });
 }
 
+function heartDiagnosisQuery(query) {
+  return /급성심근경색|심근경색|\bI21\b|\bI22\b|트로포닌|troponin|CK-MB|심전도|\bECG\b|\bEKG\b|관상동맥조영술|\bCAG\b|\bPCI\b|협심증|\bI20\b|스텐트|관상동맥|심근효소/i.test(query);
+}
+
+function rectalCarcinoidQuery(query) {
+  return /직장유암종|신경내분비종양|\bNET\b|\bD37\.5\b|\bC20\b|\bD12\.8\b|경계성종양|행동양식|암진단비|병리보고서|조직검사/i.test(query);
+}
+
+function heartInternalText(row) {
+  return /급성심근경색|심근경색|\bI21\b|\bI22\b|트로포닌|troponin|CK-MB|심전도|\bECG\b|\bEKG\b|관상동맥조영술|\bCAG\b|\bPCI\b|협심증|\bI20\b|스텐트|관상동맥|심근효소/i.test(rowText(row));
+}
+
+function irrelevantHeartInternalText(row) {
+  return /뇌경색|뇌출혈|대뇌동맥류|뇌동맥류|뇌MRA|MRI\s*판독|\bDWI\b|\bADC\b|직장유암종|갑상선암|백내장|도수치료|후유장해/i.test(rowText(row));
+}
+
+function rectalCarcinoidInternalText(row) {
+  return /직장유암종|신경내분비종양|\bNET\b|\bD37\.5\b|\bC20\b|\bD12\.8\b|\/3/i.test(rowText(row));
+}
+
+function irrelevantRectalCarcinoidInternalText(row) {
+  return /자궁경부암|유방암|유방결절|갑상선암|심근경색|뇌경색|도수치료|백내장|후유장해/i.test(rowText(row));
+}
+
+function directlyRelevantInternal(row, query) {
+  if (!internalReviewSourceAreas.has(row.source_area)) return true;
+  if (heartDiagnosisQuery(query)) {
+    if (irrelevantHeartInternalText(row)) return false;
+    return heartInternalText(row) || exactCodeMatches(row, ['I20', 'I21', 'I22']).length > 0;
+  }
+  if (rectalCarcinoidQuery(query)) {
+    if (irrelevantRectalCarcinoidInternalText(row)) return false;
+    return rectalCarcinoidInternalText(row) || exactCodeMatches(row, ['D37.5', 'C20', 'D12.8']).length > 0;
+  }
+  return true;
+}
+
 function sourceStatus(row) {
   return row.source_status || row.metadata?.source_status || row.metadata?.sourceStatus || '';
 }
@@ -237,6 +278,14 @@ function scoreRow(row, diagnosisCodes, context = {}) {
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
   if (hasSimilarButNotExactCode(row, diagnosisCodes)) score -= 0.08;
   if (isTitleSeedFss(row)) score -= 0.2;
+  if (heartDiagnosisQuery(context.query || '')) {
+    if (heartInternalText(row)) score += row.source_area === 'practice_playbooks' ? 0.22 : 0.14;
+    if (irrelevantHeartInternalText(row)) score -= 0.55;
+  }
+  if (rectalCarcinoidQuery(context.query || '')) {
+    if (rectalCarcinoidInternalText(row)) score += row.source_area === 'practice_playbooks' ? 0.22 : 0.14;
+    if (irrelevantRectalCarcinoidInternalText(row)) score -= 0.55;
+  }
   if (row.source_area === 'terms_standards') {
     const text = rowText(row);
     if (context.insurerName && text.includes(context.insurerName)) score += 0.1;
@@ -343,7 +392,9 @@ async function main() {
 
   const embedding = await createEmbedding(query);
 
-  const integratedRows = sortRows(await rpcSearch(embedding, 30, null), diagnosisCodes, context).slice(0, 10);
+  const integratedRows = sortRows(await rpcSearch(embedding, 30, null), diagnosisCodes, context)
+    .filter((row) => !internalReviewSourceAreas.has(row.source_area) || directlyRelevantInternal(row, query))
+    .slice(0, 10);
   printSection('통합 top10 (adjusted ranking preview)', integratedRows, diagnosisCodes, context);
 
   const groupedResults = [];
@@ -353,6 +404,7 @@ async function main() {
       .filter((row) => !(plan.section === 'official' && isTitleSeedFss(row)))
       .filter((row) => !(plan.section === 'official' && isBlockedOfficialSource(row)))
       .filter((row) => !(plan.section === 'official' && !isAllowedOfficialSource(row)))
+      .filter((row) => !(plan.section === 'internal' && !directlyRelevantInternal(row, query)))
       .slice(0, plan.count);
     const titleSeeds = rows.filter(isTitleSeedFss).slice(0, 2);
     groupedResults.push({ ...plan, rows: filtered, titleSeeds });

@@ -71,6 +71,7 @@ const sourceAreaLabels: Record<string, string> = {
   precedents: '판례',
   terms_standards: '약관/지급기준',
   issue_playbooks: '내부 쟁점 플레이북',
+  practice_playbooks: '내부 실무 플레이북',
   medical_issue_codes: '질병코드별 의료쟁점',
   real_case_patterns: '익명 사건 패턴',
   real_case_documents: '익명 문서 요약',
@@ -119,12 +120,13 @@ const searchPlan = [
   { source_area: 'medical_knowledge', count: 3 },
   { source_area: 'medical_issue_codes', count: 3 },
   { source_area: 'issue_playbooks', count: 2 },
+  { source_area: 'practice_playbooks', count: 2 },
   { source_area: 'real_case_patterns', count: 2 },
   { source_area: 'real_case_documents', count: 2 },
 ];
 
 const internalIdPattern = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
-const chunkReferencePattern = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
+const chunkReferencePattern = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|practice_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
 const internalSourceTypePattern = /\binternal_[A-Za-z0-9_:-]*\b/g;
 
 function publicText(value: unknown) {
@@ -179,6 +181,7 @@ function getSourceDisplayName(sourceUrl: unknown, sourceArea?: string, title?: u
     precedents: '판례',
     terms_standards: '약관/지급기준',
     issue_playbooks: '내부 쟁점 플레이북',
+    practice_playbooks: '내부 실무 플레이북',
     medical_issue_codes: '질병코드별 의료쟁점',
     real_case_patterns: '익명 사건 패턴',
     real_case_documents: '익명 문서 요약',
@@ -321,7 +324,7 @@ function isOfficialReference(row: EnrichedRow) {
 }
 
 function isInternalReviewMaterial(row: EnrichedRow) {
-  return ['issue_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge'].includes(row.source_area)
+  return ['issue_playbooks', 'practice_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge'].includes(row.source_area)
     || String(row.source_type || '').startsWith('internal_');
 }
 
@@ -341,6 +344,30 @@ function manualTherapyQuery(query: string) {
   if (cataractQuery(query)) return false;
   return /도수치료|manual\s*therapy|비급여\s*치료|치료\s*목적|치료목적|의학적\s*필요성|과잉진료|반복치료|진료비\s*세부내역|치료계획|실손보험|실손의료/i.test(query)
     && !/고지의무|미고지|계약해지|갑상선|암진단비/i.test(query);
+}
+
+function heartDiagnosisQuery(query: string) {
+  return /급성심근경색|심근경색|\bI21\b|\bI22\b|트로포닌|troponin|CK-MB|심전도|\bECG\b|\bEKG\b|관상동맥조영술|\bCAG\b|\bPCI\b|협심증|\bI20\b|스텐트|관상동맥|심근효소/i.test(query);
+}
+
+function rectalCarcinoidQuery(query: string) {
+  return /직장유암종|신경내분비종양|\bNET\b|\bD37\.5\b|\bC20\b|\bD12\.8\b|경계성종양|행동양식|암진단비|병리보고서|조직검사/i.test(query);
+}
+
+function heartInternalText(row: EnrichedRow) {
+  return /급성심근경색|심근경색|\bI21\b|\bI22\b|트로포닌|troponin|CK-MB|심전도|\bECG\b|\bEKG\b|관상동맥조영술|\bCAG\b|\bPCI\b|협심증|\bI20\b|스텐트|관상동맥|심근효소/i.test(rowText(row));
+}
+
+function irrelevantHeartInternalText(row: EnrichedRow) {
+  return /뇌경색|뇌출혈|대뇌동맥류|뇌동맥류|뇌MRA|MRI\s*판독|\bDWI\b|\bADC\b|직장유암종|갑상선암|백내장|도수치료|후유장해/i.test(rowText(row));
+}
+
+function rectalCarcinoidInternalText(row: EnrichedRow) {
+  return /직장유암종|신경내분비종양|\bNET\b|\bD37\.5\b|\bC20\b|\bD12\.8\b|\/3/i.test(rowText(row));
+}
+
+function irrelevantRectalCarcinoidInternalText(row: EnrichedRow) {
+  return /자궁경부암|유방암|유방결절|갑상선암|심근경색|뇌경색|도수치료|백내장|후유장해/i.test(rowText(row));
 }
 
 function cataractText(row: EnrichedRow) {
@@ -487,6 +514,14 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
 function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCodes: string[]) {
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
+  if (heartDiagnosisQuery(query)) {
+    if (irrelevantHeartInternalText(row)) return false;
+    return heartInternalText(row) || exactCodeMatches(row, ['I20', 'I21', 'I22']).length > 0;
+  }
+  if (rectalCarcinoidQuery(query)) {
+    if (irrelevantRectalCarcinoidInternalText(row)) return false;
+    return rectalCarcinoidInternalText(row) || exactCodeMatches(row, ['D37.5', 'C20', 'D12.8']).length > 0;
+  }
   if (cataractQuery(query)) {
     return cataractText(row) && !irrelevantCataractText(row);
   }
@@ -528,6 +563,14 @@ function scoreRow(row: EnrichedRow, diagnosisCodes: string[], context?: RagSearc
   if (manualTherapyQuery(query)) {
     if (manualTherapyText(row)) score += 0.18;
     if (irrelevantManualTherapyText(row)) score -= 0.5;
+  }
+  if (heartDiagnosisQuery(query)) {
+    if (heartInternalText(row)) score += row.source_area === 'practice_playbooks' ? 0.22 : 0.14;
+    if (irrelevantHeartInternalText(row)) score -= 0.55;
+  }
+  if (rectalCarcinoidQuery(query)) {
+    if (rectalCarcinoidInternalText(row)) score += row.source_area === 'practice_playbooks' ? 0.22 : 0.14;
+    if (irrelevantRectalCarcinoidInternalText(row)) score -= 0.55;
   }
   if (cancerInsuranceQuery(query)) {
     if (row.source_area === 'fss_dispute_cases' && thyroidFssText(row)) score += 0.28;
@@ -861,7 +904,7 @@ export function formatRagForPrompt(result: RagSearchResult) {
       `출처: ${ref.sourceDisplayName || getSourceDisplayName(ref.source_url, ref.source_area, ref.title)}`,
       ref.summary ? `요약: ${ref.summary}` : '',
     ].filter(Boolean).join('\n')).join('\n\n')
-    : '검색된 공식/준공식 근거 없음.';
+    : '직접 관련 공식근거는 충분히 검색되지 않았으며, 가입 당시 약관, 질병분류표, 판례/분쟁조정례 또는 공식 의학자료 추가 확인이 필요합니다.';
 
   const internal = result.internalReviewMaterials.length
     ? result.internalReviewMaterials.map((ref, index) => [
