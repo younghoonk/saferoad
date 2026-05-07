@@ -9,6 +9,9 @@ import {
   type RagSearchContext,
   type RagSearchResult,
 } from '../_shared/ragSearch.ts';
+import { detectAssessmentProfile, isDisclosureDutyProfileContext } from '../_shared/detectAssessmentProfile.ts';
+import { filterAssessmentReferences } from '../_shared/filterAssessmentReferences.ts';
+import type { AssessmentProfileId } from '../_shared/assessmentProfiles.ts';
 
 declare const Deno: {
   env: { get(key: string): string | undefined };
@@ -931,26 +934,40 @@ function paragraphCount(value: string) {
 }
 
 function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
-  const text = [
-    input.caseTitle,
-    input.diagnosisText,
-    input.diagnosisName,
-    input.diagnosisCode,
-    input.damageDetails,
-    input.insurerPosition,
-    input.customerStatement,
-    input.adjusterMemo,
-    input.sourceAnalysis?.diagnosisSummary,
-    input.sourceAnalysis?.summary,
-    input.sourceAnalysis?.denialReason,
-    ...(input.sourceAnalysis?.keyIssues || []),
-  ].filter(Boolean).join(' ');
-  return /M47\.26|고지의무|알릴의무|미고지|계약해지|중요한 사항|중대한 과실/i.test(text);
+  return isDisclosureDutyProfileContext({
+    caseTitle: input.caseTitle,
+    insuranceType: input.insuranceType,
+    accidentType: input.accidentType,
+    diagnosisText: input.diagnosisText,
+    diagnosisName: input.diagnosisName,
+    diagnosisCode: input.diagnosisCode,
+    damageDetails: input.damageDetails,
+    insurerPosition: input.insurerPosition,
+    customerStatement: input.customerStatement,
+    adjusterMemo: input.adjusterMemo,
+    sourceAnalysis: input.sourceAnalysis,
+  });
 }
 
-type AssessmentCaseProfile = 'm47_disclosure' | 'thyroid_disclosure_cancer' | 'cancer_diagnosis_benefit' | 'brain_diagnosis_benefit' | 'heart_diagnosis_benefit' | 'disability_benefit' | 'causation_preexisting_injury' | 'medical_review_pre_litigation' | 'indemnity_manual_therapy_denial' | 'indemnity_cataract_multifocal_lens_denial' | 'indemnity_cancer_hospitalization_denial' | 'indemnity_duplicate_proportional_reimbursement' | 'indemnity_general_denial' | 'general_disclosure' | 'general';
+type AssessmentCaseProfile = AssessmentProfileId;
 
 function caseProfile(input: ReturnType<typeof validateInput>): AssessmentCaseProfile {
+  return detectAssessmentProfile({
+    insurerName: input.insurerName,
+    caseTitle: input.caseTitle,
+    insuranceType: input.insuranceType,
+    contractDate: input.contractDate,
+    coverageType: input.coverageType,
+    accidentType: input.accidentType,
+    diagnosisText: input.diagnosisText,
+    diagnosisName: input.diagnosisName,
+    diagnosisCode: input.diagnosisCode,
+    damageDetails: input.damageDetails,
+    insurerPosition: input.insurerPosition,
+    customerStatement: input.customerStatement,
+    adjusterMemo: input.adjusterMemo,
+    sourceAnalysis: input.sourceAnalysis,
+  });
   const diagnosisText = [
     input.diagnosisText,
     input.diagnosisCode,
@@ -2024,6 +2041,7 @@ function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]
 function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): RagSearchResult {
   const codes = inputDiagnosisCodes(input);
   const profile = caseProfile(input);
+  const filteredRagResult = filterAssessmentReferences(ragResult, { profileId: profile });
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
   const cancerDiagnosisProfile = profile === 'cancer_diagnosis_benefit';
@@ -2046,8 +2064,8 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   });
 
   const officialBase = isDisclosureDutyCase(input)
-    ? [...disclosureStatuteReferences(), ...(thyroidProfile ? [thyroidPrecedentReference()] : []), ...ragResult.officialReferences]
-    : ragResult.officialReferences;
+    ? [...disclosureStatuteReferences(), ...(thyroidProfile ? [thyroidPrecedentReference()] : []), ...filteredRagResult.officialReferences]
+    : filteredRagResult.officialReferences;
   const seenOfficial = new Set<string>();
   const officialReferences = officialBase.map(normalizeRef).filter((ref) => {
     const text = [
@@ -2153,7 +2171,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
     return true;
   });
 
-  let internalReviewMaterials = ragResult.internalReviewMaterials.map(normalizeRef);
+  let internalReviewMaterials = filteredRagResult.internalReviewMaterials.map(normalizeRef);
   if (disclosureM4726) {
     const excluded = /회전근개|어깨|견관절|중심정맥관|암수술|체외충격파|M48\.3|척추협착|무릎|M17|백내장|심장|뇌|입원비|장기\s*재활/i;
     const allowed = /M47\.26|\bM47(?:\.|$)|\bM54(?:\.|$)|요통|허리통증|요추증|신경뿌리병증|고지의무|1회\s*통원|계약해지|DISCLOSURE_M4726_SINGLE_VISIT/i;
@@ -2289,7 +2307,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
   }
 
   return {
-    ...ragResult,
+    ...filteredRagResult,
     officialReferences,
     internalReviewMaterials,
   };
@@ -2349,7 +2367,9 @@ Deno.serve(async (req: Request) => {
     const apiKey = requiredEnv('OPENAI_API_KEY');
     const body = await req.json() as AssessmentDraftInput;
     const input = validateInput(body);
-    const ragResult = sanitizeRagResultForAssessment(input, await getRagResult(apiKey, input));
+    const detectedProfile = caseProfile(input);
+    const rawRagResult = await getRagResult(apiKey, input);
+    const ragResult = sanitizeRagResultForAssessment(input, rawRagResult);
 
     const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
     const draft = sanitizeResult(parseJsonResponse(draftText));
@@ -2429,7 +2449,7 @@ Deno.serve(async (req: Request) => {
       input,
     );
 
-    return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile: caseProfile(input), retrievedReferences: ragResult });
+    return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile, retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
