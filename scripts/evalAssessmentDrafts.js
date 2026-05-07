@@ -23,7 +23,7 @@ const DEFINITIVE_PATTERNS = [
 ];
 
 function parseArgs(argv) {
-  const args = { dryRun: false, caseId: '', limit: 0, category: '', from: 0, to: 0 };
+  const args = { dryRun: false, caseId: '', limit: 0, category: '', from: 0, to: 0, retries: 2 };
   for (let i = 0; i < argv.length; i += 1) {
     const item = argv[i];
     if (item === '--dry-run') args.dryRun = true;
@@ -32,12 +32,16 @@ function parseArgs(argv) {
     else if (item === '--category') args.category = argv[++i] || '';
     else if (item === '--from') args.from = Number(argv[++i] || 0);
     else if (item === '--to') args.to = Number(argv[++i] || 0);
+    else if (item === '--retries') args.retries = Number(argv[++i] || 0);
     else if (item.startsWith('--case=')) args.caseId = item.slice('--case='.length);
     else if (item.startsWith('--limit=')) args.limit = Number(item.slice('--limit='.length));
     else if (item.startsWith('--category=')) args.category = item.slice('--category='.length);
     else if (item.startsWith('--from=')) args.from = Number(item.slice('--from='.length));
     else if (item.startsWith('--to=')) args.to = Number(item.slice('--to='.length));
+    else if (item.startsWith('--retries=')) args.retries = Number(item.slice('--retries='.length));
   }
+  if (!Number.isFinite(args.retries) || args.retries < 0) args.retries = 2;
+  args.retries = Math.floor(args.retries);
   return args;
 }
 
@@ -371,6 +375,8 @@ function writeReports(summary) {
     lines.push(`- Case: ${item.title || ''}`);
     if (item.resultTitle) lines.push(`- Result title: ${item.resultTitle}`);
     if (item.detectedProfile) lines.push(`- Detected profile: ${item.detectedProfile}`);
+    if (item.attempts !== undefined) lines.push(`- Attempts: ${item.attempts}`);
+    if (item.transportError !== undefined) lines.push(`- Transport error: ${item.transportError}`);
     if (item.preview) lines.push(`- Preview: ${item.preview}`);
     if (item.error) lines.push(`- Error: ${item.error}`);
     if (item.failures?.length) {
@@ -408,9 +414,42 @@ async function signIn() {
 
 async function invokeAssessment(supabase, payload) {
   const { data, error } = await supabase.functions.invoke('create-assessment-draft', { body: payload });
-  if (error) throw error;
-  if (data?.error) throw new Error(data.error);
+  if (error) throw new AssessmentTransportError(error.message || String(error), error);
+  if (data?.error) throw new AssessmentTransportError(data.error);
   return data;
+}
+
+class AssessmentTransportError extends Error {
+  constructor(message, cause) {
+    super(message);
+    this.name = 'AssessmentTransportError';
+    this.cause = cause;
+    this.transportError = true;
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function invokeAssessmentWithRetry(supabase, payload, retries) {
+  const maxAttempts = retries + 1;
+  let lastError = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const data = await invokeAssessment(supabase, payload);
+      return { data, attempts: attempt };
+    } catch (error) {
+      lastError = error;
+      if (attempt >= maxAttempts) break;
+      console.log(`  - transport error, retrying ${attempt}/${retries}: ${preview(error instanceof Error ? error.message : String(error), 120)}`);
+      await sleep(Math.min(1000 * attempt, 3000));
+    }
+  }
+  const message = lastError instanceof Error ? lastError.message : String(lastError);
+  const finalError = new AssessmentTransportError(message, lastError);
+  finalError.attempts = maxAttempts;
+  throw finalError;
 }
 
 async function main() {
@@ -438,6 +477,8 @@ async function main() {
         status: shapeErrors.length ? 'FAIL' : 'PASS',
         failures: shapeErrors,
         dryRun: true,
+        attempts: 0,
+        transportError: false,
       };
       results.push(item);
       console.log(`${testCase.id}: ${item.status}`);
@@ -448,8 +489,11 @@ async function main() {
     const payload = buildPayload(testCase);
     console.log(`${testCase.id}: running (${preview(testCase.title, 60)})`);
     try {
-      const result = await invokeAssessment(supabase, payload);
+      const invoked = await invokeAssessmentWithRetry(supabase, payload, args.retries);
+      const result = invoked.data;
       const item = evaluateResult(testCase, result, previous);
+      item.attempts = invoked.attempts;
+      item.transportError = false;
       results.push(item);
       previous = { id: testCase.id, case: testCase, result };
       console.log(`${testCase.id}: ${item.status}`);
@@ -461,12 +505,14 @@ async function main() {
         category: testCase.category,
         title: testCase.title,
         status: 'FAIL',
-        failures: ['edge function error'],
+        failures: ['transport_error'],
         error: error instanceof Error ? error.message : String(error),
+        attempts: error?.attempts || args.retries + 1,
+        transportError: true,
       };
       results.push(item);
       console.log(`${testCase.id}: FAIL`);
-      console.log(`  - edge function error: ${preview(item.error, 160)}`);
+      console.log(`  - transport_error after ${item.attempts} attempt(s): ${preview(item.error, 160)}`);
     }
   }
 
