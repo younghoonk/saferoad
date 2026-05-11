@@ -44,3 +44,11 @@ rag_assets/
 .env.rag.local
 
 ai_eval/results/
+
+# KOICD / legal precedent generated artifacts
+koicd_precedent_pipeline_v1.zip
+rag_legal_precedents/
+rag_legal_precedents/*.jsonl
+rag_legal_precedents/*.bak
+rag_legal_precedents/*.bak.*
+rag_legal_precedents/*_report.json
