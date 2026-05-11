@@ -94,6 +94,7 @@ const groupedSearchPlan = [
   { label: '공식 근거 / 약관·지급기준', source_area: 'terms_standards', count: 3, section: 'official' },
   { label: '준공식 근거 / 금감원 분쟁조정례', source_area: 'fss_dispute_cases', count: 3, section: 'official' },
   { label: '공식 근거 / 판례', source_area: 'precedents', count: 3, section: 'official' },
+  { label: '판례 참고자료 / 미검토 판례', source_area: 'precedents', count: 3, section: 'internal' },
   { label: '의료 검토자료 / 의료지식', source_area: 'medical_knowledge', count: 3, section: 'internal' },
   { label: '의료 검토자료 / 질병코드별 의료쟁점', source_area: 'medical_issue_codes', count: 3, section: 'internal' },
   { label: '내부 검토자료 / 쟁점 플레이북', source_area: 'issue_playbooks', count: 2, section: 'internal' },
@@ -238,6 +239,7 @@ function irrelevantRectalCarcinoidInternalText(row) {
 }
 
 function directlyRelevantInternal(row, query) {
+  if (row.source_area === 'precedents') return !strongPrecedentCitation(row) && !administrativePrecedentText(row);
   if (!internalReviewSourceAreas.has(row.source_area)) return true;
   if (heartDiagnosisQuery(query)) {
     if (irrelevantHeartInternalText(row)) return false;
@@ -254,6 +256,31 @@ function sourceStatus(row) {
   return row.source_status || row.metadata?.source_status || row.metadata?.sourceStatus || '';
 }
 
+function reviewStatus(row) {
+  return row.review_status || row.metadata?.review_status || row.metadata?.reviewStatus || '';
+}
+
+function metadataBoolean(row, key) {
+  const value = row.metadata?.[key];
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'string') return value.toLowerCase() === 'true';
+  return false;
+}
+
+function officialCitationAllowed(row) {
+  return metadataBoolean(row, 'official_citation_allowed') || metadataBoolean(row, 'officialCitationAllowed');
+}
+
+function strongPrecedentCitation(row) {
+  if (row.source_area !== 'precedents') return false;
+  return sourceStatus(row) === 'official_law_api_full_text'
+    || (reviewStatus(row) === 'reviewed' && officialCitationAllowed(row));
+}
+
+function administrativePrecedentText(row) {
+  return /산업재해보상보험|산재보험|근로복지공단|업무상\s*재해|재해근로자|장해보상연금|휴업급여|요양급여|평균임금정정|보험급여차액|장기요양|건강보험약제|급여비용|환수결정처분|보험료부과처분취소|국민건강보험공단|건강보험심사평가원|부당해고|구제재심판정취소|요양불승인|행정처분취소/i.test(rowText(row));
+}
+
 function isTitleSeedFss(row) {
   if (row.source_area !== 'fss_dispute_cases') return false;
   const status = sourceStatus(row);
@@ -263,6 +290,7 @@ function isTitleSeedFss(row) {
 }
 
 function displayRole(row) {
+  if (row.source_area === 'precedents' && !strongPrecedentCitation(row)) return '판례 참고자료';
   if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row)) return '공식/준공식 근거';
   if (officialSourceAreas.has(row.source_area)) return '공식근거 제외 출처';
   if (internalReviewSourceAreas.has(row.source_area)) return '내부 검토자료';
@@ -271,8 +299,10 @@ function displayRole(row) {
 
 function scoreRow(row, diagnosisCodes, context = {}) {
   let score = Number(row.similarity || 0);
-  if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row)) score += 0.08;
+  if (officialSourceAreas.has(row.source_area) && !isBlockedOfficialSource(row) && isAllowedOfficialSource(row) && (row.source_area !== 'precedents' || strongPrecedentCitation(row))) score += 0.08;
   if (officialSourceAreas.has(row.source_area) && (isBlockedOfficialSource(row) || !isAllowedOfficialSource(row))) score -= 0.2;
+  if (row.source_area === 'precedents' && !strongPrecedentCitation(row)) score -= 0.03;
+  if (row.source_area === 'precedents' && administrativePrecedentText(row)) score -= 0.8;
   if (row.source_area === 'issue_playbooks') score -= 0.05;
   if (row.source_area === 'medical_issue_codes') score -= 0.03;
   if (exactCodeMatches(row, diagnosisCodes).length) score += 0.12;
@@ -367,6 +397,11 @@ function printRow(row, index, diagnosisCodes, context) {
   if (exact.length) console.log(`diagnosis_code_match=exact:${exact.join(',')}`);
   if (similarOnly) console.log('diagnosis_code_match=similar_code_only');
   if (titleSeed) console.log('fss_status=title_seed_needs_full_text (공식근거 후보에서 낮은 우선순위)');
+  if (row.source_area === 'precedents' && !strongPrecedentCitation(row)) {
+    console.log('precedent_status=유사 판례 참고자료 (공식근거/확정근거 아님)');
+  }
+  if (row.metadata?.source_provider) console.log(`source_provider=${row.metadata.source_provider}`);
+  if (row.metadata?.provider_prec_id) console.log(`provider_prec_id=${row.metadata.provider_prec_id}`);
   console.log(`title=${publicText(row.title) || '(empty)'}`);
   console.log(`summary=${clip(row.summary || row.chunk_text)}`);
   console.log(`source=${getSourceDisplayName(row)}`);
@@ -393,6 +428,7 @@ async function main() {
   const embedding = await createEmbedding(query);
 
   const integratedRows = sortRows(await rpcSearch(embedding, 30, null), diagnosisCodes, context)
+    .filter((row) => !(row.source_area === 'precedents' && administrativePrecedentText(row)))
     .filter((row) => !internalReviewSourceAreas.has(row.source_area) || directlyRelevantInternal(row, query))
     .slice(0, 10);
   printSection('통합 top10 (adjusted ranking preview)', integratedRows, diagnosisCodes, context);
@@ -404,6 +440,8 @@ async function main() {
       .filter((row) => !(plan.section === 'official' && isTitleSeedFss(row)))
       .filter((row) => !(plan.section === 'official' && isBlockedOfficialSource(row)))
       .filter((row) => !(plan.section === 'official' && !isAllowedOfficialSource(row)))
+      .filter((row) => !(row.source_area === 'precedents' && administrativePrecedentText(row)))
+      .filter((row) => !(plan.section === 'official' && row.source_area === 'precedents' && !strongPrecedentCitation(row)))
       .filter((row) => !(plan.section === 'internal' && !directlyRelevantInternal(row, query)))
       .slice(0, plan.count);
     const titleSeeds = rows.filter(isTitleSeedFss).slice(0, 2);

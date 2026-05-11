@@ -652,6 +652,8 @@ ${formatOfficialGroundsForBody(ragResult)}
 - Indemnity insurance generation is a search aid only; final judgment requires the insurance policy and policy terms in effect at enrollment.
 - For disability and disease-code issues, state that the policy appendix in effect at enrollment must be checked.
 - Cite precedents only when case number, court, and decision date are available.
+- Precedents marked as "유사 판례 참고자료" or with review_status needs_human_review / official_citation_allowed false may be used only for 판례상 법리 참고 or 논리 보강. Do not describe them as 공식근거, 확정 근거, or a basis that payment must be made.
+- Only reviewed precedents with official_citation_allowed true, or existing official law API full-text precedents, may be used as strong precedent grounds.
 - Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
 
 [Customer-side reconsideration direction]
@@ -748,6 +750,8 @@ ${formatOfficialGroundsForBody(ragResult)}
 [RAG review rules]
 - Remove official-looking citations if they are not present in official or semi-official RAG references.
 - Internal review materials must not be cited as official legal, precedent, FSS, or policy grounds.
+- Precedents shown as "유사 판례 참고자료" or with review_status needs_human_review / official_citation_allowed false must be qualified as 판례상 법리 참고 or 논리 보강 only. Remove wording that treats them as 공식근거, 확정 근거, or a basis that payment must be made.
+- Only reviewed precedents with official_citation_allowed true, or existing official law API full-text precedents, may remain as strong precedent grounds.
 - Policy/terms references must be removed if they are not directly related to the issue.
 - Preserve diagnosis codes exactly as provided. If a generated title or body changed an input diagnosis code, restore the input diagnosis code.
 - Remove accident date, accident location, accident mechanism, treatment date, or insurer facts that were not in the input, uploaded summaries, or RAG references.

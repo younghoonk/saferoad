@@ -5,6 +5,7 @@ const MIN_SIMILARITY = 0.45;
 export interface RetrievedReference {
   reference_type: 'official' | 'internal';
   source_area: string;
+  source_type?: string;
   source_area_label: string;
   title: string;
   summary?: string;
@@ -19,6 +20,10 @@ export interface RetrievedReference {
   diagnosis_code?: string;
   diagnosis_name?: string;
   note?: string;
+  review_status?: string;
+  official_citation_allowed?: boolean;
+  source_provider?: string;
+  provider_prec_id?: string;
 }
 
 export interface RagSearchResult {
@@ -235,6 +240,13 @@ function metadataValue(row: EnrichedRow, key: string) {
   return typeof value === 'string' ? value : '';
 }
 
+function metadataBoolean(row: EnrichedRow, key: string) {
+  const value = row.metadata?.[key];
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'string') return value.toLowerCase() === 'true';
+  return false;
+}
+
 function firstMetadataValue(row: EnrichedRow, keys: string[]) {
   for (const key of keys) {
     const value = metadataValue(row, key);
@@ -301,6 +313,24 @@ function sourceStatus(row: EnrichedRow) {
   return metadataValue(row, 'source_status') || metadataValue(row, 'sourceStatus');
 }
 
+function reviewStatus(row: EnrichedRow) {
+  return publicText(row.review_status) || metadataValue(row, 'review_status') || metadataValue(row, 'reviewStatus');
+}
+
+function officialCitationAllowed(row: EnrichedRow) {
+  return metadataBoolean(row, 'official_citation_allowed') || metadataBoolean(row, 'officialCitationAllowed');
+}
+
+function strongPrecedentCitation(row: EnrichedRow) {
+  if (row.source_area !== 'precedents') return false;
+  return sourceStatus(row) === 'official_law_api_full_text'
+    || (reviewStatus(row) === 'reviewed' && officialCitationAllowed(row));
+}
+
+function needsReviewPrecedent(row: EnrichedRow) {
+  return row.source_area === 'precedents' && !strongPrecedentCitation(row);
+}
+
 function isTitleSeedFss(row: EnrichedRow) {
   if (row.source_area !== 'fss_dispute_cases') return false;
   const text = rowText(row);
@@ -318,13 +348,14 @@ function isOfficialReference(row: EnrichedRow) {
     return sourceStatus(row) === 'official_fss_full_text';
   }
   if (row.source_area === 'precedents') {
-    return sourceStatus(row) === 'official_law_api_full_text';
+    return strongPrecedentCitation(row);
   }
   return false;
 }
 
 function isInternalReviewMaterial(row: EnrichedRow) {
-  return ['issue_playbooks', 'practice_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge'].includes(row.source_area)
+  return (row.source_area === 'precedents' && !strongPrecedentCitation(row))
+    || ['issue_playbooks', 'practice_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge'].includes(row.source_area)
     || String(row.source_type || '').startsWith('internal_');
 }
 
@@ -396,6 +427,10 @@ function irrelevantDisclosureText(row: EnrichedRow) {
 
 function disclosurePrecedentText(row: EnrichedRow) {
   return /고지의무|계약\s*전\s*알릴\s*의무|계약전\s*알릴\s*의무|중요한\s*사항|중대한\s*과실|부실고지|보험계약\s*해지|보험사고\s*인과관계|상법\s*제?\s*651|상법\s*제?\s*655/i.test(rowText(row));
+}
+
+function administrativePrecedentText(row: EnrichedRow) {
+  return /산업재해보상보험|산재보험|근로복지공단|업무상\s*재해|재해근로자|장해보상연금|휴업급여|요양급여|평균임금정정|보험급여차액|장기요양|건강보험약제|급여비용|환수결정처분|보험료부과처분취소|국민건강보험공단|건강보험심사평가원|부당해고|구제재심판정취소|요양불승인|행정처분취소/i.test(rowText(row));
 }
 
 function thyroidOfficialText(row: EnrichedRow) {
@@ -470,6 +505,7 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (row.source_area === 'precedents' && administrativePrecedentText(row)) return false;
   if (cataractQuery(query)) {
     if (irrelevantCataractText(row)) return false;
     if (row.source_area === 'legal_statutes') return false;
@@ -514,6 +550,16 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
 function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCodes: string[]) {
   if (!isInternalReviewMaterial(row)) return false;
   const text = rowText(row);
+  if (row.source_area === 'precedents') {
+    if (administrativePrecedentText(row)) return false;
+    if (cataractQuery(query)) return cataractText(row) && !irrelevantCataractText(row);
+    if (manualTherapyQuery(query)) return manualTherapyText(row) && !irrelevantManualTherapyText(row);
+    if (disclosureQuery(query)) return disclosurePrecedentText(row) && !irrelevantDisclosureText(row);
+    if (cancerInsuranceQuery(query)) return (thyroidOfficialText(row) || disclosurePrecedentText(row)) && !irrelevantDisclosureText(row);
+    if (heartDiagnosisQuery(query)) return heartInternalText(row) && !irrelevantHeartInternalText(row);
+    if (rectalCarcinoidQuery(query)) return rectalCarcinoidInternalText(row) && !irrelevantRectalCarcinoidInternalText(row);
+    return true;
+  }
   if (heartDiagnosisQuery(query)) {
     if (irrelevantHeartInternalText(row)) return false;
     return heartInternalText(row) || exactCodeMatches(row, ['I20', 'I21', 'I22']).length > 0;
@@ -713,10 +759,12 @@ async function enrichRows(supabaseUrl: string, serviceRoleKey: string, rows: Rpc
 
 function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): RetrievedReference {
   const metadata = row.metadata || {};
+  const isWeakPrecedent = referenceType === 'internal' && row.source_area === 'precedents';
   return {
     reference_type: referenceType,
     source_area: row.source_area,
-    source_area_label: getSourceDisplayName(undefined, row.source_area, row.title),
+    source_type: publicText(row.source_type),
+    source_area_label: isWeakPrecedent ? '유사 판례 참고자료' : getSourceDisplayName(undefined, row.source_area, row.title),
     title: clip(row.title, 180),
     summary: clip(row.summary || row.chunk_text, 700),
     source_url: publicText(row.source_url),
@@ -729,7 +777,13 @@ function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): 
     article_title: publicText(metadata.article_title || metadata.articleTitle),
     diagnosis_code: publicText(metadata.diagnosis_code || metadata.diagnosisCode),
     diagnosis_name: publicText(metadata.diagnosis_name || metadata.diagnosisName),
-    note: referenceType === 'internal' ? '내부 검토자료이며 공식 근거로 인용하지 않음' : undefined,
+    note: isWeakPrecedent
+      ? '유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.'
+      : referenceType === 'internal' ? '내부 검토자료이며 공식 근거로 인용하지 않음' : undefined,
+    review_status: reviewStatus(row),
+    official_citation_allowed: officialCitationAllowed(row),
+    source_provider: publicText(metadata.source_provider || metadata.sourceProvider),
+    provider_prec_id: publicText(metadata.provider_prec_id || metadata.providerPrecId),
   };
 }
 
@@ -866,6 +920,7 @@ export async function searchRagReferences(params: {
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
+      if (row.source_area === 'precedents' && administrativePrecedentText(row)) continue;
       if (isOtherInsurerTerms(row, params.context)) continue;
       if (directlyRelevantOfficial(row, query) && officialRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         officialRows.push(row);
@@ -907,14 +962,22 @@ export function formatRagForPrompt(result: RagSearchResult) {
     : '직접 관련 공식근거는 충분히 검색되지 않았으며, 가입 당시 약관, 질병분류표, 판례/분쟁조정례 또는 공식 의학자료 추가 확인이 필요합니다.';
 
   const internal = result.internalReviewMaterials.length
-    ? result.internalReviewMaterials.map((ref, index) => [
-      `[내부검토 ${index + 1}] ${ref.title}`,
-      `자료구분: ${ref.source_area_label}`,
-      ref.diagnosis_code ? `질병코드: ${ref.diagnosis_code}` : '',
-      ref.diagnosis_name ? `진단명: ${ref.diagnosis_name}` : '',
-      ref.summary ? `요약: ${ref.summary}` : '',
-      '주의: 내부 검토자료이며 공식 근거로 인용하지 마세요.',
-    ].filter(Boolean).join('\n')).join('\n\n')
+    ? result.internalReviewMaterials.map((ref, index) => {
+      const weakPrecedent = ref.source_area === 'precedents';
+      return [
+        `[${weakPrecedent ? '판례 참고자료' : '내부검토'} ${index + 1}] ${ref.title}`,
+        `자료구분: ${ref.source_area_label}`,
+        ref.case_number ? `사건번호: ${ref.case_number}` : '',
+        ref.court_or_agency ? `법원/기관: ${ref.court_or_agency}` : '',
+        ref.decision_date ? `선고/결정일: ${ref.decision_date}` : '',
+        ref.diagnosis_code ? `질병코드: ${ref.diagnosis_code}` : '',
+        ref.diagnosis_name ? `진단명: ${ref.diagnosis_name}` : '',
+        ref.summary ? `요약: ${ref.summary}` : '',
+        weakPrecedent
+          ? '주의: 유사 판례 참고자료입니다. review_status 또는 official_citation_allowed 상태상 공식근거, 확정 근거, 지급 확정 근거로 쓰지 말고 판례상 법리 참고로만 사용하세요.'
+          : '주의: 내부 검토자료이며 공식 근거로 인용하지 마세요.',
+      ].filter(Boolean).join('\n');
+    }).join('\n\n')
     : '검색된 내부 검토자료 없음.';
 
   return [

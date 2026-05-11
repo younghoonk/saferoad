@@ -15,6 +15,7 @@ function textOf(ref: RetrievedReference) {
     ref.sourceDisplayName,
     ref.source_area_label,
     ref.source_area,
+    ref.source_type,
     ref.title,
     ref.summary,
     ref.case_number,
@@ -25,6 +26,9 @@ function textOf(ref: RetrievedReference) {
     ref.diagnosis_code,
     ref.diagnosis_name,
     ref.note,
+    ref.review_status,
+    ref.source_provider,
+    ref.provider_prec_id,
   ].filter(Boolean).join(' ');
 }
 
