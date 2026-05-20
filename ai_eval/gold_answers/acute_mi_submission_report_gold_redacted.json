@@ -1,0 +1,103 @@
+{
+  "id": "GOLD_ACUTE_MI_SUBMISSION_REPORT_V2_REDACTED",
+  "linked_assess_id": "ASSESS_101",
+  "source": "방태복_손해사정서_v2_보강본-1.docx structure-only redacted gold fixture",
+  "privacy_policy": {
+    "contains_original_personal_data": false,
+    "fixture_scope": "원문 전문 저장 금지. 제출 문서 구조, 논리 흐름, 평가 rubric만 보관.",
+    "redactions": {
+      "name": "[피보험자]",
+      "resident_registration_number": "[주민번호]",
+      "address": "[주소]",
+      "phone": "[연락처]",
+      "policy_number": "[증권번호]",
+      "document_number": "[문서번호]",
+      "staff": "[담당자]"
+    }
+  },
+  "v2_core_thesis": [
+    "진단서만 있는 사건이 아니라, 진단서 발급 당일 의무기록에 주치의의 객관적 검토 과정이 남아 있는 사건으로 구성한다.",
+    "2024.06.27 외래 SOAP 기록의 'cardiac marker 상승, EKG, UA-NSTEMI 진단서 가능' 취지 문구를 결정적 증거로 취급한다.",
+    "보험사가 시술 전 심근효소 상승 없음만 문제 삼는 것은 전체 의무기록을 단편적으로 해석한 것이다.",
+    "결론은 급성심근경색증진단보험금 지급, 지연이자 지급, 구체적 서면 회신 요구로 끝낸다."
+  ],
+  "required_killing_evidence_types": [
+    "doctor_soap_note",
+    "doctor_reasoning",
+    "lab_trend",
+    "ecg_finding",
+    "cag_pci_finding",
+    "policy_clause"
+  ],
+  "required_killing_evidence_keywords": [
+    "cardiac marker",
+    "EKG",
+    "UA-NSTEMI",
+    "NSTEMI",
+    "진단서 가능",
+    "hs-troponin",
+    "Troponin T",
+    "CK-MB",
+    "ST depression",
+    "CAG",
+    "PCI",
+    "LM-LAD",
+    "LM disease",
+    "주치의 소견",
+    "진단서 발급함"
+  ],
+  "required_argument_flow": [
+    "보험사 주장 인용",
+    "보험사 주장 무력화",
+    "의학적 근거 방어선",
+    "약관상 요건 충족 방어선",
+    "판례/금감원 자료의 역이용 또는 부존재 명시",
+    "약관해석 원칙 및 작성자 불이익 원칙",
+    "보험금 지급 의무와 요청사항"
+  ],
+  "required_sections": [
+    "손해사정서",
+    "(보험금 부지급 통보에 대한 이의 및 의견)",
+    "Ⅰ. 사건의 경위 및 진단 확정 과정",
+    "Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성",
+    "Ⅲ. 의학적 근거",
+    "Ⅳ. 보험약관상 진단확정 요건의 충족",
+    "Ⅴ. 판례 및 금감원 자료에 대한 적용 또는 반박",
+    "Ⅵ. 약관해석 원칙",
+    "Ⅶ. 결론",
+    "[요청사항]",
+    "[첨부서류]"
+  ],
+  "rubric": [
+    "PreAnalysisResult가 생성되어야 한다.",
+    "KillingEvidence 배열이 존재해야 한다.",
+    "doctor_soap_note 또는 doctor_reasoning evidence는 발견 시 decisive로 분류해야 한다.",
+    "보험사 부지급 사유를 「」 안에 인용해야 한다.",
+    "Fourth Universal Definition of Myocardial Infarction 2018 또는 이에 대응하는 의학 기준을 명시해야 한다.",
+    "진단기준 대 환자 데이터 매핑표가 있어야 한다.",
+    "약관 요건 대 환자 자료 매칭표가 있어야 한다.",
+    "주치의 SOAP 기록과 NSTEMI/I21.4 진단 정당성을 연결해야 한다.",
+    "결론에 의무기록 자체로 진단의 객관성이 입증된다는 취지가 있어야 한다.",
+    "요청사항에 보험금, 지연이자, 구체적 서면 회신이 모두 있어야 한다.",
+    "없는 판례, 없는 금감원 결정례, 없는 약관 문구를 생성하지 않아야 한다.",
+    "개인정보는 [피보험자], [주민번호], [주소], [연락처], [증권번호] 등으로 비식별 처리해야 한다."
+  ],
+  "must_not_include": [
+    "사료됩니다",
+    "생각됩니다",
+    "가능성이 있습니다",
+    "추가 검토가 필요",
+    "재검토가 필요",
+    "검토 가치",
+    "확정할 수는 없으나",
+    "지급 여부를 단정",
+    "초안",
+    "참고용",
+    "confidence",
+    "document_type",
+    "completed",
+    "SKMBT_",
+    "Resized_",
+    "[일자 확인]"
+  ]
+}
