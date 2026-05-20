@@ -9,6 +9,7 @@ import {
   type RagSearchContext,
   type RagSearchResult,
 } from '../_shared/ragSearch.ts';
+import { getBearerToken, getSupabaseConfig, requireAdjusterUser } from '../_shared/caseAccess.ts';
 
 declare const Deno: {
   env: { get(key: string): string | undefined };
@@ -25,6 +26,7 @@ interface ImagePayload {
 }
 
 interface ClosingReportInput {
+  caseId?: string;
   reportType?: ReportType;
   insurerName?: string;
   productName?: string;
@@ -84,6 +86,7 @@ const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_A
 const CHUNK_REFERENCE_PATTERN = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
 const INTERNAL_FIELD_LINE_PATTERN = /^\s*(?:chunk_id|source_id|record_id|source_record_id|source_document_id|embedding_status|review_status|trust_level|source_type)\s*[:=].*$/gim;
 const INTERNAL_SOURCE_TYPE_PATTERN = /\binternal_[A-Za-z0-9_:-]*\b/g;
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -111,30 +114,26 @@ function requiredEnv(key: string) {
 }
 
 async function requireAdjuster(req: Request) {
-  const authHeader = req.headers.get('authorization');
-  if (!authHeader?.startsWith('Bearer ')) throw new HttpError(401, '로그인이 필요합니다.');
-
-  const supabaseUrl = requiredEnv('SUPABASE_URL');
-  const anonKey = requiredEnv('SUPABASE_ANON_KEY');
-  const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
-    headers: { apikey: anonKey, authorization: authHeader },
-  });
-  if (!userRes.ok) throw new HttpError(401, '유효하지 않은 로그인 세션입니다.');
-  const user = await userRes.json() as { id?: string };
-  if (!user.id) throw new HttpError(401, '사용자 정보를 확인할 수 없습니다.');
-
-  const profileRes = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${user.id}&select=id,user_type`, {
-    headers: { apikey: anonKey, authorization: authHeader, accept: 'application/json' },
-  });
-  if (!profileRes.ok) throw new HttpError(403, '프로필 권한을 확인할 수 없습니다.');
-  const profiles = await profileRes.json() as { user_type: string }[];
-  if (profiles[0]?.user_type !== 'adjuster') {
-    throw new HttpError(403, '손해사정사 계정만 종결보고서를 생성할 수 있습니다.');
+  try {
+    return await requireAdjusterUser(getSupabaseConfig(), getBearerToken(req));
+  } catch (error) {
+    const status = typeof (error as { status?: unknown }).status === 'number'
+      ? (error as { status: number }).status
+      : 500;
+    const message = error instanceof Error ? error.message : 'Failed to verify adjuster role.';
+    throw new HttpError(status, message);
   }
 }
 
 function cleanText(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function normalizeOptionalUuid(value: unknown, fieldName: string) {
+  const normalized = cleanText(value);
+  if (!normalized) return '';
+  if (!UUID_PATTERN.test(normalized)) throw new HttpError(400, `${fieldName} must be a valid UUID.`);
+  return normalized;
 }
 
 function cleanPublicText(value: unknown) {
@@ -189,6 +188,7 @@ function validateInput(body: ClosingReportInput) {
   if (totalBytes > MAX_TOTAL_BYTES) throw new HttpError(413, '전체 업로드 용량은 24MB 이하로 제한됩니다.');
 
   return {
+    caseId: normalizeOptionalUuid(body.caseId, 'caseId'),
     reportType,
     insurerName: cleanText(body.insurerName),
     productName: cleanText(body.productName),

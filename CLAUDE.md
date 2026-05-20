@@ -189,6 +189,11 @@ OPENAI_API_KEY         (in .env.rag.local)
 # 타입 체크
 npx.cmd tsc --noEmit
 
+# 배포 + eval 한 번에 (권장)
+.\scripts\deploy_and_eval.ps1              # 배포 → 10s 대기 → eval --limit 1
+.\scripts\deploy_and_eval.ps1 -limit 5     # eval 5건
+.\scripts\deploy_and_eval.ps1 -case ASSESS_001  # 특정 케이스
+
 # 사정서 eval (원격 Edge Function 호출 — 재배포 후 실행)
 npm.cmd run ai:assessment:eval -- --limit 1
 npm.cmd run ai:assessment:eval              # 전체 100건
