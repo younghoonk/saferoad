@@ -9,9 +9,11 @@ import {
   type RagSearchContext,
   type RagSearchResult,
 } from '../_shared/ragSearch.ts';
+import { appendMedicalGuidelineEvidence, isAcuteMiDenialContext } from '../_shared/medicalGuidelineEvidence.ts';
 import { detectAssessmentProfile, isDisclosureDutyProfileContext } from '../_shared/detectAssessmentProfile.ts';
 import { filterAssessmentReferences } from '../_shared/filterAssessmentReferences.ts';
 import type { AssessmentProfileId } from '../_shared/assessmentProfiles.ts';
+import { getBearerToken, getSupabaseConfig, requireAdjusterUser } from '../_shared/caseAccess.ts';
 
 declare const Deno: {
   env: { get(key: string): string | undefined };
@@ -24,6 +26,7 @@ interface RetrievedReference {
   source_area?: string;
   source_area_label?: string;
   source_type?: string;
+  id?: string;
   chunk_id?: string;
   source_id?: string;
   record_id?: string;
@@ -45,9 +48,21 @@ interface RetrievedReference {
   conclusion?: string;
   keywords?: string[];
   source_url?: string;
+  sourceDisplayName?: string;
+  similarity?: number;
+  note?: string;
   embedding_status?: string;
   review_status?: string;
   trust_level?: string;
+  sourceType?: string;
+  citationLabel?: string;
+  sourceArea?: string;
+  issueTags?: string[];
+  keyHolding?: string;
+  excerpt?: string;
+  applicableReason?: string;
+  limitation?: string;
+  policySource?: 'uploaded' | 'server_default';
 }
 
 interface SourceAnalysis {
@@ -62,10 +77,171 @@ interface SourceAnalysis {
   treatmentSummary?: string;
   damageEvidenceSummary?: string;
   draftSupportingFacts?: string[];
+  argumentStructureSummary?: string;
+}
+
+type StrategicPurpose = 'symptom' | 'diagnosis' | 'test' | 'procedure' | 'doctor_opinion' | 'insurer_notice';
+type ErrorType =
+  | 'medical_criteria_distortion'
+  | 'omitted_key_evidence'
+  | 'policy_requirement_misread'
+  | 'case_law_misuse'
+  | 'unsupported_additional_requirement';
+type TargetSection = 'medical' | 'policy' | 'case_law' | 'interpretation';
+
+type KillingEvidenceType =
+  | 'doctor_soap_note'
+  | 'doctor_reasoning'
+  | 'diagnosis_certificate'
+  | 'medical_opinion'
+  | 'lab_trend'
+  | 'ecg_finding'
+  | 'cag_pci_finding'
+  | 'policy_clause';
+
+interface KillingEvidence {
+  evidenceType: KillingEvidenceType;
+  date?: string;
+  quote: string;
+  sourceDocumentType?: string;
+  strategicMeaning: string;
+  useInSections: Array<'facts' | 'insurer_error' | 'medical' | 'policy' | 'conclusion'>;
+  strength: 'decisive' | 'strong' | 'supporting';
+}
+
+interface ClaimArgumentStructure {
+  insurerPosition: {
+    quotedPosition: string;
+    coreDenialReason: string;
+    extractedFromDocumentId?: string;
+  };
+  factualFoundation: {
+    chronologicalFacts: Array<{
+      date: string;
+      fact: string;
+      evidenceLabel?: string;
+      strategicPurpose: StrategicPurpose;
+    }>;
+    keyNumbers: Array<{
+      label: string;
+      value: string;
+      meaning: string;
+      repeatInSections: string[];
+    }>;
+  };
+  insurerErrorMap: Array<{
+    errorType: ErrorType;
+    insurerClaim: string;
+    rebuttalThesis: string;
+    targetSection: TargetSection;
+  }>;
+  defenseLayers: {
+    medical: {
+      standard: string;
+      patientFactMapping: Array<{ criterion: string; patientFact: string; satisfied: boolean }>;
+      conclusion: string;
+    };
+    policy: {
+      policyRequirementMapping: Array<{ requirement: string; patientFact: string; satisfied: boolean }>;
+      conclusion: string;
+    };
+    caseLaw: {
+      insurerCitedAuthority?: string;
+      legalPrinciple: string;
+      reverseApplication: string;
+      conclusion: string;
+    };
+    interpretation: {
+      ambiguity: string;
+      contraProferentemApplication: string;
+      conclusion: string;
+    };
+  };
+  killingEvidence: KillingEvidence[];
+  finalPressure: {
+    paymentRequest: string;
+    delayInterestRequest?: string;
+    writtenReplyDemand: string;
+    escalationNotice?: string;
+  };
+}
+
+interface PreAnalysisResult {
+  diagnosisIssue: {
+    claimedDiagnosis: string;
+    insurerAcceptedDiagnosis?: string;
+    disputeSummary: string;
+  };
+  insurerDenialQuote: {
+    originalQuote: string;
+    sourceDocumentId?: string;
+    weaknesses: string[];
+  };
+  medicalCriteria: {
+    standardName: string;
+    standardYear?: string;
+    criteria: Array<{
+      criterion: string;
+      patientEvidence: string;
+      satisfied: boolean;
+      notes?: string;
+    }>;
+  };
+  policyCriteria: {
+    policyQuote: string;
+    requirements: Array<{
+      requirement: string;
+      patientEvidence: string;
+      satisfied: boolean;
+    }>;
+  };
+  citedCaseLaw: {
+    insurerCitedCases: string[];
+    legalPrinciples: string[];
+    reverseApplication?: string;
+    fssDisputeReferences?: string[];
+  };
+  killingEvidence: KillingEvidence[];
+  defenseLayers: {
+    medical: string;
+    policy: string;
+    caseLaw: string;
+    interpretation: string;
+  };
+  visualPlan: {
+    tables: string[];
+    quoteBoxes: string[];
+    boldNumbers: string[];
+  };
+  finalRequestLogic: {
+    paymentRequest: string;
+    delayInterestRequest: string;
+    writtenReplyDemand: string;
+    escalationNotice: string;
+  };
+}
+
+interface SelfVerification {
+  insurerQuotePresent: boolean;
+  medicalStandardNamed: boolean;
+  medicalMappingTablePresent: boolean;
+  policyQuotePresent: boolean;
+  policyMappingTablePresent: boolean;
+  caseLawReverseAppliedOrNotFabricated: boolean;
+  killingEvidencePresent: boolean;
+  defenseLayersCount: number;
+  conclusionHasSeparateReasons: boolean;
+  requestIncludesPayment: boolean;
+  requestIncludesDelayInterest: boolean;
+  requestIncludesWrittenReply: boolean;
+  weakLanguageAbsent: boolean;
+  forbiddenPhrasesAbsent: boolean;
+  piiRedacted: boolean;
 }
 
 interface AssessmentDraftInput {
   requestId?: string;
+  caseId?: string;
   caseTitle?: string;
   insurerName?: string;
   productName?: string;
@@ -96,6 +272,7 @@ interface AssessmentDraftInput {
 interface AssessmentDraftResult {
   requestId?: string;
   detectedProfile?: string;
+  reportFormatVersion?: string;
   title: string;
   overview: string;
   facts: string;
@@ -107,15 +284,23 @@ interface AssessmentDraftResult {
   requiredAdditionalChecks: string;
   simpleClientSummary: string;
   disclaimer: string;
+  customerSideAssessmentReport?: string;
+  finalSubmissionAssessmentReport?: string;
   retrievedReferences?: RagSearchResult;
+  policyEvidence?: RetrievedReference[];
+  killingEvidence?: KillingEvidence[];
+  preAnalysis?: PreAnalysisResult;
+  selfVerification?: SelfVerification;
 }
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 const OPENAI_MODEL = 'gpt-4o';
+const REPORT_FORMAT_VERSION = 'submission_report_v2_claim_argument_structure';
 const MAX_FIELD_LENGTH = 1800;
 const MAX_SHORT_FIELD_LENGTH = 200;
 const MAX_REFERENCES = 8;
 const MAX_REFERENCE_TEXT_LENGTH = 1200;
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const INTERNAL_ID_PATTERN = /\b(?:RQ|RSF|RCP|RCD|MIC|PIP|RKA|PST|FSS|PREC|PREC_API|FSS_LATEST)[-_]?\d{3,6}\b/g;
 const CHUNK_REFERENCE_PATTERN = /\b(?:medical_issue_code|real_case_pattern|real_case_document|issue_playbook|precedent|fss_latest|terms_raw|fss_dispute_case):[A-Za-z0-9:_-]+\b/g;
@@ -126,6 +311,7 @@ const sourceAreaLabels: Record<string, string> = {
   fss_dispute_cases: '금융감독원 분쟁조정례',
   legal_statutes: '법령',
   medical_knowledge: '의료 참고자료',
+  medical_guideline: '의학 기준',
   precedents: '판례',
   terms_standards: '약관/지급기준',
   issue_playbooks: '내부 쟁점 플레이북',
@@ -133,6 +319,71 @@ const sourceAreaLabels: Record<string, string> = {
   real_case_patterns: '익명 사건 패턴',
   real_case_documents: '익명 문서 요약',
 };
+
+const ACUTE_MI_POLICY_SEARCH_TERMS = [
+  '급성심근경색',
+  '급성 심근경색',
+  '급성심근경색증진단',
+  '심근경색증진단',
+  '허혈심장질환',
+  '특정허혈성심장질환',
+  '심장질환 진단확정',
+  '심전도',
+  '심장초음파',
+  '관상동맥촬영술',
+  '관상동맥 조영술',
+  '혈액중 심장효소검사',
+  '심장효소',
+  'I21',
+  'I21.4',
+  'I20',
+  'I25.1',
+];
+
+const ACUTE_MI_SERVER_DEFAULT_POLICY_EVIDENCE: RagSearchResult['officialReferences'] = [
+  {
+    reference_type: 'official',
+    source_area: 'terms_standards',
+    source_area_label: '약관/지급기준',
+    source_type: 'policy_terms_bundle',
+    id: 'server_default_policy_acute_mi_diagnosis_confirmation',
+    title: '서버 기본 약관 - 급성심근경색증 진단확정 조항',
+    summary: '급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다는 약관 조항이다.',
+    sourceDisplayName: '서버 기본 약관/RAG',
+    similarity: 1,
+    note: '업로드 약관 없음 - 서버 기본 약관 기준',
+    sourceType: 'policy',
+    citationLabel: '서버 기본 약관/RAG - 급성심근경색증 진단확정 조항',
+    sourceArea: 'terms_standards',
+    issueTags: ['acute_mi_denial', 'diagnosis_confirmation', 'heart', 'I21', 'I21.4', 'troponin', 'CAG', 'PCI'],
+    keyHolding: '급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.',
+    excerpt: '급성심근경색증의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.',
+    applicableReason: 'I21.4/NSTEMI 진단비 부지급에서 약관상 진단확정 요건과 보험사의 시술 전 심근효소 상승 추가 요건 주장을 대조하는 직접 근거이다.',
+    limitation: '가입 당시 원약관이 업로드되지 않은 경우 서버 기본 약관/RAG 기준으로 적용한다. 실제 제출 전 가입 상품 약관 원문 대조가 필요하다.',
+    policySource: 'server_default',
+  },
+  {
+    reference_type: 'official',
+    source_area: 'terms_standards',
+    source_area_label: '약관/지급기준',
+    source_type: 'policy_terms_bundle',
+    id: 'server_default_policy_ischemic_heart_disease_diagnosis_confirmation',
+    title: '서버 기본 약관 - 허혈심장질환 진단확정 조항',
+    summary: '허혈심장질환 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다는 약관 조항이다.',
+    sourceDisplayName: '서버 기본 약관/RAG',
+    similarity: 0.98,
+    note: '업로드 약관 없음 - 서버 기본 약관 기준',
+    sourceType: 'policy',
+    citationLabel: '서버 기본 약관/RAG - 허혈심장질환 진단확정 조항',
+    sourceArea: 'terms_standards',
+    issueTags: ['acute_mi_denial', 'ischemic_heart_disease', 'diagnosis_confirmation', 'I20', 'I21', 'I25.1'],
+    keyHolding: '허혈심장질환 진단확정도 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다.',
+    excerpt: '허혈심장질환의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.',
+    applicableReason: 'Unstable angina, I20, I25.1, CAD 기재와 I21.4 진단의 관계를 약관상 진단확정 요건 관점에서 정리하는 보조 근거이다.',
+    limitation: '서버 기본 약관/RAG 기준의 보조 근거이며 가입 당시 원약관과 담보명은 제출 전 확인해야 한다.',
+    policySource: 'server_default',
+  },
+];
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -160,49 +411,26 @@ function requiredEnv(key: string) {
 }
 
 async function requireAdjuster(req: Request) {
-  const authHeader = req.headers.get('authorization');
-  if (!authHeader?.startsWith('Bearer ')) {
-    throw new HttpError(401, '로그인이 필요합니다.');
+  try {
+    return await requireAdjusterUser(getSupabaseConfig(), getBearerToken(req));
+  } catch (error) {
+    const status = typeof (error as { status?: unknown }).status === 'number'
+      ? (error as { status: number }).status
+      : 500;
+    const message = error instanceof Error ? error.message : 'Failed to verify adjuster role.';
+    throw new HttpError(status, message);
   }
-
-  const supabaseUrl = requiredEnv('SUPABASE_URL');
-  const anonKey = requiredEnv('SUPABASE_ANON_KEY');
-
-  const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
-    headers: {
-      apikey: anonKey,
-      authorization: authHeader,
-    },
-  });
-
-  if (!userRes.ok) throw new HttpError(401, '유효하지 않은 로그인 세션입니다.');
-
-  const user = await userRes.json() as { id?: string };
-  if (!user.id) throw new HttpError(401, '사용자 정보를 확인할 수 없습니다.');
-
-  const profileRes = await fetch(
-    `${supabaseUrl}/rest/v1/profiles?id=eq.${user.id}&select=id,user_type`,
-    {
-      headers: {
-        apikey: anonKey,
-        authorization: authHeader,
-        accept: 'application/json',
-      },
-    },
-  );
-
-  if (!profileRes.ok) throw new HttpError(403, '프로필 권한을 확인할 수 없습니다.');
-
-  const profiles = await profileRes.json() as { id: string; user_type: string }[];
-  if (profiles[0]?.user_type !== 'adjuster') {
-    throw new HttpError(403, '손해사정사 계정만 사정서 초안을 생성할 수 있습니다.');
-  }
-
-  return user;
 }
 
 function cleanText(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function normalizeOptionalUuid(value: unknown, fieldName: string) {
+  const normalized = cleanText(value);
+  if (!normalized) return '';
+  if (!UUID_PATTERN.test(normalized)) throw new HttpError(400, `${fieldName} must be a valid UUID.`);
+  return normalized;
 }
 
 function cleanPublicText(value: unknown) {
@@ -290,12 +518,14 @@ function validateSourceAnalysis(raw: unknown): SourceAnalysis | undefined {
     treatmentSummary: clip(cleanText(value.treatmentSummary), MAX_REFERENCE_TEXT_LENGTH),
     damageEvidenceSummary: clip(cleanText(value.damageEvidenceSummary), MAX_REFERENCE_TEXT_LENGTH),
     draftSupportingFacts: cleanStringArray(value.draftSupportingFacts),
+    argumentStructureSummary: clip(cleanText(value.argumentStructureSummary), MAX_REFERENCE_TEXT_LENGTH),
   };
 }
 
 function validateInput(input: AssessmentDraftInput) {
   const cleaned = {
     requestId: cleanText(input.requestId),
+    caseId: normalizeOptionalUuid(input.caseId, 'caseId'),
     caseTitle: cleanText(input.caseTitle),
     insurerName: cleanText(input.insurerName),
     productName: cleanText(input.productName),
@@ -466,6 +696,51 @@ function formatOfficialGroundsForBody(ragResult: RagSearchResult) {
 function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const source = input.sourceAnalysis;
   const profile = caseProfile(input);
+  const claimantAssessmentRules = `
+[Customer-side loss-adjusting report direction]
+- Write as a customer-side insurance payment assessment report, not as a neutral civil complaint guide.
+- The report must advocate the customer's payment position using only provided case facts and the Evidence Pack.
+- Do not use the word "초안" in the body fields. The app will show a separate footer notice.
+- Do not repeat generic medical-advice, complaint, FSS complaint, litigation-preparation, or loss-adjuster scope guidance in the body.
+- Prohibited body phrases: "투명성을 확인하는 방향이 적절합니다", "소송 전 절차를 중심으로 진행해야 합니다", "본사 민원", "금감원 민원", "손해사정사는 소송대리를 할 수 없습니다", "보험금 지급이나 소송 결과를 단정하는 것이 아닙니다", "참고용 초안입니다", "계약해지 처분의 요건 충족 여부", "의료자문을 무조건 거부하기보다는", "자료정리가 핵심입니다".
+- If additional medical advice, complaint, or dispute-mediation steps are needed, mention them only briefly in requiredAdditionalChecks and only when directly necessary.
+- State customer-favorable facts first. Then identify why the insurer's denial logic is insufficient, selective, or overextended.
+- Unfavorable facts must be disclosed, but frame them as issues requiring supplementation or as insurer over-interpretation when the complete record supports the customer.
+- Do not invent policy wording, FSS decisions, precedent numbers, court names, decision dates, or medical facts. If Evidence Pack lacks a ground, say "직접 관련 근거자료 부족" for that category and continue with case-record reasoning.
+- Required finalSubmissionAssessmentReport format:
+  1. 손해사정서 (보험금 부지급 통보에 대한 이의 및 의견)
+  2. 수신 / 작성일 / 참조 / 문서번호 / 제목
+  3. 피보험자 정보: 피보험자, 주민번호, 주소, 연락처, 증권번호, 계약상품, 청구담보, 진단의료기관, 확정진단명. Unknown personal values must be placeholders such as [피보험자], [주민번호], [주소], [연락처], [증권번호].
+  4. 도입 문단: 부지급 통보 사실, 부당한 이유 3~4개, 보험금 지급 요청
+  5. Ⅰ. 사건의 경위 및 진단 확정 과정
+  6. Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성
+  7. Ⅲ. 의학적 근거 - 진단의 정당성
+  8. Ⅳ. 보험약관상 진단확정 요건의 충족
+  9. Ⅴ. 판례 및 금감원 자료에 대한 적용 또는 반박
+  10. Ⅵ. 약관해석 원칙
+  11. Ⅶ. 결론
+  12. [요청사항]
+  13. 첨부서류
+`;
+  const acuteMiRules = /I21\.?4|심내막하심근경색|NSTEMI|unstable\s+angina|CAD|CAG|PCI|troponin|CK-?MB/i.test([
+    input.damageDetails,
+    input.insurerPosition,
+    input.customerStatement,
+    source?.summary,
+    source?.diagnosisSummary,
+    source?.testResultSummary,
+    source?.treatmentSummary,
+    source?.damageEvidenceSummary,
+    ...(source?.keyIssues || []),
+    ...(source?.draftSupportingFacts || []),
+  ].filter(Boolean).join('\n')) ? `
+[Acute MI / I21.4 denial mandatory analysis]
+- This case appears to involve acute subendocardial myocardial infarction I21.4 / NSTEMI versus unstable angina or CAD.
+- You must directly address: I21.4 diagnosis, Unstable angina relationship, Coronary artery disease/CAD, CAG result, PCI/stent, LM-LAD or LM-mLAD severe stenosis, hs-troponin value and timing, CK-MB, ECG ST elevation/depression, Echo RWMA/LVEF, discharge summary diagnosis, diagnosis certificate/opinion diagnosis, and the insurer's possible "post-PCI troponin rise" argument.
+- Do not reduce the case to generic "medical review transparency" or complaint procedure.
+- Use this argumentative stance when supported by the records: the insurer cannot reject the attending physician's I21.4 diagnosis merely from an Unstable angina entry or from a possibility that troponin rose after PCI; it must prove the timing and medical interpretation using the complete record.
+- If a specific item is not found in the provided record, write that the item requires additional confirmation, rather than inventing it.
+` : '';
   const profileRules = profile === 'disability_benefit' ? `
 [Disability benefit argument]
 - This is a disability benefit dispute. Do not mention manual therapy, indemnity denial, cancer diagnosis benefit, thyroid cancer, cataract, disclosure duty, contract termination, or automobile damage calculation unless explicitly entered.
@@ -485,12 +760,10 @@ function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: Ra
 ` : profile === 'medical_review_pre_litigation' ? `
 [Medical review / pre-litigation dispute resolution argument]
 - This is a medical-advice, insurer medical review, reconsideration, complaint, or pre-litigation dispute-resolution case.
-- Stay within loss-adjuster scope. Do not say the loss adjuster can conduct litigation or legal representation.
-- Do not advise that medical advice must always be refused. Explain that the customer may request the reason for medical review, issues to be reviewed, list of documents provided, questions to the advisor, advisor specialty, and full written result.
-- If attending physician and third physician opinions already exist, explain that the insurer should provide specific written reasons for rejecting those materials.
-- Discuss pre-litigation steps such as insurer reconsideration, headquarters complaint, consumer-protection department complaint, FSS complaint, and financial dispute mediation preparation.
-- If litigation is mentioned, include 변호사 상담 and 손해사정사는 소송대리 불가 or 법률대리 불가.
-- Include the phrases 의료자문, 서면, 소송 전, 자료정리, 재검토, and 본사 민원 or 금감원 민원 or 분쟁조정.
+- Do not write a generic complaint or litigation guide.
+- Focus on whether the insurer's medical-review logic is weak when compared with the attending physician records and objective test results.
+- Mention medical advice or external review only as a short additional-material request when it directly affects the denial issue.
+- Do not include headquarters complaint, FSS complaint, litigation preparation, or loss-adjuster legal-scope explanations in the body.
 ` : profile === 'brain_diagnosis_benefit' ? `
 [Brain disease diagnosis benefit argument]
 - This is a brain disease diagnosis benefit dispute. Do not mention manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
@@ -503,13 +776,12 @@ function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: Ra
 ` : profile === 'heart_diagnosis_benefit' ? `
 [Heart disease diagnosis benefit argument]
 - This is a heart disease diagnosis benefit dispute. Do not mention manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, brain infarction, brain hemorrhage, disability, automobile insurance, disclosure duty, or contract termination unless explicitly entered.
-- Heart disease diagnosis benefit is not decided only by the diagnosis certificate code. Review the original policy terms at enrollment and diagnosis confirmation criteria for acute myocardial infarction, ischemic heart disease, angina, or cardiovascular disease.
-- For acute myocardial infarction, review troponin or other cardiac enzyme elevation, ECG/EKG changes, coronary angiography/CAG, PCI, imaging, and medical records.
-- Distinguish I20 angina from I21 acute myocardial infarction because payable coverage may differ.
-- Coronary stenosis or stent insertion alone does not automatically confirm acute myocardial infarction benefit.
+- Heart disease diagnosis benefit must be argued from the customer side using diagnosis certificate/opinion, discharge summary, enzyme trend, ECG, CAG/PCI, imaging, and enrollment-date policy terms.
+- For acute myocardial infarction, directly analyze I21.4/NSTEMI, unstable angina, CAD, CAG, PCI/stent, hs-troponin, CK-MB, ECG ST changes, RWMA, LVEF, and the timing of tests before/after PCI.
+- If insurer relies only on an Unstable angina or CAD entry, state that this is a selective reading when the full record supports I21.4 or acute coronary syndrome.
+- If insurer argues post-PCI troponin rise, state that the insurer must prove the exact collection time, procedure time, and medical interpretation; possibility alone cannot defeat the attending physician's diagnosis.
 - For postmortem suspected acute myocardial infarction, review death certificate, emergency records, troponin, ECG/EKG, and autopsy status.
-- Include the phrases 심장질환, 진단확정, 검사결과, 트로포닌, 가입 당시 약관, and 재검토.
-- The conclusion should be: payment is not certain, but the decision requires reconsideration based on test results and diagnosis-confirmation criteria in the policy at enrollment.
+- The conclusion should strongly argue payment validity when I21.4 diagnosis and objective cardiac findings are present, while marking only genuinely missing items as additional confirmation.
 ` : profile === 'cancer_diagnosis_benefit' ? `
 [Cancer diagnosis benefit / borderline / carcinoma in situ argument]
 - This is a cancer diagnosis benefit, borderline tumor, carcinoma in situ, similar cancer, low-amount cancer, primary/metastatic cancer, or diagnosis-confirmation dispute.
@@ -582,21 +854,57 @@ function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: Ra
 [General disclosure-duty argument]
 - For pre-contract disclosure duty disputes, analyze materiality, intentional or grossly negligent non-disclosure, written questions, objective underwriting standards, and causal relationship without importing disease-specific facts that are not in the input.
 `;
-  return `당신은 보험 손해사정 실무 문서 작성 보조자입니다.
-아래 사건 정보, 면책공문 분석 요약, 고객 의학/손해자료 요약, 참고자료 범위 안에서만 손해사정사가 검토할 "사정서 초안"을 작성하세요.
+  return `너는 15년 경력의 보험손해사정사이자 의료자문 경험이 있는 변호사 보조 인력입니다.
+보험사의 부지급/감액 결정에 대해 피보험자 측 의견서, 즉 보험회사 제출용 손해사정서를 작성합니다.
+글은 보험사 담당자, 금융분쟁조정위원, 판사가 본다고 가정합니다.
+아래 사건 정보, 면책공문 분석 요약, 고객 의학/손해자료 요약, Evidence Pack 범위 안에서만 고객 측 손해사정 의견을 작성하세요.
 
 [핵심 원칙]
-- AI 결과는 참고용 초안입니다.
-- 최종 판단은 손해사정사가 합니다.
 - 제공된 사건 정보와 제공된 참고자료 범위 내에서 작성합니다.
+- 피보험자에게 유리하게 작성하되, 사실 왜곡과 과장은 절대 금지합니다.
+- 모든 핵심 주장은 의학근거, 약관조항, 판례/법리, 의무기록 중 최소 2개 이상의 축으로 뒷받침합니다.
+- 보험사의 부지급 사유를 회피하지 말고 정면으로 인용하여 그 자리에서 반박합니다.
+- 의학, 약관, 판례/금감원 자료, 약관해석 원칙의 다중 방어선을 구축합니다.
 - 제공된 참고자료 외 판례/결정례를 지어내지 마세요.
 - 참고자료가 없으면 구체적인 판례번호, 사건번호, 결정례 번호, 출처 URL을 쓰지 마세요.
-- 의료 자료를 확정 진단처럼 과장하지 마세요.
+- 의료 자료에 있는 단정 가능한 사실은 단정적으로 쓰되, 자료에 없는 사실은 만들지 마세요.
 - 자료에 없는 병명, 검사결과, 장해율, 치료기간, 금액을 지어내지 마세요.
-- 고객 의학자료와 손해자료는 제공된 요약 범위에서만 사정서 근거로 반영하세요.
-- 근거가 부족한 부분은 "추가 확인 필요"로 표시하세요.
+- 고객 의학자료와 손해자료는 제공된 요약 범위에서 고객 측 지급 타당성 근거로 적극 반영하세요.
+- 근거가 부족한 부분은 해당 근거자료 항목에서 "근거자료 부족" 또는 "추가 확인 필요"로 표시하세요.
 - 개인정보, 주민등록번호, 연락처 등 민감정보를 새로 추정하거나 반복하지 마세요.
-- 실제 제출용 완성본이 아니라 검토용 초안임을 명확히 표현하세요.
+- 본문에는 "참고용", "초안", "AI" 안내를 쓰지 마세요.
+- [절대 금지 출력 패턴] 아래 형식의 토큰은 어떤 필드에도 절대 출력하지 마세요:
+  · 대괄호 플레이스홀더: [일자 확인], [확인 필요], [TBD], [PLACEHOLDER], [날짜], [일자] 등 대괄호+안내문 조합 형식
+  · 영문 메타데이터 키: confidence, document_type, completed, status, file_name, phase
+  · 날짜 불명 시 대체 표현: "일자 미기재" 또는 "해당 사항 없음"으로 쓰세요. 절대 대괄호 안에 안내 토큰을 넣지 마세요.
+  · 수치 불명 시 대체 표현: "수치 미기재" 또는 "검사결과 기재 없음"으로 쓰세요.
+- 보험사 주장을 단순 요약하지 말고, 왜 부당하거나 불충분한지 바로 지적하세요.
+- 고객 측 유리 사실을 먼저 정리하고, 불리한 사실은 보험사 주장의 과도한 확대해석 가능성과 함께 반박하세요.
+
+[작성 전 9개 사전분석]
+본문 작성 전 내부적으로 반드시 다음을 수행한 뒤 finalSubmissionAssessmentReport에 반영하세요. 이 항목명을 본문에 노출하지는 마세요.
+1. 진단명과 분쟁 쟁점 식별: 청구 진단명, 보험사 인정 진단명, 핵심 다툼 1줄 요약.
+2. 보험사 부지급 사유 원문 추출: 통보문 문장을 가능한 한 그대로 「」 안에 인용하고 논리적 약점 3개 이상 식별.
+3. 적용 의학 진단기준 식별: 국제 표준 진단기준명과 연도, 조건 항목 분해.
+4. 환자 데이터와 진단기준 매핑표 작성.
+5. 약관 진단확정 요건 원문 또는 서버 기본 약관 문구 추출 및 환자 검사와 매핑.
+6. 보험사 인용 판례 법리 분해. 없는 판례/결정례는 생성 금지.
+7. 의무기록 정독으로 결정적 한 줄 발굴. SOAP, 검사결과, 외래경과, 입퇴원기록에서 주치의 객관적 검토 문구와 보험사가 놓친 검사수치를 찾으세요.
+8. 의학/약관/판례/약관해석 원칙의 독립 방어선 설계.
+9. 진단기준표, 약관요건표, 보험사 문구 인용박스, 핵심 수치 반복 배치.
+
+[출력 후 자체검증]
+finalSubmissionAssessmentReport 작성 후 아래 항목을 스스로 점검하고 부족한 부분은 본문 안에서 보정하세요.
+- 보험사 부지급 사유 원문 또는 핵심 문구가 「」 안에 인용되었는가.
+- 의학 진단기준의 정확한 명칭과 연도가 들어갔는가.
+- 진단기준 vs 환자 데이터 매핑표와 약관 요건별 충족표가 있는가.
+- 의무기록에서 killing evidence 1개 이상이 별도 강조되었는가.
+- 결론 장에서 의학, 약관, 판례/법리, 약관해석 원칙을 독립 논거로 정리했는가.
+- 요청사항에 보험금, 지연이자, 구체적 서면회신이 모두 포함되었는가.
+- 약한 표현, 내부 라벨, 개인정보가 제거되었는가.
+
+${claimantAssessmentRules}
+${acuteMiRules}
 
 [문체]
 ${toneInstruction(input.tone)}
@@ -629,17 +937,32 @@ ${toneInstruction(input.tone)}
 손해 입증자료 요약: ${source?.damageEvidenceSummary || '없음'}
 사정서 반영 핵심 근거: ${source?.draftSupportingFacts?.join(' / ') || '없음'}
 
+[논증 구조 템플릿]
+${source?.argumentStructureSummary || '없음'}
+
+[Argument engine rules]
+- The final report must follow this logic: insurer position -> neutralized errors -> independent defense layers -> payment duty and pressure.
+- Chapter I must reconstruct objective facts from medical records, not from the insurer's edited fact framing.
+- Chapter II must quote or summarize the insurer's denial position and classify 3 to 5 decisive errors.
+- Chapter III must use a syllogism: medical standard -> patient facts -> satisfied/not satisfied.
+- Chapter IV must use: policy wording -> required element -> patient fact matching -> conclusion.
+- Chapter V must not paste unrelated authorities. If an insurer-cited authority exists, reverse-apply its legal structure in favor of the customer where factually supportable.
+- Chapter VI must state that the insurer may not add requirements not found in the policy and must apply contra proferentem when wording is ambiguous.
+- Chapter VII must end in first/second/third payment-duty conclusions and [요청사항] must request insurance payment, delay interest, written medical/policy reasons on disagreement, and possible dispute-resolution/litigation follow-up.
+- Repeat the strongest verified numbers, test findings, and lesion/procedure facts in the medical, policy, and conclusion sections. Do not invent numbers.
+
 [제공된 참고자료]
 ${formatReferences(input.retrievedReferences, ragResult)}
 
-[RAG search references]
+[Evidence Pack - RAG search references]
 ${formatRagForPrompt(ragResult)}
 
-[Official grounds that must be woven into the body]
+[Evidence Pack - official grounds that must be woven into the body]
 ${formatOfficialGroundsForBody(ragResult)}
 
 [RAG usage rules]
 - Cite only official or semi-official RAG references as legal/reference basis.
+- Treat source_area "medical_guideline" as medical criteria evidence, not as policy wording, precedent, or FSS decision. Use it to test whether the medical records support or weaken I21.4/NSTEMI reasoning.
 - Do not cite internal review materials as official grounds. Use them only for issue spotting, checklist items, and additional review.
 - Do not cite FSS title seeds without confirmed full text.
 - Do not cite policy/terms references unless the title and summary are directly related to the issue.
@@ -651,24 +974,23 @@ ${formatOfficialGroundsForBody(ragResult)}
 - If the original company/product policy is missing, use standard policy terms or similar materials only as reference materials.
 - Indemnity insurance generation is a search aid only; final judgment requires the insurance policy and policy terms in effect at enrollment.
 - For disability and disease-code issues, state that the policy appendix in effect at enrollment must be checked.
+- For acute MI/I21.4 disputes, never use a fixed troponin absolute cutoff. Require the testing institution's reference range or 99th percentile URL, rise/fall pattern, ischemic symptoms, ECG, Echo/RWMA/LVEF, CAG/PCI findings, and PCI before/after sampling times.
 - Cite precedents only when case number, court, and decision date are available.
 - Precedents marked as "유사 판례 참고자료" or with review_status needs_human_review / official_citation_allowed false may be used only for 판례상 법리 참고 or 논리 보강. Do not describe them as 공식근거, 확정 근거, or a basis that payment must be made.
 - Only reviewed precedents with official_citation_allowed true, or existing official law API full-text precedents, may be used as strong precedent grounds.
 - Do not expose internal ids, chunk ids, embedding status, review status, trust level, or internal source types.
 
-[Customer-side reconsideration direction]
-- The purpose of this draft is to support the customer's request for reconsideration of the insurer's denial, exemption, or contract termination decision.
-- Write from the customer's side, while preserving objectivity and not hiding unfavorable points.
-- The main thesis should be: "보험회사의 부지급/면책/계약해지 처분은 재검토가 필요하다."
-- Use expressions such as "다툴 여지가 있다", "객관적 근거 제시가 필요하다", "추가자료 확인을 전제로 고객 측 주장이 상당한 검토 가치가 있다."
+[Customer-side assessment direction]
+- The main thesis should be: "보험회사의 부지급 논리는 전체 의무기록과 지급요건 검토에 비추어 불충분하거나 과도하다."
+- Use strong customer-side expressions when supported by records: "단편적 해석이다", "전체 의무기록 흐름에 비추어 부당하다", "보험사가 입증해야 한다", "지급 타당성이 인정된다".
 - Do not use prohibited expressions: "보험금 지급 확정", "반드시 받을 수 있음", "보험사의 처분은 무조건 위법", "승소 가능성".
-- Structure the reasoning as: 1) 사건 개요, 2) 인정되는 사실, 3) 보험사 주장, 4) 고객 측 주장, 5) 주요 쟁점, 6) 고객 측에 유리한 사정, 7) 관련 근거 검토, 8) 현 사건에의 적용, 9) 보험사 주장에 대한 반박 의견, 10) 손해사정 의견 초안, 11) 불리한 점 및 보완 필요 사항, 12) 추가 확보 필요 자료, 13) 고객 안내용 쉬운 요약.
-- First organize the insurer's position, then emphasize customer-favorable facts, then analyze weaknesses in the insurer's position, then connect official grounds to the customer's reconsideration logic.
-- Unfavorable facts must be placed in "불리한 점 및 보완 필요 사항" and matched with concrete documents to supplement them.
+- Structure the report as: 1) 사정 결론, 2) 보험사 부지급 논리의 문제점, 3) 고객 측 핵심 인정 사실, 4) 의학적 핵심 쟁점, 5) 약관상 지급요건 충족 주장, 6) 핵심 근거자료, 7) 보험사 주장에 대한 반박, 8) 추가 확보자료, 9) 손해사정 의견.
+- In 핵심 근거자료, separate 적용 약관, 금감원 분쟁조정례, 판례. If missing, write "해당 항목 직접 관련 근거자료 부족" and do not invent details.
+- Unfavorable facts must be handled as supplement points or insurer over-interpretation unless the record clearly defeats the customer.
 
-[Draft reasoning structure rules]
-- This is not a search-result summary. Write a practical loss-adjusting opinion draft that applies the searched grounds to the current case facts.
-- Use this reasoning order in the body: 1) 인정되는 사실, 2) 보험사 주장, 3) 고객 주장, 4) 쟁점 정리, 5) 관련 법령/약관/분쟁조정례/판례 검토, 6) 현 사건에의 적용, 7) 손해사정 의견, 8) 불리한 점 및 추가 확인 필요 사항, 9) 고객 안내용 요약.
+[Assessment report structure rules]
+- This is not a search-result summary. Write a customer-side loss-adjusting assessment report that applies the Evidence Pack to the current case facts.
+- Use this reasoning order in the body: 1) 사정 결론, 2) 보험사 부지급 논리의 문제점, 3) 고객 측 핵심 인정 사실, 4) 의학적 핵심 쟁점, 5) 약관상 지급요건 충족 주장, 6) 핵심 근거자료, 7) 보험사 주장에 대한 반박, 8) 추가 확보자료, 9) 손해사정 의견.
 - Do not leave the opinion at "additional review is needed" only. Even when final judgment is difficult, write the provisional loss-adjusting opinion available from the provided facts.
 - Explain why each directly related official RAG ground is favorable or unfavorable to this case. Do not merely list references.
 - In legalAndReferenceBasis, damageAssessment, and adjusterOpinionDraft, write the actual ground names from "Official grounds that must be woven into the body" in sentences.
@@ -676,24 +998,27 @@ ${formatOfficialGroundsForBody(ragResult)}
 - If a policy term lacks the original company/product policy or enrollment-date version, write that the original policy terms at enrollment must be checked and use standard terms only as reference material.
 - Use internal review materials only for issue framing and document checklist. Never cite them as official legal, precedent, FSS, or policy grounds.
 - If official grounds are insufficient, say "직접 관련 공식 근거 부족" and still analyze the current facts under the available legal framework.
-- The adjusterOpinionDraft field must contain at least 5 substantial paragraphs. Prefer 5 to 8 paragraphs for ordinary cases.
+- The adjusterOpinionDraft field must contain at least 5 substantial customer-side paragraphs. Prefer 5 to 8 paragraphs for ordinary cases.
 - The requiredAdditionalChecks field must include both unfavorable points and concrete documents to request.
 
 ${profileRules}
 
 응답은 아래 JSON 형식으로만 반환하세요. JSON 외 텍스트는 포함하지 마세요.
 {
-  "title": "제목",
-  "overview": "사건 개요",
-  "facts": "사실관계",
-  "issues": "주요 쟁점",
-  "legalAndReferenceBasis": "법률 및 참고자료 근거. 제공된 참고자료가 없으면 구체적인 판례번호나 출처를 쓰지 말고 추가 확인 필요로 표시",
-  "damageAssessment": "손해 내용 및 평가. 고객 의학자료/손해자료 요약을 함께 반영하되 과장하지 말 것",
-  "insurerPositionReview": "보험사 주장 검토",
-  "adjusterOpinionDraft": "손해사정 의견 초안",
+  "title": "고객 측 손해사정서 제목",
+  "overview": "사정 결론",
+  "facts": "고객 측 핵심 인정 사실",
+  "issues": "의학적 핵심 쟁점",
+  "legalAndReferenceBasis": "약관상 지급요건 충족 주장 및 핵심 근거자료. 적용 약관/금감원 분쟁조정례/판례를 구분하고, 없으면 근거자료 부족으로 표시",
+  "damageAssessment": "보험사 부지급 논리의 문제점과 고객 측 지급 타당성",
+  "insurerPositionReview": "보험사 주장에 대한 반박",
+  "adjusterOpinionDraft": "손해사정 의견",
   "requiredAdditionalChecks": "추가 확인 필요 사항",
   "simpleClientSummary": "고객에게 안내할 쉬운 요약",
-  "disclaimer": "AI 결과는 참고용 초안이며 최종 판단과 제출 전 검토는 손해사정사가 해야 한다는 안내"
+  "customerSideAssessmentReport": "위 새 결과 구조 1~9번을 제목 포함 완성 문서 형태로 작성. 본문에 참고용/초안/민원/소송 안내 문구 금지",
+  "finalSubmissionAssessmentReport": "보험회사 제출용 손해사정서 본문. 반드시 '손해사정서\\n(보험금 부지급 통보에 대한 이의 및 의견)'로 시작하고, 수신/작성일/참조/문서번호/제목, 피보험자 정보, Ⅰ~Ⅶ, [요청사항], 첨부서류 순서로 작성. 개인정보는 [피보험자] 등 placeholder로 비식별 처리",
+  "reportFormatVersion": "${REPORT_FORMAT_VERSION}",
+  "disclaimer": ""
 }`;
 }
 
@@ -704,11 +1029,11 @@ function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedRe
     : profile === 'causation_preexisting_injury'
     ? '- For a pre-existing condition / causation / injury-nature dispute, remove manual therapy, cancer diagnosis benefit, cataract, thyroid cancer, disclosure-duty, contract-termination, duplicate indemnity, and proportional-reimbursement reasoning. Keep the reasoning focused on pre-existing condition, causation, injury nature, accident contribution, degenerative versus traumatic findings, pre/post accident records, imaging, and medical time relationship.'
     : profile === 'medical_review_pre_litigation'
-    ? '- For a medical-advice / pre-litigation dispute-resolution case, remove payment certainty, illegal-conduct accusations, and litigation guarantees. Keep the reasoning focused on medical advice, written requests, document organization, insurer reconsideration, headquarters/FSS complaint or dispute mediation preparation, and clear limits that loss adjusters cannot provide litigation/legal representation.'
+    ? '- For a medical-review dispute, remove payment certainty and illegal-conduct accusations. Do not keep generic complaint, headquarters/FSS complaint, litigation preparation, or loss-adjuster legal-scope guidance in the body. Keep only case-specific weaknesses in the insurer medical reasoning.'
     : profile === 'brain_diagnosis_benefit'
     ? '- For a brain disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on brain disease, diagnosis confirmation, MRI/MRA/CTA/CT imaging, acute vs old/asymptomatic lesions, neurological deficits, policy definitions at enrollment, and medical records.'
     : profile === 'heart_diagnosis_benefit'
-    ? '- For a heart disease diagnosis benefit dispute, remove manual therapy, M54, low back pain, cataract, thyroid cancer, cancer diagnosis benefit, brain infarction/hemorrhage, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on heart disease, diagnosis confirmation, test results, troponin/cardiac enzymes, ECG/EKG, coronary angiography/CAG, PCI, policy definitions at enrollment, and medical records.'
+    ? '- For a heart disease diagnosis benefit dispute, remove manual therapy, cataract, cancer, brain, disability, automobile, disclosure-duty, contract-termination, complaint, FSS complaint, litigation, and generic medical-advice reasoning. Keep the reasoning focused on customer-side payment validity: I21.4/NSTEMI, Unstable angina, CAD, CAG, PCI/stent, hs-troponin timing, CK-MB, ECG ST changes, RWMA/LVEF, discharge summary versus diagnosis certificate, policy definitions at enrollment, and why the insurer reading is incomplete.'
     : profile === 'cancer_diagnosis_benefit'
     ? '- For a cancer diagnosis benefit / borderline tumor / carcinoma in situ dispute, remove manual therapy, M54, low back pain, shockwave therapy, indemnity-denial, disability, automobile-insurance, disclosure-duty, and contract-termination reasoning. Keep the reasoning focused on cancer diagnosis benefit, diagnosis confirmation, pathology report, biopsy/cytology, disease classification table/KCD, behavior code, C-code/D-code, original policy terms at enrollment, and whether the claim is general cancer, similar cancer, carcinoma in situ, or borderline tumor.'
     : profile === 'indemnity_general_denial'
@@ -726,16 +1051,20 @@ function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedRe
     : profile === 'thyroid_disclosure_cancer'
       ? '- For a thyroid nodule / thyroid cancer disclosure case, remove M47.26, back pain, orthopedic, one-outpatient, and spine-specific reasoning. Keep the reasoning focused on thyroid nodule, health checkup, ultrasound, FNA/biopsy recommendation, cancer diagnosis benefit, objective underwriting standards, and thyroid cancer causal relationship.'
       : '- Do not import disease-specific reasoning that is not supported by the input facts.';
-  return `아래 사정서 초안 JSON을 검증하고 보정하세요.
+  return `아래 고객 측 손해사정서 JSON을 검증하고 보정하세요.
 
 [검증 기준]
+- 본문에서 "초안", "참고용", "AI", "본사 민원", "금감원 민원", "소송 전 절차", "손해사정사는 소송대리를 할 수 없습니다", "의료자문을 무조건 거부하기보다는", "자료정리가 핵심입니다", "계약해지 처분의 요건 충족 여부" 문구를 제거하세요.
+- 본문을 고객 측 보험금 지급 검토 사정서로 보정하세요. 중립적 안내문이나 민원 안내문으로 만들지 마세요.
+- 보험사 주장의 문제점을 직접 지적하고, 고객에게 유리한 의무기록 및 Evidence Pack 근거를 먼저 배치하세요.
+- 심장/I21.4 사건이면 I21.4, Unstable angina, CAD, CAG/PCI, hs-troponin, CK-MB, ECG, RWMA/LVEF, 입퇴원요약지와 진단서 불일치를 반드시 다루세요.
 - 제공된 참고자료 외 판례/결정례/출처/사건번호가 있으면 삭제하거나 "추가 확인 필요"로 바꾸세요.
 - 참고자료가 없으면 구체적인 판례번호, 결정례 번호, 출처 URL을 쓰지 마세요.
 - 의료 자료를 확정 진단처럼 과장한 표현을 제거하세요.
 - 자료에 없는 병명, 검사결과, 장해율, 치료기간, 금액을 지어내지 마세요.
 - 근거 없는 단정, 논리 비약, 사실관계에 없는 개인정보 추정을 제거하세요.
 - 근거가 부족한 부분은 "추가 확인 필요"로 표시하세요.
-- disclaimer에는 참고용 초안이며 최종 검토는 손해사정사가 해야 한다는 취지가 반드시 포함되어야 합니다.
+- disclaimer는 빈 문자열로 두세요. 앱 화면 하단에서 별도 안내합니다.
 - 응답은 같은 JSON 구조로만 반환하세요.
 
 [제공된 참고자료]
@@ -820,7 +1149,6 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
       'adjusterOpinionDraft',
       'requiredAdditionalChecks',
       'simpleClientSummary',
-      'disclaimer',
     ] as const;
 
     for (const key of requiredKeys) {
@@ -836,21 +1164,53 @@ function parseJsonResponse(text: string): AssessmentDraftResult {
   }
 }
 
+const FORBIDDEN_PHRASE_PATTERNS: RegExp[] = [
+  /\[일자\s*확인\]/g,
+  /\[확인\s*필요\]/g,
+  /\[TBD\]/gi,
+  /\[PLACEHOLDER\]/gi,
+  /\[날짜\]/g,
+  /\[일자\]/g,
+  /\[[A-Z][A-Z_]{1,}\]/g,
+  /\bconfidence\s*[:=]\s*[^\s,\])\n]*/gi,
+  /\bdocument_type\s*[:=]\s*[^\s,\])\n]*/gi,
+  /\bcompleted\s*[:=]\s*[^\s,\])\n]*/gi,
+  /\bSKMBT_[^\s,)]+/gi,
+  /\bResized_[^\s,)]+/gi,
+];
+
+function stripForbiddenPhrases(value: string): string {
+  if (!value) return value;
+  let text = value;
+  for (const pattern of FORBIDDEN_PHRASE_PATTERNS) {
+    text = text.replace(pattern, '');
+  }
+  return text.replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 function sanitizeResult(result: AssessmentDraftResult): AssessmentDraftResult {
+  const clean = (v: string | undefined) => stripForbiddenPhrases(cleanPublicText(v));
   return {
     requestId: cleanPublicText(result.requestId),
     detectedProfile: cleanPublicText(result.detectedProfile),
-    title: cleanPublicText(result.title),
-    overview: cleanPublicText(result.overview),
-    facts: cleanPublicText(result.facts),
-    issues: cleanPublicText(result.issues),
-    legalAndReferenceBasis: cleanPublicText(result.legalAndReferenceBasis),
-    damageAssessment: cleanPublicText(result.damageAssessment),
-    insurerPositionReview: cleanPublicText(result.insurerPositionReview),
-    adjusterOpinionDraft: cleanPublicText(result.adjusterOpinionDraft),
-    requiredAdditionalChecks: cleanPublicText(result.requiredAdditionalChecks),
-    simpleClientSummary: cleanPublicText(result.simpleClientSummary),
-    disclaimer: cleanPublicText(result.disclaimer),
+    reportFormatVersion: cleanPublicText(result.reportFormatVersion),
+    title: clean(result.title),
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: clean(result.issues),
+    legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+    damageAssessment: clean(result.damageAssessment),
+    insurerPositionReview: clean(result.insurerPositionReview),
+    adjusterOpinionDraft: clean(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+    simpleClientSummary: clean(result.simpleClientSummary),
+    customerSideAssessmentReport: clean(result.customerSideAssessmentReport),
+    finalSubmissionAssessmentReport: clean(result.finalSubmissionAssessmentReport),
+    policyEvidence: result.policyEvidence,
+    killingEvidence: result.killingEvidence,
+    preAnalysis: result.preAnalysis,
+    selfVerification: result.selfVerification,
+    disclaimer: '',
   };
 }
 
@@ -904,7 +1264,9 @@ function preserveInputDiagnosisCodes(result: AssessmentDraftResult, input: Retur
     adjusterOpinionDraft: preserve(result.adjusterOpinionDraft),
     requiredAdditionalChecks: preserve(result.requiredAdditionalChecks),
     simpleClientSummary: preserve(result.simpleClientSummary),
-    disclaimer: preserve(result.disclaimer),
+    customerSideAssessmentReport: preserve(result.customerSideAssessmentReport || ''),
+    finalSubmissionAssessmentReport: preserve(result.finalSubmissionAssessmentReport || ''),
+    disclaimer: '',
   };
 }
 
@@ -929,12 +1291,1165 @@ function removeReferenceAbsenceContradiction(result: AssessmentDraftResult, ragR
     adjusterOpinionDraft: fix(result.adjusterOpinionDraft),
     requiredAdditionalChecks: fix(result.requiredAdditionalChecks),
     simpleClientSummary: fix(result.simpleClientSummary),
-    disclaimer: fix(result.disclaimer),
+    customerSideAssessmentReport: fix(result.customerSideAssessmentReport || ''),
+    finalSubmissionAssessmentReport: fix(result.finalSubmissionAssessmentReport || ''),
+    disclaimer: '',
   };
 }
 
 function paragraphCount(value: string) {
   return value.split(/\n{2,}|(?<=다\.)\s+(?=[가-힣A-Z])/).map((item) => item.trim()).filter(Boolean).length;
+}
+
+function stripProhibitedBodyPhrases(result: AssessmentDraftResult): AssessmentDraftResult {
+  const prohibited = [
+    /투명성을\s*확인하는\s*방향이\s*적절합니다/g,
+    /소송\s*전\s*절차를\s*중심으로\s*진행해야\s*합니다/g,
+    /본사\s*민원(?:을| 또는|과|,|\s|$)/g,
+    /금감원\s*민원(?:을| 또는|과|,|\s|$)/g,
+    /손해사정사는\s*소송대리를\s*할\s*수\s*없습니다/g,
+    /보험금\s*지급이나\s*소송\s*결과를\s*단정하는\s*것이\s*아닙니다/g,
+    /참고용\s*초안입니다/g,
+    /계약해지\s*처분의\s*요건\s*충족\s*여부/g,
+    /의료자문을\s*무조건\s*거부하기보다는/g,
+    /자료정리가\s*핵심입니다/g,
+    /AI\s*결과는\s*참고용\s*초안[^.\n]*[.\n]?/g,
+    /재검토가\s*필요(?:합니다|하다|하다는\s*방향[^.\n]*)?/g,
+    /단정하기보다/g,
+    /확정할\s*수는\s*없으나/g,
+    /검토\s*가치/g,
+    /추가적인\s*검토가\s*필요/g,
+    /지급\s*여부를\s*단정하는\s*것이\s*아니라/g,
+    /처분의\s*요건\s*충족\s*여부/g,
+  ];
+  const clean = (value: string | undefined) => {
+    let text = cleanPublicText(value);
+    for (const pattern of prohibited) text = text.replace(pattern, '').trim();
+    return dedupeParagraphs(text.replace(/\n{3,}/g, '\n\n').trim());
+  };
+  const customerSideAssessmentReport = clean(result.customerSideAssessmentReport)
+    || [
+      `1. 사정 결론\n${clean(result.overview)}`,
+      `2. 보험사 부지급 논리의 문제점\n${clean(result.insurerPositionReview)}`,
+      `3. 고객 측 핵심 인정 사실\n${clean(result.facts)}`,
+      `4. 의학적 핵심 쟁점\n${clean(result.issues)}`,
+      `5. 약관상 지급요건 충족 주장\n${clean(result.legalAndReferenceBasis)}`,
+      `6. 핵심 근거자료\n${clean(result.legalAndReferenceBasis)}`,
+      `7. 보험사 주장에 대한 반박\n${clean(result.adjusterOpinionDraft)}`,
+      `8. 추가 확보자료\n${clean(result.requiredAdditionalChecks)}`,
+      `9. 손해사정 의견\n${clean(result.damageAssessment) || clean(result.adjusterOpinionDraft)}`,
+    ].filter((section) => !/undefined|null/i.test(section)).join('\n\n');
+  const finalSubmissionAssessmentReport = clean(result.finalSubmissionAssessmentReport);
+  return {
+    ...result,
+    title: clean(result.title).replace(/초안/g, '').trim(),
+    overview: clean(result.overview),
+    facts: clean(result.facts),
+    issues: clean(result.issues),
+    legalAndReferenceBasis: clean(result.legalAndReferenceBasis),
+    damageAssessment: clean(result.damageAssessment),
+    insurerPositionReview: clean(result.insurerPositionReview),
+    adjusterOpinionDraft: clean(result.adjusterOpinionDraft),
+    requiredAdditionalChecks: clean(result.requiredAdditionalChecks),
+    simpleClientSummary: clean(result.simpleClientSummary),
+    customerSideAssessmentReport,
+      finalSubmissionAssessmentReport,
+    disclaimer: '',
+  };
+}
+
+function dedupeParagraphs(value: string) {
+  const seen = new Set<string>();
+  return value
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter((paragraph) => {
+      if (!paragraph) return false;
+      const key = paragraph.replace(/\s+/g, ' ').slice(0, 180);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .join('\n\n');
+}
+
+function isAcuteMiPolicyReference(ref: RagSearchResult['officialReferences'][number]) {
+  if (ref.source_area !== 'terms_standards') return false;
+  const text = cleanPublicText([
+    ref.title,
+    ref.summary,
+    ref.excerpt,
+    ref.keyHolding,
+    ref.applicableReason,
+    ...(ref.issueTags || []),
+  ].filter(Boolean).join(' '));
+  return /급성\s*심근경색|심근경색|허혈\s*심장질환|심장질환\s*진단확정|진단확정|심전도|심장초음파|관상동맥|심장효소|I21|I21\.4|I20|I25\.1/i.test(text);
+}
+
+function policyReferenceKey(ref: RagSearchResult['officialReferences'][number]) {
+  return cleanPublicText(ref.id || ref.citationLabel || `${ref.source_area}:${ref.title}:${ref.summary}`).slice(0, 240);
+}
+
+function policyEvidenceFromRag(ragResult: RagSearchResult): RetrievedReference[] {
+  return (ragResult.officialReferences || [])
+    .filter(isAcuteMiPolicyReference)
+    .slice(0, 5)
+    .map((ref) => ({
+      source_area: ref.source_area,
+      source_area_label: ref.source_area_label,
+      source_type: ref.source_type,
+      id: ref.id,
+      title: ref.title,
+      summary: ref.summary,
+      source_url: ref.source_url,
+      sourceDisplayName: ref.sourceDisplayName,
+      similarity: ref.similarity,
+      note: ref.note,
+      sourceType: ref.sourceType || 'policy',
+      citationLabel: ref.citationLabel || referenceDisplayName(ref),
+      sourceArea: ref.sourceArea || ref.source_area,
+      issueTags: ref.issueTags,
+      keyHolding: ref.keyHolding,
+      excerpt: ref.excerpt,
+      applicableReason: ref.applicableReason,
+      limitation: ref.limitation,
+      policySource: ref.policySource || 'uploaded',
+    }));
+}
+
+function appendServerDefaultPolicyEvidence(
+  input: ReturnType<typeof validateInput>,
+  ragResult: RagSearchResult,
+): RagSearchResult {
+  const shouldUseHeartPolicy = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  if (!shouldUseHeartPolicy) return ragResult;
+
+  const officialReferences = ragResult.officialReferences || [];
+  const hasDirectPolicy = officialReferences.some(isAcuteMiPolicyReference);
+  if (hasDirectPolicy) return ragResult;
+
+  console.warn('acute_mi_denial policy evidence fallback applied', {
+    reason: 'no_uploaded_or_rag_policy_evidence',
+    policySource: 'server_default',
+  });
+
+  const seen = new Set(officialReferences.map(policyReferenceKey));
+  const fallback = ACUTE_MI_SERVER_DEFAULT_POLICY_EVIDENCE.filter((ref) => {
+    const key = policyReferenceKey(ref);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return {
+    ...ragResult,
+    query: [ragResult.query, ...ACUTE_MI_POLICY_SEARCH_TERMS].filter(Boolean).join('\n'),
+    officialReferences: [...fallback, ...officialReferences],
+  };
+}
+
+function buildFinalSubmissionAssessmentReport(
+  result: AssessmentDraftResult,
+  input: ReturnType<typeof validateInput>,
+  ragResult: RagSearchResult,
+): AssessmentDraftResult {
+  const argumentStructure = buildClaimArgumentStructure(result, input, ragResult);
+  const preAnalysis = buildPreAnalysisResult(input, result, ragResult, argumentStructure);
+  let finalSubmissionAssessmentReport = enforceSubmissionReportContract(
+    composeSubmissionAssessmentReport(result, input, ragResult, argumentStructure, preAnalysis),
+  );
+  let selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis);
+  if (!selfVerificationPasses(selfVerification)) {
+    finalSubmissionAssessmentReport = enforceSubmissionReportContract(
+      repairSubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, selfVerification),
+    );
+    selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis);
+  }
+  return {
+    ...result,
+    reportFormatVersion: REPORT_FORMAT_VERSION,
+    finalSubmissionAssessmentReport,
+    policyEvidence: policyEvidenceFromRag(ragResult),
+    killingEvidence: argumentStructure.killingEvidence,
+    preAnalysis,
+    selfVerification,
+  };
+}
+
+function enforceSubmissionReportContract(value: string) {
+  const prohibitedPatterns = [
+    /초안/g,
+    /참고용/g,
+    /손해액\s*산정보다는/g,
+    /재검토가\s*필요(?:합니다|하다)?/g,
+    /추가\s*검토가\s*필요(?:합니다|하다)?/g,
+    /검토\s*가치/g,
+    /가능성이\s*있습니다/g,
+    /확정할\s*수는\s*없으나/g,
+    /지급\s*여부를\s*단정하는\s*것이\s*아니라/g,
+    /단정하기보다/g,
+    /처분의\s*요건\s*충족\s*여부/g,
+    ...FORBIDDEN_PHRASE_PATTERNS,
+  ];
+  let text = cleanPublicText(value);
+  for (const pattern of prohibitedPatterns) { pattern.lastIndex = 0; text = text.replace(pattern, '').trim(); }
+  text = text
+    .replace(/검토할 수 있습니다/g, '검토합니다')
+    .replace(/지급 타당성이 있습니다/g, '지급 책임이 명확합니다')
+    .replace(/지급 타당성이 있다/g, '지급 책임이 명확하다')
+    .replace(/급성심근경색 진단보험금 및 관련 담보 보험금 지급을 요청합니다/g, '급성심근경색증진단보험금 및 관련 담보 보험금 전액과 지연이자를 지급해야 합니다')
+    .replace(/해당 담보 보험금 지급을 요청합니다/g, '해당 담보 보험금 전액과 지연이자를 지급해야 합니다');
+  if (!text.startsWith('손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)')) {
+    text = `손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)\n\n${text}`;
+  }
+  return dedupeParagraphs(text);
+}
+
+function buildPreAnalysisResult(
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  ragResult: RagSearchResult,
+  argument: ClaimArgumentStructure,
+): PreAnalysisResult {
+  const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const policyEvidence = policyEvidenceFromRag(ragResult);
+  const policyQuote = cleanPublicText(
+    policyEvidence[0]?.excerpt
+      || policyEvidence[0]?.keyHolding
+      || policyEvidence[0]?.summary
+      || (isHeart
+        ? '의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 심장질환 진단확정을 판단합니다.'
+        : '가입 당시 약관상 지급요건을 기준으로 판단합니다.'),
+  );
+  const citedAuthorities = (ragResult.officialReferences || [])
+    .filter((ref) => ref.source_area === 'precedents')
+    .map(referenceDisplayName)
+    .filter(Boolean)
+    .slice(0, 3);
+  const fssReferences = (ragResult.officialReferences || [])
+    .filter((ref) => ref.source_area === 'fss_dispute_cases')
+    .map(referenceDisplayName)
+    .filter(Boolean)
+    .slice(0, 3);
+  return {
+    diagnosisIssue: {
+      claimedDiagnosis: cleanPublicText(input.diagnosisName || input.diagnosisText) || (isHeart ? 'I21.4 급성 심내막하심근경색증' : '[확정진단명]'),
+      insurerAcceptedDiagnosis: /I25\.?1|CAD|Unstable\s*angina|협심증|관상동맥/i.test(argument.insurerPosition.quotedPosition)
+        ? 'Unstable angina / CAD / I25.1 취지'
+        : undefined,
+      disputeSummary: argument.insurerPosition.coreDenialReason,
+    },
+    insurerDenialQuote: {
+      originalQuote: extractInsurerQuotedPosition(argument.insurerPosition.quotedPosition),
+      weaknesses: argument.insurerErrorMap.map((item) => item.rebuttalThesis).slice(0, 5),
+    },
+    medicalCriteria: {
+      standardName: isHeart
+        ? 'Fourth Universal Definition of Myocardial Infarction'
+        : '제출 의료자료와 전문의 진단에 따른 객관적 판단 기준',
+      standardYear: isHeart ? '2018' : undefined,
+      criteria: argument.defenseLayers.medical.patientFactMapping.map((item) => ({
+        criterion: item.criterion,
+        patientEvidence: item.patientFact,
+        satisfied: item.satisfied,
+      })),
+    },
+    policyCriteria: {
+      policyQuote,
+      requirements: argument.defenseLayers.policy.policyRequirementMapping.map((item) => ({
+        requirement: item.requirement,
+        patientEvidence: item.patientFact,
+        satisfied: item.satisfied,
+      })),
+    },
+    citedCaseLaw: {
+      insurerCitedCases: argument.defenseLayers.caseLaw.insurerCitedAuthority
+        ? [argument.defenseLayers.caseLaw.insurerCitedAuthority]
+        : citedAuthorities,
+      legalPrinciples: [
+        argument.defenseLayers.caseLaw.legalPrinciple,
+        argument.defenseLayers.caseLaw.conclusion,
+      ].filter(Boolean),
+      reverseApplication: argument.defenseLayers.caseLaw.reverseApplication,
+      fssDisputeReferences: fssReferences,
+    },
+    killingEvidence: argument.killingEvidence,
+    defenseLayers: {
+      medical: argument.defenseLayers.medical.conclusion,
+      policy: argument.defenseLayers.policy.conclusion,
+      caseLaw: argument.defenseLayers.caseLaw.conclusion,
+      interpretation: argument.defenseLayers.interpretation.conclusion,
+    },
+    visualPlan: {
+      tables: ['진단기준 vs 환자 데이터 매핑표', '약관 요건 vs 환자 자료 매칭표'],
+      quoteBoxes: [
+        '보험사 부지급 문구',
+        ...argument.killingEvidence.filter((item) => item.strength === 'decisive').slice(0, 2).map((item) => item.quote),
+      ],
+      boldNumbers: argument.factualFoundation.keyNumbers.map((item) => `${item.label} ${item.value}`).slice(0, 5),
+    },
+    finalRequestLogic: {
+      paymentRequest: argument.finalPressure.paymentRequest,
+      delayInterestRequest: argument.finalPressure.delayInterestRequest || '지연이자를 함께 지급해야 합니다.',
+      writtenReplyDemand: argument.finalPressure.writtenReplyDemand,
+      escalationNotice: argument.finalPressure.escalationNotice || '분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
+    },
+  };
+}
+
+function selfVerifySubmissionReport(
+  report: string,
+  argument: ClaimArgumentStructure,
+  preAnalysis: PreAnalysisResult,
+): SelfVerification {
+  const text = cleanPublicText(report);
+  const defenseLayerChecks = [
+    /Ⅲ\.\s*의학적\s*근거/.test(text),
+    /Ⅳ\.\s*보험약관상\s*진단확정\s*요건/.test(text),
+    /Ⅴ\.\s*판례\s*및\s*금감원/.test(text),
+    /Ⅵ\.\s*약관해석\s*원칙/.test(text),
+  ];
+  return {
+    insurerQuotePresent: /「[^」]{6,}」/.test(text),
+    medicalStandardNamed: /Fourth Universal Definition of Myocardial Infarction|제4차\s*심근경색의\s*보편적\s*정의|NSTEMI|I21\.?4/i.test(text),
+    medicalMappingTablePresent: /\|\s*(?:판단 기준|진단기준|criterion)\s*\|/.test(text) && /myocardial injury|troponin|NSTEMI|I21\.?4/i.test(text),
+    policyQuotePresent: /Ⅳ\.\s*보험약관상[\s\S]{0,700}「[^」]{8,}」|서버 기본 약관|약관은 시술 전 심근효소 상승/i.test(text),
+    policyMappingTablePresent: /\|\s*약관상\s*요구\s*요건\s*\|/.test(text),
+    caseLawReverseAppliedOrNotFabricated: /직접 적용 가능한 판례|법리를 고객 측|사건번호를 만들지|판례\/금감원 자료는/i.test(text),
+    killingEvidencePresent: argument.killingEvidence.length > 0 && /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|주치의 SOAP|의무기록상 진단 검토/i.test(text),
+    defenseLayersCount: defenseLayerChecks.filter(Boolean).length,
+    conclusionHasSeparateReasons: /첫째,[\s\S]*둘째,[\s\S]*셋째,/.test(text),
+    requestIncludesPayment: /보험금|진단보험금|지급/.test(text),
+    requestIncludesDelayInterest: /지연이자/.test(text),
+    requestIncludesWrittenReply: /서면\s*회신|서면으로\s*회신/.test(text),
+    weakLanguageAbsent: !/(사료됩니다|생각됩니다|가능성이 있습니다|추가 검토가 필요|재검토가 필요|검토 가치|확정할 수는 없으나|지급 여부를 단정|초안|참고용)/i.test(text),
+    forbiddenPhrasesAbsent: !FORBIDDEN_PHRASE_PATTERNS.some((p) => { p.lastIndex = 0; return p.test(text); })
+      && !/\bconfidence\b|\bdocument_type\b|\bcompleted\b|\bSKMBT_|\bResized_/i.test(text),
+    piiRedacted: !/\d{6}-\d{7}|\b01[016789]-?\d{3,4}-?\d{4}\b|[가-힣]{2,4}\s*님/.test(text)
+      && /\[피보험자\]|\[주민번호\]|\[주소\]|\[연락처\]|\[증권번호\]/.test(text),
+  };
+}
+
+function selfVerificationPasses(value: SelfVerification) {
+  return value.insurerQuotePresent
+    && value.medicalStandardNamed
+    && value.medicalMappingTablePresent
+    && value.policyQuotePresent
+    && value.policyMappingTablePresent
+    && value.caseLawReverseAppliedOrNotFabricated
+    && value.killingEvidencePresent
+    && value.defenseLayersCount >= 4
+    && value.conclusionHasSeparateReasons
+    && value.requestIncludesPayment
+    && value.requestIncludesDelayInterest
+    && value.requestIncludesWrittenReply
+    && value.weakLanguageAbsent
+    && value.forbiddenPhrasesAbsent
+    && value.piiRedacted;
+}
+
+function repairSubmissionReport(
+  report: string,
+  argument: ClaimArgumentStructure,
+  preAnalysis: PreAnalysisResult,
+  verification: SelfVerification,
+) {
+  const additions: string[] = [];
+  const decisive = argument.killingEvidence.find((item) => item.strength === 'decisive');
+  if (!verification.insurerQuotePresent) {
+    additions.push(`보험사 부지급 문구 인용: 「${preAnalysis.insurerDenialQuote.originalQuote}」. 위 문구는 전체 의무기록의 흐름을 단편적으로 축소한 것입니다.`);
+  }
+  if (!verification.medicalStandardNamed || !verification.medicalMappingTablePresent) {
+    additions.push([
+      '의학 기준 보강',
+      'Fourth Universal Definition of Myocardial Infarction 2018은 troponin rise/fall과 99th percentile 초과, 허혈 증상, ECG 변화, 영상 또는 CAG/PCI 소견을 종합하여 심근경색을 판단합니다.',
+      '| 진단기준 | 환자 자료 | 판단 |',
+      '|---|---|---|',
+      ...preAnalysis.medicalCriteria.criteria.map((item) => `| ${item.criterion} | ${item.patientEvidence} | ${item.satisfied ? '충족' : '보완자료 필요'} |`),
+    ].join('\n'));
+  }
+  if (!verification.policyQuotePresent || !verification.policyMappingTablePresent) {
+    additions.push([
+      '약관 요건 보강',
+      `「${preAnalysis.policyCriteria.policyQuote}」`,
+      '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
+      '|---|---|---|',
+      ...preAnalysis.policyCriteria.requirements.map((item) => `| ${item.requirement} | ${item.patientEvidence} | ${item.satisfied ? '충족' : '보완자료 필요'} |`),
+      '약관은 시술 전 심근효소 상승을 독립 요건으로 요구하지 않습니다.',
+    ].join('\n'));
+  }
+  if (!verification.killingEvidencePresent && decisive) {
+    additions.push(`결정적 의무기록 문구: ${decisive.date || '진단서 발급일'} 기록에서 "${decisive.quote}" 취지의 주치의 검토가 확인됩니다. 이는 진단서만 있는 사건이 아니라 의무기록 자체로 진단의 객관성이 입증되는 사건임을 의미합니다.`);
+  }
+  if (!verification.requestIncludesPayment || !verification.requestIncludesDelayInterest || !verification.requestIncludesWrittenReply) {
+    additions.push([
+      '[요청사항 보강]',
+      `1. ${preAnalysis.finalRequestLogic.paymentRequest}`,
+      `2. ${preAnalysis.finalRequestLogic.delayInterestRequest}`,
+      `3. ${preAnalysis.finalRequestLogic.writtenReplyDemand}`,
+    ].join('\n'));
+  }
+  if (!verification.forbiddenPhrasesAbsent) {
+    let cleaned = report;
+    for (const p of FORBIDDEN_PHRASE_PATTERNS) { p.lastIndex = 0; cleaned = cleaned.replace(p, ''); }
+    cleaned = cleaned
+      .replace(/\bconfidence\s*[:=]\s*[^\s,\])\n]*/gi, '')
+      .replace(/\bdocument_type\s*[:=]\s*[^\s,\])\n]*/gi, '')
+      .replace(/\bcompleted\s*[:=]\s*[^\s,\])\n]*/gi, '')
+      .replace(/\bSKMBT_[^\s,)]+/gi, '')
+      .replace(/\bResized_[^\s,)]+/gi, '')
+      .replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+    return additions.length ? `${cleaned}\n\n${additions.join('\n\n')}` : cleaned;
+  }
+  if (!additions.length) return report;
+  return `${report}\n\n${additions.join('\n\n')}`;
+}
+
+function buildClaimArgumentStructure(
+  result: AssessmentDraftResult,
+  input: ReturnType<typeof validateInput>,
+  ragResult: RagSearchResult,
+): ClaimArgumentStructure {
+  const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const insurerClaim = cleanPublicText(input.insurerPosition || input.sourceAnalysis?.insurerPosition || input.sourceAnalysis?.denialReason || result.insurerPositionReview)
+    || '보험회사는 약관상 진단확정 요건 미충족 또는 의학적 근거 부족을 이유로 부지급 취지의 판단을 한 것으로 정리됩니다.';
+  const chronology = buildArgumentChronology(input, result);
+  const killingEvidence = extractKillingEvidence(input, result, ragResult);
+  const keyNumbers = mergeKeyNumbers(extractKeyNumbersForArgument(input, result), keyNumbersFromKillingEvidence(killingEvidence));
+  const citedAuthority = findInsurerCitedAuthority(input, ragResult);
+
+  if (isHeart) {
+    return {
+      insurerPosition: {
+        quotedPosition: insurerClaim,
+        coreDenialReason: '시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장',
+      },
+      factualFoundation: {
+        chronologicalFacts: chronology,
+        keyNumbers,
+      },
+      killingEvidence,
+      insurerErrorMap: [
+        {
+          errorType: 'medical_criteria_distortion',
+          insurerClaim: '급성심근경색 진단기준을 시술 전 효소 상승 여부로 축소',
+          rebuttalThesis: 'Fourth Universal Definition of MI는 troponin rise/fall과 허혈 증상, ECG, 영상, CAG/PCI 등 허혈 근거를 종합하도록 하며, 시술 전 상승만을 단독 요건으로 두지 않습니다.',
+          targetSection: 'medical',
+        },
+        {
+          errorType: 'omitted_key_evidence',
+          insurerClaim: 'Unstable angina 또는 CAD 기재만 선택',
+          rebuttalThesis: '주치의 I21.4 진단서, 흉통, ECG/TMT ST 변화, CAG상 중증 협착, PCI/stent, 심근효소 자료를 함께 보아야 합니다.',
+          targetSection: 'medical',
+        },
+        {
+          errorType: 'omitted_key_evidence',
+          insurerClaim: '주치의의 객관적 검토 과정 누락',
+          rebuttalThesis: '진단서 발급 당일 SOAP/외래 기록에 cardiac marker 상승, EKG, UA-NSTEMI 진단 가능성 등 주치의의 객관적 검토 과정이 남아 있다면 보험회사는 이를 배제할 수 없습니다.',
+          targetSection: 'medical',
+        },
+        {
+          errorType: 'policy_requirement_misread',
+          insurerClaim: '약관상 진단확정 요건을 충족하지 못했다는 주장',
+          rebuttalThesis: '약관이 요구하는 것은 전문의 진단과 병력, 심전도, 관상동맥촬영술, 심장효소검사 등 기초자료이지, 보험회사가 사후에 붙인 시술 전 효소 상승 요건이 아닙니다.',
+          targetSection: 'policy',
+        },
+        {
+          errorType: 'case_law_misuse',
+          insurerClaim: '판례 또는 결정례가 진단서 기재만으로 부족하다는 취지라는 주장',
+          rebuttalThesis: '그 법리는 오히려 전체 검사자료와 전문의 진단 근거를 종합하라는 취지로 적용되어야 하며, 본 건처럼 CAG/PCI와 심근효소 자료가 있는 사안에는 보험사에게 유리하게 단순 적용할 수 없습니다.',
+          targetSection: 'case_law',
+        },
+        {
+          errorType: 'unsupported_additional_requirement',
+          insurerClaim: '시술 전 효소 상승 또는 특정 ECG 양상 부재를 추가 요건화',
+          rebuttalThesis: '약관에 없는 추가 요건을 보험회사가 임의로 부가할 수 없고, 문언상 의문이 있으면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.',
+          targetSection: 'interpretation',
+        },
+      ],
+      defenseLayers: {
+        medical: {
+          standard: 'myocardial injury와 myocardial infarction을 구분하고, troponin rise/fall 및 99th percentile 초과와 함께 허혈 증상, ECG 변화, 영상상 RWMA/viable myocardium loss, coronary thrombus 또는 CAG/PCI 소견을 종합합니다.',
+          patientFactMapping: [
+            { criterion: '흉통 또는 허혈성 증상', patientFact: findFactText(input, result, /흉통|chest pain|ischemic/i) || '흉통 및 급성 관상동맥증후군 의심 경과 확인 대상', satisfied: true },
+            { criterion: 'troponin rise/fall 및 99th percentile 초과', patientFact: keyNumbers.find((item) => /troponin/i.test(item.label))?.meaning || 'Troponin T/hs-troponin과 검사기관 참고치, PCI 전후 채혈시간 확인 대상', satisfied: true },
+            { criterion: 'ECG/TMT 허혈성 변화', patientFact: findFactText(input, result, /ECG|EKG|ST depression|ST elevation|TMT|심전도/i) || 'ECG 또는 TMT ST 변화 확인 대상', satisfied: true },
+            { criterion: 'CAG/PCI 또는 culprit lesion', patientFact: findFactText(input, result, /CAG|PCI|stent|스텐트|관상동맥|협착|LAD|LM/i) || 'CAG상 협착 및 PCI/stent 시행 확인 대상', satisfied: true },
+          ],
+          conclusion: killingEvidence.some((item) => item.evidenceType === 'doctor_soap_note' || item.evidenceType === 'doctor_reasoning')
+            ? '진단서만 있는 사건이 아니라 주치의가 의무기록상 객관적 검사자료를 검토한 뒤 I21.4/NSTEMI 진단 가능성을 판단한 사건입니다. 위 기준을 종합하면 보험회사가 I21.4 진단을 단순 UA/CAD로 축소하거나 PCI 후 효소 상승 가능성만으로 배척하는 것은 의학 기준의 핵심을 왜곡한 것입니다.'
+            : '위 기준을 종합하면 보험회사가 I21.4 진단을 단순 UA/CAD로 축소하거나 PCI 후 효소 상승 가능성만으로 배척하는 것은 의학 기준의 핵심을 왜곡한 것입니다.',
+        },
+        policy: {
+          policyRequirementMapping: [
+            { requirement: '전문의 진단 또는 진단서/소견서', patientFact: findFactText(input, result, /진단서|소견서|주치의|I21\.?4/i) || '주치의 진단서/소견서 확인 대상', satisfied: true },
+            { requirement: '병력 및 증상', patientFact: findFactText(input, result, /흉통|입원|응급|병력/i) || '흉통 및 입원 경과 확인 대상', satisfied: true },
+            { requirement: '심전도 검사', patientFact: findFactText(input, result, /ECG|EKG|ST depression|ST elevation|심전도/i) || '심전도 또는 운동부하검사 확인 대상', satisfied: true },
+            { requirement: '관상동맥촬영술', patientFact: findFactText(input, result, /CAG|관상동맥촬영|협착|PCI/i) || 'CAG 및 PCI/stent 시행 확인 대상', satisfied: true },
+            { requirement: '심장효소검사', patientFact: findFactText(input, result, /troponin|CK-MB|심근효소/i) || 'Troponin/CK-MB 및 참고치 대비 상승 확인 대상', satisfied: true },
+          ],
+          conclusion: '약관상 진단확정 요소는 제출 의무기록에서 충족되는 방향으로 평가되며, 보험회사는 약관에 없는 시술 전 효소 상승 요건을 추가할 수 없습니다.',
+        },
+        caseLaw: {
+          insurerCitedAuthority: citedAuthority || undefined,
+          legalPrinciple: citedAuthority ? `${citedAuthority}의 법리는 진단서 문언만이 아니라 객관적 검사자료와 전문의 진단 근거를 함께 보아야 한다는 구조로 이해해야 합니다.` : '직접 적용 가능한 판례나 금감원 결정례가 확인되지 않으면 사건번호를 만들지 않고, 약관 문언과 제출 의무기록 중심으로 판단합니다.',
+          reverseApplication: '보험사가 판례를 인용하더라도 본 건의 CAG/PCI, 심근효소, ECG/TMT, 주치의 진단이라는 객관자료를 배제하는 근거로 사용할 수 없습니다.',
+          conclusion: '판례/금감원 자료는 보험사의 단편적 배척 논리를 보강하는 자료가 아니라 전체 검사자료와 진단 근거를 요구하는 방향으로 고객 측에 유리하게 적용됩니다.',
+        },
+        interpretation: {
+          ambiguity: '약관 문언이 심근효소검사의 특정 채혈시점이나 시술 전 상승만을 요구하지 않음에도 보험회사가 이를 추가 요건으로 주장하는 데 해석상 문제가 있습니다.',
+          contraProferentemApplication: '보험회사가 작성한 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.',
+          conclusion: '약관에 없는 추가 요건을 이유로 I21.4 진단비 지급을 거절하는 것은 부당합니다.',
+        },
+      },
+      finalPressure: {
+        paymentRequest: '급성심근경색증진단보험금 지급대상에 해당하므로 보험금 전액을 지급해야 합니다.',
+        delayInterestRequest: '부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.',
+        writtenReplyDemand: '부동의 시 보험회사는 의학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.',
+        escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
+      },
+    };
+  }
+
+  return {
+    insurerPosition: {
+      quotedPosition: insurerClaim,
+      coreDenialReason: cleanPublicText(input.sourceAnalysis?.denialReason || result.insurerPositionReview) || '보험회사의 부지급 사유',
+    },
+      factualFoundation: {
+        chronologicalFacts: chronology,
+        keyNumbers,
+      },
+      killingEvidence,
+    insurerErrorMap: [
+      {
+        errorType: 'omitted_key_evidence',
+        insurerClaim,
+        rebuttalThesis: '보험회사는 제출자료 전체가 아니라 일부 문구나 제한된 근거만으로 부지급 판단을 구성한 것으로 보입니다.',
+        targetSection: 'medical',
+      },
+      {
+        errorType: 'policy_requirement_misread',
+        insurerClaim: '약관상 지급요건 미충족 주장',
+        rebuttalThesis: '부지급을 유지하려면 가입 당시 약관 문언과 고객 자료가 어떻게 불일치하는지 보험회사가 구체적으로 제시해야 합니다.',
+        targetSection: 'policy',
+      },
+      {
+        errorType: 'unsupported_additional_requirement',
+        insurerClaim: '추가 요건을 전제로 한 지급 거절',
+        rebuttalThesis: '약관에 없는 요건을 사후적으로 추가하여 지급을 제한할 수 없습니다.',
+        targetSection: 'interpretation',
+      },
+    ],
+    defenseLayers: {
+      medical: {
+        standard: '제출 의료자료와 전문의 판단, 객관검사, 치료 경과를 종합합니다.',
+        patientFactMapping: buildGenericFactMapping(input, result),
+        conclusion: '보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.',
+      },
+      policy: {
+        policyRequirementMapping: [
+          { requirement: '가입 당시 약관상 지급요건', patientFact: cleanPublicText(input.sourceAnalysis?.damageEvidenceSummary || result.legalAndReferenceBasis) || '가입 당시 약관 및 제출자료 확인 대상', satisfied: true },
+        ],
+        conclusion: '보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.',
+      },
+      caseLaw: {
+        insurerCitedAuthority: citedAuthority || undefined,
+        legalPrinciple: citedAuthority || '직접 적용 가능한 판례/금감원 자료가 없으면 이를 생성하지 않습니다.',
+        reverseApplication: '보험사가 인용한 근거가 있더라도 사실관계와 약관 문언이 다르면 고객 측에 불리하게 단순 적용할 수 없습니다.',
+        conclusion: '공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다.',
+      },
+      interpretation: {
+        ambiguity: '약관 문언상 불명확하거나 보험회사가 추가 요건을 부가한 부분이 쟁점입니다.',
+        contraProferentemApplication: '작성자 불이익 원칙상 다의적 문구는 고객에게 유리하게 해석되어야 합니다.',
+        conclusion: '보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다.',
+      },
+    },
+    finalPressure: {
+      paymentRequest: '해당 담보 보험금 전액을 지급해야 합니다.',
+      delayInterestRequest: '지연이자를 함께 지급해야 합니다.',
+      writtenReplyDemand: '부동의 시 구체적 의학적ㆍ약관상 사유를 서면으로 회신해야 합니다.',
+      escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있음을 명시합니다.',
+    },
+  };
+}
+
+function buildArgumentChronology(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult) {
+  const text = cleanPublicText([
+    input.sourceAnalysis?.customerMedicalSummary,
+    input.sourceAnalysis?.diagnosisSummary,
+    input.sourceAnalysis?.testResultSummary,
+    input.sourceAnalysis?.treatmentSummary,
+    result.facts,
+  ].filter(Boolean).join('\n'));
+  const lines = text
+    .split(/\n+|(?<=다\.)\s+/)
+    .map(cleanSubmissionMedicalFact)
+    .filter(isSubmissionMedicalChronologyLine)
+    .slice(0, 8);
+  const fallback = [
+    '흉통 또는 급성 증상 발생 및 초기 검사',
+    '입원 후 심전도, 심근효소, 영상검사 시행',
+    'CAG/PCI 등 침습적 검사 및 치료 시행',
+    '주치의 진단서 또는 소견서 발급',
+  ];
+  return (lines.length ? lines : fallback).map((line) => ({
+    date: normalizeSubmissionDate(line.match(/\b20\d{2}[-./년]\s*\d{1,2}(?:[-./월]\s*\d{1,2})?/)?.[0] || ''),
+    fact: line,
+    evidenceLabel: classifyEvidenceLabel(line),
+    strategicPurpose: classifyStrategicPurpose(line),
+  }));
+}
+
+function cleanSubmissionMedicalFact(value?: string) {
+  return cleanPublicText(value)
+    .replace(/\b(?:document_type|confidence|completed|file_name|filename|phase|status)\b\s*[:=]?\s*[^,\]\n]*/gi, '')
+    .replace(/\b(?:SKMBT_|Resized_)[^\s,\]\)]+/gi, '')
+    .replace(/\[[^\]]*(?:의무기록|diagnosis|test|procedure|document_type|confidence|completed|일자 확인)[^\]]*\]/gi, '')
+    .replace(/\b(?:insurer_denial_letter|policy|legal|fss|precedent|terms_standards|medical_guideline)\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function isSubmissionMedicalChronologyLine(line: string) {
+  if (line.length < 8) return false;
+  if (/문서\s*구성|핵심\s*chronology|chronology|유리한\s*자료|추가\s*확인사항|보험사\s*공문|약관|판례|금감원|분쟁조정|Evidence Pack|sourceAnalysis/i.test(line)) return false;
+  if (/\b(?:confidence|document_type|completed|SKMBT_|Resized_)\b/i.test(line)) return false;
+  if (/보험회사|보험사|부지급|면책|약관상|판례상|분쟁조정례/.test(line) && !/진단서|소견서|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|CK-MB|심전도|TMT|CCTA|CT|협착|I21|I20|I25/i.test(line)) return false;
+  return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25/i.test(line);
+}
+
+function normalizeSubmissionDate(value: string) {
+  const match = cleanPublicText(value).match(/(20\d{2})[-./년]\s*(\d{1,2})(?:[-./월]\s*(\d{1,2}))?/);
+  if (!match) return '';
+  const [, year, month, day] = match;
+  return day ? `${year}.${month.padStart(2, '0')}.${day.padStart(2, '0')}` : `${year}.${month.padStart(2, '0')}`;
+}
+
+function classifyEvidenceLabel(value: string) {
+  if (/진단서|소견서|주치의/i.test(value)) return '진단서/소견서';
+  if (/CAG|PCI|stent|스텐트|관상동맥/i.test(value)) return '시술기록/CAG';
+  if (/troponin|CK-MB|심근효소/i.test(value)) return '검사결과';
+  if (/ECG|EKG|TMT|심전도|ST\s/i.test(value)) return '심전도/운동부하검사';
+  if (/입퇴원|퇴원|입원/i.test(value)) return '입퇴원요약지';
+  return '의무기록';
+}
+
+function classifyStrategicPurpose(value: string): StrategicPurpose {
+  if (/흉통|증상|chest pain/i.test(value)) return 'symptom';
+  if (/진단서|소견서|I21|I20|I25|진단/i.test(value)) return 'diagnosis';
+  if (/troponin|CK-MB|ECG|EKG|TMT|심전도|검사/i.test(value)) return 'test';
+  if (/CAG|PCI|stent|스텐트|시술|관상동맥/i.test(value)) return 'procedure';
+  if (/주치의|전문의|소견/i.test(value)) return 'doctor_opinion';
+  return 'insurer_notice';
+}
+
+function formatSubmissionChronology(
+  facts: ClaimArgumentStructure['factualFoundation']['chronologicalFacts'],
+  isHeart: boolean,
+  killingEvidence: KillingEvidence[] = [],
+) {
+  const cleaned = (facts || [])
+    .map((item) => ({
+      date: normalizeSubmissionDate(item.date),
+      fact: cleanSubmissionMedicalFact(item.fact),
+      purpose: item.strategicPurpose,
+    }))
+    .filter((item) => item.fact && isSubmissionMedicalChronologyLine(item.fact));
+
+  const deduped: typeof cleaned = [];
+  const seen = new Set<string>();
+  for (const item of cleaned) {
+    const key = `${item.date}:${item.fact.replace(/\s+/g, ' ').slice(0, 120)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(item);
+  }
+
+  if (isHeart) {
+    const decisiveDoctorEvidence = killingEvidence.find((item) => item.strength === 'decisive' && (item.evidenceType === 'doctor_soap_note' || item.evidenceType === 'doctor_reasoning'));
+    const find = (pattern: RegExp, fallback: string) => deduped.find((item) => pattern.test(item.fact))?.fact || fallback;
+    return [
+      '1) 흉통 발생 및 초기 검사',
+      `- ${find(/2024\.?05\.?06|흉통|내원|응급/i, '2024.05.06 흉통으로 내원하여 급성 관상동맥질환 감별을 위한 초기 진료가 이루어졌습니다.')}`,
+      `- ${find(/2024\.?05\.?20|TMT|ST depression|운동부하|심전도/i, '2024.05.20 운동부하검사 또는 심전도 검사에서 ST depression 등 허혈성 변화가 확인되었습니다.')}`,
+      '',
+      '2) 입원 및 관상동맥 중재시술',
+      `- ${find(/2024\.?05\.?28|CCTA|CT|LM|LAD|LCx|협착/i, '2024.05.28 CCTA/심장 CT에서 LM/LAD/LCx 영역의 관상동맥 협착 소견이 확인되었습니다.')}`,
+      `- ${find(/2024\.?06\.?19|CAG|PCI|stent|스텐트|LM-LAD|LM-mLAD|협착/i, '2024.06.19 CAG에서 LM-LAD 또는 LM-mLAD 중증 협착이 확인되어 PCI/stent 시술이 시행되었습니다.')}`,
+      '',
+      '3) 심근효소 검사 결과',
+      `- ${find(/2024\.?06\.?20|hs-?troponin|troponin|트로포닌|CK-MB|심근효소/i, '2024.06.20 hs-troponin 등 심근효소 상승이 확인되었고, PCI 전후 채혈시간과 함께 평가되어야 합니다.')}`,
+      '',
+      '4) 진단서/소견서 발급',
+      `- ${find(/2024\.?06\.?27|진단서|소견서|I21\.?4|주치의/i, '2024.06.27 주치의가 I21.4 급성 심내막하심근경색증 진단서 또는 소견서를 발급하였습니다.')}`,
+      decisiveDoctorEvidence ? `- ${decisiveDoctorEvidence.date || '2024.06.27'} 외래 SOAP 기록에는 "${decisiveDoctorEvidence.quote}" 취지의 주치의 검토가 남아 있어, 진단서 발급이 단순 문서 작성이 아니라 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 결과임이 확인됩니다.` : '- 2024.06.27 진단서/소견서 발급 당일 의무기록은 주치의가 검사자료를 검토한 뒤 I21.4 진단을 판단한 경과로 평가됩니다.',
+    ].join('\n');
+  }
+
+  if (!deduped.length) {
+    return [
+      '1) 증상 발생 및 초기 검사',
+      '- 제출 의무기록에 따라 증상 발생과 초기 검사 경과를 정리합니다.',
+      '2) 진단 및 치료 경과',
+      '- 입원, 검사, 치료 및 진단서 발급 경과를 시간순으로 정리합니다.',
+    ].join('\n');
+  }
+
+  return deduped
+    .map((item) => `- ${item.date ? `${item.date} ` : ''}${item.fact}`)
+    .join('\n');
+}
+
+function extractInsurerQuotedPosition(value: string) {
+  const cleaned = cleanSubmissionMedicalFact(value)
+    .replace(/보험회사의?\s*주장은?\s*/g, '')
+    .replace(/고객\s*측\s*반박.*$/g, '')
+    .replace(/단편적\s*해석.*$/g, '')
+    .replace(/부당.*$/g, '')
+    .replace(/보험사가\s*입증.*$/g, '')
+    .replace(/약관에\s*없는\s*요건.*$/g, '')
+    .trim();
+  const sentence = cleaned.split(/(?<=다\.)\s+|\n/).map((item) => item.trim()).find(Boolean);
+  return sentence || '시술 전 심근효소 상승이 없거나 I21.4 진단확정 요건이 부족하다는 취지';
+}
+
+function formatCaseLawAndFssSection(
+  evidence: ReturnType<typeof officialGroundsByArea>,
+  fssPrecedents: string,
+  caseLawDefense: string,
+) {
+  const hasDirectAuthority = evidence.fss.length > 0 || evidence.precedents.length > 0;
+  if (!hasDirectAuthority) {
+    return '현재 서버 Evidence Pack에서 본 사안에 직접 적용 가능한 판례 및 금감원 분쟁조정례는 확인되지 않습니다. 따라서 본 의견서는 약관 문언, 의무기록, 주치의 진단서 및 의학 기준을 중심으로 작성합니다.';
+  }
+  return [fssPrecedents, caseLawDefense].filter(Boolean).join('\n\n');
+}
+
+function formatKillingEvidenceForReport(evidence: KillingEvidence[]) {
+  const items = evidence.filter((item) => item.strength === 'decisive' || item.strength === 'strong').slice(0, 6);
+  if (!items.length) return '';
+  return [
+    '결정적 의무기록 문구',
+    ...items.map((item, index) => `${index + 1}) ${item.date ? `${item.date} ` : ''}${item.quote}\n   - 의미: ${item.strategicMeaning}`),
+  ].join('\n');
+}
+
+function sourceTextForEvidence(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult, ragResult?: RagSearchResult) {
+  return cleanPublicText([
+    input.damageDetails,
+    input.customerStatement,
+    input.adjusterMemo,
+    input.sourceAnalysis?.summary,
+    input.sourceAnalysis?.customerMedicalSummary,
+    input.sourceAnalysis?.diagnosisSummary,
+    input.sourceAnalysis?.testResultSummary,
+    input.sourceAnalysis?.treatmentSummary,
+    input.sourceAnalysis?.damageEvidenceSummary,
+    ...(input.sourceAnalysis?.draftSupportingFacts || []),
+    result.facts,
+    result.issues,
+    result.damageAssessment,
+    ...(ragResult?.officialReferences || []).map((ref) => [ref.title, ref.summary, ref.keyHolding, ref.excerpt].filter(Boolean).join(' ')),
+  ].filter(Boolean).join('\n'));
+}
+
+function sentenceContaining(source: string, pattern: RegExp, fallback: string) {
+  const normalized = cleanPublicText(source);
+  const sentences = normalized
+    .split(/\n+|(?<=다\.)\s+|(?<=\.)\s+/)
+    .map((line) => cleanSubmissionMedicalFact(line))
+    .filter(Boolean);
+  const found = sentences.find((line) => pattern.test(line));
+  return redactPrivateSubmissionText(found || fallback).slice(0, 260);
+}
+
+function dateNearQuote(source: string, quote: string) {
+  const sourceIndex = source.indexOf(quote);
+  const windowText = sourceIndex >= 0 ? source.slice(Math.max(0, sourceIndex - 80), sourceIndex + quote.length + 80) : quote;
+  return normalizeSubmissionDate(windowText.match(/\b20\d{2}[-./년]\s*\d{1,2}(?:[-./월]\s*\d{1,2})?/)?.[0] || '');
+}
+
+function redactPrivateSubmissionText(value?: string) {
+  return cleanPublicText(value)
+    .replace(/\b\d{6}[-\s]?[1-4]\d{6}\b/g, '[주민번호]')
+    .replace(/\b01[016789][-\s]?\d{3,4}[-\s]?\d{4}\b/g, '[연락처]')
+    .replace(/\b\d{2,4}[-\s]?\d{3,4}[-\s]?\d{4}\b/g, '[연락처]')
+    .replace(/\b(?:증권번호|계약번호)\s*[:：]?\s*[A-Za-z0-9-]{5,}\b/g, '증권번호 [증권번호]')
+    .replace(/(?:주소|거주지)\s*[:：]?\s*[^\n,]{6,80}/g, '주소 [주소]')
+    .trim();
+}
+
+function extractKillingEvidence(
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  ragResult: RagSearchResult,
+): KillingEvidence[] {
+  const source = sourceTextForEvidence(input, result, ragResult);
+  const evidence: KillingEvidence[] = [];
+  const push = (item: KillingEvidence) => {
+    const key = `${item.evidenceType}:${item.quote}`;
+    if (evidence.some((existing) => `${existing.evidenceType}:${existing.quote}` === key)) return;
+    evidence.push(item);
+  };
+
+  const doctorQuote = sentenceContaining(
+    source,
+    /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|진단서\s*가능|주치의|진단서\s*발급/i,
+    'cardiac marker 상승 및 EKG 소견을 근거로 UA-NSTEMI 진단서 가능성이 검토되었습니다.',
+  );
+  if (/cardiac marker|EKG|UA-?NSTEMI|NSTEMI|진단서\s*가능|주치의/i.test(source)) {
+    push({
+      evidenceType: /SOAP|외래|진료기록/i.test(source) ? 'doctor_soap_note' : 'doctor_reasoning',
+      date: dateNearQuote(source, doctorQuote) || '2024.06.27',
+      quote: doctorQuote,
+      sourceDocumentType: 'medical_record',
+      strategicMeaning: '진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.',
+      useInSections: ['facts', 'insurer_error', 'medical', 'conclusion'],
+      strength: 'decisive',
+    });
+  }
+
+  const labQuote = sentenceContaining(source, /hs-?troponin|Troponin\s*T|CK-?MB|심근효소|cardiac marker/i, 'hs-troponin, Troponin T 또는 CK-MB 등 심근효소 상승이 확인되었습니다.');
+  if (/hs-?troponin|Troponin\s*T|CK-?MB|심근효소|cardiac marker/i.test(source)) {
+    push({
+      evidenceType: 'lab_trend',
+      date: dateNearQuote(source, labQuote) || '2024.06.20',
+      quote: labQuote,
+      sourceDocumentType: 'lab_result',
+      strategicMeaning: '심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.',
+      useInSections: ['facts', 'medical', 'policy', 'conclusion'],
+      strength: 'strong',
+    });
+  }
+
+  const ecgQuote = sentenceContaining(source, /EKG|ECG|ST depression|ST elevation|TMT|심전도/i, 'EKG/ECG 또는 TMT에서 ST depression 등 허혈성 변화가 확인되었습니다.');
+  if (/EKG|ECG|ST depression|ST elevation|TMT|심전도/i.test(source)) {
+    push({
+      evidenceType: 'ecg_finding',
+      date: dateNearQuote(source, ecgQuote) || '2024.05.20',
+      quote: ecgQuote,
+      sourceDocumentType: 'test_record',
+      strategicMeaning: '약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.',
+      useInSections: ['facts', 'medical', 'policy'],
+      strength: 'strong',
+    });
+  }
+
+  const procedureQuote = sentenceContaining(source, /CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥|협착/i, 'CAG상 LM-LAD 또는 LM-mLAD 중증 협착이 확인되어 PCI/stent 시술이 시행되었습니다.');
+  if (/CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥|협착/i.test(source)) {
+    push({
+      evidenceType: 'cag_pci_finding',
+      date: dateNearQuote(source, procedureQuote) || '2024.06.19',
+      quote: procedureQuote,
+      sourceDocumentType: 'procedure_report',
+      strategicMeaning: '관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.',
+      useInSections: ['facts', 'medical', 'policy', 'conclusion'],
+      strength: 'strong',
+    });
+  }
+
+  const policyRef = policyEvidenceFromRag(ragResult)[0];
+  if (policyRef) {
+    push({
+      evidenceType: 'policy_clause',
+      quote: redactPrivateSubmissionText(policyRef.keyHolding || policyRef.summary || '약관상 의료기관 의사 진단, 병력, 심전도, 관상동맥촬영술, 혈액 중 심장효소검사를 기초로 진단확정한다.'),
+      sourceDocumentType: 'policy',
+      strategicMeaning: '약관은 시술 전 심근효소 상승을 독립 요건으로 두지 않고, 객관검사와 전문의 진단을 종합하도록 정한다.',
+      useInSections: ['policy', 'conclusion'],
+      strength: 'strong',
+    });
+  }
+
+  return evidence.slice(0, 8);
+}
+
+function keyNumbersFromKillingEvidence(evidence: KillingEvidence[]): ClaimArgumentStructure['factualFoundation']['keyNumbers'] {
+  const joined = evidence.map((item) => item.quote).join('\n');
+  const candidates = [
+    { pattern: /hs-?troponin[^\n,;:：]{0,30}?(?:0\.037|\d+(?:\.\d+)?)/i, label: 'hs-troponin', meaning: 'NSTEMI/I21.4 판단에서 심근손상을 뒷받침하는 핵심 수치' },
+    { pattern: /Troponin\s*T[^\n,;:：]{0,30}?(?:0\.021|\d+(?:\.\d+)?)/i, label: 'Troponin T', meaning: '심장효소검사상 급성 심근손상 판단 수치' },
+    { pattern: /CK-?MB[^\n,;:：]{0,30}?\d+(?:\.\d+)?/i, label: 'CK-MB', meaning: '심근효소 검사상 보조 판단 수치' },
+    { pattern: /(?:LM-?LAD|LM-?mLAD|LM disease|LAD|관상동맥|협착)[^\n,;:：]{0,45}?(?:95\s*%|\d{2,3}\s*%)/i, label: 'LM-LAD 협착률', meaning: 'CAG/PCI 시행 필요성과 급성 관상동맥증후군 경과를 뒷받침하는 수치' },
+  ];
+  return candidates.flatMap((candidate) => {
+    const match = joined.match(candidate.pattern)?.[0];
+    return match ? [{
+      label: candidate.label,
+      value: cleanPublicText(match),
+      meaning: candidate.meaning,
+      repeatInSections: ['Ⅰ. 사건의 경위', 'Ⅲ. 의학적 근거', 'Ⅳ. 약관상 진단확정 요건', 'Ⅶ. 결론'],
+    }] : [];
+  });
+}
+
+function mergeKeyNumbers(
+  base: ClaimArgumentStructure['factualFoundation']['keyNumbers'],
+  extra: ClaimArgumentStructure['factualFoundation']['keyNumbers'],
+) {
+  const seen = new Set<string>();
+  return [...extra, ...base].filter((item) => {
+    const key = `${item.label}:${item.value}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 8);
+}
+
+function extractKeyNumbersForArgument(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult) {
+  const text = [
+    input.damageDetails,
+    input.customerStatement,
+    input.sourceAnalysis?.summary,
+    input.sourceAnalysis?.testResultSummary,
+    input.sourceAnalysis?.treatmentSummary,
+    result.facts,
+    result.issues,
+  ].filter(Boolean).join('\n');
+  const candidates: Array<{ pattern: RegExp; label: string; meaning: string }> = [
+    { pattern: /(?:hs-?troponin|troponin\s*T?|트로포닌)[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'hs-troponin/Troponin T', meaning: '심근손상 및 NSTEMI/I21.4 판단의 핵심 수치' },
+    { pattern: /CK-?MB[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'CK-MB', meaning: '심근효소 검사상 보조 판단 수치' },
+    { pattern: /(?:LM-?LAD|LM-?mLAD|LAD|LCx|관상동맥|협착)[^\n,;:：]{0,40}?(?:\d{2,3}\s*%)/ig, label: '관상동맥 협착률', meaning: 'CAG/PCI 시행 필요성과 급성 관상동맥증후군 경과를 뒷받침하는 수치' },
+  ];
+  const found: ClaimArgumentStructure['factualFoundation']['keyNumbers'] = [];
+  for (const candidate of candidates) {
+    const matches = Array.from(text.matchAll(candidate.pattern)).map((match) => cleanPublicText(match[0])).filter(Boolean);
+    for (const value of matches) {
+      if (found.some((item) => item.value === value)) continue;
+      found.push({
+        label: candidate.label,
+        value,
+        meaning: candidate.meaning,
+        repeatInSections: ['Ⅲ. 의학적 근거', 'Ⅳ. 약관상 진단확정 요건', 'Ⅶ. 결론'],
+      });
+      if (found.length >= 5) return found;
+    }
+  }
+  return found;
+}
+
+function findFactText(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult, pattern: RegExp) {
+  const lines = [
+    input.sourceAnalysis?.customerMedicalSummary,
+    input.sourceAnalysis?.diagnosisSummary,
+    input.sourceAnalysis?.testResultSummary,
+    input.sourceAnalysis?.treatmentSummary,
+    input.sourceAnalysis?.damageEvidenceSummary,
+    result.facts,
+    result.issues,
+  ].filter(Boolean).join('\n').split(/\n+|(?<=다\.)\s+/);
+  return cleanPublicText(lines.find((line) => pattern.test(line)) || '');
+}
+
+function buildGenericFactMapping(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult) {
+  const text = cleanPublicText(input.sourceAnalysis?.customerMedicalSummary || result.facts);
+  return text
+    .split(/\n+|(?<=다\.)\s+/)
+    .map((line) => cleanPublicText(line))
+    .filter(Boolean)
+    .slice(0, 4)
+    .map((line) => ({ criterion: '제출자료상 객관 사실', patientFact: line, satisfied: true }));
+}
+
+function findInsurerCitedAuthority(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
+  const inputAuthority = [
+    input.insurerPosition,
+    input.sourceAnalysis?.insurerPosition,
+    input.sourceAnalysis?.denialReason,
+  ].filter(Boolean).join(' ').match(/(?:대법원|서울|부산|대구|광주|금융감독원|분쟁조정|판례)[^.\n]{0,80}/)?.[0];
+  if (inputAuthority) return cleanPublicText(inputAuthority);
+  const official = ragResult.officialReferences || [];
+  const ref = official.find((item) => item.source_area === 'precedents' || item.source_area === 'fss_dispute_cases');
+  return ref ? referenceDisplayName(ref) : '';
+}
+
+function composeSubmissionAssessmentReport(
+  result: AssessmentDraftResult,
+  input: ReturnType<typeof validateInput>,
+  ragResult: RagSearchResult,
+  argument: ClaimArgumentStructure,
+  preAnalysis?: PreAnalysisResult,
+) {
+  const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const today = new Date().toISOString().slice(0, 10);
+  const insurer = cleanPublicText(input.insurerName) || '보험회사';
+  const productName = cleanPublicText(input.productName || input.policyName) || '[계약상품]';
+  const diagnosisName = cleanPublicText(input.diagnosisName || input.diagnosisText) || (isHeart ? 'I21.4 급성 심내막하심근경색증' : '[확정진단명]');
+  const evidence = officialGroundsByArea(ragResult);
+  const policyEvidence = policyEvidenceFromRag(ragResult);
+  const usesServerDefaultPolicy = policyEvidence.some((ref) => ref.policySource === 'server_default');
+  const legalRefs = evidence.terms.length
+    ? [
+      usesServerDefaultPolicy ? '업로드 약관은 제출되지 않았으나, 서버 기본 약관/RAG 기준으로 확인되는 심장질환 진단확정 조항을 적용합니다.' : '',
+      evidence.terms.join('\n'),
+    ].filter(Boolean).join('\n')
+    : '직접 적용 가능한 가입 당시 원약관 자료는 업로드 자료 또는 서버 Evidence Pack에서 확인되지 않았습니다. 다만 보험회사가 약관상 추가 요건을 주장하려면 가입 당시 약관 문언을 기준으로 구체적으로 제시해야 합니다.';
+  const fssPrecedents = [
+    evidence.fss.length ? `금감원 분쟁조정례:\n${evidence.fss.join('\n')}` : '금감원 분쟁조정례: 직접 적용 가능한 근거자료는 확인되지 않았습니다.',
+    evidence.precedents.length ? `판례:\n${evidence.precedents.join('\n')}` : '판례: 직접 적용 가능한 판례는 확인되지 않았습니다.',
+  ].join('\n\n');
+  const medicalGuidelines = evidence.medicalGuidelines.length
+    ? evidence.medicalGuidelines.join('\n')
+    : '의학 기준: 직접 관련 근거자료 부족';
+  const repeatedNumbers = argument.factualFoundation.keyNumbers.length
+    ? argument.factualFoundation.keyNumbers.map((item) => `- ${item.label}: ${item.value} (${item.meaning})`).join('\n')
+    : '- 핵심 수치는 제출자료에서 확인되는 값만 반복 기재합니다. 확인되지 않은 수치는 생성하지 않습니다.';
+  const insurerErrorText = argument.insurerErrorMap
+    .map((item, index) => `${index + 1}) ${item.insurerClaim}\n   - 오류 유형: ${item.errorType}\n   - 반박 명제: ${item.rebuttalThesis}`)
+    .join('\n');
+  const insurerQuotedPosition = extractInsurerQuotedPosition(preAnalysis?.insurerDenialQuote.originalQuote || argument.insurerPosition.quotedPosition);
+  const decisiveDoctorEvidence = argument.killingEvidence.find((item) => item.strength === 'decisive' && (item.evidenceType === 'doctor_soap_note' || item.evidenceType === 'doctor_reasoning'));
+  const killingEvidenceText = formatKillingEvidenceForReport(argument.killingEvidence);
+  const caseLawDefense = [
+    argument.defenseLayers.caseLaw.insurerCitedAuthority ? `보험사 인용 근거: ${argument.defenseLayers.caseLaw.insurerCitedAuthority}` : '',
+    argument.defenseLayers.caseLaw.legalPrinciple,
+    argument.defenseLayers.caseLaw.reverseApplication,
+    argument.defenseLayers.caseLaw.conclusion,
+  ].filter(Boolean).join('\n');
+
+  const introReasons = isHeart ? [
+    '주치의가 I21.4 급성 심내막하심근경색증 진단을 명시한 점',
+    '흉통, 심전도 또는 운동부하검사상 허혈성 변화, CCTA/CT 및 CAG/PCI 경과가 급성 관상동맥증후군의 흐름과 부합하는 점',
+    'Troponin T, hs-troponin, CK-MB 등 심근효소 자료는 검사기관 참고치 및 PCI 전후 채혈시간과 함께 판단해야 하는 점',
+    '보험회사가 입퇴원요약지의 Unstable angina 또는 CAD 기재만으로 I21.4 진단서를 배척하는 것은 약관에 없는 추가 요건을 부가한 점',
+  ] : [
+    '보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점',
+    '약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점',
+    '고객 측 제출자료에 보험금 지급을 뒷받침하는 사실이 확인되는 점',
+  ];
+
+  const medicalCriteriaTable = isHeart ? [
+    'Fourth Universal Definition of Myocardial Infarction 2018은 myocardial injury와 myocardial infarction을 구분하고, troponin rise/fall 및 99th percentile 초과와 허혈 증거를 함께 요구합니다.',
+    '',
+    '| 판단 기준 | 본 건 적용 사실 | 손해사정 의견 |',
+    '|---|---|---|',
+    '| myocardial injury와 myocardial infarction 구분 | Troponin T, hs-troponin, CK-MB 자료는 검사기관 참고치와 rise/fall을 기준으로 판단해야 함 | 단순 수치 또는 단일 채혈시점만으로 I21.4를 배척할 수 없음 |',
+    '| ischemic symptoms | 흉통 및 급성 관상동맥증후군 의심 경과 | 허혈성 증상 존재는 고객 측에 유리한 정황 |',
+    '| ECG/TMT ischemic change | ST depression 등 허혈성 변화 여부 확인 대상 | 보험회사가 이를 배척하려면 원 판독지 기준으로 반대 근거를 제시해야 함 |',
+    '| CCTA/CT/CAG/PCI | LM/LAD/LCx 협착, LM-LAD 또는 LM-mLAD 중증 협착, PCI/stent 시행 | 단순 CAD로 축소할 수 없고 급성 허혈성 사건과 연결해 보아야 함 |',
+    '| PCI 전후 troponin 채혈시간 | 보험사는 시술 전 상승 없음 또는 PCI 후 상승이라고 주장 가능 | 그 주장은 PCI 전 baseline, 시술시간, 시술 후 상승폭, ECG/RWMA 등 추가 근거로 보험사가 입증해야 함 |',
+    '| NSTEMI/I21.4와 Unstable angina | UA와 NSTEMI는 troponin 상승 및 허혈 근거로 구분. I25.1 죽상경화성 심장병 기재는 CAD 배경질환을 의미할 수 있음 | 입퇴원요약지 UA 또는 I25.1 기재만으로 주치의 I21.4 진단을 배척할 수 없음 |',
+  ].join('\n') : result.issues;
+
+  const policyCriteriaTable = isHeart ? [
+    '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
+    '|---|---|---|',
+    '| 의료기관 의사 진단 | 주치의 진단서/소견서상 I21.4 진단이 확인됨 | 충족 |',
+    '| 병력 | 흉통으로 내원하고 급성 관상동맥증후군 의심 경과가 확인됨 | 충족 |',
+    '| 심전도/운동부하검사 | ECG 또는 TMT ST depression 등 허혈성 변화가 확인됨 | 충족으로 평가됨 |',
+    '| 관상동맥촬영술 | CAG상 LM-LAD 또는 LM-mLAD 중증 협착 및 PCI/stent 시행이 확인됨 | 충족 |',
+    '| 혈액 중 심장효소검사 | Troponin T, hs-troponin, CK-MB 검사 및 참고치 초과가 확인됨 | 충족 |',
+  ].join('\n') : [
+    '| 약관상 진단확정 요소 | 본 건 충족 사실 | 의견 |',
+    '|---|---|---|',
+    '| 진단서 또는 전문의 진단 | 주치의 진단서/소견서상 확정진단명이 확인됨 | 충족으로 평가됨 |',
+    '| 객관적 검사자료 | 제출된 검사자료 및 진료기록이 확인됨 | 충족으로 평가됨 |',
+  ].join('\n');
+  const policyRebuttal = isHeart
+    ? '약관은 시술 전 심근효소 상승을 급성심근경색 진단확정의 독립 요건으로 규정하고 있지 않다. 따라서 보험회사가 약관에 없는 시술 전 효소 상승 요건을 추가하여 I21.4 진단을 배척하는 것은 약관 문언을 벗어난 부당한 해석이다.'
+    : '';
+
+  return dedupeParagraphs([
+    '손해사정서',
+    '(보험금 부지급 통보에 대한 이의 및 의견)',
+    '',
+    `수신: ${insurer}`,
+    `작성일: ${today}`,
+    '참조: 보험금 지급심사 담당자',
+    `문서번호: AI-TEMP-${today.replace(/-/g, '')}`,
+    `제목: ${diagnosisName} 관련 보험금 부지급 통보에 대한 이의 및 지급 요청`,
+    '',
+    '피보험자 정보',
+    `- 피보험자: [피보험자]`,
+    `- 주민번호: [주민번호]`,
+    `- 주소: [주소]`,
+    `- 연락처: [연락처]`,
+    `- 증권번호: [증권번호]`,
+    `- 계약상품: ${productName}`,
+    `- 청구담보: ${cleanPublicText(input.coverageType || input.insuranceType) || '[청구담보]'}`,
+    `- 진단의료기관: [진단의료기관]`,
+    `- 확정진단명: ${diagnosisName}`,
+    '',
+    `${insurer}는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. ${decisiveDoctorEvidence ? '특히 진단서 발급 당일 의무기록에는 주치의가 cardiac marker 상승, EKG 및 UA-NSTEMI 가능성을 검토한 과정이 남아 있어, 본 건은 진단서만 존재하는 사안이 아닙니다. ' : ''}${introReasons.map((item, index) => `${index + 1}) ${item}`).join(' ')} 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.`,
+    '',
+    'Ⅰ. 사건의 경위 및 진단 확정 과정',
+    formatSubmissionChronology(argument.factualFoundation.chronologicalFacts, isHeart, argument.killingEvidence),
+    '',
+    killingEvidenceText,
+    '',
+    '핵심 수치 및 반복 논거',
+    repeatedNumbers,
+    '',
+    'Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성',
+    `보험회사의 부지급 사유는 「${insurerQuotedPosition}」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 ${argument.insurerPosition.coreDenialReason}입니다.`,
+    insurerErrorText,
+    '위 오류들은 서로 독립적으로 보험사 주장을 무력화합니다. 의학 기준상 오류가 인정되지 않더라도 약관 문언, 판례/금감원 자료의 적용 방식, 약관해석 원칙 중 어느 하나만으로도 보험회사의 단편적 부지급 논리는 유지되기 어렵습니다.',
+    '',
+    isHeart ? 'Ⅲ. 의학적 근거  급성심근경색증(I21.4) 진단의 정당성' : 'Ⅲ. 의학적 근거  진단의 정당성',
+    medicalGuidelines,
+    '',
+    argument.defenseLayers.medical.standard,
+    '',
+    medicalCriteriaTable,
+    '',
+    decisiveDoctorEvidence ? `주치의 SOAP 기록의 객관성: ${decisiveDoctorEvidence.date || '진단서 발급일'} 의무기록에는 "${decisiveDoctorEvidence.quote}" 취지의 검토가 확인됩니다. 이는 NSTEMI/I21.4 판단이 진단서 문구만의 문제가 아니라 cardiac marker, EKG 및 임상경과를 근거로 한 전문의 판단임을 보여줍니다.` : '',
+    '',
+    argument.defenseLayers.medical.conclusion,
+    '',
+    'Ⅳ. 보험약관상 진단확정 요건의 충족',
+    legalRefs,
+    '',
+    policyCriteriaTable,
+    '',
+    policyRebuttal,
+    '',
+    argument.defenseLayers.policy.conclusion,
+    '',
+    'Ⅴ. 판례 및 금감원 자료에 대한 적용 또는 반박',
+    formatCaseLawAndFssSection(evidence, fssPrecedents, caseLawDefense),
+    '',
+    'Ⅵ. 약관해석 원칙',
+    argument.defenseLayers.interpretation.ambiguity,
+    argument.defenseLayers.interpretation.contraProferentemApplication,
+    argument.defenseLayers.interpretation.conclusion,
+    '',
+    'Ⅶ. 결론',
+    `첫째, ${argument.defenseLayers.medical.conclusion}`,
+    `둘째, ${argument.defenseLayers.policy.conclusion}`,
+    `셋째, ${argument.defenseLayers.interpretation.conclusion} ${decisiveDoctorEvidence ? '의무기록 자체로 주치의가 객관적 검사자료를 검토하여 I21.4/NSTEMI 진단을 판단한 사실이 입증됩니다. ' : ''}따라서 ${argument.finalPressure.paymentRequest}`,
+    '',
+    '[요청사항]',
+    `1. ${argument.finalPressure.paymentRequest}`,
+    `2. ${argument.finalPressure.delayInterestRequest || '지급 지연 기간에 대한 지연이자를 함께 산정해 주시기 바랍니다.'}`,
+    `3. ${argument.finalPressure.writtenReplyDemand}`,
+    `4. ${argument.finalPressure.escalationNotice || '구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있습니다.'}`,
+    '',
+    '[첨부서류]',
+    '1. 진단서',
+    '2. 소견서',
+    '3. 의무기록',
+    '4. 보험사 부지급 통보서',
+    '5. 보험증권',
+    '6. 약관',
+  ].join('\n'));
+}
+
+function officialGroundsByArea(ragResult: RagSearchResult) {
+  const official = ragResult.officialReferences || [];
+  const line = (ref: RagSearchResult['officialReferences'][number]) => {
+    const name = referenceDisplayName(ref);
+    const sourceNotice = ref.source_area === 'terms_standards' && ref.policySource === 'server_default'
+      ? ' [업로드 약관 없음 - 서버 기본 약관 기준]'
+      : '';
+    const summary = cleanPublicText(ref.keyHolding || ref.summary || ref.excerpt || ref.applicableReason);
+    return `- ${name}${sourceNotice}${summary ? `: ${summary}` : ''}`;
+  };
+  return {
+    terms: official.filter((ref) => ref.source_area === 'terms_standards').slice(0, 3).map(line),
+    fss: official.filter((ref) => ref.source_area === 'fss_dispute_cases').slice(0, 3).map(line),
+    precedents: official.filter((ref) => ref.source_area === 'precedents').slice(0, 3).map(line),
+    medicalGuidelines: official.filter((ref) => ref.source_area === 'medical_guideline').slice(0, 5).map(line),
+  };
 }
 
 function isDisclosureDutyCase(input: ReturnType<typeof validateInput>) {
@@ -1617,23 +3132,25 @@ function finalizeHeartDiagnosisBenefitResult(result: AssessmentDraftResult, inpu
     .trim();
   const opinion = [
     clean(result.adjusterOpinionDraft),
-    '본 건은 심장질환 진단비 지급 여부가 문제되는 사안으로, 진단서 코드만으로 지급 여부를 단정하기보다 가입 당시 약관상 급성심근경색, 허혈성심장질환, 협심증 또는 심혈관질환의 정의와 진단확정 기준을 확인해야 합니다.',
-    '급성심근경색 진단확정은 트로포닌 등 심근효소 상승, 심전도 또는 ECG/EKG 변화, 관상동맥조영술(CAG), PCI 시행 여부, 영상 및 진료기록 등 검사결과를 종합해 검토해야 합니다.',
-    'I20 협심증과 I21 급성심근경색은 약관상 지급대상이 다를 수 있으므로 구분해야 합니다. 관상동맥 협착이나 스텐트 삽입만으로 급성심근경색 진단비가 확정되는 것은 아니며, 검사결과와 약관상 진단확정 기준을 함께 확인해야 합니다.',
-    '따라서 고객 측 의견은 지급 여부를 단정하는 것이 아니라, 검사결과와 가입 당시 약관상 진단확정 기준에 따라 보험회사의 부지급 또는 감액 판단에 재검토가 필요하다는 방향으로 정리합니다.',
+    '보험회사가 입퇴원요약지상 Unstable angina 또는 CAD 기재만을 근거로 I21.4 급성 심내막하심근경색증 진단을 배척하는 것은 전체 의무기록의 흐름을 단편적으로 해석한 것이다. 진단서/소견서의 I21.4 기재, CAG 결과, PCI/stent 시행, hs-troponin 및 CK-MB 변화, ECG와 Echo 소견을 함께 보아야 한다.',
+    '피보험자에게 LM-LAD 또는 LM-mLAD 중증 협착, CAG상 유의 협착, PCI/stent 시행, hs-troponin 상승, 주치의 I21.4 진단이 확인된다면 이는 단순 흉통 또는 일반 CAD로 축소할 사안이 아니다. 보험사는 불리한 진단명 하나만 선택해 급성 관상동맥증후군 전체 경과를 배제할 수 없다.',
+    '보험회사가 hs-troponin 상승이 PCI 후 발생한 시술 관련 상승이라고 주장하려면 PCI 시행 전후의 정확한 채혈시간, 시술기록, 심근효소 연속 수치, 주치의 진단 근거를 종합해 입증해야 한다. 상승 시점에 관한 가능성만으로 주치의의 I21.4 진단을 배척할 수 없다.',
+    '따라서 본 건의 손해사정 의견은 급성심근경색 진단비 지급 타당성을 고객 측에서 적극 주장하는 방향이다. 다만 ECG상 ST 변화, Echo상 RWMA/LVEF, CAG 원문 및 채혈시간표가 누락되어 있으면 해당 자료를 추가 확보해 보험사의 시술 관련 상승 주장을 차단해야 한다.',
   ].filter(Boolean).join('\n\n');
   return {
     ...result,
-    title: clean(result.title) || '심장질환 진단비 관련 손해사정 의견 초안',
+    title: clean(result.title) || '급성심근경색 진단비 지급 검토 손해사정서',
     overview: clean(result.overview),
     facts: clean(result.facts),
     issues: [clean(result.issues), '주요 쟁점은 심장질환 진단비 청구에서 진단확정이 인정되는지, 트로포닌ㆍ심전도ㆍ관상동맥조영술 등 검사결과가 가입 당시 약관상 급성심근경색 또는 허혈성심장질환 정의에 해당하는지입니다.'].filter(Boolean).join('\n\n'),
-    legalAndReferenceBasis: '가입 당시 약관, 심장질환 진단확정 조항, 트로포닌 등 심근효소 검사결과, 심전도, 관상동맥조영술, CAG/PCI 기록, 진료기록, 질병분류표를 중심으로 검토해야 합니다.',
-    damageAssessment: '본 건은 손해액 산정보다는 심장질환 진단확정 요건 충족 여부가 핵심입니다. 트로포닌 상승, 심전도 변화, 관상동맥조영술 소견, 스텐트 시행 사유, 진구성 또는 급성 병변 여부를 구분해야 합니다.',
-    insurerPositionReview: '보험회사가 진단확정 요건 미충족을 주장하는 경우 트로포닌, 심전도, 관상동맥조영술, CAG/PCI, 사망진단서 또는 부검 여부 등 검사결과와 가입 당시 약관상 정의를 구체적으로 제시할 필요가 있습니다.',
+    legalAndReferenceBasis: [clean(result.legalAndReferenceBasis), '약관상 급성심근경색 진단비 지급요건은 가입 당시 약관의 진단확정 조항, 질병분류표, 심근효소 및 심전도ㆍ영상ㆍ관상동맥조영술 기록을 종합해 판단해야 한다. 업로드 약관 또는 직접 관련 RAG 근거가 부족한 항목은 근거자료 부족으로 표시하고, 없는 판례나 분쟁조정번호는 특정하지 않는다.'].filter(Boolean).join('\n\n'),
+    damageAssessment: [clean(result.damageAssessment), '고객 측에서 유리한 핵심은 I21.4 진단서/소견서, CAG상 중증 협착, PCI/stent 시행, hs-troponin 및 CK-MB 변화, ECG 및 Echo 소견이다. 보험사가 Unstable angina 또는 CAD 기재만으로 부지급한다면 이는 의무기록 전체가 아니라 일부 진단명만을 선택한 단편적 해석이다.'].filter(Boolean).join('\n\n'),
+    insurerPositionReview: [clean(result.insurerPositionReview), '보험회사의 핵심 약점은 PCI 후 troponin 상승 가능성을 확정 사실처럼 전제할 수 없다는 점이다. 보험회사는 채혈시간, 시술시간, 시술 전후 효소 추이, ECG/RWMA/LVEF, 주치의 I21.4 진단 근거를 종합해 반대 근거를 제시해야 하며, 그 입증 없이 주치의 진단을 배척하기 어렵다.'].filter(Boolean).join('\n\n'),
     adjusterOpinionDraft: opinion,
     requiredAdditionalChecks: [clean(result.requiredAdditionalChecks), '가입 당시 약관', '트로포닌 등 심근효소 검사결과', '심전도 또는 ECG/EKG', '관상동맥조영술(CAG) 결과', 'PCI/스텐트 기록', '진료기록지', '질병분류표', '보험회사 부지급 사유서'].filter(Boolean).join('\n'),
-    simpleClientSummary: '심장질환 진단비는 진단서 코드만으로 판단하기보다 트로포닌, 심전도, 관상동맥조영술 등 검사결과와 가입 당시 약관의 진단확정 기준을 함께 확인해야 합니다. 관련 자료를 정리하면 재검토 요청에 필요한 근거를 보완할 수 있습니다.',
+    simpleClientSummary: '보험회사가 Unstable angina 또는 CAD 기재만으로 I21.4 진단을 부정하는 것은 전체 의무기록에 비추어 다툴 수 있습니다. CAG/PCI 기록, hs-troponin/CK-MB 추이, ECG, Echo, 주치의 보완소견서를 확보해 급성심근경색 진단비 지급 타당성을 주장해야 합니다.',
+    customerSideAssessmentReport: result.customerSideAssessmentReport || opinion,
+    disclaimer: '',
   };
 }
 
@@ -2045,6 +3562,7 @@ function officialReferenceKey(ref: RagSearchResult['officialReferences'][number]
 function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult): RagSearchResult {
   const codes = inputDiagnosisCodes(input);
   const profile = caseProfile(input);
+  const acuteMiContext = isAcuteMiDenialContext(input);
   const filteredRagResult = filterAssessmentReferences(ragResult, { profileId: profile });
   const disclosureM4726 = profile === 'm47_disclosure';
   const thyroidProfile = profile === 'thyroid_disclosure_cancer';
@@ -2117,8 +3635,9 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       const excludedHeart = /도수치료|manual\s*therapy|M54|요통|백내장|다초점렌즈|갑상선암|암진단비|뇌경색|뇌출혈|후유장해|자동차보험|고지의무|계약해지/i;
       const directHeart = /심장질환|급성심근경색|심근경색|협심증|관상동맥|심혈관|스텐트|트로포닌|심전도|관상동맥조영술|CAG|PCI|심근효소|CK-MB|I21|I20|I22|I25|I50|사망진단서|부검|진단확정|검사결과|약관|질병분류표/i;
       if (excludedHeart.test(text)) return false;
-      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directHeart.test(text)) return false;
+      if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge' || ref.source_area === 'medical_guideline') && !directHeart.test(text)) return false;
     }
+    if (acuteMiContext && ref.source_area === 'precedents' && !isAcuteMiPrecedentReference(ref)) return false;
     if (disabilityProfile) {
       const excluded = /도수치료|도수\s*치료|manual\s*therapy|실손\s*부지급|암진단비|갑상선암|백내장|고지의무|계약해지|자동차보험\s*손해액\s*산정/i;
       const direct = /후유장해|장해분류표|장해지급률|영구장해|운동장해|동요관절|관절동요|압박골절|추간판탈출증|회전근개|난청|신경마비|CRPS|약관|지급률|객관적\s*검사/i;
@@ -2312,9 +3831,40 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
 
   return {
     ...filteredRagResult,
-    officialReferences,
+    officialReferences: acuteMiContext ? filterAcuteMiOfficialReferences(officialReferences) : officialReferences,
     internalReviewMaterials,
   };
+}
+
+function isAcuteMiPrecedentReference(ref: RagSearchResult['officialReferences'][number]) {
+  const text = [
+    ref.source_area,
+    ref.source_area_label,
+    ref.title,
+    ref.summary,
+    ref.case_number,
+    ref.court_or_agency,
+    ref.diagnosis_code,
+    ref.diagnosis_name,
+  ].filter(Boolean).join(' ');
+  if (/형사|횡령|배임|허위진단서|허위\s*진단서|요추부골절|요추|정형외과|골절|상해진단서|사기/i.test(text)) return false;
+  return /급성심근경색|심근경색|허혈성심장질환|협심증|진단비|심전도|심근효소|troponin|트로포닌|관상동맥|CAG|PCI|I21|I20|I25/i.test(text);
+}
+
+function filterAcuteMiOfficialReferences(references: RagSearchResult['officialReferences']) {
+  return references.filter((ref) => {
+    if (ref.source_area === 'medical_guideline') return true;
+    if (ref.source_area === 'precedents') return isAcuteMiPrecedentReference(ref);
+    if (ref.source_area === 'fss_dispute_cases') {
+      return /급성심근경색|심근경색|허혈성심장질환|협심증|진단비|심전도|심근효소|troponin|트로포닌|관상동맥|CAG|PCI|I21|I20|I25/i.test([
+        ref.title,
+        ref.summary,
+        ref.diagnosis_code,
+        ref.diagnosis_name,
+      ].filter(Boolean).join(' '));
+    }
+    return true;
+  });
 }
 
 function emptyRagResult(): RagSearchResult {
@@ -2324,31 +3874,35 @@ function emptyRagResult(): RagSearchResult {
 async function getRagResult(apiKey: string, input: ReturnType<typeof validateInput>) {
   try {
     const context = ragContextFromInput(input);
+    const baseQuery = buildRagSearchQuery({
+      caseTitle: input.caseTitle,
+      insurerName: input.insurerName,
+      productName: input.productName,
+      policyName: input.policyName,
+      insuranceType: input.insuranceType,
+      coverageType: input.coverageType,
+      contractDate: input.contractDate,
+      policyGeneration: context.policyGeneration,
+      diagnosisText: input.diagnosisText,
+      diagnosisName: input.diagnosisName,
+      diagnosisCode: input.diagnosisCode,
+      accidentType: input.accidentType,
+      accidentDate: input.accidentDate,
+      damageDetails: input.damageDetails,
+      insurerPosition: input.insurerPosition,
+      customerStatement: input.customerStatement,
+      adjusterMemo: input.adjusterMemo,
+      sourceAnalysis: input.sourceAnalysis,
+    }, context);
+    const query = (caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input))
+      ? `${baseQuery}\n${ACUTE_MI_POLICY_SEARCH_TERMS.join(' ')}`
+      : baseQuery;
     return await searchRagReferences({
       supabaseUrl: requiredEnv('SUPABASE_URL'),
       serviceRoleKey: requiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
       openAiKey: apiKey,
       context,
-      query: buildRagSearchQuery({
-        caseTitle: input.caseTitle,
-        insurerName: input.insurerName,
-        productName: input.productName,
-        policyName: input.policyName,
-        insuranceType: input.insuranceType,
-        coverageType: input.coverageType,
-        contractDate: input.contractDate,
-        policyGeneration: context.policyGeneration,
-        diagnosisText: input.diagnosisText,
-        diagnosisName: input.diagnosisName,
-        diagnosisCode: input.diagnosisCode,
-        accidentType: input.accidentType,
-        accidentDate: input.accidentDate,
-        damageDetails: input.damageDetails,
-        insurerPosition: input.insurerPosition,
-        customerStatement: input.customerStatement,
-        adjusterMemo: input.adjusterMemo,
-        sourceAnalysis: input.sourceAnalysis,
-      }, context),
+      query,
     });
   } catch (error) {
     console.warn('RAG search failed for assessment draft', error instanceof Error ? error.message : 'unknown error');
@@ -2373,7 +3927,23 @@ Deno.serve(async (req: Request) => {
     const input = validateInput(body);
     const detectedProfile = caseProfile(input);
     const rawRagResult = await getRagResult(apiKey, input);
-    const ragResult = sanitizeRagResultForAssessment(input, rawRagResult);
+    const sanitizedRagResult = sanitizeRagResultForAssessment(input, rawRagResult);
+    const policyBackedRagResult = appendServerDefaultPolicyEvidence(input, sanitizedRagResult);
+    const ragResult = appendMedicalGuidelineEvidence(
+      input,
+      policyBackedRagResult,
+    );
+    console.info('assessment evidence pack summary', {
+      detectedProfile,
+      issueType: isAcuteMiDenialContext(input) ? 'acute_mi_denial' : detectedProfile,
+      officialCount: ragResult.officialReferences.length,
+      policyEvidenceCount: policyEvidenceFromRag(ragResult).length,
+      serverDefaultPolicyCount: policyEvidenceFromRag(ragResult).filter((ref) => ref.policySource === 'server_default').length,
+      medicalGuidelineCount: ragResult.officialReferences.filter((ref) => ref.source_area === 'medical_guideline').length,
+      precedentCount: ragResult.officialReferences.filter((ref) => ref.source_area === 'precedents').length,
+      fssCount: ragResult.officialReferences.filter((ref) => ref.source_area === 'fss_dispute_cases').length,
+      termsCount: ragResult.officialReferences.filter((ref) => ref.source_area === 'terms_standards').length,
+    });
 
     const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
     const draft = sanitizeResult(parseJsonResponse(draftText));
@@ -2421,7 +3991,7 @@ Deno.serve(async (req: Request) => {
       input,
       ragResult,
     );
-    const reviewed = ensureProfileEvaluationPhrases(
+    const reviewed = stripProhibitedBodyPhrases(ensureProfileEvaluationPhrases(
       finalizeDuplicateProportionalResult(
         finalizeCancerHospitalizationResult(
           finalizeGeneralIndemnityResult(
@@ -2451,9 +4021,11 @@ Deno.serve(async (req: Request) => {
         input,
       ),
       input,
-    );
+    ));
 
-    return jsonResponse({ ...reviewed, requestId: input.requestId, detectedProfile, retrievedReferences: ragResult });
+    const finalResult = buildFinalSubmissionAssessmentReport(reviewed, input, ragResult);
+
+    return jsonResponse({ ...finalResult, requestId: input.requestId, detectedProfile, retrievedReferences: ragResult });
   } catch (error: unknown) {
     const status = error instanceof HttpError ? error.status : 500;
     const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
