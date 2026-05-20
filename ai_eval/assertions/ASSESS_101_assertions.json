@@ -1,0 +1,132 @@
+{
+  "case_id": "ASSESS_101",
+  "gold_fixture_ref": "GOLD_ACUTE_MI_SUBMISSION_REPORT_V2_REDACTED",
+  "description": "ASSESS_101 v2 보강본 기준 9개 단위 검증 항목",
+  "assertions": [
+    {
+      "id": "denial_quote",
+      "label": "보험사 부지급 문구 직접 인용",
+      "description": "보험사 부지급 결정 문구를 「」 안에 직접 인용해야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "심근효소 상승이 확인되지 않아",
+        "심근경색까지 진행하지 않은 것으로",
+        "I21.4",
+        "I25.1"
+      ],
+      "note": "부지급 사유 원문 중 핵심 구절이 출력에 포함되어야 함"
+    },
+    {
+      "id": "diagnostic_criteria",
+      "label": "국제 진단기준 명시",
+      "description": "Fourth Universal Definition of Myocardial Infarction 2018 또는 이에 상응하는 국제 기준을 명시해야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "Fourth Universal Definition of Myocardial Infarction",
+        "UDMI 2018",
+        "심근경색 국제 진단기준",
+        "2018년 국제 진단기준"
+      ],
+      "note": "연도(2018) 또는 원문 명칭 포함 필수"
+    },
+    {
+      "id": "mapping_table",
+      "label": "진단기준 vs 환자 데이터 매핑표",
+      "description": "심근경색 진단기준 항목과 환자 실제 데이터를 대응시키는 표 또는 항목별 비교가 있어야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "hs-troponin",
+        "Troponin T",
+        "CK-MB",
+        "ST depression",
+        "cardiac marker"
+      ],
+      "note": "진단기준 vs 환자 데이터 항목 중 최소 2개 이상 포함 권고"
+    },
+    {
+      "id": "clause_quote",
+      "label": "약관 조항 원문 인용 및 충족 확인",
+      "description": "보험약관의 급성심근경색 진단 요건 조항을 인용하고 환자 자료와 매칭해야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "약관",
+        "진단확정",
+        "전문의",
+        "조직검사",
+        "심전도",
+        "심장효소"
+      ],
+      "note": "약관 문구 인용 + 요건별 충족 여부 명시 필요"
+    },
+    {
+      "id": "precedent_rebuttal",
+      "label": "판례 역공 또는 유리한 판례 적용",
+      "description": "보험사가 인용한 판례(또는 유리한 판례)를 역공하거나 피보험자에게 유리하게 재적용해야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "2013다208661",
+        "2018나65691",
+        "대법원",
+        "판례",
+        "금감원"
+      ],
+      "note": "실제 존재하는 판례만 인용 — 없는 판례 생성 금지"
+    },
+    {
+      "id": "killing_evidence",
+      "label": "SOAP 기록 killing evidence 강조",
+      "description": "주치의 SOAP 기록('cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능')을 결정적 증거로 별도 강조해야 한다.",
+      "check_type": "includes_any",
+      "targets": [
+        "cardiac marker",
+        "UA-NSTEMI",
+        "SOAP",
+        "진단서 가능",
+        "주치의"
+      ],
+      "note": "SOAP 기록의 UA-NSTEMI 소견이 진단 정당성의 핵심 근거임을 명시"
+    },
+    {
+      "id": "multi_defense",
+      "label": "다중 방어선 4개 이상",
+      "description": "의학적 근거(Ⅲ), 약관 충족(Ⅳ), 판례/금감원(Ⅴ), 약관해석 원칙(Ⅵ) 중 4개 이상 방어선이 존재해야 한다.",
+      "check_type": "includes_all",
+      "targets": [
+        "의학",
+        "약관",
+        "판례",
+        "약관해석"
+      ],
+      "note": "각 방어선은 독립된 섹션으로 존재해야 하며 단순 언급이 아닌 논리 전개 필요"
+    },
+    {
+      "id": "no_weak_endings",
+      "label": "약한 어미 금지",
+      "description": "사료됩니다, 생각됩니다, 가능성이 있습니다, 추가 검토가 필요 등 불확실 어미가 없어야 한다.",
+      "check_type": "excludes_all",
+      "targets": [
+        "사료됩니다",
+        "생각됩니다",
+        "가능성이 있습니다",
+        "추가 검토가 필요",
+        "재검토가 필요",
+        "검토 가치",
+        "확정할 수는 없으나",
+        "지급 여부를 단정"
+      ],
+      "note": "결론부에서 특히 엄격하게 적용"
+    },
+    {
+      "id": "request_completeness",
+      "label": "요청사항 3종 완결",
+      "description": "결론에 ① 보험금 지급 ② 지연이자 ③ 구체적 서면 회신 3종이 모두 포함되어야 한다.",
+      "check_type": "includes_all",
+      "targets": [
+        "보험금",
+        "지연이자",
+        "서면 회신"
+      ],
+      "note": "요청사항은 가정형이 아닌 명시적 요구 형식으로 작성"
+    }
+  ]
+}
