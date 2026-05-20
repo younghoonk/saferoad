@@ -8,6 +8,7 @@ export interface RetrievedReference {
   source_type?: string;
   source_area_label: string;
   title: string;
+  id?: string;
   summary?: string;
   source_url?: string;
   sourceDisplayName?: string;
@@ -24,6 +25,17 @@ export interface RetrievedReference {
   official_citation_allowed?: boolean;
   source_provider?: string;
   provider_prec_id?: string;
+  release_stage?: string;
+  dataset_version?: string;
+  sourceType?: string;
+  citationLabel?: string;
+  sourceArea?: string;
+  issueTags?: string[];
+  keyHolding?: string;
+  excerpt?: string;
+  applicableReason?: string;
+  limitation?: string;
+  policySource?: 'uploaded' | 'server_default';
 }
 
 export interface RagSearchResult {
@@ -46,6 +58,10 @@ export interface RagSearchContext {
   policyVersion?: string;
   isLifeInsurance?: boolean;
   isNonLifeInsurance?: boolean;
+}
+
+export interface RagSearchOptions {
+  includeStaging?: boolean;
 }
 
 interface RpcRow {
@@ -72,12 +88,14 @@ interface EnrichedRow extends RpcRow {
 const sourceAreaLabels: Record<string, string> = {
   fss_dispute_cases: '금융감독원 분쟁조정례',
   legal_statutes: '법령',
+  medical_guideline: '의학 기준',
   medical_knowledge: '의료 참고자료',
   precedents: '판례',
   terms_standards: '약관/지급기준',
   issue_playbooks: '내부 쟁점 플레이북',
   practice_playbooks: '내부 실무 플레이북',
   medical_issue_codes: '질병코드별 의료쟁점',
+  dispute_resolution_cases: '금융감독원 분쟁조정례/민원사례',
   real_case_patterns: '익명 사건 패턴',
   real_case_documents: '익명 문서 요약',
 };
@@ -90,6 +108,11 @@ const sourceDomainDisplayNames: Record<string, string> = {
   'fsc.go.kr': '금융위원회',
   'health.kdca.go.kr': '질병관리청 국가건강정보포털',
   'kdca.go.kr': '질병관리청',
+  'jacc.org': 'JACC',
+  'acc.org': 'American College of Cardiology',
+  'heart.org': 'American Heart Association',
+  'professional.heart.org': 'American Heart Association',
+  'pubmed.ncbi.nlm.nih.gov': 'PubMed',
   'data.go.kr': '공공데이터포털',
   'hira.or.kr': '건강보험심사평가원',
   'cancer.go.kr': '국가암정보센터',
@@ -122,6 +145,7 @@ const searchPlan = [
   { source_area: 'terms_standards', count: 3 },
   { source_area: 'fss_dispute_cases', count: 3 },
   { source_area: 'precedents', count: 3 },
+  { source_area: 'medical_guideline', count: 3 },
   { source_area: 'medical_knowledge', count: 3 },
   { source_area: 'medical_issue_codes', count: 3 },
   { source_area: 'issue_playbooks', count: 2 },
@@ -163,6 +187,7 @@ function isBlockedOfficialSource(row: EnrichedRow) {
 }
 
 function isAllowedOfficialSource(row: EnrichedRow) {
+  if (isPolicyTermsReference(row)) return true;
   const hostname = hostnameFromUrl(row.source_url);
   if (!hostname) {
     return row.source_area === 'legal_statutes'
@@ -182,6 +207,7 @@ function getSourceDisplayName(sourceUrl: unknown, sourceArea?: string, title?: u
   const areaDisplayNames: Record<string, string> = {
     fss_dispute_cases: '금융감독원 분쟁조정례',
     legal_statutes: '법령',
+    medical_guideline: '의학 기준',
     medical_knowledge: '의료 참고자료',
     precedents: '판례',
     terms_standards: '약관/지급기준',
@@ -321,6 +347,54 @@ function officialCitationAllowed(row: EnrichedRow) {
   return metadataBoolean(row, 'official_citation_allowed') || metadataBoolean(row, 'officialCitationAllowed');
 }
 
+function releaseStage(row: EnrichedRow) {
+  return metadataValue(row, 'release_stage') || metadataValue(row, 'releaseStage');
+}
+
+function isActiveRelease(row: EnrichedRow) {
+  const stage = releaseStage(row);
+  return !stage || stage === 'active' || metadataBoolean(row, 'is_active') || metadataBoolean(row, 'isActive');
+}
+
+function filterReleaseRows(rows: EnrichedRow[], options?: RagSearchOptions) {
+  return options?.includeStaging ? rows : rows.filter(isActiveRelease);
+}
+
+function officialCitationDenied(row: EnrichedRow) {
+  const snakeValue = row.metadata?.official_citation_allowed;
+  const camelValue = row.metadata?.officialCitationAllowed;
+  return snakeValue === false
+    || camelValue === false
+    || (typeof snakeValue === 'string' && snakeValue.toLowerCase() === 'false')
+    || (typeof camelValue === 'string' && camelValue.toLowerCase() === 'false');
+}
+
+function trustLevel(row: EnrichedRow) {
+  return publicText(row.trust_level);
+}
+
+function isPolicyTermsReference(row: EnrichedRow) {
+  return row.source_area === 'terms_standards'
+    && ['policy_terms_bundle', 'silson_policy_terms'].includes(publicText(row.source_type))
+    && trustLevel(row) === 'policy_reference'
+    && officialCitationAllowed(row);
+}
+
+function explicitOfficialTermsSourceType(row: EnrichedRow) {
+  const sourceType = publicText(row.source_type);
+  return /official|standard_terms|standard_policy|policy_standard|legal|statute|regulatory|fss|fsc|標準|표준약관|법령|금감원|금융감독원|금융위원회/i.test(sourceType);
+}
+
+function isTrustedTermsReference(row: EnrichedRow) {
+  if (row.source_area !== 'terms_standards') return false;
+  if (isPolicyTermsReference(row)) return true;
+  if (officialCitationDenied(row)) return false;
+  if (reviewStatus(row) === 'unreviewed' && !trustLevel(row)) return false;
+  if (['official', 'policy_reference', 'legal_reference', 'regulatory_reference'].includes(trustLevel(row))) return true;
+  if (['reviewed', 'approved'].includes(reviewStatus(row))) return true;
+  return explicitOfficialTermsSourceType(row);
+}
+
 function strongPrecedentCitation(row: EnrichedRow) {
   if (row.source_area !== 'precedents') return false;
   return sourceStatus(row) === 'official_law_api_full_text'
@@ -342,20 +416,28 @@ function isTitleSeedFss(row: EnrichedRow) {
 }
 
 function isOfficialReference(row: EnrichedRow) {
+  if (officialCitationDenied(row)) return false;
+  if (row.source_area === 'medical_issue_codes' || row.source_area === 'practice_playbooks' || row.source_area === 'dispute_resolution_cases') return false;
+  if (['classification_reference', 'internal_practice'].includes(trustLevel(row))) return false;
   if (isBlockedOfficialSource(row) || !isAllowedOfficialSource(row)) return false;
-  if (row.source_area === 'legal_statutes' || row.source_area === 'terms_standards') return true;
+  if (row.source_area === 'legal_statutes') return true;
+  if (row.source_area === 'terms_standards') return isTrustedTermsReference(row);
   if (row.source_area === 'fss_dispute_cases') {
     return sourceStatus(row) === 'official_fss_full_text';
   }
   if (row.source_area === 'precedents') {
     return strongPrecedentCitation(row);
   }
+  if (row.source_area === 'medical_guideline') {
+    return reviewStatus(row) === 'reviewed' && officialCitationAllowed(row);
+  }
   return false;
 }
 
 function isInternalReviewMaterial(row: EnrichedRow) {
   return (row.source_area === 'precedents' && !strongPrecedentCitation(row))
-    || ['issue_playbooks', 'practice_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge'].includes(row.source_area)
+    || (row.source_area === 'terms_standards' && !isOfficialReference(row))
+    || ['issue_playbooks', 'practice_playbooks', 'medical_issue_codes', 'real_case_patterns', 'real_case_documents', 'medical_knowledge', 'dispute_resolution_cases'].includes(row.source_area)
     || String(row.source_type || '').startsWith('internal_');
 }
 
@@ -766,7 +848,7 @@ function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): 
     source_type: publicText(row.source_type),
     source_area_label: isWeakPrecedent ? '유사 판례 참고자료' : getSourceDisplayName(undefined, row.source_area, row.title),
     title: clip(row.title, 180),
-    summary: clip(row.summary || row.chunk_text, 700),
+    summary: clip(row.summary || row.chunk_text, 500),
     source_url: publicText(row.source_url),
     sourceDisplayName: getSourceDisplayName(row.source_url, row.source_area, row.title),
     similarity: Number(row.similarity || 0),
@@ -784,6 +866,8 @@ function toReference(row: EnrichedRow, referenceType: 'official' | 'internal'): 
     official_citation_allowed: officialCitationAllowed(row),
     source_provider: publicText(metadata.source_provider || metadata.sourceProvider),
     provider_prec_id: publicText(metadata.provider_prec_id || metadata.providerPrecId),
+    release_stage: releaseStage(row) || 'active',
+    dataset_version: publicText(metadata.dataset_version || metadata.datasetVersion),
   };
 }
 
@@ -898,12 +982,33 @@ export function buildRagSearchQuery(value: unknown, context?: RagSearchContext) 
   return publicText(parts.filter(Boolean).join(' ')).slice(0, 3000);
 }
 
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  worker: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let nextIndex = 0;
+  const workerCount = Math.min(Math.max(concurrency, 1), items.length);
+
+  await Promise.all(Array.from({ length: workerCount }, async () => {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await worker(items[index], index);
+    }
+  }));
+
+  return results;
+}
+
 export async function searchRagReferences(params: {
   supabaseUrl: string;
   serviceRoleKey: string;
   openAiKey: string;
   query: string;
   context?: RagSearchContext;
+  options?: RagSearchOptions;
 }): Promise<RagSearchResult> {
   const query = publicText(params.query);
   if (!query) return { query: '', officialReferences: [], internalReviewMaterials: [] };
@@ -913,10 +1018,19 @@ export async function searchRagReferences(params: {
   const officialRows: EnrichedRow[] = [];
   const internalRows: EnrichedRow[] = [];
 
-  for (const plan of searchPlan) {
-    const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 4, 10));
-    const rows = await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows);
-    const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
+  const planResults = await mapWithConcurrency(searchPlan, 4, async (plan) => {
+    try {
+      const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 2, 6));
+      const rows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows), params.options);
+      const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
+      return { plan, sorted };
+    } catch (error) {
+      console.warn('[ragSearch] source_area search failed', plan.source_area, error instanceof Error ? error.message : error);
+      return { plan, sorted: [] as EnrichedRow[] };
+    }
+  });
+
+  for (const { plan, sorted } of planResults) {
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
