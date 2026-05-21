@@ -986,18 +986,29 @@ async function mapWithConcurrency<T, R>(
   items: T[],
   concurrency: number,
   worker: (item: T, index: number) => Promise<R>,
-): Promise<R[]> {
-  const results = new Array<R>(items.length);
+): Promise<(R | undefined)[]> {
+  const results = new Array<R | undefined>(items.length);
   let nextIndex = 0;
   const workerCount = Math.min(Math.max(concurrency, 1), items.length);
 
-  await Promise.all(Array.from({ length: workerCount }, async () => {
+  // allSettled: one slot failure does not abort other slots
+  const settled = await Promise.allSettled(Array.from({ length: workerCount }, async () => {
     while (nextIndex < items.length) {
       const index = nextIndex;
       nextIndex += 1;
-      results[index] = await worker(items[index], index);
+      try {
+        results[index] = await worker(items[index], index);
+      } catch (err) {
+        console.error('[mapWithConcurrency] worker threw at index', index, err instanceof Error ? err.message : String(err));
+      }
     }
   }));
+
+  for (const s of settled) {
+    if (s.status === 'rejected') {
+      console.error('[mapWithConcurrency] slot rejected unexpectedly', s.reason instanceof Error ? s.reason.message : String(s.reason));
+    }
+  }
 
   return results;
 }
@@ -1023,14 +1034,19 @@ export async function searchRagReferences(params: {
       const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 2, 6));
       const rows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows), params.options);
       const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
+      if (sorted.length === 0 && (plan.source_area === 'precedents' || plan.source_area === 'terms_standards')) {
+        console.error('[ragSearch] SILENT_EMPTY source_area returned 0 rows', { source_area: plan.source_area, query: query.slice(0, 80) });
+      }
       return { plan, sorted };
     } catch (error) {
-      console.warn('[ragSearch] source_area search failed', plan.source_area, error instanceof Error ? error.message : error);
+      console.error('[ragSearch] source_area search FAILED', plan.source_area, error instanceof Error ? error.message : error);
       return { plan, sorted: [] as EnrichedRow[] };
     }
   });
 
-  for (const { plan, sorted } of planResults) {
+  for (const entry of planResults) {
+    if (!entry) continue; // guard: allSettled slot may yield undefined on unexpected throw
+    const { plan, sorted } = entry;
 
     for (const row of sorted) {
       if (isTitleSeedFss(row)) continue;
