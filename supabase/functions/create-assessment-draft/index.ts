@@ -1303,6 +1303,8 @@ function paragraphCount(value: string) {
 
 function stripProhibitedBodyPhrases(result: AssessmentDraftResult): AssessmentDraftResult {
   const prohibited = [
+    // Remove the whole template opinion sentence before stripping sub-phrases
+    /따라서\s*손해사정\s*의견은[^\n]*?(?:정리한다|재검토해야\s*한다는\s*방향)[^\n]*\.?[ \t]*/g,
     /투명성을\s*확인하는\s*방향이\s*적절합니다/g,
     /소송\s*전\s*절차를\s*중심으로\s*진행해야\s*합니다/g,
     /본사\s*민원(?:을| 또는|과|,|\s|$)/g,
@@ -1324,7 +1326,13 @@ function stripProhibitedBodyPhrases(result: AssessmentDraftResult): AssessmentDr
   ];
   const clean = (value: string | undefined) => {
     let text = cleanPublicText(value);
-    for (const pattern of prohibited) text = text.replace(pattern, '').trim();
+    for (const pattern of prohibited) { pattern.lastIndex = 0; text = text.replace(pattern, '').trim(); }
+    // Clean fragments left by phrase removal: orphaned particles/commas before connectors
+    text = text
+      .replace(/[ \t]*,[ \t]*(?=[위이에])/g, ' ')
+      .replace(/[ \t]+[을를][ \t]+(?=[위재검])/g, ' ')
+      .replace(/,\s*\n/g, '\n')
+      .replace(/[ \t]{2,}/g, ' ');
     return dedupeParagraphs(text.replace(/\n{3,}/g, '\n\n').trim());
   };
   const customerSideAssessmentReport = clean(result.customerSideAssessmentReport)
