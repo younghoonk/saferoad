@@ -1383,7 +1383,8 @@ function isAcuteMiPolicyReference(ref: RagSearchResult['officialReferences'][num
     ref.applicableReason,
     ...(ref.issueTags || []),
   ].filter(Boolean).join(' '));
-  return /급성\s*심근경색|심근경색|허혈\s*심장질환|심장질환\s*진단확정|진단확정|심전도|심장초음파|관상동맥|심장효소|I21|I21\.4|I20|I25\.1/i.test(text);
+  // 진단확정(bare) / I21(bare) removed — too generic, appears in every policy regardless of disease
+  return /급성\s*심근경색|심근경색|허혈\s*심장질환|심장질환\s*진단확정|심전도|심장초음파|관상동맥|심장효소|I21\.4|I21\.?4|I20\b|I25\.1/i.test(text);
 }
 
 function policyReferenceKey(ref: RagSearchResult['officialReferences'][number]) {
