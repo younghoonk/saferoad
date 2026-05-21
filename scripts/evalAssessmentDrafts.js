@@ -24,7 +24,7 @@ const DEFINITIVE_PATTERNS = [
 ];
 
 function parseArgs(argv) {
-  const args = { dryRun: false, caseId: '', limit: 0, category: '', from: 0, to: 0, retries: 2, subsetFile: '', casesFile: DEFAULT_CASES_PATH };
+  const args = { dryRun: false, caseId: '', limit: 0, category: '', from: 0, to: 0, retries: 2, delay: 2000, subsetFile: '', casesFile: DEFAULT_CASES_PATH };
   for (let i = 0; i < argv.length; i += 1) {
     const item = argv[i];
     if (item === '--dry-run') args.dryRun = true;
@@ -34,6 +34,7 @@ function parseArgs(argv) {
     else if (item === '--from') args.from = Number(argv[++i] || 0);
     else if (item === '--to') args.to = Number(argv[++i] || 0);
     else if (item === '--retries') args.retries = Number(argv[++i] || 0);
+    else if (item === '--delay') args.delay = Number(argv[++i] || 2000);
     else if (item === '--subset-file') args.subsetFile = argv[++i] || DEFAULT_SUBSET_PATH;
     else if (item === '--cases-file') args.casesFile = argv[++i] || DEFAULT_CASES_PATH;
     else if (item === '--core-subset') args.subsetFile = DEFAULT_SUBSET_PATH;
@@ -43,11 +44,13 @@ function parseArgs(argv) {
     else if (item.startsWith('--from=')) args.from = Number(item.slice('--from='.length));
     else if (item.startsWith('--to=')) args.to = Number(item.slice('--to='.length));
     else if (item.startsWith('--retries=')) args.retries = Number(item.slice('--retries='.length));
+    else if (item.startsWith('--delay=')) args.delay = Number(item.slice('--delay='.length));
     else if (item.startsWith('--subset-file=')) args.subsetFile = item.slice('--subset-file='.length);
     else if (item.startsWith('--cases-file=')) args.casesFile = item.slice('--cases-file='.length);
   }
   if (!Number.isFinite(args.retries) || args.retries < 0) args.retries = 2;
   args.retries = Math.floor(args.retries);
+  if (!Number.isFinite(args.delay) || args.delay < 0) args.delay = 2000;
   return args;
 }
 
@@ -850,7 +853,7 @@ async function main() {
     }
 
     const payload = buildPayload(testCase);
-    if (results.length > 0) await sleep(2000);
+    if (results.length > 0) await sleep(args.delay);
     console.log(`${testCase.id}: running (${preview(testCase.title, 60)})`);
     try {
       const invoked = await invokeAssessmentWithRetry(supabase, payload, args.retries);

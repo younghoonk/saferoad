@@ -1107,29 +1107,44 @@ ${profileReviewRules}
 ${JSON.stringify(draft)}`;
 }
 
-async function callOpenAI(apiKey: string, prompt: string, temperature: number) {
-  const res = await fetch(OPENAI_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      messages: [{ role: 'user', content: prompt }],
-      max_tokens: 6000,
-      temperature,
-    }),
-  });
+async function callOpenAI(apiKey: string, prompt: string, temperature: number, maxRetries = 3) {
+  let lastStatus = 0;
+  let lastErrText = '';
+  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
+    const res = await fetch(OPENAI_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 6000,
+        temperature,
+      }),
+    });
 
-  if (!res.ok) {
-    const errText = await res.text();
-    console.error('OpenAI API error', res.status, errText);
-    throw new HttpError(502, 'AI 사정서 초안 생성 서버 호출에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    if (res.ok) {
+      const json = await res.json() as { choices?: { message?: { content?: string } }[] };
+      return json.choices?.[0]?.message?.content ?? '';
+    }
+
+    lastStatus = res.status;
+    lastErrText = await res.text();
+    console.error(`OpenAI API error attempt ${attempt}/${maxRetries + 1}`, lastStatus, lastErrText.slice(0, 200));
+
+    // Retry on rate limit (429) or server errors (5xx)
+    if (attempt <= maxRetries && (lastStatus === 429 || lastStatus >= 500)) {
+      const delayMs = Math.min(2000 * attempt, 8000);
+      console.info(`Retrying OpenAI call in ${delayMs}ms (attempt ${attempt}/${maxRetries})`);
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      continue;
+    }
+    break;
   }
 
-  const json = await res.json() as { choices?: { message?: { content?: string } }[] };
-  return json.choices?.[0]?.message?.content ?? '';
+  throw new HttpError(502, 'AI 사정서 초안 생성 서버 호출에 실패했습니다. 잠시 후 다시 시도해 주세요.');
 }
 
 function parseJsonResponse(text: string): AssessmentDraftResult {
