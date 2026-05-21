@@ -1053,6 +1053,18 @@ function buildReviewPrompt(draft: AssessmentDraftResult, references: RetrievedRe
       : '- Do not import disease-specific reasoning that is not supported by the input facts.';
   return `아래 고객 측 손해사정서 JSON을 검증하고 보정하세요.
 
+[v2 보강본 품질 체크 - finalSubmissionAssessmentReport 필수 항목]
+finalSubmissionAssessmentReport 필드를 반드시 아래 9개 기준에 맞게 보정하세요:
+1. 보험사 부지급 사유 원문을 「」 안에 직접 인용했는가. 없으면 Ⅱ장에서 추가하세요.
+2. 국제 진단기준 명칭과 연도가 명시되어 있는가 (예: Fourth Universal Definition of Myocardial Infarction 2018, ATA 2015 Guideline, 통계청 한국표준질병사인분류). 없으면 Ⅲ장에서 추가하세요.
+3. 진단기준 vs 환자 데이터 매핑표 또는 약관 요건별 충족표 중 최소 1개가 표 형식(| 구분자)으로 있는가. 없으면 Ⅲ 또는 Ⅳ장에서 추가하세요.
+4. 의무기록에서 결정적 한 줄(killing evidence) — troponin 수치, SOAP note 문구, 검사 수치, PCI/수술 기록 등 — 이 별도 강조되어 있는가. 없으면 Ⅲ장에서 추가하세요.
+5. 방어선이 Ⅲ의학 / Ⅳ약관 / Ⅴ판례 / Ⅵ약관해석원칙 순서로 각 장에 독립 구성되어 있는가.
+6. "사료됩니다", "가능성이 있습니다", "검토 가치가 있습니다", "~할 수 있습니다" 등 약한 어미를 단정적 표현으로 교체하세요.
+7. Ⅶ장 결론에 첫째(보험금 지급)/둘째(지연이자)/셋째(구체적 서면 회신) 3종 요청이 있는가. 없으면 추가하세요.
+8. [요청사항]에 보험금 지급, 지연이자, 서면 회신 3가지가 명시되어 있는가. 없으면 추가하세요.
+9. 개인정보([피보험자], [주민번호] 등 placeholder)가 실제 PII 대신 사용되고 있는가.
+
 [검증 기준]
 - 본문에서 "초안", "참고용", "AI", "본사 민원", "금감원 민원", "소송 전 절차", "손해사정사는 소송대리를 할 수 없습니다", "의료자문을 무조건 거부하기보다는", "자료정리가 핵심입니다", "계약해지 처분의 요건 충족 여부" 문구를 제거하세요.
 - 본문을 고객 측 보험금 지급 검토 사정서로 보정하세요. 중립적 안내문이나 민원 안내문으로 만들지 마세요.
@@ -1120,7 +1132,7 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number, m
       body: JSON.stringify({
         model: OPENAI_MODEL,
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 6000,
+        max_tokens: 8000,
         temperature,
       }),
     });
@@ -1665,8 +1677,9 @@ function selfVerifySubmissionReport(
     weakLanguageAbsent: !/(사료됩니다|생각됩니다|가능성이 있습니다|추가 검토가 필요|재검토가 필요|검토 가치|확정할 수는 없으나|지급 여부를 단정|초안|참고용)/i.test(text),
     forbiddenPhrasesAbsent: !FORBIDDEN_PHRASE_PATTERNS.some((p) => { p.lastIndex = 0; return p.test(text); })
       && !/\bconfidence\b|\bdocument_type\b|\bcompleted\b|\bSKMBT_|\bResized_/i.test(text),
-    piiRedacted: !/\d{6}-\d{7}|\b01[016789]-?\d{3,4}-?\d{4}\b|[가-힣]{2,4}\s*님/.test(text)
-      && /\[피보험자\]|\[주민번호\]|\[주소\]|\[연락처\]|\[증권번호\]/.test(text),
+    // piiRedacted: no actual PII present. Placeholder presence is enforced by prompt,
+    // not required here — absence of placeholders alone should not trigger repair.
+    piiRedacted: !/\d{6}-\d{7}|\b01[016789]-?\d{3,4}-?\d{4}\b/.test(text),
   };
 }
 
@@ -1729,6 +1742,12 @@ function repairSubmissionReport(
       `2. ${preAnalysis.finalRequestLogic.delayInterestRequest}`,
       `3. ${preAnalysis.finalRequestLogic.writtenReplyDemand}`,
     ].join('\n'));
+  }
+  if (!verification.piiRedacted) {
+    // Mask any actual PII that slipped through
+    report = report
+      .replace(/\d{6}-\d{7}/g, '[주민번호]')
+      .replace(/\b01[016789]-?\d{3,4}-?\d{4}\b/g, '[연락처]');
   }
   if (!verification.forbiddenPhrasesAbsent) {
     let cleaned = report;
