@@ -1,0 +1,282 @@
+ASSESS_001: running (M47.26 1회 통원 미고지 실손보험 해지)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_001: PASS
+ASSESS_002: running (갑상선 결절 미고지 후 갑상선암 진단비)
+ASSESS_002: PASS
+ASSESS_003: running (고혈압 투약 미고지 계약해지)
+ASSESS_003: PASS
+ASSESS_004: running (고지 전 고지혈증 검사수치 미고지)
+ASSESS_004: PASS
+ASSESS_005: running (위염 1회 치료 미고지 계약해지)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_005: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_006: running (유방결절 건강검진 미고지)
+ASSESS_006: PASS
+ASSESS_007: running (자궁근종 미고지 여성질환 수술비 부지급)
+ASSESS_007: PASS
+ASSESS_008: running (당뇨 전단계 검진수치 미고지)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_008: PASS
+ASSESS_009: running (수면장애 진료 미고지)
+ASSESS_009: PASS
+ASSESS_010: running (우울증 상담 미고지 계약해지)
+ASSESS_010: PASS
+ASSESS_011: running (MRI 검사 권유 미고지 허리통증)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_011: PASS
+ASSESS_012: running (건강검진 재검 권유 미고지)
+ASSESS_012: PASS
+ASSESS_013: running (담석증 건강검진 미고지)
+ASSESS_013: PASS
+ASSESS_014: running (지방간 검진소견 미고지)
+ASSESS_014: PASS
+ASSESS_015: running (대장용종 절제 이력 미고지)
+ASSESS_015: PASS
+ASSESS_016: running (도수치료 실손보험 부지급)
+ASSESS_016: PASS
+ASSESS_017: running (백내장 다초점렌즈 실손 부지급)
+ASSESS_017: PASS
+ASSESS_018: running (체외충격파 실손 부지급)
+ASSESS_018: PASS
+ASSESS_019: running (비급여 주사치료 실손 부지급)
+ASSESS_019: PASS
+ASSESS_020: running (영양수액 실손 부지급)
+ASSESS_020: PASS
+ASSESS_021: running (MRI 검사비 실손 부지급)
+ASSESS_021: PASS
+ASSESS_022: running (신경차단술 실손 부지급)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_022: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_023: running (경막외신경성형술 실손 부지급)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_023: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_024: running (요양병원 암 입원비 실손 부지급)
+ASSESS_024: PASS
+ASSESS_025: running (피부 레이저 치료 실손 부지급)
+ASSESS_025: PASS
+ASSESS_026: running (수면다원검사 실손 부지급)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_026: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_027: running (턱관절 치료 실손 부지급)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_027: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_028: running (비만치료 실손 부지급)
+ASSESS_028: PASS
+ASSESS_029: running (검사 목적 입원 실손 부지급)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_029: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_030: running (중복가입 비례보상 분쟁)
+ASSESS_030: PASS
+ASSESS_031: running (대장 용종 high grade dysplasia 제자리암 진단비)
+ASSESS_031: PASS
+ASSESS_032: running (대장점막내암 일반암/제자리암 분쟁)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_032: PASS
+ASSESS_033: running (직장유암종 경계성종양/암진단비)
+ASSESS_033: PASS
+ASSESS_034: running (비침습성 방광암 제자리암 분쟁)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_034: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_035: running (유방상피내암 DCIS 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_035: PASS
+ASSESS_036: running (갑상선암 C73 림프절 전이 진단비)
+ASSESS_036: PASS
+ASSESS_037: running (난소 경계성종양 진단비)
+ASSESS_037: PASS
+ASSESS_038: running (GIST 위장관기질종양 행동양식 분쟁)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_038: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_039: running (뇌하수체 종양 수술비/진단비 분쟁)
+ASSESS_039: PASS
+ASSESS_040: running (대장암 조직검사 전 임상진단 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_040: PASS
+ASSESS_041: running (위 선종 high grade dysplasia ESD)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_041: PASS
+ASSESS_042: running (자궁경부 제자리암 D06 진단비)
+ASSESS_042: PASS
+ASSESS_043: running (흑색종 제자리암 melanoma in situ)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_043: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_044: running (병리 행동양식 /2와 진단서 코드 불일치)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_044: PASS
+ASSESS_045: running (전이암 원발부위 기준 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_045: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_046: running (재발암과 새로운 원발암 구분)
+ASSESS_046: PASS
+ASSESS_047: running (다발성 원발암 진단비 분쟁)
+ASSESS_047: PASS
+ASSESS_048: running (미세침흡인검사 갑상선암 진단확정)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_048: PASS
+ASSESS_049: running (암 책임개시일 전후 진단시점 분쟁)
+ASSESS_049: PASS
+ASSESS_050: running (경계성종양 지급비율 분쟁)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_050: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_051: running (급성 뇌경색 I63 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_051: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_052: running (열공성 뇌경색 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_052: PASS
+ASSESS_053: running (무증상 뇌경색 진단비 부지급)
+ASSESS_053: PASS
+ASSESS_054: running (진구성 뇌경색 I69/I63 분쟁)
+ASSESS_054: PASS
+ASSESS_055: running (일과성 뇌허혈 G45 진단비)
+ASSESS_055: PASS
+ASSESS_056: running (뇌출혈 I61 진단비)
+ASSESS_056: PASS
+ASSESS_057: running (지주막하출혈 I60 진단비)
+ASSESS_057: PASS
+ASSESS_058: running (경동맥 협착 뇌혈관질환 진단비)
+ASSESS_058: PASS
+ASSESS_059: running (뇌혈관 협착 I66 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_059: PASS
+ASSESS_060: running (MRI상 급성 병변 없음 뇌경색 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_060: PASS
+ASSESS_061: running (신경학적 결손 없는 뇌졸중 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+ASSESS_061: PASS
+ASSESS_062: running (뇌동맥류 수술비/진단비 분쟁)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_062: PASS
+ASSESS_063: running (급성심근경색 I21 진단비)
+ASSESS_063: PASS
+ASSESS_064: running (협심증 I20과 급성심근경색 구분)
+ASSESS_064: PASS
+ASSESS_065: running (관상동맥 협착 스텐트 진단비)
+ASSESS_065: PASS
+ASSESS_066: running (트로포닌 경미 상승 진단비)
+ASSESS_066: PASS
+ASSESS_067: running (NSTEMI 진단비)
+ASSESS_067: PASS
+ASSESS_068: running (STEMI 진단비)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_068: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_069: running (진구성 심근경색 진단비)
+ASSESS_069: PASS
+ASSESS_070: running (사망 후 급성심근경색 추정)
+ASSESS_070: PASS
+ASSESS_071: running (심부전 I50과 심근경색 구분)
+ASSESS_071: PASS
+ASSESS_072: running (심근염과 급성심근경색 감별)
+ASSESS_072: PASS
+ASSESS_073: running (관상동맥 CT 협착 효소 정상)
+ASSESS_073: PASS
+ASSESS_074: running (변이형 협심증 진단비)
+ASSESS_074: PASS
+ASSESS_075: running (무릎 동요관절 후유장해 불인정)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_075: PASS
+ASSESS_076: running (회전근개파열 후유장해 지급률)
+ASSESS_076: PASS
+ASSESS_077: running (추간판탈출증 후유장해)
+ASSESS_077: PASS
+ASSESS_078: running (척추 압박골절 후유장해)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_078: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_079: running (발목 운동범위 제한 장해)
+ASSESS_079: PASS
+ASSESS_080: running (안면 반흔 추상장해)
+ASSESS_080: PASS
+ASSESS_081: running (소음성 난청 장해)
+ASSESS_081: PASS
+ASSESS_082: running (말초신경마비 후유장해)
+ASSESS_082: PASS
+ASSESS_083: running (척추유합술 후 장해)
+ASSESS_083: PASS
+ASSESS_084: running (CRPS 복합부위통증증후군 장해)
+ASSESS_084: PASS
+ASSESS_085: running (어깨 반복 탈구 후유장해)
+ASSESS_085: PASS
+ASSESS_086: running (손가락 절단/운동장해)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_086: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_087: running (회전근개파열 퇴행성 주장)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_087: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_088: running (추간판탈출증 기왕증 주장)
+ASSESS_088: PASS
+ASSESS_089: running (척추관협착 사고 후 악화)
+ASSESS_089: PASS
+ASSESS_090: running (스테로이드 치료 후 대퇴골두 무혈성 괴사)
+ASSESS_090: PASS
+ASSESS_091: running (반월상연골파열 퇴행성 주장)
+ASSESS_091: PASS
+ASSESS_092: running (사망과 사고 인과관계 분쟁)
+ASSESS_092: PASS
+ASSESS_093: running (고혈압 기왕증과 뇌출혈 인과관계)
+ASSESS_093: PASS
+ASSESS_094: running (골다공증 압박골절 상해성 여부)
+ASSESS_094: PASS
+ASSESS_095: running (주치의·제3의사 소견서 있음에도 의료자문 요구)
+ASSESS_095: PASS
+ASSESS_096: running (보험사 자체 의료자문 결과로 부지급)
+ASSESS_096: PASS
+ASSESS_097: running (제3의료기관 자문 요구)
+ASSESS_097: FORBIDDEN_PHRASE_FAIL
+  - forbidden argument wording: /재검토\s*필요/g
+ASSESS_098: running (본사 민원 전 재심사 요청)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_098: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_099: running (금감원 민원/분쟁조정 전 자료정리)
+  - transport error, retrying 1/2: Edge Function returned a non-2xx status code
+  - transport error, retrying 2/2: Edge Function returned a non-2xx status code
+ASSESS_099: FAIL
+  - transport_error after 3 attempt(s): Edge Function returned a non-2xx status code
+ASSESS_100: running (보험사가 소송 가능성 언급)
+ASSESS_100: PASS
+ASSESS_101: running (I21.4 NSTEMI 급성심내막하심근경색 진단비 부지급 — v2 gold 케이스)
+ASSESS_101: PASS
+
+Summary: total=101 pass=82 fail=19
+JSON: c:\Users\PCA\saferoad\ai_eval\results\assessment_eval_latest.json
+MD: c:\Users\PCA\saferoad\ai_eval\results\assessment_eval_latest.md
