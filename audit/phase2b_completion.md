@@ -97,4 +97,4 @@
 
 ## 커밋 해시
 
-> **[git commit 완료 후 여기에 해시 기재]**
+> **a0eb34a** — feat(rag): phase2b RAG reprocessing — 189/199건 저장, 결정 방향성·인용 가능성 메타 추가
