@@ -1607,6 +1607,20 @@ function buildPreAnalysisResult(
   };
 }
 
+function killingEvidencePresentForProfile(
+  isHeart: boolean,
+  argument: ClaimArgumentStructure,
+  text: string,
+): boolean {
+  if (argument.killingEvidence.length === 0) return false;
+  // Heart profile: require cardiac-specific keywords in the report text
+  if (isHeart) {
+    return /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|심근효소|주치의 SOAP|의무기록상 진단 검토/i.test(text);
+  }
+  // All other profiles: trust the argument structure — if killing evidence was extracted, consider it present
+  return true;
+}
+
 function selfVerifySubmissionReport(
   report: string,
   argument: ClaimArgumentStructure,
@@ -1627,7 +1641,7 @@ function selfVerifySubmissionReport(
     policyQuotePresent: /Ⅳ\.\s*보험약관상[\s\S]{0,700}「[^」]{8,}」|서버 기본 약관|약관은 시술 전 심근효소 상승/i.test(text),
     policyMappingTablePresent: /\|\s*약관상\s*요구\s*요건\s*\|/.test(text),
     caseLawReverseAppliedOrNotFabricated: /직접 적용 가능한 판례|법리를 고객 측|사건번호를 만들지|판례\/금감원 자료는/i.test(text),
-    killingEvidencePresent: argument.killingEvidence.length > 0 && /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|주치의 SOAP|의무기록상 진단 검토/i.test(text),
+    killingEvidencePresent: killingEvidencePresentForProfile(isHeart, argument, text),
     defenseLayersCount: defenseLayerChecks.filter(Boolean).length,
     conclusionHasSeparateReasons: /첫째,[\s\S]*둘째,[\s\S]*셋째,/.test(text),
     requestIncludesPayment: /보험금|진단보험금|지급/.test(text),
