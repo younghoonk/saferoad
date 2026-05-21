@@ -850,6 +850,7 @@ async function main() {
     }
 
     const payload = buildPayload(testCase);
+    if (results.length > 0) await sleep(2000);
     console.log(`${testCase.id}: running (${preview(testCase.title, 60)})`);
     try {
       const invoked = await invokeAssessmentWithRetry(supabase, payload, args.retries);

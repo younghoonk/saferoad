@@ -3629,7 +3629,7 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directCancer.test(text)) return false;
     }
     if (brainDiagnosisProfile) {
-      const excludedBrain = /도수치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|후유장해|자동차보험|고지의무|계약해지/i;
+      const excludedBrain = /도수치료|manual\s*therapy|M54|요통|허리통증|백내장|다초점렌즈|갑상선암|암진단비|후유장해|자동차보험|고지의무|계약해지|심근경색|급성심근경색|NSTEMI|I21\.?4|심내막하심근경색/i;
       const directBrain = /뇌질환|뇌졸중|뇌경색|뇌출혈|지주막하출혈|뇌동맥류|일과성\s*뇌허혈|I63|I60|I61|I62|I65|I66|I69|G45|MRI|MRA|CTA|CT|영상검사|신경학적\s*결손|협착|경동맥|뇌혈관|진단확정|약관|질병분류표/i;
       if (excludedBrain.test(text)) return false;
       if ((ref.source_area === 'precedents' || ref.source_area === 'terms_standards' || ref.source_area === 'fss_dispute_cases' || ref.source_area === 'medical_knowledge') && !directBrain.test(text)) return false;
