@@ -129,7 +129,10 @@ export function isAcuteMiDenialContext(input: AssessmentGuidelineContext) {
     ...(input.sourceAnalysis?.keyIssues ?? []),
     ...(input.sourceAnalysis?.draftSupportingFacts ?? []),
   ].filter(Boolean).join(' ');
-  return /acute_mi_denial|I21\.?4|NSTEMI|심내막하심근경색|급성심근경색|unstable\s+angina|CAD|I20|I25\.?1|CAG|PCI|stent|troponin|CK-?MB|ECG|RWMA|LVEF/i.test(text);
+  // Exclude cerebrovascular/brain cases — they share ECG/CAG workup terms but are not acute MI
+  const isBrainCase = /I6[0-3]|I65|I66|I69|G45|뇌졸중|뇌경색|뇌출혈|뇌혈관|지주막하출혈|뇌동맥류/i.test(text);
+  if (isBrainCase) return false;
+  return /acute_mi_denial|I21\.?4|NSTEMI|심내막하심근경색|급성심근경색|unstable\s+angina|I20|I25\.?1|CAG|PCI|stent|troponin|CK-?MB|RWMA|LVEF/i.test(text);
 }
 
 const ACUTE_MI_PRECEDENT_REFS: RetrievedReference[] = [

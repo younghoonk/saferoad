@@ -1453,17 +1453,18 @@ function buildFinalSubmissionAssessmentReport(
   input: ReturnType<typeof validateInput>,
   ragResult: RagSearchResult,
 ): AssessmentDraftResult {
+  const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
   const argumentStructure = buildClaimArgumentStructure(result, input, ragResult);
   const preAnalysis = buildPreAnalysisResult(input, result, ragResult, argumentStructure);
   let finalSubmissionAssessmentReport = enforceSubmissionReportContract(
     composeSubmissionAssessmentReport(result, input, ragResult, argumentStructure, preAnalysis),
   );
-  let selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis);
+  let selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, isHeart);
   if (!selfVerificationPasses(selfVerification)) {
     finalSubmissionAssessmentReport = enforceSubmissionReportContract(
-      repairSubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, selfVerification),
+      repairSubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, selfVerification, isHeart),
     );
-    selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis);
+    selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, isHeart);
   }
   return {
     ...result,
@@ -1601,6 +1602,7 @@ function selfVerifySubmissionReport(
   report: string,
   argument: ClaimArgumentStructure,
   preAnalysis: PreAnalysisResult,
+  isHeart = false,
 ): SelfVerification {
   const text = cleanPublicText(report);
   const defenseLayerChecks = [
@@ -1611,8 +1613,8 @@ function selfVerifySubmissionReport(
   ];
   return {
     insurerQuotePresent: /「[^」]{6,}」/.test(text),
-    medicalStandardNamed: /Fourth Universal Definition of Myocardial Infarction|제4차\s*심근경색의\s*보편적\s*정의|NSTEMI|I21\.?4/i.test(text),
-    medicalMappingTablePresent: /\|\s*(?:판단 기준|진단기준|criterion)\s*\|/.test(text) && /myocardial injury|troponin|NSTEMI|I21\.?4/i.test(text),
+    medicalStandardNamed: !isHeart || /Fourth Universal Definition of Myocardial Infarction|제4차\s*심근경색의\s*보편적\s*정의|NSTEMI|I21\.?4/i.test(text),
+    medicalMappingTablePresent: !isHeart || (/\|\s*(?:판단 기준|진단기준|criterion)\s*\|/.test(text) && /myocardial injury|troponin|NSTEMI|I21\.?4/i.test(text)),
     policyQuotePresent: /Ⅳ\.\s*보험약관상[\s\S]{0,700}「[^」]{8,}」|서버 기본 약관|약관은 시술 전 심근효소 상승/i.test(text),
     policyMappingTablePresent: /\|\s*약관상\s*요구\s*요건\s*\|/.test(text),
     caseLawReverseAppliedOrNotFabricated: /직접 적용 가능한 판례|법리를 고객 측|사건번호를 만들지|판례\/금감원 자료는/i.test(text),
@@ -1653,13 +1655,14 @@ function repairSubmissionReport(
   argument: ClaimArgumentStructure,
   preAnalysis: PreAnalysisResult,
   verification: SelfVerification,
+  isHeart = false,
 ) {
   const additions: string[] = [];
   const decisive = argument.killingEvidence.find((item) => item.strength === 'decisive');
   if (!verification.insurerQuotePresent) {
     additions.push(`보험사 부지급 문구 인용: 「${preAnalysis.insurerDenialQuote.originalQuote}」. 위 문구는 전체 의무기록의 흐름을 단편적으로 축소한 것입니다.`);
   }
-  if (!verification.medicalStandardNamed || !verification.medicalMappingTablePresent) {
+  if (isHeart && (!verification.medicalStandardNamed || !verification.medicalMappingTablePresent)) {
     additions.push([
       '의학 기준 보강',
       'Fourth Universal Definition of Myocardial Infarction 2018은 troponin rise/fall과 99th percentile 초과, 허혈 증상, ECG 변화, 영상 또는 CAG/PCI 소견을 종합하여 심근경색을 판단합니다.',
