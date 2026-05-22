@@ -3702,6 +3702,8 @@ function sanitizeRagResultForAssessment(input: ReturnType<typeof validateInput>,
       }
     }
     if (cancerDiagnosisProfile) {
+      // Cardiac-specific precedents/guidelines (e.g. 2013다208661 NSTEMI cases) must not appear in cancer assessments
+      if ((ref.source_area === 'precedents' || ref.source_area === 'medical_guideline') && /NSTEMI|STEMI|I21\.\d|심내막하심근경색|급성심근경색/i.test(text)) return false;
       const excludedCancer = /도수치료|manual\s*therapy|M54|요통|허리통증|체외충격파|실손\s*부지급|비급여\s*주사|후유장해|자동차보험/i;
       const directCancer = /암|암진단비|진단확정|병리|조직검사|세포검사|질병분류표|KCD|ICD-O|제자리암|상피내암|경계성종양|유사암|행동양식|D00|D01|D06|D09|D37|D38|D39|D40|D41|D42|D43|D44|D45|D46|D47|D48|C73|갑상선암|대장|방광암|유방상피내암|직장유암종|GIST|흑색종|원발암|전이암|약관|진단비/i;
       if (excludedCancer.test(text)) return false;

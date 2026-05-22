@@ -631,6 +631,8 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
     }
   }
   if (row.source_area === 'terms_standards') return isDirectlyRelevantTerms(row, query);
+  // Cardiac-specific precedents/guidelines must not appear in non-cardiac queries (e.g. 2013다208661 in cancer cases)
+  if (!heartDiagnosisQuery(query) && heartInternalText(row)) return false;
   return true;
 }
 
@@ -645,6 +647,8 @@ function directlyRelevantInternal(row: EnrichedRow, query: string, diagnosisCode
     if (cancerInsuranceQuery(query)) return (thyroidOfficialText(row) || disclosurePrecedentText(row)) && !irrelevantDisclosureText(row);
     if (heartDiagnosisQuery(query)) return heartInternalText(row) && !irrelevantHeartInternalText(row);
     if (rectalCarcinoidQuery(query)) return rectalCarcinoidInternalText(row) && !irrelevantRectalCarcinoidInternalText(row);
+    // Cardiac-specific precedents must not appear in non-cardiac queries
+    if (!heartDiagnosisQuery(query) && heartInternalText(row)) return false;
     return true;
   }
   if (heartDiagnosisQuery(query)) {
