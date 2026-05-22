@@ -1138,8 +1138,21 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number, m
     });
 
     if (res.ok) {
-      const json = await res.json() as { choices?: { message?: { content?: string } }[] };
-      return json.choices?.[0]?.message?.content ?? '';
+      const json = await res.json() as {
+        choices?: { message?: { content?: string | null }; finish_reason?: string }[];
+        usage?: { prompt_tokens?: number; completion_tokens?: number; total_tokens?: number };
+      };
+      const choice = json.choices?.[0];
+      const content = choice?.message?.content;
+      if (!content) {
+        console.error('OpenAI returned empty content', {
+          finish_reason: choice?.finish_reason,
+          message: choice?.message,
+          usage: json.usage,
+          prompt_length: prompt.length,
+        });
+      }
+      return content ?? '';
     }
 
     lastStatus = res.status;
@@ -4010,8 +4023,21 @@ Deno.serve(async (req: Request) => {
       termsCount: ragResult.officialReferences.filter((ref) => ref.source_area === 'terms_standards').length,
     });
 
-    const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
-    const draft = sanitizeResult(parseJsonResponse(draftText));
+    let draft: AssessmentDraftResult;
+    try {
+      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
+      draft = sanitizeResult(parseJsonResponse(draftText));
+    } catch (draftErr) {
+      // Full RAG prompt failed — retry once with no RAG context (shorter prompt)
+      console.warn('draft call failed, retrying with reduced prompt', {
+        error: draftErr instanceof Error ? draftErr.message : String(draftErr),
+        profile: detectedProfile,
+        insuranceType: input.insuranceType,
+        accidentType: input.accidentType,
+      });
+      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, emptyRagResult()), 0.2);
+      draft = sanitizeResult(parseJsonResponse(draftText));
+    }
 
     const applyReviewPipeline = (base: AssessmentDraftResult) => finalizeCataractResult(
       finalizeManualTherapyResult(
