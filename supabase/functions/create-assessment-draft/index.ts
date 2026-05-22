@@ -4029,17 +4029,17 @@ Deno.serve(async (req: Request) => {
 
     let draft: AssessmentDraftResult;
     try {
-      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
+      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2, 3, 5000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     } catch (draftErr) {
-      // Full RAG prompt failed — retry once with no RAG context (shorter prompt)
+      // Full RAG prompt failed — retry once with no RAG context and reduced max_tokens
       console.warn('draft call failed, retrying with reduced prompt', {
         error: draftErr instanceof Error ? draftErr.message : String(draftErr),
         profile: detectedProfile,
         insuranceType: input.insuranceType,
         accidentType: input.accidentType,
       });
-      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, emptyRagResult()), 0.2);
+      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, emptyRagResult()), 0.2, 3, 5000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     }
 
