@@ -1082,9 +1082,6 @@ finalSubmissionAssessmentReport 필드를 반드시 아래 9개 기준에 맞게
 [제공된 참고자료]
 ${formatReferences(references, ragResult)}
 
-[RAG search references]
-${formatRagForPrompt(ragResult)}
-
 [Official grounds that must remain in the body]
 ${formatOfficialGroundsForBody(ragResult)}
 
@@ -1119,7 +1116,7 @@ ${profileReviewRules}
 ${JSON.stringify(draft)}`;
 }
 
-async function callOpenAI(apiKey: string, prompt: string, temperature: number, maxRetries = 3) {
+async function callOpenAI(apiKey: string, prompt: string, temperature: number, maxRetries = 3, maxTokens = 8000) {
   let lastStatus = 0;
   let lastErrText = '';
   for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
@@ -1132,7 +1129,7 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number, m
       body: JSON.stringify({
         model: OPENAI_MODEL,
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 8000,
+        max_tokens: maxTokens,
         temperature,
       }),
     });
@@ -1144,6 +1141,13 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number, m
       };
       const choice = json.choices?.[0];
       const content = choice?.message?.content;
+      console.info('OpenAI response', {
+        finish_reason: choice?.finish_reason,
+        prompt_tokens: json.usage?.prompt_tokens,
+        completion_tokens: json.usage?.completion_tokens,
+        prompt_length: prompt.length,
+        maxTokens,
+      });
       if (!content) {
         console.error('OpenAI returned empty content', {
           finish_reason: choice?.finish_reason,
@@ -4084,6 +4088,8 @@ Deno.serve(async (req: Request) => {
         apiKey,
         buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
         0,
+        3,
+        5000,
       );
       reviewedBase = applyReviewPipeline(sanitizeResult(parseJsonResponse(reviewedText)));
     } catch {
