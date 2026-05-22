@@ -821,7 +821,10 @@ async function rpcSearch(
       min_similarity: MIN_SIMILARITY,
     }),
   });
-  if (!response.ok) throw new Error(`RAG RPC failed: ${response.status}`);
+  if (!response.ok) {
+    const body = await response.text().catch(() => '');
+    throw new Error(`RAG RPC failed: ${response.status}${body ? ` body=${body.slice(0, 300)}` : ''}`);
+  }
   return await response.json() as RpcRow[];
 }
 
@@ -1061,9 +1064,13 @@ export async function searchRagReferences(params: {
   }
 
   if (disclosureQuery(query)) {
-    const statuteRows = await fetchDisclosureStatuteRows(params.supabaseUrl, params.serviceRoleKey);
-    for (const row of statuteRows) {
-      if (!officialRows.some((item) => item.id === row.id)) officialRows.unshift(row);
+    try {
+      const statuteRows = await fetchDisclosureStatuteRows(params.supabaseUrl, params.serviceRoleKey);
+      for (const row of statuteRows) {
+        if (!officialRows.some((item) => item.id === row.id)) officialRows.unshift(row);
+      }
+    } catch (fetchErr) {
+      console.error('[ragSearch] fetchDisclosureStatuteRows failed, proceeding with fallback only', fetchErr instanceof Error ? fetchErr.message : fetchErr);
     }
     const ensuredRows = ensureDisclosureStatuteRows(officialRows);
     officialRows.splice(0, officialRows.length, ...ensuredRows);
