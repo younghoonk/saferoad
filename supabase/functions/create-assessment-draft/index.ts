@@ -1907,7 +1907,7 @@ function buildClaimArgumentStructure(
   return {
     insurerPosition: {
       quotedPosition: insurerClaim,
-      coreDenialReason: cleanPublicText(input.sourceAnalysis?.denialReason || result.insurerPositionReview) || '보험회사의 부지급 사유',
+      coreDenialReason: cleanPublicText(input.sourceAnalysis?.denialReason || input.insurerPosition) || '보험회사의 부지급 사유',
     },
       factualFoundation: {
         chronologicalFacts: chronology,
@@ -2104,7 +2104,7 @@ function extractInsurerQuotedPosition(value: string) {
     .replace(/약관에\s*없는\s*요건.*$/g, '')
     .trim();
   const sentence = cleaned.split(/(?<=다\.)\s+|\n/).map((item) => item.trim()).find(Boolean);
-  return sentence || '시술 전 심근효소 상승이 없거나 I21.4 진단확정 요건이 부족하다는 취지';
+  return sentence || '보험회사의 부지급 사유를 확인해야 합니다.';
 }
 
 function formatCaseLawAndFssSection(
@@ -2388,7 +2388,7 @@ function composeSubmissionAssessmentReport(
     : '의학 기준: 직접 관련 근거자료 부족';
   const repeatedNumbers = argument.factualFoundation.keyNumbers.length
     ? argument.factualFoundation.keyNumbers.map((item) => `- ${item.label}: ${item.value} (${item.meaning})`).join('\n')
-    : '- 핵심 수치는 제출자료에서 확인되는 값만 반복 기재합니다. 확인되지 않은 수치는 생성하지 않습니다.';
+    : '';
   const insurerErrorText = argument.insurerErrorMap
     .map((item, index) => `${index + 1}) ${item.insurerClaim}\n   - 오류 유형: ${item.errorType}\n   - 반박 명제: ${item.rebuttalThesis}`)
     .join('\n');
@@ -2472,9 +2472,7 @@ function composeSubmissionAssessmentReport(
     '',
     killingEvidenceText,
     '',
-    '핵심 수치 및 반복 논거',
-    repeatedNumbers,
-    '',
+    ...(repeatedNumbers ? ['핵심 수치 및 반복 논거', repeatedNumbers, ''] : []),
     'Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성',
     `보험회사의 부지급 사유는 「${insurerQuotedPosition}」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 ${argument.insurerPosition.coreDenialReason}입니다.`,
     insurerErrorText,
