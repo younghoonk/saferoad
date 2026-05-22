@@ -97,7 +97,9 @@ type KillingEvidenceType =
   | 'lab_trend'
   | 'ecg_finding'
   | 'cag_pci_finding'
-  | 'policy_clause';
+  | 'policy_clause'
+  | 'pathology_finding'
+  | 'treatment_record';
 
 interface KillingEvidence {
   evidenceType: KillingEvidenceType;
@@ -1804,6 +1806,7 @@ function buildClaimArgumentStructure(
   ragResult: RagSearchResult,
 ): ClaimArgumentStructure {
   const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const isCancer = caseProfile(input) === 'cancer_diagnosis_benefit';
   const insurerClaim = cleanPublicText(input.insurerPosition || input.sourceAnalysis?.insurerPosition || input.sourceAnalysis?.denialReason || result.insurerPositionReview)
     || '보험회사는 약관상 진단확정 요건 미충족 또는 의학적 근거 부족을 이유로 부지급 취지의 판단을 한 것으로 정리됩니다.';
   const chronology = buildArgumentChronology(input, result);
@@ -1902,6 +1905,10 @@ function buildClaimArgumentStructure(
         escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
       },
     };
+  }
+
+  if (isCancer) {
+    return buildCancerClaimArgument(insurerClaim, chronology, keyNumbers, killingEvidence, citedAuthority, input, result);
   }
 
   return {
@@ -2344,6 +2351,226 @@ function buildGenericFactMapping(input: ReturnType<typeof validateInput>, result
     .filter(Boolean)
     .slice(0, 4)
     .map((line) => ({ criterion: '제출자료상 객관 사실', patientFact: line, satisfied: true }));
+}
+
+// ── Cancer claim argument builder (skeleton → full logic below) ──────────────
+
+function buildCancerClaimArgument(
+  insurerClaim: string,
+  chronology: ClaimArgumentStructure['factualFoundation']['chronologicalFacts'],
+  keyNumbers: ClaimArgumentStructure['factualFoundation']['keyNumbers'],
+  killingEvidence: KillingEvidence[],
+  citedAuthority: string | null | undefined,
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+): ClaimArgumentStructure {
+  const ctx = extractCancerDiagnosisContext(input);
+  return {
+    insurerPosition: {
+      quotedPosition: insurerClaim,
+      coreDenialReason: ctx.coreIssue,
+    },
+    factualFoundation: { chronologicalFacts: chronology, keyNumbers },
+    killingEvidence,
+    insurerErrorMap: buildCancerInsurerErrorMap(ctx, input),
+    defenseLayers: buildCancerDefenseLayers(ctx, input, result, citedAuthority ?? null),
+    finalPressure: {
+      paymentRequest: `${ctx.claimTarget} 보험금 전액을 지급해야 합니다.`,
+      delayInterestRequest: '부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.',
+      writtenReplyDemand: '부동의 시 보험회사는 병리학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.',
+      escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
+    },
+  };
+}
+
+function extractCancerDiagnosisContext(input: ReturnType<typeof validateInput>) {
+  const allText = [
+    input.diagnosisText, input.diagnosisName, input.diagnosisCode,
+    input.damageDetails, input.insurerPosition, input.customerStatement, input.adjusterMemo,
+    input.sourceAnalysis?.diagnosisSummary, input.sourceAnalysis?.denialReason,
+  ].filter(Boolean).join('\n');
+
+  const cCode = allText.match(/\bC\d{2}(?:\.\d)?\b/)?.[0] ?? '';
+  const dCode = allText.match(/\bD\d{2}(?:\.\d)?\b/)?.[0] ?? '';
+  const dcis = /DCIS|ductal carcinoma in situ|유관\s*상피내암/i.test(allText);
+  const microinvasion = /microinvasion|미세침습|micro-?invasion/i.test(allText);
+  const comedoNecrosis = /comedo\s*necrosis|코메도\s*괴사/i.test(allText);
+  const highGrade = /high[\s_-]*grade|고등급|high[\s_-]*nuclear[\s_-]*grade|grade\s*[3ⅲIII]/i.test(allText);
+  const tumorSize = allText.match(/\b(\d+(?:\.\d+)?)\s*cm\b/)?.[0] ?? '';
+  const hormoneTherapy = /항호르몬\s*치료|hormone\s*therapy|tamoxifen|letrozole|anastrozole/i.test(allText);
+  const chemotherapy = /항암\s*치료|항암|화학\s*요법|radiation|방사선\s*치료/i.test(allText);
+  const surgery = /수술|절제|부분\s*절제|mastectomy|lumpectomy|excision/i.test(allText);
+  const pathologyConfirmed = /병리\s*보고서|조직검사|생검|biopsy|fixed\s*tissue|현미경/i.test(allText);
+
+  const insurerText = (input.insurerPosition ?? '') + ' ' + (input.adjusterMemo ?? '');
+  const dCodeDenial = /D\s*코드|D\d{2}|제자리암|상피내암|carcinoma in situ|\bCIS\b|제자리\s*암/i.test(insurerText);
+  const microinvasionDenial = /microinvasion|의심\s*소견|확정된\s*침윤암이\s*아니|침윤\s*의심/i.test(insurerText);
+  const codeMismatch = /코드\s*불일치|C코드.*D코드|D코드.*C코드|진단서.*병리\s*코드|병리.*진단서.*불일치/i.test(allText);
+  const borderlineDenial = /경계성|borderline|행동양식|behavior\s*code|\/2/i.test(insurerText);
+
+  const pathologyTerms: string[] = [];
+  if (dcis) pathologyTerms.push('DCIS(ductal carcinoma in situ)');
+  if (highGrade) pathologyTerms.push('high nuclear grade');
+  if (comedoNecrosis) pathologyTerms.push('comedo necrosis');
+  if (microinvasion) pathologyTerms.push('microinvasion');
+  if (tumorSize) pathologyTerms.push(`종양 크기 ${tumorSize}`);
+  const pathologyDesc = pathologyTerms.join(', ');
+
+  const treatmentTerms: string[] = [];
+  if (surgery) treatmentTerms.push('수술적 절제');
+  if (hormoneTherapy) treatmentTerms.push('항호르몬 치료');
+  if (chemotherapy) treatmentTerms.push('항암치료');
+  const treatmentDesc = treatmentTerms.join(', ');
+
+  let coreIssue: string;
+  if (dCodeDenial && cCode) {
+    coreIssue = `병리 보고서 코드(${dCode || 'D코드'})를 근거로 진단서 ${cCode}를 배척하고 제자리암 또는 소액 지급만 인정하려는 주장`;
+  } else if (codeMismatch && (cCode || dCode)) {
+    coreIssue = `진단서 코드(${cCode || 'C코드'})와 병리 보고서 코드(${dCode || 'D코드'}) 불일치를 이유로 일반암 지급을 거절하는 주장`;
+  } else if (borderlineDenial) {
+    coreIssue = '병변의 행동양식 또는 경계성 분류를 이유로 일반암 지급을 거절하는 주장';
+  } else {
+    const raw = input.sourceAnalysis?.denialReason ?? input.insurerPosition ?? '';
+    coreIssue = extractShortCancerDenialReason(raw);
+  }
+
+  const claimTarget = dCodeDenial ? '일반암 진단비' : '암진단비';
+  return {
+    cCode, dCode, dcis, microinvasion, comedoNecrosis, highGrade, tumorSize,
+    hormoneTherapy, surgery, pathologyConfirmed, pathologyDesc, treatmentDesc,
+    coreIssue, claimTarget,
+    dCodeDenial, microinvasionDenial, codeMismatch, borderlineDenial,
+  };
+}
+
+function extractShortCancerDenialReason(value: string): string {
+  if (!value) return '보험회사의 부지급 사유';
+  const cleaned = cleanPublicText(value)
+    .replace(/보험회사의?\s*주장은?\s*/g, '')
+    .replace(/고객\s*측\s*반박.*$/g, '')
+    .replace(/약관에\s*없는\s*요건.*$/g, '');
+  const first = cleaned.split(/\.\s+/)[0]?.trim() ?? '';
+  if (first.length > 10 && first.length < 180) return first;
+  return cleaned.slice(0, 150).trim() || '보험회사의 부지급 사유';
+}
+
+function buildCancerInsurerErrorMap(
+  ctx: ReturnType<typeof extractCancerDiagnosisContext>,
+  _input: ReturnType<typeof validateInput>,
+): ClaimArgumentStructure['insurerErrorMap'] {
+  const errors: ClaimArgumentStructure['insurerErrorMap'] = [];
+
+  if (ctx.dCodeDenial || ctx.codeMismatch) {
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: `병리 보고서 ${ctx.dCode || 'D코드'}(${ctx.dcis ? '상피내암/DCIS' : '제자리암'})를 근거로 진단서 ${ctx.cCode || 'C코드'} 악성 진단을 부정하는 주장`,
+      rebuttalThesis: `진단확정의 기준은 진단서 코드와 병리 보고서 전체를 종합하여 판단해야 합니다.${ctx.pathologyDesc ? ` 본 건에서는 ${ctx.pathologyDesc} 소견이 확인되며,` : ''} ${ctx.treatmentDesc ? `${ctx.treatmentDesc}까지 시행된 임상 경과를` : '전체 의무기록을'} 배제하고 병리 코드 하나만으로 일반암 지급을 거절할 수 없습니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  if (ctx.microinvasion || ctx.microinvasionDenial) {
+    errors.push({
+      errorType: 'omitted_key_evidence',
+      insurerClaim: 'microinvasion이 의심 소견에 불과하여 확정된 침윤암이 아니라는 주장',
+      rebuttalThesis: `microinvasion 의심 소견은 침윤 가능성을 배제하지 않습니다.${ctx.highGrade ? ' high nuclear grade,' : ''}${ctx.comedoNecrosis ? ' comedo necrosis 동반,' : ''}${ctx.hormoneTherapy ? ' 항호르몬 치료 권고까지' : ''} 결합한 임상 전체가 단순 상피내암 관찰이 아닌 악성에 준한 판단을 지지합니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  if (ctx.codeMismatch || ctx.dCodeDenial) {
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: '진단서 C코드보다 병리 보고서 D코드를 우선 적용하여 소액 지급만 인정하는 주장',
+      rebuttalThesis: `약관이 규정하는 진단확정은 병리·임상병리 전문의의 조직검사 등 현미경 소견에 기초한 것으로, 진단서 코드를 병리 보고서 코드로 사후 대체하는 것은 약관에 없는 추가 요건입니다.${ctx.cCode ? ` 주치의가 발급한 진단서에는 ${ctx.cCode}가 기재되어 있습니다.` : ''}`,
+      targetSection: 'policy',
+    });
+  }
+
+  if (ctx.borderlineDenial) {
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '종양의 행동양식(behavior code) 또는 경계성 분류를 이유로 악성종양이 아니라는 주장',
+      rebuttalThesis: 'WHO 분류 기준상 ICD-O behavior code /3(악성)과 /2(상피내암)는 병리 검체의 침습 여부로 구분되며, 전문의 병리 보고서가 이를 결정합니다. 보험회사가 병리학적 검토 없이 임의로 행동양식을 재분류하는 것은 허용되지 않습니다.',
+      targetSection: 'medical',
+    });
+  }
+
+  errors.push({
+    errorType: 'policy_requirement_misread',
+    insurerClaim: '약관상 암 진단확정 요건 미충족 주장',
+    rebuttalThesis: `약관이 요구하는 암 진단확정은 병리 또는 임상병리 전문의 자격증을 가진 자에 의한 조직검사 등 현미경 소견을 기초로 한 것입니다.${ctx.pathologyDesc ? ` 본 건에서는 ${ctx.pathologyDesc} 소견을 포함한 병리 보고서가 제출되어 요건이 충족됩니다.` : ' 제출된 병리 보고서로 진단확정 요건이 충족됩니다.'}`,
+    targetSection: 'policy',
+  });
+
+  errors.push({
+    errorType: 'unsupported_additional_requirement',
+    insurerClaim: '약관에 명시되지 않은 추가 조건으로 지급 거절',
+    rebuttalThesis: `보험회사는 약관에 없는 사후적 제한 요건(${ctx.codeMismatch ? '특정 코드 우선 적용, ' : ''}${ctx.microinvasionDenial ? '침윤암 확정 요건 등' : '추가 의학적 요건 등'})을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.`,
+    targetSection: 'interpretation',
+  });
+
+  return errors.slice(0, 6);
+}
+
+function buildCancerDefenseLayers(
+  ctx: ReturnType<typeof extractCancerDiagnosisContext>,
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  citedAuthority: string | null,
+): ClaimArgumentStructure['defenseLayers'] {
+  const policyMapping: ClaimArgumentStructure['defenseLayers']['policy']['policyRequirementMapping'] = [
+    {
+      requirement: '병리 또는 임상병리 전문의 자격증을 가진 자의 진단',
+      patientFact: ctx.pathologyDesc ? `병리 보고서상 ${ctx.pathologyDesc} 소견 확인됨` : '병리 전문의 보고서 제출됨',
+      satisfied: true,
+    },
+    {
+      requirement: '조직(fixed tissue)검사 또는 세포검사 현미경 소견',
+      patientFact: findFactText(input, result, /조직검사|생검|biopsy|병리|현미경|fixed tissue/i)
+        || '조직검사(생검 또는 수술 절제 검체) 현미경 소견 제출됨',
+      satisfied: true,
+    },
+    {
+      requirement: '진단서 또는 소견서 확정진단명',
+      patientFact: ctx.cCode
+        ? `주치의 발급 진단서에 ${ctx.cCode} 확정진단명 기재됨`
+        : '주치의 진단서 및 병리 보고서 제출됨',
+      satisfied: true,
+    },
+  ];
+  if (ctx.treatmentDesc) {
+    policyMapping.push({
+      requirement: '치료 경과 — 악성 진단에 준한 임상적 판단의 방증',
+      patientFact: `${ctx.treatmentDesc} 시행됨 — 단순 관찰이 아닌 악성 진단에 준한 치료가 이루어진 경과`,
+      satisfied: true,
+    });
+  }
+
+  return {
+    medical: {
+      standard: `WHO 암 분류 및 ICD-O 행동양식 코드(/1 경계성, /2 상피내암, /3 악성)를 포함한 국제 암 분류 기준으로 판단합니다.${ctx.pathologyDesc ? ` 본 건 병리 소견: ${ctx.pathologyDesc}.` : ''}`,
+      patientFactMapping: policyMapping.map((item) => ({ criterion: item.requirement, patientFact: item.patientFact, satisfied: item.satisfied })),
+      conclusion: `${ctx.dCodeDenial ? `병리 보고서 ${ctx.dCode || 'D코드'}만으로 진단서 ${ctx.cCode || 'C코드'} 악성 진단을 배척할 수 없습니다.` : '제출된 병리 보고서와 임상 경과는 암 진단확정 기준을 충족합니다.'}${ctx.pathologyDesc ? ` ${ctx.pathologyDesc} 소견${ctx.treatmentDesc ? `과 ${ctx.treatmentDesc}` : ''}을 종합하면 보험회사의 단편적 코드 적용은 의학 기준에 반합니다.` : ''}`,
+    },
+    policy: {
+      policyRequirementMapping: policyMapping,
+      conclusion: `약관상 암 진단확정 요건은 병리·임상병리 전문의의 조직검사 등 현미경 소견을 기초로 한 것이며,${ctx.codeMismatch ? ' 진단서 코드와 병리 코드 불일치는 보험회사가 추가 요건으로 삼을 수 없습니다.' : ' 제출된 자료로 요건이 충족됩니다.'}`,
+    },
+    caseLaw: {
+      insurerCitedAuthority: citedAuthority ?? undefined,
+      legalPrinciple: citedAuthority
+        ? `${citedAuthority}의 법리는 진단서와 병리 보고서 전체를 종합하여 판단해야 한다는 구조로 이해해야 합니다.`
+        : '암 진단확정 분쟁에서 판례는 병리 보고서, 진단서, 임상 경과를 종합 판단하도록 요구합니다.',
+      reverseApplication: `보험사가 판례를 인용하더라도 병리 소견${ctx.treatmentDesc ? `과 ${ctx.treatmentDesc}` : '과 치료 경과'}를 배제하는 근거로 사용할 수 없습니다.`,
+      conclusion: '판례·금감원 분쟁조정례는 병리 실질과 임상 전체를 종합하는 방향으로 고객 측에 유리하게 적용됩니다.',
+    },
+    interpretation: {
+      ambiguity: `약관상 암/제자리암/경계성종양 정의가${ctx.codeMismatch ? ' 진단서 코드와 병리 보고서 코드 불일치 상황을 명시적으로 규정하지 않으므로' : ' 보험회사의 해석과 달리 명확하지 않으므로'} 해석상 불명확성이 있습니다.`,
+      contraProferentemApplication: '작성자 불이익 원칙상 약관의 다의적 문구는 고객에게 유리하게 해석되어야 합니다.',
+      conclusion: `보험회사가 약관에 없는 ${ctx.dCodeDenial ? '병리 코드 우선 적용' : ctx.microinvasionDenial ? '침윤암 확정 요건' : '추가 요건'}을 이유로 ${ctx.claimTarget} 지급을 거절하는 것은 부당합니다.`,
+    },
+  };
 }
 
 function findInsurerCitedAuthority(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
