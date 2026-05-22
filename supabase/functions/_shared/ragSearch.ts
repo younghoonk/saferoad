@@ -829,7 +829,9 @@ async function rpcSearch(
       signal: AbortSignal.timeout(RPC_FETCH_TIMEOUT_MS),
     });
   } catch (fetchErr) {
-    const isTimeout = fetchErr instanceof DOMException && fetchErr.name === 'TimeoutError';
+    // TimeoutError: Deno 1.33+, AbortError: Deno 1.29-1.32 (AbortSignal.timeout이 AbortError로 던지는 버전)
+    const isTimeout = fetchErr instanceof DOMException
+      && (fetchErr.name === 'TimeoutError' || fetchErr.name === 'AbortError');
     throw new Error(isTimeout
       ? `RAG RPC timeout after ${RPC_FETCH_TIMEOUT_MS}ms source_area=${sourceArea}`
       : `RAG RPC network error source_area=${sourceArea}: ${fetchErr instanceof Error ? fetchErr.message : String(fetchErr)}`);
