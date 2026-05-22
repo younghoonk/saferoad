@@ -1,0 +1,34 @@
+가이드라인명: 지주막하출혈(Subarachnoid Hemorrhage, SAH) 진단 및 중증도 분류 기준 (AHA/ASA SAH Guidelines 2023; WHO ICD-10)
+발행기관: American Heart Association (AHA) / American Stroke Association (ASA)
+적용 질환: 지주막하출혈 (KCD/ICD-10: I60.x)
+
+【진단 기준 핵심】
+1. 정의: 지주막(arachnoid membrane)과 연막(pia mater) 사이 지주막하 공간(subarachnoid space)의 출혈.
+2. 임상 증상: 급격히 발생하는 벼락두통(thunderclap headache, "생애 최악의 두통") + 구토, 의식 저하, 발열, 항강직, 신경 결손.
+3. 진단 방법:
+   - 비조영 CT: 증상 발현 6시간 이내 민감도 98.7%. 6시간 경과 후 민감도 감소.
+   - 요추 천자(Lumbar Puncture): CT 음성 시 또는 6시간 경과 후 시행. 발생 후 최소 12시간 경과 후 시행 시 황색변화(xanthochromia) 및 적혈구 확인 가능.
+4. 원인:
+   - 뇌동맥류 파열(aneurysmal SAH): 자발성의 85%
+   - 비동맥류성 지주막하출혈: 15-20% (상세불명 원인)
+   - 외상성 SAH는 제외 (S-코드)
+5. 중증도 분류:
+   - Hunt-Hess Scale (1-5): Grade 1(무증상/경도) → Grade 5(혼수/사망 직전), 30일 생존율 70%→10%
+   - Fisher Scale (1-4): CT 소견에 따른 출혈 두께 및 뇌실 내 출혈 분류
+   - WFNS 분류: Glasgow Coma Score + 국소 신경 결손 (5등급)
+6. ICD-10 세분류:
+   - I60.0-I60.8: 대뇌동맥류 위치에 따른 분류
+   - I60.9: 상세불명 지주막하출혈
+
+【약관 연결 포인트】
+- 보험 약관의 "뇌출혈 진단비"가 I60(지주막하출혈)을 포함하는지 약관 문언 확인 필요. 대부분의 약관은 I60-I61 모두 포함.
+- 보험사가 "CT에서 확인이 안 됐다"고 주장하는 경우: 증상 발현 6시간 이후 시행된 CT는 민감도가 낮으므로 요추 천자 황색변화 결과가 보완 진단 근거가 된다.
+- 보험사가 "외상성이다"라고 주장하는 경우: 자발성 SAH는 I60.x, 외상성은 S06.6 계열로 코드 자체로 구분 가능하다.
+- Hunt-Hess Grade 3 이상이면 중증 SAH이며, 이를 근거로 장기 치료 및 후유 장해 청구에 활용 가능.
+
+【사정서 활용 가이드】
+- 보험사가 "지주막하출혈 진단이 불명확하다"고 주장할 때 인용 예시:
+  "AHA/ASA 지주막하출혈 가이드라인 기준, 벼락두통과 함께 뇌척수액 검사에서 황색변화(xanthochromia) 및 적혈구가 확인된 경우 지주막하출혈(I60)로 진단 확정됩니다. 본 건은 [증상] 발현 후 [시간] 경과 후 CT 및 [요추 천자/혈관 조영]에서 SAH가 확인되었으며, Hunt-Hess Grade [등급]으로 중증도가 기록되었습니다. 이는 I60 코드 지주막하출혈 확진 조건을 충족합니다."
+
+【키워드】
+지주막하출혈, SAH, I60, 벼락두통, thunderclap headache, 뇌동맥류, Hunt-Hess Scale, Fisher Scale, WFNS, 황색변화, xanthochromia, 요추 천자, CT 진단, AHA/ASA, 뇌출혈 진단비, 자발성 SAH

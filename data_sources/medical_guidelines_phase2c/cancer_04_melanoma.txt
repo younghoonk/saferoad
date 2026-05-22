@@ -1,0 +1,36 @@
+가이드라인명: AJCC 8판 및 WHO 흑색종(Melanoma) 진단·병기 분류 기준 (AJCC Cancer Staging Manual, 8th Ed., 2017; WHO Classification of Skin Tumours, 4th Ed., 2018)
+발행기관: American Joint Committee on Cancer (AJCC) / 세계보건기구(WHO) / 국제암연구기관(IARC)
+적용 질환: 피부 흑색종, 흑색종 in situ (KCD/ICD-10: C43 악성 흑색종, D03 흑색종 in situ)
+
+【진단 기준 핵심】
+1. 확진 방법: 생검(biopsy) 후 병리조직학적 검사 필수. 절제 생검(excisional biopsy) 권장. S-100, HMB-45, Melan-A 면역조직화학 표지자 활용.
+2. In situ vs 침윤성 구분 (ICD-10 기준):
+   - D03: Melanoma in situ — 종양이 표피 기저막을 침범하지 않은 상태 (Stage 0, Tis)
+   - C43: Malignant melanoma — 기저막 침범, 진피층 이상 침윤
+3. Breslow 두께 (T 분류, AJCC 8판):
+   - T1: ≤1.0mm (T1a: <0.8mm 궤양 없음 / T1b: 0.8-1.0mm 또는 궤양 있음)
+   - T2: >1.0-2.0mm
+   - T3: >2.0-4.0mm
+   - T4: >4.0mm
+4. 궤양 여부: 침습성 흑색종 병기 결정의 추가 인자.
+5. 감시림프절 생검: Breslow >0.8mm 또는 궤양 있는 경우 표준 권고.
+6. ABCDE 임상 판별 기준: Asymmetry(비대칭), Border(불규칙 경계), Color(다양한 색), Diameter(>6mm), Evolving(변화). 진단을 위한 임상 보조 도구이며 생검으로 확진 필수.
+7. AJCC 8판 최종 병기:
+   - Stage 0: 흑색종 in situ (D03)
+   - Stage I-II: 국소 질환 (림프절 음성)
+   - Stage III: 림프절 전이
+   - Stage IV: 원격 전이
+
+【약관 연결 포인트】
+- 보험사가 "D03 melanoma in situ는 일반암이 아니다"라고 주장하는 경우: WHO 분류상 D03은 상피내 흑색종으로, 상피내암(carcinoma in situ)의 일종이다. 약관의 "소액암/제자리암" 담보 해당 여부는 약관 정의에 따른다.
+- 보험사가 "악성 흑색종이 아니다"라고 주장하는 경우: C43 코드로 확진된 흑색종은 WHO 기준 악성 신생물이며 AJCC 8판 병기가 I기 이상이면 침윤성 악성 흑색종으로 약관상 일반암에 해당한다.
+- 병리 보고서의 Breslow 두께 수치와 궤양 여부가 약관의 "진단확정" 및 "치료 필요성" 입증의 핵심 근거다.
+
+【사정서 활용 가이드】
+- 보험사가 "진단 불명확"을 주장할 때 인용 예시:
+  "본 건은 AJCC 8판 및 WHO Classification of Skin Tumours (2018) 기준에 따라 병리조직학적으로 확진된 [악성 흑색종 / 흑색종 in situ]입니다. Breslow 두께 [X]mm, [궤양 유/무]로 T[X] 분류에 해당하며, 감시림프절 [음성/양성]이 확인되었습니다. 이는 의학적 진단확정의 국제 표준을 충족합니다."
+- D03 in situ 약관 분쟁 시:
+  "D03(melanoma in situ)은 WHO 및 AJCC Stage 0으로 분류된 상피내암이며, 기저막 침범이 없는 상태입니다. 약관에서 '소액암/제자리암' 담보를 별도로 정하지 않는 한, 불명확한 조항은 피보험자 유리 해석 원칙에 따라 해석되어야 합니다."
+
+【키워드】
+흑색종, melanoma, C43, D03, melanoma in situ, Breslow 두께, Clark level, AJCC 8판, T1-T4 병기, 궤양, 감시림프절 생검, HMB-45, S-100, WHO Classification of Skin Tumours, 악성 흑색종, 제자리 흑색종, 소액암, 일반암

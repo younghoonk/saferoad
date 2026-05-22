@@ -1,0 +1,34 @@
+가이드라인명: ESC 2020 비ST분절 상승 급성관상동맥증후군(NSTEMI/UA) 진단기준 (2020 ESC Guidelines for the Management of Acute Coronary Syndromes without Persistent ST-Segment Elevation)
+발행기관: European Society of Cardiology (ESC)
+적용 질환: NSTEMI, 불안정 협심증, 급성관상동맥증후군 (KCD/ICD-10: I21.4, I20.0, I24.8)
+
+【진단 기준 핵심】
+1. ACS 3가지 분류:
+   - STEMI (I21.0-I21.3): ST분절 상승 + 심근효소 상승
+   - NSTEMI (I21.4): ST분절 비상승 + 심근효소 상승 (troponin 상승)
+   - UA (I20.0): ST분절 비상승 + 심근효소 정상 (troponin 음성)
+2. NSTEMI 확진 기준 (ESC 2020):
+   - 허혈 증상 (흉통, 흉부 압박감)
+   - ECG: ST분절 하강 ≥0.5mm, 새로운 T파 역전, LBBB
+   - 고감도 트로포닌(hs-cTn): 상승 또는 연속 측정에서 rise-and-fall 패턴
+   - 정량 기준: 99th percentile 초과 + 6시간 내 유의한 변화(delta troponin)
+3. 0h/1h algorithm (ESC 2020 권고):
+   - 0h: 첫 측정 > 52 ng/L(hs-cTnI) 또는 delta > 6 ng/L → 1시간 내 NSTEMI rule-in
+   - 0h: < 5 ng/L → 1시간 내 rule-out (저위험)
+4. GRACE Score: 원내 및 6개월/1년/3년 사망률 예측. 점수 >140: 고위험, 조기 침습적 치료 권고.
+5. TIMI Risk Score: NSTEMI/UA 7일 이내 주요 심장 사건 위험 예측.
+6. 핵심 이미징: CAG (관상동맥 조영술)으로 폐쇄 부위 및 PCI/CABG 적응증 결정.
+
+【약관 연결 포인트】
+- 보험 약관의 "급성심근경색 진단비" 기준: I21.4(비ST분절 상승 심근경색)는 NSTEMI로 급성심근경색의 국제 코드이며 약관의 심근경색 진단비 대상이다.
+- 보험사가 "troponin 상승만으로 심근경색이 아니다"라고 주장하는 경우: ESC 2020 기준으로 hs-cTn 상승 + 허혈 증상 + ECG 변화(하강)가 확인되면 NSTEMI 진단 조건을 충족한다.
+- 보험사가 "CAG에서 완전 폐쇄가 없다"고 주장하는 경우: 4th Universal Definition of MI 및 ESC 2020 모두 완전 폐쇄가 없어도 troponin 기반 확진이 가능하다.
+
+【사정서 활용 가이드】
+- 보험사가 "NSTEMI 진단 근거 부족"을 주장할 때 인용 예시:
+  "ESC 2020 NSTEMI 가이드라인에 따르면, NSTEMI 진단은 허혈 증상 + 고감도 트로포닌 99th percentile 초과 + rise-and-fall 패턴으로 확진됩니다. 본 건은 hs-cTnI [수치] ng/L([X]배 초과), delta troponin [수치] ng/L, ECG에서 ST하강/T파역전이 기록되어 NSTEMI(I21.4) 확진 요건을 충족합니다. CAG에서 확인된 [결과]은 추가적인 객관적 근거입니다."
+- GRACE Score 활용:
+  "GRACE Score [점수]점은 [등급] 위험군으로, 이는 조기 침습적 치료가 필요한 임상 상태를 확인합니다. ESC 가이드라인에 따라 시행된 PCI는 고위험 NSTEMI 치료의 표준입니다."
+
+【키워드】
+NSTEMI, I21.4, ACS, 급성관상동맥증후군, ESC 2020, 고감도 트로포닌, hs-cTnI, hs-cTnT, 99th percentile, delta troponin, ECG ST하강, GRACE Score, TIMI, CAG, PCI, LBBB, 불안정 협심증, UA, I20.0

@@ -1,0 +1,33 @@
+가이드라인명: WHO 위장관 기질 종양(GIST) 진단기준 및 악성도 분류 (WHO Classification of Tumours of the Digestive System, 5th Ed., 2019)
+발행기관: 세계보건기구(WHO) / 국제암연구기관(IARC)
+적용 질환: 위장관 기질 종양 (KCD/ICD-10: D37.x → 악성 GIST는 C49.A 또는 C17/C20 계열)
+
+【진단 기준 핵심】
+1. 정의: GIST는 위장관 카할 세포(interstitial cells of Cajal)에서 기원하는 중간엽성 종양. KIT(CD117) 또는 PDGFRA 유전자 변이가 특징.
+2. 분자적 진단 기준:
+   - KIT(CD117) 면역조직화학 양성: GIST의 95% 이상
+   - 유전자 변이 분류: KIT 변이(85%), PDGFRA 변이(10%), wild-type(5-10%)
+   - KIT exon 11, 9, 13, 17 / PDGFRA exon 18(D842V 변이는 imatinib 저항성) 구분 필요
+3. 중요한 분류 변화: WHO 2019년 분류 개정 이후 "모든 GIST는 악성 가능성을 가진다"고 재분류됨. 과거 70-80%를 양성으로 분류하던 기준이 폐기됨.
+4. 악성도 위험 분류 기준 (Miettinen/AFIP 기준):
+   - 원발 부위 (위 vs 비위): 위 GIST는 상대적으로 낮은 악성도
+   - 종양 크기: 2cm 이하 낮은 위험 / 5cm 이상 높은 위험
+   - 핵분열 수(mitotic count): 5/50 HPF 이하 vs 초과
+   - 위 2cm 이하 + 5/50 HPF 이하: 매우 낮은 위험
+   - 비위 부위 + 5cm 이상 + 높은 핵분열수: 높은 재발·전이 위험
+5. 방사선학적 악성 지표: 크기 >5cm, 조영증강 불균질, 궤양화, 전이(간·복막 주로)
+6. ICD-10 코드: 경계성(행동양식 불명) D37.x; 악성 GIST(침윤성) C49.A(소장 원발 등 부위에 따라 다름)
+
+【약관 연결 포인트】
+- 보험사가 "GIST는 D코드라 암이 아니다"라고 주장하는 경우: WHO 2019 개정 분류상 모든 GIST는 악성 가능성을 가지며, 고위험 GIST는 ICD-10 C49.A 등 악성 코드로 분류 가능하다.
+- 병리 보고서의 ICD 코드만으로 판단할 것이 아니라, 악성도 위험 분류(Miettinen 기준)와 치료 결과(이마티닙 투여 여부, 수술 범위)를 종합 검토해야 한다.
+- "진단확정"의 의미: 분자 진단(CD117 양성) + 병리조직학 확인이 GIST 진단확정의 국제 표준이다.
+
+【사정서 활용 가이드】
+- 보험사가 "D37코드이므로 암진단보험금 지급 불가"라고 주장할 때 인용 예시:
+  "WHO Classification of Tumours (Digestive System, 5th Ed., IARC 2019)에 따르면 모든 GIST는 악성 가능성이 있는 종양으로 재분류되었습니다. 본 건은 KIT(CD117) 양성, [크기] cm, 핵분열수 [X]/50 HPF로, Miettinen/AFIP 위험 분류 [등급]에 해당합니다. 고위험 GIST는 악성 신생물(C코드) 기준을 충족하며, 이마티닙 등 표적 항암제 치료가 적용된 사실이 이를 뒷받침합니다."
+- 약관이 "의사의 확진"을 요건으로 하는 경우:
+  "분자진단(CD117/KIT 면역조직화학) 및 병리조직학적 확진은 국제 의학 기준에 따른 GIST 진단 확정입니다. 보험사가 D코드라는 이유만으로 확진을 부정하는 것은 WHO 기준에 반하는 해석입니다."
+
+【키워드】
+GIST, 위장관 기질 종양, gastrointestinal stromal tumor, KIT, CD117, PDGFRA, D37, C49.A, Miettinen 기준, 핵분열수, 악성 가능성, WHO Classification of Tumours, IARC, 이마티닙, imatinib, 암진단보험금, 악성도 위험 분류
