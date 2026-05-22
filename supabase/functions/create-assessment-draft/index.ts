@@ -2015,8 +2015,8 @@ function isSubmissionMedicalChronologyLine(line: string) {
   if (line.length < 8) return false;
   if (/문서\s*구성|핵심\s*chronology|chronology|유리한\s*자료|추가\s*확인사항|보험사\s*공문|약관|판례|금감원|분쟁조정|Evidence Pack|sourceAnalysis/i.test(line)) return false;
   if (/\b(?:confidence|document_type|completed|SKMBT_|Resized_)\b/i.test(line)) return false;
-  if (/보험회사|보험사|부지급|면책|약관상|판례상|분쟁조정례/.test(line) && !/진단서|소견서|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|CK-MB|심전도|TMT|CCTA|CT|협착|I21|I20|I25/i.test(line)) return false;
-  return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25/i.test(line);
+  if (/보험회사|보험사|부지급|면책|약관상|판례상|분쟁조정례/.test(line) && !/진단서|소견서|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|CK-MB|심전도|TMT|CCTA|CT|협착|I21|I20|I25|수술|조직검사|병리|암|항암|방사선/i.test(line)) return false;
+  return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25|암진단|조직검사|생검|biopsy|DCIS|carcinoma|microinvasion|병리\s*보고서|수술|절제|항암|방사선|항호르몬|림프절|C\d{2}|D0\d/i.test(line);
 }
 
 function normalizeSubmissionDate(value: string) {
@@ -2263,6 +2263,44 @@ function extractKillingEvidence(
     });
   }
 
+  // ── Cancer-specific evidence (only when no cardiac terms detected in source) ─
+  const hasCardiacTerms = /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|CAG|PCI|stent|관상동맥/i.test(source);
+  if (!hasCardiacTerms) {
+    const pathologyQuote = sentenceContaining(
+      source,
+      /DCIS|carcinoma in situ|microinvasion|high\s*grade|comedo necrosis|병리\s*보고서|조직검사|생검|biopsy|악성신생물|상피내암/i,
+      '병리 보고서에서 해당 병변의 조직학적 소견이 확인되었습니다.',
+    );
+    if (/DCIS|carcinoma in situ|microinvasion|high\s*grade|comedo necrosis|병리|조직검사|생검/i.test(source)) {
+      push({
+        evidenceType: 'pathology_finding',
+        date: dateNearQuote(source, pathologyQuote) || '',
+        quote: pathologyQuote,
+        sourceDocumentType: 'pathology_report',
+        strategicMeaning: '병리 보고서상 조직학적 소견이 확인되며, 이는 암 진단확정의 기초 자료가 된다.',
+        useInSections: ['facts', 'medical', 'policy', 'conclusion'],
+        strength: 'decisive',
+      });
+    }
+
+    const surgeryQuote = sentenceContaining(
+      source,
+      /수술|절제|lumpectomy|mastectomy|excision|sentinel|감시림프절/i,
+      '수술적 절제 및 병리 확인이 이루어졌습니다.',
+    );
+    if (/수술|절제|lumpectomy|mastectomy|excision/i.test(source)) {
+      push({
+        evidenceType: 'treatment_record',
+        date: dateNearQuote(source, surgeryQuote) || '',
+        quote: surgeryQuote,
+        sourceDocumentType: 'procedure_report',
+        strategicMeaning: '수술 시행 사실은 악성 또는 암에 준한 임상적 판단을 뒷받침하는 근거가 된다.',
+        useInSections: ['facts', 'medical', 'conclusion'],
+        strength: 'strong',
+      });
+    }
+  }
+
   return evidence.slice(0, 8);
 }
 
@@ -2308,11 +2346,19 @@ function extractKeyNumbersForArgument(input: ReturnType<typeof validateInput>, r
     result.facts,
     result.issues,
   ].filter(Boolean).join('\n');
-  const candidates: Array<{ pattern: RegExp; label: string; meaning: string }> = [
-    { pattern: /(?:hs-?troponin|troponin\s*T?|트로포닌)[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'hs-troponin/Troponin T', meaning: '심근손상 및 NSTEMI/I21.4 판단의 핵심 수치' },
-    { pattern: /CK-?MB[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'CK-MB', meaning: '심근효소 검사상 보조 판단 수치' },
-    { pattern: /(?:LM-?LAD|LM-?mLAD|LAD|LCx|관상동맥|협착)[^\n,;:：]{0,40}?(?:\d{2,3}\s*%)/ig, label: '관상동맥 협착률', meaning: 'CAG/PCI 시행 필요성과 급성 관상동맥증후군 경과를 뒷받침하는 수치' },
-  ];
+  const isCancerInput = /암진단비|일반암|제자리암|상피내암|DCIS|carcinoma|C\d{2}|D0\d|병리|조직검사|암\s*진단/i.test(text);
+  const candidates: Array<{ pattern: RegExp; label: string; meaning: string }> = isCancerInput
+    ? [
+      { pattern: /\b(\d+(?:\.\d+)?)\s*cm\b/ig, label: '종양 크기', meaning: '병리 보고서상 종양 크기 — 악성도 및 병기 판단의 기초 수치' },
+      { pattern: /Ki-?67[^\n,;:：]{0,20}?(\d+)\s*%/ig, label: 'Ki-67', meaning: '종양 증식 지수 — 악성 정도 및 high grade 판단의 보조 수치' },
+      { pattern: /CA\s*[\d\-]+[^\n,;:：]{0,15}?(\d+(?:\.\d+)?)\s*(?:U\/mL|IU\/mL|U\/L)?/ig, label: '종양표지자(CA)', meaning: '혈청 종양표지자 — 암 진단 및 경과 추적의 보조 근거' },
+      { pattern: /(?:림프절|lymph node)[^\n,;:：]{0,30}?(?:\d+|전이\s*없음|음성|양성)/ig, label: '림프절 전이', meaning: '감시림프절 전이 여부 — 병기 및 치료 방침 결정 근거' },
+    ]
+    : [
+      { pattern: /(?:hs-?troponin|troponin\s*T?|트로포닌)[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'hs-troponin/Troponin T', meaning: '심근손상 및 NSTEMI/I21.4 판단의 핵심 수치' },
+      { pattern: /CK-?MB[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'CK-MB', meaning: '심근효소 검사상 보조 판단 수치' },
+      { pattern: /(?:LM-?LAD|LM-?mLAD|LAD|LCx|관상동맥|협착)[^\n,;:：]{0,40}?(?:\d{2,3}\s*%)/ig, label: '관상동맥 협착률', meaning: 'CAG/PCI 시행 필요성과 급성 관상동맥증후군 경과를 뒷받침하는 수치' },
+    ];
   const found: ClaimArgumentStructure['factualFoundation']['keyNumbers'] = [];
   for (const candidate of candidates) {
     const matches = Array.from(text.matchAll(candidate.pattern)).map((match) => cleanPublicText(match[0])).filter(Boolean);
