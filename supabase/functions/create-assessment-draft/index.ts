@@ -2188,10 +2188,12 @@ function extractKillingEvidence(
 
   const doctorQuote = sentenceContaining(
     source,
-    /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|진단서\s*가능|주치의|진단서\s*발급/i,
+    /cardiac marker|EKG|UA-?NSTEMI|NSTEMI/i,
     'cardiac marker 상승 및 EKG 소견을 근거로 UA-NSTEMI 진단서 가능성이 검토되었습니다.',
   );
-  if (/cardiac marker|EKG|UA-?NSTEMI|NSTEMI|진단서\s*가능|주치의/i.test(source)) {
+  // Only create cardiac killing evidence when source actually contains cardiac-specific terms.
+  // '주치의' (attending physician) is generic and appears in every case — do NOT use as trigger.
+  if (/cardiac marker|EKG|UA-?NSTEMI|NSTEMI/i.test(source)) {
     push({
       evidenceType: /SOAP|외래|진료기록/i.test(source) ? 'doctor_soap_note' : 'doctor_reasoning',
       date: dateNearQuote(source, doctorQuote) || '2024.06.27',
@@ -2463,7 +2465,7 @@ function composeSubmissionAssessmentReport(
     `- 진단의료기관: [진단의료기관]`,
     `- 확정진단명: ${diagnosisName}`,
     '',
-    `${insurer}는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. ${decisiveDoctorEvidence ? '특히 진단서 발급 당일 의무기록에는 주치의가 cardiac marker 상승, EKG 및 UA-NSTEMI 가능성을 검토한 과정이 남아 있어, 본 건은 진단서만 존재하는 사안이 아닙니다. ' : ''}${introReasons.map((item, index) => `${index + 1}) ${item}`).join(' ')} 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.`,
+    `${insurer}는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. ${isHeart && decisiveDoctorEvidence ? '특히 진단서 발급 당일 의무기록에는 주치의가 cardiac marker 상승, EKG 및 UA-NSTEMI 가능성을 검토한 과정이 남아 있어, 본 건은 진단서만 존재하는 사안이 아닙니다. ' : ''}${introReasons.map((item, index) => `${index + 1}) ${item}`).join(' ')} 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.`,
     '',
     'Ⅰ. 사건의 경위 및 진단 확정 과정',
     formatSubmissionChronology(argument.factualFoundation.chronologicalFacts, isHeart, argument.killingEvidence),
@@ -2485,7 +2487,7 @@ function composeSubmissionAssessmentReport(
     '',
     medicalCriteriaTable,
     '',
-    decisiveDoctorEvidence ? `주치의 SOAP 기록의 객관성: ${decisiveDoctorEvidence.date || '진단서 발급일'} 의무기록에는 "${decisiveDoctorEvidence.quote}" 취지의 검토가 확인됩니다. 이는 NSTEMI/I21.4 판단이 진단서 문구만의 문제가 아니라 cardiac marker, EKG 및 임상경과를 근거로 한 전문의 판단임을 보여줍니다.` : '',
+    isHeart && decisiveDoctorEvidence ? `주치의 SOAP 기록의 객관성: ${decisiveDoctorEvidence.date || '진단서 발급일'} 의무기록에는 "${decisiveDoctorEvidence.quote}" 취지의 검토가 확인됩니다. 이는 NSTEMI/I21.4 판단이 진단서 문구만의 문제가 아니라 cardiac marker, EKG 및 임상경과를 근거로 한 전문의 판단임을 보여줍니다.` : '',
     '',
     argument.defenseLayers.medical.conclusion,
     '',
