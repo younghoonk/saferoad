@@ -1,6 +1,10 @@
 const EMBEDDING_MODEL = 'text-embedding-3-small';
 const EMBEDDING_API_URL = 'https://api.openai.com/v1/embeddings';
 const MIN_SIMILARITY = 0.45;
+// Per-RPC-call hard cap. Guards against MATERIALIZED-CTE full-scans (e.g. medical_issue_codes 16万件)
+// hanging indefinitely when no statement_timeout is set in PostgreSQL.
+// If this fires, the worker try/catch returns { sorted: [] } — the function continues normally.
+const RPC_FETCH_TIMEOUT_MS = 8000;
 
 export interface RetrievedReference {
   reference_type: 'official' | 'internal';
@@ -811,19 +815,28 @@ async function rpcSearch(
   sourceArea: string,
   matchCount: number,
 ) {
-  const response = await fetch(`${supabaseUrl}/rest/v1/rpc/match_rag_master_chunks`, {
-    method: 'POST',
-    headers: restHeaders(serviceRoleKey),
-    body: JSON.stringify({
-      query_embedding: embedding,
-      match_count: matchCount,
-      source_area_filter: sourceArea,
-      min_similarity: MIN_SIMILARITY,
-    }),
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${supabaseUrl}/rest/v1/rpc/match_rag_master_chunks`, {
+      method: 'POST',
+      headers: restHeaders(serviceRoleKey),
+      body: JSON.stringify({
+        query_embedding: embedding,
+        match_count: matchCount,
+        source_area_filter: sourceArea,
+        min_similarity: MIN_SIMILARITY,
+      }),
+      signal: AbortSignal.timeout(RPC_FETCH_TIMEOUT_MS),
+    });
+  } catch (fetchErr) {
+    const isTimeout = fetchErr instanceof DOMException && fetchErr.name === 'TimeoutError';
+    throw new Error(isTimeout
+      ? `RAG RPC timeout after ${RPC_FETCH_TIMEOUT_MS}ms source_area=${sourceArea}`
+      : `RAG RPC network error source_area=${sourceArea}: ${fetchErr instanceof Error ? fetchErr.message : String(fetchErr)}`);
+  }
   if (!response.ok) {
     const body = await response.text().catch(() => '');
-    throw new Error(`RAG RPC failed: ${response.status}${body ? ` body=${body.slice(0, 300)}` : ''}`);
+    throw new Error(`RAG RPC failed: ${response.status} source_area=${sourceArea}${body ? ` body=${body.slice(0, 300)}` : ''}`);
   }
   return await response.json() as RpcRow[];
 }
@@ -1042,7 +1055,12 @@ export async function searchRagReferences(params: {
       }
       return { plan, sorted };
     } catch (error) {
-      console.error('[ragSearch] source_area search FAILED', plan.source_area, error instanceof Error ? error.message : error);
+      const msg = error instanceof Error ? error.message : String(error);
+      const isTimeout = msg.includes('timeout');
+      console.error(
+        isTimeout ? '[ragSearch] RPC_TIMEOUT' : '[ragSearch] RPC_FAIL',
+        { source_area: plan.source_area, error: msg },
+      );
       return { plan, sorted: [] as EnrichedRow[] };
     }
   });
