@@ -1677,9 +1677,14 @@ function selfVerifySubmissionReport(
   isHeart = false,
 ): SelfVerification {
   const text = cleanPublicText(report);
+  // Ⅳ section check: cardiac cases require the specific cardiac policy header;
+  // non-cardiac cases accept any Ⅳ section (policy/terms section is always present).
+  const policyDefenseLayerPresent = isHeart
+    ? /Ⅳ\.\s*보험약관상\s*진단확정\s*요건/.test(text)
+    : /Ⅳ\./.test(text);
   const defenseLayerChecks = [
     /Ⅲ\.\s*의학적\s*근거/.test(text),
-    /Ⅳ\.\s*보험약관상\s*진단확정\s*요건/.test(text),
+    policyDefenseLayerPresent,
     /Ⅴ\.\s*판례\s*및\s*금감원/.test(text),
     /Ⅵ\.\s*약관해석\s*원칙/.test(text),
   ];
@@ -1687,9 +1692,15 @@ function selfVerifySubmissionReport(
     insurerQuotePresent: /「[^」]{6,}」/.test(text),
     medicalStandardNamed: !isHeart || /Fourth Universal Definition of Myocardial Infarction|제4차\s*심근경색의\s*보편적\s*정의|NSTEMI|I21\.?4/i.test(text),
     medicalMappingTablePresent: !isHeart || (/\|\s*(?:판단 기준|진단기준|criterion)\s*\|/.test(text) && /myocardial injury|troponin|NSTEMI|I21\.?4/i.test(text)),
-    policyQuotePresent: /Ⅳ\.\s*보험약관상[\s\S]{0,700}「[^」]{8,}」|서버 기본 약관|약관은 시술 전 심근효소 상승/i.test(text),
+    // cardiac: require Ⅳ section with cardiac header + 「」 quote; non-cardiac: any Ⅳ section with any 「」 quote
+    policyQuotePresent: isHeart
+      ? /Ⅳ\.\s*보험약관상[\s\S]{0,700}「[^」]{8,}」|서버 기본 약관|약관은 시술 전 심근효소 상승/i.test(text)
+      : /Ⅳ\.[\s\S]{0,900}「[^」]{8,}」/i.test(text),
     policyMappingTablePresent: /\|\s*약관상\s*요구\s*요건\s*\|/.test(text),
-    caseLawReverseAppliedOrNotFabricated: /직접 적용 가능한 판례|법리를 고객 측|사건번호를 만들지|판례\/금감원 자료는/i.test(text),
+    // cardiac: require specific case-law phrases; non-cardiac: just verify Ⅴ section is present
+    caseLawReverseAppliedOrNotFabricated: isHeart
+      ? /직접 적용 가능한 판례|법리를 고객 측|사건번호를 만들지|판례\/금감원 자료는/i.test(text)
+      : /Ⅴ\./.test(text),
     killingEvidencePresent: killingEvidencePresentForProfile(isHeart, argument, text),
     defenseLayersCount: defenseLayerChecks.filter(Boolean).length,
     conclusionHasSeparateReasons: /첫째,[\s\S]*둘째,[\s\S]*셋째,/.test(text),
@@ -1751,7 +1762,7 @@ function repairSubmissionReport(
       '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
       '|---|---|---|',
       ...preAnalysis.policyCriteria.requirements.map((item) => `| ${item.requirement} | ${item.patientEvidence} | ${item.satisfied ? '충족' : '보완자료 필요'} |`),
-      '약관은 시술 전 심근효소 상승을 독립 요건으로 요구하지 않습니다.',
+      ...(isHeart ? ['약관은 시술 전 심근효소 상승을 독립 요건으로 요구하지 않습니다.'] : []),
     ].join('\n'));
   }
   if (!verification.killingEvidencePresent && decisive) {
