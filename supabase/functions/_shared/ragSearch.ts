@@ -196,7 +196,8 @@ function isAllowedOfficialSource(row: EnrichedRow) {
   if (!hostname) {
     return row.source_area === 'legal_statutes'
       || row.source_area === 'fss_dispute_cases'
-      || row.source_area === 'precedents';
+      || row.source_area === 'precedents'
+      || (row.source_area === 'medical_guideline' && reviewStatus(row) === 'reviewed' && officialCitationAllowed(row));
   }
   return matchDomain(hostname, allowedOfficialDomains);
 }
