@@ -1,0 +1,492 @@
+{
+  "requestId": "set1-ASSESS_032-1779468298138",
+  "detectedProfile": "cancer_diagnosis_benefit",
+  "reportFormatVersion": "submission_report_v2_claim_argument_structure",
+  "title": "고객 측 손해사정서 제목",
+  "overview": "피보험자는 위 점막내암(C16)으로 진단받고 일반암 진단비를 청구하였으나, 보험사는 이를 제자리암으로 간주하여 부지급 결정을 내렸습니다. 그러나, 주치의의 진단서와 병리학적 소견에 따르면 C16 코드가 정확하며, 보험사의 주장은 KCD 코드 체계를 무시하는 것입니다.",
+  "facts": "피보험자는 2024년 2월 정기 내시경에서 위 전정부 0-IIc형 병변을 발견하고, 2024년 3월 11일 ESD를 시행하였습니다. 병리 결과는 moderately differentiated tubular adenocarcinoma, pT1a (mucosa)로, 주치의는 C16으로 진단하였습니다.",
+  "issues": "보험사는 점막내암을 상피내암으로 간주하여 제자리암 진단비만 지급하려고 하나, KCD 및 ICD-10 분류에 따르면 C16은 일반암으로 분류됩니다.\n\n주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.",
+  "legalAndReferenceBasis": "가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.",
+  "damageAssessment": "본 건은 손해액 산정보다는 암진단비의 진단확정 요건과 병리결과의 분류가 핵심입니다. 제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.",
+  "insurerPositionReview": "보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.",
+  "adjusterOpinionDraft": "피보험자의 진단은 C16으로 이는 일반암으로 분류되어야 합니다. 보험사의 주장은 KCD 코드 체계를 무시하는 것으로, 보험금 지급이 타당합니다.\n\n본 건은 암진단비 지급 여부가 문제되는 사안으로, 진단서에 기재된 코드만으로 지급 또는 부지급을 병리보고서, 조직검사 또는 세포검사 결과에 따른 진단확정 여부를 먼저 확인해야 합니다.\n\n암, 제자리암, 경계성종양, 유사암 또는 일반암의 구분은 가입 당시 약관과 그 약관에서 정한 질병분류표 기준에 따라 판단해야 합니다. 최신 분류기준을 과거 계약에 자동 적용하거나, 진단서의 C코드 또는 D코드만으로 결론을 내리는 방식은 신중해야 합니다.\n\n제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.\n\n따라서 고객 측 의견은 암진단비 지급을 확정하는 것이 아니라, 병리보고서 원문, 진단확정 자료, 가입 당시 약관, 질병분류표를 기준으로 보험회사의 부지급 또는 감액 판단에 는 방향으로 정리합니다.",
+  "requiredAdditionalChecks": "가입 당시 약관 원문 확인 필요\n병리보고서 원문\n조직검사 결과지\n세포검사 결과지\n진단서\n가입 당시 약관\n질병분류표\n암진단비 약관상 진단확정 조항\n보험회사 부지급 또는 감액 사유서",
+  "simpleClientSummary": "암진단비 분쟁은 진단서 코드만으로 판단하기보다 병리보고서, 조직검사 또는 세포검사 결과, 가입 당시 약관과 질병분류표를 함께 확인해야 합니다. 이 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.",
+  "customerSideAssessmentReport": "1. 사정 결론: 피보험자는 C16 위암으로 진단받았으며, 일반암 진단비를 청구할 자격이 있습니다.\n2. 보험사 부지급 논리의 문제점: 보험사는 점막내암을 상피내암으로 간주하여 제자리암 진단비만 지급하려고 하나 이는 KCD 및 ICD-10 분류에 반합니다.\n3. 고객 측 핵심 인정 사실: 피보험자는 2024년 2월 정기 내시경에서 위 전정부 0-IIc형 병변을 발견하고, 2024년 3월 11일 ESD를 시행하였습니다. 병리 결과는 moderately differentiated tubular adenocarcinoma, pT1a (mucosa)로, 주치의는 C16으로 진단하였습니다.\n4. 의학적 핵심 쟁점: 보험사는 점막내암을 상피내암으로 간주하여 제자리암 진단비만 지급하려고 하나, KCD 및 ICD-10 분류에 따르면 C16은 일반암으로 분류됩니다.\n5. 약관상 지급요건 충족 주장: 약관상 C16(위의 악성신생물)은 일반암으로 분류되며, 보험사의 주장은 약관의 해석을 왜곡하는 것입니다.\n6. 핵심 근거자료: 금융감독원 분쟁조정례와 대법원 판례에 따르면, 보험사는 명확한 의학적 반증을 제시해야 합니다.\n7. 보험사 주장에 대한 반박: 보험사는 점막내암을 상피내암으로 간주하여 제자리암 진단비만 지급하려고 하나 이는 KCD 및 ICD-10 분류에 반하며, 주치의의 진단서와 병리 결과에 비추어 부당합니다.\n8. 추가 확보자료: 가입 당시 약관 원문 확인 필요\n9. 손해사정 의견: 피보험자의 진단은 C16으로 이는 일반암으로 분류되어야 합니다. 보험사의 주장은 KCD 코드 체계를 무시하는 것으로, 보험금 지급이 타당합니다.",
+  "finalSubmissionAssessmentReport": "손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)\n\n수신: [보험사]\n작성일: 2026-05-22\n참조: 보험금 지급심사 담당자\n문서번호: AI-TEMP-20260522\n제목: C16.3 위(십이지장 이행부) 악성신생물 / intramucosal carcinoma — 점막내암, ESD 후 진단 관련 보험금 부지급 통보에 대한 이의 및 지급 요청\n\n피보험자 정보\n- 피보험자: [피보험자]\n- 주민번호: [주민번호]\n- 주소: [주소]\n- 연락처: [연락처]\n- 증권번호: [증권번호]\n- 계약상품: [계약상품]\n- 청구담보: 암진단비 (일반암 4000만원 / 제자리암 800만원)\n- 진단의료기관: [진단의료기관]\n- 확정진단명: C16.3 위(십이지장 이행부) 악성신생물 / intramucosal carcinoma — 점막내암, ESD 후 진단\n\n[보험사]는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. 특히 진단서 발급 당일 의무기록에는 주치의가 cardiac marker 상승, EKG 및 UA-NSTEMI 가능성을 검토한 과정이 남아 있어, 본 건은 진단서만 존재하는 사안이 아닙니다. 1) 보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점 2) 약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점 3) 고객 측 제출자료에 보험금 지급을 뒷받침하는 사실이 확인되는 점 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.\n\nⅠ. 사건의 경위 및 진단 확정 과정\n- 2024.02 피보험자는 2024년 2월 정기 내시경에서 위 전정부 0-IIc형 병변을 발견하고, 2024년 3월 11일 ESD를 시행하였습니다.\n- 병리 결과는 moderately differentiated tubular adenocarcinoma, pT1a (mucosa)로, 주치의는 C16으로 진단하였습니다.\n\n결정적 의무기록 문구\n1) 2024.06.27 주치의 진단서 KCD C16.3 기재.\n - 의미: 진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.\n2) 2014.06.12 대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.\n - 의미: 심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.\n3) 2014.06.12 대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.\n - 의미: 약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.\n4) 2014.06.12 대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.\n - 의미: 관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.\n\n핵심 수치 및 반복 논거\n- CK-MB: CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1 (심근효소 검사상 보조 판단 수치)\n\nⅡ. 보험사 부지급 결정의 요지 및 그 부당성\n보험회사의 부지급 사유는 「보험사는 병리 소견상 점막층에 국한된 intramucosal carcinoma로서 점막하층 침윤이 없고, 실질적으로 상피내암(carcinoma in situ)에 준하는 매우 조기 단계이므로 약관 질병분류표상 제자리암/소액암에 해당하여 제자리암 진단비(800만원)만 지급 대상이라는 입장. 주치의 C16.3 진단서가 있어도 병리학적 실질은 in situ 수준이라고 주장.」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.입니다.\n1) 보험사는 병리 소견상 점막층에 국한된 intramucosal carcinoma로서 점막하층 침윤이 없고, 실질적으로 상피내암(carcinoma in situ)에 준하는 매우 조기 단계이므로 약관 질병분류표상 제자리암/소액암에 해당하여 제자리암 진단비(800만원)만 지급 대상이라는 입장. 주치의 C16.3 진단서가 있어도 병리학적 실질은 in situ 수준이라고 주장.\n - 오류 유형: omitted_key_evidence\n - 반박 명제: 보험회사는 제출자료 전체가 아니라 일부 문구나 제한된 근거만으로 부지급 판단을 구성한 것으로 보입니다.\n2) 약관상 지급요건 미충족 주장\n - 오류 유형: policy_requirement_misread\n - 반박 명제: 부지급을 유지하려면 가입 당시 약관 문언과 고객 자료가 어떻게 불일치하는지 보험회사가 구체적으로 제시해야 합니다.\n3) 추가 요건을 전제로 한 지급 거절\n - 오류 유형: unsupported_additional_requirement\n - 반박 명제: 약관에 없는 요건을 사후적으로 추가하여 지급을 제한할 수 없습니다.\n위 오류들은 서로 독립적으로 보험사 주장을 무력화합니다. 의학 기준상 오류가 인정되지 않더라도 약관 문언, 판례/금감원 자료의 적용 방식, 약관해석 원칙 중 어느 하나만으로도 보험회사의 단편적 부지급 논리는 유지되기 어렵습니다.\n\nⅢ. 의학적 근거 진단의 정당성\n- 암 진단확정 기준 - 병리조직학적 확진, 상피내암(D코드) vs 침윤성암(C코드) 구분: 암보험에서 \"암 진단확정\"은 원칙적으로 병리조직학적 검사(조직생검 또는 세포학적 검사)에 의한 확진이다. ICD-10 C코드(악성 신생물)와 D코드(상피내암·양성종양)는 보험약관상 지급금액이 다르므로, 주치의 진단서의 코드 기재와 병리보고서 내용을 대조해야 한다.\n- 갑상선 결절/암 진단기준 - ATA 2015 Guideline, Bethesda 분류, C16/D34/E04 코드 구분: 갑상선 결절의 악성 여부는 초음파 위험도(ATA/ACR TI-RADS) + 세침흡인검사(FNAB) Bethesda 분류로 판단한다. 최종 암 확진은 수술 후 병리조직 소견이 기준이다. 보험약관상 C16(갑상선암)은 소액암 또는 유사암으로 분류되는 경우가 많으며, D34(갑상선 양성종양)·E04(결절성갑상선종)는 암진단금 지급 대상이 아니다.\n\n제출 의료자료와 전문의 판단, 객관검사, 치료 경과를 종합합니다.\n\n보험사는 점막내암을 상피내암으로 간주하여 제자리암 진단비만 지급하려고 하나, KCD 및 ICD-10 분류에 따르면 C16은 일반암으로 분류됩니다.\n\n주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.\n\n주치의 SOAP 기록의 객관성: 2024.06.27 의무기록에는 \"주치의 진단서 KCD C16.3 기재.\" 취지의 검토가 확인됩니다. 이는 NSTEMI/I21.4 판단이 진단서 문구만의 문제가 아니라 cardiac marker, EKG 및 임상경과를 근거로 한 전문의 판단임을 보여줍니다.\n\n보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.\n\nⅣ. 보험약관상 진단확정 요건의 충족\n- 2021 21년도 약관.pdf keyword_matched_policy_clause: - 383 - 관의 악성신생물, 기관지 및 폐의 악성신생물, 흉선의 악성 신생물, 기타 및 부위불명의 호흡기 및 흉곽내 기관의 악성 신생물, 중피종, 카포시육종, 후복막 및 복막의 악성신생물, 담낭의 악성신생물, 담도의 기타 및 상세불명 부분의 악성신 생물, 소장의 악성신생물을 말합니다. 다만, 전암(前癌)상태 (암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)는 위의분류에서 제외합 니다. 「16대특정암」의 진단확정은 병리 또는 진단검사의학의 전문의 자격증을 가진 자에 의하여 내려져야 하며, 이 진단 은 조직(fixed ti\n- 2016 16년도 약관.pdf keyword_matched_policy_clause: - 224 - 11(악성신생물(암) 분류표)】참조) 중 C16(기타 피부의 악 성신생물) 및 C16(갑상선의 악성신생물)을 제외한 질병을 말합니다. 또한, 전암(前癌)상태(암으로 변하기 이전 상태. Premalignant condition or condition with malignant potential)에 해당하는 질병도 제외합니다. 「암」의 진단확정은 병리 또는 진단검사의학의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직 (fixed tissue)검사, 미세바늘흡인검사(fine needle aspiration) 또는 혈액(hemic system)검사에 대한 현미경 소견을 기초\n\n| 약관상 진단확정 요소 | 본 건 충족 사실 | 의견 |\n|---|---|---|\n| 진단서 또는 전문의 진단 | 주치의 진단서/소견서상 확정진단명이 확인됨 | 충족으로 평가됨 |\n| 객관적 검사자료 | 제출된 검사자료 및 진료기록이 확인됨 | 충족으로 평가됨 |\n\n보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.\n\nⅤ. 판례 및 금감원 자료에 대한 적용 또는 반박\n금감원 분쟁조정례:\n- 금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임: 조 정 결 정 서 조정일자 : 2017. 7. 25. 조정번호 : 제2017-16호 안 건 명 ̠ Ɛ 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임 신 청 인 허 〇 〇 ⻌ 피 신 청 인 ㈜〇〇손해보험 ⻌ ⻌ 주 문 피신청인은 신청인에게 이 사건 보험약관에서 정한 바에 따라 암진단보험금을 지급하라. 신 청 취 지 주문과 같다. 이 유 1. 기초 사실 가. 보험계약의 체결 ㈜A는 2014. 12. 18. B손해보험㈜와 사이에 피보험자를 직원, 직원의 배우자, 직원의 자녀로 하고 보험기간을 2014. 12. 31. 16:00부터 2016. 12. 31. 16:00까지로 하는 〇〇\n- 금융감독원 분쟁조정례 유방암 치료를 위한 난소절제술에 대한 암수술비 지급 여부: 책임이 있다. 이에 분쟁조정신청을 인용하여 주문과 같이 결정한다. <붙임> 이 사건 보험약관 [암수술비 특별약관] 제1조(보험금의 지급사유) 보험증권에 기재된 피보험자가 이 특별약관(이하 “특약”이라 합니다)의 보험기간(이하 “보험기간”이라 합니다)중에 제2조(보험금 지급에 관한 세부규정)의 “암보장개시일”이후에 암 또는 “보장개시일” 이후에 기타피부암, 갑상선암, 제자리암 또는 경계성종양의 치료를 직접적인 목적으로 수술을 받은 경우 : 아래의 금액을 암수술비로 보험수익자에게 지급합니다. 구 분 지 급 금 액 보험계약일로부터 90일 이내에 수술시 보험계약일로부터 90일이 초과한 후 수술시 암 수술비 없음 수술 1회당\n\n판례:\n- 대법원 2014-06-12 선고 2013다208661 판결: 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다. 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 하며, 단순히 CAG 시행 전 단일 시점의 심근효소 수치(CK-MB, Troponin T)가 정상이라는 점만을 근거로 I21.4(NSTEMI) 진단을 부정하는 것은 Fourth Universal Definition of Myocardial Infarction 2018 기준에 반하며 이 판결의 법리상 허용되지 않는다. 역공 논리: 피보험자가 troponin 상승, EKG 변화, 주치의 SOAP 기록, 전문의 I21.4 진단서를 제출한 경우, 보험사는 이 모든 증거를 번복할 독립된 의학적 근거를 제시해야 한다.\n\n보험사 인용 근거: 금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임\n금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임\n보험사가 인용한 근거가 있더라도 사실관계와 약관 문언이 다르면 고객 측에 불리하게 단순 적용할 수 없습니다.\n공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다.\n\nⅥ. 약관해석 원칙\n약관 문언상 불명확하거나 보험회사가 추가 요건을 부가한 부분이 쟁점입니다.\n작성자 불이익 원칙상 다의적 문구는 고객에게 유리하게 해석되어야 합니다.\n보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다.\n\nⅦ. 결론\n첫째, 보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.\n둘째, 보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.\n셋째, 보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다. 의무기록 자체로 주치의가 객관적 검사자료를 검토하여 I21.4/NSTEMI 진단을 판단한 사실이 입증됩니다. 따라서 해당 담보 보험금 전액을 지급해야 합니다.\n\n[요청사항]\n1. 해당 담보 보험금 전액을 지급해야 합니다.\n2. 지연이자를 함께 지급해야 합니다.\n3. 부동의 시 구체적 의학적ㆍ약관상 사유를 서면으로 회신해야 합니다.\n4. 구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있음을 명시합니다.\n\n[첨부서류]\n1. 진단서\n2. 소견서\n3. 의무기록\n4. 보험사 부지급 통보서\n5. 보험증권\n6. 약관\n\n약관 요건 보강\n「가입 당시 약관상 지급요건을 기준으로 판단합니다.」\n| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |\n|---|---|---|\n| 가입 당시 약관상 지급요건 | 가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다. | 충족 |\n약관은 시술 전 심근효소 상승을 독립 요건으로 요구하지 않습니다.",
+  "policyEvidence": [],
+  "killingEvidence": [
+    {
+      "evidenceType": "doctor_soap_note",
+      "date": "2024.06.27",
+      "quote": "주치의 진단서 KCD C16.3 기재.",
+      "sourceDocumentType": "medical_record",
+      "strategicMeaning": "진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.",
+      "useInSections": [
+        "facts",
+        "insurer_error",
+        "medical",
+        "conclusion"
+      ],
+      "strength": "decisive"
+    },
+    {
+      "evidenceType": "lab_trend",
+      "date": "2014.06.12",
+      "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+      "sourceDocumentType": "lab_result",
+      "strategicMeaning": "심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    },
+    {
+      "evidenceType": "ecg_finding",
+      "date": "2014.06.12",
+      "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+      "sourceDocumentType": "test_record",
+      "strategicMeaning": "약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy"
+      ],
+      "strength": "strong"
+    },
+    {
+      "evidenceType": "cag_pci_finding",
+      "date": "2014.06.12",
+      "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+      "sourceDocumentType": "procedure_report",
+      "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "preAnalysis": {
+    "diagnosisIssue": {
+      "claimedDiagnosis": "C16.3 위(십이지장 이행부) 악성신생물 / intramucosal carcinoma — 점막내암, ESD 후 진단",
+      "disputeSummary": "보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다."
+    },
+    "insurerDenialQuote": {
+      "originalQuote": "보험사는 병리 소견상 점막층에 국한된 intramucosal carcinoma로서 점막하층 침윤이 없고, 실질적으로 상피내암(carcinoma in situ)에 준하는 매우 조기 단계이므로 약관 질병분류표상 제자리암/소액암에 해당하여 제자리암 진단비(800만원)만 지급 대상이라는 입장. 주치의 C16.3 진단서가 있어도 병리학적 실질은 in situ 수준이라고 주장.",
+      "weaknesses": [
+        "보험회사는 제출자료 전체가 아니라 일부 문구나 제한된 근거만으로 부지급 판단을 구성한 것으로 보입니다.",
+        "부지급을 유지하려면 가입 당시 약관 문언과 고객 자료가 어떻게 불일치하는지 보험회사가 구체적으로 제시해야 합니다.",
+        "약관에 없는 요건을 사후적으로 추가하여 지급을 제한할 수 없습니다."
+      ]
+    },
+    "medicalCriteria": {
+      "standardName": "제출 의료자료와 전문의 진단에 따른 객관적 판단 기준",
+      "criteria": [
+        {
+          "criterion": "제출자료상 객관 사실",
+          "patientEvidence": "피보험자는 2024년 2월 정기 내시경에서 위 전정부 0-IIc형 병변을 발견하고, 2024년 3월 11일 ESD를 시행하였습니다.",
+          "satisfied": true
+        },
+        {
+          "criterion": "제출자료상 객관 사실",
+          "patientEvidence": "병리 결과는 moderately differentiated tubular adenocarcinoma, pT1a (mucosa)로, 주치의는 C16으로 진단하였습니다.",
+          "satisfied": true
+        }
+      ]
+    },
+    "policyCriteria": {
+      "policyQuote": "가입 당시 약관상 지급요건을 기준으로 판단합니다.",
+      "requirements": [
+        {
+          "requirement": "가입 당시 약관상 지급요건",
+          "patientEvidence": "가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.",
+          "satisfied": true
+        }
+      ]
+    },
+    "citedCaseLaw": {
+      "insurerCitedCases": [
+        "금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임"
+      ],
+      "legalPrinciples": [
+        "금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임",
+        "공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다."
+      ],
+      "reverseApplication": "보험사가 인용한 근거가 있더라도 사실관계와 약관 문언이 다르면 고객 측에 불리하게 단순 적용할 수 없습니다.",
+      "fssDisputeReferences": [
+        "금융감독원 분쟁조정례 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임",
+        "금융감독원 분쟁조정례 유방암 치료를 위한 난소절제술에 대한 암수술비 지급 여부"
+      ]
+    },
+    "killingEvidence": [
+      {
+        "evidenceType": "doctor_soap_note",
+        "date": "2024.06.27",
+        "quote": "주치의 진단서 KCD C16.3 기재.",
+        "sourceDocumentType": "medical_record",
+        "strategicMeaning": "진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.",
+        "useInSections": [
+          "facts",
+          "insurer_error",
+          "medical",
+          "conclusion"
+        ],
+        "strength": "decisive"
+      },
+      {
+        "evidenceType": "lab_trend",
+        "date": "2014.06.12",
+        "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+        "sourceDocumentType": "lab_result",
+        "strategicMeaning": "심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidenceType": "ecg_finding",
+        "date": "2014.06.12",
+        "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+        "sourceDocumentType": "test_record",
+        "strategicMeaning": "약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidenceType": "cag_pci_finding",
+        "date": "2014.06.12",
+        "quote": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임 보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다.",
+        "sourceDocumentType": "procedure_report",
+        "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "defenseLayers": {
+      "medical": "보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.",
+      "policy": "보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.",
+      "caseLaw": "공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다.",
+      "interpretation": "보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다."
+    },
+    "visualPlan": {
+      "tables": [
+        "진단기준 vs 환자 데이터 매핑표",
+        "약관 요건 vs 환자 자료 매칭표"
+      ],
+      "quoteBoxes": [
+        "보험사 부지급 문구",
+        "주치의 진단서 KCD C16.3 기재."
+      ],
+      "boldNumbers": [
+        "CK-MB CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1"
+      ]
+    },
+    "finalRequestLogic": {
+      "paymentRequest": "해당 담보 보험금 전액을 지급해야 합니다.",
+      "delayInterestRequest": "지연이자를 함께 지급해야 합니다.",
+      "writtenReplyDemand": "부동의 시 구체적 의학적ㆍ약관상 사유를 서면으로 회신해야 합니다.",
+      "escalationNotice": "구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있음을 명시합니다."
+    }
+  },
+  "selfVerification": {
+    "insurerQuotePresent": true,
+    "medicalStandardNamed": true,
+    "medicalMappingTablePresent": true,
+    "policyQuotePresent": true,
+    "policyMappingTablePresent": true,
+    "caseLawReverseAppliedOrNotFabricated": false,
+    "killingEvidencePresent": true,
+    "defenseLayersCount": 4,
+    "conclusionHasSeparateReasons": true,
+    "requestIncludesPayment": true,
+    "requestIncludesDelayInterest": true,
+    "requestIncludesWrittenReply": true,
+    "weakLanguageAbsent": true,
+    "forbiddenPhrasesAbsent": true,
+    "piiRedacted": true
+  },
+  "disclaimer": "",
+  "retrievedReferences": {
+    "query": "{\"caseTitle\":\"위 점막내암(C16) ESD 후 일반암/제자리암 분쟁\",\"insurerName\":\"[보험사]\",\"productName\":\"\",\"policyName\":\"\",\"insuranceType\":\"암진단비 (일반암 4000만원 / 제자리암 800만원)\",\"coverageType\":\"\",\"contractDate\":\"2018-07\",\"policyGeneration\":\"unknown\",\"diagnosisText\":\"C16.3 위(십이지장 이행부) 악성신생물 / intramucosal carcinoma — 점막내암, ESD 후 진단\",\"diagnosisName\":\"\",\"diagnosisCode\":\"\",\"accidentType\":\"암진단비 청구\",\"accidentDate\":\"unknown\",\"damageDetails\":\"피보험자는 2024.02 정기 내시경에서 위 전정부 0-IIc형 병변(1.8cm) 발견. 2024.03.11 ESD(내시경점막하박리술) 시행. 절제 병리: moderately differentiated tubular adenocarcinoma, pT1a (mucosa), 절제면 음성(lateral/vertical margin free), LVI 없음, 점막하층 침윤 없음. 주치의 진단서 KCD C16.3 기재. 피보험자 가입 약관상 위(胃)의 악성신생물(C16) 일반암 진단비(4000만원) 청구.\",\"insurerPosition\":\"보험사는 병리 소견상 점막층에 국한된 intramucosal carcinoma로서 점막하층 침윤이 없고, 실질적으로 상피내암(carcinoma in situ)에 준하는 매우 조기 단계이므로 약관 질병분류표상 제자리암/소액암에 해당하여 제자리암 진단비(800만원)만 지급 대상이라는 입장. 주치의 C16.3 진단서가 있어도 병리학적 실질은 in situ 수준이라고 주장.\",\"customerStatement\":\"주치의가 C16.3(위암)으로 진단서를 발급했고, 병리도 위암(adenocarcinoma)이라고 하는데, 보험사가 제자리암이라고 우기는 것은 이해가 안 됩니다. 가입 당시 약관에도 C16 위암이면 일반암 진단비를 준다고 되어 있습니다.\",\"adjusterMemo\":\"쟁점: KCD C16(위의 악성신생물) = 일반암 vs 보험사의 실질 in situ 주장. 핵심: ICD-10/KCD 분류상 위 점막내암(intramucosal carcinoma)은 확진 adenocarcinoma pT1a로서 C16 코드가 정확함(D00.2는 별도의 carcinoma in situ of stomach 코드), 주치의 진단서 C16.3, 약관 질병분류표 C16 = 일반암. 보험사의 실질 in situ 주장은 KCD 코드 체계를 무시하는 것. 가입 시점(2018.07) 약관 원문 및 진단확정 기준 검토 필요.\"} 보험회사 [보험사] 보험종류 암진단비 (일반암 4000만원 / 제자리암 800만원) 보험가입일 2018-07 가입 당시 약관 질병분류표 장해분류표 적용기간",
+    "officialReferences": [
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2021 21년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 383 - 관의 악성신생물, 기관지 및 폐의 악성신생물, 흉선의 악성 신생물, 기타 및 부위불명의 호흡기 및 흉곽내 기관의 악성 신생물, 중피종, 카포시육종, 후복막 및 복막의 악성신생물, 담낭의 악성신생물, 담도의 기타 및 상세불명 부분의 악성신 생물, 소장의 악성신생물을 말합니다. 다만, 전암(前癌)상태 (암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)는 위의분류에서 제외합 니다. 「16대특정암」의 진단확정은 병리 또는 진단검사의학의 전문의 자격증을 가진 자에 의하여 내려져야 하며, 이 진단 은 조직(fixed ti",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.709546587537241,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2016 16년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 224 - 11(악성신생물(암) 분류표)】참조) 중 C16(기타 피부의 악 성신생물) 및 C16(갑상선의 악성신생물)을 제외한 질병을 말합니다. 또한, 전암(前癌)상태(암으로 변하기 이전 상태. Premalignant condition or condition with malignant potential)에 해당하는 질병도 제외합니다. 「암」의 진단확정은 병리 또는 진단검사의학의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직 (fixed tissue)검사, 미세바늘흡인검사(fine needle aspiration) 또는 혈액(hemic system)검사에 대한 현미경 소견을 기초",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.693588240863039,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임",
+        "summary": "조 정 결 정 서 조정일자 : 2017. 7. 25. 조정번호 : 제2017-16호 안 건 명 ̠ Ɛ 14년 전 진단받은 암과 동일한 암으로 진단확정된 경우 단체보험계약상 암진단보험금 지급책임 신 청 인 허 〇 〇 ⻌ 피 신 청 인 ㈜〇〇손해보험 ⻌ ⻌ 주 문 피신청인은 신청인에게 이 사건 보험약관에서 정한 바에 따라 암진단보험금을 지급하라. 신 청 취 지 주문과 같다. 이 유 1. 기초 사실 가. 보험계약의 체결 ㈜A는 2014. 12. 18. B손해보험㈜와 사이에 피보험자를 직원, 직원의 배우자, 직원의 자녀로 하고 보험기간을 2014. 12. 31. 16:00부터 2016. 12. 31. 16:00까지로 하는 〇〇",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.67863823698072,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "유방암 치료를 위한 난소절제술에 대한 암수술비 지급 여부",
+        "summary": "책임이 있다. 이에 분쟁조정신청을 인용하여 주문과 같이 결정한다. <붙임> 이 사건 보험약관 [암수술비 특별약관] 제1조(보험금의 지급사유) 보험증권에 기재된 피보험자가 이 특별약관(이하 “특약”이라 합니다)의 보험기간(이하 “보험기간”이라 합니다)중에 제2조(보험금 지급에 관한 세부규정)의 “암보장개시일”이후에 암 또는 “보장개시일” 이후에 기타피부암, 갑상선암, 제자리암 또는 경계성종양의 치료를 직접적인 목적으로 수술을 받은 경우 : 아래의 금액을 암수술비로 보험수익자에게 지급합니다. 구 분 지 급 금 액 보험계약일로부터 90일 이내에 수술시 보험계약일로부터 90일이 초과한 후 수술시 암 수술비 없음 수술 1회당",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.66075572782744,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "판례",
+        "title": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임",
+        "summary": "보험금 청구소송에서 보험사고(I21.4 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다. 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 하며, 단순히 CAG 시행 전 단일 시점의 심근효소 수치(CK-MB, Troponin T)가 정상이라는 점만을 근거로 I21.4(NSTEMI) 진단을 부정하는 것은 Fourth Universal Definition of Myocardial Infarction 2018 기준에 반하며 이 판결의 법리상 허용되지 않는다. 역공 논리: 피보험자가 troponin 상승, EKG 변화, 주치의 SOAP 기록, 전문의 I21.4 진단서를 제출한 경우, 보험사는 이 모든 증거를 번복할 독립된 의학적 근거를 제시해야 한다.",
+        "sourceDisplayName": "판례",
+        "similarity": 0.618750092924876,
+        "case_number": "2013다208661",
+        "court_or_agency": "대법원",
+        "decision_date": "2014-06-12",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "암 진단확정 기준 - 병리조직학적 확진, 상피내암(D코드) vs 침윤성암(C코드) 구분",
+        "summary": "암보험에서 \"암 진단확정\"은 원칙적으로 병리조직학적 검사(조직생검 또는 세포학적 검사)에 의한 확진이다. ICD-10 C코드(악성 신생물)와 D코드(상피내암·양성종양)는 보험약관상 지급금액이 다르므로, 주치의 진단서의 코드 기재와 병리보고서 내용을 대조해야 한다.",
+        "sourceDisplayName": "국가암정보센터",
+        "similarity": 0.609465564621447,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "C16-C16 / D00-D09",
+        "diagnosis_name": "악성신생물 / 상피내암",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "국가암정보센터 / AJCC TNM",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "medical_evidence_source_pack_2026-05-21"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "갑상선 결절/암 진단기준 - ATA 2015 Guideline, Bethesda 분류, C16/D34/E04 코드 구분",
+        "summary": "갑상선 결절의 악성 여부는 초음파 위험도(ATA/ACR TI-RADS) + 세침흡인검사(FNAB) Bethesda 분류로 판단한다. 최종 암 확진은 수술 후 병리조직 소견이 기준이다. 보험약관상 C16(갑상선암)은 소액암 또는 유사암으로 분류되는 경우가 많으며, D34(갑상선 양성종양)·E04(결절성갑상선종)는 암진단금 지급 대상이 아니다.",
+        "sourceDisplayName": "PubMed",
+        "similarity": 0.516853081264,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "C16 / D34 / E04",
+        "diagnosis_name": "갑상선암 / 갑상선 양성종양 / 갑상선 결절종",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ATA 2015 Thyroid Guideline",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "medical_evidence_source_pack_2026-05-21"
+      }
+    ],
+    "internalReviewMaterials": [
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금 part 2",
+        "summary": "[1] 보험약관은 신의성실의 원칙에 따라 해당 약관의 목적과 취지를 고려하여 공정하고 합리적으로 해석하되, 개개 계약 당사자가 기도한 목적이나 의사를 참작하지 않고, 평균적 고객의 이해가능성을 기준으로 보험단체 전체의 이해관계를 고려하여 객관적·획일적으로 해석하여야 한다. 위와 같은 해석을 거친 후에도 약관 조항이 객관적으로 다의적으로 해석되고, 그 각각의 해석이 합리성이 있는 등 당해 약관의 뜻이 명백하지 아니한 경우에는 고객에게 유리하게 해석하여야 한다. [2] 甲이 대장 내시경 검사를 받던 중 직장에서 크기가 1㎝ 미만인 용종이 발견되어 용종절제술을 받았고, 병리 전문의사가 실시한 조직검사 결과를 토대로 甲의 주치의인 임상의사가 위 용종에 관하여 ‘직장의 악성 신생물’이라는 진단서를 발급하였는데, 위 용종이 甲 및 그 배우자인 乙이 丙 보험회사 등과 체결한 보험계약의 약관에서 정한 ‘암’에 해당하는지 문제 된 사안에서, 위 보험약관은 ‘암’을 ‘한국표준질병·사인분류의 기본분류에...",
+        "sourceDisplayName": "판례",
+        "similarity": 0.662274142854788,
+        "case_number": "2017다256828",
+        "court_or_agency": "",
+        "decision_date": "2018-07-24",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "199737",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금 part 2",
+        "summary": "[1] 약관 해석에서 작성자 불이익의 원칙 [2] 보험계약의 약관에서 암과 상피내암 여부에 따라 보험금 지급액의 범위를 달리하고 있는 사안에서, 위 약관에서 규정하는 상피내암이 객관적으로 다의적으로 해석되어 약관 조항의 뜻이 명백하지 아니하므로 작성자 불이익의 원칙을 적용하여 위 상피내암에는 점막내 암종을 제외한 상피내 암종만이 해당한다고 제한 해석한 사례",
+        "sourceDisplayName": "판례",
+        "similarity": 0.624879094595412,
+        "case_number": "2010다93011",
+        "court_or_agency": "",
+        "decision_date": "2011-02-10",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "157232",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금",
+        "summary": "[1] 약관 해석에서 작성자 불이익의 원칙 [2] 암보험계약 약관에서 ‘암’과 ‘상피내암’ 여부에 따라 암치료자금과 수술자금을 달리 지급하도록 정한 사안에서, 위 약관이 규정하는 ‘상피내암’은 다의적으로 해석되어 약관 조항의 뜻이 명백하지 않으므로 작성자 불이익의 원칙을 적용하여 여기에는 점막내 암종(intramucosal carcinoma)을 제외한 상피내 암종(intraepithelial carcinoma)만이 해당한다고 제한 해석하는 것이 타당하다고 한 사례",
+        "sourceDisplayName": "판례",
+        "similarity": 0.586736286114653,
+        "case_number": "2011다1118",
+        "court_or_agency": "",
+        "decision_date": "2011-04-28",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "158490",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "medical_issue_codes",
+        "source_type": "icdo_morphology",
+        "source_area_label": "질병코드별 의료쟁점",
+        "title": "M8000/3 Neoplasm, malignant",
+        "summary": "일반암 진단비 검토 대상이다. 단, 약관상 소액암/특정암/원발부위 기준 특약과 가입 당시 KCD 차수를 함께 확인한다.",
+        "sourceDisplayName": "질병코드별 의료쟁점",
+        "similarity": 0.56374644089933,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "내부 검토자료이며 공식 근거로 인용하지 않음",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "icd_o",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "icdo_morphology_dataset_v1"
+      }
+    ]
+  }
+}
