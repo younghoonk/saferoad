@@ -2435,7 +2435,7 @@ function composeSubmissionAssessmentReport(
     '| 관상동맥촬영술 | CAG상 LM-LAD 또는 LM-mLAD 중증 협착 및 PCI/stent 시행이 확인됨 | 충족 |',
     '| 혈액 중 심장효소검사 | Troponin T, hs-troponin, CK-MB 검사 및 참고치 초과가 확인됨 | 충족 |',
   ].join('\n') : [
-    '| 약관상 진단확정 요소 | 본 건 충족 사실 | 의견 |',
+    '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
     '|---|---|---|',
     '| 진단서 또는 전문의 진단 | 주치의 진단서/소견서상 확정진단명이 확인됨 | 충족으로 평가됨 |',
     '| 객관적 검사자료 | 제출된 검사자료 및 진료기록이 확인됨 | 충족으로 평가됨 |',
@@ -2511,7 +2511,7 @@ function composeSubmissionAssessmentReport(
     'Ⅶ. 결론',
     `첫째, ${argument.defenseLayers.medical.conclusion}`,
     `둘째, ${argument.defenseLayers.policy.conclusion}`,
-    `셋째, ${argument.defenseLayers.interpretation.conclusion} ${decisiveDoctorEvidence ? '의무기록 자체로 주치의가 객관적 검사자료를 검토하여 I21.4/NSTEMI 진단을 판단한 사실이 입증됩니다. ' : ''}따라서 ${argument.finalPressure.paymentRequest}`,
+    `셋째, ${argument.defenseLayers.interpretation.conclusion} ${isHeart && decisiveDoctorEvidence ? '의무기록 자체로 주치의가 객관적 검사자료를 검토하여 I21.4/NSTEMI 진단을 판단한 사실이 입증됩니다. ' : ''}따라서 ${argument.finalPressure.paymentRequest}`,
     '',
     '[요청사항]',
     `1. ${argument.finalPressure.paymentRequest}`,
