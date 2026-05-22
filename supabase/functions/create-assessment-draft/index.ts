@@ -1518,8 +1518,8 @@ function enforceSubmissionReportContract(value: string) {
     /초안/g,
     /참고용/g,
     /손해액\s*산정보다는/g,
-    /재검토가\s*필요(?:합니다|하다)?/g,
-    /추가\s*검토가\s*필요(?:합니다|하다)?/g,
+    /재검토\s*(?:가|를|은|는)?\s*필요(?:합니다|하다)?/g,
+    /추가\s*검토\s*(?:가|를|은|는)?\s*필요(?:합니다|하다)?/g,
     /검토\s*가치/g,
     /가능성이\s*있습니다/g,
     /확정할\s*수는\s*없으나/g,
@@ -1529,6 +1529,11 @@ function enforceSubmissionReportContract(value: string) {
     ...FORBIDDEN_PHRASE_PATTERNS,
   ];
   let text = cleanPublicText(value);
+  text = text
+    .replace(/재검토\s*필요성/g, '이의 근거')
+    .replace(/재검토\s*(?:가|를|은|는)?\s*필요합니다/g, '재심사해야 합니다')
+    .replace(/재검토\s*(?:가|를|은|는)?\s*필요하다/g, '재심사해야 한다')
+    .replace(/재검토\s*(?:가|를|은|는)?\s*필요/g, '재심사 의무 있음');
   for (const pattern of prohibitedPatterns) { pattern.lastIndex = 0; text = text.replace(pattern, '').trim(); }
   text = text
     .replace(/검토할 수 있습니다/g, '검토합니다')
@@ -1674,7 +1679,7 @@ function selfVerifySubmissionReport(
     requestIncludesPayment: /보험금|진단보험금|지급/.test(text),
     requestIncludesDelayInterest: /지연이자/.test(text),
     requestIncludesWrittenReply: /서면\s*회신|서면으로\s*회신/.test(text),
-    weakLanguageAbsent: !/(사료됩니다|생각됩니다|가능성이 있습니다|추가 검토가 필요|재검토가 필요|검토 가치|확정할 수는 없으나|지급 여부를 단정|초안|참고용)/i.test(text),
+    weakLanguageAbsent: !/(사료됩니다|생각됩니다|가능성이 있습니다|추가\s*검토\s*(?:가|를|은|는)?\s*필요|재검토\s*(?:가|를|은|는)?\s*필요|검토 가치|확정할 수는 없으나|지급 여부를 단정|초안|참고용)/i.test(text),
     forbiddenPhrasesAbsent: !FORBIDDEN_PHRASE_PATTERNS.some((p) => { p.lastIndex = 0; return p.test(text); })
       && !/\bconfidence\b|\bdocument_type\b|\bcompleted\b|\bSKMBT_|\bResized_/i.test(text),
     // piiRedacted: no actual PII present. Placeholder presence is enforced by prompt,
@@ -4008,12 +4013,7 @@ Deno.serve(async (req: Request) => {
     const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2);
     const draft = sanitizeResult(parseJsonResponse(draftText));
 
-    const reviewedText = await callOpenAI(
-      apiKey,
-      buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
-      0,
-    );
-    const reviewedBase = finalizeCataractResult(
+    const applyReviewPipeline = (base: AssessmentDraftResult) => finalizeCataractResult(
       finalizeManualTherapyResult(
         addThyroidFssFollowUpCheck(
           removeProfileSpecificLeakage(
@@ -4024,7 +4024,7 @@ Deno.serve(async (req: Request) => {
                     enforceCustomerSideStance(
                       ensureOfficialGroundsInBody(
                         removeReferenceAbsenceContradiction(
-                          preserveInputDiagnosisCodes(sanitizeResult(parseJsonResponse(reviewedText)), input),
+                          preserveInputDiagnosisCodes(base, input),
                           ragResult,
                         ),
                         ragResult,
@@ -4051,6 +4051,20 @@ Deno.serve(async (req: Request) => {
       input,
       ragResult,
     );
+
+    let reviewedBase: AssessmentDraftResult;
+    try {
+      const reviewedText = await callOpenAI(
+        apiKey,
+        buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
+        0,
+      );
+      reviewedBase = applyReviewPipeline(sanitizeResult(parseJsonResponse(reviewedText)));
+    } catch {
+      // review call timed out or parse-failed — fall back to draft quality
+      console.warn('review call failed, falling back to draft result');
+      reviewedBase = applyReviewPipeline(draft);
+    }
     const reviewed = stripProhibitedBodyPhrases(ensureProfileEvaluationPhrases(
       finalizeDuplicateProportionalResult(
         finalizeCancerHospitalizationResult(
