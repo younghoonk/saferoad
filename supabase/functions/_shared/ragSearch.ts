@@ -454,6 +454,13 @@ function cancerInsuranceQuery(query: string) {
   return /암보험|암진단비|갑상선암|갑상선\s*결절|C73|E04|D34/i.test(query);
 }
 
+// terms_standards 필터 전용 — 비갑상선 암 케이스(림프종/유방암/대장암 등) 포함 감지
+// cancerInsuranceQuery(갑상선 특화)는 FSS/판례 블록에서 그대로 사용
+function generalCancerDiagnosisQuery(query: string) {
+  if (cancerInsuranceQuery(query)) return true;
+  return /일반암|소액암|유사암|제자리암|경계성종양|혈액암|림프종|백혈병|유방암|대장암|위암|폐암|췌장암|간암|신장암|골수종|흑색종|\bC[0-8]\d\b|\bC9[0-7]\b|\bD0[0-9]\b|\bD3[7-9]\b|\bD4[0-8]\b/i.test(query);
+}
+
 function cataractQuery(query: string) {
   return /백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(query);
 }
@@ -615,9 +622,11 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
         && !irrelevantDisclosureText(row);
     }
   }
-  if (row.source_area === 'terms_standards' && cancerInsuranceQuery(query)) {
+  if (row.source_area === 'terms_standards' && generalCancerDiagnosisQuery(query)) {
     const text = rowText(row);
+    // 암과 무관한 약관 조항 차단 (실손/콩팥병/희귀난치성 등)
     if (/실손|실손보험|실손의료|도수치료|백내장|체외충격파/i.test(text)) return false;
+    if (/\bN18\b|만성콩팥병|신대체요법|복막투석|혈액투석|희귀난치성\s*7대/i.test(text)) return false;
     if (!/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
   }
   if (disclosureQuery(query)) {
