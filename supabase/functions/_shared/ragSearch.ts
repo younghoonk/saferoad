@@ -482,6 +482,10 @@ function generalCancerDiagnosisQuery(query: string) {
   return /일반암|소액암|유사암|제자리암|경계성종양|혈액암|림프종|백혈병|유방암|대장암|위암|폐암|췌장암|간암|신장암|골수종|흑색종|\bC[0-8]\d\b|\bC9[0-7]\b|\bD0[0-9]\b|\bD3[7-9]\b|\bD4[0-8]\b/i.test(query);
 }
 
+function brainInsuranceQuery(query: string) {
+  return /뇌혈관|뇌졸중|뇌경색|뇌출혈|지주막하출혈|뇌동맥류|\bI6[0-9]\b|\bG45\b|뇌진단비/i.test(query);
+}
+
 function cataractQuery(query: string) {
   return /백내장|H25|H26|다초점|다초점렌즈|다초점\s*인공수정체|인공수정체|IOL|intraocular\s*lens|백내장\s*수술|안과|시력교정|수정체/i.test(query);
 }
@@ -650,6 +654,13 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
     if (/\bN18\b|만성콩팥병|신대체요법|복막투석|혈액투석|희귀난치성\s*7대/i.test(text)) return false;
     if (!/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
   }
+  if (row.source_area === 'terms_standards' && brainInsuranceQuery(query)) {
+    const text = rowText(row);
+    // 암 전용 병리/조직검사 조항 차단 — 뇌혈관 케이스와 무관
+    if (/암의\s*진단확정|병리\s*전문의|병리\s*또는\s*진단검사의학|fixed\s*tissue/i.test(text)) return false;
+    // 뇌혈관 관련 키워드 없는 약관 청크 차단
+    if (!/뇌혈관|뇌졸중|뇌경색|뇌출혈|지주막하|뇌동맥류|I6[0-9]|G45|뇌진단비/i.test(text)) return false;
+  }
   if (disclosureQuery(query)) {
     if (row.source_area === 'legal_statutes') return preferredDisclosureStatute(row);
     if (postContractNoticeStatute(row)) return false;
@@ -768,6 +779,11 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
   const diagnosisCodes = extractDiagnosisCodes(query);
   if (diagnosisCodes.length && exactCodeMatches(row, diagnosisCodes).length) return true;
 
+  // 뇌혈관 쿼리에 암 전용 병리/조직검사 약관 청크 조기 차단
+  if (brainInsuranceQuery(queryText) && /암의\s*진단확정|병리\s*전문의|병리\s*또는\s*진단검사의학|fixed\s*tissue/i.test(text)) {
+    return false;
+  }
+
   const normalizedIssueGroups = [
     {
       query: /고지|알릴|미고지|계약해지|중요한 사항|중대한 과실/,
@@ -782,8 +798,12 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
       terms: /후유장해|장해|지급률|운동범위|동요|장해분류표/,
     },
     {
-      query: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리/,
-      terms: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리|진단확정/,
+      query: /암|심근경색|협심증|진단비|경계성|제자리/,
+      terms: /암|심근경색|협심증|진단비|경계성|제자리|진단확정/,
+    },
+    {
+      query: /뇌경색|뇌출혈|뇌혈관|뇌졸중/,
+      terms: /뇌경색|뇌출혈|뇌혈관|뇌졸중|I6[0-9]|분류표|뇌진단비/,
     },
     {
       query: /면책|자살|이륜|통지의무|책임개시|설명의무/,
@@ -807,8 +827,12 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
       terms: /후유장해|장해|지급률|운동범위|동요|장해분류표/,
     },
     {
-      query: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리/,
-      terms: /암|뇌경색|뇌출혈|심근경색|협심증|진단비|경계성|제자리|진단확정/,
+      query: /암|심근경색|협심증|진단비|경계성|제자리/,
+      terms: /암|심근경색|협심증|진단비|경계성|제자리|진단확정/,
+    },
+    {
+      query: /뇌경색|뇌출혈|뇌혈관|뇌졸중/,
+      terms: /뇌경색|뇌출혈|뇌혈관|뇌졸중|I6[0-9]|분류표|뇌진단비/,
     },
     {
       query: /면책|자살|이륜|통지의무|책임개시|설명의무/,
