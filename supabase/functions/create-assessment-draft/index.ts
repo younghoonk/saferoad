@@ -298,8 +298,9 @@ interface AssessmentDraftResult {
   selfVerification?: SelfVerification;
 }
 
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
-const OPENAI_MODEL = 'gpt-4o';
+const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+const CLAUDE_MODEL = 'claude-sonnet-4-6';
+const ANTHROPIC_VERSION = '2023-06-01';
 const REPORT_FORMAT_VERSION = 'submission_report_v2_claim_argument_structure';
 const MAX_FIELD_LENGTH = 1800;
 const MAX_SHORT_FIELD_LENGTH = 200;
@@ -1121,42 +1122,43 @@ ${profileReviewRules}
 ${JSON.stringify(draft)}`;
 }
 
-async function callOpenAI(apiKey: string, prompt: string, temperature: number, maxRetries = 3, maxTokens = 8000) {
+async function callClaude(apiKey: string, prompt: string, temperature: number, maxRetries = 3, maxTokens = 8000) {
   let lastStatus = 0;
   let lastErrText = '';
   for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
-    const res = await fetch(OPENAI_API_URL, {
+    const res = await fetch(CLAUDE_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
+        'x-api-key': apiKey,
+        'anthropic-version': ANTHROPIC_VERSION,
       },
       body: JSON.stringify({
-        model: OPENAI_MODEL,
-        messages: [{ role: 'user', content: prompt }],
+        model: CLAUDE_MODEL,
         max_tokens: maxTokens,
         temperature,
+        messages: [{ role: 'user', content: prompt }],
       }),
     });
 
     if (res.ok) {
       const json = await res.json() as {
-        choices?: { message?: { content?: string | null }; finish_reason?: string }[];
-        usage?: { prompt_tokens?: number; completion_tokens?: number; total_tokens?: number };
+        content?: { type: string; text?: string }[];
+        usage?: { input_tokens?: number; output_tokens?: number };
+        stop_reason?: string;
       };
-      const choice = json.choices?.[0];
-      const content = choice?.message?.content;
-      console.info('OpenAI response', {
-        finish_reason: choice?.finish_reason,
-        prompt_tokens: json.usage?.prompt_tokens,
-        completion_tokens: json.usage?.completion_tokens,
+      const content = json.content?.[0]?.text;
+      console.info('Claude response', {
+        stop_reason: json.stop_reason,
+        input_tokens: json.usage?.input_tokens,
+        output_tokens: json.usage?.output_tokens,
         prompt_length: prompt.length,
         maxTokens,
       });
       if (!content) {
-        console.error('OpenAI returned empty content', {
-          finish_reason: choice?.finish_reason,
-          message: choice?.message,
+        console.error('Claude returned empty content', {
+          stop_reason: json.stop_reason,
+          content: json.content,
           usage: json.usage,
           prompt_length: prompt.length,
         });
@@ -1166,12 +1168,12 @@ async function callOpenAI(apiKey: string, prompt: string, temperature: number, m
 
     lastStatus = res.status;
     lastErrText = await res.text();
-    console.error(`OpenAI API error attempt ${attempt}/${maxRetries + 1}`, lastStatus, lastErrText.slice(0, 200));
+    console.error(`Claude API error attempt ${attempt}/${maxRetries + 1}`, lastStatus, lastErrText.slice(0, 200));
 
     // Retry on rate limit (429) or server errors (5xx)
     if (attempt <= maxRetries && (lastStatus === 429 || lastStatus >= 500)) {
       const delayMs = Math.min(2000 * attempt, 8000);
-      console.info(`Retrying OpenAI call in ${delayMs}ms (attempt ${attempt}/${maxRetries})`);
+      console.info(`Retrying Claude call in ${delayMs}ms (attempt ${attempt}/${maxRetries})`);
       await new Promise((resolve) => setTimeout(resolve, delayMs));
       continue;
     }
@@ -4740,11 +4742,12 @@ Deno.serve(async (req: Request) => {
   try {
     await requireAdjuster(req);
 
-    const apiKey = requiredEnv('OPENAI_API_KEY');
+    const openAiKey = requiredEnv('OPENAI_API_KEY');
+    const claudeApiKey = requiredEnv('ANTHROPIC_API_KEY');
     const body = await req.json() as AssessmentDraftInput;
     const input = validateInput(body);
     const detectedProfile = caseProfile(input);
-    const rawRagResult = await getRagResult(apiKey, input);
+    const rawRagResult = await getRagResult(openAiKey, input);
     const sanitizedRagResult = sanitizeRagResultForAssessment(input, rawRagResult);
     const policyBackedRagResult = appendServerDefaultPolicyEvidence(input, sanitizedRagResult);
     const ragResult = appendMedicalGuidelineEvidence(
@@ -4765,7 +4768,7 @@ Deno.serve(async (req: Request) => {
 
     let draft: AssessmentDraftResult;
     try {
-      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, ragResult), 0.2, 3, 5000);
+      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, ragResult), 0.2, 3, 5000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     } catch (draftErr) {
       // Full RAG prompt failed — retry once with no RAG context and reduced max_tokens
@@ -4775,7 +4778,7 @@ Deno.serve(async (req: Request) => {
         insuranceType: input.insuranceType,
         accidentType: input.accidentType,
       });
-      const draftText = await callOpenAI(apiKey, buildDraftPrompt(input, emptyRagResult()), 0.2, 3, 5000);
+      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, emptyRagResult()), 0.2, 3, 5000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     }
 
@@ -4820,8 +4823,8 @@ Deno.serve(async (req: Request) => {
 
     let reviewedBase: AssessmentDraftResult;
     try {
-      const reviewedText = await callOpenAI(
-        apiKey,
+      const reviewedText = await callClaude(
+        claudeApiKey,
         buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
         0,
         3,
