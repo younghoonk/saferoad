@@ -2238,8 +2238,12 @@ function extractKillingEvidence(
     });
   }
 
-  const procedureQuote = sentenceContaining(source, /CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥|협착/i, 'CAG상 LM-LAD 또는 LM-mLAD 중증 협착이 확인되어 PCI/stent 시술이 시행되었습니다.');
-  if (/CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥|협착/i.test(source)) {
+  // CAG/PCI evidence: cardiac-specific. Brain cases use '협착' for cerebrovascular stenosis (MRA/CTA),
+  // so '협착' alone must not trigger this block. Require a distinctly cardiac term.
+  const isBrainProfile = caseProfile(input) === 'brain_diagnosis_benefit';
+  const cardiacProcedurePattern = /CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥(?:\s*협착)?/i;
+  const procedureQuote = sentenceContaining(source, cardiacProcedurePattern, 'CAG상 LM-LAD 또는 LM-mLAD 중증 협착이 확인되어 PCI/stent 시술이 시행되었습니다.');
+  if (!isBrainProfile && cardiacProcedurePattern.test(source)) {
     push({
       evidenceType: 'cag_pci_finding',
       date: dateNearQuote(source, procedureQuote) || '2024.06.19',
@@ -2263,9 +2267,10 @@ function extractKillingEvidence(
     });
   }
 
-  // ── Cancer-specific evidence (only when no cardiac terms detected in source) ─
+  // ── Cancer-specific evidence (only when no cardiac/brain terms detected in source) ─
+  // Brain cases (코일색전술, 수술 등) must not trigger cancer pathology/surgery blocks.
   const hasCardiacTerms = /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|CAG|PCI|stent|관상동맥/i.test(source);
-  if (!hasCardiacTerms) {
+  if (!hasCardiacTerms && !isBrainProfile) {
     const pathologyQuote = sentenceContaining(
       source,
       /DCIS|carcinoma in situ|microinvasion|high\s*grade|comedo necrosis|병리\s*보고서|조직검사|생검|biopsy|악성신생물|상피내암/i,

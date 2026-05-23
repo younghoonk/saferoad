@@ -1,0 +1,336 @@
+{
+  "requestId": "sample-ASSESS_055-1779517481607",
+  "detectedProfile": "brain_diagnosis_benefit",
+  "reportFormatVersion": "submission_report_v2_claim_argument_structure",
+  "title": "고객 측 손해사정서 제목",
+  "overview": "본 사건은 피보험자가 2024년 3월 18일에 발생한 지주막하출혈로 인해 보험금을 청구한 건으로, 보험사는 동맥류가 책임개시일 이전에 존재했다는 이유로 부지급을 결정하였습니다. 그러나 지주막하출혈의 발생 시점은 책임개시일 이후이며, 보험사의 면책 주장은 부당합니다.",
+  "facts": "피보험자는 2024년 3월 18일 갑작스러운 심한 두통과 구토로 응급실에 내원하여 지주막하출혈 진단을 받았으며, 즉시 코일색전술을 시행받았습니다. 주치의는 I60 진단을 확정하였습니다.",
+  "issues": "지주막하출혈의 발생 시점이 책임개시일 이후인지 여부와 동맥류의 존재가 보험사고로 간주될 수 있는지 여부가 쟁점입니다.\n\n주요 쟁점은 뇌질환 진단비 청구에서 진단확정이 인정되는지, MRI/MRA/CTA/CT 등 영상검사 결과가 가입 당시 약관상 뇌졸중ㆍ뇌경색ㆍ뇌출혈ㆍ뇌혈관질환 정의에 해당하는지입니다.",
+  "legalAndReferenceBasis": "가입 당시 약관, 뇌질환 진단확정 조항, MRI/MRA/CTA/CT 등 영상검사 결과, 전문의 진단, 진료기록, 질병분류표를 중심으로 검토해야 합니다.",
+  "damageAssessment": "본 건은 손해액 산정보다는 뇌질환 진단확정 요건 충족 여부가 핵심입니다. 영상검사상 급성 병변, 진구성 병변, 무증상 병변, 협착 또는 신경학적 결손 여부를 구분하여 검토해야 합니다.",
+  "insurerPositionReview": "보험회사가 진단확정 요건 미충족을 주장하는 경우 MRI, MRA, CTA, CT 등 영상검사 결과와 가입 당시 약관상 정의, 신경학적 결손 또는 급성 병변 요건을 구체적으로 제시할 필요가 있습니다.",
+  "adjusterOpinionDraft": "본 사건은 지주막하출혈의 발생 시점이 책임개시일 이후임을 고려할 때, 보험금 지급이 타당합니다. 보험사의 부지급 결정은 동맥류의 존재를 과도하게 해석한 결과이며 이는 전체 의무기록과 지급요건 검토에 비추어 부당합니다.\n\n종합하면, 현 단계에서 보험금 지급을 고객 측 주장은 상당한 가 있다. 보험회사는 부지급, 면책 또는 판단의 전제가 되는 객관적 근거와 인수기준을 제시할 필요가 있으며, 현재 확인된 사실관계에 비추어 해당 처분은 는 방향으로 의견을 정리한다.\n\n본 건은 뇌질환 진단비 지급 여부가 문제되는 사안으로, 진단명 또는 질병코드만으로 지급 여부를 가입 당시 약관상 뇌졸중, 뇌경색, 뇌출혈 또는 뇌혈관질환의 정의와 진단확정 기준을 먼저 확인해야 합니다.\n\n뇌질환 진단확정 판단에서는 MRI, MRA, CTA, CT 등 영상검사 결과, 전문의 진단, 진료기록이 핵심 자료입니다. 특히 급성 병변인지, 진구성 병변인지, 무증상 병변인지, 영상검사상 실제 병변과 임상 증상이 부합하는지 구분해야 합니다.\n\n일과성 뇌허혈 G45, 경동맥 협착, 뇌혈관 협착, 뇌동맥류 등은 약관상 뇌졸중 또는 뇌경색 진단비 대상에 포함되는지 별도 확인이 필요합니다. 신경학적 결손이 약관상 필수 요건인지도 가입 당시 약관 기준으로 확인해야 합니다.\n\n따라서 고객 측 의견은 , 영상검사와 가입 당시 약관상 진단확정 기준에 따라 보험회사의 부지급 또는 감액 판단에 는 방향으로 정리합니다.",
+  "requiredAdditionalChecks": "관련 판례 추가 확인 필요. 보험 가입 당시 약관의 원문 확인 필요.\n\n불리한 점으로는 실제 청약서 질문사항, 고지 당시 문답 내용, 진료기록의 구체적 기재, 처방 또는 검사 여부에 따라 보험사 주장이 강화될 수 있다는 점이 있다. 따라서 청약서, 상품별 원약관, 초진기록, 처방전, 검사내역, 의사소견서, 보험사 인수기준을 보완자료로 확보해야 한다.\n가입 당시 약관\nMRI/MRA/CTA/CT 영상검사 판독지\n전문의 진단서\n진료기록지\n신경학적 결손 기록\n질병분류표\n보험회사 부지급 사유서",
+  "simpleClientSummary": "뇌질환 진단비는 진단명만으로 판단하기보다 MRI 등 영상검사와 가입 당시 약관의 진단확정 기준을 함께 확인해야 합니다. 영상검사 판독지와 전문의 진단 자료를 정리하면 재검토 요청에 필요한 근거를 보완할 수 있습니다.",
+  "customerSideAssessmentReport": "1. 사정 결론: 본 사건은 피보험자가 2024년 3월 18일에 발생한 지주막하출혈로 인해 보험금을 청구한 건으로, 보험사는 동맥류가 책임개시일 이전에 존재했다는 이유로 부지급을 결정하였습니다. 그러나 지주막하출혈의 발생 시점은 책임개시일 이후이며, 보험사의 면책 주장은 부당합니다.\n2. 보험사 부지급 논리의 문제점: 보험사는 동맥류가 책임개시일 이전에 존재했다는 이유로 부지급을 결정하였으나 이는 지주막하출혈의 발생 시점을 간과한 것입니다. 동맥류의 존재는 보험사고가 아니며, 파열이 사고입니다.\n3. 고객 측 핵심 인정 사실: 피보험자는 2024년 3월 18일 갑작스러운 심한 두통과 구토로 응급실에 내원하여 지주막하출혈 진단을 받았으며, 즉시 코일색전술을 시행받았습니다. 주치의는 I60 진단을 확정하였습니다.\n4. 의학적 핵심 쟁점: 지주막하출혈의 발생 시점이 책임개시일 이후인지 여부와 동맥류의 존재가 보험사고로 간주될 수 있는지 여부가 쟁점입니다.\n5. 약관상 지급요건 충족 주장: 2021년도 약관에 따르면, 보험기간 중 뇌혈관질환으로 진단확정된 경우 보험금을 지급합니다. 금융감독원 분쟁조정례에 따르면, 보험기간 개시 이후 발생한 사고는 보장 대상입니다. 관련 판례는 추가 확인 필요.\n6. 핵심 근거자료: 약관상 지급요건 충족 주장 및 핵심 근거자료. 적용 약관/금감원 분쟁조정례/판례를 구분하고, 없으면 근거자료 부족으로 표시\n7. 보험사 주장에 대한 반박: 보험사의 주장은 동맥류의 존재를 보험사고로 간주하는 과도한 해석입니다. 지주막하출혈의 발생 시점이 책임개시일 이후임을 고려할 때, 보험금 지급이 타당합니다.\n8. 추가 확보자료: 관련 판례 추가 확인 필요. 보험 가입 당시 약관의 원문 확인 필요.\n9. 손해사정 의견: 본 사건은 지주막하출혈의 발생 시점이 책임개시일 이후임을 고려할 때, 보험금 지급이 타당합니다. 보험사의 부지급 결정은 동맥류의 존재를 과도하게 해석한 결과이며 이는 전체 의무기록과 지급요건 검토에 비추어 부당합니다.",
+  "finalSubmissionAssessmentReport": "손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)\n\n수신: [보험사]\n작성일: 2026-05-23\n참조: 보험금 지급심사 담당자\n문서번호: AI-TEMP-20260523\n제목: I60.7 두개내동맥의 지주막하출혈, 전교통동맥류 파열 관련 보험금 부지급 통보에 대한 이의 및 지급 요청\n\n피보험자 정보\n- 피보험자: [피보험자]\n- 주민번호: [주민번호]\n- 주소: [주소]\n- 연락처: [연락처]\n- 증권번호: [증권번호]\n- 계약상품: [계약상품]\n- 청구담보: 뇌혈관질환 진단비 (뇌졸중 3000만원)\n- 진단의료기관: [진단의료기관]\n- 확정진단명: I60.7 두개내동맥의 지주막하출혈, 전교통동맥류 파열\n\n[보험사]는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. 1) 보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점 2) 약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점 3) 고객 측 제출자료에 보험금 지급을 뒷받침하는 사실이 확인되는 점 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.\n\nⅠ. 사건의 경위 및 진단 확정 과정\n- 2024.03.18 피보험자는 2024년 3월 18일 갑작스러운 심한 두통과 구토로 응급실에 내원하여 지주막하출혈 진단을 받았으며, 즉시 코일색전술을 시행받았습니다.\n- 주치의는 I60 진단을 확정하였습니다.\n\n결정적 의무기록 문구\n1) 2024.06.19 영상검사상 급성 병변, 진구성 병변, 무증상 병변, 협착 또는 신경학적 결손 여부를 구분하여 검토해야 합니다.\n - 의미: 관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.\n\nⅡ. 보험사 부지급 결정의 요지 및 그 부당성\n보험회사의 부지급 사유는 「보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장.」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장.입니다.\n1) 보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장.\n - 오류 유형: omitted_key_evidence\n - 반박 명제: 보험회사는 제출자료 전체가 아니라 일부 문구나 제한된 근거만으로 부지급 판단을 구성한 것으로 보입니다.\n2) 약관상 지급요건 미충족 주장\n - 오류 유형: policy_requirement_misread\n - 반박 명제: 부지급을 유지하려면 가입 당시 약관 문언과 고객 자료가 어떻게 불일치하는지 보험회사가 구체적으로 제시해야 합니다.\n3) 추가 요건을 전제로 한 지급 거절\n - 오류 유형: unsupported_additional_requirement\n - 반박 명제: 약관에 없는 요건을 사후적으로 추가하여 지급을 제한할 수 없습니다.\n위 오류들은 서로 독립적으로 보험사 주장을 무력화합니다. 의학 기준상 오류가 인정되지 않더라도 약관 문언, 판례/금감원 자료의 적용 방식, 약관해석 원칙 중 어느 하나만으로도 보험회사의 단편적 부지급 논리는 유지되기 어렵습니다.\n\nⅢ. 의학적 근거 진단의 정당성\n- 뇌졸중(Stroke) 진단기준 - 허혈성 뇌졸중 I60, 출혈성 I60/I60 및 보험 쟁점: 뇌졸중 진단은 갑작스러운 국소 신경학적 결손 + CT/MRI 영상 확인이 원칙이다. I60(뇌경색), I60(뇌내출혈), I60(지주막하출혈)은 각각 별도의 진단기준이 있으며, 단순 TIA(일과성허혈발작)는 I60에 해당하지 않아 뇌졸중 진단비 지급요건 미충족이 된다.\n- 지주막하출혈(Subarachnoid Hemorrhage, SAH) 진단 및 중증도 분류 기준 (AHA/ASA SAH Guidelines 2023; WHO ICD-10): 지주막하출혈 — 1. 정의: 지주막(arachnoid membrane)과 연막(pia mater) 사이 지주막하 공간(subarachnoid space)의 출혈. 2. 임상 증상: 급격히 발생하는 벼락두통(thunderclap headache, \"생애 최악의 두통\") + 구토, 의식 저하, 발열, 항강직, 신경 결손. 3. 진단 방법:\n- 허혈성 뇌졸중 진단기준 — WHO 정의 및 AHA/ASA 2019 가이드라인 핵심 (Guidelines for the Early Management of Patients with Acute Ischemic Stroke, AHA/ASA 2019): 허혈성 뇌졸중 — 1. WHO 뇌졸중 정의: \"24시간 이상 지속되거나 사망에 의해 중단되는 뇌혈관 원인의 국소 신경학적 결손\". 이 24시간 기준이 TIA와 뇌졸중을 구분한다. 2. 허혈성 뇌졸중 분류(TOAST 기준): - 큰 동맥 죽상경화(Large-artery atherosclerosis)\n\n제출 의료자료와 전문의 판단, 객관검사, 치료 경과를 종합합니다.\n\n지주막하출혈의 발생 시점이 책임개시일 이후인지 여부와 동맥류의 존재가 보험사고로 간주될 수 있는지 여부가 쟁점입니다.\n\n주요 쟁점은 뇌질환 진단비 청구에서 진단확정이 인정되는지, MRI/MRA/CTA/CT 등 영상검사 결과가 가입 당시 약관상 뇌졸중ㆍ뇌경색ㆍ뇌출혈ㆍ뇌혈관질환 정의에 해당하는지입니다.\n\n보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.\n\nⅣ. 보험약관상 진단확정 요건의 충족\n- 2021 21년도 약관.pdf keyword_matched_policy_clause: - 1248 - 7. 알뜰한 뇌혈관질환진단비Ⅱ보장 특별약관 제1조(보험금의 지급사유) 회사는 보험증권에 기재된 피보험자가 이 특별약관의 보 험기간 중 뇌혈관질환보장개시일 이후에「뇌혈관질환」으로 진단확정되었을 때에는 보험수익자에게 최초 1회에 한하여 아래의 금액을 뇌혈관질환진단비로 지급합니다. 다만, 아래 의「계약일부터 1년경과시점」이라 함은 계약일부터 그 날 을 포함하여 1년이 지난날의 다음날을 말합니다. 구분 지급금액 계약일부터 1년경과시점 전일 이전 계약일부터 1년경과시점 이후 뇌혈관질환 진단시 (단, 최초1회에 한하여 지급) 보험가입금액의 50% 보험가입금액의 100% 【뇌혈관질환진단비(Ⅱ)[예시\n\n| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |\n|---|---|---|\n| 진단서 또는 전문의 진단 | 주치의 진단서/소견서상 확정진단명이 확인됨 | 충족으로 평가됨 |\n| 객관적 검사자료 | 제출된 검사자료 및 진료기록이 확인됨 | 충족으로 평가됨 |\n\n보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.\n\nⅤ. 판례 및 금감원 자료에 대한 적용 또는 반박\n금감원 분쟁조정례:\n- 금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.): 371 평가되어외박․외출에대한제재를하지않았던점. ⑥과거금융분쟁조정위원회가입원기간중외출, 또는외박을하는경우약관상정한 입원급여금이지급되는지의여부에대한판단248)을함에있어, 직계가족의사망등외 출, 외박이불가피한경우를제외하고피보험자가자신의의사에기초하여과도하게외 출․외박하는경우에도입원급여금을지급하게된다면, 보험의선의성에비추어볼때 피보험자스스로보험의보호영역에서벗어난행위에대해서까지보험금이지급되는모 순이발생하고, 이경우의사의관리하에치료에전념하는다른피보험자와의형평을 기할수없게되어보험의단체성을유명무실하게하는결과를초래할수있다고조정 결정하였던점. 라. 결론 이건피보험자의2009.12.17～2010.6.26.까지입원사실에대하여당해보험약관에서정\n- 금융감독원 분쟁조정례 보험기간 개시 이후 발생한 보험사고에 해당되는지 여부: 중 한가지에 해당되는 경우에는 보장을 하지 아니합니다. 1. 제1항에서 정한 보장이 개시되지 아니한 경우 □ 00 민영의료보험 보통약관 제6조(보상하는 손해) ① 회사는 피보험자가 급격하고도 우연한 외래의 사고로 신체에 입은 상해 또는 질병으로 인하여 보험기간 중에 의료법 제3조(의료기관)에서 정한 대한민국내의 병원 또는 의원 등에 입원을 개시하여 발생되는 의료비용으로서 국민건강보험법에 의하여 피보험자가 부담하는 입원의료비를 이 약관에 따라 피보험자에게 보상하여 드립니다. ②~③(생략) ④ 보험기간 전 입원했던 피보험자가 보험기간 중 동일한 상해나 질병으로 병원에서 병원으로 직접 이동하는 경우와 피보험자가 보험기간 전\n\n판례: 직접 적용 가능한 판례는 확인되지 않았습니다.\n\n보험사 인용 근거: 금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)\n금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)\n보험사가 인용한 근거가 있더라도 사실관계와 약관 문언이 다르면 고객 측에 불리하게 단순 적용할 수 없습니다.\n공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다.\n\nⅥ. 약관해석 원칙\n약관 문언상 불명확하거나 보험회사가 추가 요건을 부가한 부분이 쟁점입니다.\n작성자 불이익 원칙상 다의적 문구는 고객에게 유리하게 해석되어야 합니다.\n보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다.\n\nⅦ. 결론\n첫째, 보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.\n둘째, 보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.\n셋째, 보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다. 따라서 해당 담보 보험금 전액을 지급해야 합니다.\n\n[요청사항]\n1. 해당 담보 보험금 전액을 지급해야 합니다.\n2. 지연이자를 함께 지급해야 합니다.\n3. 부동의 시 구체적 의학적ㆍ약관상 사유를 서면으로 회신해야 합니다.\n4. 구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있음을 명시합니다.\n\n[첨부서류]\n1. 진단서\n2. 소견서\n3. 의무기록\n4. 보험사 부지급 통보서\n5. 보험증권\n6. 약관",
+  "policyEvidence": [],
+  "killingEvidence": [
+    {
+      "evidenceType": "cag_pci_finding",
+      "date": "2024.06.19",
+      "quote": "영상검사상 급성 병변, 진구성 병변, 무증상 병변, 협착 또는 신경학적 결손 여부를 구분하여 검토해야 합니다.",
+      "sourceDocumentType": "procedure_report",
+      "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "preAnalysis": {
+    "diagnosisIssue": {
+      "claimedDiagnosis": "I60.7 두개내동맥의 지주막하출혈, 전교통동맥류 파열",
+      "disputeSummary": "보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장."
+    },
+    "insurerDenialQuote": {
+      "originalQuote": "보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장.",
+      "weaknesses": [
+        "보험회사는 제출자료 전체가 아니라 일부 문구나 제한된 근거만으로 부지급 판단을 구성한 것으로 보입니다.",
+        "부지급을 유지하려면 가입 당시 약관 문언과 고객 자료가 어떻게 불일치하는지 보험회사가 구체적으로 제시해야 합니다.",
+        "약관에 없는 요건을 사후적으로 추가하여 지급을 제한할 수 없습니다."
+      ]
+    },
+    "medicalCriteria": {
+      "standardName": "제출 의료자료와 전문의 진단에 따른 객관적 판단 기준",
+      "criteria": [
+        {
+          "criterion": "제출자료상 객관 사실",
+          "patientEvidence": "피보험자는 2024년 3월 18일 갑작스러운 심한 두통과 구토로 응급실에 내원하여 지주막하출혈 진단을 받았으며, 즉시 코일색전술을 시행받았습니다.",
+          "satisfied": true
+        },
+        {
+          "criterion": "제출자료상 객관 사실",
+          "patientEvidence": "주치의는 I60 진단을 확정하였습니다.",
+          "satisfied": true
+        }
+      ]
+    },
+    "policyCriteria": {
+      "policyQuote": "가입 당시 약관상 지급요건을 기준으로 판단합니다.",
+      "requirements": [
+        {
+          "requirement": "가입 당시 약관상 지급요건",
+          "patientEvidence": "가입 당시 약관, 뇌질환 진단확정 조항, MRI/MRA/CTA/CT 등 영상검사 결과, 전문의 진단, 진료기록, 질병분류표를 중심으로 검토해야 합니다.",
+          "satisfied": true
+        }
+      ]
+    },
+    "citedCaseLaw": {
+      "insurerCitedCases": [
+        "금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)"
+      ],
+      "legalPrinciples": [
+        "금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)",
+        "공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다."
+      ],
+      "reverseApplication": "보험사가 인용한 근거가 있더라도 사실관계와 약관 문언이 다르면 고객 측에 불리하게 단순 적용할 수 없습니다.",
+      "fssDisputeReferences": [
+        "금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)",
+        "금융감독원 분쟁조정례 보험기간 개시 이후 발생한 보험사고에 해당되는지 여부"
+      ]
+    },
+    "killingEvidence": [
+      {
+        "evidenceType": "cag_pci_finding",
+        "date": "2024.06.19",
+        "quote": "영상검사상 급성 병변, 진구성 병변, 무증상 병변, 협착 또는 신경학적 결손 여부를 구분하여 검토해야 합니다.",
+        "sourceDocumentType": "procedure_report",
+        "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "defenseLayers": {
+      "medical": "보험회사의 부지급 판단은 제출자료 전체와 대조하여 제한적으로 보아야 합니다.",
+      "policy": "보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.",
+      "caseLaw": "공식근거는 사건자료와 약관 문언에 맞게 제한적으로 적용해야 합니다.",
+      "interpretation": "보험회사의 확대해석은 지급 제한 근거가 될 수 없습니다."
+    },
+    "visualPlan": {
+      "tables": [
+        "진단기준 vs 환자 데이터 매핑표",
+        "약관 요건 vs 환자 자료 매칭표"
+      ],
+      "quoteBoxes": [
+        "보험사 부지급 문구"
+      ],
+      "boldNumbers": []
+    },
+    "finalRequestLogic": {
+      "paymentRequest": "해당 담보 보험금 전액을 지급해야 합니다.",
+      "delayInterestRequest": "지연이자를 함께 지급해야 합니다.",
+      "writtenReplyDemand": "부동의 시 구체적 의학적ㆍ약관상 사유를 서면으로 회신해야 합니다.",
+      "escalationNotice": "구체적 사유 없는 부동의가 유지될 경우 후속 절차를 검토할 수 있음을 명시합니다."
+    }
+  },
+  "selfVerification": {
+    "insurerQuotePresent": true,
+    "medicalStandardNamed": true,
+    "medicalMappingTablePresent": true,
+    "policyQuotePresent": true,
+    "policyMappingTablePresent": true,
+    "caseLawReverseAppliedOrNotFabricated": true,
+    "killingEvidencePresent": true,
+    "defenseLayersCount": 4,
+    "conclusionHasSeparateReasons": true,
+    "requestIncludesPayment": true,
+    "requestIncludesDelayInterest": true,
+    "requestIncludesWrittenReply": true,
+    "weakLanguageAbsent": true,
+    "forbiddenPhrasesAbsent": true,
+    "piiRedacted": true
+  },
+  "disclaimer": "",
+  "retrievedReferences": {
+    "query": "{\"caseTitle\":\"지주막하출혈(I60) — 동맥류 파열, 책임개시일 전후 분쟁\",\"insurerName\":\"[보험사]\",\"productName\":\"\",\"policyName\":\"\",\"insuranceType\":\"뇌혈관질환 진단비 (뇌졸중 3000만원)\",\"coverageType\":\"\",\"contractDate\":\"2023-12\",\"policyGeneration\":\"unknown\",\"diagnosisText\":\"I60.7 두개내동맥의 지주막하출혈, 전교통동맥류 파열\",\"diagnosisName\":\"\",\"diagnosisCode\":\"\",\"accidentType\":\"뇌혈관질환 진단비 청구\",\"accidentDate\":\"unknown\",\"damageDetails\":\"피보험자는 2024.03.18 갑작스러운 심한 두통(thunderclap headache)과 구토로 응급실 내원. 뇌 CT에서 기저수조 지주막하출혈(SAH) 확인, CT 혈관조영술(CTA)에서 전교통동맥류(7mm) 파열 확인. 책임개시일 2024.01.10. 즉시 코일색전술 시행. 주치의 I60.7 진단. 보험사는 가입 전 2023.10 두통으로 신경과 외래 기록을 근거로 동맥류가 책임개시일 이전 존재했다며 면책 주장.\",\"insurerPosition\":\"보험사는 가입 전 2023.10 두통으로 신경과 진료받은 기록이 있고 뇌동맥류는 선천적/장기간에 걸쳐 형성되므로 책임개시일(2024.01.10) 이전에 이미 동맥류가 존재했을 것이라며, 뇌혈관질환의 발생이 책임개시일 이전이라는 이유로 면책 주장.\",\"customerStatement\":\"2023년 10월 두통은 단순 긴장성 두통이었고 당시 동맥류 진단은 없었습니다. 실제 지주막하출혈은 책임개시일 이후인 2024년 3월에 발생했는데, 동맥류가 미리 있었을 거라는 추정으로 면책하는 것은 부당합니다.\",\"adjusterMemo\":\"쟁점: 지주막하출혈 발생 시점 vs 책임개시일. 보험사는 동맥류 기존 존재로 면책 주장. 핵심: 보험사고는 동맥류 존재가 아니라 지주막하출혈(파열) 발생이고 파열일(2024.03.18)이 책임개시일(2024.01.10) 이후, 미파열 동맥류는 보험사고 아님(파열이 사고), 가입 전 두통은 동맥류 진단 아님, 발생시점 입증책임은 보험사, I60.7 진단서. 뇌졸중 발생시점 법리, 약관 검토.\"} 보험회사 [보험사] 보험종류 뇌혈관질환 진단비 (뇌졸중 3000만원) 보험가입일 2023-12 가입 당시 약관 질병분류표 장해분류표 적용기간",
+    "officialReferences": [
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2021 21년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 1248 - 7. 알뜰한 뇌혈관질환진단비Ⅱ보장 특별약관 제1조(보험금의 지급사유) 회사는 보험증권에 기재된 피보험자가 이 특별약관의 보 험기간 중 뇌혈관질환보장개시일 이후에「뇌혈관질환」으로 진단확정되었을 때에는 보험수익자에게 최초 1회에 한하여 아래의 금액을 뇌혈관질환진단비로 지급합니다. 다만, 아래 의「계약일부터 1년경과시점」이라 함은 계약일부터 그 날 을 포함하여 1년이 지난날의 다음날을 말합니다. 구분 지급금액 계약일부터 1년경과시점 전일 이전 계약일부터 1년경과시점 이후 뇌혈관질환 진단시 (단, 최초1회에 한하여 지급) 보험가입금액의 50% 보험가입금액의 100% 【뇌혈관질환진단비(Ⅱ)[예시",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.64528205390333,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "금융분쟁조정 사례집 제1권 보험(17.12.)",
+        "summary": "371 평가되어외박․외출에대한제재를하지않았던점. ⑥과거금융분쟁조정위원회가입원기간중외출, 또는외박을하는경우약관상정한 입원급여금이지급되는지의여부에대한판단248)을함에있어, 직계가족의사망등외 출, 외박이불가피한경우를제외하고피보험자가자신의의사에기초하여과도하게외 출․외박하는경우에도입원급여금을지급하게된다면, 보험의선의성에비추어볼때 피보험자스스로보험의보호영역에서벗어난행위에대해서까지보험금이지급되는모 순이발생하고, 이경우의사의관리하에치료에전념하는다른피보험자와의형평을 기할수없게되어보험의단체성을유명무실하게하는결과를초래할수있다고조정 결정하였던점. 라. 결론 이건피보험자의2009.12.17～2010.6.26.까지입원사실에대하여당해보험약관에서정",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.615143573634832,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "보험기간 개시 이후 발생한 보험사고에 해당되는지 여부",
+        "summary": "중 한가지에 해당되는 경우에는 보장을 하지 아니합니다. 1. 제1항에서 정한 보장이 개시되지 아니한 경우 □ 00 민영의료보험 보통약관 제6조(보상하는 손해) ① 회사는 피보험자가 급격하고도 우연한 외래의 사고로 신체에 입은 상해 또는 질병으로 인하여 보험기간 중에 의료법 제3조(의료기관)에서 정한 대한민국내의 병원 또는 의원 등에 입원을 개시하여 발생되는 의료비용으로서 국민건강보험법에 의하여 피보험자가 부담하는 입원의료비를 이 약관에 따라 피보험자에게 보상하여 드립니다. ②~③(생략) ④ 보험기간 전 입원했던 피보험자가 보험기간 중 동일한 상해나 질병으로 병원에서 병원으로 직접 이동하는 경우와 피보험자가 보험기간 전",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.613582115879246,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "뇌졸중(Stroke) 진단기준 - 허혈성 뇌졸중 I60, 출혈성 I60/I60 및 보험 쟁점",
+        "summary": "뇌졸중 진단은 갑작스러운 국소 신경학적 결손 + CT/MRI 영상 확인이 원칙이다. I60(뇌경색), I60(뇌내출혈), I60(지주막하출혈)은 각각 별도의 진단기준이 있으며, 단순 TIA(일과성허혈발작)는 I60에 해당하지 않아 뇌졸중 진단비 지급요건 미충족이 된다.",
+        "sourceDisplayName": "PubMed",
+        "similarity": 0.555131808329076,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I60 / I60 / I60",
+        "diagnosis_name": "허혈성 뇌졸중 / 뇌내출혈 / 지주막하출혈",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "AHA/ASA Stroke Guideline 2018",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "medical_evidence_source_pack_2026-05-21"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "지주막하출혈(Subarachnoid Hemorrhage, SAH) 진단 및 중증도 분류 기준 (AHA/ASA SAH Guidelines 2023; WHO ICD-10)",
+        "summary": "지주막하출혈 — 1. 정의: 지주막(arachnoid membrane)과 연막(pia mater) 사이 지주막하 공간(subarachnoid space)의 출혈. 2. 임상 증상: 급격히 발생하는 벼락두통(thunderclap headache, \"생애 최악의 두통\") + 구토, 의식 저하, 발열, 항강직, 신경 결손. 3. 진단 방법:",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.60325427672378,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I60.x",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "허혈성 뇌졸중 진단기준 — WHO 정의 및 AHA/ASA 2019 가이드라인 핵심 (Guidelines for the Early Management of Patients with Acute Ischemic Stroke, AHA/ASA 2019)",
+        "summary": "허혈성 뇌졸중 — 1. WHO 뇌졸중 정의: \"24시간 이상 지속되거나 사망에 의해 중단되는 뇌혈관 원인의 국소 신경학적 결손\". 이 24시간 기준이 TIA와 뇌졸중을 구분한다. 2. 허혈성 뇌졸중 분류(TOAST 기준): - 큰 동맥 죽상경화(Large-artery atherosclerosis)",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.501185330023499,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I60, I60",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      }
+    ],
+    "internalReviewMaterials": [
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "채무부존재확인·보험금",
+        "summary": "[1] 화재보험보통약관에서 ‘보험계약을 맺은 후 보험의 목적에 아래와 같은 사실이 생긴 경우에는 보험계약자나 피보험자는 지체 없이 서면으로 회사에 알리고 보험증권에 확인을 받아야 한다’고 규정하면서 그 중 하나로 ‘그 이외에 사고발생의 위험이 현저히 증가한 경우’를 들고 있는 경우, 이러한 위험증가 사실의 통지의무는 상법 제652조 제1항에서 규정하고 있는 통지의무를 되풀이하는 것에 불과하여 이에 관하여 보험자가 보험계약자에게 별도로 설명할 의무가 있다고 볼 수 없다. [2] 화재보험보통약관에서 보험계약자 등의 통지의무 대상으로 ‘사고발생의 위험이 현저히 증가한 경우’를 규정하고 있는 경우, 위 약관에서 말하는 ‘사고발생 위험의 현저한 증가’란 그 정도의 위험이 계약 체결 당시에 존재하였다면 보험자가 계약을 체결하지 아니하였거나 또는 적어도 동일한 조건으로는 계약을 체결하지 아니하였으리라고 생각되는 정도의 위험의 증가를 뜻하는 것으로서, 어떠한 상태의 발생이나 변경이 여기에 해당하는...",
+        "sourceDisplayName": "판례",
+        "similarity": 0.531531478487248,
+        "case_number": "2011다23743, 23750",
+        "court_or_agency": "",
+        "decision_date": "2011-07-28",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "157112",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금 part 2",
+        "summary": "[1] 영국 해상보험법(Marine Insurance Act, 1906) 제39조 제4항은 \"어느 선박이 부보된 해상사업에서 통상 일어날 수 있는 해상위험을 견디어낼 수 있을 만큼 모든 점에서 상당히 적합(reasonably fit)할 때에는 감항능력이 있는 것으로 간주된다.\"고 규정하고, 제39조 제5항은 \"기간보험(Time Policy)에서는 해상사업의 어떤 단계에서이든 선박이 감항능력이 있어야 한다는 묵시적 담보가 없다. 그러나 피보험자가 선박이 감항능력이 없음을 알면서도(with privity of the assured) 항해하게 하였다면 보험자는 감항능력이 없음으로 인하여 발생한 일체의 손해에 대하여 책임을 지지 아니한다.\"고 규정하고 있는바, 즉 영국 해상보험법상의 법리에 의하면, 해상보험의 경우 감항성 또는 감항능력(seaworthiness)은 ‘특정의 항해에서 통상적인 위험에 견딜 수 있는 능력(at the time of the insurance able to perf...",
+        "sourceDisplayName": "판례",
+        "similarity": 0.522743927985731,
+        "case_number": "2000다21062",
+        "court_or_agency": "",
+        "decision_date": "2002-06-28",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "81656",
+        "release_stage": "active",
+        "dataset_version": ""
+      }
+    ]
+  }
+}
