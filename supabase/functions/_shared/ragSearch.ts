@@ -322,13 +322,16 @@ function effectiveDateScore(row: EnrichedRow, contractDate?: string) {
   if (from && contract < from) return -0.12;
   if (to && contract > to) return -0.12;
   if (from || to) return 0.12;
-  // effective_from/to가 없는 경우: metadata.policy_year로 계약일 기준 패널티/보너스 적용
-  // (rag_master_chunks.effective_from은 전체 null이며 policy_year 정수값이 존재함)
+  // effective_from/to가 없는 경우: metadata.policy_year로 가입 시점 약관 우선 원칙 적용
+  // 원칙: 계약 성립 시점 이전 약관 중 가장 최신을 우선, 이후 약관은 가입 당시 미존재로 강배제
+  // hard-false 대신 강패널티 사용: 이전 약관이 DB에 없는 케이스에서 약관 0건 방지
   const policyYear = metadataNumber(row, 'policy_year');
   if (policyYear !== null) {
     const contractYear = contract.getFullYear();
-    if (policyYear > contractYear) return -0.25;           // 계약일 이후 약관: 강한 패널티
-    if (contractYear - policyYear <= 5) return 0.12;       // 5년 이내 이전 약관: 보너스
+    if (policyYear > contractYear) return -0.60;           // 계약일 이후 약관: 강배제 (미존재)
+    const yearsBefore = contractYear - policyYear;
+    if (yearsBefore <= 2) return +0.20;                    // 가입 직전 2년: 최우선
+    if (yearsBefore <= 5) return +0.10;                    // 가입 직전 5년: 우대
   }
   return 0;
 }
