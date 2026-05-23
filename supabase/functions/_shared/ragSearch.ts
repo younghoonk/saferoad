@@ -654,6 +654,14 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
     if (/\bN18\b|만성콩팥병|신대체요법|복막투석|혈액투석|희귀난치성\s*7대/i.test(text)) return false;
     if (!/암보험|질병보험|표준약관|암진단비|진단확정|갑상선암|유사암|소액암|제자리암|고지의무|알릴의무/i.test(text)) return false;
   }
+  // 암 쿼리에 심장 판례(2013다208661 NSTEMI 등) 혼입 차단 — allowlist 방식
+  if (row.source_area === 'precedents' && generalCancerDiagnosisQuery(query)) {
+    const text = rowText(row);
+    // 심장 키워드 포함 판례 차단 (blocklist first — 고속 경로)
+    if (/심근경색|관상동맥|협심증|NSTEMI|STEMI|\bI21\b|트로포닌|troponin|심근효소|CK-MB|심전도/i.test(text)) return false;
+    // 암 관련 키워드 없는 판례 차단 (allowlist — 희귀암 GIST/발덴스트롬 포함)
+    if (!/암|악성|종양|병리|carcinoma|lymphoma|leukemia|GIST|신경내분비|경계성|제자리|행동양식|암진단비|혈액암|림프종|백혈병|책임개시일|발병시점/i.test(text)) return false;
+  }
   if (row.source_area === 'terms_standards' && brainInsuranceQuery(query)) {
     const text = rowText(row);
     // 암 전용 병리/조직검사 조항 차단 — 뇌혈관 케이스와 무관
