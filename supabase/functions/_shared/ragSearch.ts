@@ -278,6 +278,16 @@ function metadataBoolean(row: EnrichedRow, key: string) {
   return false;
 }
 
+function metadataNumber(row: EnrichedRow, key: string): number | null {
+  const value = row.metadata?.[key];
+  if (typeof value === 'number') return Number.isNaN(value) ? null : value;
+  if (typeof value === 'string') {
+    const n = parseInt(value, 10);
+    return Number.isNaN(n) ? null : n;
+  }
+  return null;
+}
+
 function firstMetadataValue(row: EnrichedRow, keys: string[]) {
   for (const key of keys) {
     const value = metadataValue(row, key);
@@ -312,6 +322,14 @@ function effectiveDateScore(row: EnrichedRow, contractDate?: string) {
   if (from && contract < from) return -0.12;
   if (to && contract > to) return -0.12;
   if (from || to) return 0.12;
+  // effective_from/to가 없는 경우: metadata.policy_year로 계약일 기준 패널티/보너스 적용
+  // (rag_master_chunks.effective_from은 전체 null이며 policy_year 정수값이 존재함)
+  const policyYear = metadataNumber(row, 'policy_year');
+  if (policyYear !== null) {
+    const contractYear = contract.getFullYear();
+    if (policyYear > contractYear) return -0.25;           // 계약일 이후 약관: 강한 패널티
+    if (contractYear - policyYear <= 5) return 0.12;       // 5년 이내 이전 약관: 보너스
+  }
   return 0;
 }
 
