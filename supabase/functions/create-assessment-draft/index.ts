@@ -2787,14 +2787,35 @@ function extractBrainDiagnosisContext(input: ReturnType<typeof validateInput>) {
   const isTia = /\bTIA\b|일과성\s*뇌허혈|transient\s*ischemic/i.test(allText);
   const insurerText = (input.insurerPosition ?? '') + ' ' + (input.adjusterMemo ?? '');
   const insurerClaimsTia = /TIA\s*가능성|일과성\s*허혈\s*발작|TIA로\s*판단|TIA\s*의심/i.test(insurerText);
-  const ctNegative = /CT\s*음성|CT\s*상\s*이상\s*없|CT에서\s*확인.*되지|CT\s*정상/i.test(insurerText);
+  // CT negative: also catch "CT에서 명확한 병변이 확인되지" pattern (posterior fossa CT limitation)
+  const ctNegative = /CT\s*음성|CT\s*상\s*이상\s*없|CT\s*정상|CT에서[^.]{0,30}(?:확인\s*되지|보이지\s*않|검출.*어|명확.*없)/i.test(insurerText);
   const symptomImproved = /증상\s*호전|증상이\s*호전|자연.*호전|호전되어/i.test(insurerText);
   const lesionSmall = /병변\s*작|소경색|열공성|lacunar|경미|mild/i.test(insurerText);
+
+  // 4 new denial pattern detectors
+  // No-symptom denial (057-type): insurer claims "no neurological symptom = not stroke"
+  const noSymptomDenial = /신경학적\s*증상\s*(?:없|부재|없고)|증상\s*(?:없|없고|없으므로|없다|동반\s*안)|무증상.*뇌졸중\s*아님|일상생활.*지장\s*없/i.test(insurerText);
+  // Recurrent stroke denial (058-type): insurer claims existing lesion / sequel
+  const recurrentStrokeDenial = /기존\s*(?:병변|경색|뇌경색)|과거\s*(?:병변|경색|뇌경색).*(?:연장|진행|후유증)|후유증.*뇌졸중\s*아님|신규\s*보험사고\s*(?:아님|아니|해당\s*않)/i.test(insurerText);
+  // Classification-table denial (060-type): insurer accepts inclusion in table but denies coverage on "not acute stroke" grounds
+  const classificationTableDenial = /(?:분류표.*포함|I67).*(?:급성\s*아님|실질.*손상|뇌졸중\s*아닌|뇌졸중.*해당\s*않)|급성\s*뇌졸중.*아니라|만성.*협착.*기형/i.test(insurerText);
+  // Venous stroke denial (061-type): insurer claims "not arterial = not typical stroke"
+  const venousStrokeDenial = /동맥성\s*아님|정맥.*뇌경색.*(?:해당\s*않|아니|다른)|동맥\s*폐색.*아니/i.test(insurerText);
+  // Posterior fossa / brainstem imaging limitation (062-type)
+  const posteriorFossaCtLimit = /뇌간|후두개와|교뇌|pons|소뇌|cerebellum/i.test(allText) && ctNegative;
 
   // Core denial issue classification
   let coreIssue: string;
   if (insurerClaimsTia || ctNegative) {
     coreIssue = 'CT 음성 또는 일시적 증상 호전을 이유로 뇌경색이 아닌 TIA(일과성 뇌허혈발작)에 해당한다는 주장';
+  } else if (noSymptomDenial) {
+    coreIssue = '뚜렷한 신경학적 증상이 없어 약관상 뇌졸중 진단비 지급 대상이 아니라는 주장';
+  } else if (recurrentStrokeDenial) {
+    coreIssue = '과거 뇌경색 병력을 이유로 이번 병변이 기존 병변의 후유증 또는 진행이어서 신규 보험사고가 아니라는 주장';
+  } else if (classificationTableDenial) {
+    coreIssue = '약관 분류표 포함은 인정하나 급성 뇌졸중 사건이 아닌 만성 혈관 기형·협착 상태여서 보장 실질에 해당하지 않는다는 주장';
+  } else if (venousStrokeDenial) {
+    coreIssue = '정맥동 혈전에 의한 경색은 동맥성 뇌경색과 기전이 달라 약관이 예정한 뇌졸중에 해당하지 않는다는 주장';
   } else if (isTraumaticBleed && !isHypertensiveBleed) {
     coreIssue = '뇌출혈이 외상에 의한 것으로 질병성 뇌출혈 진단비 지급 대상이 아니라는 주장';
   } else if (isUnruptured && !isRuptured) {
@@ -2814,6 +2835,8 @@ function extractBrainDiagnosisContext(input: ReturnType<typeof validateInput>) {
     lesionSize, lesionLocation, isHypertensiveBleed, isTraumaticBleed, htxHistory,
     hasAneurysm, isRuptured, isUnruptured, coilEmbolization, isTia,
     insurerClaimsTia, ctNegative, symptomImproved, lesionSmall,
+    noSymptomDenial, recurrentStrokeDenial, classificationTableDenial,
+    venousStrokeDenial, posteriorFossaCtLimit,
     coreIssue, diagnosisDesc,
   };
 }
@@ -2856,6 +2879,46 @@ function buildBrainInsurerErrorMap(
     });
   }
 
+  // 3-a. No-symptom denial (silent infarction, 057-type)
+  if (ctx.noSymptomDenial) {
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '뚜렷한 신경학적 증상이 없어 약관상 뇌졸중 진단비 지급 대상이 아니라는 주장',
+      rebuttalThesis: `KCD I63(뇌경색증) 진단확정 기준은 MRI/DWI 영상 소견이며, 증상 유무나 정도는 진단 기준이 아닙니다. 무증상(silent) 뇌경색도 DWI에서 급성 허혈성 병변이 확인되면 I63으로 확정진단이 가능합니다.${ctx.hasDwi ? ' 본 건에서는 DWI 고신호 및 ADC map 신호 감소로 급성기 경색이 영상으로 확정된 사안입니다.' : ''} 약관의 뇌졸중 정의는 '증상 동반'을 별도 요건으로 규정하고 있지 않으며, 보험회사가 이를 추가 요건화하는 것은 허용되지 않습니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  // 3-b. Recurrent stroke / existing lesion denial (058-type)
+  if (ctx.recurrentStrokeDenial) {
+    errors.push({
+      errorType: 'omitted_key_evidence',
+      insurerClaim: '과거 뇌경색 병력을 이유로 이번 병변이 기존 병변의 후유증 또는 진행이어서 신규 보험사고가 아니라는 주장',
+      rebuttalThesis: `DWI에서 고신호 병변은 급성 허혈성 경색(72시간~2주 이내)에서만 나타나며, 만성 또는 오래된 경색은 DWI에서 음성을 보입니다.${ctx.hasDwi ? ' 본 건 DWI에서 확인된 고신호 병변은 신규 급성 경색의 영상 증거입니다.' : ''} 이번 병변이 과거 병변과 다른 부위에서 발생했다면, 독립된 신규 뇌경색 사건으로 별도의 보험사고가 성립합니다. 보험회사가 신규 병변을 기존 병변의 후유증으로 단정하려면 구체적 영상 근거를 제시해야 합니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  // 3-c. Classification-table-included but "not acute stroke" denial (060-type: moyamoya, I67.x)
+  if (ctx.classificationTableDenial) {
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: '약관 분류표에 포함되나 급성 뇌졸중 사건이 아닌 만성 혈관 기형·협착 상태여서 뇌혈관질환 진단비 지급 대상이 아니라는 주장',
+      rebuttalThesis: `약관 뇌혈관질환 분류표(I60~I69)는 ${ctx.iCode ? `I${ctx.iCode.slice(1)} 포함` : 'I67 기타 뇌혈관질환'}을 명시하며, 약관 어디에도 '급성 뇌졸중 사건에 한정' 또는 '만성 혈관 질환 제외' 문구가 없습니다. 분류표에 명시된 질환으로 확진된 이상 보험회사는 별도의 제한 사유 없이 지급 의무가 있으며, 약관에 없는 '급성 사건' 또는 '실질적 손상' 요건을 사후에 추가하는 것은 허용되지 않습니다.`,
+      targetSection: 'policy',
+    });
+  }
+
+  // 3-d. Venous vs arterial stroke denial (061-type: cerebral venous sinus thrombosis)
+  if (ctx.venousStrokeDenial) {
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '정맥동 혈전에 의한 경색은 동맥성 뇌경색과 기전이 달라 약관이 예정한 뇌졸중에 해당하지 않는다는 주장',
+      rebuttalThesis: `KCD I63.6(대뇌정맥혈전증에 의한 뇌경색)은 I63 범주에 명백히 포함되는 뇌경색입니다. 약관의 뇌졸중·뇌경색 정의는 동맥성 폐색에 한정되지 않으며, 발생 기전(동맥성/정맥성)은 진단비 지급요건과 무관합니다. MRV 또는 MRI에서 정맥동 혈전 및 정맥성 경색이 영상으로 확정된 이상, 보험회사가 '동맥성 한정' 요건을 추가하여 지급을 거절하는 것은 약관 문언에 없는 제한입니다.`,
+      targetSection: 'medical',
+    });
+  }
+
   // 4. Traumatic hemorrhage argument
   if (ctx.isTraumaticBleed) {
     errors.push({
@@ -2887,10 +2950,19 @@ function buildBrainInsurerErrorMap(
   });
 
   // Always: contra proferentem
+  const addedReqs = [
+    ctx.insurerClaimsTia ? 'TIA 분류 재적용' : '',
+    ctx.lesionSmall ? '중증도 요건' : '',
+    ctx.ctNegative ? 'CT 영상 의존' : '',
+    ctx.noSymptomDenial ? '증상 동반 요건' : '',
+    ctx.recurrentStrokeDenial ? '신규 사고 한정 해석' : '',
+    ctx.classificationTableDenial ? '급성 사건 한정 해석' : '',
+    ctx.venousStrokeDenial ? '동맥성 경색 한정 해석' : '',
+  ].filter(Boolean);
   errors.push({
     errorType: 'unsupported_additional_requirement',
     insurerClaim: '약관에 명시되지 않은 추가 조건으로 지급 거절',
-    rebuttalThesis: `보험회사는 약관에 없는 사후적 제한 요건(${ctx.insurerClaimsTia ? 'TIA 분류 재적용, ' : ''}${ctx.lesionSmall ? '중증도 요건, ' : ''}${ctx.ctNegative ? 'CT 영상 의존 등' : '추가 의학적 요건 등'})을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.`,
+    rebuttalThesis: `보험회사는 약관에 없는 사후적 제한 요건(${addedReqs.length ? addedReqs.join(', ') : '추가 의학적 요건'} 등)을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.`,
     targetSection: 'interpretation',
   });
 
