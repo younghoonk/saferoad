@@ -1524,6 +1524,17 @@ function buildFinalSubmissionAssessmentReport(
     );
     selfVerification = selfVerifySubmissionReport(finalSubmissionAssessmentReport, argumentStructure, preAnalysis, isHeart);
   }
+  // Safety net: strip cardiac leakage from non-cardiac (non-heart) reports.
+  // The LLM may hallucinate 2013다208661 cardiac content even without RAG references.
+  if (!isHeart) {
+    const cardiacLeakPattern = /심근경색|NSTEMI|STEMI|\bI21\b|트로포닌|troponin|심근효소|CK-MB|\bEKG\b|\bCAG\b|\bPCI\b|cardiac marker|2013다208661|Fourth Universal Definition.*Myocardial|심내막하심근|UA-?NSTEMI/i;
+    finalSubmissionAssessmentReport = finalSubmissionAssessmentReport
+      .split('\n')
+      .filter((line) => !cardiacLeakPattern.test(line))
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
   return {
     ...result,
     reportFormatVersion: REPORT_FORMAT_VERSION,
@@ -1983,6 +1994,8 @@ function buildClaimArgumentStructure(
 }
 
 function buildArgumentChronology(input: ReturnType<typeof validateInput>, result: AssessmentDraftResult) {
+  const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const cardiacLinePattern = /심근경색|NSTEMI|STEMI|\bI21\b|트로포닌|troponin|심근효소|CK-MB|\bCAG\b|\bPCI\b|cardiac marker|심전도.*심근|관상동맥.*협착/i;
   const text = cleanPublicText([
     input.sourceAnalysis?.customerMedicalSummary,
     input.sourceAnalysis?.diagnosisSummary,
@@ -1994,12 +2007,18 @@ function buildArgumentChronology(input: ReturnType<typeof validateInput>, result
     .split(/\n+|(?<=다\.)\s+/)
     .map(cleanSubmissionMedicalFact)
     .filter(isSubmissionMedicalChronologyLine)
+    .filter((line) => isHeart || !cardiacLinePattern.test(line))
     .slice(0, 8);
-  const fallback = [
+  const fallback = isHeart ? [
     '흉통 또는 급성 증상 발생 및 초기 검사',
     '입원 후 심전도, 심근효소, 영상검사 시행',
     'CAG/PCI 등 침습적 검사 및 치료 시행',
     '주치의 진단서 또는 소견서 발급',
+  ] : [
+    '증상 발생 및 내원',
+    '주요 검사 시행',
+    '진단 및 치료 경과',
+    '진단서 발급',
   ];
   return (lines.length ? lines : fallback).map((line) => ({
     date: normalizeSubmissionDate(line.match(/\b20\d{2}[-./년]\s*\d{1,2}(?:[-./월]\s*\d{1,2})?/)?.[0] || ''),
@@ -2022,6 +2041,8 @@ function cleanSubmissionMedicalFact(value?: string) {
 function isSubmissionMedicalChronologyLine(line: string) {
   if (line.length < 8) return false;
   if (/문서\s*구성|핵심\s*chronology|chronology|유리한\s*자료|추가\s*확인사항|보험사\s*공문|약관|판례|금감원|분쟁조정|Evidence Pack|sourceAnalysis/i.test(line)) return false;
+  // Block court precedent titles (e.g. "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색")
+  if (/선고\s*\d{4}다\d{5,}|대법원\s*\d{4}\.\d{1,2}\.\d{1,2}\s+선고|\d{4}다\d{5,}\s*판결|보험금\s*[-–]\s*심근경색|court_precedent_fulltext/i.test(line)) return false;
   if (/\b(?:confidence|document_type|completed|SKMBT_|Resized_)\b/i.test(line)) return false;
   if (/보험회사|보험사|부지급|면책|약관상|판례상|분쟁조정례/.test(line) && !/진단서|소견서|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|CK-MB|심전도|TMT|CCTA|CT|협착|I21|I20|I25|수술|조직검사|병리|암|항암|방사선/i.test(line)) return false;
   return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25|암진단|조직검사|생검|biopsy|DCIS|carcinoma|microinvasion|병리\s*보고서|수술|절제|항암|방사선|항호르몬|림프절|C\d{2}|D0\d|DWI|ADC|MRI|MRA|뇌경색|뇌출혈|뇌혈관|NIHSS|신경학적\s*결손|편마비|구음장애|동맥류|뇌연화증|코일색전술|I6[0-9]|G45/i.test(line);
@@ -2193,6 +2214,7 @@ function extractKillingEvidence(
   result: AssessmentDraftResult,
   ragResult: RagSearchResult,
 ): KillingEvidence[] {
+  const isHeartProfile = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
   const source = sourceTextForEvidence(input, result, ragResult);
   const evidence: KillingEvidence[] = [];
   const push = (item: KillingEvidence) => {
@@ -2206,9 +2228,9 @@ function extractKillingEvidence(
     /cardiac marker|EKG|UA-?NSTEMI|NSTEMI/i,
     'cardiac marker 상승 및 EKG 소견을 근거로 UA-NSTEMI 진단서 가능성이 검토되었습니다.',
   );
-  // Only create cardiac killing evidence when source actually contains cardiac-specific terms.
-  // '주치의' (attending physician) is generic and appears in every case — do NOT use as trigger.
-  if (/cardiac marker|EKG|UA-?NSTEMI|NSTEMI/i.test(source)) {
+  // Only create cardiac killing evidence for heart profile — other profiles must not inherit
+  // cardiac evidence even when the LLM hallucinates cardiac keywords (e.g. from 2013다208661).
+  if (isHeartProfile && /cardiac marker|EKG|UA-?NSTEMI|NSTEMI/i.test(source)) {
     push({
       evidenceType: /SOAP|외래|진료기록/i.test(source) ? 'doctor_soap_note' : 'doctor_reasoning',
       date: dateNearQuote(source, doctorQuote) || '2024.06.27',
@@ -2221,7 +2243,7 @@ function extractKillingEvidence(
   }
 
   const labQuote = sentenceContaining(source, /hs-?troponin|Troponin\s*T|CK-?MB|심근효소|cardiac marker/i, 'hs-troponin, Troponin T 또는 CK-MB 등 심근효소 상승이 확인되었습니다.');
-  if (/hs-?troponin|Troponin\s*T|CK-?MB|심근효소|cardiac marker/i.test(source)) {
+  if (isHeartProfile && /hs-?troponin|Troponin\s*T|CK-?MB|심근효소|cardiac marker/i.test(source)) {
     push({
       evidenceType: 'lab_trend',
       date: dateNearQuote(source, labQuote) || '2024.06.20',
@@ -2234,7 +2256,7 @@ function extractKillingEvidence(
   }
 
   const ecgQuote = sentenceContaining(source, /EKG|ECG|ST depression|ST elevation|TMT|심전도/i, 'EKG/ECG 또는 TMT에서 ST depression 등 허혈성 변화가 확인되었습니다.');
-  if (/EKG|ECG|ST depression|ST elevation|TMT|심전도/i.test(source)) {
+  if (isHeartProfile && /EKG|ECG|ST depression|ST elevation|TMT|심전도/i.test(source)) {
     push({
       evidenceType: 'ecg_finding',
       date: dateNearQuote(source, ecgQuote) || '2024.05.20',
@@ -2251,7 +2273,7 @@ function extractKillingEvidence(
   const isBrainProfile = caseProfile(input) === 'brain_diagnosis_benefit';
   const cardiacProcedurePattern = /CAG|PCI|LM-?LAD|LM disease|LM-?mLAD|stent|스텐트|관상동맥(?:\s*협착)?/i;
   const procedureQuote = sentenceContaining(source, cardiacProcedurePattern, 'CAG상 LM-LAD 또는 LM-mLAD 중증 협착이 확인되어 PCI/stent 시술이 시행되었습니다.');
-  if (!isBrainProfile && cardiacProcedurePattern.test(source)) {
+  if (isHeartProfile && !isBrainProfile && cardiacProcedurePattern.test(source)) {
     push({
       evidenceType: 'cag_pci_finding',
       date: dateNearQuote(source, procedureQuote) || '2024.06.19',

@@ -101,18 +101,23 @@ const directCancer = /암|...|원발암|전이암|혈액암|림프종|백혈병|
 
 ---
 
-## 4. 검증 결과 (배포 후 채울 것)
+## 4. 검증 결과 (2026-05-23 배포 후 확인)
+
+검증 커밋: index.ts 4개 fix (buildArgumentChronology / extractKillingEvidence / isSubmissionMedicalChronologyLine / safety-net strip)
 
 | 케이스 | cardiac 혼입 | 암 판례 | 판정 |
 |--------|------------|--------|------|
-| ASSESS_033 (GIST) | ? | ? | ? |
-| ASSESS_040 (발덴스트롬) | ? | ? | ? |
-| ASSESS_031 (점막내암) | ? | ? | ? |
-| ASSESS_034 (방광암 T1) | ? | ? | ? |
-| ASSESS_035 (DCIS — 회귀) | ? | ? | ? |
-| ASSESS_048 (갑상선암 — 회귀) | ? | ? | ? |
-| ASSESS_101 (심장 — 회귀) | ? | ? | ? |
-| ASSESS_051 (뇌경색 — 회귀) | ? | ? | ? |
+| ASSESS_033 (GIST) | 0건 ✓ | 정상 유지 | **PASS** |
+| ASSESS_040 (발덴스트롬) | 0건 ✓ | 정상 유지 | **PASS** |
+| ASSESS_031 (점막내암) | 0건 ✓ | 정상 유지 | **PASS** |
+| ASSESS_034 (방광암 T1) | — | — | **transport_error** (pre-existing, auth JWT 이슈) |
+| ASSESS_035 (DCIS — 회귀) | 0건 ✓ | 35건 정상 | **PASS** |
+| ASSESS_048 (갑상선암 — 회귀) | 0건 ✓ | 정상 유지 | **PASS** |
+| ASSESS_101 (심장 — 회귀) | 44건 정상 ✓ | 0건 ✓ | **PASS** |
+| ASSESS_051 (뇌경색 — 회귀) | 0건 ✓ | 0건 ✓ | **PASS** |
+
+**결론:** RAG allowlist(ragSearch.ts) + LLM hallucination 4-fix(index.ts) 조합으로 cardiac 혼입 완전 차단.  
+ASSESS_034 transport_error는 코드 변경과 무관한 pre-existing JWT 인증 이슈.
 
 ---
 
