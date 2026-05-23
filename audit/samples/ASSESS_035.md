@@ -1,7 +1,7 @@
 # 사정서 샘플: ASSESS_035
 
-생성일시: 2026-05-23T06:59:27.270Z
-배포커밋: 423177e
+생성일시: 2026-05-23T09:20:49.178Z
+배포커밋: a536828
 Profile: cancer_diagnosis_benefit
 
 ## 입력
@@ -47,9 +47,9 @@ Profile: cancer_diagnosis_benefit
 [보험사]는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. 1) 보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점 2) 약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점 3) 고객 측 제출자료에 보험금 지급을 뒷받침하는 사실이 확인되는 점 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.
 
 Ⅰ. 사건의 경위 및 진단 확정 과정
-- 2024.04 피보험자는 2024년 4월 유방촬영술에서 미세석회화가 발견되어 조직검사를 통해 DCIS(high grade) 진단을 받았습니다.
-- 2024.05.18 2024년 5월 18일 유방부분절제술을 받았으며, 병리 결과에서 DCIS, high nuclear grade, comedo necrosis, microinvasion 의심 소견이 확인되었습니다.
-- 주치의는 항호르몬 치료를 권고하였습니다.
+- 2024.04 피보험자는 2024년 4월 유방촬영술에서 미세석회화가 발견되어 조직검사를 통해 ductal carcinoma in situ(DCIS, high grade) 진단을 받았습니다.
+- 2024.05.18 2024년 5월 18일 유방부분절제술을 시행하였고, 병리 결과에서 DCIS, high nuclear grade, comedo necrosis 동반, 일부 영역에서 microinvasion 의심 소견이 확인되었습니다.
+- 주치의는 microinvasion 가능성으로 항호르몬 치료를 권고하였습니다.
 
 결정적 의무기록 문구
 1) 2024.04 피보험자는 2024.04 검진 유방촬영술 미세석회화로 조직검사 시행, ductal carcinoma in situ(DCIS, high grade) 진단.
@@ -87,7 +87,7 @@ Profile: cancer_diagnosis_benefit
 
 WHO 암 분류 및 ICD-O 행동양식 코드(/1 경계성, /2 상피내암, /3 악성)를 포함한 국제 암 분류 기준으로 판단합니다. 본 건 병리 소견: DCIS(ductal carcinoma in situ), high nuclear grade, comedo necrosis, microinvasion, 종양 크기 2.3cm.
 
-주요 쟁점은 병리 보고서의 DCIS 진단과 진단서의 C50.9 코드 불일치, microinvasion 의심 소견의 평가, 그리고 항호르몬 치료의 임상적 의미입니다.
+주요 쟁점은 DCIS의 high grade 및 comedo necrosis 동반 여부, microinvasion 의심 소견의 임상적 의미, 그리고 진단서와 병리 보고서의 코드 불일치입니다.
 
 주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.
 
