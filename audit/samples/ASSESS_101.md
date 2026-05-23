@@ -1,9 +1,30 @@
-# ASSESS_101 v4 (B-1 cancer branch)
+# 사정서 샘플: ASSESS_101
 
-생성일시: 2026-05-23T01:43:50.605Z
+생성일시: 2026-05-23T05:26:18.258Z
+배포커밋: 4bc92ef
 Profile: heart_diagnosis_benefit
 
-## 전문
+## 입력
+- **제목**: I21.4 NSTEMI 급성심내막하심근경색 진단비 부지급 — v2 gold 케이스
+- **진단**: I21.4 급성 심내막하심근경색증 (NSTEMI)
+- **계약일**: 2022-03-01
+
+## RAG 인용 현황
+- official 9건, internal 3건
+  - [official] medical_guideline | Acute MI criteria - troponin rise/fall, 99th percentile URL, ischemic evidence
+  - [official] medical_guideline | PCI-related myocardial injury and type 4a MI - PCI 전후 채혈 시간관계
+  - [official] medical_guideline | CAG/PCI 소견과 허혈 근거 - coronary thrombus, culprit lesion, severe stenosis
+  - [official] terms_standards | 서버 기본 약관 - 급성심근경색증 진단확정 조항
+  - [official] terms_standards | 서버 기본 약관 - 허혈심장질환 진단확정 조항
+  - [official] medical_guideline | Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분
+  - [official] medical_guideline | ESC 2020 비ST분절 상승 급성관상동맥증후군(NSTEMI/UA) 진단기준 (2020 ESC Guidelines for the Managem
+  - [official] medical_guideline | Fourth Universal Definition of Myocardial Infarction (2018) - myocardial injury와
+  - [official] precedents | 대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.4) 진단확정 증명책임
+  - [internal] practice_playbooks | 죽상경화성 심장질환(I25.1) 보험금, 왜 거절될까
+  - [internal] practice_playbooks | 급성심근경색 진단금 거절 협심증으로 바뀌는 이유와 대응방법
+  - [internal] real_case_patterns | 암/뇌/심장 진단비 - DIAGNOSIS_AMI_CRITERIA
+
+## 사정서 전문
 
 손해사정서
 (보험금 부지급 통보에 대한 이의 및 의견)
@@ -29,18 +50,18 @@ Profile: heart_diagnosis_benefit
 
 Ⅰ. 사건의 경위 및 진단 확정 과정
 1) 흉통 발생 및 초기 검사
-- 고객은 흉통 발생 후 병원에 내원하여 운동부하검사에서 ST depression이 확인되었고, 관상동맥 CT 및 조영술에서 심각한 협착이 발견되었습니다.
-- 고객은 흉통 발생 후 병원에 내원하여 운동부하검사에서 ST depression이 확인되었고, 관상동맥 CT 및 조영술에서 심각한 협착이 발견되었습니다.
+- 피보험자는 흉통으로 내원하여 관상동맥조영술(CAG) 및 스텐트 삽입(PCI)을 받았으며, 주치의는 I21.4 급성 심내막하심근경색증으로 진단하였습니다.
+- 2024.05.20 운동부하검사 또는 심전도 검사에서 ST depression 등 허혈성 변화가 확인되었습니다.
 
 2) 입원 및 관상동맥 중재시술
-- 고객은 흉통 발생 후 병원에 내원하여 운동부하검사에서 ST depression이 확인되었고, 관상동맥 CT 및 조영술에서 심각한 협착이 발견되었습니다.
-- 고객은 흉통 발생 후 병원에 내원하여 운동부하검사에서 ST depression이 확인되었고, 관상동맥 CT 및 조영술에서 심각한 협착이 발견되었습니다.
+- 2024.05.28 CCTA/심장 CT에서 LM/LAD/LCx 영역의 관상동맥 협착 소견이 확인되었습니다.
+- 피보험자는 흉통으로 내원하여 관상동맥조영술(CAG) 및 스텐트 삽입(PCI)을 받았으며, 주치의는 I21.4 급성 심내막하심근경색증으로 진단하였습니다.
 
 3) 심근효소 검사 결과
-- 주치의는 NSTEMI 진단을 내렸으며, 관련 심근효소 수치와 심전도 소견이 이를 뒷받침합니다.
+- 2024.06.20 hs-troponin 등 심근효소 상승이 확인되었고, PCI 전후 채혈시간과 함께 평가되어야 합니다.
 
 4) 진단서/소견서 발급
-- 주치의는 NSTEMI 진단을 내렸으며, 관련 심근효소 수치와 심전도 소견이 이를 뒷받침합니다.
+- 피보험자는 흉통으로 내원하여 관상동맥조영술(CAG) 및 스텐트 삽입(PCI)을 받았으며, 주치의는 I21.4 급성 심내막하심근경색증으로 진단하였습니다.
 - 2024.06.27 외래 SOAP 기록에는 "이후 외래 SOAP 기록: hs-troponin 0.037, 주치의 소견 「cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능」." 취지의 주치의 검토가 남아 있어, 진단서 발급이 단순 문서 작성이 아니라 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 결과임이 확인됩니다.
 
 결정적 의무기록 문구
