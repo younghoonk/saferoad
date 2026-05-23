@@ -713,20 +713,6 @@ function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: Ra
 - State customer-favorable facts first. Then identify why the insurer's denial logic is insufficient, selective, or overextended.
 - Unfavorable facts must be disclosed, but frame them as issues requiring supplementation or as insurer over-interpretation when the complete record supports the customer.
 - Do not invent policy wording, FSS decisions, precedent numbers, court names, decision dates, or medical facts. If Evidence Pack lacks a ground, say "직접 관련 근거자료 부족" for that category and continue with case-record reasoning.
-- Required finalSubmissionAssessmentReport format:
-  1. 손해사정서 (보험금 부지급 통보에 대한 이의 및 의견)
-  2. 수신 / 작성일 / 참조 / 문서번호 / 제목
-  3. 피보험자 정보: 피보험자, 주민번호, 주소, 연락처, 증권번호, 계약상품, 청구담보, 진단의료기관, 확정진단명. Unknown personal values must be placeholders such as [피보험자], [주민번호], [주소], [연락처], [증권번호].
-  4. 도입 문단: 부지급 통보 사실, 부당한 이유 3~4개, 보험금 지급 요청
-  5. Ⅰ. 사건의 경위 및 진단 확정 과정
-  6. Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성
-  7. Ⅲ. 의학적 근거 - 진단의 정당성
-  8. Ⅳ. 보험약관상 진단확정 요건의 충족
-  9. Ⅴ. 판례 및 금감원 자료에 대한 적용 또는 반박
-  10. Ⅵ. 약관해석 원칙
-  11. Ⅶ. 결론
-  12. [요청사항]
-  13. 첨부서류
 `;
   const acuteMiRules = /I21\.?4|심내막하심근경색|NSTEMI|unstable\s+angina|CAD|CAG|PCI|troponin|CK-?MB/i.test([
     input.damageDetails,
@@ -887,28 +873,6 @@ function buildDraftPrompt(input: ReturnType<typeof validateInput>, ragResult: Ra
 - 보험사 주장을 단순 요약하지 말고, 왜 부당하거나 불충분한지 바로 지적하세요.
 - 고객 측 유리 사실을 먼저 정리하고, 불리한 사실은 보험사 주장의 과도한 확대해석 가능성과 함께 반박하세요.
 
-[작성 전 9개 사전분석]
-본문 작성 전 내부적으로 반드시 다음을 수행한 뒤 finalSubmissionAssessmentReport에 반영하세요. 이 항목명을 본문에 노출하지는 마세요.
-1. 진단명과 분쟁 쟁점 식별: 청구 진단명, 보험사 인정 진단명, 핵심 다툼 1줄 요약.
-2. 보험사 부지급 사유 원문 추출: 통보문 문장을 가능한 한 그대로 「」 안에 인용하고 논리적 약점 3개 이상 식별.
-3. 적용 의학 진단기준 식별: 국제 표준 진단기준명과 연도, 조건 항목 분해.
-4. 환자 데이터와 진단기준 매핑표 작성.
-5. 약관 진단확정 요건 원문 또는 서버 기본 약관 문구 추출 및 환자 검사와 매핑.
-6. 보험사 인용 판례 법리 분해. 없는 판례/결정례는 생성 금지.
-7. 의무기록 정독으로 결정적 한 줄 발굴. SOAP, 검사결과, 외래경과, 입퇴원기록에서 주치의 객관적 검토 문구와 보험사가 놓친 검사수치를 찾으세요.
-8. 의학/약관/판례/약관해석 원칙의 독립 방어선 설계.
-9. 진단기준표, 약관요건표, 보험사 문구 인용박스, 핵심 수치 반복 배치.
-
-[출력 후 자체검증]
-finalSubmissionAssessmentReport 작성 후 아래 항목을 스스로 점검하고 부족한 부분은 본문 안에서 보정하세요.
-- 보험사 부지급 사유 원문 또는 핵심 문구가 「」 안에 인용되었는가.
-- 의학 진단기준의 정확한 명칭과 연도가 들어갔는가.
-- 진단기준 vs 환자 데이터 매핑표와 약관 요건별 충족표가 있는가.
-- 의무기록에서 killing evidence 1개 이상이 별도 강조되었는가.
-- 결론 장에서 의학, 약관, 판례/법리, 약관해석 원칙을 독립 논거로 정리했는가.
-- 요청사항에 보험금, 지연이자, 구체적 서면회신이 모두 포함되었는가.
-- 약한 표현, 내부 라벨, 개인정보가 제거되었는가.
-
 ${claimantAssessmentRules}
 ${acuteMiRules}
 
@@ -1004,8 +968,9 @@ ${formatOfficialGroundsForBody(ragResult)}
 - If a policy term lacks the original company/product policy or enrollment-date version, write that the original policy terms at enrollment must be checked and use standard terms only as reference material.
 - Use internal review materials only for issue framing and document checklist. Never cite them as official legal, precedent, FSS, or policy grounds.
 - If official grounds are insufficient, say "직접 관련 공식 근거 부족" and still analyze the current facts under the available legal framework.
-- The adjusterOpinionDraft field must contain at least 5 substantial customer-side paragraphs. Prefer 5 to 8 paragraphs for ordinary cases.
+- The adjusterOpinionDraft field must contain at least 3 substantial customer-side paragraphs. Prefer 3 to 5 paragraphs. Keep each paragraph concise.
 - The requiredAdditionalChecks field must include both unfavorable points and concrete documents to request.
+- TOTAL OUTPUT BUDGET: The entire JSON response must fit within 7000 tokens. Keep all fields concise. Do not repeat information across fields. Output raw JSON only — no markdown code fences, no triple-backticks.
 
 ${profileRules}
 
@@ -1021,8 +986,6 @@ ${profileRules}
   "adjusterOpinionDraft": "손해사정 의견",
   "requiredAdditionalChecks": "추가 확인 필요 사항",
   "simpleClientSummary": "고객에게 안내할 쉬운 요약",
-  "customerSideAssessmentReport": "위 새 결과 구조 1~9번을 제목 포함 완성 문서 형태로 작성. 본문에 참고용/초안/민원/소송 안내 문구 금지",
-  "finalSubmissionAssessmentReport": "보험회사 제출용 손해사정서 본문. 반드시 '손해사정서\\n(보험금 부지급 통보에 대한 이의 및 의견)'로 시작하고, 수신/작성일/참조/문서번호/제목, 피보험자 정보, Ⅰ~Ⅶ, [요청사항], 첨부서류 순서로 작성. 개인정보는 [피보험자] 등 placeholder로 비식별 처리",
   "reportFormatVersion": "${REPORT_FORMAT_VERSION}",
   "disclaimer": ""
 }`;
@@ -1106,7 +1069,7 @@ ${formatOfficialGroundsForBody(ragResult)}
 - Remove or qualify any statement that applies a later policy version, disease classification table, or disability table to an older contract without confirming the original policy.
 - Keep internal ids, chunk ids, embedding status, review status, trust level, and internal source types out of the final text.
 - Ensure the final draft reads like a loss-adjusting opinion, not a reference search summary.
-- The adjusterOpinionDraft field must contain at least 5 substantial paragraphs and must explain the insurer's position, counterpoints, application of official grounds, unfavorable points, and a restrained provisional opinion.
+- The adjusterOpinionDraft field must contain at least 3 substantial paragraphs and must explain the insurer's position, counterpoints, application of official grounds, unfavorable points, and a restrained provisional opinion. Keep each paragraph concise.
 - Do not end the opinion with only "additional review needed." If facts are insufficient, still state what can be argued from current facts and what must be confirmed.
 - The legalAndReferenceBasis and damageAssessment fields must explain how directly related official RAG grounds apply to this case.
 - The legalAndReferenceBasis, damageAssessment, and adjusterOpinionDraft fields must contain actual official ground names from "Official grounds that must remain in the body" when official RAG grounds exist.
@@ -1138,32 +1101,64 @@ async function callClaude(apiKey: string, prompt: string, temperature: number, m
         max_tokens: maxTokens,
         temperature,
         messages: [{ role: 'user', content: prompt }],
+        stream: true,
       }),
     });
 
     if (res.ok) {
-      const json = await res.json() as {
-        content?: { type: string; text?: string }[];
-        usage?: { input_tokens?: number; output_tokens?: number };
-        stop_reason?: string;
-      };
-      const content = json.content?.[0]?.text;
+      // Stream response to keep network data flowing (prevents Supabase idle timeout)
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+      let inputTokens = 0;
+      let outputTokens = 0;
+      let stopReason = '';
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() ?? '';
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const raw = line.slice(6).trim();
+          if (!raw || raw === '[DONE]') continue;
+          try {
+            const event = JSON.parse(raw) as {
+              type?: string;
+              delta?: { type?: string; text?: string; stop_reason?: string };
+              message?: { usage?: { input_tokens?: number } };
+              usage?: { input_tokens?: number; output_tokens?: number };
+            };
+            if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+              fullText += event.delta.text ?? '';
+            } else if (event.type === 'message_start' && event.message?.usage) {
+              inputTokens = event.message.usage.input_tokens ?? 0;
+            } else if (event.type === 'message_delta') {
+              if (event.delta?.stop_reason) stopReason = event.delta.stop_reason;
+              if (event.usage?.output_tokens) outputTokens = event.usage.output_tokens;
+            }
+          } catch {
+            // skip malformed SSE line
+          }
+        }
+      }
+
       console.info('Claude response', {
-        stop_reason: json.stop_reason,
-        input_tokens: json.usage?.input_tokens,
-        output_tokens: json.usage?.output_tokens,
+        stop_reason: stopReason,
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
         prompt_length: prompt.length,
         maxTokens,
+        fullText_length: fullText.length,
       });
-      if (!content) {
-        console.error('Claude returned empty content', {
-          stop_reason: json.stop_reason,
-          content: json.content,
-          usage: json.usage,
-          prompt_length: prompt.length,
-        });
+      if (!fullText) {
+        // Throw diagnostic error so callers surface the reason instead of silently returning empty
+        throw new Error(`Claude empty response: stop_reason=${stopReason} input_tokens=${inputTokens} output_tokens=${outputTokens} attempt=${attempt}/${maxRetries + 1}`);
       }
-      return content ?? '';
+      return fullText;
     }
 
     lastStatus = res.status;
@@ -1184,8 +1179,10 @@ async function callClaude(apiKey: string, prompt: string, temperature: number, m
 }
 
 function parseJsonResponse(text: string): AssessmentDraftResult {
-  const match = text.match(/\{[\s\S]*\}/);
-  if (!match) throw new HttpError(502, 'AI 응답을 분석할 수 없습니다. 다시 시도해 주세요.');
+  // Strip markdown code fences (```json ... ```) that Claude sometimes wraps around the JSON
+  const stripped = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  const match = stripped.match(/\{[\s\S]*\}/);
+  if (!match) throw new HttpError(502, `AI 응답 파싱 실패 (len=${text.length}): HEAD=${JSON.stringify(text.slice(0, 80))} TAIL=${JSON.stringify(text.slice(-80))}`);
 
   try {
     const parsed = JSON.parse(match[0]) as Partial<AssessmentDraftResult>;
@@ -4739,13 +4736,26 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ error: 'POST 요청만 지원합니다.' }, 405);
   }
 
+  // Fast-fail: auth + input validation — returns non-2xx immediately before streaming starts
+  let openAiKey: string;
+  let claudeApiKey: string;
+  let input: AssessmentDraftInput;
   try {
     await requireAdjuster(req);
-
-    const openAiKey = requiredEnv('OPENAI_API_KEY');
-    const claudeApiKey = requiredEnv('ANTHROPIC_API_KEY');
+    openAiKey = requiredEnv('OPENAI_API_KEY');
+    claudeApiKey = requiredEnv('ANTHROPIC_API_KEY');
     const body = await req.json() as AssessmentDraftInput;
-    const input = validateInput(body);
+    input = validateInput(body);
+  } catch (error: unknown) {
+    const status = error instanceof HttpError ? error.status : 500;
+    const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+    return jsonResponse({ error: message }, status);
+  }
+
+  // Expensive work (RAG + Claude) started OUTSIDE ReadableStream to avoid nested-stream issues in Deno.
+  // callClaude reads a streaming HTTP response; calling it inside ReadableStream.start() causes Deno
+  // to prematurely close the inner reader. Running it as a plain Promise fixes this.
+  const workPromise: Promise<string> = (async () => {
     const detectedProfile = caseProfile(input);
     const rawRagResult = await getRagResult(openAiKey, input);
     const sanitizedRagResult = sanitizeRagResultForAssessment(input, rawRagResult);
@@ -4768,7 +4778,7 @@ Deno.serve(async (req: Request) => {
 
     let draft: AssessmentDraftResult;
     try {
-      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, ragResult), 0.2, 3, 5000);
+      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, ragResult), 0.2, 1, 8000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     } catch (draftErr) {
       // Full RAG prompt failed — retry once with no RAG context and reduced max_tokens
@@ -4778,7 +4788,7 @@ Deno.serve(async (req: Request) => {
         insuranceType: input.insuranceType,
         accidentType: input.accidentType,
       });
-      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, emptyRagResult()), 0.2, 3, 5000);
+      const draftText = await callClaude(claudeApiKey, buildDraftPrompt(input, emptyRagResult()), 0.2, 3, 8000);
       draft = sanitizeResult(parseJsonResponse(draftText));
     }
 
@@ -4821,21 +4831,9 @@ Deno.serve(async (req: Request) => {
       ragResult,
     );
 
-    let reviewedBase: AssessmentDraftResult;
-    try {
-      const reviewedText = await callClaude(
-        claudeApiKey,
-        buildReviewPrompt(draft, input.retrievedReferences, ragResult, input),
-        0,
-        3,
-        5000,
-      );
-      reviewedBase = applyReviewPipeline(sanitizeResult(parseJsonResponse(reviewedText)));
-    } catch {
-      // review call timed out or parse-failed — fall back to draft quality
-      console.warn('review call failed, falling back to draft result');
-      reviewedBase = applyReviewPipeline(draft);
-    }
+    // Claude single-pass: review call skipped — TTFT × 2 calls would exceed Supabase 150s idle timeout.
+    // Deterministic post-processing pipeline below provides sufficient quality correction.
+    const reviewedBase: AssessmentDraftResult = applyReviewPipeline(draft);
     const reviewed = stripProhibitedBodyPhrases(ensureProfileEvaluationPhrases(
       finalizeDuplicateProportionalResult(
         finalizeCancerHospitalizationResult(
@@ -4869,11 +4867,35 @@ Deno.serve(async (req: Request) => {
     ));
 
     const finalResult = buildFinalSubmissionAssessmentReport(reviewed, input, ragResult);
+    return JSON.stringify({ ...finalResult, requestId: input.requestId, detectedProfile, retrievedReferences: ragResult });
+  })();
 
-    return jsonResponse({ ...finalResult, requestId: input.requestId, detectedProfile, retrievedReferences: ragResult });
-  } catch (error: unknown) {
-    const status = error instanceof HttpError ? error.status : 500;
-    const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
-    return jsonResponse({ error: message }, status);
-  }
+  // ReadableStream sends '\n' keepalives every 30s while awaiting workPromise.
+  // Supabase idle timeout fires at 150s of no data client←function; keepalives reset it.
+  // JSON.parse ignores leading whitespace so the final JSON is parsed correctly by clients.
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const keepaliveHandle = setInterval(() => {
+        try { controller.enqueue(encoder.encode('\n')); } catch { /* stream already closed */ }
+      }, 30000);
+
+      try {
+        const resultJson = await workPromise;
+        clearInterval(keepaliveHandle);
+        controller.enqueue(encoder.encode(resultJson));
+        controller.close();
+      } catch (error: unknown) {
+        clearInterval(keepaliveHandle);
+        const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+        controller.enqueue(encoder.encode(JSON.stringify({ error: message })));
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    status: 200,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
 });

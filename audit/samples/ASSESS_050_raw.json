@@ -1,0 +1,410 @@
+{
+  "requestId": "sample-ASSESS_050-1779555667287",
+  "detectedProfile": "cancer_diagnosis_benefit",
+  "reportFormatVersion": "submission_report_v2_claim_argument_structure",
+  "title": "난소 경계성 장액성 종양(침윤성 이식 동반) 일반암 진단비 부지급 관련 피보험자 측 손해사정 의견서",
+  "overview": "피보험자는 2024년 3월 양측 난소난관절제술 및 대망절제술을 시행받았으며, 병리 결과 serous borderline tumor with invasive implants(복막 및 대망 침윤성 이식 동반 경계성 장액성 종양)가 확인되었다. 주치의는 이를 근거로 C56(난소의 악성신생물) 코드로 진단서를 발급하였다. 보험사는 원발 종양의 조직학적 명칭이 'borderline tumor'임을 이유로 D39(행동양식 불명, 경계성) 분류를 적용하여 경계성종양 진단비 800만 원만 지급 대상이라고 결정하였다. 그러나 침윤성 이식(invasive implants)은 WHO 난소종양 분류 기준상 경계성 종양의 정의 요건인 '간질 침습 없음(without stromal invasion)'을 벗어난 침습성 병변으로, 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 악성 행동을 나타낸다. 이는 단순 경계성 종양과 의학적으로 구별되는 병변이며, 주치의의 C56 진단은 이러한 병리 소견에 근거한 것이다. 보험사의 부지급 논리는 병리 전체 소견을 고려하지 않고 원발 종양 명칭만을 단편적으로 적용한 것으로, 가입 당시 약관의 진단확정 기준 및 약관 해석 원칙에 비추어 . 본 의견서는 일반암 진단비 4,000만 원의 지급 타당성이 인정된다는 입장에서 작성되었다.",
+  "facts": "1. 피보험자는 2018년 7월 암진단비 특약(일반암 4,000만 원, 경계성종양 800만 원)을 포함한 보험계약을 체결하였다.\n2. 2024년 3월 골반 종괴로 양측 난소난관절제술 및 대망절제술을 시행받았으며, 수술 중 채취된 조직에 대해 병리조직학적 검사가 시행되었다.\n3. 병리 보고서 주진단: serous borderline tumor with invasive implants. 복막 및 대망에 침윤성 이식(invasive implants)이 확인되었다.\n4. 침윤성 이식은 WHO 난소종양 분류 기준상 경계성 종양의 정의 요건인 '간질 침습 없음'을 벗어난 병변으로, 저등급 장액성 암종에 준하는 침습성을 가진다.\n5. 주치의(병리 또는 임상 전문의)는 침윤성 이식 동반 소견을 근거로 C56(난소의 악성신생물) 코드로 진단서를 발급하였다.\n6. 보험사는 원발 종양 명칭이 'borderline tumor'임을 이유로 D39 분류를 적용, 경계성종양 진단비 800만 원만 지급 대상이라고 결정하였다.\n7. 면책공문 원문은 제공되지 않았으나, 사건 정보상 보험사의 부지급 사유는 '원발 종양이 경계성이므로 D39 해당'이라는 논리임이 확인된다.",
+  "issues": "【쟁점 1】 침윤성 이식 동반 경계성 종양의 KCD 코드 분류: C56이냐 D39이냐\n침윤성 이식(invasive implants)은 WHO Classification of Tumours(5th Ed.) 기준상 경계성 종양의 정의 핵심 요건인 'atypical epithelial proliferation WITHOUT stromal invasion'을 충족하지 않는 병변이다. 즉, 침윤성 이식이 확인된 경우 해당 병변은 경계성 종양의 정의 범위를 벗어나며, 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 악성 행동으로 분류된다. 이 경우 원발 난소 종양의 조직학적 명칭이 'borderline'이더라도, 복막 및 대망에 확인된 침윤성 이식 병변 자체는 악성 행동 코드(C 계열)에 해당할 수 있다.\n\n【쟁점 2】 진단서 C56의 유효성\n주치의는 병리 소견 전체(원발 종양 + 침윤성 이식)를 종합하여 C56으로 진단서를 발급하였다. 약관상 암 진단확정은 병리 또는 진단검사의학 전문의사의 조직검사 현미경 소견을 기초로 한다. 주치의의 C56 진단은 이 요건을 충족한다.\n\n【쟁점 3】 보험사의 D39 분류 적용의 타당성\n보험사는 원발 종양 명칭만을 근거로 D39을 적용하였으나 이는 침윤성 이식이라는 결정적 병리 소견을 배제한 단편적 해석이다. D39은 '행동양식 불명'으로 침습성이 확인되지 않은 경계성 종양에 적용되는 코드이며, 침윤성 이식이 병리적으로 확인된 본 사안에 그대로 적용하는 것은 의학적 근거가 불충분하다.\n\n【쟁점 4】 약관상 '전암상태' 제외 조항의 적용 가부\n약관은 '전암상태(암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)'를 암 지급 대상에서 제외한다. 침윤성 이식 동반 경계성 종양이 이 제외 조항에 해당하는지가 쟁점이다. 침윤성 이식은 이미 악성 행동이 발현된 병변으로, '암으로 변하기 이전 상태'로 볼 수 없다는 것이 피보험자 측 입장이다.\n\n주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.",
+  "legalAndReferenceBasis": "가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.",
+  "damageAssessment": "본 건은 손해액 산정보다는 암진단비의 진단확정 요건과 병리결과의 분류가 핵심입니다. 제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.",
+  "insurerPositionReview": "보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.",
+  "adjusterOpinionDraft": "본 사안의 핵심은 병리 보고서에 기재된 'serous borderline tumor with invasive implants'라는 진단을 전체적으로 해석할 것인지, 아니면 'borderline tumor'라는 원발 종양 명칭만을 추출하여 해석할 것인지에 있다. 보험사는 후자의 방식으로 D39을 적용하였으나 이는 침윤성 이식이라는 결정적 병리 소견을 배제한 단편적 해석으로 타당하지 않다.\n\nWHO 난소종양 분류 기준(5th Ed.)에 따르면 경계성 종양은 '간질 침습이 없는' 종양으로 정의된다. 침윤성 이식(invasive implants)은 이 정의 요건을 충족하지 않는 병변으로, 저등급 장액성 암종에 준하는 침습성을 가진다. FIGO 병기 분류 및 WHO 분류 체계에서도 침윤성 이식 동반 경계성 종양은 단순 경계성 종양과 구별되며, 예후 및 치료 방침이 실질적으로 다르다. 주치의가 이러한 병리 소견 전체를 종합하여 C56으로 진단서를 발급한 것은 의학적으로 근거 있는 판단이다.\n\n약관상 암 진단확정은 병리 전문의사의 조직검사 현미경 소견을 기초로 한다. 본 사안에서 수술 절제 조직에 대한 병리조직학적 검사가 시행되었고, 그 결과를 기초로 C56 진단서가 발급되었으므로 약관상 진단확정 절차 요건은 충족된다. 보험사가 이 진단을 부정하고 D39을 적용하기 위해서는 독립적 병리 전문의 자문을 통해 주치의 진단의 오류를 구체적으로 입증하여야 하며, 그러한 입증 없이 원발 종양 명칭만을 이유로 지급을 거절하는 것은 지급 거절 사유로 불충분하다.\n\n설령 침윤성 이식 동반 경계성 종양의 KCD 코드 분류에 해석상 불명확성이 있다고 하더라도, 대법원 판례 법리상 약관 조항이 다의적으로 해석될 경우 고객에게 유리하게 해석하여야 한다는 작성자 불이익 원칙이 적용된다. 이 원칙에 따르면 C56 적용이 피보험자에게 유리한 해석이며, 보험사는 D39 적용이 유일하게 합리적인 해석임을 입증할 책임을 진다. 이상의 의학적 근거, 약관상 진단확정 기준, 약관 해석 원칙을 종합할 때, 일반암 진단비 4,000만 원의 지급 타당성이 인정된다는 것이 본 손해사정 의견이다.\n\n본 건은 암진단비 지급 여부가 문제되는 사안으로, 진단서에 기재된 코드만으로 지급 또는 부지급을 병리보고서, 조직검사 또는 세포검사 결과에 따른 진단확정 여부를 먼저 확인해야 합니다.\n\n암, 제자리암, 경계성종양, 유사암 또는 일반암의 구분은 가입 당시 약관과 그 약관에서 정한 질병분류표 기준에 따라 판단해야 합니다. 최신 분류기준을 과거 계약에 자동 적용하거나, 진단서의 C코드 또는 D코드만으로 결론을 내리는 방식은 신중해야 합니다.\n\n제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.\n\n따라서 고객 측 의견은 암진단비 지급을 확정하는 것이 아니라, 병리보고서 원문, 진단확정 자료, 가입 당시 약관, 질병분류표를 기준으로 보험회사의 부지급 또는 감액 판단에 는 방향으로 정리합니다.",
+  "requiredAdditionalChecks": "1. 가입 당시(2018년 7월) 원약관 및 질병분류표 원문 확보 필수. 현재 검토에 사용된 2012년도, 2016년도 표준약관은 참고자료이며, 원약관의 암/경계성종양 정의 및 질병분류표 적용 기준이 최종 판단 근거가 된다.\n2. 병리 보고서 원문 확보 및 검토 필요. 침윤성 이식(invasive implants)의 위치(복막, 대망), 범위, 조직학적 특성이 구체적으로 기재되어 있는지 확인. 병리 보고서가 'invasive implants'를 명시적으로 기재하고 있는지가 핵심 증거이다.\n3. 주치의 진단서 원문 및 소견서 확보. C56 코드 기재 근거(침윤성 이식 동반 소견 명시 여부)를 확인하고, 필요시 주치의에게 침윤성 이식과 C56 진단의 관계를 설명하는 추가 소견서 발급을 요청한다.\n4. 보험사 면책공문 원문 확보. 현재 면책공문이 제공되지 않아 보험사의 구체적 부지급 사유 및 근거 조항을 확인하지 못하였다. 면책공문 원문을 확보하여 보험사가 인용한 약관 조항 및 의학 근거를 정확히 파악해야 한다.\n5. 보험사 의료자문 내용 확인. 보험사가 독립적 병리 전문의 자문을 받았는지, 자문 내용이 무엇인지 확인 필요. 자문 없이 원발 종양 명칭만으로 D39을 적용한 경우 지급 거절 근거가 더욱 취약해진다.\n6. 침윤성 이식 동반 경계성 종양의 C56 인정 여부에 관한 금감원 분쟁조정 결정례 추가 조사 필요. 제공된 자료 범위 내에서는 직접 관련 결정례가 확인되지 않는다.\n7. 불리한 사실 관리: 병리 주진단 명칭이 'borderline tumor'로 기재된 점은 보험사 주장의 형식적 근거가 될 수 있다. 이에 대응하기 위해 주치의의 C56 진단 근거를 병리 보고서와 연결하여 명확히 문서화하는 것이 중요하다.\n병리보고서 원문\n조직검사 결과지\n세포검사 결과지\n진단서\n가입 당시 약관\n질병분류표\n암진단비 약관상 진단확정 조항\n보험회사 부지급 또는 감액 사유서",
+  "simpleClientSummary": "암진단비 분쟁은 진단서 코드만으로 판단하기보다 병리보고서, 조직검사 또는 세포검사 결과, 가입 당시 약관과 질병분류표를 함께 확인해야 합니다. 이 자료를 정리하면 보험회사에 재검토를 요청할 때 필요한 근거를 보완할 수 있습니다.",
+  "customerSideAssessmentReport": "1. 사정 결론\n피보험자는 2024년 3월 양측 난소난관절제술 및 대망절제술을 시행받았으며, 병리 결과 serous borderline tumor with invasive implants(복막 및 대망 침윤성 이식 동반 경계성 장액성 종양)가 확인되었다. 주치의는 이를 근거로 C56(난소의 악성신생물) 코드로 진단서를 발급하였다. 보험사는 원발 종양의 조직학적 명칭이 'borderline tumor'임을 이유로 D39(행동양식 불명, 경계성) 분류를 적용하여 경계성종양 진단비 800만 원만 지급 대상이라고 결정하였다. 그러나 침윤성 이식(invasive implants)은 WHO 난소종양 분류 기준상 경계성 종양의 정의 요건인 '간질 침습 없음(without stromal invasion)'을 벗어난 침습성 병변으로, 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 악성 행동을 나타낸다. 이는 단순 경계성 종양과 의학적으로 구별되는 병변이며, 주치의의 C56 진단은 이러한 병리 소견에 근거한 것이다. 보험사의 부지급 논리는 병리 전체 소견을 고려하지 않고 원발 종양 명칭만을 단편적으로 적용한 것으로, 가입 당시 약관의 진단확정 기준 및 약관 해석 원칙에 비추어 . 본 의견서는 일반암 진단비 4,000만 원의 지급 타당성이 인정된다는 입장에서 작성되었다.\n\n2. 보험사 부지급 논리의 문제점\n보험회사가 D코드, 양성 표현, 경계성 또는 제자리암 분류를 이유로 부지급하거나 감액하는 경우, 병리보고서 원문과 가입 당시 약관상 암ㆍ제자리암ㆍ경계성종양ㆍ유사암 정의 및 질병분류표를 함께 제시해야 합니다.\n\n3. 고객 측 핵심 인정 사실\n1. 피보험자는 2018년 7월 암진단비 특약(일반암 4,000만 원, 경계성종양 800만 원)을 포함한 보험계약을 체결하였다.\n2. 2024년 3월 골반 종괴로 양측 난소난관절제술 및 대망절제술을 시행받았으며, 수술 중 채취된 조직에 대해 병리조직학적 검사가 시행되었다.\n3. 병리 보고서 주진단: serous borderline tumor with invasive implants. 복막 및 대망에 침윤성 이식(invasive implants)이 확인되었다.\n4. 침윤성 이식은 WHO 난소종양 분류 기준상 경계성 종양의 정의 요건인 '간질 침습 없음'을 벗어난 병변으로, 저등급 장액성 암종에 준하는 침습성을 가진다.\n5. 주치의(병리 또는 임상 전문의)는 침윤성 이식 동반 소견을 근거로 C56(난소의 악성신생물) 코드로 진단서를 발급하였다.\n6. 보험사는 원발 종양 명칭이 'borderline tumor'임을 이유로 D39 분류를 적용, 경계성종양 진단비 800만 원만 지급 대상이라고 결정하였다.\n7. 면책공문 원문은 제공되지 않았으나, 사건 정보상 보험사의 부지급 사유는 '원발 종양이 경계성이므로 D39 해당'이라는 논리임이 확인된다.\n\n4. 의학적 핵심 쟁점\n【쟁점 1】 침윤성 이식 동반 경계성 종양의 KCD 코드 분류: C56이냐 D39이냐\n침윤성 이식(invasive implants)은 WHO Classification of Tumours(5th Ed.) 기준상 경계성 종양의 정의 핵심 요건인 'atypical epithelial proliferation WITHOUT stromal invasion'을 충족하지 않는 병변이다. 즉, 침윤성 이식이 확인된 경우 해당 병변은 경계성 종양의 정의 범위를 벗어나며, 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 악성 행동으로 분류된다. 이 경우 원발 난소 종양의 조직학적 명칭이 'borderline'이더라도, 복막 및 대망에 확인된 침윤성 이식 병변 자체는 악성 행동 코드(C 계열)에 해당할 수 있다.\n\n【쟁점 2】 진단서 C56의 유효성\n주치의는 병리 소견 전체(원발 종양 + 침윤성 이식)를 종합하여 C56으로 진단서를 발급하였다. 약관상 암 진단확정은 병리 또는 진단검사의학 전문의사의 조직검사 현미경 소견을 기초로 한다. 주치의의 C56 진단은 이 요건을 충족한다.\n\n【쟁점 3】 보험사의 D39 분류 적용의 타당성\n보험사는 원발 종양 명칭만을 근거로 D39을 적용하였으나 이는 침윤성 이식이라는 결정적 병리 소견을 배제한 단편적 해석이다. D39은 '행동양식 불명'으로 침습성이 확인되지 않은 경계성 종양에 적용되는 코드이며, 침윤성 이식이 병리적으로 확인된 본 사안에 그대로 적용하는 것은 의학적 근거가 불충분하다.\n\n【쟁점 4】 약관상 '전암상태' 제외 조항의 적용 가부\n약관은 '전암상태(암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)'를 암 지급 대상에서 제외한다. 침윤성 이식 동반 경계성 종양이 이 제외 조항에 해당하는지가 쟁점이다. 침윤성 이식은 이미 악성 행동이 발현된 병변으로, '암으로 변하기 이전 상태'로 볼 수 없다는 것이 피보험자 측 입장이다.\n\n주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.\n\n5. 약관상 지급요건 충족 주장\n가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.\n\n6. 핵심 근거자료\n가입 당시 약관, 질병분류표, 병리보고서, 조직검사 또는 세포검사 결과, 진단확정 조항을 중심으로 검토해야 합니다. 국가암정보센터, 통계청/KCD, 금융감독원, 판례 또는 보험회사 공식 약관이 확인되는 경우 보조 근거로 사용할 수 있으나, 직접 관련 없는 자료는 공식 근거로 인용하지 않습니다.\n\n7. 보험사 주장에 대한 반박\n본 사안의 핵심은 병리 보고서에 기재된 'serous borderline tumor with invasive implants'라는 진단을 전체적으로 해석할 것인지, 아니면 'borderline tumor'라는 원발 종양 명칭만을 추출하여 해석할 것인지에 있다. 보험사는 후자의 방식으로 D39을 적용하였으나 이는 침윤성 이식이라는 결정적 병리 소견을 배제한 단편적 해석으로 타당하지 않다.\n\nWHO 난소종양 분류 기준(5th Ed.)에 따르면 경계성 종양은 '간질 침습이 없는' 종양으로 정의된다. 침윤성 이식(invasive implants)은 이 정의 요건을 충족하지 않는 병변으로, 저등급 장액성 암종에 준하는 침습성을 가진다. FIGO 병기 분류 및 WHO 분류 체계에서도 침윤성 이식 동반 경계성 종양은 단순 경계성 종양과 구별되며, 예후 및 치료 방침이 실질적으로 다르다. 주치의가 이러한 병리 소견 전체를 종합하여 C56으로 진단서를 발급한 것은 의학적으로 근거 있는 판단이다.\n\n약관상 암 진단확정은 병리 전문의사의 조직검사 현미경 소견을 기초로 한다. 본 사안에서 수술 절제 조직에 대한 병리조직학적 검사가 시행되었고, 그 결과를 기초로 C56 진단서가 발급되었으므로 약관상 진단확정 절차 요건은 충족된다. 보험사가 이 진단을 부정하고 D39을 적용하기 위해서는 독립적 병리 전문의 자문을 통해 주치의 진단의 오류를 구체적으로 입증하여야 하며, 그러한 입증 없이 원발 종양 명칭만을 이유로 지급을 거절하는 것은 지급 거절 사유로 불충분하다.\n\n설령 침윤성 이식 동반 경계성 종양의 KCD 코드 분류에 해석상 불명확성이 있다고 하더라도, 대법원 판례 법리상 약관 조항이 다의적으로 해석될 경우 고객에게 유리하게 해석하여야 한다는 작성자 불이익 원칙이 적용된다. 이 원칙에 따르면 C56 적용이 피보험자에게 유리한 해석이며, 보험사는 D39 적용이 유일하게 합리적인 해석임을 입증할 책임을 진다. 이상의 의학적 근거, 약관상 진단확정 기준, 약관 해석 원칙을 종합할 때, 일반암 진단비 4,000만 원의 지급 타당성이 인정된다는 것이 본 손해사정 의견이다.\n\n본 건은 암진단비 지급 여부가 문제되는 사안으로, 진단서에 기재된 코드만으로 지급 또는 부지급을 병리보고서, 조직검사 또는 세포검사 결과에 따른 진단확정 여부를 먼저 확인해야 합니다.\n\n암, 제자리암, 경계성종양, 유사암 또는 일반암의 구분은 가입 당시 약관과 그 약관에서 정한 질병분류표 기준에 따라 판단해야 합니다. 최신 분류기준을 과거 계약에 자동 적용하거나, 진단서의 C코드 또는 D코드만으로 결론을 내리는 방식은 신중해야 합니다.\n\n제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.\n\n따라서 고객 측 의견은 암진단비 지급을 확정하는 것이 아니라, 병리보고서 원문, 진단확정 자료, 가입 당시 약관, 질병분류표를 기준으로 보험회사의 부지급 또는 감액 판단에 는 방향으로 정리합니다.\n\n8. 추가 확보자료\n1. 가입 당시(2018년 7월) 원약관 및 질병분류표 원문 확보 필수. 현재 검토에 사용된 2012년도, 2016년도 표준약관은 참고자료이며, 원약관의 암/경계성종양 정의 및 질병분류표 적용 기준이 최종 판단 근거가 된다.\n2. 병리 보고서 원문 확보 및 검토 필요. 침윤성 이식(invasive implants)의 위치(복막, 대망), 범위, 조직학적 특성이 구체적으로 기재되어 있는지 확인. 병리 보고서가 'invasive implants'를 명시적으로 기재하고 있는지가 핵심 증거이다.\n3. 주치의 진단서 원문 및 소견서 확보. C56 코드 기재 근거(침윤성 이식 동반 소견 명시 여부)를 확인하고, 필요시 주치의에게 침윤성 이식과 C56 진단의 관계를 설명하는 추가 소견서 발급을 요청한다.\n4. 보험사 면책공문 원문 확보. 현재 면책공문이 제공되지 않아 보험사의 구체적 부지급 사유 및 근거 조항을 확인하지 못하였다. 면책공문 원문을 확보하여 보험사가 인용한 약관 조항 및 의학 근거를 정확히 파악해야 한다.\n5. 보험사 의료자문 내용 확인. 보험사가 독립적 병리 전문의 자문을 받았는지, 자문 내용이 무엇인지 확인 필요. 자문 없이 원발 종양 명칭만으로 D39을 적용한 경우 지급 거절 근거가 더욱 취약해진다.\n6. 침윤성 이식 동반 경계성 종양의 C56 인정 여부에 관한 금감원 분쟁조정 결정례 추가 조사 필요. 제공된 자료 범위 내에서는 직접 관련 결정례가 확인되지 않는다.\n7. 불리한 사실 관리: 병리 주진단 명칭이 'borderline tumor'로 기재된 점은 보험사 주장의 형식적 근거가 될 수 있다. 이에 대응하기 위해 주치의의 C56 진단 근거를 병리 보고서와 연결하여 명확히 문서화하는 것이 중요하다.\n병리보고서 원문\n조직검사 결과지\n세포검사 결과지\n진단서\n가입 당시 약관\n질병분류표\n암진단비 약관상 진단확정 조항\n보험회사 부지급 또는 감액 사유서\n\n9. 손해사정 의견\n본 건은 손해액 산정보다는 암진단비의 진단확정 요건과 병리결과의 분류가 핵심입니다. 제자리암, 경계성종양, 유사암, 행동양식, D코드/C코드 및 병리결과의 의미를 가입 당시 약관과 질병분류표 기준으로 구분해야 합니다.",
+  "finalSubmissionAssessmentReport": "손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)\n\n수신: [보험사]\n작성일: 2026-05-23\n참조: 보험금 지급심사 담당자\n문서번호: AI-TEMP-20260523\n제목: C56 난소의 악성신생물 / D39.1 난소 행동양식 불명 — 경계성종양 침윤성 이식, 코드 불일치 관련 보험금 부지급 통보에 대한 이의 및 지급 요청\n\n피보험자 정보\n- 피보험자: [피보험자]\n- 주민번호: [주민번호]\n- 주소: [주소]\n- 연락처: [연락처]\n- 증권번호: [증권번호]\n- 계약상품: [계약상품]\n- 청구담보: 암진단비 (일반암 4000만원 / 경계성종양 800만원)\n- 진단의료기관: [진단의료기관]\n- 확정진단명: C56 난소의 악성신생물 / D39.1 난소 행동양식 불명 — 경계성종양 침윤성 이식, 코드 불일치\n\n[보험사]는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. 1) 보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점 2) 약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점 3) 고객 측 제출자료에 보험금 지급을 뒷받침하는 사실이 확인되는 점 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.\n\nⅠ. 사건의 경위 및 진단 확정 과정\n- 2018.07 1. 피보험자는 2018년 7월 암진단비 특약(일반암 4,000만 원, 경계성종양 800만 원)을 포함한 보험계약을 체결하였다.\n- 2024.03 2. 2024년 3월 골반 종괴로 양측 난소난관절제술 및 대망절제술을 시행받았으며, 수술 중 채취된 조직에 대해 병리조직학적 검사가 시행되었다.\n- 3. 병리 보고서 주진단: serous borderline tumor with invasive implants. 복막 및 대망에 침윤성 이식(invasive implants)이 확인되었다.\n- 5. 주치의(병리 또는 임상 전문의)는 침윤성 이식 동반 소견을 근거로 C56(난소의 악성신생물) 코드로 진단서를 발급하였다.\n\n결정적 의무기록 문구\n1) 병리 보고서 주진단: serous borderline tumor with invasive implants.\n - 의미: 병리 보고서상 조직학적 소견이 확인되며, 이는 암 진단확정의 기초 자료가 된다.\n2) 2024.03 피보험자는 2024.03 골반 종괴로 양측 난소난관절제술 및 대망절제술 시행.\n - 의미: 수술 시행 사실은 악성 또는 암에 준한 임상적 판단을 뒷받침하는 근거가 된다.\n\nⅡ. 보험사 부지급 결정의 요지 및 그 부당성\n보험회사의 부지급 사유는 「보험사는 병리 주진단이 serous borderline tumor(경계성 장액성 종양)이므로 KCD D39.1(행동양식 불명, 경계성)에 해당하여 경계성종양 진단비(800만원)만 지급 대상이라는 입장. 침윤성 이식이 있어도 원발 종양 자체는 경계성이므로 일반암(C56)으로 볼 수 없다고 주장.」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 병리 보고서 코드(D39.1)를 근거로 진단서 C56를 배척하고 제자리암 또는 소액 지급만 인정하려는 주장입니다.\n1) 병리 보고서 D39.1(제자리암)를 근거로 진단서 C56 악성 진단을 부정하는 주장\n - 오류 유형: medical_criteria_distortion\n - 반박 명제: 진단확정의 기준은 진단서 코드와 병리 보고서 전체를 종합하여 판단해야 합니다. 수술적 절제까지 시행된 임상 경과를 배제하고 병리 코드 하나만으로 일반암 지급을 거절할 수 없습니다.\n2) 진단서 C코드보다 병리 보고서 D코드를 우선 적용하여 소액 지급만 인정하는 주장\n - 오류 유형: policy_requirement_misread\n - 반박 명제: 약관이 규정하는 진단확정은 병리·임상병리 전문의의 조직검사 등 현미경 소견에 기초한 것으로, 진단서 코드를 병리 보고서 코드로 사후 대체하는 것은 약관에 없는 추가 요건입니다. 주치의가 발급한 진단서에는 C56가 기재되어 있습니다.\n3) 종양의 행동양식(behavior code) 또는 경계성 분류를 이유로 악성종양이 아니라는 주장\n - 오류 유형: medical_criteria_distortion\n - 반박 명제: WHO 분류 기준상 ICD-O behavior code /3(악성)과 /2(상피내암)는 병리 검체의 침습 여부로 구분되며, 전문의 병리 보고서가 이를 결정합니다. 보험회사가 병리학적 검토 없이 임의로 행동양식을 재분류하는 것은 허용되지 않습니다.\n4) 약관상 암 진단확정 요건 미충족 주장\n - 오류 유형: policy_requirement_misread\n - 반박 명제: 약관이 요구하는 암 진단확정은 병리 또는 임상병리 전문의 자격증을 가진 자에 의한 조직검사 등 현미경 소견을 기초로 한 것입니다. 제출된 병리 보고서로 진단확정 요건이 충족됩니다.\n5) 약관에 명시되지 않은 추가 조건으로 지급 거절\n - 오류 유형: unsupported_additional_requirement\n - 반박 명제: 보험회사는 약관에 없는 사후적 제한 요건(특정 코드 우선 적용, 추가 의학적 요건 등)을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.\n위 오류들은 서로 독립적으로 보험사 주장을 무력화합니다. 의학 기준상 오류가 인정되지 않더라도 약관 문언, 판례/금감원 자료의 적용 방식, 약관해석 원칙 중 어느 하나만으로도 보험회사의 단편적 부지급 논리는 유지되기 어렵습니다.\n\nⅢ. 의학적 근거 진단의 정당성\n- WHO 암 분류 기준 — 경계성 종양(Borderline Tumor / Low Malignant Potential Tumor) 정의 (WHO Classification of Tumours, 5th Ed.): 경계성 종양 — 1. 정의: 경계성 종양(Low Malignant Potential, LMP)은 \"상피세포 증식이 있으나 간질 침습(stromal invasion)이 없는 종양\"으로, 양성과 악성 사이의 중간 단계다. WHO 정의 핵심: atypical epithelial proliferation WITHOUT stromal invasion. 2. 주요 조직학적 기준: - 층상 배열 상피세포 증식\n- 난소암 FIGO 병기 분류 및 진단 기준 (FIGO Staging for Ovarian Cancer, 2014; WHO Classification of Tumours of Female Reproductive Organs, 5th Ed., 2020): 난소암, 난소 경계성 종양 — 1. 확진 기준: 수술(복강경 또는 개복술) 중 조직 채취 후 병리조직학적 검사로 확진. CA-125 단독으로는 진단 확정 불가. 2. 조직학적 분류: - 상피성 난소암(89.7%): 장액성, 자궁내막양, 투명세포암, 점액성암\n- AJCC/UICC TNM 병기 분류 체계 — 암 진단확정 및 병기 판단 기준 (AJCC Cancer Staging Manual, 8th Ed., 2017; UICC TNM Classification, 8th Ed., 2017): 모든 고형암 (ICD-10 C56-C56; 상피내암 D39-D39) — 1. TNM 체계 구성: - T(Tumor): 원발 종양의 크기 및 침범 정도. T0(종양 없음), Tis(상피내암), T1-T4(크기/침범도 증가) - N(Node): 림프절 전이 여부. N0(전이 없음), N1-N3(전이 범위 증가)\n\nWHO 암 분류 및 ICD-O 행동양식 코드(/1 경계성, /2 상피내암, /3 악성)를 포함한 국제 암 분류 기준으로 판단합니다.\n\n【쟁점 1】 침윤성 이식 동반 경계성 종양의 KCD 코드 분류: C56이냐 D39이냐\n침윤성 이식(invasive implants)은 WHO Classification of Tumours(5th Ed.) 기준상 경계성 종양의 정의 핵심 요건인 'atypical epithelial proliferation WITHOUT stromal invasion'을 충족하지 않는 병변이다. 즉, 침윤성 이식이 확인된 경우 해당 병변은 경계성 종양의 정의 범위를 벗어나며, 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 악성 행동으로 분류된다. 이 경우 원발 난소 종양의 조직학적 명칭이 'borderline'이더라도, 복막 및 대망에 확인된 침윤성 이식 병변 자체는 악성 행동 코드(C 계열)에 해당할 수 있다.\n\n【쟁점 2】 진단서 C56의 유효성\n주치의는 병리 소견 전체(원발 종양 + 침윤성 이식)를 종합하여 C56으로 진단서를 발급하였다. 약관상 암 진단확정은 병리 또는 진단검사의학 전문의사의 조직검사 현미경 소견을 기초로 한다. 주치의의 C56 진단은 이 요건을 충족한다.\n\n【쟁점 3】 보험사의 D39 분류 적용의 타당성\n보험사는 원발 종양 명칭만을 근거로 D39을 적용하였으나 이는 침윤성 이식이라는 결정적 병리 소견을 배제한 단편적 해석이다. D39은 '행동양식 불명'으로 침습성이 확인되지 않은 경계성 종양에 적용되는 코드이며, 침윤성 이식이 병리적으로 확인된 본 사안에 그대로 적용하는 것은 의학적 근거가 불충분하다.\n\n【쟁점 4】 약관상 '전암상태' 제외 조항의 적용 가부\n약관은 '전암상태(암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)'를 암 지급 대상에서 제외한다. 침윤성 이식 동반 경계성 종양이 이 제외 조항에 해당하는지가 쟁점이다. 침윤성 이식은 이미 악성 행동이 발현된 병변으로, '암으로 변하기 이전 상태'로 볼 수 없다는 것이 피보험자 측 입장이다.\n\n주요 쟁점은 암진단비 청구에서 진단확정이 인정되는지, 병리보고서 또는 조직검사ㆍ세포검사 결과가 가입 당시 약관과 질병분류표상 암, 제자리암, 경계성종양 또는 유사암 중 어디에 해당하는지입니다.\n\n병리 보고서 D39.1만으로 진단서 C56 악성 진단을 배척할 수 없습니다.\n\nⅣ. 보험약관상 진단확정 요건의 충족\n- 2012 12년도 약관.pdf keyword_matched_policy_clause: - 134 - 癌)상태(암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)는 제외 합니다. 대 상 질 병 분류코드 1. 기타 피부의 악성신생물 2. 갑상선의 악성신생물 3. 유방의 악성신생물 4. 자궁목의 악성신생물 5. 자궁체의 악성신생물 6. 전립선의 악성신생물 7. 방광의 악성신생물 C56 C56 C56 C56 C56 C56 C56 「암(소액암 제외)」의 진단확정은 해부병리 또는 임상병 리의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직(fixed tissue)검사, 미세바늘흡인검사(fine\n- 2016 16년도 약관.pdf keyword_matched_policy_clause: - 224 - 11(악성신생물(암) 분류표)】참조) 중 C56(기타 피부의 악 성신생물) 및 C56(갑상선의 악성신생물)을 제외한 질병을 말합니다. 또한, 전암(前癌)상태(암으로 변하기 이전 상태. Premalignant condition or condition with malignant potential)에 해당하는 질병도 제외합니다. 「암」의 진단확정은 병리 또는 진단검사의학의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직 (fixed tissue)검사, 미세바늘흡인검사(fine needle aspiration) 또는 혈액(hemic system)검사에 대한 현미경 소견을 기초\n\n| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |\n|---|---|---|\n| 진단서 또는 전문의 진단 | 주치의 진단서/소견서상 확정진단명이 확인됨 | 충족으로 평가됨 |\n| 객관적 검사자료 | 제출된 검사자료 및 진료기록이 확인됨 | 충족으로 평가됨 |\n\n약관상 암 진단확정 요건은 병리·임상병리 전문의의 조직검사 등 현미경 소견을 기초로 한 것이며, 진단서 코드와 병리 코드 불일치는 보험회사가 추가 요건으로 삼을 수 없습니다.\n\nⅤ. 판례 및 금감원 자료에 대한 적용 또는 반박\n현재 서버 Evidence Pack에서 본 사안에 직접 적용 가능한 판례 및 금감원 분쟁조정례는 확인되지 않습니다. 따라서 본 의견서는 약관 문언, 의무기록, 주치의 진단서 및 의학 기준을 중심으로 작성합니다.\n\nⅥ. 약관해석 원칙\n약관상 암/제자리암/경계성종양 정의가 진단서 코드와 병리 보고서 코드 불일치 상황을 명시적으로 규정하지 않으므로 해석상 불명확성이 있습니다.\n작성자 불이익 원칙상 약관의 다의적 문구는 고객에게 유리하게 해석되어야 합니다.\n보험회사가 약관에 없는 병리 코드 우선 적용을 이유로 일반암 진단비 지급을 거절하는 것은 부당합니다.\n\nⅦ. 결론\n첫째, 병리 보고서 D39.1만으로 진단서 C56 악성 진단을 배척할 수 없습니다.\n둘째, 약관상 암 진단확정 요건은 병리·임상병리 전문의의 조직검사 등 현미경 소견을 기초로 한 것이며, 진단서 코드와 병리 코드 불일치는 보험회사가 추가 요건으로 삼을 수 없습니다.\n셋째, 보험회사가 약관에 없는 병리 코드 우선 적용을 이유로 일반암 진단비 지급을 거절하는 것은 부당합니다. 따라서 일반암 진단비 보험금 전액을 지급해야 합니다.\n\n[요청사항]\n1. 일반암 진단비 보험금 전액을 지급해야 합니다.\n2. 부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.\n3. 부동의 시 보험회사는 병리학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.\n4. 구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.\n\n[첨부서류]\n1. 진단서\n2. 소견서\n3. 의무기록\n4. 보험사 부지급 통보서\n5. 보험증권\n6. 약관",
+  "policyEvidence": [],
+  "killingEvidence": [
+    {
+      "evidenceType": "pathology_finding",
+      "date": "",
+      "quote": "병리 보고서 주진단: serous borderline tumor with invasive implants.",
+      "sourceDocumentType": "pathology_report",
+      "strategicMeaning": "병리 보고서상 조직학적 소견이 확인되며, 이는 암 진단확정의 기초 자료가 된다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "decisive"
+    },
+    {
+      "evidenceType": "treatment_record",
+      "date": "2024.03",
+      "quote": "피보험자는 2024.03 골반 종괴로 양측 난소난관절제술 및 대망절제술 시행.",
+      "sourceDocumentType": "procedure_report",
+      "strategicMeaning": "수술 시행 사실은 악성 또는 암에 준한 임상적 판단을 뒷받침하는 근거가 된다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "conclusion"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "preAnalysis": {
+    "diagnosisIssue": {
+      "claimedDiagnosis": "C56 난소의 악성신생물 / D39.1 난소 행동양식 불명 — 경계성종양 침윤성 이식, 코드 불일치",
+      "disputeSummary": "병리 보고서 코드(D39.1)를 근거로 진단서 C56를 배척하고 제자리암 또는 소액 지급만 인정하려는 주장"
+    },
+    "insurerDenialQuote": {
+      "originalQuote": "보험사는 병리 주진단이 serous borderline tumor(경계성 장액성 종양)이므로 KCD D39.1(행동양식 불명, 경계성)에 해당하여 경계성종양 진단비(800만원)만 지급 대상이라는 입장. 침윤성 이식이 있어도 원발 종양 자체는 경계성이므로 일반암(C56)으로 볼 수 없다고 주장.",
+      "weaknesses": [
+        "진단확정의 기준은 진단서 코드와 병리 보고서 전체를 종합하여 판단해야 합니다. 수술적 절제까지 시행된 임상 경과를 배제하고 병리 코드 하나만으로 일반암 지급을 거절할 수 없습니다.",
+        "약관이 규정하는 진단확정은 병리·임상병리 전문의의 조직검사 등 현미경 소견에 기초한 것으로, 진단서 코드를 병리 보고서 코드로 사후 대체하는 것은 약관에 없는 추가 요건입니다. 주치의가 발급한 진단서에는 C56가 기재되어 있습니다.",
+        "WHO 분류 기준상 ICD-O behavior code /3(악성)과 /2(상피내암)는 병리 검체의 침습 여부로 구분되며, 전문의 병리 보고서가 이를 결정합니다. 보험회사가 병리학적 검토 없이 임의로 행동양식을 재분류하는 것은 허용되지 않습니다.",
+        "약관이 요구하는 암 진단확정은 병리 또는 임상병리 전문의 자격증을 가진 자에 의한 조직검사 등 현미경 소견을 기초로 한 것입니다. 제출된 병리 보고서로 진단확정 요건이 충족됩니다.",
+        "보험회사는 약관에 없는 사후적 제한 요건(특정 코드 우선 적용, 추가 의학적 요건 등)을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다."
+      ]
+    },
+    "medicalCriteria": {
+      "standardName": "제출 의료자료와 전문의 진단에 따른 객관적 판단 기준",
+      "criteria": [
+        {
+          "criterion": "병리 또는 임상병리 전문의 자격증을 가진 자의 진단",
+          "patientEvidence": "병리 전문의 보고서 제출됨",
+          "satisfied": true
+        },
+        {
+          "criterion": "조직(fixed tissue)검사 또는 세포검사 현미경 소견",
+          "patientEvidence": "2. 2024년 3월 골반 종괴로 양측 난소난관절제술 및 대망절제술을 시행받았으며, 수술 중 채취된 조직에 대해 병리조직학적 검사가 시행되었다.",
+          "satisfied": true
+        },
+        {
+          "criterion": "진단서 또는 소견서 확정진단명",
+          "patientEvidence": "주치의 발급 진단서에 C56 확정진단명 기재됨",
+          "satisfied": true
+        },
+        {
+          "criterion": "치료 경과 — 악성 진단에 준한 임상적 판단의 방증",
+          "patientEvidence": "수술적 절제 시행됨 — 단순 관찰이 아닌 악성 진단에 준한 치료가 이루어진 경과",
+          "satisfied": true
+        }
+      ]
+    },
+    "policyCriteria": {
+      "policyQuote": "가입 당시 약관상 지급요건을 기준으로 판단합니다.",
+      "requirements": [
+        {
+          "requirement": "병리 또는 임상병리 전문의 자격증을 가진 자의 진단",
+          "patientEvidence": "병리 전문의 보고서 제출됨",
+          "satisfied": true
+        },
+        {
+          "requirement": "조직(fixed tissue)검사 또는 세포검사 현미경 소견",
+          "patientEvidence": "2. 2024년 3월 골반 종괴로 양측 난소난관절제술 및 대망절제술을 시행받았으며, 수술 중 채취된 조직에 대해 병리조직학적 검사가 시행되었다.",
+          "satisfied": true
+        },
+        {
+          "requirement": "진단서 또는 소견서 확정진단명",
+          "patientEvidence": "주치의 발급 진단서에 C56 확정진단명 기재됨",
+          "satisfied": true
+        },
+        {
+          "requirement": "치료 경과 — 악성 진단에 준한 임상적 판단의 방증",
+          "patientEvidence": "수술적 절제 시행됨 — 단순 관찰이 아닌 악성 진단에 준한 치료가 이루어진 경과",
+          "satisfied": true
+        }
+      ]
+    },
+    "citedCaseLaw": {
+      "insurerCitedCases": [],
+      "legalPrinciples": [
+        "암 진단확정 분쟁에서 판례는 병리 보고서, 진단서, 임상 경과를 종합 판단하도록 요구합니다.",
+        "판례·금감원 분쟁조정례는 병리 실질과 임상 전체를 종합하는 방향으로 고객 측에 유리하게 적용됩니다."
+      ],
+      "reverseApplication": "보험사가 판례를 인용하더라도 병리 소견과 수술적 절제를 배제하는 근거로 사용할 수 없습니다.",
+      "fssDisputeReferences": []
+    },
+    "killingEvidence": [
+      {
+        "evidenceType": "pathology_finding",
+        "date": "",
+        "quote": "병리 보고서 주진단: serous borderline tumor with invasive implants.",
+        "sourceDocumentType": "pathology_report",
+        "strategicMeaning": "병리 보고서상 조직학적 소견이 확인되며, 이는 암 진단확정의 기초 자료가 된다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "decisive"
+      },
+      {
+        "evidenceType": "treatment_record",
+        "date": "2024.03",
+        "quote": "피보험자는 2024.03 골반 종괴로 양측 난소난관절제술 및 대망절제술 시행.",
+        "sourceDocumentType": "procedure_report",
+        "strategicMeaning": "수술 시행 사실은 악성 또는 암에 준한 임상적 판단을 뒷받침하는 근거가 된다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "conclusion"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "defenseLayers": {
+      "medical": "병리 보고서 D39.1만으로 진단서 C56 악성 진단을 배척할 수 없습니다.",
+      "policy": "약관상 암 진단확정 요건은 병리·임상병리 전문의의 조직검사 등 현미경 소견을 기초로 한 것이며, 진단서 코드와 병리 코드 불일치는 보험회사가 추가 요건으로 삼을 수 없습니다.",
+      "caseLaw": "판례·금감원 분쟁조정례는 병리 실질과 임상 전체를 종합하는 방향으로 고객 측에 유리하게 적용됩니다.",
+      "interpretation": "보험회사가 약관에 없는 병리 코드 우선 적용을 이유로 일반암 진단비 지급을 거절하는 것은 부당합니다."
+    },
+    "visualPlan": {
+      "tables": [
+        "진단기준 vs 환자 데이터 매핑표",
+        "약관 요건 vs 환자 자료 매칭표"
+      ],
+      "quoteBoxes": [
+        "보험사 부지급 문구",
+        "병리 보고서 주진단: serous borderline tumor with invasive implants."
+      ],
+      "boldNumbers": []
+    },
+    "finalRequestLogic": {
+      "paymentRequest": "일반암 진단비 보험금 전액을 지급해야 합니다.",
+      "delayInterestRequest": "부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.",
+      "writtenReplyDemand": "부동의 시 보험회사는 병리학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.",
+      "escalationNotice": "구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다."
+    }
+  },
+  "selfVerification": {
+    "insurerQuotePresent": true,
+    "medicalStandardNamed": true,
+    "medicalMappingTablePresent": true,
+    "policyQuotePresent": true,
+    "policyMappingTablePresent": true,
+    "caseLawReverseAppliedOrNotFabricated": true,
+    "killingEvidencePresent": true,
+    "defenseLayersCount": 4,
+    "conclusionHasSeparateReasons": true,
+    "requestIncludesPayment": true,
+    "requestIncludesDelayInterest": true,
+    "requestIncludesWrittenReply": true,
+    "weakLanguageAbsent": true,
+    "forbiddenPhrasesAbsent": true,
+    "piiRedacted": true
+  },
+  "disclaimer": "",
+  "retrievedReferences": {
+    "query": "{\"caseTitle\":\"난소 경계성종양(D39) 침윤성 이식 — 일반암 진단비 부지급\",\"insurerName\":\"[보험사]\",\"productName\":\"\",\"policyName\":\"\",\"insuranceType\":\"암진단비 (일반암 4000만원 / 경계성종양 800만원)\",\"coverageType\":\"\",\"contractDate\":\"2018-07\",\"policyGeneration\":\"unknown\",\"diagnosisText\":\"C56 난소의 악성신생물 / D39.1 난소 행동양식 불명 — 경계성종양 침윤성 이식, 코드 불일치\",\"diagnosisName\":\"\",\"diagnosisCode\":\"\",\"accidentType\":\"암진단비 청구\",\"accidentDate\":\"unknown\",\"damageDetails\":\"피보험자는 2024.03 골반 종괴로 양측 난소난관절제술 및 대망절제술 시행. 절제 병리: serous borderline tumor(경계성 장액성 종양), 복막에 침윤성 이식(invasive implants) 동반, 대망 침윤성 이식 확인. 침윤성 이식은 저등급 장액성 암종(low-grade serous carcinoma)에 준하는 침습성 병변. 주치의는 침윤성 이식 동반 경계성종양으로 C56 진단. 진단서 C56 기재, 병리 주진단 serous borderline tumor with invasive implants. 보험사는 borderline tumor를 이유로 D39.1 경계성 주장.\",\"insurerPosition\":\"보험사는 병리 주진단이 serous borderline tumor(경계성 장액성 종양)이므로 KCD D39.1(행동양식 불명, 경계성)에 해당하여 경계성종양 진단비(800만원)만 지급 대상이라는 입장. 침윤성 이식이 있어도 원발 종양 자체는 경계성이므로 일반암(C56)으로 볼 수 없다고 주장.\",\"customerStatement\":\"병리에 침윤성 이식(invasive implants)이 복막과 대망에 확인됐고 이건 저등급 암종에 준하는 침습성 병변인데, 원발이 borderline이라는 이유로 경계성 800만원만 주는 게 부당합니다.\",\"adjusterMemo\":\"쟁점: 침윤성 이식 동반 경계성종양의 분류 — 일반암(C56)이냐 경계성(D39)이냐. 보험사는 원발 borderline으로 경계성 주장. 핵심: 침윤성 이식(invasive implants)은 WHO 분류상 저등급 장액성 암종에 준하는 침습성 병변으로 악성 행동, 침윤성 이식 동반 경계성종양은 일반 경계성과 구별(예후·치료 다름), 진단서 C56, 침습성 병변 확인 시 C코드 인정, WHO 난소종양 분류, 가입 약관 검토.\"} 보험회사 [보험사] 보험종류 암진단비 (일반암 4000만원 / 경계성종양 800만원) 보험가입일 2018-07 가입 당시 약관 질병분류표 장해분류표 적용기간",
+    "officialReferences": [
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2012 12년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 134 - 癌)상태(암으로 변하기 이전 상태, Premalignant condition or condition with malignant potential)는 제외 합니다. 대 상 질 병 분류코드 1. 기타 피부의 악성신생물 2. 갑상선의 악성신생물 3. 유방의 악성신생물 4. 자궁목의 악성신생물 5. 자궁체의 악성신생물 6. 전립선의 악성신생물 7. 방광의 악성신생물 C56 C56 C56 C56 C56 C56 C56 「암(소액암 제외)」의 진단확정은 해부병리 또는 임상병 리의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직(fixed tissue)검사, 미세바늘흡인검사(fine",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.683209494092857,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2016 16년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 224 - 11(악성신생물(암) 분류표)】참조) 중 C56(기타 피부의 악 성신생물) 및 C56(갑상선의 악성신생물)을 제외한 질병을 말합니다. 또한, 전암(前癌)상태(암으로 변하기 이전 상태. Premalignant condition or condition with malignant potential)에 해당하는 질병도 제외합니다. 「암」의 진단확정은 병리 또는 진단검사의학의 전문의사 자격증을 가진 자에 의하여 내려져야 하며, 이 진단은 조직 (fixed tissue)검사, 미세바늘흡인검사(fine needle aspiration) 또는 혈액(hemic system)검사에 대한 현미경 소견을 기초",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.674315260293528,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "WHO 암 분류 기준 — 경계성 종양(Borderline Tumor / Low Malignant Potential Tumor) 정의 (WHO Classification of Tumours, 5th Ed.)",
+        "summary": "경계성 종양 — 1. 정의: 경계성 종양(Low Malignant Potential, LMP)은 \"상피세포 증식이 있으나 간질 침습(stromal invasion)이 없는 종양\"으로, 양성과 악성 사이의 중간 단계다. WHO 정의 핵심: atypical epithelial proliferation WITHOUT stromal invasion. 2. 주요 조직학적 기준: - 층상 배열 상피세포 증식",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.646399011844447,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "D39–D39",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "난소암 FIGO 병기 분류 및 진단 기준 (FIGO Staging for Ovarian Cancer, 2014; WHO Classification of Tumours of Female Reproductive Organs, 5th Ed., 2020)",
+        "summary": "난소암, 난소 경계성 종양 — 1. 확진 기준: 수술(복강경 또는 개복술) 중 조직 채취 후 병리조직학적 검사로 확진. CA-125 단독으로는 진단 확정 불가. 2. 조직학적 분류: - 상피성 난소암(89.7%): 장액성, 자궁내막양, 투명세포암, 점액성암",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.572312200345392,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "C56 난소 악성, D39 난소 양성, D39 난소 행동양식 불명",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "AJCC/UICC TNM 병기 분류 체계 — 암 진단확정 및 병기 판단 기준 (AJCC Cancer Staging Manual, 8th Ed., 2017; UICC TNM Classification, 8th Ed., 2017)",
+        "summary": "모든 고형암 (ICD-10 C56-C56; 상피내암 D39-D39) — 1. TNM 체계 구성: - T(Tumor): 원발 종양의 크기 및 침범 정도. T0(종양 없음), Tis(상피내암), T1-T4(크기/침범도 증가) - N(Node): 림프절 전이 여부. N0(전이 없음), N1-N3(전이 범위 증가)",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.571279323032015,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      }
+    ],
+    "internalReviewMaterials": [
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금 part 2",
+        "summary": "[1] 보험약관은 신의성실의 원칙에 따라 해당 약관의 목적과 취지를 고려하여 공정하고 합리적으로 해석하되, 개개 계약 당사자가 기도한 목적이나 의사를 참작하지 않고, 평균적 고객의 이해가능성을 기준으로 보험단체 전체의 이해관계를 고려하여 객관적·획일적으로 해석하여야 한다. 위와 같은 해석을 거친 후에도 약관 조항이 객관적으로 다의적으로 해석되고, 그 각각의 해석이 합리성이 있는 등 당해 약관의 뜻이 명백하지 아니한 경우에는 고객에게 유리하게 해석하여야 한다. [2] 甲이 대장 내시경 검사를 받던 중 직장에서 크기가 1㎝ 미만인 용종이 발견되어 용종절제술을 받았고, 병리 전문의사가 실시한 조직검사 결과를 토대로 甲의 주치의인 임상의사가 위 용종에 관하여 ‘직장의 악성 신생물’이라는 진단서를 발급하였는데, 위 용종이 甲 및 그 배우자인 乙이 丙 보험회사 등과 체결한 보험계약의 약관에서 정한 ‘암’에 해당하는지 문제 된 사안에서, 위 보험약관은 ‘암’을 ‘한국표준질병·사인분류의 기본분류에...",
+        "sourceDisplayName": "판례",
+        "similarity": 0.638947396548899,
+        "case_number": "2017다256828",
+        "court_or_agency": "",
+        "decision_date": "2018-07-24",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "199737",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "kca_dispute",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "직장 신경내분비종양 진단에 따른 암진단 보험금 지급 요구",
+        "summary": "대장내시경 점막절제술 후 직장 신경내분비종양 진단을 받았고, KCD 분류와 병리소견을 근거로 암진단 보험금 지급 여부가 다투어진 사례.",
+        "sourceDisplayName": "판례",
+        "similarity": 0.576281536821275,
+        "case_number": "seq=1003206886",
+        "court_or_agency": "한국소비자원 소비자분쟁조정위원회",
+        "decision_date": "2021-11-05",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "unreviewed",
+        "official_citation_allowed": false,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "유사 판례 참고자료",
+        "title": "보험금 part 2",
+        "summary": "[1] 약관 해석에서 작성자 불이익의 원칙 [2] 보험계약의 약관에서 암과 상피내암 여부에 따라 보험금 지급액의 범위를 달리하고 있는 사안에서, 위 약관에서 규정하는 상피내암이 객관적으로 다의적으로 해석되어 약관 조항의 뜻이 명백하지 아니하므로 작성자 불이익의 원칙을 적용하여 위 상피내암에는 점막내 암종을 제외한 상피내 암종만이 해당한다고 제한 해석한 사례",
+        "sourceDisplayName": "판례",
+        "similarity": 0.571016063920918,
+        "case_number": "2010다93011",
+        "court_or_agency": "",
+        "decision_date": "2011-02-10",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "유사 판례 참고자료입니다. 검토 전 판례이므로 공식근거 또는 확정 근거로 인용하지 말고 판례상 법리 참고로만 사용하세요.",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "koicd",
+        "provider_prec_id": "157232",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "medical_issue_codes",
+        "source_type": "icdo_morphology",
+        "source_area_label": "질병코드별 의료쟁점",
+        "title": "M8000/3 Neoplasm, malignant",
+        "summary": "일반암 진단비 검토 대상이다. 단, 약관상 소액암/특정암/원발부위 기준 특약과 가입 당시 KCD 차수를 함께 확인한다.",
+        "sourceDisplayName": "질병코드별 의료쟁점",
+        "similarity": 0.563021621538152,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "내부 검토자료이며 공식 근거로 인용하지 않음",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "icd_o",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "icdo_morphology_dataset_v1"
+      }
+    ]
+  }
+}

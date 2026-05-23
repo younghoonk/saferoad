@@ -71,7 +71,10 @@ export function detectAssessmentProfile(input: AssessmentProfileDetectionInput):
   const disabilitySpecific = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|압박골절|추간판탈출증|회전근개파열|무릎\s*인대|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
   const strongDisabilitySignal = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
 
-  if (/의료자문|의료\s*자문|보험사\s*자문|자문의|제3의료기관|본사\s*민원|소비자보호부서|금감원\s*민원|분쟁조정|소송\s*전|소송\s*가능성|자료정리|서면\s*요청/i.test(allText)) {
+  // Strong cancer signals take priority over pre-litigation routing
+  // (e.g. cases where insurer's medical review is mentioned inside a cancer dispute)
+  const strongCancerSignal = /암진단비|일반암|제자리암|상피내암|경계성종양|high\s*grade\s*dysplasia|dysplasia|carcinoma|adenocarcinoma|melanoma|Breslow|FIGO|microinvasion|미세침윤|침윤성\s*이식|ESD|원추절제|conization|원발암|전이암|침윤암/i.test(allText);
+  if (!strongCancerSignal && /의료자문|의료\s*자문|보험사\s*자문|자문의|제3의료기관|본사\s*민원|소비자보호부서|금감원\s*민원|분쟁조정|소송\s*전|소송\s*가능성|자료정리|서면\s*요청/i.test(allText)) {
     return 'medical_review_pre_litigation';
   }
   if (strongDisabilitySignal) return 'disability_benefit';
