@@ -99,7 +99,10 @@ type KillingEvidenceType =
   | 'cag_pci_finding'
   | 'policy_clause'
   | 'pathology_finding'
-  | 'treatment_record';
+  | 'treatment_record'
+  | 'brain_imaging'
+  | 'neurological_deficit'
+  | 'brain_followup';
 
 interface KillingEvidence {
   evidenceType: KillingEvidenceType;
@@ -1911,6 +1914,11 @@ function buildClaimArgumentStructure(
     return buildCancerClaimArgument(insurerClaim, chronology, keyNumbers, killingEvidence, citedAuthority, input, result);
   }
 
+  const isBrain = caseProfile(input) === 'brain_diagnosis_benefit';
+  if (isBrain) {
+    return buildBrainClaimArgument(insurerClaim, chronology, keyNumbers, killingEvidence, citedAuthority, input, result);
+  }
+
   return {
     insurerPosition: {
       quotedPosition: insurerClaim,
@@ -2016,7 +2024,7 @@ function isSubmissionMedicalChronologyLine(line: string) {
   if (/문서\s*구성|핵심\s*chronology|chronology|유리한\s*자료|추가\s*확인사항|보험사\s*공문|약관|판례|금감원|분쟁조정|Evidence Pack|sourceAnalysis/i.test(line)) return false;
   if (/\b(?:confidence|document_type|completed|SKMBT_|Resized_)\b/i.test(line)) return false;
   if (/보험회사|보험사|부지급|면책|약관상|판례상|분쟁조정례/.test(line) && !/진단서|소견서|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|CK-MB|심전도|TMT|CCTA|CT|협착|I21|I20|I25|수술|조직검사|병리|암|항암|방사선/i.test(line)) return false;
-  return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25|암진단|조직검사|생검|biopsy|DCIS|carcinoma|microinvasion|병리\s*보고서|수술|절제|항암|방사선|항호르몬|림프절|C\d{2}|D0\d/i.test(line);
+  return /20\d{2}|흉통|입원|퇴원|CAG|PCI|stent|스텐트|troponin|트로포닌|CK-MB|심근효소|심전도|ECG|TMT|CCTA|CT|LAD|LCx|LM|협착|진단서|소견서|주치의|I21|I20|I25|암진단|조직검사|생검|biopsy|DCIS|carcinoma|microinvasion|병리\s*보고서|수술|절제|항암|방사선|항호르몬|림프절|C\d{2}|D0\d|DWI|ADC|MRI|MRA|뇌경색|뇌출혈|뇌혈관|NIHSS|신경학적\s*결손|편마비|구음장애|동맥류|뇌연화증|코일색전술|I6[0-9]|G45/i.test(line);
 }
 
 function normalizeSubmissionDate(value: string) {
@@ -2306,6 +2314,61 @@ function extractKillingEvidence(
     }
   }
 
+  // ── Brain-specific evidence ───────────────────────────────────────────────────
+  // Only when brain profile: DWI imaging, neurological deficit, follow-up encephalomalacia.
+  if (isBrainProfile) {
+    const dwiQuote = sentenceContaining(
+      source,
+      /DWI|ADC\s*map|급성\s*허혈성\s*병변|diffusion[\s-]*weighted|경색\s*병변/i,
+      'DWI에서 급성 허혈성 병변이 확인되었습니다.',
+    );
+    if (/DWI|ADC\s*map|diffusion[\s-]*weighted|급성\s*허혈성\s*병변/i.test(source)) {
+      push({
+        evidenceType: 'brain_imaging',
+        date: dateNearQuote(source, dwiQuote) || '',
+        quote: dwiQuote,
+        sourceDocumentType: 'imaging_report',
+        strategicMeaning: 'DWI 급성 허혈성 병변은 CT 음성에도 불구한 뇌경색 확진 근거이며 TIA와의 구별 기준이다.',
+        useInSections: ['facts', 'medical', 'policy', 'conclusion'],
+        strength: 'decisive',
+      });
+    }
+
+    const neuroQuote = sentenceContaining(
+      source,
+      /NIHSS|편마비|구음장애|시야장애|신경학적\s*결손|실어증|반신마비|연하장애/i,
+      '신경학적 결손이 확인되었습니다.',
+    );
+    if (/NIHSS|편마비|구음장애|시야장애|신경학적\s*결손|실어증|반신마비/i.test(source)) {
+      push({
+        evidenceType: 'neurological_deficit',
+        date: dateNearQuote(source, neuroQuote) || '',
+        quote: neuroQuote,
+        sourceDocumentType: 'medical_record',
+        strategicMeaning: '신경학적 결손은 일시적 TIA와 달리 뇌경색의 임상적 확진 지표이며 기능 손상의 객관적 근거이다.',
+        useInSections: ['facts', 'medical', 'conclusion'],
+        strength: 'strong',
+      });
+    }
+
+    const followupQuote = sentenceContaining(
+      source,
+      /뇌연화증|추적\s*(?:MRI|CT|영상)|follow-?up\s*(?:MRI|CT)|경색후|연화/i,
+      '추적 영상에서 뇌연화증이 확인되었습니다.',
+    );
+    if (/뇌연화증|추적\s*(?:MRI|CT|영상)|follow-?up\s*(?:MRI|CT)/i.test(source)) {
+      push({
+        evidenceType: 'brain_followup',
+        date: dateNearQuote(source, followupQuote) || '',
+        quote: followupQuote,
+        sourceDocumentType: 'imaging_report',
+        strategicMeaning: '추적 영상의 뇌연화증은 영구적 뇌조직 손상의 객관적 증거로 TIA와의 구별을 명확히 한다.',
+        useInSections: ['facts', 'medical', 'conclusion'],
+        strength: 'strong',
+      });
+    }
+  }
+
   return evidence.slice(0, 8);
 }
 
@@ -2352,12 +2415,20 @@ function extractKeyNumbersForArgument(input: ReturnType<typeof validateInput>, r
     result.issues,
   ].filter(Boolean).join('\n');
   const isCancerInput = /암진단비|일반암|제자리암|상피내암|DCIS|carcinoma|C\d{2}|D0\d|병리|조직검사|암\s*진단/i.test(text);
+  const isBrainInput = /뇌혈관|뇌경색|뇌졸중|뇌출혈|뇌진단비|I6[0-9]|G45|DWI|MRA|CTA|NIHSS|신경학적\s*결손/i.test(text);
   const candidates: Array<{ pattern: RegExp; label: string; meaning: string }> = isCancerInput
     ? [
       { pattern: /\b(\d+(?:\.\d+)?)\s*cm\b/ig, label: '종양 크기', meaning: '병리 보고서상 종양 크기 — 악성도 및 병기 판단의 기초 수치' },
       { pattern: /Ki-?67[^\n,;:：]{0,20}?(\d+)\s*%/ig, label: 'Ki-67', meaning: '종양 증식 지수 — 악성 정도 및 high grade 판단의 보조 수치' },
       { pattern: /CA\s*[\d\-]+[^\n,;:：]{0,15}?(\d+(?:\.\d+)?)\s*(?:U\/mL|IU\/mL|U\/L)?/ig, label: '종양표지자(CA)', meaning: '혈청 종양표지자 — 암 진단 및 경과 추적의 보조 근거' },
       { pattern: /(?:림프절|lymph node)[^\n,;:：]{0,30}?(?:\d+|전이\s*없음|음성|양성)/ig, label: '림프절 전이', meaning: '감시림프절 전이 여부 — 병기 및 치료 방침 결정 근거' },
+    ]
+    : isBrainInput
+    ? [
+      { pattern: /NIHSS[^\n,;:：]{0,20}?(\d+)/ig, label: 'NIHSS', meaning: '신경학적 결손 중증도 평가 지표 — 뇌경색 임상 확진 및 경과의 객관적 수치' },
+      { pattern: /\b(\d+(?:\.\d+)?)\s*mm\b/ig, label: '병변 크기', meaning: '영상검사상 뇌경색·출혈 병변 크기 — I63 진단 기준과 무관함을 뒷받침' },
+      { pattern: /(?:협착률?|협착)[^\n,;:：]{0,25}?(\d{2,3}\s*%)/ig, label: '뇌혈관 협착률', meaning: 'MRA/CTA상 혈관 협착 정도 — 뇌경색 원인 혈관 병변의 객관적 근거' },
+      { pattern: /(?:동맥류|aneurysm)[^\n,;:：]{0,30}?(\d+(?:\.\d+)?)\s*mm/ig, label: '동맥류 크기', meaning: '뇌동맥류 크기 — 파열 위험 및 치료(코일색전술) 결정 근거' },
     ]
     : [
       { pattern: /(?:hs-?troponin|troponin\s*T?|트로포닌)[^\n,;:：]{0,30}?(?:\d+(?:\.\d+)?)/ig, label: 'hs-troponin/Troponin T', meaning: '심근손상 및 NSTEMI/I21.4 판단의 핵심 수치' },
@@ -2620,6 +2691,286 @@ function buildCancerDefenseLayers(
       ambiguity: `약관상 암/제자리암/경계성종양 정의가${ctx.codeMismatch ? ' 진단서 코드와 병리 보고서 코드 불일치 상황을 명시적으로 규정하지 않으므로' : ' 보험회사의 해석과 달리 명확하지 않으므로'} 해석상 불명확성이 있습니다.`,
       contraProferentemApplication: '작성자 불이익 원칙상 약관의 다의적 문구는 고객에게 유리하게 해석되어야 합니다.',
       conclusion: `보험회사가 약관에 없는 ${ctx.dCodeDenial ? '병리 코드 우선 적용' : ctx.microinvasionDenial ? '침윤암 확정 요건' : '추가 요건'}을 이유로 ${ctx.claimTarget} 지급을 거절하는 것은 부당합니다.`,
+    },
+  };
+}
+
+// ── Brain(뇌혈관질환) claim argument builder ─────────────────────────────────
+
+function buildBrainClaimArgument(
+  insurerClaim: string,
+  chronology: ClaimArgumentStructure['factualFoundation']['chronologicalFacts'],
+  keyNumbers: ClaimArgumentStructure['factualFoundation']['keyNumbers'],
+  killingEvidence: KillingEvidence[],
+  citedAuthority: string | null | undefined,
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+): ClaimArgumentStructure {
+  const ctx = extractBrainDiagnosisContext(input);
+  return {
+    insurerPosition: {
+      quotedPosition: insurerClaim,
+      coreDenialReason: ctx.coreIssue,
+    },
+    factualFoundation: { chronologicalFacts: chronology, keyNumbers },
+    killingEvidence,
+    insurerErrorMap: buildBrainInsurerErrorMap(ctx, input),
+    defenseLayers: buildBrainDefenseLayers(ctx, input, result, citedAuthority ?? null),
+    finalPressure: {
+      paymentRequest: `뇌혈관질환 진단비(${ctx.iCode || ctx.diagnosisDesc} 해당) 보험금 전액을 지급해야 합니다.`,
+      delayInterestRequest: '부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.',
+      writtenReplyDemand: '부동의 시 보험회사는 영상의학적 근거와 약관상 분류표 해당 여부를 구분하여 서면으로 회신해야 합니다.',
+      escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
+    },
+  };
+}
+
+function extractBrainDiagnosisContext(input: ReturnType<typeof validateInput>) {
+  const allText = [
+    input.diagnosisText, input.diagnosisName, input.diagnosisCode,
+    input.damageDetails, input.insurerPosition, input.customerStatement, input.adjusterMemo,
+    input.sourceAnalysis?.diagnosisSummary, input.sourceAnalysis?.denialReason,
+    input.sourceAnalysis?.testResultSummary, input.sourceAnalysis?.treatmentSummary,
+  ].filter(Boolean).join('\n');
+
+  // ICD codes
+  const iCode = allText.match(/\bI6[0-9](?:\.\d)?\b/)?.[0] ?? '';
+  const g45 = /\bG45\b/.test(allText);
+
+  // Imaging modalities
+  const hasDwi = /\bDWI\b|diffusion[\s-]*weighted/i.test(allText);
+  const hasAdc = /\bADC\b(?:\s*map)?/i.test(allText);
+  const hasMra = /\bMRA\b/i.test(allText);
+  const hasCta = /\bCTA\b/i.test(allText);
+  const hasMri = /\bMRI\b/i.test(allText);
+
+  // Neurological deficit
+  const nihss = allText.match(/NIHSS[^\n,;：]{0,20}?(\d+)/i)?.[0] ?? '';
+  const hasNeurologicalDeficit = /편마비|구음장애|시야장애|신경학적\s*결손|실어증|언어장애|반신마비|연하장애/i.test(allText);
+  const deficitTerms: string[] = [];
+  if (/편마비|반신마비/i.test(allText)) deficitTerms.push('편마비');
+  if (/구음장애/i.test(allText)) deficitTerms.push('구음장애');
+  if (/실어증|언어장애/i.test(allText)) deficitTerms.push('실어증');
+  if (/시야장애/i.test(allText)) deficitTerms.push('시야장애');
+  if (/연하장애/i.test(allText)) deficitTerms.push('연하장애');
+  if (nihss) deficitTerms.push(`NIHSS ${nihss}`);
+  const deficitDesc = deficitTerms.join(', ');
+
+  // Lesion characteristics
+  const hasEncephalomalacia = /뇌연화증/i.test(allText);
+  const hasFollowupImaging = /추적\s*(?:MRI|CT|MRA|영상)|follow-?up\s*(?:MRI|CT)/i.test(allText);
+  const lesionSize = allText.match(/\b(\d+(?:\.\d+)?)\s*mm\b/)?.[0] ?? '';
+
+  // Lesion location
+  const locationTerms: string[] = [];
+  if (/중대뇌동맥|MCA/i.test(allText)) locationTerms.push('중대뇌동맥(MCA) 영역');
+  if (/기저핵|basal\s*ganglia|putamen|caudate/i.test(allText)) locationTerms.push('기저핵');
+  if (/시상|thalamus/i.test(allText)) locationTerms.push('시상');
+  if (/후두엽|occipital/i.test(allText)) locationTerms.push('후두엽');
+  if (/소뇌|cerebellar/i.test(allText)) locationTerms.push('소뇌');
+  if (/뇌간|brainstem/i.test(allText)) locationTerms.push('뇌간');
+  if (/전두엽|frontal/i.test(allText)) locationTerms.push('전두엽');
+  const lesionLocation = locationTerms.join(', ');
+
+  // Hemorrhage type
+  const isHypertensiveBleed = /고혈압성|고혈압\s*뇌출혈|hypertensive\s*ICH/i.test(allText);
+  const isTraumaticBleed = /외상성|traumatic/i.test(allText);
+  const htxHistory = /고혈압\s*기왕력|고혈압\s*약|혈압약|antihypertensive/i.test(allText);
+
+  // Aneurysm
+  const hasAneurysm = /동맥류|aneurysm/i.test(allText);
+  const isRuptured = /파열|ruptur/i.test(allText);
+  const isUnruptured = /미파열|unruptured/i.test(allText);
+  const coilEmbolization = /코일색전술|coil\s*embolization/i.test(allText);
+
+  // TIA
+  const isTia = /\bTIA\b|일과성\s*뇌허혈|transient\s*ischemic/i.test(allText);
+  const insurerText = (input.insurerPosition ?? '') + ' ' + (input.adjusterMemo ?? '');
+  const insurerClaimsTia = /TIA\s*가능성|일과성\s*허혈\s*발작|TIA로\s*판단|TIA\s*의심/i.test(insurerText);
+  const ctNegative = /CT\s*음성|CT\s*상\s*이상\s*없|CT에서\s*확인.*되지|CT\s*정상/i.test(insurerText);
+  const symptomImproved = /증상\s*호전|증상이\s*호전|자연.*호전|호전되어/i.test(insurerText);
+  const lesionSmall = /병변\s*작|소경색|열공성|lacunar|경미|mild/i.test(insurerText);
+
+  // Core denial issue classification
+  let coreIssue: string;
+  if (insurerClaimsTia || ctNegative) {
+    coreIssue = 'CT 음성 또는 일시적 증상 호전을 이유로 뇌경색이 아닌 TIA(일과성 뇌허혈발작)에 해당한다는 주장';
+  } else if (isTraumaticBleed && !isHypertensiveBleed) {
+    coreIssue = '뇌출혈이 외상에 의한 것으로 질병성 뇌출혈 진단비 지급 대상이 아니라는 주장';
+  } else if (isUnruptured && !isRuptured) {
+    coreIssue = '미파열 동맥류로 뇌혈관질환 진단비 약관상 지급 요건인 실질적 뇌손상이 없다는 주장';
+  } else if (lesionSmall) {
+    coreIssue = '병변이 경미하거나 열공성 소경색으로 뇌혈관질환 진단비 지급 기준 미달이라는 주장';
+  } else {
+    const raw = input.sourceAnalysis?.denialReason ?? input.insurerPosition ?? '';
+    coreIssue = raw ? cleanPublicText(raw).slice(0, 150) : '보험회사의 부지급 사유';
+  }
+
+  const diagnosisDesc = iCode ? iCode : (isTia ? 'G45 일과성 뇌허혈발작' : '뇌혈관질환');
+
+  return {
+    iCode, g45, hasDwi, hasAdc, hasMra, hasCta, hasMri, nihss,
+    hasNeurologicalDeficit, deficitDesc, hasEncephalomalacia, hasFollowupImaging,
+    lesionSize, lesionLocation, isHypertensiveBleed, isTraumaticBleed, htxHistory,
+    hasAneurysm, isRuptured, isUnruptured, coilEmbolization, isTia,
+    insurerClaimsTia, ctNegative, symptomImproved, lesionSmall,
+    coreIssue, diagnosisDesc,
+  };
+}
+
+function buildBrainInsurerErrorMap(
+  ctx: ReturnType<typeof extractBrainDiagnosisContext>,
+  _input: ReturnType<typeof validateInput>,
+): ClaimArgumentStructure['insurerErrorMap'] {
+  const errors: ClaimArgumentStructure['insurerErrorMap'] = [];
+
+  // 1. CT negative / TIA argument
+  if (ctx.insurerClaimsTia || ctx.ctNegative) {
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: ctx.ctNegative
+        ? 'CT 음성을 근거로 뇌경색이 아니라는 주장'
+        : 'CT 음성 또는 일시적 증상 호전을 이유로 TIA(일과성 뇌허혈발작)에 해당한다는 주장',
+      rebuttalThesis: `AHA/ASA 뇌졸중/TIA 진료지침에 따르면 급성기 CT는 허혈성 병변을 초기에 검출하지 못하는 경우가 흔하며, DWI(확산강조영상)가 급성 뇌경색의 표준 영상진단입니다.${ctx.hasDwi ? ' 본 건에서는 DWI에서 급성 허혈성 병변이 확인되어 뇌경색 진단이 이루어진 것입니다.' : ''} CT 음성은 뇌경색을 배제하지 않습니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  // 2. Symptom improvement = TIA argument
+  if (ctx.symptomImproved || ctx.insurerClaimsTia) {
+    errors.push({
+      errorType: 'omitted_key_evidence',
+      insurerClaim: '증상 호전을 이유로 TIA에 해당하여 뇌경색 진단을 부정하는 주장',
+      rebuttalThesis: `AHA/ASA 2009 개정 이후 TIA의 정의는 증상 지속 시간이 아닌 조직 기반(tissue-based) 기준으로, DWI에서 급성 뇌경색 병변이 확인되면 증상이 호전되더라도 TIA가 아닌 뇌경색으로 분류됩니다.${ctx.hasEncephalomalacia ? ' 추적 영상에서 뇌연화증이 확인된 것은 영구적 조직 손상의 증거로 TIA와의 구별을 명확히 합니다.' : ''}`,
+      targetSection: 'medical',
+    });
+  }
+
+  // 3. Small lesion / lacunar argument
+  if (ctx.lesionSmall) {
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: '병변이 경미하거나 열공성 소경색으로 약관상 뇌혈관질환 진단비 지급 기준 미달이라는 주장',
+      rebuttalThesis: `KCD I63(뇌경색증)은 병변 크기나 증상 중증도와 무관하게 영상 확진된 뇌경색 전 범위를 포함합니다. 약관 분류표(I60~I69)는 중증도 요건을 규정하지 않으며,${ctx.lesionSize ? ` 병변 크기 ${ctx.lesionSize}는 진단 기준 자체와 무관합니다.` : ' 보험회사가 사후에 중증도 요건을 추가하는 것은 약관에 없는 요건을 부가하는 것입니다.'}`,
+      targetSection: 'policy',
+    });
+  }
+
+  // 4. Traumatic hemorrhage argument
+  if (ctx.isTraumaticBleed) {
+    errors.push({
+      errorType: 'omitted_key_evidence',
+      insurerClaim: '뇌출혈이 외상에 의한 것으로 질병성 뇌출혈 진단비 지급 대상이 아니라는 주장',
+      rebuttalThesis: `고혈압성 뇌출혈의 특징적 호발 부위(${ctx.lesionLocation || '기저핵·시상 등 심부 뇌실질'})에서 발생한 출혈${ctx.htxHistory ? '과 고혈압 기왕력을 종합하면' : '은'} 고혈압성 뇌출혈에 해당하며, 외상흔적이 없는 경우 외상성 주장을 유지하려면 보험회사가 객관적 외상 근거를 제시해야 합니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  // 5. Aneurysm pre-existing / unruptured argument
+  if (ctx.hasAneurysm) {
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: ctx.isUnruptured
+        ? '미파열 동맥류로 뇌혈관질환 진단비 약관상 지급 요건인 실질적 뇌손상이 없다는 주장'
+        : '동맥류가 기존에 존재하였으므로 보험사고가 아니라는 주장',
+      rebuttalThesis: `약관 뇌혈관질환 분류표(I60~I69)는 I67.1(뇌동맥의 동맥류) 등 미파열 뇌동맥류를 명시적으로 포함합니다. 보험사고는 파열(SAH/뇌출혈) 또는 확진 시점이며,${ctx.coilEmbolization ? ' 코일색전술 시행은 임상적으로 뇌혈관질환 치료를 받은 것을 뒷받침합니다.' : ''} 약관에 없는 '실질 뇌손상' 요건을 사후에 추가하는 것은 허용되지 않습니다.`,
+      targetSection: 'policy',
+    });
+  }
+
+  // Always: policy requirement addition prohibition
+  errors.push({
+    errorType: 'policy_requirement_misread',
+    insurerClaim: '약관상 뇌혈관질환 진단비 지급요건 미충족 주장',
+    rebuttalThesis: `약관이 요구하는 뇌혈관질환 진단확정은 전문의 진단과 MRI/CT 등 영상검사 결과를 기초로 한 것입니다.${ctx.iCode ? ` 본 건은 KCD ${ctx.iCode}로 확진되어` : ''} 요건이 충족됩니다. 보험회사가 약관에 없는 추가 요건(중증도·병변 크기·CT 영상 의존 등)을 부가하는 것은 허용되지 않습니다.`,
+    targetSection: 'policy',
+  });
+
+  // Always: contra proferentem
+  errors.push({
+    errorType: 'unsupported_additional_requirement',
+    insurerClaim: '약관에 명시되지 않은 추가 조건으로 지급 거절',
+    rebuttalThesis: `보험회사는 약관에 없는 사후적 제한 요건(${ctx.insurerClaimsTia ? 'TIA 분류 재적용, ' : ''}${ctx.lesionSmall ? '중증도 요건, ' : ''}${ctx.ctNegative ? 'CT 영상 의존 등' : '추가 의학적 요건 등'})을 부가하여 지급을 제한할 수 없습니다. 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.`,
+    targetSection: 'interpretation',
+  });
+
+  return errors.slice(0, 6);
+}
+
+function buildBrainDefenseLayers(
+  ctx: ReturnType<typeof extractBrainDiagnosisContext>,
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  citedAuthority: string | null,
+): ClaimArgumentStructure['defenseLayers'] {
+  const imagingDesc = [
+    ctx.hasDwi ? 'DWI 급성 허혈성 병변' : '',
+    ctx.hasAdc ? 'ADC 감소 소견' : '',
+    ctx.hasMra ? 'MRA 혈관 평가' : '',
+    ctx.hasCta ? 'CTA 혈관 평가' : '',
+    ctx.hasEncephalomalacia ? '추적 영상 뇌연화증' : '',
+  ].filter(Boolean).join(', ');
+
+  const policyMapping: ClaimArgumentStructure['defenseLayers']['policy']['policyRequirementMapping'] = [
+    {
+      requirement: '전문의(신경과/신경외과) 확정진단',
+      patientFact: findFactText(input, result, /신경과|신경외과|주치의|진단서|I6[0-9]/i)
+        || `${ctx.iCode || '뇌혈관질환'}으로 전문의 확정진단 기재됨`,
+      satisfied: true,
+    },
+    {
+      requirement: 'MRI/CT 등 영상검사 객관적 근거',
+      patientFact: imagingDesc
+        ? `영상검사 소견: ${imagingDesc}`
+        : findFactText(input, result, /MRI|CT|DWI|MRA|CTA/i) || 'MRI/CT 영상검사 시행 및 결과 확인됨',
+      satisfied: true,
+    },
+    {
+      requirement: '약관 뇌혈관질환 분류표 해당(I60~I69)',
+      patientFact: ctx.iCode
+        ? `KCD ${ctx.iCode}는 뇌혈관질환 분류표(I60~I69) 범위 내 해당함`
+        : '진단명이 뇌혈관질환 분류표(I60~I69) 범위에 해당함',
+      satisfied: true,
+    },
+  ];
+  if (ctx.hasNeurologicalDeficit && ctx.deficitDesc) {
+    policyMapping.push({
+      requirement: '신경학적 결손 또는 임상적 증거',
+      patientFact: `신경학적 결손: ${ctx.deficitDesc} 확인됨`,
+      satisfied: true,
+    });
+  }
+
+  return {
+    medical: {
+      standard: `AHA/ASA 뇌졸중/TIA 진료지침 및 KCD 뇌혈관질환 분류(I60~I69)를 기준으로 판단합니다.${imagingDesc ? ` 본 건 영상 소견: ${imagingDesc}.` : ''}${ctx.deficitDesc ? ` 신경학적 결손: ${ctx.deficitDesc}.` : ''}`,
+      patientFactMapping: policyMapping.map((item) => ({
+        criterion: item.requirement,
+        patientFact: item.patientFact,
+        satisfied: item.satisfied,
+      })),
+      conclusion: ctx.insurerClaimsTia
+        ? 'DWI 급성 병변 확인과 조직 기반 TIA 정의에 따르면 뇌경색 진단이 정당합니다.'
+        : ctx.lesionSmall
+        ? 'I63은 병변 크기 무관 뇌경색 전 범위를 포함하며 경증·열공성도 대상입니다.'
+        : `${ctx.iCode || '뇌혈관질환'} 진단은 영상·임상 기준을 충족합니다.${ctx.hasEncephalomalacia ? ' 추적 영상의 뇌연화증은 영구 조직 손상을 객관적으로 확인시켜 줍니다.' : ''}`,
+    },
+    policy: {
+      policyRequirementMapping: policyMapping,
+      conclusion: `약관상 뇌혈관질환 진단확정은 영상검사와 전문의 진단을 기초로 하며,${ctx.iCode ? ` KCD ${ctx.iCode}는 분류표(I60~I69) 내 범위에 해당합니다.` : ' 제출된 자료로 요건이 충족됩니다.'} 보험회사는 약관 문언에 없는 사후적 제한 요건을 추가할 수 없습니다.`,
+    },
+    caseLaw: {
+      insurerCitedAuthority: citedAuthority ?? undefined,
+      legalPrinciple: citedAuthority
+        ? `${citedAuthority}의 법리는 영상 소견과 전문의 진단 전체를 종합하여 판단해야 한다는 구조로 이해해야 합니다.`
+        : '뇌혈관질환 진단비 분쟁에서 판례·금감원 분쟁조정례는 MRI/DWI 영상 소견과 신경과 전문의 진단을 종합하도록 요구합니다.',
+      reverseApplication: `보험사가 판례를 인용하더라도 ${ctx.hasDwi ? 'DWI 영상 소견과 ' : ''}${ctx.hasNeurologicalDeficit ? '신경학적 결손과 ' : ''}전문의 진단을 배제하는 근거로 사용할 수 없습니다.`,
+      conclusion: '판례·금감원 분쟁조정례는 영상 소견과 임상 전체를 종합하는 방향으로 고객 측에 유리하게 적용됩니다.',
+    },
+    interpretation: {
+      ambiguity: `약관상 뇌혈관질환 분류표(I60~I69)가${ctx.insurerClaimsTia ? ' TIA와 뇌경색 구분에 관해' : ctx.isUnruptured ? ' 미파열 동맥류의 지급 요건에 관해' : ' 중증도 기준에 관해'} 명시적 제한을 두고 있지 않으므로 해석상 불명확성이 있습니다.`,
+      contraProferentemApplication: '작성자 불이익 원칙상 약관의 다의적 문구는 고객에게 유리하게 해석되어야 합니다.',
+      conclusion: `보험회사가 약관에 없는 ${ctx.insurerClaimsTia ? 'TIA 재분류' : ctx.lesionSmall ? '중증도 요건' : ctx.isUnruptured ? '실질 뇌손상 요건' : '추가 요건'}을 이유로 뇌혈관질환 진단비 지급을 거절하는 것은 부당합니다.`,
     },
   };
 }
