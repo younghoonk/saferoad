@@ -634,15 +634,12 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
-  if (row.source_area === 'terms_standards' && metadataValue(row, 'dataset_version') === 'nmt_v1') {
-    console.log('[NMT5] directlyRelevantOfficial query matchers',
-      'cataractQuery=', cataractQuery(query),
-      'manualTherapyQuery=', manualTherapyQuery(query),
-      'cancerInsuranceQuery=', cancerInsuranceQuery(query),
-      'generalCancerDiagnosisQuery=', generalCancerDiagnosisQuery(query),
-      'brainInsuranceQuery=', brainInsuranceQuery(query),
-      'disclosureQuery=', disclosureQuery(query),
-      'query_sample=', query?.slice(0, 120));
+  // NMT 신의료기술 고시 청크: cataract/manualTherapy/cancer/brain 중간 차단 블록 건너뛰고
+  // isDirectlyRelevantTerms(→ nmt_v1 token fallback)로 직행
+  const isNmtChunk = row.source_area === 'terms_standards'
+    && metadataValue(row, 'dataset_version') === 'nmt_v1';
+  if (isNmtChunk) {
+    return isDirectlyRelevantTerms(row, query);
   }
   if (row.source_area === 'precedents' && administrativePrecedentText(row)) return false;
   if (cataractQuery(query)) {
