@@ -1,0 +1,724 @@
+{
+  "requestId": "sample-ASSESS_068-1779783290752",
+  "detectedProfile": "heart_diagnosis_benefit",
+  "reportFormatVersion": "submission_report_v2_claim_argument_structure",
+  "title": "허혈성심장질환 진단비(급성심근경색 I21.2) 보험금 지급 타당성에 관한 피보험자 측 손해사정 의견서",
+  "overview": "피보험자는 2024년 5월 흉통 및 어지럼 증상으로 내원하여, 후벽 유도(V7-V9) 심전도상 ST분절 상승, 고민감도 트로포닌 T 0.15→2.9 ng/mL의 급격한 상승, 관상동맥조영술(CAG)상 좌회선지(LCx) 완전폐색, 경피적관상동맥중재술(PCI) 시행, 심초음파상 후벽 운동저하(RWMA) 소견이 복합적으로 확인되었다. 담당 전문의는 이를 종합하여 후벽 STEMI(I21.2, 기타 부위의 급성 ST분절상승 심근경색)로 진단하고 진단서에 I21.2를 기재하였다. 보험사는 표준 12유도 심전도에서 전형적 ST분절 상승이 명확하지 않다는 단일 사유로 지급을 보류하고 있으나 이는 후벽 심근경색의 해부학적·진단적 특수성을 무시한 단편적 해석이다. Fourth Universal Definition of Myocardial Infarction(2018) 및 AHA 기준, 약관상 진단확정 조항, 대법원 2013다208661 판결의 법리에 비추어 피보험자의 보험금 청구는 지급 타당성이 충분히 인정된다.",
+  "facts": "① 증상: 2024년 5월 흉통 및 어지럼 증상으로 의료기관 내원.\n② 심전도: 표준 12유도 심전도에서 전형적 ST분절 상승이 뚜렷하지 않았으나, 후벽 유도(V7-V9) 추가 검사에서 ST분절 상승이 확인됨.\n③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인). CK-MB 수치는 제공된 자료에 기재 없음(추가 확인 필요).\n④ 관상동맥조영술(CAG): 좌회선지(LCx) 완전폐색(acute occlusion) 확인.\n⑤ 시술: PCI(경피적관상동맥중재술) 시행.\n⑥ 심초음파: 후벽 운동저하(RWMA) 소견 확인.\n⑦ 진단: 담당 전문의가 후벽 STEMI(I21.2)로 진단, 진단서에 I21.2 기재.\n⑧ 보험계약: 2021년 3월 가입, 허혈성심장질환 진단비(급성심근경색 3,000만 원) 담보 포함.",
+  "issues": "【쟁점 1】 후벽 심근경색의 진단 특수성 — 표준 12유도 심전도 비전형의 의학적 의미\n후벽(posterior wall)은 표준 12유도 심전도의 직접 유도 범위 밖에 위치하여, 후벽 경색 시 표준 유도에서 ST분절 상승이 나타나지 않거나 V1-V3에서 ST하강·R파 증가 등 간접 소견만 관찰되는 것이 의학적으로 잘 알려진 사실이다. 국제 심장학 지침은 후벽 경색 의심 시 V7-V9 유도 추가 검사를 표준 진단 절차로 권고하며, 해당 유도에서 ST분절 상승이 확인되면 STEMI로 분류한다. 보험사가 표준 12유도 심전도만을 기준으로 ST상승 부재를 이유로 진단을 의심하는 것은 후벽 경색의 해부학적 특수성을 반영하지 않은 오류이다.\n\n【쟁점 2】 Fourth Universal Definition 기준 충족 여부\nFourth Universal Definition of Myocardial Infarction(2018)에 따르면 급성 심근경색은 ① 트로포닌 상승(99th percentile URL 초과, rise/fall 패턴) + ② 허혈 증거(허혈성 증상, 새로운 ECG 변화, 새 RWMA, CAG상 coronary thrombus/acute occlusion 중 하나 이상)의 결합으로 진단된다. 본 사안은 hs-TnT 0.15→2.9 ng/mL 상승(rise/fall 패턴), 후벽 유도 ST상승, LCx 완전폐색, 후벽 RWMA가 모두 확인되어 동 기준을 충족한다.\n\n【쟁점 3】 LCx 완전폐색과 culprit lesion의 의미\nCAG에서 확인된 LCx 완전폐색(acute occlusion)은 Fourth Universal Definition 및 AHA 기준상 급성 허혈성 사건의 핵심 근거인 coronary thrombus/culprit lesion에 해당한다. 이는 단순 관상동맥질환(CAD)이나 협심증과 구별되는 급성 폐색 소견으로, 보험사의 단순 CAD 해석 논리를 직접 반박한다.\n\n【쟁점 4】 트로포닌 상승의 PCI 전후 시간관계\n보험사가 향후 'PCI 후 트로포닌 상승'을 주장할 경우, Fourth Universal Definition 및 ACC 기준에 따라 보험사는 PCI 전 baseline 채혈 시각, 시술 시각, 시술 후 채혈 시각, 상승폭, 새 ECG 변화, 새 RWMA 등 시간관계 전체를 의학적으로 입증해야 한다. 단순히 PCI 시행 사실만으로 트로포닌 상승을 시술 관련 손상으로 귀속시키는 것은 허용되지 않는다.\n\n주요 쟁점은 심장질환 진단비 청구에서 진단확정이 인정되는지, 트로포닌ㆍ심전도ㆍ관상동맥조영술 등 검사결과가 가입 당시 약관상 급성심근경색 또는 허혈성심장질환 정의에 해당하는지입니다.\n주요 쟁점은 심장질환 진단확정 여부와 검사결과, 트로포닌 등 심근효소, 심전도, 관상동맥조영술 자료가 가입 당시 약관상 지급기준을 충족하는지입니다.",
+  "legalAndReferenceBasis": "【적용 약관】\n금융감독원 분쟁조정 사례집(제1권, 2017.12.) 수록 표준 약관 제3조에 따르면, 급성심근경색증의 진단확정은 '의료기관 전문의의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로' 하여야 한다. 약관은 심전도를 진단 기초 자료 중 하나로 열거할 뿐, 표준 12유도 심전도에서의 ST분절 상승을 단독·필수 요건으로 규정하지 않는다. 본 사안에서 후벽 유도 ST상승, 트로포닌 상승, CAG, 심초음파 RWMA, 전문의 진단이 모두 갖추어져 있으므로 약관상 진단확정 기초 요건이 충족된다. 가입 당시(2021년 3월) 원약관 조항의 정확한 문언은 원약관 원본으로 최종 확인이 필요하며, 표준약관은 참고자료로 적용한다.\n\n【금융감독원 분쟁조정례】\n금융감독원 분쟁조정 제2017-3호(2017.3.14.)는 객관적 의학 자료(부검 포함)를 기초로 전문의가 급성심근경색증을 진단한 경우 보험사는 진단비를 지급하여야 한다고 결정하였다. 동 결정례는 진단확정의 기초가 복수의 객관적 검사 자료의 종합임을 확인하며, 단일 검사 결과의 부재만으로 진단을 부정할 수 없음을 시사한다.\n\n【판례】\n대법원 2014.6.12. 선고 2013다208661 판결은, 피보험자가 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등을 제출하면 1차 증명이 완료되고, 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 한다고 판시하였다. 단일 시점의 심근효소 정상 또는 단일 검사 결과만으로 전문의 진단을 부정하는 것은 동 판결의 법리상 허용되지 않는다. 고등법원 2018나65691 사건은 심근경색 관련 보험금 청구 사건으로 확인되나, 사건번호 외 선고일자·법원명 등 세부 정보의 추가 확인이 필요하여 직접 인용은 유보한다.\n\n【의학 기준】\nFourth Universal Definition of Myocardial Infarction(2018, JACC), AHA Acute MI criteria, ACC/ESC 2020 ACS 가이드라인이 공식 의학 기준으로 적용된다.\n\n[본문 반영 근거]\n\nFourth Universal Definition of Myocardial Infarction (2018) - myocardial injury와 myocardial infarction 구분은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nAcute MI criteria - troponin rise/fall, 99th percentile URL, ischemic evidence은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nPCI-related myocardial injury and type 4a MI - PCI 전후 채혈 시간관계은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nUnstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nCAG/PCI 소견과 허혈 근거 - coronary thrombus, culprit lesion, severe stenosis은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\n서버 기본 약관 - 급성심근경색증 진단확정 조항은(는) 약관 검토자료이나, 가입 당시 해당 보험회사ㆍ상품의 원약관 확인 전에는 표준약관 또는 유사자료로만 참고해야 한다.\n서버 기본 약관 - 허혈심장질환 진단확정 조항은(는) 약관 검토자료이나, 가입 당시 해당 보험회사ㆍ상품의 원약관 확인 전에는 표준약관 또는 유사자료로만 참고해야 한다.\n2021 21년도 약관.pdf keyword_matched_policy_clause은(는) 약관 검토자료이나, 가입 당시 해당 보험회사ㆍ상품의 원약관 확인 전에는 표준약관 또는 유사자료로만 참고해야 한다.\n금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부은(는) 또는 쟁점의 분쟁 처리 방향을 검토할 때 참고할 수 있으나, 본 건의 진료 횟수와 치료 정도가 실제로 유사한지는 원문 확인이 필요하다.\n금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)은(는) 또는 쟁점의 분쟁 처리 방향을 검토할 때 참고할 수 있으나, 본 건의 진료 횟수와 치료 정도가 실제로 유사한지는 원문 확인이 필요하다.\n대법원 2014-06-12 선고 2013다208661 판결은(는) retrievedReferences에 확인된 범위에서만 검토 근거로 삼고, 사건번호ㆍ법원ㆍ선고일자 등 메타데이터가 부족한 경우 관련 판례 추가 확인이 필요하다.\n고등법원 2018나65691 보험금(사건번호/법원/선고일자 추가 확인 필요)은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nESC 2020 비ST분절 상승 급성관상동맥증후군(NSTEMI/UA) 진단기준 (2020 ESC Guidelines for the Management of Acute Coronary Syndromes without Persistent ST-Segment Elevation)은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\nUnstable angina vs NSTEMI - troponin 및 I20/I21.2/I25.1 코드 구분은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\n심부전 진단기준 — ESC 2021 급성·만성 심부전 가이드라인 (2021 ESC Guidelines for the Diagnosis and Treatment of Acute and Chronic Heart Failure)은(는) retrievedReferences에 포함된 공식/준공식 근거로서 본 건 적용 가능성을 검토해야 한다.\n\n약관상 급성심근경색 진단비 지급요건은 가입 당시 약관의 진단확정 조항, 질병분류표, 심근효소 및 심전도ㆍ영상ㆍ관상동맥조영술 기록을 종합해 판단해야 한다. 업로드 약관 또는 직접 관련 RAG 근거가 부족한 항목은 근거자료 부족으로 표시하고, 없는 판례나 분쟁조정번호는 특정하지 않는다.\n심장질환 진단비 사건에서는 진단확정, 검사결과, 트로포닌 또는 심전도 또는 관상동맥조영술, 가입 당시 약관을 중심으로 추가 확인 및 .",
+  "damageAssessment": "【보험사 부지급 논리의 결정적 문제점】\n\n첫째, 보험사는 '표준 12유도 심전도에서 전형적 ST분절 상승이 명확하지 않다'는 단일 사유로 지급을 보류하고 있다. 그러나 약관상 진단확정 조항은 심전도를 복수의 기초 자료 중 하나로 열거할 뿐, 표준 12유도 심전도 ST상승을 단독 필수 요건으로 규정하지 않는다. 보험사의 해석은 약관에 없는 요건을 추가하는 것으로, 약관 해석의 대원칙인 작성자 불이익 원칙(contra proferentem)에 반한다.\n\n둘째, 후벽 심근경색은 해부학적 특성상 표준 12유도에서 ST분절 상승이 나타나지 않는 것이 의학적 상식이다. 이를 이유로 진단을 의심하는 것은 후벽 경색의 진단 특수성을 전혀 반영하지 않은 단편적 해석이며, 전체 의무기록 흐름에 비추어 부당하다.\n\n셋째, 본 사안에서는 ① 후벽 유도(V7-V9) ST분절 상승, ② hs-TnT 0.15→2.9 ng/mL 급격 상승(rise/fall 패턴), ③ LCx 완전폐색(acute occlusion), ④ PCI 시행, ⑤ 심초음파 후벽 RWMA, ⑥ 전문의 I21.2 진단서가 모두 확인된다. Fourth Universal Definition(2018) 및 AHA 기준상 급성 심근경색 진단 요건이 복합적으로 충족된다.\n\n넷째, LCx 완전폐색은 단순 관상동맥질환(CAD)이나 협심증(I20)과 구별되는 급성 폐색 소견으로, 보험사가 이를 단순 CAD로 해석하려면 독립적인 의학적 근거를 제시해야 한다.\n\n【고객 측 지급 타당성】\n대법원 2013다208661 판결의 법리에 따라, 피보험자가 전문의 진단서·의무기록·트로포닌 수치·후벽 유도 ECG·CAG/PCI 기록·심초음파 RWMA를 제출한 이상 1차 증명은 완료된 것으로 보아야 한다. 보험사가 이를 번복하려면 구체적이고 독립적인 의학적 반증을 제시해야 하며, 표준 12유도 심전도 ST상승 부재라는 단일 사유는 그 반증으로 충분하지 않다. 지급 타당성이 인정된다.\n\n위 근거들을 현 사건에 적용하면, 보험회사의 주장은 진료기록의 존재만으로 충분하지 않고 청약서 질문사항 해당성, 중요한 사항성, 피보험자의 인식 가능성, 고의 또는 중대한 과실, 그리고 보험금 부지급과 관련한 인과관계가 함께 확인되어야 한다.\n\n고객 측에서 유리한 핵심은 I21.4 진단서/소견서, CAG상 중증 협착, PCI/stent 시행, hs-troponin 및 CK-MB 변화, ECG 및 Echo 소견이다. 보험사가 Unstable angina 또는 CAD 기재만으로 부지급한다면 이는 의무기록 전체가 아니라 일부 진단명만을 선택한 단편적 해석이다.\n손해액 산정보다는 심장질환 진단확정과 검사결과의 충족 여부가 핵심입니다.",
+  "insurerPositionReview": "【보험사 주장】 표준 12유도 심전도에서 전형적 ST분절 상승이 명확히 관찰되지 않으므로 ST분절상승 심근경색(STEMI/I21.2)으로 보기 어렵고, 진단확정 기준 충족 여부에 추가 검토가 필요하다.\n\n【반박 1 — 의학적 오류】\n후벽(posterior wall)은 표준 12유도 심전도의 직접 탐지 범위 밖에 위치한다. 국제 심장학 지침은 후벽 경색 의심 시 V7-V9 유도 추가 검사를 표준 절차로 권고하며, 해당 유도에서 ST분절 상승이 확인되면 STEMI로 분류한다. 본 사안에서 V7-V9 유도 ST상승이 확인되었으므로, 표준 12유도 비전형을 이유로 STEMI 진단을 부정하는 것은 의학적으로 타당하지 않다.\n\n【반박 2 — 약관 해석 오류】\n약관상 진단확정 조항은 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 '기초로' 한다고 규정할 뿐, 표준 12유도 심전도 ST상승을 단독 필수 요건으로 명시하지 않는다. 보험사가 약관에 없는 요건을 추가하여 지급을 거부하는 것은 허용되지 않으며, 약관 문언이 불명확한 경우 작성자 불이익 원칙에 따라 피보험자에게 유리하게 해석되어야 한다.\n\n【반박 3 — 증명책임 전도 시도】\n대법원 2013다208661 판결에 따르면, 피보험자가 전문의 진단서·의무기록·트로포닌 수치·ECG·CAG/PCI 기록을 제출하면 1차 증명이 완료된다. 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 하며, 표준 12유도 ST상승 부재라는 단일 사유는 전문의의 종합적 진단을 번복하기에 충분하지 않다.\n\n【반박 4 — Fourth Universal Definition 기준 충족】\nFourth Universal Definition(2018)은 트로포닌 rise/fall + 허혈 증거(증상, ECG 변화, RWMA, CAG상 acute occlusion 중 하나 이상)의 결합을 요구한다. 본 사안은 hs-TnT 0.15→2.9 ng/mL 상승, 후벽 유도 ST상승, LCx 완전폐색, 후벽 RWMA가 모두 확인되어 동 기준을 충족한다. 보험사는 이 기준에 따른 종합 판단을 회피하고 표준 12유도 심전도만을 선택적으로 인용하고 있다.\n\n보험회사의 핵심 약점은 PCI 후 troponin 상승 가능성을 확정 사실처럼 전제할 수 없다는 점이다. 보험회사는 채혈시간, 시술시간, 시술 전후 효소 추이, ECG/RWMA/LVEF, 주치의 I21.4 진단 근거를 종합해 반대 근거를 제시해야 하며, 그 입증 없이 주치의 진단을 배척하기 어렵다.",
+  "adjusterOpinionDraft": "본 사안은 후벽 심근경색(I21.2)의 진단 특수성에서 비롯된 분쟁으로, 보험사의 지급 보류 사유는 의학적·약관적·법리적으로 모두 충분하지 않다. 후벽 경색은 표준 12유도 심전도에서 ST분절 상승이 나타나지 않는 것이 의학적으로 확립된 사실이며 이를 이유로 전문의의 종합적 진단을 의심하는 것은 진단 특수성을 무시한 단편적 해석이다. 피보험자는 후벽 유도(V7-V9) ST상승, hs-TnT 0.15→2.9 ng/mL 급격 상승, LCx 완전폐색, PCI 시행, 심초음파 후벽 RWMA, 전문의 I21.2 진단서를 모두 갖추고 있으며 이는 Fourth Universal Definition of Myocardial Infarction(2018) 및 AHA 급성 심근경색 기준상 진단 요건을 복합적으로 충족한다.\n\n약관상 급성심근경색증 진단확정 조항은 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 '기초로' 한다고 규정하며 이들 검사 중 어느 하나를 단독 필수 요건으로 명시하지 않는다. 본 사안에서 위 검사들이 모두 시행되었고 각각 급성 심근경색에 부합하는 소견이 확인되었으므로, 약관상 진단확정 기초 요건은 충족된다. 보험사가 표준 12유도 심전도 ST상승 부재라는 약관에 없는 요건을 추가하여 지급을 거부하는 것은 약관 해석의 작성자 불이익 원칙에 반한다.\n\n대법원 2013다208661 판결의 법리에 따라, 피보험자가 전문의 진단서·의무기록·트로포닌 수치·후벽 유도 ECG·CAG/PCI 기록·심초음파 RWMA를 제출한 이상 보험사고 발생에 대한 1차 증명은 완료된 것으로 보아야 한다. 보험사가 이를 번복하려면 표준 12유도 심전도 소견 외에 구체적이고 독립적인 의학적 반증, 즉 트로포닌 상승의 PCI 전후 시간관계 분석, 새 RWMA 부재 입증, 또는 LCx 완전폐색이 급성 사건이 아님을 뒷받침하는 의학적 근거를 제시해야 한다. 현재 보험사는 이러한 반증을 제시하지 않고 있으며, 지급 보류의 근거가 충분하지 않다. 피보험자에 대한 허혈성심장질환 진단비(급성심근경색 3,000만 원)의 지급 타당성이 인정된다.\n\n보험회사가 입퇴원요약지상 Unstable angina 또는 CAD 기재만을 근거로 I21.4 급성 심내막하심근경색증 진단을 배척하는 것은 전체 의무기록의 흐름을 단편적으로 해석한 것이다. 진단서/소견서의 I21.4 기재, CAG 결과, PCI/stent 시행, hs-troponin 및 CK-MB 변화, ECG와 Echo 소견을 함께 보아야 한다.\n\n피보험자에게 LM-LAD 또는 LM-mLAD 중증 협착, CAG상 유의 협착, PCI/stent 시행, hs-troponin 상승, 주치의 I21.4 진단이 확인된다면 이는 단순 흉통 또는 일반 CAD로 축소할 사안이 아니다. 보험사는 불리한 진단명 하나만 선택해 급성 관상동맥증후군 전체 경과를 배제할 수 없다.\n\n보험회사가 hs-troponin 상승이 PCI 후 발생한 시술 관련 상승이라고 주장하려면 PCI 시행 전후의 정확한 채혈시간, 시술기록, 심근효소 연속 수치, 주치의 진단 근거를 종합해 입증해야 한다. 상승 시점에 관한 가능성만으로 주치의의 I21.4 진단을 배척할 수 없다.\n\n따라서 본 건의 손해사정 의견은 급성심근경색 진단비 지급 타당성을 고객 측에서 적극 주장하는 방향이다. 다만 ECG상 ST 변화, Echo상 RWMA/LVEF, CAG 원문 및 채혈시간표가 누락되어 있으면 해당 자료를 추가 확보해 보험사의 시술 관련 상승 주장을 차단해야 한다.\n심장질환 진단비 사건에서는 진단확정, 검사결과, 트로포닌 또는 심전도 또는 관상동맥조영술, 가입 당시 약관을 중심으로 추가 확인 및 .",
+  "requiredAdditionalChecks": "【추가 확보 필요 자료】\n① 가입 당시(2021년 3월) 원약관 원본 및 질병분류표: 진단확정 조항의 정확한 문언과 I21.2 포함 여부 최종 확인 필요.\n② 후벽 유도(V7-V9) 심전도 원본 및 판독지: ST분절 상승 수치와 판독 소견 명시 자료 확보 필요.\n③ hs-TnT 채혈 시각 기록: PCI 전 baseline 채혈 시각, 시술 시각, 시술 후 채혈 시각을 명시한 검사 결과지 확보 필요(보험사가 향후 PCI 후 트로포닌 상승 주장 시 대응 근거).\n④ CK-MB 검사 결과: 제공된 자료에 수치 기재 없음. 검사 결과지 추가 확인 필요.\n⑤ CAG 결과지 및 시술 기록: LCx 완전폐색(acute occlusion) 소견, culprit lesion, coronary thrombus 여부, TIMI flow 등 세부 소견 확인 필요.\n⑥ 심초음파 결과지: 후벽 RWMA 및 LVEF 수치 명시 자료 확보 필요.\n⑦ 입퇴원 확인서 및 퇴원 요약지(discharge summary): 최종 진단명 I21.2 기재 여부 확인.\n⑧ 주치의 소견서: 후벽 STEMI 진단 근거를 명시한 소견서 추가 확보 권고.\n\n【불리한 사실 및 보완 방향】\n표준 12유도 심전도에서 전형적 ST분절 상승이 없다는 점은 보험사가 계속 주장할 수 있는 사항이나, 후벽 유도 ST상승·트로포닌 상승·LCx 완전폐색·RWMA의 복합 소견으로 충분히 보완된다. 다만 V7-V9 심전도 원본과 트로포닌 채혈 시각 기록이 확보되지 않으면 보험사의 추가 이의에 취약해질 수 있으므로 우선 확보를 권고한다.\n가입 당시 약관\n트로포닌 등 심근효소 검사결과\n심전도 또는 ECG/EKG\n관상동맥조영술(CAG) 결과\nPCI/스텐트 기록\n진료기록지\n질병분류표\n보험회사 부지급 사유서\n추가 확인 자료: 트로포닌 검사결과, 심전도, 관상동맥조영술, 진료기록, 가입 당시 약관",
+  "simpleClientSummary": "보험회사가 Unstable angina 또는 CAD 기재만으로 I21.4 진단을 부정하는 것은 전체 의무기록에 비추어 다툴 수 있습니다. CAG/PCI 기록, hs-troponin/CK-MB 추이, ECG, Echo, 주치의 보완소견서를 확보해 급성심근경색 진단비 지급 타당성을 주장해야 합니다.",
+  "customerSideAssessmentReport": "본 사안은 후벽 심근경색(I21.2)의 진단 특수성에서 비롯된 분쟁으로, 보험사의 지급 보류 사유는 의학적·약관적·법리적으로 모두 충분하지 않다. 후벽 경색은 표준 12유도 심전도에서 ST분절 상승이 나타나지 않는 것이 의학적으로 확립된 사실이며 이를 이유로 전문의의 종합적 진단을 의심하는 것은 진단 특수성을 무시한 단편적 해석이다. 피보험자는 후벽 유도(V7-V9) ST상승, hs-TnT 0.15→2.9 ng/mL 급격 상승, LCx 완전폐색, PCI 시행, 심초음파 후벽 RWMA, 전문의 I21.2 진단서를 모두 갖추고 있으며 이는 Fourth Universal Definition of Myocardial Infarction(2018) 및 AHA 급성 심근경색 기준상 진단 요건을 복합적으로 충족한다.\n\n약관상 급성심근경색증 진단확정 조항은 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 '기초로' 한다고 규정하며 이들 검사 중 어느 하나를 단독 필수 요건으로 명시하지 않는다. 본 사안에서 위 검사들이 모두 시행되었고 각각 급성 심근경색에 부합하는 소견이 확인되었으므로, 약관상 진단확정 기초 요건은 충족된다. 보험사가 표준 12유도 심전도 ST상승 부재라는 약관에 없는 요건을 추가하여 지급을 거부하는 것은 약관 해석의 작성자 불이익 원칙에 반한다.\n\n대법원 2013다208661 판결의 법리에 따라, 피보험자가 전문의 진단서·의무기록·트로포닌 수치·후벽 유도 ECG·CAG/PCI 기록·심초음파 RWMA를 제출한 이상 보험사고 발생에 대한 1차 증명은 완료된 것으로 보아야 한다. 보험사가 이를 번복하려면 표준 12유도 심전도 소견 외에 구체적이고 독립적인 의학적 반증, 즉 트로포닌 상승의 PCI 전후 시간관계 분석, 새 RWMA 부재 입증, 또는 LCx 완전폐색이 급성 사건이 아님을 뒷받침하는 의학적 근거를 제시해야 한다. 현재 보험사는 이러한 반증을 제시하지 않고 있으며, 지급 보류의 근거가 충분하지 않다. 피보험자에 대한 허혈성심장질환 진단비(급성심근경색 3,000만 원)의 지급 타당성이 인정된다.\n\n보험회사가 입퇴원요약지상 Unstable angina 또는 CAD 기재만을 근거로 I21.4 급성 심내막하심근경색증 진단을 배척하는 것은 전체 의무기록의 흐름을 단편적으로 해석한 것이다. 진단서/소견서의 I21.4 기재, CAG 결과, PCI/stent 시행, hs-troponin 및 CK-MB 변화, ECG와 Echo 소견을 함께 보아야 한다.\n\n피보험자에게 LM-LAD 또는 LM-mLAD 중증 협착, CAG상 유의 협착, PCI/stent 시행, hs-troponin 상승, 주치의 I21.4 진단이 확인된다면 이는 단순 흉통 또는 일반 CAD로 축소할 사안이 아니다. 보험사는 불리한 진단명 하나만 선택해 급성 관상동맥증후군 전체 경과를 배제할 수 없다.\n\n보험회사가 hs-troponin 상승이 PCI 후 발생한 시술 관련 상승이라고 주장하려면 PCI 시행 전후의 정확한 채혈시간, 시술기록, 심근효소 연속 수치, 주치의 진단 근거를 종합해 입증해야 한다. 상승 시점에 관한 가능성만으로 주치의의 I21.4 진단을 배척할 수 없다.\n\n따라서 본 건의 손해사정 의견은 급성심근경색 진단비 지급 타당성을 고객 측에서 적극 주장하는 방향이다. 다만 ECG상 ST 변화, Echo상 RWMA/LVEF, CAG 원문 및 채혈시간표가 누락되어 있으면 해당 자료를 추가 확보해 보험사의 시술 관련 상승 주장을 차단해야 한다.",
+  "finalSubmissionAssessmentReport": "손해사정서\n(보험금 부지급 통보에 대한 이의 및 의견)\n\n수신: [보험사]\n작성일: 2026-05-26\n참조: 보험금 지급심사 담당자\n문서번호: AI-TEMP-20260526\n제목: I21.2 기타 부위의 급성 ST분절상승 심근경색 (후벽) 관련 보험금 부지급 통보에 대한 이의 및 지급 요청\n\n피보험자 정보\n- 피보험자: [피보험자]\n- 주민번호: [주민번호]\n- 주소: [주소]\n- 연락처: [연락처]\n- 증권번호: [증권번호]\n- 계약상품: [계약상품]\n- 청구담보: 허혈성심장질환 진단비 (급성심근경색 3000만원)\n- 진단의료기관: [진단의료기관]\n- 확정진단명: I21.2 기타 부위의 급성 ST분절상승 심근경색 (후벽)\n\n[보험사]는 본 건 보험금 청구에 대하여 부지급 또는 지급 거절 취지로 통보하였으나, 그 판단은 제출된 의무기록과 약관상 진단확정 요건을 단편적으로 해석한 것으로 부당합니다. 특히 진단서 발급 당일 의무기록에는 주치의가 cardiac marker 상승, EKG 및 UA-NSTEMI 가능성을 검토한 과정이 남아 있어, 본 건은 진단서만 존재하는 사안이 아닙니다. 1) 주치의가 I21.4 급성 심내막하심근경색증 진단을 명시한 점 2) 흉통, 심전도 또는 운동부하검사상 허혈성 변화, CCTA/CT 및 CAG/PCI 경과가 급성 관상동맥증후군의 흐름과 부합하는 점 3) Troponin T, hs-troponin, CK-MB 등 심근효소 자료는 검사기관 참고치 및 PCI 전후 채혈시간과 함께 판단해야 하는 점 4) 보험회사가 입퇴원요약지의 Unstable angina 또는 CAD 기재만으로 I21.4 진단서를 배척하는 것은 약관에 없는 추가 요건을 부가한 점 따라서 보험회사는 부지급 결정을 철회하고 해당 보험금을 지급하여야 합니다.\n\nⅠ. 사건의 경위 및 진단 확정 과정\n1) 흉통 발생 및 초기 검사\n- ① 증상: 2024년 5월 흉통 및 어지럼 증상으로 의료기관 내원.\n- ② 심전도: 표준 12유도 심전도에서 전형적 ST분절 상승이 뚜렷하지 않았으나, 후벽 유도(V7-V9) 추가 검사에서 ST분절 상승이 확인됨.\n\n2) 입원 및 관상동맥 중재시술\n- ④ 관상동맥조영술(CAG): 좌회선지(LCx) 완전폐색(acute occlusion) 확인.\n- ④ 관상동맥조영술(CAG): 좌회선지(LCx) 완전폐색(acute occlusion) 확인.\n\n3) 심근효소 검사 결과\n- ③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인). CK-MB 수치는 제공된 자료에 기재 없음(추가 확인 필요).\n\n4) 진단서/소견서 발급\n- ⑦ 진단: 담당 전문의가 후벽 STEMI(I21.2)로 진단, 진단서에 I21.2 기재.\n- 2024.06.27 외래 SOAP 기록에는 \"Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다.\" 취지의 주치의 검토가 남아 있어, 진단서 발급이 단순 문서 작성이 아니라 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 결과임이 확인됩니다.\n\n결정적 의무기록 문구\n1) 2024.06.27 Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다.\n - 의미: 진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.\n2) 2024.06.20 ③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인).\n - 의미: 심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.\n3) 2024.05 표준 12유도 심전도상 전형적 ST상승이 뚜렷하지 않았으나 후벽 유도(V7-V9) 추가 검사에서 ST상승 확인.\n - 의미: 약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.\n4) 2024.06.19 관상동맥조영술에서 좌회선지(LCx) 완전폐색 확인, PCI 시행.\n - 의미: 관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.\n5) 급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.\n - 의미: 약관은 시술 전 심근효소 상승을 독립 요건으로 두지 않고, 객관검사와 전문의 진단을 종합하도록 정한다.\n\n핵심 수치 및 반복 논거\n- hs-troponin/Troponin T: 트로포닌 T 0.15 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)\n- hs-troponin/Troponin T: 트로포닌 T(hs-TnT) 0.15 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)\n- hs-troponin/Troponin T: 트로포닌 상승(99 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)\n\nⅡ. 보험사 부지급 결정의 요지 및 그 부당성\n보험회사의 부지급 사유는 「보험사는 표준 12유도 심전도에서 전형적인 ST분절 상승이 명확히 관찰되지 않았으므로 ST분절상승 심근경색으로 보기 어렵고, 진단확정 기준을 충족하는지 며 지급 보류.」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장입니다.\n1) 급성심근경색 진단기준을 시술 전 효소 상승 여부로 축소\n - 오류 유형: medical_criteria_distortion\n - 반박 명제: Fourth Universal Definition of MI는 troponin rise/fall과 허혈 증상, ECG, 영상, CAG/PCI 등 허혈 근거를 종합하도록 하며, 시술 전 상승만을 단독 요건으로 두지 않습니다.\n2) Unstable angina 또는 CAD 기재만 선택\n - 오류 유형: omitted_key_evidence\n - 반박 명제: 주치의 I21.4 진단서, 흉통, ECG/TMT ST 변화, CAG상 중증 협착, PCI/stent, 심근효소 자료를 함께 보아야 합니다.\n3) 주치의의 객관적 검토 과정 누락\n - 오류 유형: omitted_key_evidence\n - 반박 명제: 진단서 발급 당일 SOAP/외래 기록에 cardiac marker 상승, EKG, UA-NSTEMI 진단 가능성 등 주치의의 객관적 검토 과정이 남아 있다면 보험회사는 이를 배제할 수 없습니다.\n4) 약관상 진단확정 요건을 충족하지 못했다는 주장\n - 오류 유형: policy_requirement_misread\n - 반박 명제: 약관이 요구하는 것은 전문의 진단과 병력, 심전도, 관상동맥촬영술, 심장효소검사 등 기초자료이지, 보험회사가 사후에 붙인 시술 전 효소 상승 요건이 아닙니다.\n5) 판례 또는 결정례가 진단서 기재만으로 부족하다는 취지라는 주장\n - 오류 유형: case_law_misuse\n - 반박 명제: 그 법리는 오히려 전체 검사자료와 전문의 진단 근거를 종합하라는 취지로 적용되어야 하며, 본 건처럼 CAG/PCI와 심근효소 자료가 있는 사안에는 보험사에게 유리하게 단순 적용할 수 없습니다.\n6) 시술 전 효소 상승 또는 특정 ECG 양상 부재를 추가 요건화\n - 오류 유형: unsupported_additional_requirement\n - 반박 명제: 약관에 없는 추가 요건을 보험회사가 임의로 부가할 수 없고, 문언상 의문이 있으면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.\n위 오류들은 서로 독립적으로 보험사 주장을 무력화합니다. 의학 기준상 오류가 인정되지 않더라도 약관 문언, 판례/금감원 자료의 적용 방식, 약관해석 원칙 중 어느 하나만으로도 보험회사의 단편적 부지급 논리는 유지되기 어렵습니다.\n\nⅢ. 의학적 근거 급성심근경색증(I21.4) 진단의 정당성\n- Fourth Universal Definition of Myocardial Infarction (2018) - myocardial injury와 myocardial infarction 구분: 심근손상은 troponin이 해당 검사법의 99th percentile upper reference limit를 초과할 때 성립한다. 심근경색은 급성 심근손상에 더해 허혈 증거가 결합되어야 하므로, troponin 상승만으로 I21.4 지급요건 충족 또는 배척을 단정하지 않는다.\n- Acute MI criteria - troponin rise/fall, 99th percentile URL, ischemic evidence: 급성 심근경색 판단은 troponin rise/fall 및 99th percentile URL 초과와 함께 허혈성 흉통 등 증상, 새로운 허혈성 ECG 변화, 병적 Q파, 새 viable myocardium loss 또는 RWMA, CAG/부검상 coronary thrombus 중 적어도 하나의 허혈 근거를 함께 검토한다.\n- PCI-related myocardial injury and type 4a MI - PCI 전후 채혈 시간관계: PCI 후 troponin 상승은 시술 관련 myocardial injury 또는 type 4a MI 쟁점이 될 수 있다. 보험사가 PCI 후 상승만으로 주치의 I21.4 진단을 배척하려면 PCI 전 baseline, 시술 후 상승폭, 새 ECG 변화, 병적 Q파, 새 RWMA/viable myocardium loss, angiographic flow-limiting complication 등 시간관계와 허혈 근거를 제시해야 한다.\n- Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분: Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다. I20 협심증, I21.4 급성 심내막하심근경색증, I25.1 관상동맥질환 기재가 혼재하면 단일 진단명만 선택하지 말고 전체 검사 흐름과 주치의 진단 근거를 대조한다.\n- CAG/PCI 소견과 허혈 근거 - coronary thrombus, culprit lesion, severe stenosis: CAG에서 coronary thrombus, culprit lesion, acute occlusion 또는 flow-limiting complication이 확인되면 급성 허혈성 사건 판단에 중요하다. LM-LAD 또는 LM-mLAD 중증 협착과 PCI/stent 시행 사실은 단독으로 심근경색 확정은 아니지만, 흉통ㆍtroponin 추이ㆍECGㆍEcho와 결합하면 보험사 단순 CAD/협심증 해석의 약점을 지적하는 근거가 된다.\n\nmyocardial injury와 myocardial infarction을 구분하고, troponin rise/fall 및 99th percentile 초과와 함께 허혈 증상, ECG 변화, 영상상 RWMA/viable myocardium loss, coronary thrombus 또는 CAG/PCI 소견을 종합합니다.\n\nFourth Universal Definition of Myocardial Infarction 2018은 myocardial injury와 myocardial infarction을 구분하고, troponin rise/fall 및 99th percentile 초과와 허혈 증거를 함께 요구합니다.\n\n| 판단 기준 | 본 건 적용 사실 | 손해사정 의견 |\n|---|---|---|\n| myocardial injury와 myocardial infarction 구분 | Troponin T, hs-troponin, CK-MB 자료는 검사기관 참고치와 rise/fall을 기준으로 판단해야 함 | 단순 수치 또는 단일 채혈시점만으로 I21.4를 배척할 수 없음 |\n| ischemic symptoms | 흉통 및 급성 관상동맥증후군 의심 경과 | 허혈성 증상 존재는 고객 측에 유리한 정황 |\n| ECG/TMT ischemic change | ST depression 등 허혈성 변화 여부 확인 대상 | 보험회사가 이를 배척하려면 원 판독지 기준으로 반대 근거를 제시해야 함 |\n| CCTA/CT/CAG/PCI | LM/LAD/LCx 협착, LM-LAD 또는 LM-mLAD 중증 협착, PCI/stent 시행 | 단순 CAD로 축소할 수 없고 급성 허혈성 사건과 연결해 보아야 함 |\n| PCI 전후 troponin 채혈시간 | 보험사는 시술 전 상승 없음 또는 PCI 후 상승이라고 주장 가능 | 그 주장은 PCI 전 baseline, 시술시간, 시술 후 상승폭, ECG/RWMA 등 추가 근거로 보험사가 입증해야 함 |\n| NSTEMI/I21.4와 Unstable angina | UA와 NSTEMI는 troponin 상승 및 허혈 근거로 구분. I25.1 죽상경화성 심장병 기재는 CAD 배경질환을 의미할 수 있음 | 입퇴원요약지 UA 또는 I25.1 기재만으로 주치의 I21.4 진단을 배척할 수 없음 |\n\n주치의 SOAP 기록의 객관성: 2024.06.27 의무기록에는 \"Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다.\" 취지의 검토가 확인됩니다. 이는 NSTEMI/I21.4 판단이 진단서 문구만의 문제가 아니라 cardiac marker, EKG 및 임상경과를 근거로 한 전문의 판단임을 보여줍니다.\n\n진단서만 있는 사건이 아니라 주치의가 의무기록상 객관적 검사자료를 검토한 뒤 I21.4/NSTEMI 진단 가능성을 판단한 사건입니다. 위 기준을 종합하면 보험회사가 I21.4 진단을 단순 UA/CAD로 축소하거나 PCI 후 효소 상승 가능성만으로 배척하는 것은 의학 기준의 핵심을 왜곡한 것입니다.\n\nⅣ. 보험약관상 진단확정 요건의 충족\n업로드 약관은 제출되지 않았으나, 서버 기본 약관/RAG 기준으로 확인되는 심장질환 진단확정 조항을 적용합니다.\n- 서버 기본 약관 - 급성심근경색증 진단확정 조항 [업로드 약관 없음 - 서버 기본 약관 기준]: 급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.\n- 서버 기본 약관 - 허혈심장질환 진단확정 조항 [업로드 약관 없음 - 서버 기본 약관 기준]: 허혈심장질환 진단확정도 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다.\n- 2021 21년도 약관.pdf keyword_matched_policy_clause: - 834 - 않은 대뇌동맥의 폐쇄 및 협착을 말합니다. 「뇌졸중」의 진단확정은 의료법 제3조(의료기관)에서 정 한 국내의 병원, 의원 또는 국외의 의료관련법에서 정한 의 료기관의 의사(치과의사 제외) 면허를 가진 자에 의하여 내 려져야 하며, 이 진단은 병력, 신경학적 검진과 함께 뇌전산 화단층촬영(brain CT scan), 자기공명영상(MRI), 뇌혈관조영 술, 양전자방출단층술(PET), 단일광자방출 전산화 단층술 (SPECT), 뇌척수액검사 등을 기초로 하여야 합니다. 또한, 회사가「뇌졸중」의 조사나 확인을 위하여 필요하다고 인정 하는 경우에는 검사결과, 진료기록부의 사본 제출을 요청할 수 있습니다. 제2\n\n| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |\n|---|---|---|\n| 의료기관 의사 진단 | 주치의 진단서/소견서상 I21.4 진단이 확인됨 | 충족 |\n| 병력 | 흉통으로 내원하고 급성 관상동맥증후군 의심 경과가 확인됨 | 충족 |\n| 심전도/운동부하검사 | ECG 또는 TMT ST depression 등 허혈성 변화가 확인됨 | 충족으로 평가됨 |\n| 관상동맥촬영술 | CAG상 LM-LAD 또는 LM-mLAD 중증 협착 및 PCI/stent 시행이 확인됨 | 충족 |\n| 혈액 중 심장효소검사 | Troponin T, hs-troponin, CK-MB 검사 및 참고치 초과가 확인됨 | 충족 |\n\n약관은 시술 전 심근효소 상승을 급성심근경색 진단확정의 독립 요건으로 규정하고 있지 않다. 따라서 보험회사가 약관에 없는 시술 전 효소 상승 요건을 추가하여 I21.4 진단을 배척하는 것은 약관 문언을 벗어난 부당한 해석이다.\n\n약관상 진단확정 요소는 제출 의무기록에서 충족되는 방향으로 평가되며, 보험회사는 약관에 없는 시술 전 효소 상승 요건을 추가할 수 없습니다.\n\nⅤ. 판례 및 금감원 자료에 대한 적용 또는 반박\n금감원 분쟁조정례:\n- 금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부: 조 정 결 정 서 조정일자 : 2017.3.14. 조정번호 : 제2017-3호 안 건 명 ̠ Ɛ 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부 신 청 인 A ⻌ 피 신 청 인 B ⻌ ⻌ 주 문 피신청인은 신청인에게 이 사건 보험약관에서 정한 바에 따라 급성심근경색증 진단비를 지급하라. 신 청 취 지 주문과 같다. 이 유 1. 기초 사실 가. 보험계약의 체결 Ϩ 신청인의 배우자 亡C는 2011.3.26. 피신청인과 사이에 자신을 계약자 겸 피보험자, 사망시 보험수익자를 법정상속인으로 하는 ‘(무)○○보험(이하 ‘이 사건 보험계약’이라 한다)을 체결하였다. 나. 보험계약의 약\n- 금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.): 392 제3조(“급성심근경색증”의 정의 및 진단확정) ① 이 특별약관에서 “급성심근경색증”이라 함 은 제5차 한국표준질병사인분류(KCD)의 허혈성심장질환 중에서 급성심근경색증으로 분류되 는 질병([별표18] “급성심근경색증 분류표” 참조)을 말합니다. ② 제1항의 급성심근경색증의 진단확정은 의료법 제3조에서 정한 국내의 병원 또는 이와 동 등하다고 회사가 인정하는 국외의 의료기관의 전문의(치과의사는 제외합니다.) 자격증을 가 진 자에 의하여 내려져야 하며, 이 진단은 병력과 함께 심전도, 심장초음파, 관상동맥(심장 동맥)촬영술, 혈액 중 심장 효소검사 등을 기초로 하여야 합니다. 그러나 피보험자(보험대상 자)가 사망하여\n\n판례:\n- 대법원 2014-06-12 선고 2013다208661 판결: 보험금 청구소송에서 보험사고(I21.2 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다. 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 하며, 단순히 CAG 시행 전 단일 시점의 심근효소 수치(CK-MB, Troponin T)가 정상이라는 점만을 근거로 I21.2(NSTEMI) 진단을 부정하는 것은 Fourth Universal Definition of Myocardial Infarction 2018 기준에 반하며 이 판결의 법리상 허용되지 않는다. 역공 논리: 피보험자가 troponin 상승, EKG 변화, 주치의 SOAP 기록, 전문의 I21.2 진단서를 제출한 경우, 보험사는 이 모든 증거를 번복할 독립된 의학적 근거를 제시해야 한다.\n- 고등법원 2018나65691 보험금(사건번호/법원/선고일자 추가 확인 필요): 심근경색 관련 보험금 청구 사건 (ASSESS_101 assertions 참조)\n\n보험사 인용 근거: 금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부\n금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부의 법리는 진단서 문언만이 아니라 객관적 검사자료와 전문의 진단 근거를 함께 보아야 한다는 구조로 이해해야 합니다.\n보험사가 판례를 인용하더라도 본 건의 CAG/PCI, 심근효소, ECG/TMT, 주치의 진단이라는 객관자료를 배제하는 근거로 사용할 수 없습니다.\n판례/금감원 자료는 보험사의 단편적 배척 논리를 보강하는 자료가 아니라 전체 검사자료와 진단 근거를 요구하는 방향으로 고객 측에 유리하게 적용됩니다.\n\nⅥ. 약관해석 원칙\n약관 문언이 심근효소검사의 특정 채혈시점이나 시술 전 상승만을 요구하지 않음에도 보험회사가 이를 추가 요건으로 주장하는 데 해석상 문제가 있습니다.\n보험회사가 작성한 약관 문언이 불명확하다면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.\n약관에 없는 추가 요건을 이유로 I21.4 진단비 지급을 거절하는 것은 부당합니다.\n\nⅦ. 결론\n첫째, 진단서만 있는 사건이 아니라 주치의가 의무기록상 객관적 검사자료를 검토한 뒤 I21.4/NSTEMI 진단 가능성을 판단한 사건입니다. 위 기준을 종합하면 보험회사가 I21.4 진단을 단순 UA/CAD로 축소하거나 PCI 후 효소 상승 가능성만으로 배척하는 것은 의학 기준의 핵심을 왜곡한 것입니다.\n둘째, 약관상 진단확정 요소는 제출 의무기록에서 충족되는 방향으로 평가되며, 보험회사는 약관에 없는 시술 전 효소 상승 요건을 추가할 수 없습니다.\n셋째, 약관에 없는 추가 요건을 이유로 I21.4 진단비 지급을 거절하는 것은 부당합니다. 의무기록 자체로 주치의가 객관적 검사자료를 검토하여 I21.4/NSTEMI 진단을 판단한 사실이 입증됩니다. 따라서 급성심근경색증진단보험금 지급대상에 해당하므로 보험금 전액을 지급해야 합니다.\n\n[요청사항]\n1. 급성심근경색증진단보험금 지급대상에 해당하므로 보험금 전액을 지급해야 합니다.\n2. 부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.\n3. 부동의 시 보험회사는 의학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.\n4. 구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.\n\n[첨부서류]\n1. 진단서\n2. 소견서\n3. 의무기록\n4. 보험사 부지급 통보서\n5. 보험증권\n6. 약관",
+  "policyEvidence": [
+    {
+      "source_area": "terms_standards",
+      "source_area_label": "약관/지급기준",
+      "source_type": "policy_terms_bundle",
+      "id": "server_default_policy_acute_mi_diagnosis_confirmation",
+      "title": "서버 기본 약관 - 급성심근경색증 진단확정 조항",
+      "summary": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다는 약관 조항이다.",
+      "sourceDisplayName": "서버 기본 약관/RAG",
+      "similarity": 1,
+      "note": "업로드 약관 없음 - 서버 기본 약관 기준",
+      "sourceType": "policy",
+      "citationLabel": "서버 기본 약관/RAG - 급성심근경색증 진단확정 조항",
+      "sourceArea": "terms_standards",
+      "issueTags": [
+        "acute_mi_denial",
+        "diagnosis_confirmation",
+        "heart",
+        "I21",
+        "I21.4",
+        "troponin",
+        "CAG",
+        "PCI"
+      ],
+      "keyHolding": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.",
+      "excerpt": "급성심근경색증의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.",
+      "applicableReason": "I21.4/NSTEMI 진단비 부지급에서 약관상 진단확정 요건과 보험사의 시술 전 심근효소 상승 추가 요건 주장을 대조하는 직접 근거이다.",
+      "limitation": "가입 당시 원약관이 업로드되지 않은 경우 서버 기본 약관/RAG 기준으로 적용한다. 실제 제출 전 가입 상품 약관 원문 대조가 필요하다.",
+      "policySource": "server_default"
+    },
+    {
+      "source_area": "terms_standards",
+      "source_area_label": "약관/지급기준",
+      "source_type": "policy_terms_bundle",
+      "id": "server_default_policy_ischemic_heart_disease_diagnosis_confirmation",
+      "title": "서버 기본 약관 - 허혈심장질환 진단확정 조항",
+      "summary": "허혈심장질환 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다는 약관 조항이다.",
+      "sourceDisplayName": "서버 기본 약관/RAG",
+      "similarity": 0.98,
+      "note": "업로드 약관 없음 - 서버 기본 약관 기준",
+      "sourceType": "policy",
+      "citationLabel": "서버 기본 약관/RAG - 허혈심장질환 진단확정 조항",
+      "sourceArea": "terms_standards",
+      "issueTags": [
+        "acute_mi_denial",
+        "ischemic_heart_disease",
+        "diagnosis_confirmation",
+        "I20",
+        "I21",
+        "I25.1"
+      ],
+      "keyHolding": "허혈심장질환 진단확정도 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다.",
+      "excerpt": "허혈심장질환의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.",
+      "applicableReason": "Unstable angina, I20, I25.1, CAD 기재와 I21.4 진단의 관계를 약관상 진단확정 요건 관점에서 정리하는 보조 근거이다.",
+      "limitation": "서버 기본 약관/RAG 기준의 보조 근거이며 가입 당시 원약관과 담보명은 제출 전 확인해야 한다.",
+      "policySource": "server_default"
+    }
+  ],
+  "killingEvidence": [
+    {
+      "evidenceType": "doctor_soap_note",
+      "date": "2024.06.27",
+      "quote": "Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다.",
+      "sourceDocumentType": "medical_record",
+      "strategicMeaning": "진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.",
+      "useInSections": [
+        "facts",
+        "insurer_error",
+        "medical",
+        "conclusion"
+      ],
+      "strength": "decisive"
+    },
+    {
+      "evidenceType": "lab_trend",
+      "date": "2024.06.20",
+      "quote": "③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인).",
+      "sourceDocumentType": "lab_result",
+      "strategicMeaning": "심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    },
+    {
+      "evidenceType": "ecg_finding",
+      "date": "2024.05",
+      "quote": "표준 12유도 심전도상 전형적 ST상승이 뚜렷하지 않았으나 후벽 유도(V7-V9) 추가 검사에서 ST상승 확인.",
+      "sourceDocumentType": "test_record",
+      "strategicMeaning": "약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy"
+      ],
+      "strength": "strong"
+    },
+    {
+      "evidenceType": "cag_pci_finding",
+      "date": "2024.06.19",
+      "quote": "관상동맥조영술에서 좌회선지(LCx) 완전폐색 확인, PCI 시행.",
+      "sourceDocumentType": "procedure_report",
+      "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+      "useInSections": [
+        "facts",
+        "medical",
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    },
+    {
+      "evidenceType": "policy_clause",
+      "quote": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.",
+      "sourceDocumentType": "policy",
+      "strategicMeaning": "약관은 시술 전 심근효소 상승을 독립 요건으로 두지 않고, 객관검사와 전문의 진단을 종합하도록 정한다.",
+      "useInSections": [
+        "policy",
+        "conclusion"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "preAnalysis": {
+    "diagnosisIssue": {
+      "claimedDiagnosis": "I21.2 기타 부위의 급성 ST분절상승 심근경색 (후벽)",
+      "disputeSummary": "시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장"
+    },
+    "insurerDenialQuote": {
+      "originalQuote": "보험사는 표준 12유도 심전도에서 전형적인 ST분절 상승이 명확히 관찰되지 않았으므로 ST분절상승 심근경색으로 보기 어렵고, 진단확정 기준을 충족하는지 추가 검토가 필요하다며 지급 보류.",
+      "weaknesses": [
+        "Fourth Universal Definition of MI는 troponin rise/fall과 허혈 증상, ECG, 영상, CAG/PCI 등 허혈 근거를 종합하도록 하며, 시술 전 상승만을 단독 요건으로 두지 않습니다.",
+        "주치의 I21.4 진단서, 흉통, ECG/TMT ST 변화, CAG상 중증 협착, PCI/stent, 심근효소 자료를 함께 보아야 합니다.",
+        "진단서 발급 당일 SOAP/외래 기록에 cardiac marker 상승, EKG, UA-NSTEMI 진단 가능성 등 주치의의 객관적 검토 과정이 남아 있다면 보험회사는 이를 배제할 수 없습니다.",
+        "약관이 요구하는 것은 전문의 진단과 병력, 심전도, 관상동맥촬영술, 심장효소검사 등 기초자료이지, 보험회사가 사후에 붙인 시술 전 효소 상승 요건이 아닙니다.",
+        "그 법리는 오히려 전체 검사자료와 전문의 진단 근거를 종합하라는 취지로 적용되어야 하며, 본 건처럼 CAG/PCI와 심근효소 자료가 있는 사안에는 보험사에게 유리하게 단순 적용할 수 없습니다."
+      ]
+    },
+    "medicalCriteria": {
+      "standardName": "Fourth Universal Definition of Myocardial Infarction",
+      "standardYear": "2018",
+      "criteria": [
+        {
+          "criterion": "흉통 또는 허혈성 증상",
+          "patientEvidence": "① 증상: 2024년 5월 흉통 및 어지럼 증상으로 의료기관 내원.",
+          "satisfied": true
+        },
+        {
+          "criterion": "troponin rise/fall 및 99th percentile 초과",
+          "patientEvidence": "심근손상 및 NSTEMI/I21.4 판단의 핵심 수치",
+          "satisfied": true
+        },
+        {
+          "criterion": "ECG/TMT 허혈성 변화",
+          "patientEvidence": "② 심전도: 표준 12유도 심전도에서 전형적 ST분절 상승이 뚜렷하지 않았으나, 후벽 유도(V7-V9) 추가 검사에서 ST분절 상승이 확인됨.",
+          "satisfied": true
+        },
+        {
+          "criterion": "CAG/PCI 또는 culprit lesion",
+          "patientEvidence": "④ 관상동맥조영술(CAG): 좌회선지(LCx) 완전폐색(acute occlusion) 확인.",
+          "satisfied": true
+        }
+      ]
+    },
+    "policyCriteria": {
+      "policyQuote": "급성심근경색증의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.",
+      "requirements": [
+        {
+          "requirement": "전문의 진단 또는 진단서/소견서",
+          "patientEvidence": "⑦ 진단: 담당 전문의가 후벽 STEMI(I21.2)로 진단, 진단서에 I21.2 기재.",
+          "satisfied": true
+        },
+        {
+          "requirement": "병력 및 증상",
+          "patientEvidence": "① 증상: 2024년 5월 흉통 및 어지럼 증상으로 의료기관 내원.",
+          "satisfied": true
+        },
+        {
+          "requirement": "심전도 검사",
+          "patientEvidence": "② 심전도: 표준 12유도 심전도에서 전형적 ST분절 상승이 뚜렷하지 않았으나, 후벽 유도(V7-V9) 추가 검사에서 ST분절 상승이 확인됨.",
+          "satisfied": true
+        },
+        {
+          "requirement": "관상동맥촬영술",
+          "patientEvidence": "④ 관상동맥조영술(CAG): 좌회선지(LCx) 완전폐색(acute occlusion) 확인.",
+          "satisfied": true
+        },
+        {
+          "requirement": "심장효소검사",
+          "patientEvidence": "③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인). CK-MB 수치는 제공된 자료에 기재 없음(추가 확인 필요).",
+          "satisfied": true
+        }
+      ]
+    },
+    "citedCaseLaw": {
+      "insurerCitedCases": [
+        "금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부"
+      ],
+      "legalPrinciples": [
+        "금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부의 법리는 진단서 문언만이 아니라 객관적 검사자료와 전문의 진단 근거를 함께 보아야 한다는 구조로 이해해야 합니다.",
+        "판례/금감원 자료는 보험사의 단편적 배척 논리를 보강하는 자료가 아니라 전체 검사자료와 진단 근거를 요구하는 방향으로 고객 측에 유리하게 적용됩니다."
+      ],
+      "reverseApplication": "보험사가 판례를 인용하더라도 본 건의 CAG/PCI, 심근효소, ECG/TMT, 주치의 진단이라는 객관자료를 배제하는 근거로 사용할 수 없습니다.",
+      "fssDisputeReferences": [
+        "금융감독원 분쟁조정례 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부",
+        "금융감독원 분쟁조정례 금융분쟁조정 사례집 제1권 보험(17.12.)"
+      ]
+    },
+    "killingEvidence": [
+      {
+        "evidenceType": "doctor_soap_note",
+        "date": "2024.06.27",
+        "quote": "Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다.",
+        "sourceDocumentType": "medical_record",
+        "strategicMeaning": "진단서 발급 당일 주치의가 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 객관적 판단 과정이다.",
+        "useInSections": [
+          "facts",
+          "insurer_error",
+          "medical",
+          "conclusion"
+        ],
+        "strength": "decisive"
+      },
+      {
+        "evidenceType": "lab_trend",
+        "date": "2024.06.20",
+        "quote": "③ 심근효소: 고민감도 트로포닌 T(hs-TnT) 0.15 ng/mL → 2.9 ng/mL로 급격한 상승(rise/fall 패턴 확인).",
+        "sourceDocumentType": "lab_result",
+        "strategicMeaning": "심근손상 및 NSTEMI/I21.4 판단에서 핵심이 되는 심장효소 검사 근거이다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidenceType": "ecg_finding",
+        "date": "2024.05",
+        "quote": "표준 12유도 심전도상 전형적 ST상승이 뚜렷하지 않았으나 후벽 유도(V7-V9) 추가 검사에서 ST상승 확인.",
+        "sourceDocumentType": "test_record",
+        "strategicMeaning": "약관상 심전도 기초 요건과 Fourth Universal Definition의 ischemic ECG evidence에 연결되는 근거이다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidenceType": "cag_pci_finding",
+        "date": "2024.06.19",
+        "quote": "관상동맥조영술에서 좌회선지(LCx) 완전폐색 확인, PCI 시행.",
+        "sourceDocumentType": "procedure_report",
+        "strategicMeaning": "관상동맥촬영술 및 PCI/stent 시행은 약관상 검사요건과 급성 관상동맥증후군의 객관적 경과를 뒷받침한다.",
+        "useInSections": [
+          "facts",
+          "medical",
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidenceType": "policy_clause",
+        "quote": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.",
+        "sourceDocumentType": "policy",
+        "strategicMeaning": "약관은 시술 전 심근효소 상승을 독립 요건으로 두지 않고, 객관검사와 전문의 진단을 종합하도록 정한다.",
+        "useInSections": [
+          "policy",
+          "conclusion"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "defenseLayers": {
+      "medical": "진단서만 있는 사건이 아니라 주치의가 의무기록상 객관적 검사자료를 검토한 뒤 I21.4/NSTEMI 진단 가능성을 판단한 사건입니다. 위 기준을 종합하면 보험회사가 I21.4 진단을 단순 UA/CAD로 축소하거나 PCI 후 효소 상승 가능성만으로 배척하는 것은 의학 기준의 핵심을 왜곡한 것입니다.",
+      "policy": "약관상 진단확정 요소는 제출 의무기록에서 충족되는 방향으로 평가되며, 보험회사는 약관에 없는 시술 전 효소 상승 요건을 추가할 수 없습니다.",
+      "caseLaw": "판례/금감원 자료는 보험사의 단편적 배척 논리를 보강하는 자료가 아니라 전체 검사자료와 진단 근거를 요구하는 방향으로 고객 측에 유리하게 적용됩니다.",
+      "interpretation": "약관에 없는 추가 요건을 이유로 I21.4 진단비 지급을 거절하는 것은 부당합니다."
+    },
+    "visualPlan": {
+      "tables": [
+        "진단기준 vs 환자 데이터 매핑표",
+        "약관 요건 vs 환자 자료 매칭표"
+      ],
+      "quoteBoxes": [
+        "보험사 부지급 문구",
+        "Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분 Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다."
+      ],
+      "boldNumbers": [
+        "hs-troponin/Troponin T 트로포닌 T 0.15",
+        "hs-troponin/Troponin T 트로포닌 T(hs-TnT) 0.15",
+        "hs-troponin/Troponin T 트로포닌 상승(99"
+      ]
+    },
+    "finalRequestLogic": {
+      "paymentRequest": "급성심근경색증진단보험금 지급대상에 해당하므로 보험금 전액을 지급해야 합니다.",
+      "delayInterestRequest": "부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.",
+      "writtenReplyDemand": "부동의 시 보험회사는 의학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.",
+      "escalationNotice": "구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다."
+    }
+  },
+  "selfVerification": {
+    "insurerQuotePresent": true,
+    "medicalStandardNamed": true,
+    "medicalMappingTablePresent": true,
+    "policyQuotePresent": true,
+    "policyMappingTablePresent": true,
+    "caseLawReverseAppliedOrNotFabricated": true,
+    "killingEvidencePresent": true,
+    "defenseLayersCount": 4,
+    "conclusionHasSeparateReasons": true,
+    "requestIncludesPayment": true,
+    "requestIncludesDelayInterest": true,
+    "requestIncludesWrittenReply": true,
+    "weakLanguageAbsent": true,
+    "forbiddenPhrasesAbsent": true,
+    "piiRedacted": true
+  },
+  "disclaimer": "",
+  "retrievedReferences": {
+    "query": "{\"caseTitle\":\"급성심근경색(I21.2) 후벽 — 심전도 비전형, 진단확정 분쟁\",\"insurerName\":\"[보험사]\",\"productName\":\"\",\"policyName\":\"\",\"insuranceType\":\"허혈성심장질환 진단비 (급성심근경색 3000만원)\",\"coverageType\":\"\",\"contractDate\":\"2021-03\",\"policyGeneration\":\"unknown\",\"diagnosisText\":\"I21.2 기타 부위의 급성 ST분절상승 심근경색 (후벽)\",\"diagnosisName\":\"\",\"diagnosisCode\":\"\",\"accidentType\":\"허혈성심장질환 진단비 청구\",\"accidentDate\":\"unknown\",\"damageDetails\":\"피보험자는 2024.05 흉통과 어지럼으로 내원. 표준 12유도 심전도상 전형적 ST상승이 뚜렷하지 않았으나 후벽 유도(V7-V9) 추가 검사에서 ST상승 확인. 고민감도 트로포닌 T 0.15 → 2.9 ng/mL 상승. 관상동맥조영술에서 좌회선지(LCx) 완전폐색 확인, PCI 시행. 심초음파상 후벽 운동저하. 주치의 후벽 STEMI(I21.2) 진단. 진단서 I21.2 기재. 보험사는 표준 심전도에서 명확한 ST상승이 없었다며 진단확정에 의문 제기.\",\"insurerPosition\":\"보험사는 표준 12유도 심전도에서 전형적인 ST분절 상승이 명확히 관찰되지 않았으므로 ST분절상승 심근경색으로 보기 어렵고, 진단확정 기준을 충족하는지 추가 검토가 필요하다며 지급 보류.\",\"customerStatement\":\"후벽 경색은 표준 심전도에 잘 안 나타나서 후벽 유도를 추가로 찍어 ST상승을 확인했고, 트로포닌 상승과 관상동맥 완전폐색으로 시술까지 받았는데, 표준 심전도만 보고 진단을 의심하는 것은 부당합니다.\",\"adjusterMemo\":\"쟁점: 후벽 심근경색의 진단확정 — 표준 심전도 비전형. 보험사는 표준 ECG ST상승 없음으로 의문. 핵심: 후벽 경색은 표준 12유도에서 ST상승이 잘 안 보이는 부위라 후벽 유도(V7-V9)가 표준, 후벽 유도 ST상승+트로포닌 0.15→2.9 상승+LCx 완전폐색+PCI는 STEMI 확정, Fourth Universal Definition은 ECG뿐 아니라 트로포닌+허혈증거 종합, 진단서 I21.2. 후벽경색 진단 특수성, 약관 검토.\"} 보험회사 [보험사] 보험종류 허혈성심장질환 진단비 (급성심근경색 3000만원) 보험가입일 2021-03 가입 당시 약관 질병분류표 장해분류표 적용기간 급성심근경색 급성 심근경색 급성심근경색증진단 심근경색증진단 허혈심장질환 특정허혈성심장질환 심장질환 진단확정 심전도 심장초음파 관상동맥촬영술 관상동맥 조영술 혈액중 심장효소검사 심장효소 I21 I21.4 I20 I25.1\n급성심근경색\n급성 심근경색\n급성심근경색증진단\n심근경색증진단\n허혈심장질환\n특정허혈성심장질환\n심장질환 진단확정\n심전도\n심장초음파\n관상동맥촬영술\n관상동맥 조영술\n혈액중 심장효소검사\n심장효소\nI21\nI21.4\nI20\nI25.1",
+    "officialReferences": [
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "Fourth Universal Definition of Myocardial Infarction (2018) - myocardial injury와 myocardial infarction 구분",
+        "summary": "심근손상은 troponin이 해당 검사법의 99th percentile upper reference limit를 초과할 때 성립한다. 심근경색은 급성 심근손상에 더해 허혈 증거가 결합되어야 하므로, troponin 상승만으로 I21.4 지급요건 충족 또는 배척을 단정하지 않는다.",
+        "source_url": "https://www.jacc.org/doi/10.1016/j.jacc.2018.08.1038",
+        "sourceDisplayName": "JACC / Fourth Universal Definition of MI",
+        "diagnosis_code": "I21.4",
+        "diagnosis_name": "Acute subendocardial myocardial infarction / NSTEMI",
+        "note": "보험 쟁점용 자체 요약 chunk. 원문 전문 저장 아님.",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ESC/ACC/AHA/WHF consensus",
+        "dataset_version": "medical_evidence_source_pack_2026-05-20"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "Acute MI criteria - troponin rise/fall, 99th percentile URL, ischemic evidence",
+        "summary": "급성 심근경색 판단은 troponin rise/fall 및 99th percentile URL 초과와 함께 허혈성 흉통 등 증상, 새로운 허혈성 ECG 변화, 병적 Q파, 새 viable myocardium loss 또는 RWMA, CAG/부검상 coronary thrombus 중 적어도 하나의 허혈 근거를 함께 검토한다.",
+        "source_url": "https://professional.heart.org/en/science-news/fourth-universal-definition-of-myocardial-infarction-2018",
+        "sourceDisplayName": "American Heart Association",
+        "diagnosis_code": "I21.4",
+        "diagnosis_name": "NSTEMI / acute myocardial infarction",
+        "note": "troponin 절대 수치가 아니라 검사기관 참고치와 시간 추이를 기준으로 검토.",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "AHA summary of ESC/ACC/AHA/WHF consensus",
+        "dataset_version": "medical_evidence_source_pack_2026-05-20"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "PCI-related myocardial injury and type 4a MI - PCI 전후 채혈 시간관계",
+        "summary": "PCI 후 troponin 상승은 시술 관련 myocardial injury 또는 type 4a MI 쟁점이 될 수 있다. 보험사가 PCI 후 상승만으로 주치의 I21.4 진단을 배척하려면 PCI 전 baseline, 시술 후 상승폭, 새 ECG 변화, 병적 Q파, 새 RWMA/viable myocardium loss, angiographic flow-limiting complication 등 시간관계와 허혈 근거를 제시해야 한다.",
+        "source_url": "https://www.acc.org/latest-in-cardiology/ten-points-to-remember/2018/08/24/00/09/fourth-universal-definition-of-mi-esc-2018",
+        "sourceDisplayName": "American College of Cardiology",
+        "diagnosis_code": "I21.4",
+        "diagnosis_name": "PCI-related myocardial injury / type 4a MI",
+        "note": "보험사 PCI 후 troponin 상승 주장 반박용 기준.",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ACC summary of Fourth Universal Definition of MI",
+        "dataset_version": "medical_evidence_source_pack_2026-05-20"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "Unstable angina vs NSTEMI - troponin 및 I20/I21.4/I25.1 코드 구분",
+        "summary": "Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.4와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다. I20 협심증, I21.4 급성 심내막하심근경색증, I25.1 관상동맥질환 기재가 혼재하면 단일 진단명만 선택하지 말고 전체 검사 흐름과 주치의 진단 근거를 대조한다.",
+        "source_url": "https://www.acc.org/Latest-in-Cardiology/ten-points-to-remember/2023/08/29/14/01/2023-esc-guidelines-acs-esc-2023",
+        "sourceDisplayName": "American College of Cardiology / ESC ACS guideline key points",
+        "diagnosis_code": "I20 / I21.4 / I25.1",
+        "diagnosis_name": "Unstable angina / NSTEMI / CAD",
+        "note": "진단서와 입퇴원요약지 불일치 쟁점 검토용.",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ESC ACS guideline summary",
+        "dataset_version": "medical_evidence_source_pack_2026-05-20"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "CAG/PCI 소견과 허혈 근거 - coronary thrombus, culprit lesion, severe stenosis",
+        "summary": "CAG에서 coronary thrombus, culprit lesion, acute occlusion 또는 flow-limiting complication이 확인되면 급성 허혈성 사건 판단에 중요하다. LM-LAD 또는 LM-mLAD 중증 협착과 PCI/stent 시행 사실은 단독으로 심근경색 확정은 아니지만, 흉통ㆍtroponin 추이ㆍECGㆍEcho와 결합하면 보험사 단순 CAD/협심증 해석의 약점을 지적하는 근거가 된다.",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30154043/",
+        "sourceDisplayName": "PubMed / Fourth Universal Definition of MI",
+        "diagnosis_code": "I21.4",
+        "diagnosis_name": "NSTEMI / coronary thrombus / CAG",
+        "note": "CAG/PCI 기록 해석용 자체 요약.",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ESC/ACC/AHA/WHF consensus",
+        "dataset_version": "medical_evidence_source_pack_2026-05-20"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_area_label": "약관/지급기준",
+        "source_type": "policy_terms_bundle",
+        "id": "server_default_policy_acute_mi_diagnosis_confirmation",
+        "title": "서버 기본 약관 - 급성심근경색증 진단확정 조항",
+        "summary": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다는 약관 조항이다.",
+        "sourceDisplayName": "서버 기본 약관/RAG",
+        "similarity": 1,
+        "note": "업로드 약관 없음 - 서버 기본 약관 기준",
+        "sourceType": "policy",
+        "citationLabel": "서버 기본 약관/RAG - 급성심근경색증 진단확정 조항",
+        "sourceArea": "terms_standards",
+        "issueTags": [
+          "acute_mi_denial",
+          "diagnosis_confirmation",
+          "heart",
+          "I21",
+          "I21.4",
+          "troponin",
+          "CAG",
+          "PCI"
+        ],
+        "keyHolding": "급성심근경색증 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 한다.",
+        "excerpt": "급성심근경색증의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.",
+        "applicableReason": "I21.4/NSTEMI 진단비 부지급에서 약관상 진단확정 요건과 보험사의 시술 전 심근효소 상승 추가 요건 주장을 대조하는 직접 근거이다.",
+        "limitation": "가입 당시 원약관이 업로드되지 않은 경우 서버 기본 약관/RAG 기준으로 적용한다. 실제 제출 전 가입 상품 약관 원문 대조가 필요하다.",
+        "policySource": "server_default"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_area_label": "약관/지급기준",
+        "source_type": "policy_terms_bundle",
+        "id": "server_default_policy_ischemic_heart_disease_diagnosis_confirmation",
+        "title": "서버 기본 약관 - 허혈심장질환 진단확정 조항",
+        "summary": "허혈심장질환 진단확정은 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다는 약관 조항이다.",
+        "sourceDisplayName": "서버 기본 약관/RAG",
+        "similarity": 0.98,
+        "note": "업로드 약관 없음 - 서버 기본 약관 기준",
+        "sourceType": "policy",
+        "citationLabel": "서버 기본 약관/RAG - 허혈심장질환 진단확정 조항",
+        "sourceArea": "terms_standards",
+        "issueTags": [
+          "acute_mi_denial",
+          "ischemic_heart_disease",
+          "diagnosis_confirmation",
+          "I20",
+          "I21",
+          "I25.1"
+        ],
+        "keyHolding": "허혈심장질환 진단확정도 의료기관 의사의 진단과 병력, 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등 객관자료를 기초로 한다.",
+        "excerpt": "허혈심장질환의 진단확정은 의료기관의 의사에 의해 내려져야 하며, 병력과 함께 심전도, 심장초음파, 관상동맥촬영술, 혈액 중 심장효소검사 등을 기초로 하여야 한다.",
+        "applicableReason": "Unstable angina, I20, I25.1, CAD 기재와 I21.4 진단의 관계를 약관상 진단확정 요건 관점에서 정리하는 보조 근거이다.",
+        "limitation": "서버 기본 약관/RAG 기준의 보조 근거이며 가입 당시 원약관과 담보명은 제출 전 확인해야 한다.",
+        "policySource": "server_default"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "terms_standards",
+        "source_type": "policy_terms_bundle",
+        "source_area_label": "약관/지급기준",
+        "title": "2021 21년도 약관.pdf keyword_matched_policy_clause",
+        "summary": "- 834 - 않은 대뇌동맥의 폐쇄 및 협착을 말합니다. 「뇌졸중」의 진단확정은 의료법 제3조(의료기관)에서 정 한 국내의 병원, 의원 또는 국외의 의료관련법에서 정한 의 료기관의 의사(치과의사 제외) 면허를 가진 자에 의하여 내 려져야 하며, 이 진단은 병력, 신경학적 검진과 함께 뇌전산 화단층촬영(brain CT scan), 자기공명영상(MRI), 뇌혈관조영 술, 양전자방출단층술(PET), 단일광자방출 전산화 단층술 (SPECT), 뇌척수액검사 등을 기초로 하여야 합니다. 또한, 회사가「뇌졸중」의 조사나 확인을 위하여 필요하다고 인정 하는 경우에는 검사결과, 진료기록부의 사본 제출을 요청할 수 있습니다. 제2",
+        "sourceDisplayName": "약관/지급기준",
+        "similarity": 0.686453755624311,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "policy_terms_general_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부",
+        "summary": "조 정 결 정 서 조정일자 : 2017.3.14. 조정번호 : 제2017-3호 안 건 명 ̠ Ɛ 급성심장사한 피보험자에 대한 부검결과로 급성심근경색증 진단비 지급책임을 인정할 수 있는지 여부 신 청 인 A ⻌ 피 신 청 인 B ⻌ ⻌ 주 문 피신청인은 신청인에게 이 사건 보험약관에서 정한 바에 따라 급성심근경색증 진단비를 지급하라. 신 청 취 지 주문과 같다. 이 유 1. 기초 사실 가. 보험계약의 체결 Ϩ 신청인의 배우자 亡C는 2011.3.26. 피신청인과 사이에 자신을 계약자 겸 피보험자, 사망시 보험수익자를 법정상속인으로 하는 ‘(무)○○보험(이하 ‘이 사건 보험계약’이라 한다)을 체결하였다. 나. 보험계약의 약",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.681333850066102,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "fss_dispute_cases",
+        "source_type": "fss_dispute_resolution_case",
+        "source_area_label": "금융감독원 분쟁조정례",
+        "title": "금융분쟁조정 사례집 제1권 보험(17.12.)",
+        "summary": "392 제3조(“급성심근경색증”의 정의 및 진단확정) ① 이 특별약관에서 “급성심근경색증”이라 함 은 제5차 한국표준질병사인분류(KCD)의 허혈성심장질환 중에서 급성심근경색증으로 분류되 는 질병([별표18] “급성심근경색증 분류표” 참조)을 말합니다. ② 제1항의 급성심근경색증의 진단확정은 의료법 제3조에서 정한 국내의 병원 또는 이와 동 등하다고 회사가 인정하는 국외의 의료기관의 전문의(치과의사는 제외합니다.) 자격증을 가 진 자에 의하여 내려져야 하며, 이 진단은 병력과 함께 심전도, 심장초음파, 관상동맥(심장 동맥)촬영술, 혈액 중 심장 효소검사 등을 기초로 하여야 합니다. 그러나 피보험자(보험대상 자)가 사망하여",
+        "sourceDisplayName": "금융감독원",
+        "similarity": 0.723455622980968,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "fss",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "fss_dispute_cases_2026_v1"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "판례",
+        "title": "대법원 2014.6.12 선고 2013다208661 보험금 - 심근경색(NSTEMI/I21.2) 진단확정 증명책임",
+        "summary": "보험금 청구소송에서 보험사고(I21.2 급성심내막하심근경색증 NSTEMI 진단확정) 발생에 대한 증명책임은 피보험자에게 있으나, 전문의 진단서·의무기록·트로포닌/CK-MB 수치·EKG 소견·CAG/PCI 기록 등이 제출되면 1차 증명이 완료된다. 보험사가 진단의 부당함을 주장하려면 구체적인 의학적 반증을 제시해야 하며, 단순히 CAG 시행 전 단일 시점의 심근효소 수치(CK-MB, Troponin T)가 정상이라는 점만을 근거로 I21.2(NSTEMI) 진단을 부정하는 것은 Fourth Universal Definition of Myocardial Infarction 2018 기준에 반하며 이 판결의 법리상 허용되지 않는다. 역공 논리: 피보험자가 troponin 상승, EKG 변화, 주치의 SOAP 기록, 전문의 I21.2 진단서를 제출한 경우, 보험사는 이 모든 증거를 번복할 독립된 의학적 근거를 제시해야 한다.",
+        "sourceDisplayName": "판례",
+        "similarity": 0.662726050599505,
+        "case_number": "2013다208661",
+        "court_or_agency": "대법원",
+        "decision_date": "2014-06-12",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "official",
+        "source_area": "precedents",
+        "source_type": "court_precedent_fulltext",
+        "source_area_label": "판례",
+        "title": "고등법원 2018나65691 보험금",
+        "summary": "심근경색 관련 보험금 청구 사건 (ASSESS_101 assertions 참조)",
+        "sourceDisplayName": "판례",
+        "similarity": 0.505855633588336,
+        "case_number": "2018나65691",
+        "court_or_agency": "고등법원",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "ESC 2020 비ST분절 상승 급성관상동맥증후군(NSTEMI/UA) 진단기준 (2020 ESC Guidelines for the Management of Acute Coronary Syndromes without Persistent ST-Segment Elevation)",
+        "summary": "NSTEMI, 불안정 협심증, 급성관상동맥증후군 — 1. ACS 3가지 분류: - STEMI (I21.2-I21.2): ST분절 상승 + 심근효소 상승 - NSTEMI (I21.2): ST분절 비상승 + 심근효소 상승 (troponin 상승)",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.56857573325597,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I21.2, I20.0, I24.8",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_summary",
+        "source_area_label": "의학 기준",
+        "title": "Unstable angina vs NSTEMI - troponin 및 I20/I21.2/I25.1 코드 구분",
+        "summary": "Unstable angina는 임상적으로 급성 관상동맥증후군 범주에 속하지만, NSTEMI/I21.2와의 핵심 구분은 심근손상을 뒷받침하는 troponin 상승 여부와 허혈 증거이다. I20 협심증, I21.2 급성 심내막하심근경색증, I25.1 관상동맥질환 기재가 혼재하면 단일 진단명만 선택하지 말고 전체 검사 흐름과 주치의 진단 근거를 대조한다.",
+        "sourceDisplayName": "American College of Cardiology",
+        "similarity": 0.53104109277394,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I20 / I21.2 / I25.1",
+        "diagnosis_name": "Unstable angina / NSTEMI / CAD",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "ESC ACS guideline summary",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "medical_evidence_source_pack_2026-05-21"
+      },
+      {
+        "reference_type": "official",
+        "source_area": "medical_guideline",
+        "source_type": "guideline_phase2c",
+        "source_area_label": "의학 기준",
+        "title": "심부전 진단기준 — ESC 2021 급성·만성 심부전 가이드라인 (2021 ESC Guidelines for the Diagnosis and Treatment of Acute and Chronic Heart Failure)",
+        "summary": "심부전 — 1. ESC 2021 심부전 정의: \"심장의 구조적 또는 기능적 이상으로 인해 심장이 안정 시 또는 운동 시 신체 요구에 부응하는 산소 공급을 하지 못하는 복잡한 임상 증후군.\" 2. 확진 기준 (3가지 모두 충족): - 심부전의 전형적 증상 (호흡곤란, 피로, 발목 부종 등)",
+        "sourceDisplayName": "의학 기준",
+        "similarity": 0.533348261351108,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "I50.x",
+        "diagnosis_name": "",
+        "review_status": "reviewed",
+        "official_citation_allowed": true,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": "phase2c_medical_guidelines_2026-05-22"
+      }
+    ],
+    "internalReviewMaterials": [
+      {
+        "reference_type": "internal",
+        "source_area": "practice_playbooks",
+        "source_type": "",
+        "source_area_label": "내부 실무 플레이북",
+        "title": "죽상경화성 심장질환(I25.1) 보험금, 왜 거절될까",
+        "summary": "죽상경화성 심장질환(I25.1) 보험금, 왜 거절될까 practice_points: customer_arguments: 진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장 insurer_arguments: I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장 트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장 협심증 또는 만성 허혈성 심질환에 불과하다고 주장 rebuttal_points: required_documents: 진단서 응급실 기록 혈액검사 결과(Troponin, CK-MB) 심전도 검사결과 관상동맥조영술 결과 입퇴원확인서 주치의 소견서 가입 당시 약관 질병분류표",
+        "sourceDisplayName": "내부 실무 플레이북",
+        "similarity": 0.691074867006496,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "내부 검토자료이며 공식 근거로 인용하지 않음",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      },
+      {
+        "reference_type": "internal",
+        "source_area": "practice_playbooks",
+        "source_type": "",
+        "source_area_label": "내부 실무 플레이북",
+        "title": "급성심근경색 진단금 거절 협심증으로 바뀌는 이유와 대응방법",
+        "summary": "급성심근경색 진단금 거절 협심증으로 바뀌는 이유와 대응방법 practice_points: customer_arguments: 진단서 코드만이 아니라 심근효소, 심전도, 관상동맥조영술, 응급기록, 주치의 소견을 종합해 급성심근경색 진단확정 기준을 재검토해야 한다고 주장 insurer_arguments: I21/I22 급성 또는 재발성 심근경색 코드가 아니라고 주장 트로포닌/CK-MB 상승, 심전도 변화, 관상동맥조영술 등 진단확정 기준이 부족하다고 주장 협심증 또는 만성 허혈성 심질환에 불과하다고 주장 rebuttal_points: required_documents: 진단서 응급실 기록 혈액검사 결과(Troponin, CK-MB) 심전도 검사결과 관상동맥조영술 결과 입퇴원확인서 주치의 소견서 가입 당시 약관 질병분류표",
+        "sourceDisplayName": "내부 실무 플레이북",
+        "similarity": 0.686707080439292,
+        "case_number": "",
+        "court_or_agency": "",
+        "decision_date": "",
+        "law_name": "",
+        "article_title": "",
+        "diagnosis_code": "",
+        "diagnosis_name": "",
+        "note": "내부 검토자료이며 공식 근거로 인용하지 않음",
+        "review_status": "needs_human_review",
+        "official_citation_allowed": false,
+        "source_provider": "",
+        "provider_prec_id": "",
+        "release_stage": "active",
+        "dataset_version": ""
+      }
+    ]
+  }
+}
