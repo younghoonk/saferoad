@@ -418,7 +418,7 @@ function isTrustedTermsReference(row: EnrichedRow) {
   if (isPolicyTermsReference(row)) return true;
   if (officialCitationDenied(row)) return false;
   if (reviewStatus(row) === 'unreviewed' && !trustLevel(row)) return false;
-  if (['official', 'policy_reference', 'legal_reference', 'regulatory_reference'].includes(trustLevel(row))) return true;
+  if (['official', 'official_guideline', 'policy_reference', 'legal_reference', 'regulatory_reference'].includes(trustLevel(row))) return true;
   if (['reviewed', 'approved'].includes(reviewStatus(row))) return true;
   return explicitOfficialTermsSourceType(row);
 }
