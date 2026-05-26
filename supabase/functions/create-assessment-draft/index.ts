@@ -1823,6 +1823,105 @@ function repairSubmissionReport(
   return `${report}\n\n${additions.join('\n\n')}`;
 }
 
+function extractHeartDiagnosisContext(input: ReturnType<typeof validateInput>) {
+  const allText = [
+    input.diagnosisText, input.diagnosisCode, input.diagnosisName,
+    input.damageDetails, input.insurerPosition, input.customerStatement, input.adjusterMemo,
+  ].filter(Boolean).join('\n');
+  const insurerText = (input.insurerPosition ?? '') + ' ' + (input.adjusterMemo ?? '');
+
+  const contractDateDispute = /책임개시일|석회화|이미\s*존재|검진\s*당시|위험인자/i.test(insurerText);
+  const ischemicCauseDispute = /허혈성\s*원인|고혈압\s*원인|다혈관\s*협착|허혈성\s*심부전|비허혈성/i.test(insurerText);
+  const anginaProgression = /불안정협심증|협심증.*진행|협심증.*심근경색/i.test(insurerText);
+
+  const troponinRef = allText.match(/(?:트로포닌|troponin)[^\d\n]{0,10}(\d+(?:\.\d+)?(?:\s*[→~→]\s*\d+(?:\.\d+)?)?)/i)?.[0] ?? '';
+  const stenosisRef = allText.match(/(?:LAD|RCA|LCx|좌전하행|우관상|좌회선)[^,\n]{0,30}\d+%/i)?.[0]?.trim() ?? '';
+  const wallMotionRef = /벽운동\s*이상|wall\s*motion\s*abnormality|무운동|저운동|\bWMA\b/i.test(allText);
+  const riskFactorRef = allText.match(/(?:석회화|고지혈증|고혈압)[^\n,]{0,30}(?:소견|기왕|병력|있어)/i)?.[0]?.trim() ?? '';
+
+  return { contractDateDispute, ischemicCauseDispute, anginaProgression, troponinRef, stenosisRef, wallMotionRef, riskFactorRef };
+}
+
+function buildHeartInsurerErrorMap(
+  ctx: ReturnType<typeof extractHeartDiagnosisContext>,
+  _input: ReturnType<typeof validateInput>,
+): ClaimArgumentStructure['insurerErrorMap'] {
+  const specialErrors: ClaimArgumentStructure['insurerErrorMap'] = [];
+
+  if (ctx.contractDateDispute) {
+    const riskDesc = ctx.riskFactorRef || '석회화·위험인자 소견';
+    specialErrors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: `가입 전 ${riskDesc}를 근거로 급성심근경색이 책임개시일 이전부터 진행되었으므로 면책에 해당한다는 주장`,
+      rebuttalThesis: `보험사고는 '관상동맥질환의 존재'가 아닌 '급성심근경색 발생일'을 기준으로 합니다. ${riskDesc}는 배경 위험인자이며 심근경색 진단이 아닙니다. 급성 플라크 파열·혈전 형성에 의한 심근경색 발생은 별개의 보험사고이고, 발생 시점 및 면책 요건에 관한 입증책임은 보험사에 있습니다.`,
+      targetSection: 'policy',
+    });
+  }
+
+  if (ctx.ischemicCauseDispute) {
+    const stenosisDesc = ctx.stenosisRef ? `${ctx.stenosisRef} 등 다혈관 협착 소견` : '다혈관 관상동맥 협착 소견';
+    const wmDesc = ctx.wallMotionRef ? '벽운동 이상(WMA)' : '허혈성 심기능 저하';
+    specialErrors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '고혈압 등 비허혈성 원인으로도 심부전이 발생할 수 있어 허혈성심장질환으로 단정하기 어렵다는 주장',
+      rebuttalThesis: `${stenosisDesc}과 ${wmDesc}이 함께 확인되면 허혈성 심근병증의 진단기준을 충족합니다. 고혈압은 동반 질환이지 허혈성 원인을 배제하는 근거가 아닙니다. 약관상 허혈성심장질환 진단비는 원인의 단일성을 요구하지 않으며, 주치의가 허혈성 원인으로 확인한 이상 보험회사가 사후에 원인을 재분류할 수 없습니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  if (ctx.anginaProgression) {
+    const troponinDesc = ctx.troponinRef ? `${ctx.troponinRef} 급상승` : '트로포닌 급격한 상승';
+    specialErrors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '불안정협심증 입원 중 발생한 트로포닌 상승을 별도의 급성심근경색이 아닌 협심증 경과의 일부로 보는 주장',
+      rebuttalThesis: `${troponinDesc}은 심근괴사 발생의 객관적 지표입니다. Fourth Universal Definition of MI에 따르면 불안정협심증 경과 중 발생한 경우라도 troponin rise/fall과 허혈 근거가 충족되면 급성심근경색으로 분류됩니다. 불안정협심증과 급성심근경색은 별개 임상 진단단위이며, 트로포닌 상승이 확인된 시점부터 독립된 보험사고가 발생한 것입니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  // Base 6 NSTEMI errors — 101(pure NSTEMI)의 경로. 내용 변경 금지.
+  const baseErrors: ClaimArgumentStructure['insurerErrorMap'] = [
+    {
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: '급성심근경색 진단기준을 시술 전 효소 상승 여부로 축소',
+      rebuttalThesis: 'Fourth Universal Definition of MI는 troponin rise/fall과 허혈 증상, ECG, 영상, CAG/PCI 등 허혈 근거를 종합하도록 하며, 시술 전 상승만을 단독 요건으로 두지 않습니다.',
+      targetSection: 'medical',
+    },
+    {
+      errorType: 'omitted_key_evidence',
+      insurerClaim: 'Unstable angina 또는 CAD 기재만 선택',
+      rebuttalThesis: '주치의 I21.4 진단서, 흉통, ECG/TMT ST 변화, CAG상 중증 협착, PCI/stent, 심근효소 자료를 함께 보아야 합니다.',
+      targetSection: 'medical',
+    },
+    {
+      errorType: 'omitted_key_evidence',
+      insurerClaim: '주치의의 객관적 검토 과정 누락',
+      rebuttalThesis: '진단서 발급 당일 SOAP/외래 기록에 cardiac marker 상승, EKG, UA-NSTEMI 진단 가능성 등 주치의의 객관적 검토 과정이 남아 있다면 보험회사는 이를 배제할 수 없습니다.',
+      targetSection: 'medical',
+    },
+    {
+      errorType: 'policy_requirement_misread',
+      insurerClaim: '약관상 진단확정 요건을 충족하지 못했다는 주장',
+      rebuttalThesis: '약관이 요구하는 것은 전문의 진단과 병력, 심전도, 관상동맥촬영술, 심장효소검사 등 기초자료이지, 보험회사가 사후에 붙인 시술 전 효소 상승 요건이 아닙니다.',
+      targetSection: 'policy',
+    },
+    {
+      errorType: 'case_law_misuse',
+      insurerClaim: '판례 또는 결정례가 진단서 기재만으로 부족하다는 취지라는 주장',
+      rebuttalThesis: '그 법리는 오히려 전체 검사자료와 전문의 진단 근거를 종합하라는 취지로 적용되어야 하며, 본 건처럼 CAG/PCI와 심근효소 자료가 있는 사안에는 보험사에게 유리하게 단순 적용할 수 없습니다.',
+      targetSection: 'case_law',
+    },
+    {
+      errorType: 'unsupported_additional_requirement',
+      insurerClaim: '시술 전 효소 상승 또는 특정 ECG 양상 부재를 추가 요건화',
+      rebuttalThesis: '약관에 없는 추가 요건을 보험회사가 임의로 부가할 수 없고, 문언상 의문이 있으면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.',
+      targetSection: 'interpretation',
+    },
+  ];
+
+  return [...specialErrors, ...baseErrors].slice(0, 6);
+}
+
 function buildClaimArgumentStructure(
   result: AssessmentDraftResult,
   input: ReturnType<typeof validateInput>,
@@ -1838,54 +1937,24 @@ function buildClaimArgumentStructure(
   const citedAuthority = findInsurerCitedAuthority(input, ragResult);
 
   if (isHeart) {
+    const heartCtx = extractHeartDiagnosisContext(input);
     return {
       insurerPosition: {
         quotedPosition: insurerClaim,
-        coreDenialReason: '시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장',
+        coreDenialReason: heartCtx.contractDateDispute
+          ? '가입 전 위험인자(석회화·고지혈증 등)를 이유로 급성심근경색 발생 시점이 책임개시일 이전이라는 주장'
+          : heartCtx.ischemicCauseDispute
+          ? '고혈압 등 비허혈성 원인을 이유로 허혈성심장질환 진단을 부정하는 주장'
+          : heartCtx.anginaProgression
+          ? '불안정협심증에서 진행한 트로포닌 상승을 별도의 급성심근경색으로 볼 수 없다는 주장'
+          : '시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장',
       },
       factualFoundation: {
         chronologicalFacts: chronology,
         keyNumbers,
       },
       killingEvidence,
-      insurerErrorMap: [
-        {
-          errorType: 'medical_criteria_distortion',
-          insurerClaim: '급성심근경색 진단기준을 시술 전 효소 상승 여부로 축소',
-          rebuttalThesis: 'Fourth Universal Definition of MI는 troponin rise/fall과 허혈 증상, ECG, 영상, CAG/PCI 등 허혈 근거를 종합하도록 하며, 시술 전 상승만을 단독 요건으로 두지 않습니다.',
-          targetSection: 'medical',
-        },
-        {
-          errorType: 'omitted_key_evidence',
-          insurerClaim: 'Unstable angina 또는 CAD 기재만 선택',
-          rebuttalThesis: '주치의 I21.4 진단서, 흉통, ECG/TMT ST 변화, CAG상 중증 협착, PCI/stent, 심근효소 자료를 함께 보아야 합니다.',
-          targetSection: 'medical',
-        },
-        {
-          errorType: 'omitted_key_evidence',
-          insurerClaim: '주치의의 객관적 검토 과정 누락',
-          rebuttalThesis: '진단서 발급 당일 SOAP/외래 기록에 cardiac marker 상승, EKG, UA-NSTEMI 진단 가능성 등 주치의의 객관적 검토 과정이 남아 있다면 보험회사는 이를 배제할 수 없습니다.',
-          targetSection: 'medical',
-        },
-        {
-          errorType: 'policy_requirement_misread',
-          insurerClaim: '약관상 진단확정 요건을 충족하지 못했다는 주장',
-          rebuttalThesis: '약관이 요구하는 것은 전문의 진단과 병력, 심전도, 관상동맥촬영술, 심장효소검사 등 기초자료이지, 보험회사가 사후에 붙인 시술 전 효소 상승 요건이 아닙니다.',
-          targetSection: 'policy',
-        },
-        {
-          errorType: 'case_law_misuse',
-          insurerClaim: '판례 또는 결정례가 진단서 기재만으로 부족하다는 취지라는 주장',
-          rebuttalThesis: '그 법리는 오히려 전체 검사자료와 전문의 진단 근거를 종합하라는 취지로 적용되어야 하며, 본 건처럼 CAG/PCI와 심근효소 자료가 있는 사안에는 보험사에게 유리하게 단순 적용할 수 없습니다.',
-          targetSection: 'case_law',
-        },
-        {
-          errorType: 'unsupported_additional_requirement',
-          insurerClaim: '시술 전 효소 상승 또는 특정 ECG 양상 부재를 추가 요건화',
-          rebuttalThesis: '약관에 없는 추가 요건을 보험회사가 임의로 부가할 수 없고, 문언상 의문이 있으면 작성자 불이익 원칙에 따라 고객에게 유리하게 해석되어야 합니다.',
-          targetSection: 'interpretation',
-        },
-      ],
+      insurerErrorMap: buildHeartInsurerErrorMap(heartCtx, input),
       defenseLayers: {
         medical: {
           standard: 'myocardial injury와 myocardial infarction을 구분하고, troponin rise/fall 및 99th percentile 초과와 함께 허혈 증상, ECG 변화, 영상상 RWMA/viable myocardium loss, coronary thrombus 또는 CAG/PCI 소견을 종합합니다.',
