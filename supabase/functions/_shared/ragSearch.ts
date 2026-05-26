@@ -812,6 +812,13 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
     if (!nmtTokens.length) return true;
     const result = nmtTokens.some((token) => text.includes(token));
     console.log('[NMT-DEBUG] isDirectlyRelevantTerms nmt_v1 result', { id: row.id, result });
+    console.log('[NMT3] nmt token check',
+      'queryText_sample=', queryText?.slice(0, 150),
+      'text_sample=', text?.slice(0, 150),
+      'nmtTokens_count=', nmtTokens?.length,
+      'nmtTokens_sample=', JSON.stringify(nmtTokens?.slice(0, 15)),
+      'matched=', nmtTokens?.some((t) => text.includes(t)),
+      'return_value=', result);
     return result;
   }
 
