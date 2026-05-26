@@ -444,6 +444,14 @@ function isTitleSeedFss(row: EnrichedRow) {
 }
 
 function isOfficialReference(row: EnrichedRow) {
+  if (row.source_area === 'terms_standards' && metadataValue(row, 'dataset_version') === 'nmt_v1') {
+    console.log('[NMT4] isOfficialReference NMT gates',
+      'officialCitationDenied=', officialCitationDenied(row),
+      'trustLevel=', trustLevel(row),
+      'isBlockedOfficialSource=', isBlockedOfficialSource(row),
+      'isAllowedOfficialSource=', isAllowedOfficialSource(row),
+      'isTrustedTermsReference=', isTrustedTermsReference(row));
+  }
   if (officialCitationDenied(row)) return false;
   if (row.source_area === 'medical_issue_codes' || row.source_area === 'practice_playbooks' || row.source_area === 'dispute_resolution_cases') return false;
   if (['classification_reference', 'internal_practice'].includes(trustLevel(row))) return false;
