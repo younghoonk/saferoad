@@ -3217,6 +3217,7 @@ function composeSubmissionAssessmentReport(
   preAnalysis?: PreAnalysisResult,
 ) {
   const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
+  const isBrain = caseProfile(input) === 'brain_diagnosis_benefit';
   const today = new Date().toISOString().slice(0, 10);
   const insurer = cleanPublicText(input.insurerName) || '보험회사';
   const productName = cleanPublicText(input.productName || input.policyName) || '[계약상품]';
@@ -3285,6 +3286,13 @@ function composeSubmissionAssessmentReport(
     '| 심전도/운동부하검사 | ECG 또는 TMT ST depression 등 허혈성 변화가 확인됨 | 충족으로 평가됨 |',
     '| 관상동맥촬영술 | CAG상 LM-LAD 또는 LM-mLAD 중증 협착 및 PCI/stent 시행이 확인됨 | 충족 |',
     '| 혈액 중 심장효소검사 | Troponin T, hs-troponin, CK-MB 검사 및 참고치 초과가 확인됨 | 충족 |',
+  ].join('\n') : isBrain ? [
+    '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
+    '|---|---|---|',
+    '| 의료기관 전문의 진단 | 신경과/신경외과 전문의 진단서 또는 소견서상 확정진단명이 확인됨 | 충족 |',
+    '| 신경학적 증상 및 병력 | 뇌혈관질환에 합당한 임상 증상(반신마비, 실어증, 의식장애 등)이 확인됨 | 충족으로 평가됨 |',
+    '| 영상검사 (MRI/CT) | 뇌 MRI 또는 CT상 뇌경색·뇌출혈 병변이 확인됨 | 충족 |',
+    '| KCD 분류코드 (I60~I69) | 진단서상 KCD/ICD 코드가 뇌혈관질환 범위에 해당함 | 충족 |',
   ].join('\n') : [
     '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
     '|---|---|---|',
@@ -3293,7 +3301,20 @@ function composeSubmissionAssessmentReport(
   ].join('\n');
   const policyRebuttal = isHeart
     ? '약관은 시술 전 심근효소 상승을 급성심근경색 진단확정의 독립 요건으로 규정하고 있지 않다. 따라서 보험회사가 약관에 없는 시술 전 효소 상승 요건을 추가하여 I21.4 진단을 배척하는 것은 약관 문언을 벗어난 부당한 해석이다.'
+    : isBrain
+    ? [
+        '약관상 뇌혈관질환 진단확정 요건은 의료기관 전문의의 진단과 영상검사(MRI/CT 등)를 기초로 하며, KCD 분류표 I60~I69 범위 내 해당 여부로 판단합니다.',
+        '보험회사는 약관에 없는 추가 요건(경색 크기, CT 음성 시 배제, 증상 중증도 기준 등)을 임의로 부가할 수 없으며, 약관 문언이 불명확한 경우 작성자 불이익 원칙에 따라 피보험자에게 유리하게 해석되어야 합니다.',
+      ].join('\n')
     : '';
+
+  const brainPolicyQuote = (() => {
+    if (!isBrain) return '';
+    const ragTermsText = evidence.terms.join(' ');
+    const ragMatch = ragTermsText.match(/「([^」]{8,})」/);
+    if (ragMatch) return `「${ragMatch[1]}」`;
+    return '「뇌졸중의 진단확정은 의사의 진단에 의하여 병력, 신경학적 검진, 뇌 CT 또는 MRI 등을 기초로 하여 뇌혈관질환(KCD I60~I69)으로 확정된 것이어야 합니다」';
+  })();
 
   return dedupeParagraphs([
     '손해사정서',
@@ -3341,6 +3362,7 @@ function composeSubmissionAssessmentReport(
     argument.defenseLayers.medical.conclusion,
     '',
     'Ⅳ. 보험약관상 진단확정 요건의 충족',
+    ...(isBrain ? [brainPolicyQuote, ''] : []),
     legalRefs,
     '',
     policyCriteriaTable,
