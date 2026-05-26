@@ -62,6 +62,7 @@ export interface RagSearchContext {
   policyVersion?: string;
   isLifeInsurance?: boolean;
   isNonLifeInsurance?: boolean;
+  profile?: string;
 }
 
 export interface RagSearchOptions {
@@ -903,6 +904,7 @@ async function rpcSearch(
   embedding: number[],
   sourceArea: string,
   matchCount: number,
+  extra?: { sourceTypeFilter?: string; datasetVersionFilter?: string; minSimilarity?: number },
 ) {
   let response: Response;
   try {
@@ -913,7 +915,9 @@ async function rpcSearch(
         query_embedding: embedding,
         match_count: matchCount,
         source_area_filter: sourceArea,
-        min_similarity: MIN_SIMILARITY,
+        min_similarity: extra?.minSimilarity ?? MIN_SIMILARITY,
+        ...(extra?.sourceTypeFilter ? { source_type_filter: extra.sourceTypeFilter } : {}),
+        ...(extra?.datasetVersionFilter ? { dataset_version_filter: extra.datasetVersionFilter } : {}),
       }),
       signal: AbortSignal.timeout(RPC_FETCH_TIMEOUT_MS),
     });
@@ -1180,6 +1184,26 @@ export async function searchRagReferences(params: {
       } else if (directlyRelevantInternal(row, query, diagnosisCodes) && internalRows.filter((item) => item.source_area === plan.source_area).length < plan.count) {
         internalRows.push(row);
       }
+    }
+  }
+
+  // NMT 전용 검색: reimbursement_medical_necessity 프로파일에서 NMT 978건이 실손약관과
+  // 자리 경쟁하지 않도록 dataset_version_filter='nmt_v1' 전용 슬롯으로 별도 검색.
+  // min_similarity=0.35 (정형 포맷 고시문서는 자연어 쿼리와 유사도가 낮으므로 완화).
+  if (params.context?.profile === 'reimbursement_medical_necessity') {
+    try {
+      const nmtRaw = await rpcSearch(
+        params.supabaseUrl, params.serviceRoleKey, embedding, 'terms_standards', 4,
+        { sourceTypeFilter: 'official_guideline', datasetVersionFilter: 'nmt_v1', minSimilarity: 0.35 },
+      );
+      const nmtRows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, nmtRaw), params.options);
+      for (const row of nmtRows) {
+        if (!officialRows.some((r) => r.id === row.id) && directlyRelevantOfficial(row, query)) {
+          officialRows.push(row);
+        }
+      }
+    } catch (nmtErr) {
+      console.error('[ragSearch] NMT_SEARCH_FAIL', nmtErr instanceof Error ? nmtErr.message : String(nmtErr));
     }
   }
 

@@ -629,6 +629,7 @@ function ragContextFromInput(input: ReturnType<typeof validateInput>): RagSearch
     policyVersion: input.policyVersion,
     isLifeInsurance: input.isLifeInsurance,
     isNonLifeInsurance: input.isNonLifeInsurance,
+    profile: caseProfile(input),
   };
 }
 

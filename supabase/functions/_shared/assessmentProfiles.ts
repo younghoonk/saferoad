@@ -13,6 +13,7 @@ export type AssessmentProfileId =
   | 'disability_benefit'
   | 'causation_preexisting_injury'
   | 'medical_review_pre_litigation'
+  | 'reimbursement_medical_necessity'
   | 'general';
 
 export interface AssessmentProfileDefinition {
@@ -247,6 +248,22 @@ export const assessmentProfiles: AssessmentProfileDefinition[] = [
     forbiddenPhrases: [...commonForbiddenPhrases, '손해사정사가 소송을 대신'],
     requiredDocuments: ['의료자문 요청서', '자문 질문지', '주치의 소견서', '제3의사 소견서', '보험회사 답변서'],
     opinionGuidelines: ['소송대리나 법률대리 가능성을 암시하지 않는다.'],
+  },
+  {
+    id: 'reimbursement_medical_necessity',
+    label: '신의료기술/비급여 실손 부지급',
+    priority: 620,
+    detectKeywords: ['신의료기술', '고시상 사용대상', '임의비급여', '고시 요건', '실손의료비'],
+    positiveKeywords: ['신의료기술', '고시', '사용대상', '임의비급여', '실손'],
+    negativeKeywords: ['도수치료', '암진단비', '백내장', '고지의무', '후유장해'],
+    officialAllowKeywords: ['신의료기술', '고시', '비급여', '실손', '사용대상', '치료대상'],
+    officialExcludeKeywords: ['도수치료', '암진단비', '고지의무', '후유장해'],
+    internalAllowKeywords: ['신의료기술', '고시', '비급여', '실손', 'BMAC', '전립선결찰술', 'UroLift'],
+    internalExcludeKeywords: ['도수치료', '암진단비', '고지의무', '후유장해'],
+    requiredPhrases: ['신의료기술', '고시', '사용대상', '가입 당시 원약관', '재검토'],
+    forbiddenPhrases: commonForbiddenPhrases,
+    requiredDocuments: ['신의료기술 고시 원문', '진단서', '수술기록지', '가입 당시 원약관', '보험회사 부지급 사유서'],
+    opinionGuidelines: ['고시 요건 외 추가 요건 부가 불가 원칙을 중심으로 작성한다.'],
   },
   {
     id: 'indemnity_general_denial',
