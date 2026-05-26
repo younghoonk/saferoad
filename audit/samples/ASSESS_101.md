@@ -1,7 +1,7 @@
 # 사정서 샘플: ASSESS_101
 
-생성일시: 2026-05-23T16:25:23.142Z
-배포커밋: 0f8405c
+생성일시: 2026-05-26T16:25:39.998Z
+배포커밋: 8565a8a
 Profile: heart_diagnosis_benefit
 
 ## 입력
@@ -30,9 +30,9 @@ Profile: heart_diagnosis_benefit
 (보험금 부지급 통보에 대한 이의 및 의견)
 
 수신: [보험사]
-작성일: 2026-05-23
+작성일: 2026-05-26
 참조: 보험금 지급심사 담당자
-문서번호: AI-TEMP-20260523
+문서번호: AI-TEMP-20260526
 제목: I21.4 급성 심내막하심근경색증 (NSTEMI) 관련 보험금 부지급 통보에 대한 이의 및 지급 요청
 
 피보험자 정보
@@ -50,18 +50,18 @@ Profile: heart_diagnosis_benefit
 
 Ⅰ. 사건의 경위 및 진단 확정 과정
 1) 흉통 발생 및 초기 검사
-- ① D-44: 흉통 발생으로 의료기관 내원. 허혈성 흉통 증상이 임상 경과의 출발점으로 기록되어 있다.
-- ② D-30: 운동부하검사(TMT) 시행 결과 ST depression 확인. 이는 새로운 허혈성 ECG 변화에 해당하며, 급성 관상동맥증후군 평가의 객관적 근거이다.
+- ① 흉통 발생(D-44): 피보험자는 흉통을 주소로 의료기관에 내원하였다.
+- ② 운동부하검사(D-30): TMT에서 ST depression이 확인되어 허혈성 심전도 변화가 객관적으로 기록되었다.
 
 2) 입원 및 관상동맥 중재시술
-- ③ D-22: 관상동맥 CT 시행 — Ca score 532.9(중증 석회화), LM 협착 90% 초과, LAD 협착 70%, LCx 협착 70% 초과 확인. 다혈관 중증 협착이 영상으로 입증되었다.
-- ③ D-22: 관상동맥 CT 시행 — Ca score 532.9(중증 석회화), LM 협착 90% 초과, LAD 협착 70%, LCx 협착 70% 초과 확인. 다혈관 중증 협착이 영상으로 입증되었다.
+- ③ 관상동맥 CT(D-22): Ca score 532.9(중증 석회화), LM 협착 90% 초과, LAD 협착 70%, LCx 협착 70% 초과로 다혈관 중증 협착이 확인되었다.
+- ③ 관상동맥 CT(D-22): Ca score 532.9(중증 석회화), LM 협착 90% 초과, LAD 협착 70%, LCx 협착 70% 초과로 다혈관 중증 협착이 확인되었다.
 
 3) 심근효소 검사 결과
-- ④ D-1: CAG 시행 결과 LM-LAD 협착 95% 확인. 동일 시술 중 PCI(스텐트 삽입) 시행. CAG 시행 전 채혈 혈액검사: CK-MB 2.1, Troponin T 0.021 기록. ⑤ 이후 외래 SOAP 기록: hs-troponin 0.037 상승 확인. 주치의 소견란에 「cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능」이라고 명시되어 있다.
+- ④ CAG 시행 전 혈액검사(D-1): CK-MB 2.1, Troponin T 0.021이 측정되었다.
 
 4) 진단서/소견서 발급
-- ④ D-1: CAG 시행 결과 LM-LAD 협착 95% 확인. 동일 시술 중 PCI(스텐트 삽입) 시행. CAG 시행 전 채혈 혈액검사: CK-MB 2.1, Troponin T 0.021 기록. ⑤ 이후 외래 SOAP 기록: hs-troponin 0.037 상승 확인. 주치의 소견란에 「cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능」이라고 명시되어 있다.
+- ⑥ 외래 SOAP 기록: hs-troponin 0.037 측정, 주치의가 'cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능'이라고 명시하였다.
 - 2024.06.27 외래 SOAP 기록에는 "이후 외래 SOAP 기록: hs-troponin 0.037, 주치의 소견 「cardiac marker 상승, EKG로 UA-NSTEMI 진단서 가능」." 취지의 주치의 검토가 남아 있어, 진단서 발급이 단순 문서 작성이 아니라 cardiac marker, EKG 및 UA-NSTEMI 가능성을 검토한 결과임이 확인됩니다.
 
 결정적 의무기록 문구
@@ -84,7 +84,7 @@ Profile: heart_diagnosis_benefit
 - hs-troponin/Troponin T: Troponin T 0.021 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)
 - hs-troponin/Troponin T: hs-troponin 0.037 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)
 - hs-troponin/Troponin T: troponin의 rise/fall 패턴과 99 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)
-- 관상동맥 협착률: 협착 >90% (CAG/PCI 시행 필요성과 급성 관상동맥증후군 경과를 뒷받침하는 수치)
+- hs-troponin/Troponin T: troponin 추이·PCI 시행 사실과 결합하면 단순 만성 CAD(I25.1 (심근손상 및 NSTEMI/I21.4 판단의 핵심 수치)
 
 Ⅱ. 보험사 부지급 결정의 요지 및 그 부당성
 보험회사의 부지급 사유는 「흉통 발생 이후 관상동맥조영술 시행 전까지 시행한 혈액검사상 심근효소 상승이 확인되지 않아, 심근경색까지 진행하지 않은 것으로 검토되는 바, 급성 심내막하심근경색증(I21.4) 진단 불인 의견, 죽상경화성 심장병(I25.1) 진단 인정 의견」로 정리됩니다. 이에 대한 고객 측 반박은 인용문 밖에서 검토합니다. 핵심 부지급 사유는 시술 전 심근효소 상승 부재, Unstable angina/CAD 기재, PCI 후 troponin 상승 가능성을 이유로 I21.4 진단을 배척하는 주장입니다.
