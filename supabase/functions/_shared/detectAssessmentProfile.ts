@@ -67,6 +67,16 @@ export function detectAssessmentProfile(input: AssessmentProfileDetectionInput):
     return 'general_disclosure';
   }
 
+  // Explicit insurance product type takes priority over causation/disability routing.
+  // "퇴행성" in an insurer's denial reason must not reroute a heart/brain benefit case.
+  const insuranceProductText = [input.insuranceType, input.coverageType, input.accidentType].filter(Boolean).join(' ');
+  if (/심장질환\s*진단비|허혈성\s*심장질환\s*진단비|심장진단비/i.test(insuranceProductText)) {
+    return 'heart_diagnosis_benefit';
+  }
+  if (/뇌질환\s*진단비|뇌졸중\s*진단비|뇌경색\s*진단비|뇌진단비/i.test(insuranceProductText)) {
+    return 'brain_diagnosis_benefit';
+  }
+
   const causationSpecific = /기왕증|인과관계|상해성|사고\s*기여도|퇴행성|기존\s*병력|사고\s*전\s*병력|고혈압\s*기왕증|뇌출혈\s*인과관계|사망과\s*사고\s*인과관계/i.test(allText);
   const disabilitySpecific = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|압박골절|추간판탈출증|회전근개파열|무릎\s*인대|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
   const strongDisabilitySignal = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);

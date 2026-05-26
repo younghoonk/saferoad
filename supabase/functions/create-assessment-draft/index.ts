@@ -1534,6 +1534,18 @@ function buildFinalSubmissionAssessmentReport(
       .replace(/\n{3,}/g, '\n\n')
       .trim();
   }
+  // Safety net: strip brain leakage from heart reports.
+  // A brain/stroke RAG chunk (뇌졸중 진단기준) can be retrieved for heart queries (I30-I52 range),
+  // causing the LLM to hallucinate brain content (I52=뇌경색) in the medical section.
+  if (isHeart) {
+    const brainLeakPattern = /뇌경색|뇌졸중|뇌출혈|뇌내출혈|지주막하출혈|뇌혈관질환|NIHSS/i;
+    finalSubmissionAssessmentReport = finalSubmissionAssessmentReport
+      .split('\n')
+      .filter((line) => !brainLeakPattern.test(line))
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
   return {
     ...result,
     reportFormatVersion: REPORT_FORMAT_VERSION,
