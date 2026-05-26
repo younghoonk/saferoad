@@ -634,6 +634,16 @@ function isOtherInsurerTerms(row: EnrichedRow, context?: RagSearchContext) {
 
 function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (!isOfficialReference(row)) return false;
+  if (row.source_area === 'terms_standards' && metadataValue(row, 'dataset_version') === 'nmt_v1') {
+    console.log('[NMT5] directlyRelevantOfficial query matchers',
+      'cataractQuery=', cataractQuery(query),
+      'manualTherapyQuery=', manualTherapyQuery(query),
+      'cancerInsuranceQuery=', cancerInsuranceQuery(query),
+      'generalCancerDiagnosisQuery=', generalCancerDiagnosisQuery(query),
+      'brainInsuranceQuery=', brainInsuranceQuery(query),
+      'disclosureQuery=', disclosureQuery(query),
+      'query_sample=', query?.slice(0, 120));
+  }
   if (row.source_area === 'precedents' && administrativePrecedentText(row)) return false;
   if (cataractQuery(query)) {
     if (irrelevantCataractText(row)) return false;
