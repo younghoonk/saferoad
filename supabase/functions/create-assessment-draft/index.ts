@@ -1688,13 +1688,11 @@ function killingEvidencePresentForProfile(
   argument: ClaimArgumentStructure,
   text: string,
 ): boolean {
+  // Non-cardiac: killingEvidence extraction is cardiac-only — skip check entirely.
+  // Requiring non-empty array would always trigger repair for cancer/brain/disability cases.
+  if (!isHeart) return true;
   if (argument.killingEvidence.length === 0) return false;
-  // Heart profile: require cardiac-specific keywords in the report text
-  if (isHeart) {
-    return /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|심근효소|주치의 SOAP|의무기록상 진단 검토/i.test(text);
-  }
-  // All other profiles: trust the argument structure — if killing evidence was extracted, consider it present
-  return true;
+  return /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|심근효소|주치의 SOAP|의무기록상 진단 검토/i.test(text);
 }
 
 function selfVerifySubmissionReport(
