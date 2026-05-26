@@ -680,7 +680,13 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
       return disclosureRelevantText(row) && !irrelevantDisclosureText(row);
     }
   }
-  if (row.source_area === 'terms_standards') return isDirectlyRelevantTerms(row, query);
+  if (row.source_area === 'terms_standards') {
+    const result = isDirectlyRelevantTerms(row, query);
+    if (metadataValue(row, 'dataset_version') === 'nmt_v1') {
+      console.log('[NMT-DEBUG] directlyRelevantOfficial result', { id: row.id, result });
+    }
+    return result;
+  }
   // Cardiac-specific precedents/guidelines must not appear in non-cardiac queries (e.g. 2013다208661 in cancer cases)
   if (!heartDiagnosisQuery(query) && heartInternalText(row)) return false;
   return true;
@@ -798,8 +804,14 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
   if (metadataValue(row, 'dataset_version') === 'nmt_v1') {
     const nmtTokens = Array.from(new Set(queryText.match(/[가-힣A-Za-z0-9.]{3,}/g) || []))
       .filter((token) => !['보험', '실손보험', '의료비', '계약', '청구'].includes(token));
+    console.log('[NMT-DEBUG] enter isDirectlyRelevantTerms nmt_v1 bypass', {
+      id: row.id, title: row.title?.slice(0, 40) ?? null,
+      nmtTokens_count: nmtTokens.length, nmtTokens_sample: nmtTokens.slice(0, 5),
+    });
     if (!nmtTokens.length) return true;
-    return nmtTokens.some((token) => text.includes(token));
+    const result = nmtTokens.some((token) => text.includes(token));
+    console.log('[NMT-DEBUG] isDirectlyRelevantTerms nmt_v1 result', { id: row.id, result });
+    return result;
   }
 
   const normalizedIssueGroups = [
@@ -1128,6 +1140,17 @@ export async function searchRagReferences(params: {
     try {
       const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 2, 6));
       const rows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows), params.options);
+      if (plan.source_area === 'terms_standards') {
+        const nmtRows = rows.filter((r) => metadataValue(r, 'dataset_version') === 'nmt_v1');
+        const first = nmtRows[0];
+        console.log('[NMT-DEBUG] RPC+enrich terms_standards', {
+          raw_count: rawRows.length, enriched_count: rows.length, nmt_count: nmtRows.length,
+          first_id: first?.id ?? null, first_title: first?.title?.slice(0, 40) ?? null,
+          first_trust_level: first?.trust_level ?? null, first_source_type: first?.source_type ?? null,
+          first_similarity: first?.similarity ?? null,
+          first_dataset_version: first ? metadataValue(first, 'dataset_version') : null,
+        });
+      }
       const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
       if (sorted.length === 0 && (plan.source_area === 'precedents' || plan.source_area === 'terms_standards')) {
         console.error('[ragSearch] SILENT_EMPTY source_area returned 0 rows', { source_area: plan.source_area, query: query.slice(0, 80) });
