@@ -2561,6 +2561,11 @@ function extractCancerDiagnosisContext(input: ReturnType<typeof validateInput>) 
   const codeMismatch = /코드\s*불일치|C코드.*D코드|D코드.*C코드|진단서.*병리\s*코드|병리.*진단서.*불일치/i.test(allText);
   const borderlineDenial = /경계성|borderline|행동양식|behavior\s*code|\/2/i.test(insurerText);
 
+  // Special dispute flags: detected from insurer's position + adjuster memo (+ allText for CUP code)
+  const cupDenial = /원발\s*불명|원발부위\s*불명|\bCUP\b|\bC80\b/i.test(allText);
+  const contractDateDispute = /책임개시일|면책기간|이미\s*존재|검진\s*당시|소급|발병\s*시점/i.test(insurerText);
+  const duplicateCancerDenial = /중복암|두\s*번째\s*암|별개\s*원발|다발성\s*원발/i.test(insurerText);
+
   const pathologyTerms: string[] = [];
   if (dcis) pathologyTerms.push('DCIS(ductal carcinoma in situ)');
   if (highGrade) pathologyTerms.push('high nuclear grade');
@@ -2575,8 +2580,17 @@ function extractCancerDiagnosisContext(input: ReturnType<typeof validateInput>) 
   if (chemotherapy) treatmentTerms.push('항암치료');
   const treatmentDesc = treatmentTerms.join(', ');
 
+  // Malignant histology shorthand for CUP rebuttal
+  const malignantHistology = allText.match(/adenocarcinoma|squamous\s*cell\s*carcinoma|carcinoma\s*NOS|poorly\s*differentiated/i)?.[0] ?? '';
+
   let coreIssue: string;
-  if (dCodeDenial && cCode) {
+  if (cupDenial) {
+    coreIssue = `원발 부위가 특정되지 않았다는 이유로 ${cCode || 'C80'} 악성신생물 진단을 부정하고 암 진단비 지급을 거절하는 주장`;
+  } else if (contractDateDispute) {
+    coreIssue = '가입 전 검진 이상 소견 또는 증상 기록을 근거로 책임개시일 이전 발병 추정 하에 면책을 주장';
+  } else if (duplicateCancerDenial) {
+    coreIssue = '약관상 최초 1회 지급 원칙을 이유로 두 번째 원발암에 대한 진단비 지급을 거절하는 주장';
+  } else if (dCodeDenial && cCode) {
     coreIssue = `병리 보고서 코드(${dCode || 'D코드'})를 근거로 진단서 ${cCode}를 배척하고 제자리암 또는 소액 지급만 인정하려는 주장`;
   } else if (codeMismatch && (cCode || dCode)) {
     coreIssue = `진단서 코드(${cCode || 'C코드'})와 병리 보고서 코드(${dCode || 'D코드'}) 불일치를 이유로 일반암 지급을 거절하는 주장`;
@@ -2591,8 +2605,9 @@ function extractCancerDiagnosisContext(input: ReturnType<typeof validateInput>) 
   return {
     cCode, dCode, dcis, microinvasion, comedoNecrosis, highGrade, tumorSize,
     hormoneTherapy, surgery, pathologyConfirmed, pathologyDesc, treatmentDesc,
-    coreIssue, claimTarget,
+    malignantHistology, coreIssue, claimTarget,
     dCodeDenial, microinvasionDenial, codeMismatch, borderlineDenial,
+    cupDenial, contractDateDispute, duplicateCancerDenial,
   };
 }
 
@@ -2609,9 +2624,44 @@ function extractShortCancerDenialReason(value: string): string {
 
 function buildCancerInsurerErrorMap(
   ctx: ReturnType<typeof extractCancerDiagnosisContext>,
-  _input: ReturnType<typeof validateInput>,
+  input: ReturnType<typeof validateInput>,
 ): ClaimArgumentStructure['insurerErrorMap'] {
   const errors: ClaimArgumentStructure['insurerErrorMap'] = [];
+
+  // === Special dispute blocks (priority: appear first in Ⅱ섹션) ===
+
+  if (ctx.cupDenial) {
+    const codeRef = ctx.cCode || 'C80';
+    const histologyRef = ctx.malignantHistology ? ` 조직검사상 ${ctx.malignantHistology} 악성 소견이 확인되었으며,` : (ctx.pathologyConfirmed ? ' 조직생검으로 악성 소견이 확정되었으며,' : '');
+    const treatRef = ctx.treatmentDesc ? ` ${ctx.treatmentDesc}까지 시행된 임상 경과는` : ' 다발성 전이 및 전신 항암치료 시행은';
+    errors.push({
+      errorType: 'medical_criteria_distortion',
+      insurerClaim: `원발 부위가 해부학적으로 특정되지 않아 ${codeRef} 악성신생물 진단이 확정되지 않았다는 주장`,
+      rebuttalThesis: `원발 미특정은 진단 불확정이 아닙니다. CUP(원발부위 불명암, C80)은 WHO 및 KCD가 인정한 독립 임상 진단단위입니다.${histologyRef}${treatRef} C80이 악성신생물임을 객관적으로 뒷받침합니다. 약관은 원발 부위의 해부학적 특정을 진단확정 요건으로 규정하지 않으며, 병리 또는 임상병리 전문의의 조직검사 소견에 기한 ${codeRef} 진단서가 발급된 이상 진단확정 요건은 충족됩니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  if (ctx.contractDateDispute) {
+    const contractDate = input.contractDate ? `(책임개시일: 가입일 기준 유예기간 경과 후)` : '';
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: `가입 전 검진 이상 소견 또는 증상 기록을 근거로 책임개시일 이전에 암이 이미 존재하였으므로 면책에 해당한다는 주장`,
+      rebuttalThesis: `보험사고 발생 시점은 진단확정일 기준입니다${contractDate}. 가입 전 검진에서 발견된 이상 소견이나 임상 증상은 위험인자·추적관찰 대상일 뿐 약관상 암 진단확정이 아닙니다. 진단확정은 병리 또는 임상병리 전문의의 조직검사 등 현미경 소견이 갖추어진 날이며, 병리검사 결과 발행일이 책임개시일 이후인 이상 지급 의무가 발생합니다. 발병 시점 및 면책 요건에 관한 입증책임은 보험사에 있습니다.`,
+      targetSection: 'policy',
+    });
+  }
+
+  if (ctx.duplicateCancerDenial) {
+    errors.push({
+      errorType: 'policy_requirement_misread',
+      insurerClaim: `약관상 암 진단비는 최초 1회 지급이 원칙이므로 이전 암 진단비 수령 후 새로 발생한 암에 대해서는 추가 지급 의무가 없다는 주장`,
+      rebuttalThesis: `ICD-O 원발부위 코드가 상이하고 면역조직화학(IHC) 검사로 원발이 확인된 경우 이는 전이가 아닌 신규 원발암으로서 독립된 보험사고입니다. 약관의 '최초 1회 지급' 조항은 동일 암의 중복 청구를 제한하는 것이지 원발 부위가 다른 별개 원발암까지 통합 제한하는 것이 아닙니다. 문언이 불분명하다면 작성자 불이익 원칙에 따라 피보험자에게 유리하게 해석되어야 합니다.`,
+      targetSection: 'policy',
+    });
+  }
+
+  // === Code/pathology dispute blocks (existing) ===
 
   if (ctx.dCodeDenial || ctx.codeMismatch) {
     errors.push({
