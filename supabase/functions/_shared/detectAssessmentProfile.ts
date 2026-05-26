@@ -87,6 +87,12 @@ export function detectAssessmentProfile(input: AssessmentProfileDetectionInput):
   // Strong cancer signals take priority over pre-litigation routing
   // (e.g. cases where insurer's medical review is mentioned inside a cancer dispute)
   const strongCancerSignal = /암진단비|일반암|제자리암|상피내암|경계성종양|high\s*grade\s*dysplasia|dysplasia|carcinoma|adenocarcinoma|melanoma|Breslow|FIGO|microinvasion|미세침윤|침윤성\s*이식|ESD|원추절제|conization|원발암|전이암|침윤암/i.test(allText);
+  if (
+    /신의료기술|신의료\s*기술|고시상\s*(?:사용대상|치료대상|적용대상|요건)|임의비급여|고시\s*(?:요건|치료대상|사용대상)/i.test(allText)
+    && /실손|실손보험|실손의료비|실손의료/i.test(allText)
+  ) {
+    return 'reimbursement_medical_necessity';
+  }
   if (!strongCancerSignal && /의료자문|의료\s*자문|보험사\s*자문|자문의|제3의료기관|본사\s*민원|소비자보호부서|금감원\s*민원|분쟁조정|소송\s*전|소송\s*가능성|자료정리|서면\s*요청/i.test(allText)) {
     return 'medical_review_pre_litigation';
   }
