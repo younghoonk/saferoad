@@ -793,6 +793,15 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
     return false;
   }
 
+  // NMT 신의료기술 고시 청크: normalizedIssueGroups/issueGroups 단락평가 우회 → token fallback으로 직행
+  // NMT 본문은 임상·규제 언어(골수흡인농축물/BMAC/KL Grade 등)로 구성돼 약관 용어 그룹에 매칭되지 않음
+  if (metadataValue(row, 'dataset_version') === 'nmt_v1') {
+    const nmtTokens = Array.from(new Set(queryText.match(/[가-힣A-Za-z0-9.]{3,}/g) || []))
+      .filter((token) => !['보험', '실손보험', '의료비', '계약', '청구'].includes(token));
+    if (!nmtTokens.length) return true;
+    return nmtTokens.some((token) => text.includes(token));
+  }
+
   const normalizedIssueGroups = [
     {
       query: /고지|알릴|미고지|계약해지|중요한 사항|중대한 과실/,
