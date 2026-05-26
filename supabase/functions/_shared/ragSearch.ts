@@ -197,7 +197,8 @@ function isAllowedOfficialSource(row: EnrichedRow) {
     return row.source_area === 'legal_statutes'
       || row.source_area === 'fss_dispute_cases'
       || row.source_area === 'precedents'
-      || (row.source_area === 'medical_guideline' && reviewStatus(row) === 'reviewed' && officialCitationAllowed(row));
+      || (row.source_area === 'medical_guideline' && reviewStatus(row) === 'reviewed' && officialCitationAllowed(row))
+      || (row.source_area === 'terms_standards' && isTrustedTermsReference(row));
   }
   return matchDomain(hostname, allowedOfficialDomains);
 }
