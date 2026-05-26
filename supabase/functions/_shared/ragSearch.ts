@@ -1132,6 +1132,10 @@ export async function searchRagReferences(params: {
   context?: RagSearchContext;
   options?: RagSearchOptions;
 }): Promise<RagSearchResult> {
+  console.log('[NMT2-CTX] searchRagReferences entry. context.profile=',
+    JSON.stringify(params.context?.profile),
+    'typeof=', typeof params.context?.profile,
+    'full context keys=', params.context ? Object.keys(params.context) : 'NO CONTEXT');
   const query = publicText(params.query);
   if (!query) return { query: '', officialReferences: [], internalReviewMaterials: [] };
 
