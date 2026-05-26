@@ -1190,14 +1190,19 @@ export async function searchRagReferences(params: {
   // NMT 전용 검색: reimbursement_medical_necessity 프로파일에서 NMT 978건이 실손약관과
   // 자리 경쟁하지 않도록 dataset_version_filter='nmt_v1' 전용 슬롯으로 별도 검색.
   // min_similarity=0.35 (정형 포맷 고시문서는 자연어 쿼리와 유사도가 낮으므로 완화).
+  console.log('[NMT2] reached nmt-block check, profile=', params.context?.profile);
   if (params.context?.profile === 'reimbursement_medical_necessity') {
+    console.log('[NMT2] block entered, profile=', params.context?.profile);
     try {
       const nmtRaw = await rpcSearch(
         params.supabaseUrl, params.serviceRoleKey, embedding, 'terms_standards', 4,
         { sourceTypeFilter: 'official_guideline', datasetVersionFilter: 'nmt_v1', minSimilarity: 0.35 },
       );
+      console.log('[NMT2] nmt rpc raw_count=', nmtRaw?.length, 'first=', JSON.stringify(nmtRaw?.[0])?.slice(0, 200));
       const nmtRows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, nmtRaw), params.options);
+      console.log('[NMT2] after enrich/filter nmtRows=', nmtRows?.length);
       for (const row of nmtRows) {
+        console.log('[NMT2] row relevant?', row.id, directlyRelevantOfficial(row, query));
         if (!officialRows.some((r) => r.id === row.id) && directlyRelevantOfficial(row, query)) {
           officialRows.push(row);
         }
