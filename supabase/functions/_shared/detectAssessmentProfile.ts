@@ -81,7 +81,7 @@ export function detectAssessmentProfile(input: AssessmentProfileDetectionInput):
   }
 
   const causationSpecific = /기왕증|인과관계|상해성|사고\s*기여도|퇴행성|기존\s*병력|사고\s*전\s*병력|고혈압\s*기왕증|뇌출혈\s*인과관계|사망과\s*사고\s*인과관계/i.test(allText);
-  const disabilitySpecific = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|압박골절|추간판탈출증|회전근개파열|무릎\s*인대|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
+  const disabilitySpecific = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|압박골절|회전근개파열|무릎\s*인대|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
   const strongDisabilitySignal = /후유장해|장해지급률|장해분류표|영구장해|운동장해|동요관절|관절동요|지급률|발목\s*운동범위|안면\s*반흔|추상장해|난청|말초신경마비|척추유합술|CRPS|반복\s*탈구|손가락\s*절단/i.test(allText);
 
   // Strong cancer signals take priority over pre-litigation routing

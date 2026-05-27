@@ -38,15 +38,16 @@ const allCases: EvalCase[] = JSON.parse(
   readFileSync('ai_eval/assessment_cases_100_v1.json', 'utf8'),
 );
 
+const REGRESSION_IDS = new Set(['ASSESS_035', 'ASSESS_051', 'ASSESS_101']);
 const targets = allCases.filter(
-  (c) => c.id >= 'ASSESS_075' && c.id <= 'ASSESS_089',
+  (c) => (c.id >= 'ASSESS_075' && c.id <= 'ASSESS_089') || REGRESSION_IDS.has(c.id),
 );
 
 let matchCount = 0;
 let mismatchCount = 0;
 const mismatches: string[] = [];
 
-console.log('=== probeProfiles: ASSESS_075~089 라우팅 실측 ===\n');
+console.log('=== probeProfiles: ASSESS_075~089 + 회귀(035/051/101) 라우팅 실측 ===\n');
 
 for (const c of targets) {
   const actual = detectAssessmentProfile(c.input);
