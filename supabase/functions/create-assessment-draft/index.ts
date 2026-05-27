@@ -2263,7 +2263,9 @@ function sourceTextForEvidence(input: ReturnType<typeof validateInput>, result: 
     result.facts,
     result.issues,
     result.damageAssessment,
-    ...(ragResult?.officialReferences || []).map((ref) => [ref.title, ref.summary, ref.keyHolding, ref.excerpt].filter(Boolean).join(' ')),
+    ...(ragResult?.officialReferences || [])
+      .filter((ref) => !(caseProfile(input) === 'reimbursement_medical_necessity' && ref.source_area === 'medical_guideline'))
+      .map((ref) => [ref.title, ref.summary, ref.keyHolding, ref.excerpt].filter(Boolean).join(' ')),
   ].filter(Boolean).join('\n'));
 }
 
@@ -2383,8 +2385,11 @@ function extractKillingEvidence(
 
   // ── Cancer-specific evidence (only when no cardiac/brain terms detected in source) ─
   // Brain cases (코일색전술, 수술 등) must not trigger cancer pathology/surgery blocks.
+  // Reimbursement cases (신의료기술/실손) must not trigger cancer evidence even when
+  // cancer RAG guidelines bleed into source text.
   const hasCardiacTerms = /cardiac marker|EKG|UA-?NSTEMI|NSTEMI|troponin|CAG|PCI|stent|관상동맥/i.test(source);
-  if (!hasCardiacTerms && !isBrainProfile) {
+  const isReimbursementProfile = caseProfile(input) === 'reimbursement_medical_necessity';
+  if (!hasCardiacTerms && !isBrainProfile && !isReimbursementProfile) {
     const pathologyQuote = sentenceContaining(
       source,
       /DCIS|carcinoma in situ|microinvasion|high\s*grade|comedo necrosis|병리\s*보고서|조직검사|생검|biopsy|악성신생물|상피내암/i,

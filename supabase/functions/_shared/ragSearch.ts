@@ -693,6 +693,14 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   }
   // Cardiac-specific precedents/guidelines must not appear in non-cardiac queries (e.g. 2013다208661 in cancer cases)
   if (!heartDiagnosisQuery(query) && heartInternalText(row)) return false;
+  // 암/뇌 전용 medical_guideline은 각각 해당 쿼리가 아닌 경우 차단
+  // (신의료기술/실손 케이스에서 암·뇌 가이드라인 오혼입 방지)
+  if (row.source_area === 'medical_guideline') {
+    if (!cancerInsuranceQuery(query) && !generalCancerDiagnosisQuery(query)
+      && /암의\s*진단확정|조직\s*생검|세침흡인|\bFNA\b|\bbiopsy\b|병리\s*전문의|carcinoma|악성신생물|암진단비|암보험/i.test(rowText(row))) return false;
+    if (!brainInsuranceQuery(query)
+      && /뇌졸중|뇌경색|뇌출혈|\bI6[0-9]\b|\bDWI\b|뇌혈관|지주막하|뇌동맥류/i.test(rowText(row))) return false;
+  }
   return true;
 }
 
