@@ -3218,7 +3218,7 @@ function extractReimbursementContext(input: ReturnType<typeof validateInput>) {
     input.sourceAnalysis?.diagnosisSummary,
   ].filter(Boolean).join('\n');
 
-  const PROC_REGEX = /(?:자가골수흡인농축물|BMAC|골수흡인농축물|전립선동맥색전술|전립선결찰술|UroLift|PAE|고강도집속초음파|HIFU|PRP|혈소판풍부혈장|줄기세포|자가지방유래)[^\n。은는이가을를로에의,]{0,25}/i;
+  const PROC_REGEX = /(?:자가골수흡인농축물|BMAC|골수흡인농축물|전립선동맥색전술|전립선결찰술|UroLift|PAE|고강도집속초음파|HIFU|PRP|혈소판풍부혈장|줄기세포|자가지방유래)[^\n。은는이가을를로에의,.]{0,25}/i;
   const procFromInsurer = input.insurerPosition?.match(PROC_REGEX)?.[0]?.trim();
   const procFromDamage = input.damageDetails?.match(PROC_REGEX)?.[0]?.trim();
   const procedureName = procFromInsurer || procFromDamage || '해당 신의료기술 비급여 시술';
