@@ -2009,6 +2009,11 @@ function buildClaimArgumentStructure(
     return buildBrainClaimArgument(insurerClaim, chronology, keyNumbers, killingEvidence, citedAuthority, input, result);
   }
 
+  const isReimbursement = caseProfile(input) === 'reimbursement_medical_necessity';
+  if (isReimbursement) {
+    return buildReimbursementClaimArgument(input, result, ragResult, citedAuthority);
+  }
+
   return {
     insurerPosition: {
       quotedPosition: insurerClaim,
@@ -3198,6 +3203,176 @@ function buildBrainDefenseLayers(
   };
 }
 
+function extractReimbursementContext(input: ReturnType<typeof validateInput>) {
+  const allText = [
+    input.diagnosisText, input.diagnosisName, input.diagnosisCode,
+    input.insuranceType, input.coverageType, input.accidentType,
+    input.damageDetails, input.insurerPosition,
+    input.customerStatement, input.adjusterMemo,
+    input.sourceAnalysis?.summary, input.sourceAnalysis?.denialReason,
+    input.sourceAnalysis?.diagnosisSummary,
+  ].filter(Boolean).join('\n');
+
+  const procedureMatch = allText.match(
+    /(?:자가골수흡인농축물|BMAC|골수흡인농축물|전립선동맥색전술|PAE|고강도집속초음파|HIFU|체외충격파|PRP|혈소판풍부혈장|줄기세포|자가지방유래)[^\n。]{0,60}/i,
+  );
+  const procedureName = procedureMatch
+    ? procedureMatch[0].trim()
+    : (cleanPublicText(input.diagnosisName || input.damageDetails || '') || '해당 시술');
+
+  const nmtNoticeMatch = allText.match(/보건복지부\s*고시\s*제?[\d-]+호|신의료기술고시\s*제[\d-]+호/i);
+  const nmtNotice = nmtNoticeMatch ? nmtNoticeMatch[0] : '신의료기술 고시(보건복지부)';
+
+  const eligibilityText = allText.match(
+    /사용대상[^\n。]{0,200}|(?:KL\s*(?:grade|등급)\s*[0-9Ⅱ-Ⅳ])[^\n]{0,80}|치료적용\s*기준[^\n]{0,100}/i,
+  )?.[0]?.trim();
+
+  const hasInsuranceMedicalReview = /의료자문|보험사\s*자문|자문의|제3의료기관|사내\s*자문/i.test(allText);
+  const hasExtraRequirementClaim = /약물치료\s*(?:선행|기간|먼저)|보존치료\s*(?:선행|기간|먼저)|KL\s*(?:재판정|재검사|추가\s*등급)|추가\s*(?:요건|조건|기준)/i.test(allText);
+
+  const nmtIndications: string[] = eligibilityText
+    ? [eligibilityText]
+    : [
+        /BMAC|골수/.test(allText) ? 'KL Grade Ⅱ~Ⅳ 무릎 골관절염 진단 환자' : '',
+        /전립선|PAE/.test(allText) ? '증상이 있는 양성 전립선비대증 환자' : '',
+        '주치의가 고시 사용대상 요건을 충족한다고 판단한 환자',
+      ].filter(Boolean);
+
+  const coreIssue = hasInsuranceMedicalReview
+    ? '보험사 의료자문 결과로 주치의의 신의료기술 사용대상 판단을 대체하여 임의비급여로 처리한 주장'
+    : hasExtraRequirementClaim
+    ? '신의료기술 고시에 없는 약물치료 선행기간·KL등급 재판정 등 추가 요건을 임의 부가하여 실손 보상을 거절한 주장'
+    : '신의료기술 고시 사용대상 요건 충족에도 불구하고 임의비급여 또는 보상 제외로 처리한 주장';
+
+  return {
+    procedureName, nmtNotice, nmtIndications, eligibilityText,
+    hasInsuranceMedicalReview, hasExtraRequirementClaim, coreIssue,
+  };
+}
+
+function buildReimbursementInsurerErrorMap(
+  ctx: ReturnType<typeof extractReimbursementContext>,
+  _input: ReturnType<typeof validateInput>,
+): ClaimArgumentStructure['insurerErrorMap'] {
+  const errors: ClaimArgumentStructure['insurerErrorMap'] = [];
+
+  errors.push({
+    errorType: 'unsupported_additional_requirement',
+    insurerClaim: `${ctx.procedureName}에 대해 신의료기술 고시에 없는 추가 요건(약물치료 선행기간·KL등급 재판정 등)을 임의 부가하여 보상 거절`,
+    rebuttalThesis: `보건복지부 ${ctx.nmtNotice}는 사용대상 요건을 명시하며, 보험사는 고시에 규정되지 않은 추가 요건을 사후에 부가하여 보상 범위를 제한할 수 없습니다. 고시가 정한 사용대상을 충족하는 한 실손 보상대상에 해당합니다.`,
+    targetSection: 'policy',
+  });
+
+  if (ctx.hasInsuranceMedicalReview) {
+    errors.push({
+      errorType: 'omitted_key_evidence',
+      insurerClaim: '보험사 의료자문 결과로 주치의의 고시 사용대상 판단을 대체하여 임의비급여 처리',
+      rebuttalThesis: `주치의는 환자의 임상 소견·영상검사를 직접 검토하여 ${ctx.procedureName}의 신의료기술 고시 사용대상 요건 충족을 판단한 것입니다. 보험사 의료자문은 환자를 직접 진찰하지 않은 서류검토에 불과하며, 이를 이유로 주치의 판단을 배제하는 것은 허용되지 않습니다.`,
+      targetSection: 'medical',
+    });
+  }
+
+  errors.push({
+    errorType: 'policy_requirement_misread',
+    insurerClaim: '임의비급여 판단 근거 부재 — 신의료기술 고시 사용대상 충족 시 실손 보상대상',
+    rebuttalThesis: `실손의료보험 약관상 신의료기술 고시에 따라 시행된 비급여 의료행위는 보상대상에 해당합니다. 고시 사용대상 요건을 충족한 시술에 대해 보험사가 별도의 임의비급여 판단 기준을 적용하는 것은 약관 문언을 벗어난 해석입니다.`,
+    targetSection: 'interpretation',
+  });
+
+  return errors;
+}
+
+function buildReimbursementDefenseLayers(
+  ctx: ReturnType<typeof extractReimbursementContext>,
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  citedAuthority: string | null | undefined,
+): ClaimArgumentStructure['defenseLayers'] {
+  return {
+    medical: {
+      standard: `${ctx.nmtNotice}는 ${ctx.procedureName}의 사용대상 요건을 명시하고 있으며, 주치의는 해당 요건 충족을 임상적으로 판단한 것입니다.`,
+      patientFactMapping: [
+        {
+          criterion: `${ctx.procedureName} 신의료기술 고시 사용대상 요건`,
+          patientFact: ctx.eligibilityText
+            ? `고시 사용대상: ${ctx.eligibilityText}`
+            : findFactText(input, result, /사용대상|KL\s*(?:grade|등급)|골관절염|전립선|양성전립선|BMAC|PAE/i)
+            || `주치의가 ${ctx.nmtNotice} 사용대상에 해당함을 확인`,
+          satisfied: true,
+        },
+        {
+          criterion: '주치의 확정판단',
+          patientFact: findFactText(input, result, /주치의|전문의|진단서|소견서/i)
+            || '주치의가 신의료기술 사용대상 요건 충족을 직접 진찰 후 판단',
+          satisfied: true,
+        },
+      ],
+      conclusion: `${ctx.procedureName}은 ${ctx.nmtNotice} 사용대상 요건을 충족하여 시행된 의료행위로, 보험사의 추가요건 부가 또는 의료자문으로 이를 배척하는 것은 부당합니다.`,
+    },
+    policy: {
+      policyRequirementMapping: [
+        {
+          requirement: '실손약관상 비급여 의료행위 보상요건',
+          patientFact: '신의료기술 고시에 따라 시행된 비급여 의료행위로 보상대상에 해당',
+          satisfied: true,
+        },
+        {
+          requirement: '고시 사용대상 요건 충족',
+          patientFact: ctx.eligibilityText || `${ctx.procedureName} 고시 사용대상 충족 확인`,
+          satisfied: true,
+        },
+      ],
+      conclusion: `실손의료보험 약관상 ${ctx.nmtNotice}에 따라 시행된 ${ctx.procedureName}은 비급여 의료행위 보상 대상에 해당하며, 보험사는 지급 의무가 있습니다.`,
+    },
+    caseLaw: {
+      insurerCitedAuthority: citedAuthority || '',
+      legalPrinciple: '금융감독원 실손의료보험 분쟁조정례에 따르면 신의료기술 고시 사용대상 요건을 충족한 비급여 의료행위는 실손 보상대상으로 판단하고 있습니다.',
+      reverseApplication: citedAuthority
+        ? `보험사 인용 근거(${citedAuthority})는 고시 사용대상을 충족하지 못한 사안에 관한 것으로, 본 건과 같이 고시 요건을 충족한 경우에는 그대로 적용될 수 없습니다.`
+        : '보험사가 인용하는 근거가 있다면, 해당 근거가 고시 사용대상을 충족한 본 건과 동일한 사안인지 구체적으로 제시되어야 합니다.',
+      conclusion: '금감원 분쟁조정 사례는 신의료기술 고시 사용대상 충족 여부를 핵심 판단 기준으로 삼고 있어 본 건에 유리하게 적용됩니다.',
+    },
+    interpretation: {
+      ambiguity: '실손의료보험 약관의 비급여 보상 조항은 신의료기술 고시 사용대상 충족 여부를 기준으로 해석되어야 하며, 이를 넘어서는 추가 요건을 보험사가 임의로 부가하는 것은 약관 문언에 없는 제한입니다.',
+      contraProferentemApplication: '약관의 해석이 불명확하다면 보험회사가 작성한 약관을 작성자 불이익 원칙에 따라 피보험자에게 유리하게 해석해야 하며, 신의료기술 고시 사용대상 충족이 확인된 이상 보험사는 지급을 거절할 수 없습니다.',
+      conclusion: '고시에 없는 추가요건 부가 금지 원칙과 작성자 불이익 원칙에 따라 보험사의 부지급 결정은 철회되어야 합니다.',
+    },
+  };
+}
+
+function buildReimbursementClaimArgument(
+  input: ReturnType<typeof validateInput>,
+  result: AssessmentDraftResult,
+  ragResult: RagSearchResult,
+  citedAuthority: string | null | undefined,
+): ClaimArgumentStructure {
+  const ctx = extractReimbursementContext(input);
+  const insurerClaim = cleanPublicText(
+    input.insurerPosition || input.sourceAnalysis?.insurerPosition
+    || input.sourceAnalysis?.denialReason || result.insurerPositionReview,
+  ) || '보험회사는 신의료기술 고시 사용대상 미충족 또는 임의비급여를 이유로 부지급 취지의 판단을 한 것으로 정리됩니다.';
+  const chronology = buildArgumentChronology(input, result);
+  const killingEvidence = extractKillingEvidence(input, result, ragResult);
+  const keyNumbers = mergeKeyNumbers(extractKeyNumbersForArgument(input, result), keyNumbersFromKillingEvidence(killingEvidence));
+
+  return {
+    insurerPosition: {
+      quotedPosition: insurerClaim,
+      coreDenialReason: ctx.coreIssue,
+    },
+    factualFoundation: { chronologicalFacts: chronology, keyNumbers },
+    killingEvidence,
+    insurerErrorMap: buildReimbursementInsurerErrorMap(ctx, input),
+    defenseLayers: buildReimbursementDefenseLayers(ctx, input, result, citedAuthority),
+    finalPressure: {
+      paymentRequest: `${ctx.procedureName} 시술에 대한 실손의료비 보험금 전액을 지급해야 합니다.`,
+      delayInterestRequest: '부지급 통보 이후 지연기간에 대한 지연이자를 함께 지급해야 합니다.',
+      writtenReplyDemand: `부동의 시 보험회사는 ${ctx.nmtNotice} 사용대상 요건 중 어느 항목이 충족되지 않았는지 구체적인 의학적 근거와 약관상 근거를 구분하여 서면으로 회신해야 합니다.`,
+      escalationNotice: '구체적 사유 없는 부동의가 유지될 경우 분쟁조정 또는 소송 등 후속 절차를 검토할 수 있음을 명시합니다.',
+    },
+  };
+}
+
 function findInsurerCitedAuthority(input: ReturnType<typeof validateInput>, ragResult: RagSearchResult) {
   const inputAuthority = [
     input.insurerPosition,
@@ -3219,6 +3394,7 @@ function composeSubmissionAssessmentReport(
 ) {
   const isHeart = caseProfile(input) === 'heart_diagnosis_benefit' || isAcuteMiDenialContext(input);
   const isBrain = caseProfile(input) === 'brain_diagnosis_benefit';
+  const isReimbursement = caseProfile(input) === 'reimbursement_medical_necessity';
   const today = new Date().toISOString().slice(0, 10);
   const insurer = cleanPublicText(input.insurerName) || '보험회사';
   const productName = cleanPublicText(input.productName || input.policyName) || '[계약상품]';
@@ -3260,6 +3436,10 @@ function composeSubmissionAssessmentReport(
     '흉통, 심전도 또는 운동부하검사상 허혈성 변화, CCTA/CT 및 CAG/PCI 경과가 급성 관상동맥증후군의 흐름과 부합하는 점',
     'Troponin T, hs-troponin, CK-MB 등 심근효소 자료는 검사기관 참고치 및 PCI 전후 채혈시간과 함께 판단해야 하는 점',
     '보험회사가 입퇴원요약지의 Unstable angina 또는 CAD 기재만으로 I21.4 진단서를 배척하는 것은 약관에 없는 추가 요건을 부가한 점',
+  ] : isReimbursement ? [
+    '신의료기술 고시(보건복지부)가 정한 사용대상 요건을 충족하여 시행된 시술임이 확인되는 점',
+    '보험회사가 고시에 없는 추가 요건(약물치료 선행기간·KL등급 재판정 등)을 임의 부가하여 보상을 거절한 점',
+    '실손의료보험 약관상 신의료기술 고시에 따른 비급여 의료행위는 보상대상에 해당하는 점',
   ] : [
     '보험회사의 부지급 판단은 제출된 의료자료 전체를 충분히 반영하지 않은 점',
     '약관상 지급요건과 보험회사 주장 사이에 불일치가 있는 점',
@@ -3277,6 +3457,15 @@ function composeSubmissionAssessmentReport(
     '| CCTA/CT/CAG/PCI | LM/LAD/LCx 협착, LM-LAD 또는 LM-mLAD 중증 협착, PCI/stent 시행 | 단순 CAD로 축소할 수 없고 급성 허혈성 사건과 연결해 보아야 함 |',
     '| PCI 전후 troponin 채혈시간 | 보험사는 시술 전 상승 없음 또는 PCI 후 상승이라고 주장 가능 | 그 주장은 PCI 전 baseline, 시술시간, 시술 후 상승폭, ECG/RWMA 등 추가 근거로 보험사가 입증해야 함 |',
     '| NSTEMI/I21.4와 Unstable angina | UA와 NSTEMI는 troponin 상승 및 허혈 근거로 구분. I25.1 죽상경화성 심장병 기재는 CAD 배경질환을 의미할 수 있음 | 입퇴원요약지 UA 또는 I25.1 기재만으로 주치의 I21.4 진단을 배척할 수 없음 |',
+  ].join('\n') : isReimbursement ? [
+    '신의료기술 고시(보건복지부) 사용대상 요건 ↔ 환자 충족사실 매핑',
+    '',
+    '| 고시 사용대상 요건 | 환자 충족 사실 | 손해사정 의견 |',
+    '|---|---|---|',
+    '| 주치의 의학적 판단에 의한 시술 적용 결정 | 주치의가 임상 소견 및 검사자료를 검토하여 고시 사용대상 충족을 판단함 | 충족 |',
+    '| 보존치료 경과 및 적응증 충족 | 제출 의무기록 및 소견서에서 적응증 충족 기재 확인 | 충족으로 평가됨 |',
+    '| 비급여 동의서 및 설명 고지 | 시술 전 환자 동의 및 설명이 이루어진 것으로 확인됨 | 충족 |',
+    '| 고시 사용대상 외 추가요건(약물치료 선행기간 등) | 해당 요건은 고시 본문에 존재하지 않음 | 보험사 추가요건 부가 불가 |',
   ].join('\n') : result.issues;
 
   const policyCriteriaTable = isHeart ? [
@@ -3294,6 +3483,13 @@ function composeSubmissionAssessmentReport(
     '| 신경학적 증상 및 병력 | 뇌혈관질환에 합당한 임상 증상(반신마비, 실어증, 의식장애 등)이 확인됨 | 충족으로 평가됨 |',
     '| 영상검사 (MRI/CT) | 뇌 MRI 또는 CT상 뇌경색·뇌출혈 병변이 확인됨 | 충족 |',
     '| KCD 분류코드 (I60~I69) | 진단서상 KCD/ICD 코드가 뇌혈관질환 범위에 해당함 | 충족 |',
+  ].join('\n') : isReimbursement ? [
+    '| 실손약관 비급여 판단기준 | 본 건 충족 사실 | 의견 |',
+    '|---|---|---|',
+    '| 신의료기술 고시에 따른 시술 여부 | 보건복지부 신의료기술 고시(신의료기술평가위원회 승인)에 따라 시행된 시술임이 확인됨 | 충족 |',
+    '| 고시 사용대상 요건 충족 | 주치의 판단 및 제출자료에서 고시 사용대상 해당 확인 | 충족으로 평가됨 |',
+    '| 비급여 동의 및 설명 | 시술 전 환자 동의 및 설명이 이루어진 것으로 확인됨 | 충족 |',
+    '| 고시 외 추가요건(약물치료 선행기간 등) | 해당 요건은 고시 본문에 존재하지 않아 보험사가 임의 부가한 것임 | 부가 불가 |',
   ].join('\n') : [
     '| 약관상 요구 요건 | 본 건 충족 사실 | 의견 |',
     '|---|---|---|',
@@ -3307,6 +3503,8 @@ function composeSubmissionAssessmentReport(
         '약관상 뇌혈관질환 진단확정 요건은 의료기관 전문의의 진단과 영상검사(MRI/CT 등)를 기초로 하며, KCD 분류표 I60~I69 범위 내 해당 여부로 판단합니다.',
         '보험회사는 약관에 없는 추가 요건(경색 크기, CT 음성 시 배제, 증상 중증도 기준 등)을 임의로 부가할 수 없으며, 약관 문언이 불명확한 경우 작성자 불이익 원칙에 따라 피보험자에게 유리하게 해석되어야 합니다.',
       ].join('\n')
+    : isReimbursement
+    ? '신의료기술 고시는 사용대상 요건 충족 여부로 보상대상을 판단하며, 보험사가 고시에 없는 추가요건을 임의 부가할 수 없다. 실손의료보험 약관은 신의료기술 고시에 따라 시행된 비급여 의료행위를 보상대상으로 규정하고 있으며, 고시 사용대상을 충족한 이상 보험사는 별도의 임의비급여 판단 기준을 적용하여 지급을 거절할 수 없다.'
     : '';
 
   const brainPolicyQuote = (() => {
