@@ -444,14 +444,6 @@ function isTitleSeedFss(row: EnrichedRow) {
 }
 
 function isOfficialReference(row: EnrichedRow) {
-  if (row.source_area === 'terms_standards' && metadataValue(row, 'dataset_version') === 'nmt_v1') {
-    console.log('[NMT4] isOfficialReference NMT gates',
-      'officialCitationDenied=', officialCitationDenied(row),
-      'trustLevel=', trustLevel(row),
-      'isBlockedOfficialSource=', isBlockedOfficialSource(row),
-      'isAllowedOfficialSource=', isAllowedOfficialSource(row),
-      'isTrustedTermsReference=', isTrustedTermsReference(row));
-  }
   if (officialCitationDenied(row)) return false;
   if (row.source_area === 'medical_issue_codes' || row.source_area === 'practice_playbooks' || row.source_area === 'dispute_resolution_cases') return false;
   if (['classification_reference', 'internal_practice'].includes(trustLevel(row))) return false;
@@ -697,11 +689,7 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
     }
   }
   if (row.source_area === 'terms_standards') {
-    const result = isDirectlyRelevantTerms(row, query);
-    if (metadataValue(row, 'dataset_version') === 'nmt_v1') {
-      console.log('[NMT-DEBUG] directlyRelevantOfficial result', { id: row.id, result });
-    }
-    return result;
+    return isDirectlyRelevantTerms(row, query);
   }
   // Cardiac-specific precedents/guidelines must not appear in non-cardiac queries (e.g. 2013다208661 in cancer cases)
   if (!heartDiagnosisQuery(query) && heartInternalText(row)) return false;
@@ -820,21 +808,8 @@ function isDirectlyRelevantTerms(row: EnrichedRow, query: string) {
   if (metadataValue(row, 'dataset_version') === 'nmt_v1') {
     const nmtTokens = Array.from(new Set(queryText.match(/[가-힣A-Za-z0-9.]{3,}/g) || []))
       .filter((token) => !['보험', '실손보험', '의료비', '계약', '청구'].includes(token));
-    console.log('[NMT-DEBUG] enter isDirectlyRelevantTerms nmt_v1 bypass', {
-      id: row.id, title: row.title?.slice(0, 40) ?? null,
-      nmtTokens_count: nmtTokens.length, nmtTokens_sample: nmtTokens.slice(0, 5),
-    });
     if (!nmtTokens.length) return true;
-    const result = nmtTokens.some((token) => text.includes(token));
-    console.log('[NMT-DEBUG] isDirectlyRelevantTerms nmt_v1 result', { id: row.id, result });
-    console.log('[NMT3] nmt token check',
-      'queryText_sample=', queryText?.slice(0, 150),
-      'text_sample=', text?.slice(0, 150),
-      'nmtTokens_count=', nmtTokens?.length,
-      'nmtTokens_sample=', JSON.stringify(nmtTokens?.slice(0, 15)),
-      'matched=', nmtTokens?.some((t) => text.includes(t)),
-      'return_value=', result);
-    return result;
+    return nmtTokens.some((token) => text.includes(token));
   }
 
   const normalizedIssueGroups = [
@@ -1154,10 +1129,6 @@ export async function searchRagReferences(params: {
   context?: RagSearchContext;
   options?: RagSearchOptions;
 }): Promise<RagSearchResult> {
-  console.log('[NMT2-CTX] searchRagReferences entry. context.profile=',
-    JSON.stringify(params.context?.profile),
-    'typeof=', typeof params.context?.profile,
-    'full context keys=', params.context ? Object.keys(params.context) : 'NO CONTEXT');
   const query = publicText(params.query);
   if (!query) return { query: '', officialReferences: [], internalReviewMaterials: [] };
 
@@ -1170,17 +1141,6 @@ export async function searchRagReferences(params: {
     try {
       const rawRows = await rpcSearch(params.supabaseUrl, params.serviceRoleKey, embedding, plan.source_area, Math.max(plan.count * 2, 6));
       const rows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, rawRows), params.options);
-      if (plan.source_area === 'terms_standards') {
-        const nmtRows = rows.filter((r) => metadataValue(r, 'dataset_version') === 'nmt_v1');
-        const first = nmtRows[0];
-        console.log('[NMT-DEBUG] RPC+enrich terms_standards', {
-          raw_count: rawRows.length, enriched_count: rows.length, nmt_count: nmtRows.length,
-          first_id: first?.id ?? null, first_title: first?.title?.slice(0, 40) ?? null,
-          first_trust_level: first?.trust_level ?? null, first_source_type: first?.source_type ?? null,
-          first_similarity: first?.similarity ?? null,
-          first_dataset_version: first ? metadataValue(first, 'dataset_version') : null,
-        });
-      }
       const sorted = rows.sort((a, b) => scoreRow(b, diagnosisCodes, params.context, query) - scoreRow(a, diagnosisCodes, params.context, query));
       if (sorted.length === 0 && (plan.source_area === 'precedents' || plan.source_area === 'terms_standards')) {
         console.error('[ragSearch] SILENT_EMPTY source_area returned 0 rows', { source_area: plan.source_area, query: query.slice(0, 80) });
@@ -1216,19 +1176,14 @@ export async function searchRagReferences(params: {
   // NMT 전용 검색: reimbursement_medical_necessity 프로파일에서 NMT 978건이 실손약관과
   // 자리 경쟁하지 않도록 dataset_version_filter='nmt_v1' 전용 슬롯으로 별도 검색.
   // min_similarity=0.35 (정형 포맷 고시문서는 자연어 쿼리와 유사도가 낮으므로 완화).
-  console.log('[NMT2] reached nmt-block check, profile=', params.context?.profile);
   if (params.context?.profile === 'reimbursement_medical_necessity') {
-    console.log('[NMT2] block entered, profile=', params.context?.profile);
     try {
       const nmtRaw = await rpcSearch(
         params.supabaseUrl, params.serviceRoleKey, embedding, 'terms_standards', 4,
         { sourceTypeFilter: 'official_guideline', datasetVersionFilter: 'nmt_v1', minSimilarity: 0.35 },
       );
-      console.log('[NMT2] nmt rpc raw_count=', nmtRaw?.length, 'first=', JSON.stringify(nmtRaw?.[0])?.slice(0, 200));
       const nmtRows = filterReleaseRows(await enrichRows(params.supabaseUrl, params.serviceRoleKey, nmtRaw), params.options);
-      console.log('[NMT2] after enrich/filter nmtRows=', nmtRows?.length);
       for (const row of nmtRows) {
-        console.log('[NMT2] row relevant?', row.id, directlyRelevantOfficial(row, query));
         if (!officialRows.some((r) => r.id === row.id) && directlyRelevantOfficial(row, query)) {
           officialRows.push(row);
         }
