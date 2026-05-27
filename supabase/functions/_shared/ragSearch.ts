@@ -633,6 +633,12 @@ function directlyRelevantOfficial(row: EnrichedRow, query: string) {
   if (isNmtChunk) {
     return isDirectlyRelevantTerms(row, query);
   }
+  // 목차성 청크 차단: 보장명을 bullet으로 3개 이상 나열한 청크(목차/보장항목 목록)는
+  // 특정 질환 케이스와 무관한 보장명(심장·뇌혈관 등)을 끌어오므로 official에서 제외
+  if (row.source_area === 'terms_standards') {
+    const tocHits = (rowText(row).match(/[·•]\s*[가-힣]{2,20}(?:수술|진단|사망|입원|통원)비?보장/g) || []).length;
+    if (tocHits >= 3) return false;
+  }
   if (row.source_area === 'precedents' && administrativePrecedentText(row)) return false;
   if (cataractQuery(query)) {
     if (irrelevantCataractText(row)) return false;
